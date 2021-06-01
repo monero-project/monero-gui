@@ -40,6 +40,7 @@ Item {
 
     property alias input: input
     property alias text: input.text
+    property alias inputFieldWidth: inputItem.width
 
     property bool password: false
     property bool passwordHidden: true

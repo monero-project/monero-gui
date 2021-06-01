@@ -66,6 +66,8 @@ ApplicationWindow {
     property bool ctrlPressed: false
     property alias persistentSettings : persistentSettings
     property string accountsDir: !persistentSettings.portable ? moneroAccountsDir : persistentSettings.portableFolderName + "/wallets"
+    property bool firstHardwareWalletConnection: true
+    property string trezorFirmwareVersion: "2.3.4"
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
@@ -98,6 +100,7 @@ ApplicationWindow {
     property bool splashDisplayedBeforeButtonRequest;
     property int appEpoch: Math.floor((new Date).getTime() / 1000)
     property bool themeTransition: false
+    property alias hardwareWalletDialog: hardwareWalletDialog
 
     // fiat price conversion
     property real fiatPriceXMRUSD: 0
@@ -529,23 +532,37 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
-            // try to resolve common wallet cache errors automatically
-            switch (wallet.errorString) {
-                case "basic_string::_M_replace_aux":
-                case "std::bad_alloc":
-                    walletManager.clearWalletCache(wallet.path);
-                    walletPassword = passwordDialog.password;
-                    appWindow.initialize();
-                    console.error("Repairing wallet cache with error: ", wallet.errorString);
-                    appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
-                    return;
-                default:
-                    // opening with password but password doesn't match
-                    console.error("Error opening wallet with password: ", wallet.errorString);
-                    passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
-                    console.log("closing wallet async : " + wallet.address)
-                    closeWallet();
-                    return;
+            if(wallet.errorString == "Could not connect to the device Trezor" || wallet.errorString == "Wrong Device Status: 0x6e00 (SW_CLA_NOT_SUPPORTED), EXPECTED 0x9000 (SW_OK), MASK 0xffff") {
+
+                if (wallet.errorString == "Wrong Device Status: 0x6e00 (SW_CLA_NOT_SUPPORTED), EXPECTED 0x9000 (SW_OK), MASK 0xffff") {
+                        var hardwareWalletType = "Ledger";
+                    } else {
+                        var hardwareWalletType = "Trezor";
+                    }
+
+                console.log ("Can't connect to hardware wallet")
+                appWindow.showHardwareWalletDialog(wallet.path, hardwareWalletType);
+                firstHardwareWalletConnection = false;
+                return;
+            } else {
+                // try to resolve common wallet cache errors automatically
+                switch (wallet.errorString) {
+                    case "basic_string::_M_replace_aux":
+                    case "std::bad_alloc":
+                        walletManager.clearWalletCache(wallet.path);
+                        walletPassword = passwordDialog.password;
+                        appWindow.initialize();
+                        console.error("Repairing wallet cache with error: ", wallet.errorString);
+                        appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
+                        return;
+                    default:
+                        // opening with password but password doesn't match
+                        console.error("Error opening wallet with password: ", wallet.errorString);
+                        passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
+                        console.log("closing wallet async : " + wallet.address)
+                        closeWallet();
+                        return;
+                }
             }
         }
 
@@ -1088,6 +1105,49 @@ ApplicationWindow {
             middlePanel.enabled = true
             titleBar.enabled = true
         }
+    }
+
+    function showHardwareWalletDialog(path, hardwareWalletType) {
+
+        leftPanel.enabled = false;
+        middlePanel.enabled = false;
+        titleBar.enabled = false;
+
+        if (firstHardwareWalletConnection) {
+            if (hardwareWalletType == "Ledger") {
+                hardwareWalletDialog.titleText = qsTr("Connect your Ledger, unlock it and open Monero app...") + translationManager.emptyString;
+            } else {
+                hardwareWalletDialog.titleText = qsTr("Connect and unlock your Trezor to continue...") + translationManager.emptyString;
+            }
+            hardwareWalletDialog.imgSource = hardwareWalletType == "Ledger" ? "qrc:///images/ledgerNanoX.png" : "qrc:///images/trezor.png";
+            hardwareWalletDialog.messageInstructions1 = "";
+            hardwareWalletDialog.messageInstructions2 = "";
+            hardwareWalletDialog.okButtonText = qsTr("Open wallet") + translationManager.emptyString;
+        } else {
+            hardwareWalletDialog.titleText = qsTr("Can't connect to %1").arg(hardwareWalletType) + translationManager.emptyString;
+            hardwareWalletDialog.imgSource = "";
+            if (hardwareWalletType == "Ledger") {
+                hardwareWalletDialog.messageInstructions1 = qsTr("Check if your Ledger has the Monero app installed (available in Ledger Live) and is running it.") + translationManager.emptyString;
+                hardwareWalletDialog.messageInstructions2 = qsTr("Check if your Ledger has the most recent firmware version (available on Manager section of Ledger Live).") + translationManager.emptyString;
+            } else {
+                hardwareWalletDialog.messageInstructions1 = qsTr("Check if the USB cable is connected. Push the cable into your Trezor until you hear/feel a click.") + translationManager.emptyString;
+                hardwareWalletDialog.messageInstructions2 = qsTr("Check if your Trezor has firmware v%1 or higher (available on Trezor Wallet or Trezor Suite).").arg(trezorFirmwareVersion) + translationManager.emptyString;
+            }
+            hardwareWalletDialog.okButtonText = qsTr("Try again") + translationManager.emptyString;
+        }
+
+        hardwareWalletDialog.onAcceptedCallback = function() {
+            wizard.openWalletFile(path);
+        }
+        hardwareWalletDialog.onRejectedCallback = function() {
+            firstHardwareWalletConnection = true;
+            appWindow.showWizard();
+            leftPanel.enabled = true;
+            middlePanel.enabled = true;
+            titleBar.enabled = true;
+        }
+
+        hardwareWalletDialog.show();
     }
 
     // close wallet and show wizard
@@ -1729,6 +1789,24 @@ ApplicationWindow {
         messageText: qsTr("Please wait...") + translationManager.emptyString
     }
 
+    HardwareWalletDialog {
+        id: hardwareWalletDialog
+        width: 450
+        height: hardwareWalletDialog.imgSource == "" ? 300 : 330
+        x: (appWindow.width - width) / 2
+        y: (appWindow.height - height) / 2
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted:  {
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+        onRejected: {
+            if (onRejectedCallback)
+                onRejectedCallback();
+        }
+    }
+
     Item {
         id: rootItem
         anchors.fill: parent
@@ -1839,7 +1917,7 @@ ApplicationWindow {
             radius: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
-                remoteNodeDialog.visible
+                remoteNodeDialog.visible || hardwareWalletDialog.visible
         }
 
 
