@@ -154,10 +154,10 @@ Rectangle {
                 Layout.fillWidth: true
                 input.topPadding: 6
                 input.bottomPadding: 6
-                fontSize: 16
+                fontSize: 15
                 labelFontSize: 14
                 placeholderText: qsTr("Search by Transaction ID, Address, Description, Amount or Blockheight") + translationManager.emptyString
-                placeholderFontSize: 16
+                placeholderFontSize: 15
                 inputHeight: 34
                 onTextUpdated: {
                     if(searchInput.text != null && searchInput.text.length >= 3){
@@ -169,6 +169,21 @@ Rectangle {
                         root.reset();
                         root.updateFilter();
                     }
+                }
+
+                MoneroComponents.InlineButton {
+                    Layout.topMargin: -8
+                    Layout.rightMargin: -8
+                    Layout.leftMargin: -2
+                    buttonColor: "transparent"
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontStyleName: "Solid"
+                    fontPixelSize: 18
+                    text: FontAwesome.times
+                    tooltip: qsTr("Clean") + translationManager.emptyString
+                    tooltipLeft: true
+                    visible: searchInput.text != ""
+                    onClicked: searchInput.text = ""
                 }
             }
         }
