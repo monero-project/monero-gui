@@ -35,6 +35,7 @@ import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
+import moneroComponents.AddressBookModel 1.0
 import FontAwesome 1.0
 import "../components"
 import "../components" as MoneroComponents
@@ -81,6 +82,8 @@ Rectangle {
     }
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property int addressBookModelCount: 0
+    property var addressBookModelData: []  // representation of address book data (appWindow.currentWallet.addressBookModel)
 
     Clipboard { id: clipboard }
 
@@ -338,7 +341,7 @@ Rectangle {
                             text: FontAwesome.infinity
                             visible: recipientModel.count == 1
                             tooltip: qsTr("Send all unlocked balance of this account") + translationManager.emptyString
-                            onClicked: recipientRepeater.itemAt(0).children[1].children[2].text = "(all)";
+                            onClicked: recipientRepeater.itemAt(0).children[1].children[3].text = "(all)";
                         }
 
                         Item {
@@ -370,9 +373,82 @@ Rectangle {
                         RowLayout {
                             spacing: 0
 
+                            Rectangle {
+                                id: contactRectangle
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.margins: 5
+                                color: "transparent"
+                                visible: contactName.text != ""
+
+                                RowLayout {
+                                    Layout.topMargin: 8
+
+                                    MoneroComponents.TextPlain {
+                                        Layout.topMargin: 11
+                                        Layout.leftMargin: 5
+                                        Layout.fillWidth: false
+                                        font.family: FontAwesome.fontFamily
+                                        font.bold: true
+                                        font.pixelSize: 18
+                                        color: MoneroComponents.Style.defaultFontColor
+                                        text: FontAwesome.addressBook
+                                    }
+
+                                    MoneroComponents.TextPlain {
+                                        id: contactName
+                                        Layout.topMargin: 12
+                                        Layout.leftMargin: 5
+                                        Layout.fillWidth: true
+                                        font.pixelSize:16
+                                        color: MoneroComponents.Style.inlineButtonTextColor
+                                        text: ""
+                                        opacity: contactNameMouseArea.containsMouse ? 1 : 0.85
+                                        visible: contactName.text != ""
+                                        tooltip: addressInput.text
+                                        tooltipWrapMode: Text.Wrap
+
+                                        MouseArea {
+                                            id: contactNameMouseArea
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            hoverEnabled: true
+                                            onEntered: parent.tooltipPopup.open()
+                                            onExited: parent.tooltipPopup.close()
+                                        }
+                                    }
+
+                                    MoneroComponents.TextPlain {
+                                        Layout.fillWidth: false
+                                        Layout.topMargin: 12
+                                        Layout.leftMargin: 6
+                                        font.family: FontAwesome.fontFamily
+                                        font.bold: true
+                                        color: MoneroComponents.Style.defaultFontColor
+                                        text: FontAwesome.times
+                                        opacity: removeContactMouseArea.containsMouse ? 1 : 0.85
+                                        tooltip: qsTr("Remove recipient")  + translationManager.emptyString
+
+                                        MouseArea {
+                                            id: removeContactMouseArea
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            hoverEnabled: true
+                                            onEntered: parent.tooltipPopup.open()
+                                            onExited: parent.tooltipPopup.close()
+                                            onClicked: {
+                                                addressInput.text = "";
+                                                contactName.text = "";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             MoneroComponents.LineEditMulti {
-                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
-                                KeyNavigation.tab: parent.children[2]
+                                id: addressInput
+                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[3] : sendButton
+                                KeyNavigation.tab: parent.children[3]
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.topMargin: recipientLayout.rowSpacing / 2
                                 Layout.bottomMargin: recipientLayout.rowSpacing / 2
@@ -389,6 +465,7 @@ Rectangle {
                                 placeholderFontSize: 14
                                 spacing: 0
                                 wrapMode: Text.WrapAnywhere
+                                visible: !contactRectangle.visible
                                 placeholderText: {
                                     if(persistentSettings.nettype == NetworkType.MAINNET){
                                         return "4.. / 8.. / OpenAlias";
@@ -399,6 +476,13 @@ Rectangle {
                                     }
                                 }
                                 onTextChanged: {
+                                    if (addressInput.text.length >= 95) {
+                                        var getMatchesResult = getMatches();
+                                        if (getMatchesResult) {
+                                            contactName.text = getMatchesResult
+                                            amountInput.forceActiveFocus()
+                                        }
+                                    }
                                     const parsed = walletManager.parse_uri_to_object(text);
                                     if (!parsed.error) {
                                         fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
@@ -406,6 +490,21 @@ Rectangle {
                                     address = text;
                                 }
                                 text: address
+
+                                function getMatches() {
+                                    var returnText = "";
+                                    for (var i = 0; i < root.addressBookModelCount; i+=1){
+                                        var item = root.addressBookModelData[i];
+                                        if (item.address == addressInput.text) {
+                                            if (returnText == "") {
+                                                returnText = item.description;
+                                            } else {
+                                                returnText += ", " + item.description;
+                                            }
+                                        }
+                                    }
+                                    return returnText;
+                                }
 
                                 MoneroComponents.InlineButton {
                                     small: true
@@ -422,14 +521,14 @@ Rectangle {
                                                         // prepend openalias to description
                                                         descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
                                                         descriptionCheckbox.checked = true
-                                                        recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                                        recipientRepeater.itemAt(index).children[1].children[1].text = parts[1];
                                                     }
                                                     else
                                                         oa_message(qsTr("No valid address found at this OpenAlias address"))
                                                 }
                                                 else if (parts[0] === "false") {
                                                         if (address_ok) {
-                                                            recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                                            recipientRepeater.itemAt(index).children[1].children[1].text = parts[1];
                                                             oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
                                                         }
                                                         else
@@ -461,8 +560,9 @@ Rectangle {
                             }
 
                             MoneroComponents.LineEdit {
-                                KeyNavigation.backtab: parent.children[0]
-                                KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
+                                id: amountInput
+                                KeyNavigation.backtab: parent.children[1]
+                                KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[1] : sendButton
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.topMargin: recipientLayout.rowSpacing / 2
                                 Layout.bottomMargin: recipientLayout.rowSpacing / 2
@@ -1093,11 +1193,33 @@ Rectangle {
     // fires on every page load
     function onPageCompleted() {
         console.log("transfer page loaded")
+        root.updateAddressBookFromModel()
         updateStatus();
     }
 
     //TODO: Add daemon sync status
     //TODO: enable send page when we're connected and daemon is synced
+
+    function updateAddressBookFromModel() {
+        // This function copies the items of `appWindow.currentWallet.addressBookModel` to `root.addressBookModelData`, as a list of javascript objects
+        if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+
+        var _model = appWindow.currentWallet.addressBookModel;
+        var count = _model.rowCount()
+        root.addressBookModelData = [];
+
+        for (var i = 0; i < count; ++i) {
+            var idx = _model.index(i, 0);
+            var address = _model.data(idx, AddressBookModel.AddressBookAddressRole);
+            var description = _model.data(idx, AddressBookModel.AddressBookDescriptionRole);
+            root.addressBookModelData.push({
+                "i": i,
+                "address": address,
+                "description": description
+            });
+        }
+        root.addressBookModelCount = root.addressBookModelData.length;
+    }
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
