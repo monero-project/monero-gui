@@ -2,13 +2,33 @@ function destinationsToAmount(destinations){
     // Gets amount from destinations line
     // input: "20.000000000000: 9tLGyK277MnYrDc7Vzi6TB1pJvstFoviziFwsqQNFbwA9rvg5RxYVYjEezFKDjvDHgAzTELJhJHVx6JAaWZKeVqSUZkXeKk"
     // returns: 20.000000000000
-    return destinations.split(" ")[0].split(":")[0];
+    var numberOfDestinations = (destinations.match(/:/g) || []).length;
+    var amountList = "";
+    for (var i = 0; i < numberOfDestinations; i++) {
+        var destinationAndAmount = destinations.split("<br> ")[i];
+        var amount = destinationAndAmount.split(":")[0];
+        if (i+1 != numberOfDestinations) {
+            amountList += amount + " ";
+        } else {
+            amountList += amount;
+        }
+    }
+    return amountList;
 }
 
 function destinationsToAddress(destinations){
-    var address = destinations.split(" ")[1];
-    if(address === undefined) return ""
-    return address;
+    var numberOfDestinations = (destinations.match(/:/g) || []).length;
+    var addressList = "";
+    for (var i = 0; i < numberOfDestinations; i++) {
+        var destinationAndAmount = destinations.split("<br> ")[i];
+        var address = destinationAndAmount.split(": ")[1];
+        if (i+1 != numberOfDestinations) {
+            addressList += address + " ";
+        } else {
+            addressList += address;
+        }
+    }
+    return addressList;
 }
 
 function addressTruncate(address, range){
