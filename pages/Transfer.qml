@@ -318,12 +318,32 @@ Rectangle {
                         }
                     }
 
-                    MoneroComponents.TextPlain {
-                        Layout.preferredWidth: recipientLayout.secondRowWidth
-                        font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 16
-                        color: MoneroComponents.Style.defaultFontColor
-                        text: qsTr("Amount") + translationManager.emptyString
+                    RowLayout {
+                        id: amountLabel
+                        spacing: 6
+                        Layout.preferredWidth: 125
+                        Layout.maximumWidth: recipientLayout.secondRowWidth
+
+                        MoneroComponents.TextPlain {
+                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.pixelSize: 16
+                            color: MoneroComponents.Style.defaultFontColor
+                            text: qsTr("Amount") + translationManager.emptyString
+                        }
+
+                        MoneroComponents.InlineButton {
+                            fontFamily: FontAwesome.fontFamilySolid
+                            fontStyleName: "Solid"
+                            fontPixelSize: 16
+                            text: FontAwesome.infinity
+                            visible: recipientModel.count == 1
+                            tooltip: qsTr("Send all unlocked balance of this account") + translationManager.emptyString
+                            onClicked: recipientRepeater.itemAt(0).children[1].children[2].text = "(all)";
+                        }
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
                     }
 
                     Item {
@@ -485,9 +505,10 @@ Rectangle {
                                 font.styleName: "Solid"
                                 horizontalAlignment: Text.AlignHCenter
                                 opacity: mouseArea.containsMouse ? 1 : 0.85
-                                text: recipientModel.count == 1 ? FontAwesome.infinity : FontAwesome.times
-                                tooltip: recipientModel.count == 1 ? qsTr("Send all unlocked balance of this account") : qsTr("Remove recipient")  + translationManager.emptyString
+                                text: FontAwesome.times
+                                tooltip: qsTr("Remove recipient")  + translationManager.emptyString
                                 tooltipLeft: true
+                                visible: recipientModel.count > 1
 
                                 MouseArea {
                                     id: mouseArea
@@ -496,14 +517,17 @@ Rectangle {
                                     hoverEnabled: true
                                     onEntered: parent.tooltipPopup.open()
                                     onExited: parent.tooltipPopup.close()
-                                    onClicked: {
-                                        if (recipientModel.count == 1) {
-                                            parent.parent.children[2].text = "(all)";
-                                        } else {
-                                            recipientModel.remove(index);
-                                        }
-                                    }
+                                    onClicked: recipientModel.remove(index);
                                 }
+                            }
+
+                            MoneroComponents.TextPlain {
+                                Layout.leftMargin: recipientLayout.colSpacing / 2
+                                Layout.preferredWidth: recipientLayout.thirdRowWidth
+                                horizontalAlignment: Text.AlignHCenter
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                text: "XMR"
+                                visible: recipientModel.count == 1
                             }
                         }
                     }
