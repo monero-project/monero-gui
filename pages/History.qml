@@ -42,6 +42,7 @@ import "../components/effects/" as MoneroEffects
 import "../components" as MoneroComponents
 import "../js/Utils.js" as Utils
 import "../js/TxUtils.js" as TxUtils
+import "../../js/Wizard.js" as Wizard
 
 
 Rectangle {
@@ -188,6 +189,9 @@ Rectangle {
                 width: 100
                 inputLabel.text: qsTr("Date from") + translationManager.emptyString
                 inputLabel.font.pixelSize: 14
+                calendar.minimumDate: currentWallet ? new Date(Wizard.getApproximateDate(currentWallet.walletCreationHeight, Utils.netTypeToString())) : new Date();
+                calendar.maximumDate: toDatePicker.currentDate
+                isFromDatePicker: true
                 onCurrentDateChanged: {
                     if(root.initialized){
                         root.reset();
@@ -201,6 +205,8 @@ Rectangle {
                 Layout.fillWidth: true
                 width: 100
                 inputLabel.text: qsTr("Date to") + translationManager.emptyString
+                calendar.minimumDate: fromDatePicker.currentDate
+                calendar.maximumDate: new Date() //today
 
                 onCurrentDateChanged: {
                     if(root.initialized){
@@ -1384,7 +1390,7 @@ Rectangle {
         }
 
         if (typeof root.model !== 'undefined' && root.model != null) {
-            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime
+            toDatePicker.currentDate = new Date();
         }
 
         // extract from model, create JS array of txs
@@ -1762,7 +1768,7 @@ Rectangle {
             root.model = appWindow.currentWallet.historyModel;
             root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
             root.model.sort(0, Qt.DescendingOrder);
-            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+            fromDatePicker.currentDate = new Date(Wizard.getApproximateDate(currentWallet.walletCreationHeight, Utils.netTypeToString())) //approximate date of restore height
         }
 
         root.reset();
