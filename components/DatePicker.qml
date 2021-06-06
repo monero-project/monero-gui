@@ -305,11 +305,6 @@ Item {
                             id: dayRect
                             anchors.fill: parent
                             radius: parent.implicitHeight / 2
-                            color: {
-                                if(dayArea.pressed && styleData.visibleMonth)
-                                    return MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
-                                return "transparent";
-                            }
                         }
 
                         MoneroComponents.TextPlain {
@@ -327,19 +322,32 @@ Item {
                             text: styleData.date.getDate()
                             themeTransition: false
                             color: {
-                                if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
-                                if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
-                                if(styleData.today) return MoneroComponents.Style.orange
-                                return MoneroComponents.Style.defaultFontColor
+                              if (currentDate.toDateString() === styleData.date.toDateString()) {
+                                  if (dayArea.containsMouse) {
+                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
+                                  } else {
+                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
+                                  }
+                              } else {
+                                  if (dayArea.containsMouse) {
+                                      dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                                  } else {
+                                      dayRect.color = "transparent";
+                                  }
+                              }
+                              if(!styleData.valid) return "transparent"
+                              if(styleData.date.toDateString() === (new Date()).toDateString()) return "#FFFF00"
+                              if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
+                              if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
+                              return MoneroComponents.Style.defaultFontColor
                             }
                         }
 
                         MouseArea {
                             id: dayArea
                             anchors.fill: parent
+                            visible: styleData.valid
                             hoverEnabled: true
-                            onEntered: dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
-                            onExited: dayRect.color = "transparent"
                             cursorShape: Qt.PointingHandCursor
                             onClicked: {
                                 if(styleData.visibleMonth) {
