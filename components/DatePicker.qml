@@ -32,6 +32,7 @@ import QtQuick.Controls 2.2 as QtQuickControls2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.2
+import FontAwesome 1.0
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -221,21 +222,18 @@ Item {
                 Layout.fillWidth: true
                 color: "transparent"
 
-                Image {
+                MoneroEffects.ImageMask {
                     id: button
                     anchors.right: parent.right
                     anchors.rightMargin: 10
                     anchors.verticalCenter: parent.verticalCenter
-                    source: "qrc:///images/whiteDropIndicator.png"
-                    visible: false
-                }
-
-                ColorOverlay {
-                    source: button
-                    anchors.fill: button
+                    image: "qrc:///images/whiteDropIndicator.png"
+                    height: 8
+                    width: 12
+                    fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                    fontAwesomeFallbackSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     rotation: datePicker.expanded ? 180 : 0
-                    opacity: 1
                 }
 
                 MouseArea {
@@ -397,18 +395,15 @@ Item {
                             anchors.bottom: parent.bottom
                             width: height
 
-                            Image {
+                            MoneroEffects.ImageMask {
                                 id: prevMonthIcon
                                 anchors.centerIn: parent
-                                source: "qrc:///images/prevMonth.png"
-                                visible: false
-                            }
-
-                            ColorOverlay {
-                                source: prevMonthIcon
-                                anchors.fill: prevMonthIcon
+                                image: "qrc:///images/prevMonth.png"
+                                height: 8
+                                width: 12
+                                fontAwesomeFallbackIcon: FontAwesome.arrowLeft
+                                fontAwesomeFallbackSize: 14
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
                             }
 
                             MouseArea {
@@ -426,19 +421,16 @@ Item {
                             anchors.bottom: parent.bottom
                             width: height
 
-                            Image {
+                            MoneroEffects.ImageMask {
                                 id: nextMonthIcon
                                 anchors.centerIn: parent
-                                source: "qrc:///images/prevMonth.png"
-                                visible: false
-                            }
-
-                            ColorOverlay {
-                                source: nextMonthIcon
-                                anchors.fill: nextMonthIcon
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                image: "qrc:///images/prevMonth.png"
+                                height: 8
+                                width: 12
                                 rotation: 180
+                                fontAwesomeFallbackIcon: FontAwesome.arrowLeft
+                                fontAwesomeFallbackSize: 14
+                                color: MoneroComponents.Style.defaultFontColor
                             }
 
                             MouseArea {
