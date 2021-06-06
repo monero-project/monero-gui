@@ -271,6 +271,11 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
+                scrollGestureEnabled: false
+                onWheel: {
+                    if (wheel.angleDelta.y > 0) return calendar.showPreviousMonth();
+                    if (wheel.angleDelta.y < 0) return calendar.showNextMonth();
+                }
             }
 
             Rectangle {
