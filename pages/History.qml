@@ -1783,6 +1783,7 @@ Rectangle {
     }
 
     function clearFields() {
+        sortAndFilter.collapsed = false;
         searchInput.text = "";
         root.txDataCollapsed = [];
     }
