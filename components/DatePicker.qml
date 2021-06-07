@@ -91,8 +91,8 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
-            anchors.leftMargin: datePicker.expanded ? 1 : 0
-            anchors.rightMargin: datePicker.expanded ? 1 : 0
+            anchors.leftMargin: 0
+            anchors.rightMargin: 0
             radius: 4
             y: 1
             color: datePicker.backgroundColor
@@ -257,7 +257,7 @@ Item {
             id: calendarRect
             width: head.width
             x: head.x
-            y: head.y + head.height + 10
+            y: head.y + head.height - 2
 
             color: MoneroComponents.Style.middlePanelBackgroundColor
             border.width: 1
@@ -266,7 +266,7 @@ Item {
             clip: true
 
             Behavior on height {
-                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+                NumberAnimation { duration: 150; easing.type: Easing.InQuad }
             }
 
             MouseArea {
