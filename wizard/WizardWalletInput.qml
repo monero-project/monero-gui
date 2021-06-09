@@ -36,6 +36,7 @@ import "../components"
 import "../components" as MoneroComponents
 
 GridLayout {
+    id: grid
     Layout.fillWidth: true
     property alias walletName: walletName
     property alias walletLocation: walletLocation
@@ -61,7 +62,7 @@ GridLayout {
 
     MoneroComponents.LineEdit {
         id: walletName
-        Layout.fillWidth: true
+        Layout.preferredWidth: grid.width/3
 
         function verify(){
             if(walletLocation === "" || /[\\\/]/.test(walletName.text)) return false;
@@ -82,7 +83,7 @@ GridLayout {
 
     MoneroComponents.LineEdit {
         id: walletLocation
-        Layout.fillWidth: true
+        Layout.preferredWidth: grid.width/3
 
         labelText: qsTr("Wallet location") + translationManager.emptyString
         labelFontSize: 14

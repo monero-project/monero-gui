@@ -82,9 +82,9 @@ GridLayout {
         return addr + ":" + port;
     }
 
-    LineEdit {
+    MoneroComponents.LineEdit {
         id: daemonAddr
-        Layout.fillWidth: true
+        Layout.preferredWidth: root.width/3
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
@@ -104,9 +104,9 @@ GridLayout {
         text: initialHostPort[1]
     }
 
-    LineEdit {
+    MoneroComponents.LineEdit {
         id: daemonPort
-        Layout.fillWidth: true
+        Layout.preferredWidth: root.width/3
         placeholderText: qsTr("Port") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold

@@ -171,19 +171,25 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.InlineButton {
-                    Layout.topMargin: -8
+                Rectangle {
+                    color: "transparent"
+                    height: cleanButton.height
+                    width: cleanButton.width
                     Layout.rightMargin: -8
                     Layout.leftMargin: -2
-                    buttonColor: "transparent"
-                    fontFamily: FontAwesome.fontFamilySolid
-                    fontStyleName: "Solid"
-                    fontPixelSize: 18
-                    text: FontAwesome.times
-                    tooltip: qsTr("Clean") + translationManager.emptyString
-                    tooltipLeft: true
-                    visible: searchInput.text != ""
-                    onClicked: searchInput.text = ""
+
+                    MoneroComponents.InlineButton {
+                        id: cleanButton
+                        buttonColor: "transparent"
+                        fontFamily: FontAwesome.fontFamilySolid
+                        fontStyleName: "Solid"
+                        fontPixelSize: 18
+                        text: FontAwesome.times
+                        tooltip: qsTr("Clean") + translationManager.emptyString
+                        tooltipLeft: true
+                        visible: searchInput.text != ""
+                        onClicked: searchInput.text = ""
+                    }
                 }
             }
         }
