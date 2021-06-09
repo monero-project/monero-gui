@@ -1287,6 +1287,8 @@ Rectangle {
                         image: "qrc:///images/whiteDropIndicator.png"
                         rotation: delegate.collapsed ? 180 : 0
                         color: MoneroComponents.Style.defaultFontColor
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
                     }
                 }
 
