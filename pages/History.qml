@@ -203,6 +203,21 @@ Rectangle {
                 width: 100
                 inputLabel.text: qsTr("Date from") + translationManager.emptyString
                 inputLabel.font.pixelSize: 14
+                minimumDate: {
+                    if (appWindow.currentWallet != null && typeof root.model !== 'undefined' && root.model != null) {
+                        var count = root.model.rowCount()
+                        if (count > 0) {
+                            //date of the first transaction
+                            return root.model.data(root.model.index((count - 1), 0), TransactionHistoryModel.TransactionDateRole);
+                        } else {
+                            //date of monero birth
+                            return new Date("2014-04-18");
+                        }
+                    }
+                }
+                maximumDate: toDatePicker.currentDate
+                isFromDatePicker: true
+
                 onCurrentDateChanged: {
                     if(root.initialized){
                         root.reset();
@@ -216,6 +231,8 @@ Rectangle {
                 Layout.fillWidth: true
                 width: 100
                 inputLabel.text: qsTr("Date to") + translationManager.emptyString
+                minimumDate: fromDatePicker.currentDate
+                maximumDate: new Date() //today
 
                 onCurrentDateChanged: {
                     if(root.initialized){
@@ -1784,8 +1801,8 @@ Rectangle {
                 //date of the first transaction
                 fromDatePicker.currentDate = root.model.data(root.model.index((count - 1), 0), TransactionHistoryModel.TransactionDateRole);
             } else {
-                //date of monero birth (2014-04-18)
-                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+                //date of monero birth
+                fromDatePicker.currentDate = new Date("2014-04-18");
             }
         }
 
