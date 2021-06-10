@@ -159,7 +159,7 @@ Rectangle {
                         Rectangle {
                             anchors.fill: parent
                             anchors.topMargin: 5
-                            anchors.rightMargin: 110
+                            anchors.rightMargin: 125
                             color: "transparent"
 
                             MoneroComponents.Label {
@@ -220,6 +220,18 @@ Rectangle {
                                 onClicked: {
                                     doSend();
                                 }
+                            }
+
+                            MoneroComponents.IconButton {
+                                fontAwesomeFallbackIcon: FontAwesome.searchPlus
+                                fontAwesomeFallbackSize: 22
+                                color: MoneroComponents.Style.defaultFontColor
+                                fontAwesomeFallbackOpacity: 0.5
+                                Layout.preferredWidth: 23
+                                Layout.preferredHeight: 21
+                                tooltip: qsTr("See transactions") + translationManager.emptyString
+
+                                onClicked: doSearchInHistory(address)
                             }
 
                             MoneroComponents.IconButton {
