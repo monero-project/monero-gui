@@ -1794,6 +1794,8 @@ Rectangle {
 
     function searchInHistory(searchTerm){
         searchInput.text = searchTerm;
+        searchInput.forceActiveFocus();
+        searchInput.cursorPosition = searchInput.text.length;
         sortAndFilter.collapsed = true;
     }
 
