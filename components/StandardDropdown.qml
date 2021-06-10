@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -96,19 +97,16 @@ Item {
             anchors.rightMargin: 12
             width: dropdownIcon.width
 
-            Image {
+            MoneroEffects.ImageMask {
                 id: dropdownIcon
                 anchors.centerIn: parent
-                source: "qrc:///images/whiteDropIndicator.png"
-                visible: false
-            }
-
-            ColorOverlay {
-                source: dropdownIcon
-                anchors.fill: dropdownIcon
+                image: "qrc:///images/whiteDropIndicator.png"
+                height: 8
+                width: 12
+                fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                fontAwesomeFallbackSize: 14
                 color: MoneroComponents.Style.defaultFontColor
                 rotation: dropdown.expanded ? 180  : 0
-                opacity: 1
             }
         }
 
