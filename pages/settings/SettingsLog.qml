@@ -132,6 +132,18 @@ Rectangle {
             font.pixelSize: 18
             font.family: MoneroComponents.Style.fontRegular.name
             text: qsTr("Daemon log") + translationManager.emptyString
+            themeTransition: false
+            onColorChanged: {
+                var flickableContentYBefore = flickable.contentY
+                var daemonLogText = consoleArea.text
+                consoleArea.clear();
+                if (MoneroComponents.Style.blackTheme) {
+                    consoleArea.append(daemonLogText.replace(/#000000/g, '#ffffff').replace(/#008000/g, '#00ff00'));
+                } else {
+                    consoleArea.append(daemonLogText.replace(/#ffffff/g, '#000000').replace(/#00ff00/g, '#008000'));
+                }
+                flickable.contentY = flickableContentYBefore
+            }
         }
 
         Item {
@@ -164,7 +176,7 @@ Rectangle {
                     wrapMode: TextEdit.Wrap
                     readOnly: true
                     function logCommand(msg){
-                        msg = log_color(msg, "lime");
+                        msg = log_color(msg, MoneroComponents.Style.blackTheme ? "lime" : "green");
                         consoleArea.append(msg);
                     }
                     function logMessage(msg){
@@ -173,7 +185,7 @@ Rectangle {
                         if(msg.toLowerCase().indexOf('error') >= 0){
                             color = MoneroComponents.Style.errorColor;
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
-                            color = MoneroComponents.Style.warningColor;
+                            color = "#fa6800"
                         }
 
                         // format multi-lines
