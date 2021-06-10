@@ -95,7 +95,10 @@ Item {
             cursorShape: rect.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
             hoverEnabled: true
             anchors.fill: parent
-            onClicked: doClick()
+            onClicked: {
+                tooltip.text ? tooltip.tooltipPopup.close() : ""
+                doClick()
+            }
             onEntered: {
                 tooltip.text ? tooltip.tooltipPopup.open() : ""
                 rect.color = buttonColor ? buttonColor : "#707070";
