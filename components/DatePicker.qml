@@ -250,6 +250,10 @@ Item {
         id: popup
         padding: 0
         closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
+        onOpened: {
+            calendar.visibleMonth = currentDate.getMonth();
+            calendar.visibleYear = currentDate.getFullYear();
+        }
 
         Rectangle {
             id: calendarRect
