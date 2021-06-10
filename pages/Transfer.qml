@@ -340,6 +340,7 @@ Rectangle {
 
                         Rectangle {
                             Layout.fillWidth: true
+                            Layout.topMargin: -1
                             Layout.rightMargin: recipientLayout.thirdRowWidth
                             color: MoneroComponents.Style.inputBorderColorInActive
                             height: 1
@@ -521,6 +522,7 @@ Rectangle {
                         Layout.column: 0
                         Layout.row: 0
                         Layout.fillWidth: true
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
                         spacing: 0
 
                         CheckBox {
@@ -584,6 +586,7 @@ Rectangle {
                         Layout.column: 1
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.secondRowWidth
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
                         borderDisabled: true
                         fontFamily: MoneroComponents.Style.fontMonoRegular.name
                         fontSize: 14
@@ -599,6 +602,7 @@ Rectangle {
                         Layout.column: 2
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
                         font.family: MoneroComponents.Style.fontRegular.name
                         horizontalAlignment: Text.AlignHCenter
                         opacity: 0.7
