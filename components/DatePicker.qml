@@ -33,11 +33,10 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.2
 import FontAwesome 1.0
+import moneroComponents.TransactionHistoryModel 1.0
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
-import "../js/Utils.js" as Utils
-import "../../js/Wizard.js" as Wizard
 
 Item {
     id: datePicker
@@ -48,7 +47,6 @@ Item {
     property color errorColor : "red"
     property bool error: false
     property bool isFromDatePicker: false
-    property var today: new Date();
     property bool isCalendarDisplayingMinimumDate: calendar.visibleMonth == calendar.minimumDate.getMonth() && calendar.visibleYear == calendar.minimumDate.getFullYear()
     property bool isCalendarDisplayingMaximumDate: calendar.visibleMonth == calendar.maximumDate.getMonth() && calendar.visibleYear == calendar.maximumDate.getFullYear()
     property alias calendar: calendar
@@ -99,8 +97,8 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
-            anchors.leftMargin: datePicker.expanded ? 1 : 0
-            anchors.rightMargin: datePicker.expanded ? 1 : 0
+            anchors.leftMargin: 0
+            anchors.rightMargin: 0
             radius: 4
             y: 1
             color: datePicker.backgroundColor
@@ -266,7 +264,7 @@ Item {
             id: calendarRect
             width: head.width
             x: head.x
-            y: head.y + head.height + 10
+            y: head.y + head.height - 2
 
             color: MoneroComponents.Style.middlePanelBackgroundColor
             border.width: 1
@@ -275,11 +273,12 @@ Item {
             clip: true
 
             Behavior on height {
-                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+                NumberAnimation { duration: 150; easing.type: Easing.InQuad }
             }
 
             MouseArea {
                 anchors.fill: parent
+                scrollGestureEnabled: false
                 onWheel: {
                     if (wheel.angleDelta.y > 0 && !isCalendarDisplayingMinimumDate) return calendar.showPreviousMonth();
                     if (wheel.angleDelta.y < 0 && !isCalendarDisplayingMaximumDate) return calendar.showNextMonth();
@@ -336,24 +335,24 @@ Item {
                             text: styleData.date.getDate()
                             themeTransition: false
                             color: {
-                                if (currentDate.toDateString() === styleData.date.toDateString()) {
-                                    if (dayArea.containsMouse) {
-                                        dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
-                                    } else {
-                                        dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
-                                    }
-                                } else {
-                                    if (dayArea.containsMouse) {
-                                        dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
-                                    } else {
-                                        dayRect.color = "transparent";
-                                    }
-                                }
-                                if(!styleData.valid) return "transparent"
-                                if(styleData.date.toDateString() === today.toDateString()) return "#FFFF00"
-                                if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
-                                if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
-                                return MoneroComponents.Style.defaultFontColor
+                              if (currentDate.toDateString() === styleData.date.toDateString()) {
+                                  if (dayArea.containsMouse) {
+                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
+                                  } else {
+                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
+                                  }
+                              } else {
+                                  if (dayArea.containsMouse) {
+                                      dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                                  } else {
+                                      dayRect.color = "transparent";
+                                  }
+                              }
+                              if(!styleData.valid) return "transparent"
+                              if(styleData.date.toDateString() === (new Date()).toDateString()) return "#FFFF00"
+                              if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
+                              if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
+                              return MoneroComponents.Style.defaultFontColor
                             }
                         }
 
@@ -479,19 +478,20 @@ Item {
                 anchors.leftMargin: 5
                 font.family: MoneroComponents.Style.fontMonoRegular.name
                 font.pixelSize: 13
-                color: restoreHeightLabelMouseArea.containsMouse ? MoneroComponents.Style.buttonBackgroundColorHover : MoneroComponents.Style.buttonBackgroundColor
+                color: firstTransactionMouseArea.containsMouse ? MoneroComponents.Style.buttonBackgroundColorHover : MoneroComponents.Style.buttonBackgroundColor
                 themeTransition: false
-                visible: isFromDatePicker
-                text: qsTr("Restore Height") + translationManager.emptyString
+                visible: isFromDatePicker && typeof root.model !== 'undefined' && root.model != null && root.model.rowCount() > 0
+                text: qsTr("First transaction") + translationManager.emptyString
 
                 MouseArea {
-                    id: restoreHeightLabelMouseArea
+                    id: firstTransactionMouseArea
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
                     anchors.fill: parent
                     onClicked: {
-                        var restoreHeight = new Date(Wizard.getApproximateDate(currentWallet.walletCreationHeight, Utils.netTypeToString()))
-                        datePicker.currentDate = restoreHeight;
+                        if (appWindow.currentWallet != null && typeof root.model !== 'undefined' && root.model != null) {
+                            datePicker.currentDate = root.model.data(root.model.index((root.model.rowCount() - 1), 0), TransactionHistoryModel.TransactionDateRole);
+                        }
                         popup.close()
                     }
                 }
@@ -516,7 +516,7 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     anchors.fill: parent
                     onClicked: {
-                        datePicker.currentDate = today;
+                        datePicker.currentDate = new Date();
                         popup.close()
                     }
                 }
