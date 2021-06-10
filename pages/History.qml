@@ -1607,6 +1607,7 @@ Rectangle {
 
     function editDescription(_hash, _tx_note){
         inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
+        inputDialog.inputText = _tx_note ? _tx_note : "";
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
             appWindow.showStatusMessage(qsTr("Updated description."),3);
