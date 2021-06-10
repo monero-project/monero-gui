@@ -28,7 +28,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 
 import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
@@ -206,6 +206,7 @@ Rectangle {
 
                 ScrollBar.vertical: ScrollBar {
                     onActiveChanged: if (!active && !isMac) active = true
+                    policy: isMac ? ScrollBar.AsNeeded : ScrollBar.AlwaysOn
                 }
             }
         }
