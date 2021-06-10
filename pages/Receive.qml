@@ -189,6 +189,7 @@ Rectangle {
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
+                                tooltip: qsTr("See transactions") + translationManager.emptyString
 
                                 onClicked: doSearchInHistory(address)
                             }
