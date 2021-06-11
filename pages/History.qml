@@ -1773,6 +1773,38 @@ Rectangle {
         }
     }
 
+    Timer {
+        interval: 1000 * 20;
+        running: appWindow.currentWallet != null && !walletSynced && middlePanel.state == "History"
+        repeat: true
+        triggeredOnStart: false
+        onTriggered: {
+            // copy of the first item of refresh() function
+            if (typeof appWindow.currentWallet.history !== "undefined" ) {
+                currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+            }
+            // check if new transactions arrived
+            var modelCount = root.model.rowCount();
+            if (modelCount > txCount) {
+                // copy of the remaining items of refresh() function
+                if (typeof root.model !== 'undefined' && root.model != null) {
+                    toDatePicker.currentDate = new Date(); //today
+                }
+                root.updateTransactionsFromModel();
+                root.updateDisplay(root.txOffset, root.txMax);
+
+                // update filter
+                root.updateFilter();
+
+                //update fromDatePicker
+                if (fromDatePicker.currentDate.getTime() === (new Date("2014-04-18")).getTime()) {
+                    //date of the first transaction
+                    fromDatePicker.currentDate = root.model.data(root.model.index((modelCount - 1), 0), TransactionHistoryModel.TransactionDateRole);
+                }
+            }
+        }
+    }
+
     function onPageCompleted() {
         // setup date filter scope according to real transactions
         if(appWindow.currentWallet != null){
@@ -1784,8 +1816,8 @@ Rectangle {
                 //date of the first transaction
                 fromDatePicker.currentDate = root.model.data(root.model.index((count - 1), 0), TransactionHistoryModel.TransactionDateRole);
             } else {
-                //date of monero birth (2014-04-18)
-                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+                //date of monero birth
+                fromDatePicker.currentDate = new Date("2014-04-18");
             }
         }
 
