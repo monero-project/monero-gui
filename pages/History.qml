@@ -160,6 +160,9 @@ Rectangle {
                 placeholderFontSize: 15
                 inputHeight: 34
                 onTextUpdated: {
+                    if (!sortAndFilter.collapsed) {
+                        sortAndFilter.collapsed = true;
+                    }
                     if(searchInput.text != null && searchInput.text.length >= 3){
                         root.sortSearchString = searchInput.text;
                         root.reset();
