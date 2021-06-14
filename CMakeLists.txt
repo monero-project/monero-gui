@@ -11,7 +11,6 @@ set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
-option(ENABLE_PASS_STRENGTH_METER "Enable zxcvbn library for password strength" OFF)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
@@ -76,13 +75,6 @@ if(STATIC)
   set(Boost_USE_STATIC_RUNTIME ON)
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ${CMAKE_FIND_LIBRARY_SUFFIXES})
   add_definitions(-DMONERO_GUI_STATIC)
-endif()
-
-# Include password strength library
-if(ENABLE_PASS_STRENGTH_METER)
-    message(STATUS "Building with pass strength meter support.")
-else()
-    add_definitions(-DDISABLE_PASS_STRENGTH_METER)
 endif()
 
 include(CMakePackageConfigHelpers)
