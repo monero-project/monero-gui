@@ -189,13 +189,7 @@ Rectangle {
                     inputDialog.onAcceptedCallback = function() {
                         var _restoreHeight;
                         if (inputDialog.inputText) {
-                            var restoreHeightText = inputDialog.inputText;
-                            // Parse date string or restore height as integer
-                            if(restoreHeightText.indexOf('-') === 4 && restoreHeightText.length === 10) {
-                                _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeightText, Utils.netTypeToString());
-                            } else {
-                                _restoreHeight = parseInt(restoreHeightText)
-                            }
+                            _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText);
                         }
                         if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {

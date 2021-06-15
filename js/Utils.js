@@ -115,3 +115,18 @@ function capitalize(s){
 function removeTrailingZeros(value) {
     return (value + '').replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
 }
+
+function parseDateStringOrRestoreHeightAsInteger(value) {
+    // Parse date string or restore height as integer
+    var restoreHeight = 0;
+    if (value.indexOf('-') === 4 && value.length === 10) {
+        restoreHeight = Wizard.getApproximateBlockchainHeight(value, Utils.netTypeToString());
+    } else if (parseInt(value.substring(0, 4)) >= 2014 && parseInt(value.substring(0, 4)) <= 2025 && value.length === 8) {
+        // Correct date typed in a wrong format (20201225 instead of 2020-12-25)
+        var restoreHeightHyphenated = value.substring(0, 4) + "-" + value.substring(4, 6) + "-" + value.substring(6, 8);
+        restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeightHyphenated, Utils.netTypeToString());
+    } else {
+        restoreHeight = parseInt(value);
+    }
+    return restoreHeight;
+}
