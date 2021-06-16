@@ -226,10 +226,13 @@ Rectangle {
         MoneroComponents.LineEdit {
             id: sendCommandText
             Layout.fillWidth: true
+            inputPaddingTop: 0
+            inputPaddingBottom: 0
             property var lastCommands: []
             property int currentCommandIndex
             enabled: !persistentSettings.useRemoteNode
             fontBold: false
+            fontSize: 16
             placeholderText: qsTr("Type a command (e.g '%1' or '%2') and press Enter").arg("help").arg("status") + translationManager.emptyString
             placeholderFontSize: 16
             Keys.onUpPressed: {

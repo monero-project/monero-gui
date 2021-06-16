@@ -468,10 +468,14 @@ Rectangle {
                                 Layout.bottomMargin: recipientLayout.rowSpacing / 2
                                 Layout.rightMargin: recipientLayout.colSpacing / 2
                                 Layout.preferredWidth: 125
+                                Layout.maximumWidth: 125
                                 borderDisabled: true
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name
                                 fontSize: 14
-                                inputPadding: 0
+                                inputPaddingLeft: 0
+                                inputPaddingRight: 0
+                                inputPaddingTop: 0
+                                inputPaddingBottom: 0
                                 placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
                                 placeholderFontSize: 14
                                 placeholderLeftMargin: 0
@@ -586,11 +590,15 @@ Rectangle {
                         Layout.column: 1
                         Layout.row: 0
                         Layout.preferredWidth: recipientLayout.secondRowWidth
+                        Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
                         fontFamily: MoneroComponents.Style.fontMonoRegular.name
                         fontSize: 14
                         inputHeight: 30
-                        inputPadding: 0
+                        inputPaddingLeft: 0
+                        inputPaddingRight: 0
+                        inputPaddingTop: 0
+                        inputPaddingBottom: 0
                         readOnly: true
                         text: Utils.removeTrailingZeros(walletManager.displayAmount(recipientModel.getAmountTotal()))
                         visible: recipientModel.count > 1
@@ -600,6 +608,7 @@ Rectangle {
                         Layout.column: 2
                         Layout.row: 0
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
+                        Layout.maximumWidth: recipientLayout.thirdRowWidth
                         horizontalAlignment: Text.AlignHCenter
                         font.family: MoneroComponents.Style.fontRegular.name
                         text: "XMR"
@@ -611,11 +620,15 @@ Rectangle {
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.secondRowWidth
                         Layout.topMargin: recipientModel.count > 1 ? 0 : 5
+                        Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
                         fontFamily: MoneroComponents.Style.fontMonoRegular.name
                         fontSize: 14
                         inputHeight: 30
-                        inputPadding: 0
+                        inputPaddingLeft: 0
+                        inputPaddingRight: 0
+                        inputPaddingTop: 0
+                        inputPaddingBottom: 0
                         opacity: 0.7
                         readOnly: true
                         text: fiatApiConvertToFiat(walletManager.displayAmount(recipientModel.getAmountTotal()))
@@ -627,6 +640,7 @@ Rectangle {
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
                         Layout.topMargin: recipientModel.count > 1 ? 0 : 5
+                        Layout.maximumWidth: recipientLayout.thirdRowWidth
                         font.family: MoneroComponents.Style.fontRegular.name
                         horizontalAlignment: Text.AlignHCenter
                         opacity: 0.7
