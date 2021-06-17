@@ -319,6 +319,8 @@ Rectangle {
             MoneroComponents.LineEditMulti {
                 id: addressLine
                 Layout.topMargin: 20
+                KeyNavigation.backtab: deleteButton.visible ? deleteButton: cancelButton
+                KeyNavigation.tab: resolveButton.visible ? resolveButton : descriptionLine
                 labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style> %1"
                     .arg(qsTr("Address")) + translationManager.emptyString
                 placeholderText: {
@@ -340,6 +342,8 @@ Rectangle {
                         descriptionLine.text = parsed.tx_description;
                     }
                 }
+                onEnterPressed: addButton.enabled ? addButton.clicked() : ""
+                onReturnPressed: addButton.enabled ? addButton.clicked() : ""
 
                 MoneroComponents.InlineButton {
                     buttonColor: MoneroComponents.Style.orange
@@ -355,6 +359,8 @@ Rectangle {
 
             MoneroComponents.StandardButton {
                 id: resolveButton
+                KeyNavigation.backtab: addressLine
+                KeyNavigation.tab: descriptionLine
                 Layout.topMargin: 10
                 text: qsTr("Resolve") + translationManager.emptyString
                 visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
@@ -392,17 +398,25 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEditMulti {
+            MoneroComponents.LineEdit {
                 id: descriptionLine
+                KeyNavigation.backtab: resolveButton.visible ? resolveButton : addressLine
+                KeyNavigation.tab: addButton.enabled ? addButton : cancelButton
                 Layout.topMargin: 20
+                Layout.fillWidth: true
+                fontSize: 16
+                placeholderFontSize: 16
                 labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style> %1"
                     .arg(qsTr("Description")) + translationManager.emptyString
                 placeholderText: qsTr("Add a name...") + translationManager.emptyString
+                onAccepted: addButton.enabled ? addButton.clicked() : ""
             }
             RowLayout {
                 Layout.topMargin: 20
                 MoneroComponents.StandardButton {
                     id: addButton
+                    KeyNavigation.backtab: descriptionLine
+                    KeyNavigation.tab: cancelButton
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
                     onClicked: {
@@ -428,39 +442,25 @@ Rectangle {
                     }
                 }
 
-                Text {
+                MoneroComponents.StandardButton {
                     id: cancelButton
-                    Layout.leftMargin: 20
-                    font.pixelSize: 16
-                    font.bold: false
-                    color: MoneroComponents.Style.defaultFontColor
+                    KeyNavigation.backtab: addButton
+                    KeyNavigation.tab: deleteButton.visible ? deleteButton : addressLine
                     text: qsTr("Cancel") + translationManager.emptyString
-
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.showAddressBook();
-                    }
+                    primary: false
+                    onClicked: root.showAddressBook();
                 }
 
-                Text {
+                MoneroComponents.StandardButton {
                     id: deleteButton
+                    KeyNavigation.backtab: cancelButton
+                    KeyNavigation.tab: addressLine
                     visible: root.editEntry
-                    Layout.leftMargin: 20
-                    font.pixelSize: 16
-                    font.bold: false
-                    color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Delete") + translationManager.emptyString
-
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
-                            root.showAddressBook();
-                        }
+                    primary: false
+                    onClicked: {
+                        currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
+                        root.showAddressBook();
                     }
                 }
             }
@@ -491,6 +491,7 @@ Rectangle {
         addressBookEmptyLayout.visible = false
         addressBookLayout.visible = false;
         addContactLayout.visible = true;
+        addressLine.forceActiveFocus();
     }
 
     function showEditAddress(address, description) {
@@ -501,6 +502,8 @@ Rectangle {
         addContactLayout.visible = true;
         addressLine.text = address;
         descriptionLine.text = description;
+        addressLine.forceActiveFocus();
+        addressLine.cursorPosition = addressLine.text.length;
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {

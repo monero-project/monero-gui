@@ -68,6 +68,7 @@ ColumnLayout {
     }
 
     property alias error: input.error
+    property alias cursorPosition: input.cursorPosition
 
     property string labelFontColor: MoneroComponents.Style.defaultFontColor
     property bool labelFontBold: false
@@ -91,6 +92,8 @@ ColumnLayout {
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
     signal editingFinished();
+    signal returnPressed();
+    signal enterPressed();
 
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
 
@@ -176,6 +179,8 @@ ColumnLayout {
         fontColor: item.fontColor
         mouseSelection: item.mouseSelection
         onEditingFinished: item.editingFinished()
+        Keys.onReturnPressed: item.returnPressed()
+        Keys.onEnterPressed: item.enterPressed()
 
         MoneroComponents.TextPlain {
             id: placeholderLabel
