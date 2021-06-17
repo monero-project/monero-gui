@@ -175,7 +175,6 @@ Rectangle {
                     color: "transparent"
                     height: cleanButton.height
                     width: cleanButton.width
-                    Layout.topMargin: -8
                     Layout.rightMargin: -8
                     Layout.leftMargin: -2
 
