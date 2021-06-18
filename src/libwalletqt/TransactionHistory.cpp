@@ -181,7 +181,6 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         TransactionInfo info(tx, this);
 
         // collect column data
-        double amount = info.amount();
         quint64 atomicAmount = info.atomicAmount();
         quint32 subaddrAccount = info.subaddrAccount();
         QString fee = info.fee();
@@ -212,7 +211,7 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         // format and write
         QString line = QString("%1,%2,%3,%4,%5,%6,%7,%8,\"%9\",%10,%11\n")
             .arg(QString::number(blockHeight), QString::number(epoch), date)
-            .arg(direction, QString::number(amount), QString::number(atomicAmount))
+            .arg(direction, displayAmount, QString::number(atomicAmount))
             .arg(info.fee(), info.hash(), label, QString::number(subaddrAccount))
             .arg(paymentId);
         output << line;
