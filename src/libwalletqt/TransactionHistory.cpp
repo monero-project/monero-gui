@@ -170,7 +170,7 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
 
     // write header
     QTextStream output(&data);
-    output << "blockHeight,epoch,date,direction,amount,atomicAmount,fee,txid,label,subaddrAccount,paymentId\n";
+    output << "blockHeight,epoch,date,direction,amount,atomicAmount,fee,txid,label,subaddrAccount,paymentId,description\n";
 
     QReadLocker locker(&m_lock);
     for (const auto &tx : m_pimpl->getAll()) {
@@ -199,6 +199,8 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         }
         QString label = info.label();
         label.remove(QChar('"'));  // reserved
+        QString description = info.description();
+        description.remove(QChar('"')); // reserved
         quint64 blockHeight = info.blockHeight();
         QDateTime timeStamp = info.timestamp();
         QString date = info.date() + " " + info.time();
@@ -210,11 +212,11 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         }
 
         // format and write
-        QString line = QString("%1,%2,%3,%4,%5,%6,%7,%8,\"%9\",%10,%11\n")
+        QString line = QString("%1,%2,%3,%4,%5,%6,%7,%8,\"%9\",%10,%11,\"%12\"\n")
             .arg(QString::number(blockHeight), QString::number(epoch), date)
             .arg(direction, QString::number(amount), QString::number(atomicAmount))
             .arg(info.fee(), info.hash(), label, QString::number(subaddrAccount))
-            .arg(paymentId);
+            .arg(paymentId, description);
         output << line;
     }
 
