@@ -117,14 +117,13 @@ Rectangle {
                     id: restoreHeight
                     visible: !newDeviceWallet.checked
                     Layout.fillWidth: true
-                    labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
+                    labelText: qsTr("Wallet creation date or restore height") + " (" + "optional" + ")" + translationManager.emptyString
                     labelFontSize: 14
                     placeholderFontSize: 16
-                    placeholderText: qsTr("Restore height") + translationManager.emptyString
+                    placeholderText: qsTr("Date (YYYY-MM-DD) or restore height. Leave blank if you don't know.") + translationManager.emptyString
                     validator: RegExpValidator {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
-                    text: "0"
                 }
 
                 MoneroComponents.StandardDropdown {
@@ -183,10 +182,8 @@ Rectangle {
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
                     if(lookahead.text)
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
-                    if(restoreHeight.text){
-                        wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
-                    }
 
+                    wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text, wizardCreateDevice1.deviceName);
                     wizardController.walletCreatedFromDevice.connect(onCreateWalletFromDeviceCompleted);
                     wizardController.createWalletFromDevice();
                 }
