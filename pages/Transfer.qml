@@ -361,7 +361,8 @@ Rectangle {
                         Rectangle {
                             Layout.fillWidth: true
                             Layout.topMargin: -1
-                            Layout.rightMargin: recipientLayout.thirdRowWidth
+                            Layout.leftMargin: 1
+                            Layout.rightMargin: recipientLayout.thirdRowWidth + 1
                             color: MoneroComponents.Style.inputBorderColorInActive
                             height: 1
                             visible: index > 0
@@ -374,8 +375,8 @@ Rectangle {
                                 KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
                                 KeyNavigation.tab: parent.children[2]
                                 Layout.alignment: Qt.AlignVCenter
-                                Layout.topMargin: recipientLayout.rowSpacing / 2
-                                Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                                Layout.topMargin: index > 0 ? 0 : 1
+                                Layout.bottomMargin: 2
                                 Layout.fillWidth: true
                                 addressValidation: true
                                 borderDisabled: true
@@ -454,6 +455,8 @@ Rectangle {
 
                             Rectangle {
                                 Layout.fillHeight: true
+                                Layout.topMargin: index > 0 ? 0 : 1
+                                Layout.bottomMargin: 1
                                 Layout.leftMargin: recipientLayout.colSpacing / 2 - width
                                 Layout.rightMargin: recipientLayout.colSpacing / 2
                                 color: MoneroComponents.Style.inputBorderColorInActive
@@ -464,8 +467,8 @@ Rectangle {
                                 KeyNavigation.backtab: parent.children[0]
                                 KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
                                 Layout.alignment: Qt.AlignVCenter
-                                Layout.topMargin: recipientLayout.rowSpacing / 2
-                                Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                                Layout.topMargin: index > 0 ? 0 : 1
+                                Layout.bottomMargin: 2
                                 Layout.rightMargin: recipientLayout.colSpacing / 2
                                 Layout.preferredWidth: 125
                                 Layout.maximumWidth: 125
@@ -550,7 +553,7 @@ Rectangle {
                         Layout.column: 0
                         Layout.row: 0
                         Layout.fillWidth: true
-                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         spacing: 0
 
                         CheckBox {
@@ -590,6 +593,7 @@ Rectangle {
                         Layout.column: 1
                         Layout.row: 0
                         Layout.preferredWidth: recipientLayout.secondRowWidth
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
                         fontFamily: MoneroComponents.Style.fontMonoRegular.name
@@ -619,7 +623,7 @@ Rectangle {
                         Layout.column: 1
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.secondRowWidth
-                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
                         fontFamily: MoneroComponents.Style.fontMonoRegular.name
@@ -639,7 +643,7 @@ Rectangle {
                         Layout.column: 2
                         Layout.row: recipientModel.count > 1 ? 1 : 0
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
-                        Layout.topMargin: recipientModel.count > 1 ? 0 : 5
+                        Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
                         font.family: MoneroComponents.Style.fontRegular.name
                         horizontalAlignment: Text.AlignHCenter
