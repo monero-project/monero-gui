@@ -181,43 +181,36 @@ Rectangle {
                 columns: 4
                 columnSpacing: 20
                 Layout.fillWidth: true
+                Layout.topMargin: 10
 
-                ColumnLayout {
-                    Layout.topMargin: 4
+                MoneroComponents.StandardDropdown {
+                    id: networkTypeDropdown
+                    currentIndex: persistentSettings.nettype
+                    dataModel: networkTypeModel
+                    Layout.maximumWidth: 180
+                    labelText: qsTr("Network") + ":" + translationManager.emptyString
+                    labelFontSize: 14
 
-                    MoneroComponents.Label {
-                        text: qsTr("Change Network:") + translationManager.emptyString
-                        fontSize: 14
-                    }
-
-                    MoneroComponents.StandardDropdown {
-                        id: networkTypeDropdown
-                        currentIndex: persistentSettings.nettype
-                        dataModel: networkTypeModel
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 180
-                        Layout.topMargin: 5
-
-                        onChanged: {
-                            var item = dataModel.get(currentIndex).nettype.toLowerCase();
-                            if(item === "mainnet") {
-                                persistentSettings.nettype = NetworkType.MAINNET
-                            } else if(item === "stagenet"){
-                                persistentSettings.nettype = NetworkType.STAGENET
-                            } else if(item === "testnet"){
-                                persistentSettings.nettype = NetworkType.TESTNET
-                            }
-                            appWindow.disconnectRemoteNode()
+                    onChanged: {
+                        var item = dataModel.get(currentIndex).nettype.toLowerCase();
+                        if(item === "mainnet") {
+                            persistentSettings.nettype = NetworkType.MAINNET
+                        } else if(item === "stagenet"){
+                            persistentSettings.nettype = NetworkType.STAGENET
+                        } else if(item === "testnet"){
+                            persistentSettings.nettype = NetworkType.TESTNET
                         }
+                        appWindow.disconnectRemoteNode()
                     }
                 }
 
                 MoneroComponents.LineEdit {
                     id: kdfRoundsText
-                    Layout.fillWidth: true
+                    Layout.maximumWidth: 180
 
                     labelText: qsTr("Number of KDF rounds:") + translationManager.emptyString
                     labelFontSize: 14
+                    fontSize: 16
                     placeholderFontSize: 16
                     placeholderText: "0"
                     validator: IntValidator { bottom: 1 }
