@@ -265,7 +265,6 @@ Rectangle {
                         Layout.fillWidth: true
 
                         MoneroComponents.TextPlain {
-                            Layout.leftMargin: 10
                             font.family: MoneroComponents.Style.fontRegular.name
                             font.pixelSize: 16
                             color: MoneroComponents.Style.defaultFontColor
