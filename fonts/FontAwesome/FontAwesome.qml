@@ -42,6 +42,7 @@ Object {
     property string edit : "\uf044"
     property string ellipsisH : "\uf141"
     property string exclamationCircle : "\uf06a"
+    property string expandAlt : "\uf424"
     property string eye : "\uf06e"
     property string eyeSlash : "\uf070"
     property string folderOpen : "\uf07c"

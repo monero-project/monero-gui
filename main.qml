@@ -1737,13 +1737,13 @@ ApplicationWindow {
                 name: "wizard"
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: resizeArea; visible: true }
+                PropertyChanges { target: resizeArea; visible: appWindow.visibility !== Window.Maximized }
                 PropertyChanges { target: titleBar; state: "essentials" }
             }, State {
                 name: "normal"
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: resizeArea; visible: true }
+                PropertyChanges { target: resizeArea; visible: appWindow.visibility !== Window.Maximized }
                 PropertyChanges { target: titleBar; state: "default" }
             }
         ]
@@ -1854,11 +1854,14 @@ ApplicationWindow {
 
             MoneroEffects.ImageMask {
                 anchors.centerIn: parent
-                visible: persistentSettings.customDecorations
+                visible: persistentSettings.customDecorations && appWindow.visibility !== Window.Maximized
                 image: "qrc:///images/resize.png"
                 color: MoneroComponents.Style.defaultFontColor
                 width: 12
                 height: 12
+                fontAwesomeFallbackIcon: FontAwesome.expandAlt
+                fontAwesomeFallbackSize: 18
+                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
                 opacity: (parent.containsMouse || parent.pressed) ? 0.5 : 1.0
             }
 

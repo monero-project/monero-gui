@@ -54,9 +54,6 @@ QtObject {
     property string titleBarBackgroundGradientStop: blackTheme ? _b_titleBarBackgroundGradientStop : _w_titleBarBackgroundGradientStop
     property string titleBarBackgroundBorderColor: blackTheme ? _b_titleBarBackgroundBorderColor : _w_titleBarBackgroundBorderColor
     property string titleBarLogoSource: blackTheme ? _b_titleBarLogoSource : _w_titleBarLogoSource
-    property string titleBarMinimizeSource: blackTheme ? _b_titleBarMinimizeSource : _w_titleBarMinimizeSource
-    property string titleBarFullscreenSource: blackTheme ? _b_titleBarFullscreenSource : _w_titleBarFullscreenSource
-    property string titleBarCloseSource: blackTheme ? _b_titleBarCloseSource : _w_titleBarCloseSource
     property string titleBarButtonHoverColor: blackTheme ? _b_titleBarButtonHoverColor : _w_titleBarButtonHoverColor
 
     property string wizardBackgroundGradientStart: blackTheme ? _b_wizardBackgroundGradientStart : _w_wizardBackgroundGradientStart
@@ -111,9 +108,6 @@ QtObject {
     property string _b_titleBarBackgroundGradientStop: "#191919"
     property string _b_titleBarBackgroundBorderColor: "#2f2f2f"
     property string _b_titleBarLogoSource: "qrc:///images/titlebarLogo.png"
-    property string _b_titleBarMinimizeSource: "qrc:///images/minimize.svg"
-    property string _b_titleBarFullscreenSource: "qrc:///images/fullscreen.svg"
-    property string _b_titleBarCloseSource: "qrc:///images/close.svg"
     property string _b_titleBarButtonHoverColor: "#10FFFFFF"
 
     property string _b_wizardBackgroundGradientStart: "#1e1e1e"
@@ -168,9 +162,6 @@ QtObject {
     property string _w_titleBarBackgroundGradientStop: "#FBFBFB"
     property string _w_titleBarBackgroundBorderColor: "#DEDEDE"
     property string _w_titleBarLogoSource: "qrc:///images/themes/white/titlebarLogo.png"
-    property string _w_titleBarMinimizeSource: "qrc:///images/themes/white/minimize.svg"
-    property string _w_titleBarFullscreenSource: "qrc:///images/themes/white/fullscreen.svg"
-    property string _w_titleBarCloseSource: "qrc:///images/themes/white/close.svg"
     property string _w_titleBarButtonHoverColor: "#11000000"
 
     property string _w_wizardBackgroundGradientStart: "white"

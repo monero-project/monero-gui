@@ -232,12 +232,6 @@
         <file>images/middlePanelShadow.png</file>
         <file>images/themes/white/titlebarLogo@2x.png</file>
         <file>images/themes/white/titlebarLogo.png</file>
-        <file>images/fullscreen.svg</file>
-        <file>images/close.svg</file>
-        <file>images/minimize.svg</file>
-        <file>images/themes/white/close.svg</file>
-        <file>images/themes/white/fullscreen.svg</file>
-        <file>images/themes/white/minimize.svg</file>
         <file>components/effects/ColorTransition.qml</file>
         <file>components/effects/GradientBackground.qml</file>
         <file>images/check-white.svg</file>

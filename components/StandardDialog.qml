@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -199,24 +200,34 @@ Rectangle {
         height: 48
         color: "transparent"
 
-        MoneroEffects.ImageMask {
-            anchors.centerIn: parent
-            width: 16
-            height: 16
-            image: MoneroComponents.Style.titleBarCloseSource
-            color: MoneroComponents.Style.defaultFontColor
+        Text {
+            text: FontAwesome.times
+            font.family:FontAwesome.fontFamilySolid
+            font.pixelSize: 19
+            color: closeButtonMouseArea.containsMouse ?  MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor 
+            font.styleName: "Solid"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             opacity: 0.75
         }
 
-        MouseArea {
+        MoneroComponents.Tooltip {
+            id: btnCloseStandardDialogTooltip
             anchors.fill: parent
+            text: qsTr("Close") + translationManager.emptyString
+        }
+
+        MouseArea {
+            id: closeButtonMouseArea
+            anchors.fill: parent
+            hoverEnabled: true
             onClicked: {
                 root.close()
                 root.rejected()
             }
             cursorShape: Qt.PointingHandCursor
-            onEntered: closeButton.color = "#262626";
-            onExited: closeButton.color = "transparent";
+            onEntered: btnCloseStandardDialogTooltip.tooltipPopup.open()
+            onExited: btnCloseStandardDialogTooltip.tooltipPopup.close()
         }
     }
 
