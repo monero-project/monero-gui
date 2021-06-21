@@ -184,6 +184,23 @@ RUN git clone -b v3.19.7 --depth 1 https://github.com/Kitware/CMake \
     && PATH=${HOST_PATH} make -j${THREADS} install \
     && rm -rf $(pwd)
 
+RUN git clone -b v1.0.24 --depth 1 https://github.com/libusb/libusb \
+    && cd libusb \
+    && git fetch origin pull/874/head:pr874 \
+    && git checkout pr874 \
+    && cd android/jni \
+    && sed -i "s/SHARED_LIBRAR/STATIC_LIBRAR/g" *.mk \
+    && PATH=${ANDROID_NDK_ROOT}:${HOST_PATH} ndk-build \
+    && cp ../obj/local/arm64-v8a/libusb1.0.a ${PREFIX}/lib/libusb-1.0.a \
+    && cp ../../libusb/libusb.h ${PREFIX}/include
+
+RUN git clone -b hidapi-0.10.1 --depth 1 https://github.com/libusb/hidapi \
+    && cd hidapi/android/jni \
+    && sed -i "s/SHARED_LIBRAR/STATIC_LIBRAR/g" Android.mk \
+    && PATH=${ANDROID_NDK_ROOT}:${HOST_PATH} ndk-build LOCAL_CFLAGS="-I ${PREFIX}/include" LIB_PATH="${PREFIX}/lib" \
+    && cp ../obj/local/arm64-v8a/libhidapi.a ${PREFIX}/lib \
+    && cp -r ${WORKDIR}/hidapi/hidapi ${PREFIX}/include
+
 CMD set -ex \
     && cd /monero-gui \
     && mkdir -p build/Android/release \

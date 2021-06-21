@@ -75,6 +75,10 @@
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
+#if defined(Q_OS_ANDROID)
+#include <jni.h>
+#include <libusb.h>
+#endif
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -156,6 +160,13 @@ bool isLinux = false;
 bool isTails = false;
 bool isDesktop = false;
 bool isOpenGL = true;
+
+#if defined(Q_OS_ANDROID)
+jint JNI_OnLoad(JavaVM *vm, void*) {
+    libusb_set_option(NULL, LIBUSB_OPTION_ANDROID_JAVAVM, vm);
+    return JNI_VERSION_1_6;
+}
+#endif
 
 int main(int argc, char *argv[])
 {
