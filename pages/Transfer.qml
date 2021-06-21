@@ -669,13 +669,6 @@ Rectangle {
             spacing: 0
             visible: appWindow.walletMode >= 2
 
-            Label {
-                id: transactionPriority
-                Layout.topMargin: 0
-                text: qsTr("Transaction priority") + translationManager.emptyString
-                fontBold: false
-                fontSize: 16
-            }
             // Note: workaround for translations in listElements
             // ListElement: cannot use script for property value, so
             // code like this wont work:
@@ -699,10 +692,11 @@ Rectangle {
                 spacing: 10
 
                 StandardDropdown {
-                    Layout.preferredWidth: 200
+                    Layout.maximumWidth: 200
                     id: priorityDropdown
                     currentIndex: 0
                     dataModel: priorityModelV5
+                    labelText: qsTr("Transaction priority") + translationManager.emptyString
                 }
 
                 MoneroComponents.TextPlain {

@@ -178,52 +178,34 @@ Rectangle {
             Layout.leftMargin: 36
             columnSpacing: 32
 
-            ColumnLayout {
-                spacing: 10
-                Layout.fillWidth: true
+            MoneroComponents.StandardDropdown {
+                id: fiatPriceProviderDropDown
+                Layout.maximumWidth: 200
+                labelText: qsTr("Price source") + translationManager.emptyString
+                labelFontSize: 14
+                dataModel: fiatPriceProvidersModel
+                onChanged: {
+                    var obj = dataModel.get(currentIndex);
+                    persistentSettings.fiatPriceProvider = obj.data;
 
-                MoneroComponents.Label {
-                    Layout.fillWidth: true
-                    fontSize: 14
-                    text: qsTr("Price source") + translationManager.emptyString
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: fiatPriceProviderDropDown
-                    Layout.fillWidth: true
-                    dataModel: fiatPriceProvidersModel
-                    onChanged: {
-                        var obj = dataModel.get(currentIndex);
-                        persistentSettings.fiatPriceProvider = obj.data;
-
-                        if(persistentSettings.fiatPriceEnabled)
-                            appWindow.fiatApiRefresh();
-                    }
+                    if(persistentSettings.fiatPriceEnabled)
+                        appWindow.fiatApiRefresh();
                 }
             }
 
-            ColumnLayout {
-                spacing: 10
-                Layout.fillWidth: true
+            MoneroComponents.StandardDropdown {
+                id: fiatPriceCurrencyDropdown
+                Layout.maximumWidth: 100
+                labelText: qsTr("Currency") + translationManager.emptyString
+                labelFontSize: 14
+                currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
+                dataModel: fiatPriceCurrencyModel
+                onChanged: {
+                    var obj = dataModel.get(currentIndex);
+                    persistentSettings.fiatPriceCurrency = obj.data;
 
-                MoneroComponents.Label {
-                    Layout.fillWidth: true
-                    fontSize: 14
-                    text: qsTr("Currency") + translationManager.emptyString
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: fiatPriceCurrencyDropdown
-                    Layout.fillWidth: true
-                    currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
-                    dataModel: fiatPriceCurrencyModel
-                    onChanged: {
-                        var obj = dataModel.get(currentIndex);
-                        persistentSettings.fiatPriceCurrency = obj.data;
-
-                        if(persistentSettings.fiatPriceEnabled)
-                            appWindow.fiatApiRefresh();
-                    }
+                    if(persistentSettings.fiatPriceEnabled)
+                        appWindow.fiatApiRefresh();
                 }
             }
 

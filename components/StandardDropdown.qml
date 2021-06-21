@@ -30,12 +30,15 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 import FontAwesome 1.0
+import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
 
-Item {
+ColumnLayout {
     id: dropdown
+    Layout.fillWidth: true
+
     property int itemTopMargin: 0
     property alias dataModel: repeater.model
     property string shadowPressedColor
@@ -45,46 +48,66 @@ Item {
     property string textColor: MoneroComponents.Style.defaultFontColor
     property alias currentIndex: columnid.currentIndex
     readonly property alias expanded: popup.visible
-    property int dropdownHeight: 42
-    property int fontHeaderSize: 16
+    property alias labelText: dropdownLabel.text
+    property alias labelColor: dropdownLabel.color
+    property alias labelTextFormat: dropdownLabel.textFormat
+    property alias labelWrapMode: dropdownLabel.wrapMode
+    property alias labelHorizontalAlignment: dropdownLabel.horizontalAlignment
+    property bool showingHeader: dropdownLabel.text !== ""
+    property int labelFontSize: 16
+    property bool labelFontBold: false
+    property int dropdownHeight: 39
+    property int fontSize: 16
     property int fontItemSize: 14
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
     property bool headerFontBold: false
 
-    height: dropdownHeight
-
     signal changed();
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
 
-    Item {
-        id: head
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.topMargin: parent.itemTopMargin
-        height: dropdown.dropdownHeight
+    spacing: 0
+    Rectangle {
+        id: dropdownLabelRect
+        color: "transparent"
+        Layout.fillWidth: true
+        height: (dropdownLabel.height + 10)
+        visible: showingHeader ? true : false
 
-        Rectangle {
-            color: "transparent"
-            border.width: dropdown.headerBorder ? 1 : 0
-            border.color: dropdown.colorBorder
-            radius: 4
-            anchors.fill: parent
+        MoneroComponents.TextPlain {
+            id: dropdownLabel
+            anchors.top: parent.top
+            anchors.left: parent.left
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: labelFontSize
+            font.bold: labelFontBold
+            textFormat: Text.RichText
+            color: MoneroComponents.Style.defaultFontColor
         }
+    }
+
+    Rectangle {
+        id: head
+        color: "transparent"
+        border.width: dropdown.headerBorder ? 1 : 0
+        border.color: dropdown.colorBorder
+        radius: 4
+        Layout.fillWidth: true
+        Layout.preferredHeight: dropdownHeight
 
         MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 12
+            anchors.leftMargin: 10
             anchors.right: dropIndicator.left
             anchors.rightMargin: 12
+            width: droplist.width
             elide: Text.ElideRight
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
-            font.pixelSize: dropdown.fontHeaderSize
+            font.pixelSize: dropdown.fontSize
             color: dropdown.textColor
             text: columnid.currentIndex < repeater.model.count ? qsTr(repeater.model.get(columnid.currentIndex).column1) + translationManager.emptyString : ""
         }
@@ -126,7 +149,7 @@ Item {
 
         Rectangle {
             id: droplist
-            x: dropdown.x
+            anchors.left: parent.left
             width: dropdown.width
             y: head.y + head.height
             clip: true
