@@ -1269,7 +1269,7 @@ Rectangle {
                                 if(res[i].state === 'copyable_address') (address ? root.toClipboard(address) : root.toClipboard(addressField.text));
                                 if(res[i].state === 'copyable_receiving_address') root.toClipboard(currentWallet.address(subaddrAccount, subaddrIndex));
                                 if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
-                                if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note);
+                                if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note, root.txPage);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
                                 doCollapse = false;
@@ -1432,7 +1432,7 @@ Rectangle {
         }
     }
 
-    function updateFilter(){
+    function updateFilter(currentPage){
         // applying filters
         root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
 
@@ -1482,6 +1482,9 @@ Rectangle {
 
         root.updateSort();
         root.updateDisplay(root.txOffset, root.txMax);
+        if (currentPage) {
+            root.paginationJump(parseInt(currentPage));
+        }
     }
 
     function updateSort(){
@@ -1620,20 +1623,20 @@ Rectangle {
         root.txCount = root.txData.length;
     }
 
-    function update() {
+    function update(currentPage) {
         // handle outside mutation of tx model; incoming/outgoing funds or new blocks. Update table.
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
 
         root.updateTransactionsFromModel();
-        root.updateFilter();
+        root.updateFilter(currentPage);
     }
 
-    function editDescription(_hash, _tx_note){
+    function editDescription(_hash, _tx_note, currentPage){
         inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
             appWindow.showStatusMessage(qsTr("Updated description."),3);
-            root.update();
+            root.update(currentPage);
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open(_tx_note);
