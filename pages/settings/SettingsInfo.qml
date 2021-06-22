@@ -42,13 +42,15 @@ Rectangle {
     Layout.fillWidth: true
     property alias infoHeight: infoLayout.height
     property string walletModeString: {
+        var modeStr;
         if(appWindow.walletMode === 0){
-          return qsTr("Simple mode") + translationManager.emptyString;
+          modeStr = qsTr("Simple mode") + translationManager.emptyString;
         } else if(appWindow.walletMode === 1){
-          return qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
+          modeStr = qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
         } else if(appWindow.walletMode === 2){
-          return "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
+          modeStr = "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
         }
+        return modeStr + (persistentSettings.portable ? ", %1".arg(qsTr("portable")) : "");
     }
 
     ColumnLayout {
