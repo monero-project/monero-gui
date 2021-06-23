@@ -59,7 +59,7 @@ ColumnLayout {
             Rectangle {
                 height: 30
                 Layout.fillWidth: true
-                color: itemMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+                color: itemMouseArea.containsMouse || trustedDaemonCheckMark.labelMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                 Rectangle {
                     color: MoneroComponents.Style.appWindowBorderColor
@@ -80,14 +80,32 @@ ColumnLayout {
                     anchors.fill: parent
                     anchors.rightMargin: 80
                     color: "transparent"
+                    property var trusted: remoteNodesModel.get(index).trusted
 
                     MoneroComponents.TextPlain {
+                        id: addressText
                         color: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 6
                         font.pixelSize: 16
                         text: address
+                        themeTransition: false
+                    }
+
+                    MoneroComponents.Label {
+                        id: trustedDaemonCheckMark
+                        anchors.left: addressText.right
+                        anchors.leftMargin: 6
+                        anchors.verticalCenter: parent.verticalCenter
+                        z: itemMouseArea.z + 1
+                        fontSize: 16
+                        fontFamily: FontAwesome.fontFamilySolid
+                        fontColor: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        styleName: "Solid"
+                        visible: trusted
+                        text: FontAwesome.shieldAlt
+                        tooltip: qsTr("Trusted daemon") + translationManager.emptyString
                         themeTransition: false
                     }
 
