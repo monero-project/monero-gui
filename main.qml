@@ -1003,7 +1003,6 @@ ApplicationWindow {
     }
 
     function txProofComputed(txid, result){
-        informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
@@ -1012,8 +1011,6 @@ ApplicationWindow {
             informationPopup.text  = result;
             informationPopup.icon = StandardIcon.Critical;
         }
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
     }
 
     // called on "checkProof"
