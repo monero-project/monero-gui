@@ -700,6 +700,7 @@ Rectangle {
                     currentIndex: 0
                     dataModel: priorityModelV5
                     labelText: qsTr("Transaction priority") + translationManager.emptyString
+                    labelFontSize: 16
                 }
 
                 MoneroComponents.TextPlain {

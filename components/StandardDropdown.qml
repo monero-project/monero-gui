@@ -54,10 +54,10 @@ ColumnLayout {
     property alias labelWrapMode: dropdownLabel.wrapMode
     property alias labelHorizontalAlignment: dropdownLabel.horizontalAlignment
     property bool showingHeader: dropdownLabel.text !== ""
-    property int labelFontSize: 16
+    property int labelFontSize: 14
     property bool labelFontBold: false
     property int dropdownHeight: 39
-    property int fontSize: 16
+    property int fontSize: 14
     property int fontItemSize: 14
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
     property string colorHeaderBackground: "transparent"
@@ -90,7 +90,7 @@ ColumnLayout {
 
     Rectangle {
         id: head
-        color: "transparent"
+        color: dropArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
         border.width: dropdown.headerBorder ? 1 : 0
         border.color: dropdown.colorBorder
         radius: 4
@@ -129,7 +129,6 @@ ColumnLayout {
                 fontAwesomeFallbackIcon: FontAwesome.arrowDown
                 fontAwesomeFallbackSize: 14
                 color: MoneroComponents.Style.defaultFontColor
-                rotation: dropdown.expanded ? 180  : 0
             }
         }
 
@@ -138,7 +137,7 @@ ColumnLayout {
             anchors.fill: parent
             onClicked: dropdown.expanded ? popup.close() : popup.open()
             hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: Qt.ArrowCursor
         }
     }
 
@@ -213,7 +212,7 @@ ColumnLayout {
                             id: itemArea
                             anchors.fill: parent
                             hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
+                            cursorShape: Qt.ArrowCursor
 
                             onClicked: {
                                 popup.close()
