@@ -209,20 +209,6 @@ ColumnLayout {
                             text: ""
                         }
 
-                        Rectangle {
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            width: 3; height: 3
-                            color: parent.color
-                        }
-
-                        Rectangle {
-                            anchors.right: parent.right
-                            anchors.top: parent.top
-                            width: 3; height: 3
-                            color: parent.color
-                        }
-
                         MouseArea {
                             id: itemArea
                             anchors.fill: parent
