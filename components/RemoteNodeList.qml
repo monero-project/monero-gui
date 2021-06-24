@@ -121,9 +121,8 @@ ColumnLayout {
                 RowLayout {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    anchors.rightMargin: 6
                     height: 30
-                    spacing: 10
+                    spacing: 2
 
                     MoneroComponents.InlineButton {
                         buttonColor: "transparent"
