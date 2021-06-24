@@ -37,6 +37,7 @@ Item {
     property alias tooltip: label.tooltip
     property alias tooltipIconVisible: label.tooltipIconVisible
     property alias color: label.color
+    property alias labelMouseArea: labelMouseArea
     property int textFormat: Text.PlainText
     property string tipText: ""
     property int fontSize: 16
@@ -72,9 +73,13 @@ Item {
         onLinkActivated: item.linkActivated()
         textFormat: parent.textFormat
         MouseArea {
+            id: labelMouseArea
             anchors.fill: parent
+            hoverEnabled: true
             acceptedButtons: Qt.NoButton
-            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            cursorShape: parent.hoveredLink || (tooltip && !tooltipIconVisible) ? Qt.PointingHandCursor : Qt.ArrowCursor
+            onEntered: tooltip && !tooltipIconVisible ? parent.tooltipPopup.open() : undefined
+            onExited: tooltip && !tooltipIconVisible ? parent.tooltipPopup.close() : undefined
         }
     }
 }

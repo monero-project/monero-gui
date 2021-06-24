@@ -601,6 +601,7 @@ Object {
     property string shekel : "\uf20b"
     property string sheqel : "\uf20b"
     property string shield : "\uf132"
+    property string shieldAlt : "\uf3ed"
     property string ship : "\uf21a"
     property string shirtsinbulk : "\uf214"
     property string shoppingBag : "\uf290"
