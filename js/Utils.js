@@ -118,6 +118,7 @@ function removeTrailingZeros(value) {
 
 function parseDateStringOrRestoreHeightAsInteger(value, device) {
     // Parse date string or restore height as integer
+
     var restoreHeight = 0;
     if (value.indexOf('-') === 4 && value.length === 10) {
         restoreHeight = Wizard.getApproximateBlockchainHeight(value, Utils.netTypeToString());
@@ -130,14 +131,10 @@ function parseDateStringOrRestoreHeightAsInteger(value, device) {
         var ledgerMinRestoreHeight = 1522000;
         // 1697500 = 2018-11-04 (Trezor Model T support)
         var trezorMinRestoreHeight = 1697500;
-        console.log("Restore height undefined. Changing restore height to %1.".arg(device == "Ledger" ? ledgerMinRestoreHeight : trezorMinRestoreHeight));
         restoreHeight = (device == "Ledger" ? ledgerMinRestoreHeight : trezorMinRestoreHeight);
-    } else {
-        if (value == "") {
-            restoreHeight = 0;
-        } else {
-            restoreHeight = parseInt(value);
-        }
+        console.log("Restore height undefined. Changing restore height to %1.".arg(restoreHeight));
+    } else if (value != "") {
+        restoreHeight = parseInt(value);
     }
     return restoreHeight;
 }
