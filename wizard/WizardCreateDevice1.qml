@@ -180,10 +180,12 @@ Rectangle {
                     wizardController.walletOptionsName = walletInput.walletName.text;
                     wizardController.walletOptionsLocation = walletInput.walletLocation.text;
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
-                    if(lookahead.text)
+                    if (lookahead.text) {
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
-
-                    wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text, wizardCreateDevice1.deviceName);
+                    }
+                    if (wizardController.walletOptionsDeviceIsRestore) {
+                        wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text, wizardCreateDevice1.deviceName);
+                    }
                     wizardController.walletCreatedFromDevice.connect(onCreateWalletFromDeviceCompleted);
                     wizardController.createWalletFromDevice();
                 }
