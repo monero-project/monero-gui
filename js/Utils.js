@@ -118,7 +118,6 @@ function removeTrailingZeros(value) {
 
 function parseDateStringOrRestoreHeightAsInteger(value, device) {
     // Parse date string or restore height as integer
-
     var restoreHeight = 0;
     if (value.indexOf('-') === 4 && value.length === 10) {
         restoreHeight = Wizard.getApproximateBlockchainHeight(value, Utils.netTypeToString());
