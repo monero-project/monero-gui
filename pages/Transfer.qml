@@ -789,9 +789,11 @@ Rectangle {
                   }
               }
 
-              LineEditMulti {
+              LineEdit {
                   id: descriptionLine
-                  placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+                  placeholderFontSize: 16
+                  fontSize: 16
+                  placeholderText: qsTr("Saved to local wallet history") + " (" + qsTr("only visible to you") + ")" + translationManager.emptyString
                   Layout.fillWidth: true
                   visible: descriptionCheckbox.checked
               }
