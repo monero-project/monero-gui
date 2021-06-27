@@ -192,6 +192,7 @@
         <file>wizard/WizardCreateWallet3.qml</file>
         <file>wizard/WizardCreateWallet4.qml</file>
         <file>wizard/WizardCreateDevice1.qml</file>
+        <file>wizard/WizardCreateDevice2.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>wizard/WizardHeader.qml</file>
         <file>wizard/WizardHome.qml</file>
