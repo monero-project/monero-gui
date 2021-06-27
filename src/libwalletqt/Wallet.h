@@ -202,6 +202,7 @@ public:
     Q_INVOKABLE QString getMultisigInfo();
     Q_INVOKABLE QString makeMultisig(QString info);
     Q_INVOKABLE bool hasMultisigPartialKeyImages();
+    Q_INVOKABLE QString exportMultisigImages();
     Q_INVOKABLE bool exportMultisigImages(QString filename);
     Q_INVOKABLE void importMultisigImages(QString filename);
     Q_INVOKABLE PendingTransaction* loadMultisigTxFromFile(QString filename);

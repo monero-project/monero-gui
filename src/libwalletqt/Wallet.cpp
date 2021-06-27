@@ -452,6 +452,13 @@ bool Wallet::hasMultisigPartialKeyImages()
     return m_walletImpl->hasMultisigPartialKeyImages();
 }
 
+QString Wallet::exportMultisigImages()
+{
+    std::string images;
+    m_walletImpl->exportMultisigImages(images, "", true);
+    return QString::fromStdString(images);
+}
+
 bool Wallet::exportMultisigImages(QString filename)
 {
     std::string images;

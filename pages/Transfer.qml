@@ -1080,14 +1080,43 @@ Rectangle {
         }
     }
 
-    //ExportMultisigKeyImagesDialog
-    FileDialog {
+    
+    StandardDialog {
         id: exportMultisigKeyImagesDialog
+        title: qsTr("Export Partial Key Images") + translationManager.emptyString
+        text: qsTr("You may choose to view your parial key image data in plain text (ASCII) or save it as a binary file") +translationManager.emptyString
+        height: 220
+
+        cancelText: qsTr("Plain text") + translationManager.emptyString
+        onRejected: {
+            exportMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            exportMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            partialKeyImagesASCII.text = currentWallet.exportMultisigImages() // looks strange i know but we cant set the text as soon as the page is rendered
+            partialKeyImagesASCII.open()
+        }
+
+        okText: qsTr("Save as file") + translationManager.emptyString
+        onAccepted: {
+            exportMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            exportMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            exportMultisigKeyImagesFileDialog.open()
+        }
+    }
+
+    StandardDialog {
+        id: partialKeyImagesASCII
+        title: qsTr("ASCII encoded partial key images") + translationManager.emptyString
+        cancelVisible: false
+    }
+
+    //exportMultisigKeyImagesFileDialog
+    FileDialog {
+        id: exportMultisigKeyImagesFileDialog
         selectMultiple: false
         selectExisting: false
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(exportMultisigKeyImagesDialog.fileUrl))
-            currentWallet.exportMultisigImages(walletManager.urlToLocalPath(exportMultisigKeyImagesDialog.fileUrl));
+            console.log(walletManager.urlToLocalPath(exportMultisigKeyImagesFileDialog.fileUrl))
+            currentWallet.exportMultisigImages(walletManager.urlToLocalPath(exportMultisigKeyImagesFileDialog.fileUrl));
         }
         onRejected: {
             console.log("Canceled");
