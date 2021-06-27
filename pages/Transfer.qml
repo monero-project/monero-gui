@@ -827,18 +827,6 @@ Rectangle {
             recipientModel.getAmountTotal() <= appWindow.getUnlockedBalance() &&
             !recipientModel.hasInvalidAddress();
       }
-
-    } // pageRoot
-
-    ColumnLayout {
-        id: advancedLayout
-        anchors.top: pageRoot.bottom
-        anchors.left: parent.left
-        anchors.margins: 20
-        anchors.topMargin: 32
-        spacing: 10
-        enabled: !viewOnly || pageRoot.enabled
-
         AdvancedOptionsItem {
             visible: isMultisig
             title: qsTr("Partial key images") + translationManager.emptyString
@@ -865,8 +853,20 @@ Rectangle {
             helpTextSmall.themeTransition: false
         }
 
+    } // pageRoot
+
+    ColumnLayout {
+        id: advancedLayout
+        anchors.top: pageRoot.bottom
+        anchors.left: parent.left
+        anchors.margins: 20
+        anchors.topMargin: 32
+        spacing: 10
+        enabled: !viewOnly || pageRoot.enabled
+        visible: !isMultisig
+
         RowLayout {
-            visible: appWindow.walletMode >= 2 && !isMultisig
+            visible: appWindow.walletMode >= 2
             CheckBox2 {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
