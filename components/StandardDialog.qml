@@ -212,7 +212,6 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 root.close()
-                root.rejected()
             }
             cursorShape: Qt.PointingHandCursor
             onEntered: closeButton.color = "#262626";
