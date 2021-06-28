@@ -472,8 +472,17 @@ void Wallet::importMultisigImages(QString filename)
 
 PendingTransaction* Wallet::loadMultisigTxFromFile(QString filename)
 {
-    Monero::PendingTransaction* txptr = m_walletImpl->loadMultisigTxFromFile(filename.toStdString());
-    return new PendingTransaction(txptr,this);
+    try {
+        Monero::PendingTransaction* txptr = m_walletImpl->loadMultisigTxFromFile(filename.toStdString());
+        if (txptr == nullptr)
+        {
+            throw std::runtime_error("Failed to read tx file, txptr is null");
+        }
+        return new PendingTransaction(txptr,this);
+    } catch (const std::exception &e) {
+        qDebug() << e.what();
+    }
+    return nullptr;
 }
 
 bool Wallet::signMultisigTxFromFile(QString filename)
