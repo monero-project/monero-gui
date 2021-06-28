@@ -840,7 +840,7 @@ ApplicationWindow {
 
         } else if (transaction.txCount == 0) {
             console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            txConfirmationPopup.errorText.text   = transaction.errorString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
         } else {
