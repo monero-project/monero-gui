@@ -12,7 +12,7 @@ option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(ENABLE_PASS_STRENGTH_METER "Enable zxcvbn library for password strength" OFF)
-option(WITH_SCANNER "Enable webcam QR scanner" OFF)
+option(WITH_SCANNER "Enable webcam QR scanner" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
