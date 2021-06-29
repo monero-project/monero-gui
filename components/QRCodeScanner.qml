@@ -90,6 +90,9 @@ Rectangle {
             if (!parsed.error) {
                 root.qrcode_decoded(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name, parsed.extra_parameters);
                 root.state = "Stopped";
+            } else if (walletManager.addressValid(data, appWindow.persistentSettings.nettype)) {
+                root.qrcode_decoded(data, "", "", "", "", null);
+                root.state = "Stopped";
             } else {
                 onNotifyError(parsed.error);
             }
