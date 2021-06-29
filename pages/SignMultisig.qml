@@ -187,6 +187,12 @@ Rectangle {
             txFilename = walletManager.urlToLocalPath(loadMultisigTxDialog.fileUrl);
             console.log(txFilename);
             var transaction = currentWallet.loadMultisigTxFromFile(txFilename);
+            if (transaction === null) {
+              console.log("transaction null");
+              txFilename = "";
+              errorDialog.open()
+              return;
+            }
             addressLine.text = transaction.address;
             amountLine.text = Utils.printMoney(transaction.amount);
             feeLine.text = Utils.printMoney(transaction.fee);
@@ -199,5 +205,11 @@ Rectangle {
     SuccessfulTxDialog {
         id: successfulSigningDialog
         z: parent.z + 1
+    }
+
+    StandardDialog {
+        id: errorDialog
+        title: qsTr("Error Loading Transaction from File") + translationManager.emptyString
+        cancelVisible: false
     }
 }
