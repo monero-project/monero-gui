@@ -132,6 +132,7 @@ Rectangle {
                     console.log("Trying to sign tx");
                     if (!currentWallet.signMultisigTxFromFile(txFilename)) {
                         console.log("Failed to sign tx");
+                        signTxErrorDialog.open()
                         return;
                     }
                     successfulSigningDialog.open();
@@ -208,8 +209,14 @@ Rectangle {
     }
 
     StandardDialog {
-        id: errorDialog
+        id: loadTxErrorDialog
         title: qsTr("Error Loading Transaction from File") + translationManager.emptyString
+        cancelVisible: false
+    }
+
+    StandardDialog {
+        id: signTxErrorDialog
+        title: qsTr("Error Signing Transaction") + translationManager.emptyString
         cancelVisible: false
     }
 }
