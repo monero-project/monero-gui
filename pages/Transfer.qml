@@ -705,7 +705,8 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: feeLabel
-                    Layout.alignment: Qt.AlignVCenter
+                    Layout.alignment: Qt.AlignBottom
+                    Layout.bottomMargin: 11
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
