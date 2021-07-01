@@ -470,6 +470,11 @@ void Wallet::importMultisigImages(QString filename)
     m_walletImpl->importMultisigImages(filename.toStdString());
 }
 
+void Wallet::importMultisigImagesAscii(QString ascii)
+{
+    m_walletImpl->importMultisigImagesAscii(ascii.toStdString());
+}
+
 PendingTransaction* Wallet::loadMultisigTxFromFile(QString filename)
 {
     try {

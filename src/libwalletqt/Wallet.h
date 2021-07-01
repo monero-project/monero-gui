@@ -205,6 +205,7 @@ public:
     Q_INVOKABLE QString exportMultisigImages();
     Q_INVOKABLE bool exportMultisigImages(QString filename);
     Q_INVOKABLE void importMultisigImages(QString filename);
+    Q_INVOKABLE void importMultisigImagesAscii(QString ascii);
     Q_INVOKABLE PendingTransaction* loadMultisigTxFromFile(QString filename);
     Q_INVOKABLE bool signMultisigTxFromFile(QString filename);
 
