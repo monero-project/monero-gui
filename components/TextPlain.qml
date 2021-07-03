@@ -21,6 +21,13 @@ Text {
     font.pixelSize: 14
     textFormat: Text.PlainText
 
+    Rectangle {
+        width: root.width * 1.25
+        height: root.height * 1.5
+        anchors.centerIn: root
+        color: root.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
+
     MoneroEffects.ColorTransition {
         enabled: root.themeTransition
         themeTransition: root.themeTransition
