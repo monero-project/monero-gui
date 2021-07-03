@@ -35,7 +35,7 @@ import "." 1.0
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
-RowLayout {
+Item {
     id: checkBox
     property alias text: label.text
     property bool checked: false
@@ -50,10 +50,21 @@ RowLayout {
         checkBox.clicked()
     }
 
+    Keys.onReturnPressed: toggle()
+    Keys.onEnterPressed: toggle()
+    Keys.onSpacePressed: toggle()
+
+    Rectangle {
+        width: itemRectangle.width + 15
+        height: itemRectangle.height * 1.15
+        color: checkBox.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
+
     RowLayout {
         Layout.fillWidth: true
 
-        Rectangle{
+        Rectangle {
+            id: itemRectangle
             height: label.height
             width: (label.width + indicatorRect.width + checkBox.textMargin)
             color: "transparent"

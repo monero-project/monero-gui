@@ -40,11 +40,35 @@ RowLayout {
     Layout.bottomMargin: 10
     property alias imageIcon: icon.source
     property bool checkbox: false
+    property bool selected: false
     property alias checked: checkboxItem.checked
     property alias headerText: header.text
     property alias bodyText: body.text
     signal menuClicked();
     spacing: 10
+
+    function doClick() {
+        rowlayout.menuClicked();
+        if (!rowlayout.checkbox) {
+            rowlayout.focus = false;
+        }
+    }
+
+    Keys.onReturnPressed: rowlayout.doClick();
+    Keys.onEnterPressed: rowlayout.doClick();
+    Keys.onSpacePressed: rowlayout.doClick();
+
+    Rectangle {
+        width: rowlayout.width
+        height: rowlayout.height
+        color: rowlayout.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
+
+    Rectangle {
+        height: 70
+        width: 2
+        color: rowlayout.selected ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
+    }
 
     Item {
         Layout.preferredWidth: 70
@@ -82,7 +106,7 @@ RowLayout {
             cursorShape: Qt.PointingHandCursor
             anchors.fill: parent
             onClicked: {
-                rowlayout.menuClicked();
+                rowlayout.doClick();
             }
         }
     }
@@ -113,7 +137,7 @@ RowLayout {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
                 onClicked: {
-                    rowlayout.menuClicked();
+                    rowlayout.doClick();
                 }
             }
         }
@@ -138,7 +162,7 @@ RowLayout {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
                 onClicked: {
-                    rowlayout.menuClicked();
+                    rowlayout.doClick();
                 }
             }
         }

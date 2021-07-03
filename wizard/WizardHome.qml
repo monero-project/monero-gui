@@ -38,6 +38,7 @@ Rectangle {
     id: wizardHome
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardHome"
 
     ColumnLayout {
@@ -48,6 +49,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter;
 
         spacing: 10
+        KeyNavigation.tab: wizardHeader
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -61,18 +63,33 @@ Rectangle {
                 spacing: 10
 
                 WizardHeader {
+                    id: wizardHeader
                     Layout.bottomMargin: 7
                     Layout.fillWidth: true
                     title: qsTr("Welcome to Monero") + translationManager.emptyString
                     subtitle: ""
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: title
+                    KeyNavigation.up: showAdvancedCheckbox.checked ? kdfRoundsText : showAdvancedCheckbox
+                    KeyNavigation.backtab: showAdvancedCheckbox.checked ? kdfRoundsText : showAdvancedCheckbox
+                    KeyNavigation.down: languageButton
+                    KeyNavigation.tab: languageButton
                 }
 
                 MoneroComponents.LanguageButton {
+                    id: languageButton
                     Layout.bottomMargin: 8
+                    Accessible.role: Accessible.Button
+                    Accessible.name: qsTr("Selected language ") + persistentSettings.language  + translationManager.emptyString
+                    KeyNavigation.up: wizardHeader
+                    KeyNavigation.backtab: wizardHeader
+                    KeyNavigation.down: createNewWalletMenuItem
+                    KeyNavigation.tab: createNewWalletMenuItem
                 }
             }
 
             WizardMenuItem {
+                id: createNewWalletMenuItem
                 headerText: qsTr("Create a new wallet") + translationManager.emptyString
                 bodyText: qsTr("Choose this option if this is your first time using Monero.") + translationManager.emptyString
                 imageIcon: "qrc:///images/create-wallet.png"
@@ -82,6 +99,13 @@ Rectangle {
                     wizardController.createWallet();
                     wizardStateView.state = "wizardCreateWallet1"
                 }
+
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: languageButton
+                KeyNavigation.backtab: languageButton
+                KeyNavigation.down: createNewWalletFromHardwareMenuItem
+                KeyNavigation.tab: createNewWalletFromHardwareMenuItem
             }
 
             Rectangle {
@@ -94,6 +118,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: createNewWalletFromHardwareMenuItem
                 headerText: qsTr("Create a new wallet from hardware") + translationManager.emptyString
                 bodyText: qsTr("Connect your hardware wallet to create a new Monero wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet-from-hardware.png"
@@ -102,6 +127,13 @@ Rectangle {
                     wizardController.restart();
                     wizardStateView.state = "wizardCreateDevice1"
                 }
+
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: createNewWalletMenuItem
+                KeyNavigation.backtab: createNewWalletMenuItem
+                KeyNavigation.down: openWalletFromFileMenuItem
+                KeyNavigation.tab: openWalletFromFileMenuItem
             }
 
             Rectangle {
@@ -114,6 +146,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: openWalletFromFileMenuItem
                 headerText: qsTr("Open a wallet from file") + translationManager.emptyString
                 bodyText: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/open-wallet-from-file.png"
@@ -122,6 +155,13 @@ Rectangle {
                     wizardStateView.state = "wizardOpenWallet1"
                     wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
                 }
+
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: createNewWalletFromHardwareMenuItem
+                KeyNavigation.backtab: createNewWalletFromHardwareMenuItem
+                KeyNavigation.down: restoreWalletFromKeysOrSeed
+                KeyNavigation.tab: restoreWalletFromKeysOrSeed
             }
 
             Rectangle {
@@ -134,6 +174,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: restoreWalletFromKeysOrSeed
                 headerText: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
                 bodyText: qsTr("Enter your private keys or 25-word mnemonic seed to restore your wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet.png"
@@ -142,6 +183,13 @@ Rectangle {
                     wizardController.restart();
                     wizardStateView.state = "wizardRestoreWallet1"
                 }
+
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: openWalletFromFileMenuItem
+                KeyNavigation.backtab: openWalletFromFileMenuItem
+                KeyNavigation.down: changeWalletModeButton
+                KeyNavigation.tab: changeWalletModeButton
             }
 
             RowLayout {
@@ -150,13 +198,22 @@ Rectangle {
                 spacing: 20
 
                 MoneroComponents.StandardButton {
+                    id: changeWalletModeButton
                     small: true
                     text: qsTr("Change wallet mode") + translationManager.emptyString
 
                     onClicked: {
                         wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardModeSelection';
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }                    
+
+                    Accessible.role: Accessible.Button
+                    Accessible.name: text
+                    KeyNavigation.up: restoreWalletFromKeysOrSeed
+                    KeyNavigation.backtab: restoreWalletFromKeysOrSeed
+                    KeyNavigation.down: showAdvancedCheckbox
+                    KeyNavigation.tab: showAdvancedCheckbox
                 }
             }
 
@@ -168,6 +225,13 @@ Rectangle {
                 checked: false
                 text: qsTr("Advanced options") + translationManager.emptyString
                 visible: appWindow.walletMode >= 2
+
+                Accessible.role: Accessible.CheckBox
+                Accessible.name: qsTr("Show advanced options") + translationManager.emptyString
+                KeyNavigation.up: changeWalletModeButton
+                KeyNavigation.backtab: changeWalletModeButton
+                KeyNavigation.down: showAdvancedCheckbox.checked ? networkTypeDropdown : wizardHeader
+                KeyNavigation.tab: showAdvancedCheckbox.checked ? networkTypeDropdown : wizardHeader
             }
 
             ListModel {
@@ -203,6 +267,8 @@ Rectangle {
                         }
                         appWindow.disconnectRemoteNode()
                     }
+                    KeyNavigation.backtab: showAdvancedCheckbox
+                    KeyNavigation.tab: kdfRoundsText
                 }
 
                 MoneroComponents.LineEdit {
@@ -219,6 +285,12 @@ Rectangle {
                     onTextChanged: {
                         persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
                     }
+                    Accessible.role: Accessible.EditableText
+                    Accessible.name: labelText + text
+                    KeyNavigation.up: networkTypeDropdown
+                    KeyNavigation.backtab: networkTypeDropdown
+                    KeyNavigation.down: wizardHeader
+                    KeyNavigation.tab: wizardHeader
                 }
 
                 Item {

@@ -166,8 +166,10 @@ Rectangle {
             previousView = currentView;
 
             // reset push direction
-            if(wizardController.wizardState == "wizardHome")
+            if (wizardController.wizardState == "wizardHome") {
                 wizardController.wizardStackView.backTransition = false;
+                wizardStateView.wizardHomeView.pageRoot.forceActiveFocus();
+            }
         }
 
         states: [
