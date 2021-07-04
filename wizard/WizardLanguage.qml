@@ -165,6 +165,7 @@ Rectangle {
                         wizardStateView.state = "wizardHome"
                     } else {
                         wizardStateView.state = "wizardModeSelection"
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }
                 }
             }
