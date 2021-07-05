@@ -82,6 +82,7 @@ Rectangle {
 
     property var m_wallet;
     property alias wizardState: wizardStateView.state
+    property alias wizardStateView: wizardStateView
     property alias wizardStackView: stackView
     property int wizardSubViewWidth: 780
     property int wizardSubViewTopMargin: persistentSettings.customDecorations ? 90 : 32

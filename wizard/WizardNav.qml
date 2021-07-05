@@ -36,6 +36,8 @@ import "../components" as MoneroComponents
 RowLayout {
     id: menuNav
     property alias progressEnabled: wizardProgress.visible
+    property var btnPrevKeyNavigationBackTab: btnNext
+    property var btnNextKeyNavigationTab: btnPrev
     property int progressSteps: 0
     property int progress: 0
     property bool autoTransition: true
@@ -77,7 +79,18 @@ RowLayout {
             onClicked: {
                 menuNav.m_prevClicked();
                 menuNav.prevClicked();
+                focus = false;
             }
+            Accessible.role: Accessible.Button
+            Accessible.name: text
+            KeyNavigation.up: btnPrevKeyNavigationBackTab
+            KeyNavigation.backtab: btnPrevKeyNavigationBackTab
+            KeyNavigation.down: wizardProgress.visible ? wizardProgress
+                                                       : btnNext.visible && btnNext.enabled ? btnNext
+                                                                                            : btnNextKeyNavigationTab
+            KeyNavigation.tab: wizardProgress.visible ? wizardProgress
+                                                      : btnNext.visible && btnNext.enabled ? btnNext
+                                                                                           : btnNextKeyNavigationTab
         }
     }
 
@@ -101,6 +114,17 @@ RowLayout {
                 // @TODO: Qt 5.10+ replace === with <=
                 color: index === menuNav.progress ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.progressBarBackgroundColor
             }
+            Accessible.role: Accessible.Indicator
+            Accessible.name: qsTr("Step (%1) of (%2)").arg(currentIndex + 1).arg(count) + translationManager.emptyString
+            KeyNavigation.up: btnPrev
+            KeyNavigation.backtab: btnPrev
+            KeyNavigation.down: btnNext
+            KeyNavigation.tab: btnNext
+
+            Rectangle {
+                anchors.fill: parent
+                color: wizardProgress.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
         }
     }
 
@@ -119,7 +143,14 @@ RowLayout {
             onClicked: {
                 menuNav.m_nextClicked();
                 menuNav.nextClicked();
+                focus = false;
             }
+            Accessible.role: Accessible.Button
+            Accessible.name: text
+            KeyNavigation.up: wizardProgress.visible ? wizardProgress : btnPrev
+            KeyNavigation.backtab: wizardProgress.visible ? wizardProgress : btnPrev
+            KeyNavigation.down: btnNextKeyNavigationTab
+            KeyNavigation.tab: btnNextKeyNavigationTab
         }
     }
 }

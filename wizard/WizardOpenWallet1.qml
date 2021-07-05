@@ -45,6 +45,7 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardOpenWallet1"
     property int walletCount: walletKeysFilesModel.rowCount()
 
@@ -58,6 +59,7 @@ Rectangle {
         width: parent.width - 100
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
+        KeyNavigation.tab: openWalletFromFileHeader
 
         spacing: 0
 
@@ -69,8 +71,15 @@ Rectangle {
             spacing: 10
 
             WizardHeader {
+                id: openWalletFromFileHeader
                 title: qsTr("Open a wallet from file") + translationManager.emptyString
                 subtitle: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title + ". " + subtitle
+                Keys.onUpPressed: wizardNav.btnNext.forceActiveFocus();
+                Keys.onBacktabPressed: wizardNav.btnNext.forceActiveFocus();
+                Keys.onDownPressed: recentList.itemAt(0).forceActiveFocus();
+                Keys.onTabPressed: recentList.itemAt(0).forceActiveFocus();
             }
 
             GridLayout {
@@ -122,6 +131,27 @@ Rectangle {
                     Layout.minimumWidth: flow.itemHeight
                     Layout.preferredHeight: parent.height
 
+                    function moveUp(itemIndex) {
+                        if (itemIndex == 0) {
+                            openWalletFromFileHeader.forceActiveFocus();
+                        } else {
+                            recentList.itemAt(itemIndex - 1).forceActiveFocus();
+                        }
+                    }
+
+                    function moveDown(itemIndex) {
+                        if (itemIndex + 1 == recentList.count) {
+                            wizardNav.btnPrev.forceActiveFocus();
+                        } else {
+                            recentList.itemAt(itemIndex + 1).forceActiveFocus();
+                        }
+                    }
+
+                    function openSelectedWalletFile(networktype, path) {
+                        persistentSettings.nettype = parseInt(networktype);
+                        wizardController.openWalletFile(path);
+                    }
+
                     delegate: Rectangle {
                         // inherited roles from walletKeysFilesModel:
                         // index, fileName, modified, accessed, path, networktype, address
@@ -138,7 +168,24 @@ Rectangle {
                             else if(networktype === 2) return qsTr("Stagenet");
                             return "";
                         }
-                        color: "transparent"
+                        color: item.focus || itemMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+                        border.width: item.focus ? 3 : 0
+                        border.color: MoneroComponents.Style.inputBorderColorActive
+
+                        Accessible.role: Accessible.ListItem
+                        Accessible.name: {
+                            if (networktype === 0) var networkTypeText = qsTr("Mainnet wallet") + translationManager.emptyString;
+                            if (networktype === 1) var networkTypeText = qsTr("Testnet wallet") + translationManager.emptyString;
+                            if (networktype === 2) var networkTypeText = qsTr("Stagenet wallet") + translationManager.emptyString;
+
+                            return fileName + ". " + networkTypeText;
+                        }
+                        Keys.onUpPressed: recentList.moveUp(index);
+                        Keys.onBacktabPressed: recentList.moveUp(index);
+                        Keys.onDownPressed: recentList.moveDown(index);
+                        Keys.onTabPressed: recentList.moveDown(index);
+                        Keys.onEnterPressed: recentList.openSelectedWalletFile(networktype, path);
+                        Keys.onReturnPressed: recentList.openSelectedWalletFile(networktype, path);
 
                         Rectangle {
                             height: 1
@@ -257,21 +304,11 @@ Rectangle {
                         }
 
                         MouseArea {
+                            id: itemMouseArea
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-
-                            onEntered: {
-                                parent.color = MoneroComponents.Style.titleBarButtonHoverColor;
-                            }
-                            onExited: {
-                                parent.color = "transparent";
-                            }
-                            onClicked: {
-                                persistentSettings.nettype = parseInt(networktype)
-
-                                wizardController.openWalletFile(path);
-                            }
+                            onClicked: recentList.openSelectedWalletFile(networktype, path);
                         }
                     }
                 }
@@ -282,11 +319,15 @@ Rectangle {
             }
 
             WizardNav {
+                id: wizardNav
                 Layout.topMargin: 0
                 progressEnabled: false
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
                 btnNext.text: qsTr("Browse filesystem") + translationManager.emptyString
                 btnNext.visible: true
+                btnPrevKeyNavigationBackTab: recentList.itemAt(recentList.count - 1)
+                btnNextKeyNavigationTab: openWalletFromFileHeader
+
                 onPrevClicked: {
                     wizardStateView.state = "wizardHome";
                 }
