@@ -48,13 +48,6 @@ if(APPLE)
     list(APPEND SOURCE_FILES "qt/macoshelper.mm")
 endif()
 
-if(ENABLE_PASS_STRENGTH_METER)
-    file(GLOB PASS_STRENGTH_FILES
-        "zxcvbn-c/zxcvbn.h"
-        "zxcvbn-c/zxcvbn.c"
-    )
-endif()
-
 set(EXECUTABLE_FLAG)
 if(MINGW)
     set(EXECUTABLE_FLAG WIN32)
@@ -76,7 +69,6 @@ endif()
 
 set(monero_wallet_gui_sources
     ${SOURCE_FILES}
-    ${PASS_STRENGTH_FILES}
     ${RESOURCES}
 )
 
@@ -148,6 +140,7 @@ target_link_libraries(monero-wallet-gui
     openpgp
     qrdecoder
     translations
+    zxcvbn
 )
 
 if(X11_FOUND)
