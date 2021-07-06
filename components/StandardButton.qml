@@ -146,6 +146,7 @@ Item {
             width: button.small ? 16 : 20
             height: button.small ? 16 : 20
             source: {
+                if (fontAwesomeIcon) return "";
                 if(button.rightIconInactive !== "" && !button.enabled) {
                     return button.rightIconInactive;
                 }
