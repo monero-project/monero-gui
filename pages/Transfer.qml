@@ -285,6 +285,9 @@ Rectangle {
                                     if (!parsed.error) {
                                         fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name);
                                         break;
+                                    } else if (walletManager.addressValid(codes[index], appWindow.persistentSettings.nettype)) {
+                                        fillPaymentDetails(codes[index]);
+                                        break;
                                     }
                                 }
                             }
