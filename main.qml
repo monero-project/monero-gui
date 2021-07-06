@@ -62,6 +62,7 @@ ApplicationWindow {
     minimumHeight: 450
 
     property var currentItem
+    property var previousActiveFocusItem
     property bool hideBalanceForced: false
     property bool ctrlPressed: false
     property alias persistentSettings : persistentSettings
@@ -1937,6 +1938,7 @@ ApplicationWindow {
 
     function toggleLanguageView(){
         languageSidebar.visible ? languageSidebar.close() : languageSidebar.open();
+        languageSidebar.selectCurrentLanguage()
         resetLanguageFields()
     }
 
@@ -2349,6 +2351,8 @@ ApplicationWindow {
     MoneroComponents.LanguageSidebar {
         id: languageSidebar
         dragMargin: 0
+        onAboutToShow: previousActiveFocusItem = activeFocusItem;
+        onClosed: { if (previousActiveFocusItem) previousActiveFocusItem.forceActiveFocus() }
     }
 
     MoneroComponents.MenuBar { }

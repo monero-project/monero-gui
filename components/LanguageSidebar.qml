@@ -53,26 +53,64 @@ Drawer {
         color: "red"
 
         ListView {
+            id: languagesListView
             clip: true
             Layout.fillHeight: true
             Layout.fillWidth: true
             boundsBehavior: Flickable.StopAtBounds
             width: sideBar.width
             height: sideBar.height
+            focus: true
 
             model: langModel
 
+            Keys.onUpPressed: currentIndex !== 0 ? currentIndex = currentIndex - 1 : ""
+            Keys.onBacktabPressed: currentIndex !== 0 ? currentIndex = currentIndex - 1 : ""
+            Keys.onDownPressed: currentIndex + 1 !== count ? currentIndex = currentIndex + 1 : ""
+            Keys.onTabPressed: currentIndex + 1 !== count ? currentIndex = currentIndex + 1 : ""
+
             delegate: Rectangle {
                 id: item
-                color: "transparent"
+                color: index == languagesListView.currentIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
                 width: sideBar.width
                 height: 32
+
+                Accessible.role: Accessible.ListItem
+                Accessible.name: display_name
+                Keys.onEnterPressed: setSelectedItemAsLanguage();
+                Keys.onReturnPressed: setSelectedItemAsLanguage();
+                Keys.onSpacePressed: setSelectedItemAsLanguage();
+
+                function setSelectedItemAsLanguage() {
+                    var locale_spl = locale.split("_");
+
+                    // reload active translations
+                    console.log(locale_spl[0]);
+                    translationManager.setLanguage(locale_spl[0]);
+
+                    // set wizard language settings
+                    persistentSettings.locale = locale;
+                    persistentSettings.language = display_name;
+                    persistentSettings.language_wallet = wallet_language;
+
+                    appWindow.showStatusMessage(qsTr("Language changed."), 3);
+                    appWindow.toggleLanguageView();
+                }
+
+                Rectangle {
+                    id: selectedIndicator
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    height: parent.height
+                    width: 2
+                    color: index == languagesListView.currentIndex ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
+                }
 
                 Rectangle {
                     id: flagRect
                     height: 24
                     width: 24
-                    anchors.left: parent.left
+                    anchors.left: selectedIndicator.right
                     anchors.leftMargin: 4
                     anchors.verticalCenter: parent.verticalCenter
                     color: "transparent"
@@ -85,8 +123,8 @@ Drawer {
 
                 MoneroComponents.TextPlain {
                     anchors.left: parent.left
-                    anchors.leftMargin: 30
-                    font.bold: true
+                    anchors.leftMargin: 32
+                    font.bold: languagesListView.currentIndex == index ? true : false
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     text: display_name
@@ -112,21 +150,7 @@ Drawer {
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            var locale_spl = locale.split("_");
-
-                            // reload active translations
-                            console.log(locale_spl[0]);
-                            translationManager.setLanguage(locale_spl[0]);
-
-                            // set wizard language settings
-                            persistentSettings.locale = locale;
-                            persistentSettings.language = display_name;
-                            persistentSettings.language_wallet = wallet_language;
-
-                            appWindow.showStatusMessage(qsTr("Language changed."), 3);
-                            appWindow.toggleLanguageView();
-                        }
+                        onClicked: setSelectedItemAsLanguage();
                         hoverEnabled: true
                         onEntered: {
                             // item.color = "#26FFFFFF"
@@ -163,6 +187,14 @@ Drawer {
         onStatusChanged: {
             if(status === XmlListModel.Ready){
                 console.log("languages available: ",count);
+            }
+        }
+    }
+
+    function selectCurrentLanguage() {
+        for (var i = 0; i < langModel.count; ++i) {
+            if (langModel.get(i).display_name === persistentSettings.language)  {
+                languagesListView.currentIndex = i;
             }
         }
     }
