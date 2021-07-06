@@ -57,7 +57,7 @@ GridLayout {
         walletName.error = !walletName.verify();
         walletLocation.error = walletLocation.text === "";
         walletLocation.text = appWindow.accountsDir;
-        walletName.text = defaultAccountName;
+        walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
     }
 
     MoneroComponents.LineEdit {

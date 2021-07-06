@@ -82,6 +82,17 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
     return false;
 }
 
+function unusedWalletName(directory, filename, walletManager) {
+    for (var i = 0; i < 100; i++) {
+        var walletName = filename + (i > 0 ? "_" + i : "");
+        if (!walletManager.walletExists(directory + "/" + walletName + "/" + walletName)) {
+            return walletName;
+        }
+    }
+
+    return filename;
+}
+
 function isAscii(str){
     for (var i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) > 127)
