@@ -73,18 +73,14 @@ ColumnLayout {
 
     function selectPreviousItem() {
         if (columnid.currentIndex !== 0) {
-            columnid.currentIndex = columnid.currentIndex - 1;
-            repeater.itemAt(columnid.currentIndex).forceActiveFocus();
-            dropdown.Accessible.name = dropdownLabel.text + " " + dropdownText.text
+            repeater.itemAt(--columnid.currentIndex).forceActiveFocus();
             changed();
         }
     }
 
     function selectNextItem() {
         if (columnid.currentIndex + 1 !== repeater.count) {
-            columnid.currentIndex = columnid.currentIndex + 1;
-            repeater.itemAt(columnid.currentIndex).forceActiveFocus();
-            dropdown.Accessible.name = dropdownLabel.text + " " + dropdownText.text
+            repeater.itemAt(++columnid.currentIndex).forceActiveFocus();
             changed();
         }
     }
