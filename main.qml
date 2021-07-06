@@ -99,8 +99,7 @@ ApplicationWindow {
     property bool themeTransition: false
 
     // fiat price conversion
-    property real fiatPriceXMRUSD: 0
-    property real fiatPriceXMREUR: 0
+    property real fiatPrice: 0
     property var fiatPriceAPIs: {
         return {
             "kraken": {
@@ -1201,10 +1200,7 @@ ApplicationWindow {
             return;
         }
 
-        if(persistentSettings.fiatPriceCurrency === "xmrusd")
-            appWindow.fiatPriceXMRUSD = ticker;
-        else if(persistentSettings.fiatPriceCurrency === "xmreur")
-            appWindow.fiatPriceXMREUR = ticker;
+        appWindow.fiatPrice = ticker;
 
         appWindow.updateBalance();
     }
@@ -1243,7 +1239,7 @@ ApplicationWindow {
     }
 
     function fiatApiConvertToFiat(amount) {
-        var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
+        const ticker = appWindow.fiatPrice;
         if(ticker <= 0){
             fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
