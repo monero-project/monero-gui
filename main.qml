@@ -96,7 +96,6 @@ ApplicationWindow {
     property alias viewState: rootItem.state
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
-    property int appEpoch: Math.floor((new Date).getTime() / 1000)
     property bool themeTransition: false
 
     // fiat price conversion
@@ -2201,8 +2200,7 @@ ApplicationWindow {
 
     function userActivity() {
         // register user activity
-        var epoch = Math.floor((new Date).getTime()/1000);
-        appWindow.userLastActive = epoch;
+        appWindow.userLastActive = Utils.epoch();
     }
 
     function checkInUserActivity() {
@@ -2214,8 +2212,7 @@ ApplicationWindow {
         var informationPopupVisible = informationPopup && informationPopup.visible
 
         // prompt password after X seconds of inactivity
-        var epoch = Math.floor((new Date).getTime() / 1000);
-        var inactivity = epoch - appWindow.userLastActive;
+        var inactivity = Utils.epoch() - appWindow.userLastActive;
         if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
 
         passwordDialog.onAcceptedCallback = function() {
