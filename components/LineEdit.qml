@@ -78,9 +78,9 @@ ColumnLayout {
 
     property bool borderDisabled: false
     property string borderColor: {
-        if(error && input.text !== ""){
+        if ((error && input.text !== "") || (errorWhenEmpty && input.text == "")) {
             return MoneroComponents.Style.inputBorderColorInvalid;
-        } else if(input.activeFocus){
+        } else if (input.activeFocus) {
             return MoneroComponents.Style.inputBorderColorActive;
         } else {
             return MoneroComponents.Style.inputBorderColorInActive;
@@ -92,6 +92,7 @@ ColumnLayout {
     property bool fontBold: false
     property alias fontColor: input.color
     property bool error: false
+    property bool errorWhenEmpty: false
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
