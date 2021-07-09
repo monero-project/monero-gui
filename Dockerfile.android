@@ -102,7 +102,7 @@ RUN wget -q http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz
 ARG BOOST_VERSION=1_74_0
 ARG BOOST_VERSION_DOT=1.74.0
 ARG BOOST_HASH=83bfc1507731a0906e387fc28b7ef5417d591429e51e788417fe9ff025e116b1
-RUN wget -q https://downloads.sourceforge.net/project/boost/boost/${BOOST_VERSION_DOT}/boost_${BOOST_VERSION}.tar.bz2 \
+RUN wget -q https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION_DOT}/source/boost_${BOOST_VERSION}.tar.bz2 \
     && echo "${BOOST_HASH}  boost_${BOOST_VERSION}.tar.bz2" | sha256sum -c \
     && tar -xf boost_${BOOST_VERSION}.tar.bz2 \
     && rm -f boost_${BOOST_VERSION}.tar.bz2 \
@@ -146,8 +146,8 @@ RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-${
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-ARG UNBOUND_VERSION=1.13.2
-ARG UNBOUND_HASH=0a13b547f3b92a026b5ebd0423f54c991e5718037fd9f72445817f6a040e1a83
+ARG UNBOUND_VERSION=1.16.2
+ARG UNBOUND_HASH=2e32f283820c24c51ca1dd8afecfdb747c7385a137abe865c99db4b257403581
 RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-${UNBOUND_VERSION}.tar.gz && \
     echo "${UNBOUND_HASH}  unbound-${UNBOUND_VERSION}.tar.gz" | sha256sum -c && \
     tar -xzf unbound-${UNBOUND_VERSION}.tar.gz && \
@@ -158,8 +158,8 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-${UNBOUND_VERSION}.t
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-ARG ZMQ_VERSION=v4.3.3
-ARG ZMQ_HASH=04f5bbedee58c538934374dc45182d8fc5926fa3
+ARG ZMQ_VERSION=v4.3.4
+ARG ZMQ_HASH=4097855ddaaa65ed7b5e8cb86d143842a594eebd
 RUN git clone https://github.com/zeromq/libzmq.git -b ${ZMQ_VERSION} --depth 1 \
     && cd libzmq \
     && git checkout ${ZMQ_HASH} \
@@ -181,27 +181,27 @@ RUN set -ex \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.38 --depth 1 git://git.gnupg.org/libgpg-error.git \
+RUN git clone -b libgpg-error-1.41 --depth 1 git://git.gnupg.org/libgpg-error.git \
     && cd libgpg-error \
-    && git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 \
+    && git reset --hard 98032624ae89a67ee6fe3b1db5d95032e681d163 \
     && ./autogen.sh \
     && CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --host=aarch64-linux-android --prefix=${PREFIX} --disable-rpath --disable-shared --enable-static --disable-doc --disable-tests \
     && PATH=${TOOLCHAIN_DIR}/bin:${HOST_PATH} make -j${THREADS} \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.8.5 --depth 1 git://git.gnupg.org/libgcrypt.git \
+RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git \
     && cd libgcrypt \
-    && git reset --hard 56606331bc2a80536db9fc11ad53695126007298 \
+    && git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 \
     && ./autogen.sh \
     && CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --host=aarch64-linux-android --prefix=${PREFIX} --with-gpg-error-prefix=${PREFIX} --disable-shared --enable-static --disable-doc --disable-tests \
     && PATH=${TOOLCHAIN_DIR}/bin:${HOST_PATH} make -j${THREADS} \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b v3.19.7 --depth 1 https://github.com/Kitware/CMake \
+RUN git clone -b v3.24.2 --depth 1 https://github.com/Kitware/CMake \
     && cd CMake \
-    && git reset --hard 22612dd53a46c7f9b4c3f4b7dbe5c78f9afd9581 \
+    && git reset --hard 31f835410efeea50acd43512eb9e5646a26ea177 \
     && PATH=${HOST_PATH} ./bootstrap \
     && PATH=${HOST_PATH} make -j${THREADS} \
     && PATH=${HOST_PATH} make -j${THREADS} install \
