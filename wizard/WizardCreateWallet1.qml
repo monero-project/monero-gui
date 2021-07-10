@@ -71,7 +71,7 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
 
-                Layout.topMargin: 10
+                Layout.topMargin: -10
                 Layout.fillWidth: true
 
                 MoneroComponents.LineEditMulti {

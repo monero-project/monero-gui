@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -42,11 +43,11 @@ GridLayout {
     property alias walletLocation: walletLocation
 
     columnSpacing: 20
-    columns: 3
+    columns: 2
 
     function verify() {
-        if(walletName.text !== '' && walletLocation.text !== ''){
-            if(!walletName.error){
+        if (walletName.text !== '' && walletLocation.text !== '') {
+            if (!walletName.error && !walletLocation.error) {
                 return true;
             }
         }
@@ -55,26 +56,41 @@ GridLayout {
 
     function reset() {
         walletName.error = !walletName.verify();
-        walletLocation.error = walletLocation.text === "";
+        walletLocation.error = !walletLocation.verify();
         walletLocation.text = appWindow.accountsDir;
         walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
     }
 
     MoneroComponents.LineEdit {
         id: walletName
-        Layout.preferredWidth: grid.width/3
+        Layout.preferredWidth: grid.width/5
 
         function verify(){
-            if(walletLocation === "" || /[\\\/]/.test(walletName.text)) return false;
-
-            var exists = Wizard.walletPathExists(appWindow.accountsDir, walletLocation.text, walletName.text, isIOS, walletManager);
-            return !exists && walletLocation.error === false;
+            if (walletName.text === "") {
+                errorMessageWalletName.text = qsTr("Wallet name is empty") + translationManager.emptyString;
+                return false;
+            }
+            if (/[\\\/]/.test(walletName.text)) {
+                errorMessageWalletName.text = qsTr("Wallet name is invalid") + translationManager.emptyString;
+                return false;
+            }
+            if (walletLocation.text !== "") {
+                var walletAlreadyExists = Wizard.walletPathExists(appWindow.accountsDir, walletLocation.text, walletName.text, isIOS, walletManager);
+                if (walletAlreadyExists) {
+                    errorMessageWalletName.text = qsTr("Wallet already exists") + translationManager.emptyString;
+                    return false;
+                }
+            }
+            errorMessageWalletName.text = "";
+            return true;
         }
 
         labelText: qsTr("Wallet name") + translationManager.emptyString
         labelFontSize: 14
+        fontSize: 16
         placeholderFontSize: 16
-        placeholderText: "-"
+        placeholderText: ""
+        errorWhenEmpty: true
         text: defaultAccountName
 
         onTextChanged: walletName.error = !walletName.verify();
@@ -85,18 +101,35 @@ GridLayout {
         id: walletLocation
         Layout.preferredWidth: grid.width/3
 
-        labelText: qsTr("Wallet location") + translationManager.emptyString
-        labelFontSize: 14
-        placeholderText: "..."
-        placeholderFontSize: 16
-        text: appWindow.accountsDir + "/"
-        onTextChanged: {
-            walletLocation.error = walletLocation.text === "";
+        function verify() {
+            if (walletLocation.text == "") {
+                errorMessageWalletLocation.text = qsTr("Wallet location is empty") + translationManager.emptyString;
+                return false;
+            }
+            errorMessageWalletLocation.text = "";
+            return true;
         }
 
+        labelText: qsTr("Wallet location") + translationManager.emptyString
+        labelFontSize: 14
+        fontSize: 16
+        placeholderText: ""
+        placeholderFontSize: 16
+        errorWhenEmpty: true
+        text: appWindow.accountsDir + "/"
+        onTextChanged: {
+            walletLocation.error = !walletLocation.verify();
+            walletName.error = !walletName.verify();
+        }
+        Component.onCompleted: walletLocation.error = !walletLocation.verify();
+
         MoneroComponents.InlineButton {
-            small: true
-            text: qsTr("Browse") + translationManager.emptyString
+            fontFamily: FontAwesome.fontFamilySolid
+            fontStyleName: "Solid"
+            fontPixelSize: 18
+            text: FontAwesome.folderOpen
+            tooltip: qsTr("Browse") + translationManager.emptyString
+            tooltipLeft: true
             onClicked: {
                 fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
                 fileWalletDialog.open()
@@ -117,6 +150,52 @@ GridLayout {
         }
         onRejected: {
             fileWalletDialog.visible = false;
+        }
+    }
+
+    RowLayout {
+        Layout.preferredWidth: grid.width/5
+
+        MoneroComponents.TextPlain {
+            visible: errorMessageWalletName.text != ""
+            font.family: FontAwesome.fontFamilySolid
+            font.styleName: "Solid"
+            font.pixelSize: 15
+            text: FontAwesome.exclamationCircle
+            color: "#FF0000"
+            themeTransition: false
+        }
+
+        MoneroComponents.TextPlain {
+            id: errorMessageWalletName
+            textFormat: Text.PlainText
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+            color: "#FF0000"
+            themeTransition: false
+        }
+    }
+
+    RowLayout {
+        Layout.preferredWidth: grid.width/3
+
+        MoneroComponents.TextPlain {
+            visible: errorMessageWalletLocation.text != ""
+            font.family: FontAwesome.fontFamilySolid
+            font.styleName: "Solid"
+            font.pixelSize: 15
+            text: FontAwesome.exclamationCircle
+            color: "#FF0000"
+            themeTransition: false
+        }
+
+        MoneroComponents.TextPlain {
+            id: errorMessageWalletLocation
+            textFormat: Text.PlainText
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+            color: "#FF0000"
+            themeTransition: false
         }
     }
 }
