@@ -83,8 +83,17 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
+                MoneroComponents.StandardDropdown {
+                    id: deviceNameDropdown
+                    dataModel: deviceNameModel
+                    Layout.fillWidth: true
+                    Layout.topMargin: 0
+                    z: 3
+                }
+
                 MoneroComponents.RadioButton {
                     id: newDeviceWallet
+                    Layout.topMargin: 20
                     text: qsTr("Create a new wallet from device.") + translationManager.emptyString
                     fontSize: 16
                     checked: true
@@ -125,14 +134,6 @@ Rectangle {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "0"
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: deviceNameDropdown
-                    dataModel: deviceNameModel
-                    Layout.fillWidth: true
-                    Layout.topMargin: 6
-                    z: 3
                 }
 
                 CheckBox2 {
