@@ -1,9 +1,5 @@
 add_subdirectory(QR-Code-scanner)
-add_subdirectory(daemon)
-add_subdirectory(libwalletqt)
-add_subdirectory(model)
 add_subdirectory(openpgp)
-add_subdirectory(zxcvbn-c)
 
 qt5_add_resources(RESOURCES ../qml.qrc)
 
@@ -91,9 +87,6 @@ message(STATUS "OpenGL: include dir at ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL: libraries at ${OPENGL_LIBRARIES}")
 
 target_include_directories(monero-wallet-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
-
-file(GLOB_RECURSE SRC_SOURCES *.cpp)
-file(GLOB_RECURSE SRC_HEADERS *.h)
 
 target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_SOURCE_DIR}/monero/include
