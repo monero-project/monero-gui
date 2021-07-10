@@ -141,7 +141,7 @@ Rectangle {
 
     function showFiatConversion(valueXMR) {
         const fiatFee = fiatApiConvertToFiat(valueXMR);
-        return "%1 %2".arg(fiatFee < 0.01 ? "<0.01" : "~" + fiatFee).arg(fiatApiCurrencySymbol());
+        return "%1 %2".arg(fiatFee < 0.01 ? "&lt;0.01" : "~" + fiatFee).arg(fiatApiCurrencySymbol());
     }
 
     ColumnLayout {
