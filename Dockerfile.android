@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 ARG THREADS=1
 ARG ANDROID_NDK_REVISION=21e
@@ -16,14 +16,14 @@ ENV ANDROID_CLANG=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang
 ENV ANDROID_CLANGPP=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang++
 ENV ANDROID_NDK_ROOT=${WORKDIR}/android-ndk-r${ANDROID_NDK_REVISION}
 ENV ANDROID_SDK_ROOT=${WORKDIR}/cmdline-tools
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 ENV PREFIX=${WORKDIR}/prefix
 ENV TOOLCHAIN_DIR=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64
 
 RUN apt-get update \
     && apt-get install -y ant automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
-    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-8-jdk-headless openjdk-8-jre-headless pkg-config python3 \
+    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-11-jdk-headless openjdk-11-jre-headless pkg-config python3 \
     unzip wget
 
 RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
