@@ -45,11 +45,14 @@ Rectangle {
     property string viewName: "wizardCreateDevice1"
 
     property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
+    property var ledgerType: deviceName == "Ledger" ? deviceNameModel.get(deviceNameDropdown.currentIndex).column1 : null
+    property var hardwareWalletType: wizardCreateDevice1.deviceName;
 
     ListModel {
         id: deviceNameModel
-        ListElement { column1: qsTr("Choose your hardware device"); column2: "";}
-        ListElement { column1: "Ledger Nano S/X"; column2: "Ledger";}
+        ListElement { column1: qsTr("Choose your hardware wallet"); column2: "";}
+        ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
+        ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
     }
 
@@ -78,44 +81,88 @@ Rectangle {
                 id: walletInput
             }
 
-            ColumnLayout {
+            RowLayout {
+                id: mainRow
                 spacing: 0
                 Layout.topMargin: -10
                 Layout.fillWidth: true
 
-                MoneroComponents.StandardDropdown {
-                    id: deviceNameDropdown
-                    dataModel: deviceNameModel
+                ColumnLayout {
+                    id: leftColumn
                     Layout.fillWidth: true
-                    Layout.topMargin: 0
-                    z: 3
-                }
+                    Layout.alignment: Qt.AlignTop
 
-                MoneroComponents.RadioButton {
-                    id: newDeviceWallet
-                    Layout.topMargin: 20
-                    text: qsTr("Create a new wallet from device.") + translationManager.emptyString
-                    fontSize: 16
-                    checked: true
-                    onClicked: {
-                        checked = true;
-                        restoreDeviceWallet.checked = false;
-                        wizardController.walletOptionsDeviceIsRestore = false;
-                    }
-                }
+                    MoneroComponents.TextPlain {
+                         font.family: MoneroComponents.Style.fontRegular.name
+                         font.pixelSize: 14
+                         color: MoneroComponents.Style.defaultFontColor
+                         wrapMode: Text.Wrap
+                         Layout.fillWidth: true
+                         text: qsTr("Hardware wallet model")
+                     }
 
-                MoneroComponents.RadioButton {
-                    id: restoreDeviceWallet
-                    Layout.topMargin: 10
-                    text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
-                    fontSize: 16
-                    checked: false
-                    onClicked: {
-                        checked = true;
-                        newDeviceWallet.checked = false;
-                        wizardController.walletOptionsDeviceIsRestore = true;
-                    }
-                }
+                     MoneroComponents.StandardDropdown {
+                         id: deviceNameDropdown
+                         dataModel: deviceNameModel
+                         Layout.preferredWidth: 450
+                         Layout.topMargin: 6
+                         z: 3
+                     }
+
+                     MoneroComponents.RadioButton {
+                         id: newDeviceWallet
+                         Layout.topMargin: 20
+                         text: qsTr("Create a new wallet from device.") + translationManager.emptyString
+                         fontSize: 16
+                         checked: true
+                         onClicked: {
+                             checked = true;
+                             restoreDeviceWallet.checked = false;
+                             wizardController.walletOptionsDeviceIsRestore = false;
+                         }
+                     }
+
+                     MoneroComponents.RadioButton {
+                         id: restoreDeviceWallet
+                         Layout.topMargin: 10
+                         text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
+                         fontSize: 16
+                         checked: false
+                         onClicked: {
+                             checked = true;
+                             newDeviceWallet.checked = false;
+                             wizardController.walletOptionsDeviceIsRestore = true;
+                         }
+                     }
+                 }
+
+                 ColumnLayout {
+                     id: rightColumn
+                     Layout.alignment: Qt.AlignTop
+                     Layout.preferredWidth: 305
+                     Layout.minimumWidth: 120
+                     Layout.preferredHeight: 165
+                     Layout.maximumHeight: 165
+                     Layout.leftMargin: 10
+                     Layout.rightMargin: 10
+
+                     Rectangle {
+                         color: "transparent"
+                         Layout.fillWidth: true
+                         Layout.fillHeight: true
+                         Layout.topMargin: 0
+
+                         Image {
+                             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                             source: hardwareWalletType == "Trezor" ? "qrc:///images/trezor.png" : hardwareWalletType == "Ledger" ? (ledgerType == "Ledger Nano S" ? "qrc:///images/ledgerNanoS.png" : "qrc:///images/ledgerNanoX.png") : ""
+                             z: parent.z + 1
+                             width: parent.width
+                             height: 165
+                             fillMode: Image.PreserveAspectFit
+                             mipmap: true
+                         }
+                     }
+                 }
             }
 
             ColumnLayout {
