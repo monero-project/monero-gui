@@ -43,7 +43,6 @@ ColumnLayout {
 
     Text {
         text: title
-        Layout.fillWidth: true
         font.family: MoneroComponents.Style.fontRegular.name
         color: MoneroComponents.Style.defaultFontColor
         opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
@@ -59,11 +58,15 @@ ColumnLayout {
         leftPadding: 0
         topPadding: 0
         bottomPadding: 0
+
+        Rectangle {
+            anchors.fill: parent
+            color: parent.parent.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+        }
     }
 
     Text {
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignCenter
+        Layout.alignment: Qt.AlignLeft
         visible: parent.subtitle !== ""
 
         color: MoneroComponents.Style.dimmedFontColor
@@ -81,5 +84,10 @@ ColumnLayout {
         wrapMode: Text.WordWrap
         leftPadding: 0
         topPadding: 0
+
+        Rectangle {
+            anchors.fill: parent
+            color: parent.parent.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+        }
     }
 }

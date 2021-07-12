@@ -120,6 +120,7 @@ Rectangle {
 
                 onMenuClicked: {
                     wizardStateView.state = "wizardOpenWallet1"
+                    wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
                 }
             }
 

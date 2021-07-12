@@ -211,6 +211,9 @@ ApplicationWindow {
             if (prevState) {
                 appWindow.viewState = prevState;
             }
+            if (wizard.wizardState == "wizardOpenWallet1") {
+                wizard.wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
+            }
         };
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
     }
