@@ -98,7 +98,6 @@ Rectangle {
             Text {
                 id: tooltip
                 Layout.maximumWidth: 350
-                width: contentWidth > Layout.maximumWidth ? Layout.maximumWidth : contentWidth
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 12
