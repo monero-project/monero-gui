@@ -95,9 +95,11 @@ Rectangle {
         delay: 200
 
         RowLayout {
+            Layout.maximumWidth: 350
+
             Text {
                 id: tooltip
-                Layout.maximumWidth: 350
+                width: contentWidth
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 12
