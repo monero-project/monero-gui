@@ -68,7 +68,8 @@ Rectangle{
             }
 
             Rectangle {
-                visible: !persistentSettings.useRemoteNode
+                id: localNodeIndicator
+                visible: !persistentSettings.useRemoteNode && !persistentSettings.useOffline
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -77,9 +78,14 @@ Rectangle{
             }
 
             Rectangle {
+                anchors.fill: parent
+                color: localNodeMouseArea.containsMouse || localNodeIndicator.visible ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
+
+            Rectangle {
                 width: parent.width
-                height: localNodeHeader.height + localNodeArea.contentHeight
-                color: "transparent";
+                height: localNodeHeader.height + localNodeTextArea.contentHeight
+                color: "transparent"
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -116,7 +122,7 @@ Rectangle{
                 }
 
                 Text {
-                    id: localNodeArea
+                    id: localNodeTextArea
                     anchors.top: localNodeHeader.bottom
                     anchors.topMargin: 4
                     anchors.left: localNodeIcon.right
@@ -134,12 +140,17 @@ Rectangle{
             }
 
             MouseArea {
+                id: localNodeMouseArea
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
-                enabled: persistentSettings.useRemoteNode
+                hoverEnabled: true
                 onClicked: {
-                    persistentSettings.useRemoteNode = false;
-                    appWindow.disconnectRemoteNode();
+                    if (persistentSettings.useRemoteNode || persistentSettings.useOffline) {
+                        persistentSettings.useRemoteNode = false;
+                        persistentSettings.useOffline = false;
+                        appWindow.currentWallet.offline = false;
+                        appWindow.disconnectRemoteNode();
+                    }
                 }
             }
         }
@@ -161,7 +172,8 @@ Rectangle{
             }
 
             Rectangle {
-                visible: persistentSettings.useRemoteNode
+                id: remoteNodeIndicator
+                visible: persistentSettings.useRemoteNode && !persistentSettings.useOffline
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -170,9 +182,14 @@ Rectangle{
             }
 
             Rectangle {
+                anchors.fill: parent
+                color: remoteNodeMouseArea.containsMouse || remoteNodeIndicator.visible ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
+
+            Rectangle {
                 width: parent.width
-                height: remoteNodeHeader.height + remoteNodeArea.contentHeight
-                color: "transparent";
+                height: remoteNodeHeader.height + remoteNodeTextArea.contentHeight
+                color: "transparent"
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -209,7 +226,7 @@ Rectangle{
                 }
 
                 Text {
-                    id: remoteNodeArea
+                    id: remoteNodeTextArea
                     anchors.top: remoteNodeHeader.bottom
                     anchors.topMargin: 4
                     anchors.left: remoteNodeIcon.right
@@ -224,19 +241,111 @@ Rectangle{
                     text: qsTr("Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.") + translationManager.emptyString
                     width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
                 }
+            }
 
-                MouseArea {
-                    cursorShape: Qt.PointingHandCursor
-                    anchors.fill: parent
-                    enabled: !persistentSettings.useRemoteNode
-                    onClicked: {
+            MouseArea {
+                id: remoteNodeMouseArea
+                cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    if (!persistentSettings.useRemoteNode || persistentSettings.useOffline) {
+                        persistentSettings.useRemoteNode = true;
+                        persistentSettings.useOffline = false;
                         appWindow.connectRemoteNode();
                     }
                 }
             }
+        }
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 90
+            color: "transparent"
 
             Rectangle {
-                id: localNodeBottomDivider
+                Layout.fillWidth: true
+                anchors.topMargin: 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 1
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                id: offlineIndicator
+                visible: persistentSettings.useOffline
+                Layout.fillHeight: true
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                color: MoneroComponents.Style.buttonBackgroundColor
+                width: 2
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                color: offlineMouseArea.containsMouse || offlineIndicator.visible ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
+
+            Rectangle {
+                width: parent.width
+                height: offlineHeader.height + offlineTextArea.contentHeight
+                color: "transparent"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+
+                Rectangle {
+                    id: offlineIcon
+                    color: "transparent"
+                    height: 32
+                    width: 32
+                    anchors.left: parent.left
+                    anchors.leftMargin: 16
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    MoneroComponents.Label {
+                        fontSize: 32
+                        text: FontAwesome.times
+                        fontFamily: FontAwesome.fontFamilySolid
+                        styleName: "Solid"
+                        anchors.centerIn: parent
+                        fontColor: MoneroComponents.Style.defaultFontColor
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    id: offlineHeader
+                    anchors.left: offlineIcon.right
+                    anchors.leftMargin: 14
+                    anchors.top: parent.top
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    font.bold: true
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 16
+                    text: qsTr("Offline mode") + translationManager.emptyString
+                }
+
+                Text {
+                    id: offlineTextArea
+                    anchors.top: offlineHeader.bottom
+                    anchors.topMargin: 4
+                    anchors.left: offlineIcon.right
+                    anchors.leftMargin: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 15
+                    horizontalAlignment: TextInput.AlignLeft
+                    wrapMode: Text.WordWrap;
+                    leftPadding: 0
+                    topPadding: 0
+                    text: qsTr("Your wallet doesn't try to establish any connection. Use this option for cold wallets and offline transaction signing.") + translationManager.emptyString
+                    width: parent.width - (offlineIcon.width + offlineIcon.anchors.leftMargin + anchors.leftMargin)
+                }
+            }
+
+            Rectangle {
                 Layout.fillWidth: true
                 anchors.topMargin: 0
                 anchors.left: parent.left
@@ -246,25 +355,38 @@ Rectangle{
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
             }
+
+            MouseArea {
+                id: offlineMouseArea
+                cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    if (!persistentSettings.useOffline) {
+                        persistentSettings.useOffline = true;
+                        appWindow.currentWallet.offline = true;
+                    }
+                }
+            }
         }
 
         MoneroComponents.WarningBox {
             Layout.topMargin: 46
             text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
-            visible: persistentSettings.useRemoteNode
+            visible: persistentSettings.useRemoteNode && !persistentSettings.useOffline
         }
 
         MoneroComponents.RemoteNodeList {
             Layout.fillWidth: true
             Layout.topMargin: 26
-            visible: persistentSettings.useRemoteNode
+            visible: persistentSettings.useRemoteNode && !persistentSettings.useOffline
         }
 
         ColumnLayout {
             id: localNodeLayout
             spacing: 20
             Layout.topMargin: 40
-            visible: !persistentSettings.useRemoteNode
+            visible: !persistentSettings.useRemoteNode && !persistentSettings.useOffline
 
             MoneroComponents.StandardButton {
                 small: true

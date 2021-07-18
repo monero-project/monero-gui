@@ -1202,6 +1202,9 @@ Rectangle {
         //pageRoot.enabled = false;
 
         switch (currentWallet.connected()) {
+        case Wallet.ConnectionStatus_OfflineMode:
+            root.warningContent = qsTr("Wallet is in forced offline mode.")
+            break
         case Wallet.ConnectionStatus_Connecting:
             root.warningContent = qsTr("Wallet is connecting to daemon.")
             break

@@ -91,6 +91,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
     Q_PROPERTY(QString proxyAddress READ getProxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
     Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
+    Q_PROPERTY(bool offline READ isOffline WRITE setOffline NOTIFY offlineChanged)
 
 public:
 
@@ -107,7 +108,8 @@ public:
         ConnectionStatus_Connected       = Monero::Wallet::ConnectionStatus_Connected,
         ConnectionStatus_Disconnected    = Monero::Wallet::ConnectionStatus_Disconnected,
         ConnectionStatus_WrongVersion    = Monero::Wallet::ConnectionStatus_WrongVersion,
-        ConnectionStatus_Connecting
+        ConnectionStatus_Connecting,
+        ConnectionStatus_OfflineMode
     };
 
     Q_ENUM(ConnectionStatus)
@@ -336,6 +338,10 @@ public:
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
 
+    // toggle offline = true, offline = false
+    void setOffline(bool offline);
+    bool isOffline() const;
+
     // Blackalled outputs
     Q_INVOKABLE bool blackballOutput(const QString &amount, const QString &offset);
     Q_INVOKABLE bool blackballOutputs(const QList<QString> &outputs, bool add);
@@ -392,6 +398,7 @@ signals:
     void disconnectedChanged() const;
     void proxyAddressChanged() const;
     void refreshingChanged() const;
+    void offlineChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);

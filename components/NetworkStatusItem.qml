@@ -57,6 +57,8 @@ Rectangle {
                 return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
             case Wallet.ConnectionStatus_WrongVersion:
                 return qsTr("Wrong version");
+            case Wallet.ConnectionStatus_OfflineMode:
+                return qsTr("Disconnected (offline mode)");
             case Wallet.ConnectionStatus_Disconnected:
                 if (appWindow.walletMode <= 1) {
                     return qsTr("Searching node") + translationManager.emptyString;
@@ -138,7 +140,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 14
                 font.family: MoneroComponents.Style.fontMedium.name
-                font.pixelSize: 20
+                font.pixelSize: 19
                 color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
                 opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.7

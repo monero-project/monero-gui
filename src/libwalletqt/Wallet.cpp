@@ -112,6 +112,13 @@ void Wallet::updateConnectionStatusAsync()
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
+
+    if (m_walletImpl->isOffline())
+    {
+        qDebug() << "Wallet is in offline mode";
+        return ConnectionStatus_OfflineMode;
+    }
+
     if (!m_initialized)
     {
         return ConnectionStatus_Connecting;
@@ -301,7 +308,14 @@ void Wallet::initAsync(
     });
     if (future.first)
     {
-        setConnectionStatus(Wallet::ConnectionStatus_Connecting);
+        if (m_walletImpl->isOffline())
+        {
+            setConnectionStatus(Wallet::ConnectionStatus_OfflineMode);
+        }
+        else
+        {
+            setConnectionStatus(Wallet::ConnectionStatus_Connecting);
+        }
     }
 }
 
@@ -967,6 +981,17 @@ void Wallet::setWalletCreationHeight(quint64 height)
 QString Wallet::getDaemonLogPath() const
 {
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
+}
+
+void Wallet::setOffline(bool offline)
+{
+    m_walletImpl->setOffline(offline);
+    emit offlineChanged();
+}
+
+bool Wallet::isOffline() const
+{
+    return m_walletImpl->isOffline();
 }
 
 bool Wallet::blackballOutput(const QString &amount, const QString &offset)
