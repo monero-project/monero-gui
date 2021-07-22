@@ -2,6 +2,23 @@
 
 Copyright (c) 2014-2019, The Monero Project
 
+## Table of Contents
+  * [Development resources](#development-resources)
+  * [Vulnerability response](#vulnerability-response)
+  * [Introduction](#introduction)
+  * [About this project](#about-this-project)
+  * [Supporting the project](#supporting-the-project)
+  * [License](#license)
+  * [Translations](#translations)
+  * [Installing the Monero GUI from a package](#installing-the-monero-gui-from-a-package)
+  * [Compiling the Monero GUI from source](#compiling-the-monero-gui-from-source)
+    + [Building Reproducible Windows static binaries with Docker (any OS)](#building-reproducible-windows-static-binaries-with-docker-any-os)
+    + [Building Reproducible Linux static binaries with Docker (any OS)](#building-reproducible-linux-static-binaries-with-docker-any-os)
+    + [Building Android APK with Docker (any OS) *Experimental*](#building-android-apk-with-docker-any-os-experimental)
+    + [Building on Linux](#building-on-linux)
+    + [Building on OS X](#building-on-os-x)
+    + [Building on Windows](#building-on-windows)
+
 ## Development resources
 
 - Web: [getmonero.org](https://getmonero.org)
@@ -180,7 +197,7 @@ Packaging for your favorite distribution would be a welcome contribution!
       http://<your.local.ip>:8080/QtApp-debug.apk
       ```
 
-### On Linux:
+### Building on Linux
 
 (Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
 
@@ -244,7 +261,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 The executable can be found in the build/release/bin folder.
 
-### On OS X:
+### Building on OS X
 
 1. Install Xcode from AppStore
 
@@ -277,7 +294,7 @@ The executable can be found in the `build/release/bin` folder.
 
 For building an application bundle see `DEPLOY.md`.
 
-### On Windows:
+### Building on Windows
 
 The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not officially supported anymore.
 
