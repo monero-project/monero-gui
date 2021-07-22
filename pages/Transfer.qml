@@ -855,7 +855,6 @@ Rectangle {
           StandardButton {
               id: sendButton
               rightIcon: "qrc:///images/rightArrow.png"
-              rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
               enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible

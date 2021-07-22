@@ -64,7 +64,7 @@ Item {
     Rectangle{
         id: rect
         anchors.fill: parent
-        color: MoneroComponents.Style.buttonInlineBackgroundColor
+        color: buttonArea.containsMouse ? MoneroComponents.Style.buttonInlineBackgroundColorHover : MoneroComponents.Style.buttonInlineBackgroundColor
         radius: 4
 
 
@@ -101,13 +101,9 @@ Item {
             }
             onEntered: {
                 tooltip.text ? tooltip.tooltipPopup.open() : ""
-                rect.color = buttonColor ? buttonColor : "#707070";
-                rect.opacity = 0.8;
             }
             onExited: {
                 tooltip.text ? tooltip.tooltipPopup.close() : ""
-                rect.opacity = 1.0;
-                rect.color = buttonColor ? buttonColor : "#808080";
             }
         }
     }

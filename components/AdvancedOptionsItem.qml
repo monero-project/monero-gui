@@ -37,27 +37,30 @@ RowLayout {
         Layout.fillWidth: false
         Layout.alignment: Qt.AlignTop | Qt.AlignLeft
         spacing: 4
-                
+
         RowLayout {
             Layout.fillWidth: false
             spacing: 12
             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-            
+
             StandardButton {
                 id: button1
                 small: true
+                primary: false
                 visible: button1.text
             }
-    
+
             StandardButton {
                 id: button2
                 small: true
+                primary: false
                 visible: button2.text
             }
-            
+
             StandardButton {
                 id: button3
                 small: true
+                primary: false
                 visible: button3.text
             }
         }

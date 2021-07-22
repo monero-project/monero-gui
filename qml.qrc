@@ -159,8 +159,6 @@
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
         <file>images/warning@2x.png</file>
-        <file>images/rightArrowInactive.png</file>
-        <file>images/rightArrowInactive@2x.png</file>
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
