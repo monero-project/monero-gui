@@ -80,7 +80,7 @@ Rectangle {
                 if(item.connected == Wallet.ConnectionStatus_Connected){
                     return 1
                 } else {
-                    return 0.5
+                    MoneroComponents.Style.blackTheme ? 0.5 : 0.3
                 }
             }
 
@@ -92,7 +92,7 @@ Rectangle {
                 source: {
                     if(appWindow.isMining) {
                        return "qrc:///images/miningxmr.png"
-                    } else if(item.connected == Wallet.ConnectionStatus_Connected) {
+                    } else if(item.connected == Wallet.ConnectionStatus_Connected || !MoneroComponents.Style.blackTheme) {
                         return "qrc:///images/lightning.png"
                     } else {
                         return "qrc:///images/lightning-white.png"
@@ -126,8 +126,8 @@ Rectangle {
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.bold: true
                 font.pixelSize: 13
-                color: MoneroComponents.Style.dimmedFontColor
-                opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.5
+                color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
+                opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.75
                 text: qsTr("Network status") + translationManager.emptyString
                 themeTransition: false
             }
@@ -159,16 +159,18 @@ Rectangle {
                 }
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 anchors.left: statusTextVal.right
                 anchors.leftMargin: 16
                 anchors.verticalCenter: parent.verticalCenter
-                color: refreshMouseArea.containsMouse ?  MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
+                color: refreshMouseArea.containsMouse ?  MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                 font.family: FontAwesome.fontFamilySolid
                 font.pixelSize: 24
                 font.styleName: "Solid"
-                opacity: iconItem.opacity * (refreshMouseArea.visible ? 1 : 0.5)
+                opacity: 0.85
                 text: FontAwesome.random
+                themeTransition: false
+                tooltip: qsTr("Switch to another public remote node") + translationManager.emptyString;
                 visible: (
                     !appWindow.disconnected &&
                     !persistentSettings.useRemoteNode &&
@@ -181,6 +183,8 @@ Rectangle {
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
                     visible: true
+                    onEntered: parent.tooltipPopup.open()
+                    onExited: parent.tooltipPopup.close()
                     onClicked: {
                         const callback = function(result) {
                             refreshMouseArea.visible = true;
