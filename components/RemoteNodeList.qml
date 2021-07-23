@@ -62,6 +62,15 @@ ColumnLayout {
                 color: itemMouseArea.containsMouse || trustedDaemonCheckMark.labelMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                 Rectangle {
+                    visible: index === remoteNodesModel.selected
+                    Layout.fillHeight: true
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    color: "darkgrey"
+                    width: 2
+                }
+
+                Rectangle {
                     color: MoneroComponents.Style.appWindowBorderColor
                     anchors.right: parent.right
                     anchors.left: parent.left

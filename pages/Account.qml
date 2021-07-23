@@ -197,6 +197,15 @@ Rectangle {
                         color: itemMouseArea.containsMouse || index === currentAccountIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle {
+                            visible: index === currentAccountIndex
+                            Layout.fillHeight: true
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            color: "darkgrey"
+                            width: 2
+                        }
+
+                        Rectangle {
                             color: MoneroComponents.Style.appWindowBorderColor
                             anchors.right: parent.right
                             anchors.left: parent.left

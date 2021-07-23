@@ -72,7 +72,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
+                color: "darkgrey"
                 width: 2
             }
 
@@ -165,7 +165,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
+                color: "darkgrey"
                 width: 2
             }
 
