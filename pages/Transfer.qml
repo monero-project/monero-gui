@@ -382,7 +382,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 addressValidation: true
                                 borderDisabled: true
-                                fontColor: error ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
+                                fontColor: error && text != "" ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name
                                 fontSize: 14
                                 inputPaddingBottom: 0
