@@ -84,6 +84,7 @@ ColumnLayout {
 
                     MoneroComponents.TextPlain {
                         id: addressText
+                        width: parent.width - trustedDaemonCheckMark.width
                         color: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
@@ -91,6 +92,7 @@ ColumnLayout {
                         font.pixelSize: 16
                         text: address
                         themeTransition: false
+                        elide: Text.ElideMiddle
                     }
 
                     MoneroComponents.Label {
