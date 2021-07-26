@@ -698,8 +698,8 @@ Rectangle {
                 spacing: 10
 
                 StandardDropdown {
-                    Layout.maximumWidth: 200
                     id: priorityDropdown
+                    dropdownFillWidth: false
                     currentIndex: 0
                     dataModel: priorityModelV5
                     labelText: qsTr("Transaction priority") + translationManager.emptyString
@@ -709,6 +709,7 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     id: feeLabel
                     Layout.alignment: Qt.AlignBottom
+                    Layout.fillWidth: true
                     Layout.bottomMargin: 11
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
@@ -751,16 +752,27 @@ Rectangle {
                         if (!sendButton.enabled || estimatedFee == null) {
                             return ""
                         }
-                        return "~%1 XMR%2 %3".arg(estimatedFee)
-                            .arg(estimatedFeeFiat)
-                            .arg(qsTr("fee") + translationManager.emptyString);
+                        return "%1: ~%2 XMR%3".arg(qsTr("Fee") + translationManager.emptyString)
+                            .arg(estimatedFee)
+                            .arg(estimatedFeeFiat);
                     }
 
                     BusyIndicator {
-                        anchors.left: parent.left
+                        Layout.fillWidth: true
                         running: feeLabel.estimating
                         height: parent.height
                         width: height
+
+                        MoneroComponents.TextPlain {
+                            anchors.left: parent.right
+                            anchors.leftMargin: 8
+                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.pixelSize: 14
+                            color: MoneroComponents.Style.defaultFontColor
+                            opacity: 0.7
+                            text: qsTr("Estimating fee") + "..." + translationManager.emptyString
+                            visible: parent.running
+                        }
                     }
                 }
             }
