@@ -346,6 +346,29 @@ Rectangle {
                 onReturnPressed: addButton.enabled ? addButton.clicked() : ""
 
                 MoneroComponents.InlineButton {
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontStyleName: "Solid"
+                    fontPixelSize: 18
+                    text: FontAwesome.desktop
+                    tooltip: qsTr("Grab QR code from screen") + translationManager.emptyString
+                    onClicked: {
+                        clearFields();
+                        const codes = oshelper.grabQrCodesFromScreen();
+                        for (var index = 0; index < codes.length; ++index) {
+                            const parsed = walletManager.parse_uri_to_object(codes[index]);
+                            if (!parsed.error) {
+                                addressLine.text = parsed.address
+                                descriptionLine.text = parsed.recipient_name
+                                break;
+                            } else if (walletManager.addressValid(codes[index], appWindow.persistentSettings.nettype)) {
+                                addressLine.text = codes[index];
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                MoneroComponents.InlineButton {
                     buttonColor: MoneroComponents.Style.orange
                     fontFamily: FontAwesome.fontFamily
                     text: FontAwesome.qrcode
@@ -509,7 +532,7 @@ Rectangle {
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
         console.log("updateFromQrCode")
         addressLine.text = address
-        descriptionLine.text = recipient_name + " " + tx_description
+        descriptionLine.text = recipient_name
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
