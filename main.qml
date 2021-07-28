@@ -719,7 +719,11 @@ ApplicationWindow {
     function stopDaemon(callback, splash){
         daemonStartStopInProgress = 2;
         if (splash) {
-            appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
+            if (appWindow.walletMode == 0) {
+                appWindow.showProcessingSplash(qsTr("Waiting for remote node seeker to stop..."));
+            } else {
+                appWindow.showProcessingSplash(qsTr("Waiting for local node to stop..."));
+            }
         }
         daemonManager.stopAsync(persistentSettings.nettype, function(result) {
             daemonStartStopInProgress = 0;
@@ -2070,7 +2074,7 @@ ApplicationWindow {
         statusMessage.visible = true
     }
 
-    function showDaemonIsRunningDialog(onClose) {
+    function showDaemonIsRunningDialog(onClose, isClosing) {
         // Show confirmation dialog
         confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
         confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
@@ -2081,7 +2085,7 @@ ApplicationWindow {
             onClose();
         }
         confirmationDialog.onRejectedCallback = function() {
-            stopDaemon(onClose);
+            stopDaemon(onClose, isClosing);
         };
         confirmationDialog.open();
     }
@@ -2115,7 +2119,7 @@ ApplicationWindow {
             const handler = function(running) {
                 hideProcessingSplash();
                 if (running) {
-                    showDaemonIsRunningDialog(closeAccepted);
+                    showDaemonIsRunningDialog(closeAccepted, true);
                 } else {
                     closeAccepted();
                 }
