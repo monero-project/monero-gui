@@ -1251,6 +1251,15 @@ ApplicationWindow {
         return (amount * ticker).toFixed(2);
     }
 
+    function fiatApiConvertToXMR(amount) {
+        const ticker = appWindow.fiatPrice;
+        if(ticker <= 0){
+            fiatApiError("Invalid ticker value: " + ticker);
+            return "?.??";
+        }
+        return (amount / ticker).toFixed(12);
+    }
+
     function fiatApiUpdateBalance(balance){
         // update balance card
         var bFiat = "?.??"

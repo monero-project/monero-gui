@@ -74,13 +74,29 @@ function isValidOpenAliasAddress(address) {
     return true
 }
 
-function makeQRCodeString(addr, amount) {
+function makeQRCodeString(addr, amount, txDescription, recipientName) {
     var XMR_URI_SCHEME = "monero:"
     var XMR_AMOUNT = "tx_amount"
+    var XMR_RECIPIENT_NAME = "recipient_name"
+    var XMR_TX_DESCRIPTION = "tx_description"
     var qrCodeString =""
     qrCodeString += (XMR_URI_SCHEME + addr)
     if (amount !== undefined && amount !== ""){
       qrCodeString += ("?" + XMR_AMOUNT + "=" + amount)
+    }
+    if (txDescription !== undefined && txDescription !== ""){
+        if (amount == ""){
+            qrCodeString += ("?" + XMR_TX_DESCRIPTION + "=" + encodeURI(txDescription))
+        } else {
+            qrCodeString += ("&" + XMR_TX_DESCRIPTION + "=" + encodeURI(txDescription))
+        }
+    }
+    if (recipientName !== undefined && recipientName !== ""){
+        if (amount == "" && txDescription == ""){
+            qrCodeString += ("?" + XMR_RECIPIENT_NAME + "=" + encodeURI(recipientName))
+        } else {
+            qrCodeString += ("&" + XMR_RECIPIENT_NAME + "=" + encodeURI(recipientName))
+        }
     }
     return qrCodeString
 }

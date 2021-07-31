@@ -102,7 +102,7 @@ Rectangle {
 
         recipientModel.newRecipient(address, Utils.removeTrailingZeros(amount || ""));
         setPaymentId(payment_id || "");
-        setDescription((recipient_name ? recipient_name + " " : "") + (tx_description || ""));
+        setDescription((recipient_name ? recipient_name + (tx_description ? " (" + tx_description + ")" : "") : (tx_description || "")));
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
@@ -404,7 +404,7 @@ Rectangle {
                                 onTextChanged: {
                                     const parsed = walletManager.parse_uri_to_object(text);
                                     if (!parsed.error) {
-                                        fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
+                                        fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name);
                                     }
                                     address = text;
                                 }
