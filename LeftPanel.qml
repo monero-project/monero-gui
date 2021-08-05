@@ -213,7 +213,7 @@ Rectangle {
 
                 MoneroComponents.Label {
                     fontSize: 16
-                    visible: isSyncing
+                    visible: isSyncing || progressBar.bar.visible
                     text: qsTr("Syncing...") + translationManager.emptyString
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
@@ -525,9 +525,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: daemonProgressBar.top
-            height: 48
+            anchors.bottomMargin: 6
             syncType: qsTr("Wallet") + translationManager.emptyString
-            visible: !appWindow.disconnected
+            visible: !appWindow.disconnected && !daemonProgressBar.isSynchronizing
         }
 
         MoneroComponents.ProgressBar {
@@ -535,9 +535,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: networkStatus.top
-            syncType: qsTr("Daemon") + translationManager.emptyString
+            anchors.bottomMargin: 6
+            syncType: qsTr("Node") + translationManager.emptyString
             visible: !appWindow.disconnected
-            height: 62
         }
         
         MoneroComponents.NetworkStatusItem {
