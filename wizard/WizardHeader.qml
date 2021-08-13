@@ -66,6 +66,7 @@ ColumnLayout {
     }
 
     Text {
+        Layout.fillWidth: true
         Layout.alignment: Qt.AlignLeft
         visible: parent.subtitle !== ""
 
