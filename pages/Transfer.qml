@@ -406,7 +406,6 @@ Rectangle {
                                     if (!parsed.error) {
                                         fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
                                     }
-                                    address = text;
                                 }
                                 text: address
 
