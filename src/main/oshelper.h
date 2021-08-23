@@ -46,6 +46,7 @@ public:
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
     Q_INVOKABLE QList<QString> grabQrCodesFromScreen() const;
+    Q_INVOKABLE bool openFile(const QString &filePath) const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;
     Q_INVOKABLE QString openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const;
     Q_INVOKABLE QString temporaryFilename() const;
@@ -53,6 +54,7 @@ public:
     Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;
     Q_INVOKABLE bool isCapsLock() const;
     Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath) const;
+    Q_INVOKABLE void openSeedTemplate() const;
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
 private:

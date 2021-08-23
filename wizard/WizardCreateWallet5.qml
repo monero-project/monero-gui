@@ -30,16 +30,16 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
+import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
 Rectangle {
-    id: wizardCreateWallet3
+    id: wizardCreateWallet5
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
-    property string viewName: "wizardCreateWallet3"
-    property alias pwField: passwordFields.password
-    property alias pwConfirmField: passwordFields.passwordConfirm
+    property alias wizardNav: wizardNav
+    property string viewName: "wizardCreateWallet5"
 
     ColumnLayout {
         id: pageRoot
@@ -55,32 +55,38 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 0
+            spacing: 20
 
-            WizardAskPassword {
-                id: passwordFields
+            WizardHeader {
+                title: qsTr("You're all set up!") + translationManager.emptyString
+                subtitle: qsTr("New wallet details:") + translationManager.emptyString
             }
 
-            WizardNav {
-                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
-                progress: 2
-                btnNext.enabled: passwordFields.calcStrengthAndVerify();
-                onPrevClicked: {
-                    if(wizardController.walletOptionsIsRecoveringFromDevice){
-                        wizardStateView.state = "wizardCreateDevice1";
-                    } else {
-                        wizardStateView.state = "wizardCreateWallet2";
-                        wizardStateView.wizardCreateWallet2View.pageRoot.forceActiveFocus();
-                    }
-                }
-                onNextClicked: {
-                    wizardController.walletOptionsPassword = passwordFields.password;
+            WizardSummary {}
 
-                    if (appWindow.walletMode < 2) {
-                        wizardStateView.state = "wizardCreateWallet5";
+            WizardNav {
+                id: wizardNav
+                Layout.topMargin: 24
+                btnNextText: qsTr("Create wallet") + translationManager.emptyString
+                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
+                progress: appWindow.walletMode <= 1 ? 3 : 4
+
+                onPrevClicked: {
+                    if (appWindow.walletMode <= 1){
+                        wizardStateView.state = "wizardCreateWallet1";
                     } else {
                         wizardStateView.state = "wizardCreateWallet4";
                     }
+                }
+                onNextClicked: {
+                    btnNext.enabled = false;
+                    wizardController.wizardStateView.wizardCreateWallet3View.pwField = "";
+                    wizardController.wizardStateView.wizardCreateWallet3View.pwConfirmField = "";
+                    wizardController.writeWallet(function() {
+                        wizardController.useMoneroClicked();
+                        wizardController.walletOptionsIsRecoveringFromDevice = false;
+                    });
+                    btnNext.enabled = true;
                 }
             }
         }

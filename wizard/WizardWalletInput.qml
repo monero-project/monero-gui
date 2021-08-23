@@ -41,9 +41,16 @@ GridLayout {
     Layout.fillWidth: true
     property alias walletName: walletName
     property alias walletLocation: walletLocation
+    property alias browseButton: browseButton
+    property alias errorMessageWalletName: errorMessageWalletName
+    property alias errorMessageWalletLocation: errorMessageWalletLocation
+    property bool rowLayout: true
+    property var walletNameKeyNavigationBackTab: browseButton
+    property var browseButtonKeyNavigationTab: walletName
 
-    columnSpacing: 20
-    columns: 2
+    columnSpacing: rowLayout ? 20 : 0
+    rowSpacing: rowLayout ? 0 : 20
+    columns: rowLayout ? 2 : 1
 
     function verify() {
         if (walletName.text !== '' && walletLocation.text !== '') {
@@ -61,79 +68,163 @@ GridLayout {
         walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
     }
 
-    MoneroComponents.LineEdit {
-        id: walletName
-        Layout.preferredWidth: grid.width/5
+    ColumnLayout {
+        MoneroComponents.LineEdit {
+            id: walletName
+            Layout.preferredWidth: grid.width/5
 
-        function verify(){
-            if (walletName.text === "") {
-                errorMessageWalletName.text = qsTr("Wallet name is empty") + translationManager.emptyString;
-                return false;
-            }
-            if (/[\\\/]/.test(walletName.text)) {
-                errorMessageWalletName.text = qsTr("Wallet name is invalid") + translationManager.emptyString;
-                return false;
-            }
-            if (walletLocation.text !== "") {
-                var walletAlreadyExists = Wizard.walletPathExists(appWindow.accountsDir, walletLocation.text, walletName.text, isIOS, walletManager);
-                if (walletAlreadyExists) {
-                    errorMessageWalletName.text = qsTr("Wallet already exists") + translationManager.emptyString;
+            function verify(){
+                if (walletName.text === "") {
+                    errorMessageWalletName.text = qsTr("Wallet name is empty") + translationManager.emptyString;
                     return false;
                 }
+                if (/[\\\/]/.test(walletName.text)) {
+                    errorMessageWalletName.text = qsTr("Wallet name is invalid") + translationManager.emptyString;
+                    return false;
+                }
+                if (walletLocation.text !== "") {
+                    var walletAlreadyExists = Wizard.walletPathExists(appWindow.accountsDir, walletLocation.text, walletName.text, isIOS, walletManager);
+                    if (walletAlreadyExists) {
+                        errorMessageWalletName.text = qsTr("Wallet already exists") + translationManager.emptyString;
+                        return false;
+                    }
+                }
+                errorMessageWalletName.text = "";
+                return true;
             }
-            errorMessageWalletName.text = "";
-            return true;
+
+            labelText: qsTr("Wallet name") + translationManager.emptyString
+            labelFontSize: 14
+            fontSize: 16
+            placeholderFontSize: 16
+            placeholderText: ""
+            errorWhenEmpty: true
+            text: defaultAccountName
+
+            onTextChanged: walletName.error = !walletName.verify();
+            Component.onCompleted: walletName.error = !walletName.verify();
+
+            Accessible.role: Accessible.EditableText
+            Accessible.name: labelText + text
+            KeyNavigation.up: walletNameKeyNavigationBackTab
+            KeyNavigation.backtab: walletNameKeyNavigationBackTab
+            KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
+            KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
         }
 
-        labelText: qsTr("Wallet name") + translationManager.emptyString
-        labelFontSize: 14
-        fontSize: 16
-        placeholderFontSize: 16
-        placeholderText: ""
-        errorWhenEmpty: true
-        text: defaultAccountName
+        RowLayout {
+            Layout.preferredWidth: grid.width/5
 
-        onTextChanged: walletName.error = !walletName.verify();
-        Component.onCompleted: walletName.error = !walletName.verify();
+            MoneroComponents.TextPlain {
+                visible: errorMessageWalletName.text != ""
+                font.family: FontAwesome.fontFamilySolid
+                font.styleName: "Solid"
+                font.pixelSize: 15
+                text: FontAwesome.exclamationCircle
+                color: "#FF0000"
+                themeTransition: false
+            }
+
+            MoneroComponents.TextPlain {
+                id: errorMessageWalletName
+                textFormat: Text.PlainText
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: "#FF0000"
+                themeTransition: false
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
+                KeyNavigation.up: walletName
+                KeyNavigation.backtab: walletName
+                KeyNavigation.down: walletLocation
+                KeyNavigation.tab: walletLocation
+            }
+        }
     }
 
-    MoneroComponents.LineEdit {
-        id: walletLocation
-        Layout.preferredWidth: grid.width/3
+    ColumnLayout {
+        visible: appWindow.walletMode >= 2
 
-        function verify() {
-            if (walletLocation.text == "") {
-                errorMessageWalletLocation.text = qsTr("Wallet location is empty") + translationManager.emptyString;
-                return false;
+        MoneroComponents.LineEdit {
+            id: walletLocation
+            Layout.preferredWidth: grid.width/3
+
+            function verify() {
+                if (walletLocation.text == "") {
+                    errorMessageWalletLocation.text = qsTr("Wallet location is empty") + translationManager.emptyString;
+                    return false;
+                }
+                errorMessageWalletLocation.text = "";
+                return true;
             }
-            errorMessageWalletLocation.text = "";
-            return true;
+
+            labelText: qsTr("Wallet location") + translationManager.emptyString
+            labelFontSize: 14
+            fontSize: 16
+            placeholderText: ""
+            placeholderFontSize: 16
+            errorWhenEmpty: true
+            text: appWindow.accountsDir + "/"
+            onTextChanged: {
+                walletLocation.error = !walletLocation.verify();
+                walletName.error = !walletName.verify();
+            }
+            Component.onCompleted: walletLocation.error = !walletLocation.verify();
+            Accessible.role: Accessible.EditableText
+            Accessible.name: labelText + text
+            KeyNavigation.up: errorMessageWalletName.text != "" ? errorMessageWalletName : walletName
+            KeyNavigation.backtab: errorMessageWalletName.text != "" ? errorMessageWalletName : walletName
+            KeyNavigation.down: browseButton
+            KeyNavigation.tab: browseButton
+
+            MoneroComponents.InlineButton {
+                id: browseButton
+                fontFamily: FontAwesome.fontFamilySolid
+                fontStyleName: "Solid"
+                fontPixelSize: 18
+                text: FontAwesome.folderOpen
+                tooltip: qsTr("Browse") + translationManager.emptyString
+                tooltipLeft: true
+                onClicked: {
+                    fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
+                    fileWalletDialog.open()
+                    walletLocation.focus = true
+                }
+                Accessible.role: Accessible.Button
+                Accessible.name: qsTr("Browse") + translationManager.emptyString
+                KeyNavigation.up: walletLocation
+                KeyNavigation.backtab: walletLocation
+                KeyNavigation.down: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
+                KeyNavigation.tab: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
+            }
         }
 
-        labelText: qsTr("Wallet location") + translationManager.emptyString
-        labelFontSize: 14
-        fontSize: 16
-        placeholderText: ""
-        placeholderFontSize: 16
-        errorWhenEmpty: true
-        text: appWindow.accountsDir + "/"
-        onTextChanged: {
-            walletLocation.error = !walletLocation.verify();
-            walletName.error = !walletName.verify();
-        }
-        Component.onCompleted: walletLocation.error = !walletLocation.verify();
+        RowLayout {
+            Layout.preferredWidth: grid.width/3
 
-        MoneroComponents.InlineButton {
-            fontFamily: FontAwesome.fontFamilySolid
-            fontStyleName: "Solid"
-            fontPixelSize: 18
-            text: FontAwesome.folderOpen
-            tooltip: qsTr("Browse") + translationManager.emptyString
-            tooltipLeft: true
-            onClicked: {
-                fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
-                fileWalletDialog.open()
-                walletLocation.focus = true
+            MoneroComponents.TextPlain {
+                visible: errorMessageWalletLocation.text != ""
+                font.family: FontAwesome.fontFamilySolid
+                font.styleName: "Solid"
+                font.pixelSize: 15
+                text: FontAwesome.exclamationCircle
+                color: "#FF0000"
+                themeTransition: false
+            }
+
+            MoneroComponents.TextPlain {
+                id: errorMessageWalletLocation
+                textFormat: Text.PlainText
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: "#FF0000"
+                themeTransition: false
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
+                KeyNavigation.up: browseButton
+                KeyNavigation.backtab: browseButton
+                KeyNavigation.down: browseButtonKeyNavigationTab
+                KeyNavigation.tab: browseButtonKeyNavigationTab
             }
         }
     }
@@ -150,52 +241,6 @@ GridLayout {
         }
         onRejected: {
             fileWalletDialog.visible = false;
-        }
-    }
-
-    RowLayout {
-        Layout.preferredWidth: grid.width/5
-
-        MoneroComponents.TextPlain {
-            visible: errorMessageWalletName.text != ""
-            font.family: FontAwesome.fontFamilySolid
-            font.styleName: "Solid"
-            font.pixelSize: 15
-            text: FontAwesome.exclamationCircle
-            color: "#FF0000"
-            themeTransition: false
-        }
-
-        MoneroComponents.TextPlain {
-            id: errorMessageWalletName
-            textFormat: Text.PlainText
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 14
-            color: "#FF0000"
-            themeTransition: false
-        }
-    }
-
-    RowLayout {
-        Layout.preferredWidth: grid.width/3
-
-        MoneroComponents.TextPlain {
-            visible: errorMessageWalletLocation.text != ""
-            font.family: FontAwesome.fontFamilySolid
-            font.styleName: "Solid"
-            font.pixelSize: 15
-            text: FontAwesome.exclamationCircle
-            color: "#FF0000"
-            themeTransition: false
-        }
-
-        MoneroComponents.TextPlain {
-            id: errorMessageWalletLocation
-            textFormat: Text.PlainText
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 14
-            color: "#FF0000"
-            themeTransition: false
         }
     }
 }

@@ -160,6 +160,18 @@ QList<QString> OSHelper::grabQrCodesFromScreen() const
     return codes;
 }
 
+bool OSHelper::openFile(const QString &filePath) const
+{
+    QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();
+    QUrl url = QUrl::fromLocalFile(canonicalFilePath);
+    if (!url.isValid())
+    {
+        qWarning() << "Malformed file path" << canonicalFilePath << url.errorString();
+        return false;
+    }
+    return QDesktopServices::openUrl(url);
+}
+
 bool OSHelper::openContainingFolder(const QString &filePath) const
 {
     QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();
@@ -312,4 +324,10 @@ quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath) const
         walletPath = keysPath.mid(0,keysPath.length()-5);
     }
     return getNetworkTypeAndAddressFromFile(walletPath).first;
+}
+
+void OSHelper::openSeedTemplate() const
+{
+    QFile::copy(":/wizard/template.pdf", QDir::tempPath() + "/seed_template.pdf");
+    openFile(QDir::tempPath() + "/seed_template.pdf");
 }

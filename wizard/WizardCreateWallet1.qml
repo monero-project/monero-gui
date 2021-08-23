@@ -40,8 +40,8 @@ Rectangle {
     
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardCreateWallet1"
-    property alias seed: seed
 
     ColumnLayout {
         id: pageRoot
@@ -51,6 +51,8 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter;
 
         spacing: 0
+        KeyNavigation.down: createWalletHeader
+        KeyNavigation.tab: createWalletHeader
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -60,6 +62,7 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
+                id: createWalletHeader
                 title: {
                     var nettype = persistentSettings.nettype;
                     return qsTr("Create a new wallet") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
@@ -67,146 +70,42 @@ Rectangle {
                                                                                         : "") + translationManager.emptyString
                 }
                 subtitle: qsTr("Creates a new wallet on this computer.") + translationManager.emptyString
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title + subtitle
+                Keys.onUpPressed: wizardNav.btnNext.enabled ? wizardNav.btnNext.forceActiveFocus() : wizardNav.wizardProgress.forceActiveFocus()
+                Keys.onBacktabPressed: wizardNav.btnNext.enabled ? wizardNav.btnNext.forceActiveFocus() : wizardNav.wizardProgress.forceActiveFocus()
+                Keys.onDownPressed: walletInput.walletName.forceActiveFocus();
+                Keys.onTabPressed: walletInput.walletName.forceActiveFocus();
             }
 
             WizardWalletInput{
                 id: walletInput
-            }
-
-            ColumnLayout {
-                spacing: 0
-
-                Layout.topMargin: -10
-                Layout.fillWidth: true
-
-                MoneroComponents.LineEditMulti {
-                    id: seed
-
-                    spacing: 0
-                    inputPaddingLeft: 16
-                    inputPaddingRight: 16
-                    inputPaddingTop: 20
-                    inputPaddingBottom: 20
-                    inputRadius: 0
-
-                    fontSize: 18
-                    fontBold: true
-                    wrapMode: Text.WordWrap
-                    backgroundColor: "red"
-                    addressValidation: false
-                    labelText: qsTr("Mnemonic seed") + translationManager.emptyString
-                    labelFontSize: 14
-                    copyButton: false
-                    readOnly: true
-
-                    placeholderText: "-"
-                    text: wizardController.walletOptionsSeed
-                }
-
-                MoneroComponents.WarningBox {
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        height: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    radius: 0
-                    border.color: MoneroComponents.Style.inputBorderColorInActive
-                    border.width: 0
-
-                    text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.") + translationManager.emptyString
-                }
-            }
-
-            ColumnLayout {
-                spacing: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-
-                MoneroComponents.LineEditMulti {
-                    id: restoreHeight
-
-                    spacing: 0
-                    inputPaddingLeft: 16
-                    inputPaddingRight: 16
-                    inputPaddingTop: 20
-                    inputPaddingBottom: 20
-                    inputRadius: 0
-                    fontSize: 18
-                    fontBold: true
-                    wrapMode: Text.WordWrap
-                    labelText: qsTr("Wallet restore height") + translationManager.emptyString
-                    labelFontSize: 14
-                    copyButton: false
-                    readOnly: true
-                    text: Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0)
-                }
-
-                MoneroComponents.WarningBox {
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        height: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
-                    }
-
-                    radius: 0
-                    border.color: MoneroComponents.Style.inputBorderColorInActive
-                    border.width: 0
-                    text: qsTr("Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.") + translationManager.emptyString
-                }
+                rowLayout: false
+                walletNameKeyNavigationBackTab: createWalletHeader
+                browseButtonKeyNavigationTab: wizardNav.btnPrev
             }
 
             WizardNav {
-                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                id: wizardNav
+                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
                 progress: 0
                 btnNext.enabled: walletInput.verify();
-                btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
+                btnPrev.text: appWindow.width <= 506 ? "<" : qsTr("Back to menu") + translationManager.emptyString
                 onPrevClicked: {
-                    wizardController.wizardStateView.wizardCreateWallet2View.pwField = "";
-                    wizardController.wizardStateView.wizardCreateWallet2View.pwConfirmField = "";
+                    if (wizardStateView.wizardCreateWallet2View.seedListGrid) {
+                        wizardStateView.wizardCreateWallet2View.seedListGrid.destroy();
+                    }
+                    wizardController.wizardStateView.wizardCreateWallet3View.pwField = "";
+                    wizardController.wizardStateView.wizardCreateWallet3View.pwConfirmField = "";
                     wizardStateView.state = "wizardHome";
                 }
+                btnPrevKeyNavigationBackTab: walletInput.errorMessageWalletLocation.text != "" ? walletInput.errorMessageWalletLocation : walletInput.browseButton
+                btnNextKeyNavigationTab: createWalletHeader
                 onNextClicked: {
                     wizardController.walletOptionsName = walletInput.walletName.text;
-                    wizardController.walletOptionsLocation = walletInput.walletLocation.text;
+                    wizardController.walletOptionsLocation = appWindow.walletMode >= 2 ? walletInput.walletLocation.text : appWindow.accountsDir;
                     wizardStateView.state = "wizardCreateWallet2";
+                    wizardStateView.wizardCreateWallet2View.pageRoot.forceActiveFocus();
                 }
             }
         }
