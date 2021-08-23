@@ -159,6 +159,18 @@ QList<QString> OSHelper::grabQrCodesFromScreen() const
     return codes;
 }
 
+bool OSHelper::openFile(const QString &filePath) const
+{
+    QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();
+    QUrl url = QUrl::fromLocalFile(canonicalFilePath);
+    if (!url.isValid())
+    {
+        qWarning() << "Malformed file path" << canonicalFilePath << url.errorString();
+        return false;
+    }
+    return QDesktopServices::openUrl(url);
+}
+
 bool OSHelper::openContainingFolder(const QString &filePath) const
 {
     QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();

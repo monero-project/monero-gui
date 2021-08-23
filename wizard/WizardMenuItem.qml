@@ -102,10 +102,12 @@ RowLayout {
             font.bold: true
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
-                if(wizardController.layoutScale === 2 ){
-                    return 22;
-                } else {
+                if (wizardController.layoutScale == 4) {
                     return 16;
+                } else if (wizardController.layoutScale == 3) {
+                    return 20;
+                } else if (wizardController.layoutScale <= 2) {
+                    return 22;
                 }
             }
 
@@ -124,7 +126,7 @@ RowLayout {
             color: MoneroComponents.Style.dimmedFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
-                if(wizardController.layoutScale === 2 ){
+                if (wizardController.layoutScale <= 2 ){
                     return 16;
                 } else {
                     return 14;

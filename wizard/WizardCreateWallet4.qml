@@ -30,7 +30,6 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
-import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
 Rectangle {
@@ -57,32 +56,23 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("You're all set up!") + translationManager.emptyString
-                subtitle: qsTr("New wallet details:") + translationManager.emptyString
+                title: qsTr("Daemon settings") + translationManager.emptyString
+                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
             }
 
-            WizardSummary {}
+            WizardDaemonSettings {
+                id: daemonSettings
+            }
 
             WizardNav {
-                Layout.topMargin: 24
-                btnNextText: qsTr("Create wallet") + translationManager.emptyString
-                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
-                progress: appWindow.walletMode <= 1 ? 2 : 3
-
+                progressSteps: 5
+                progress: 3
                 onPrevClicked: {
-                    if (appWindow.walletMode <= 1){
-                        wizardStateView.state = "wizardCreateWallet1";
-                    } else {
-                        wizardStateView.state = "wizardCreateWallet3";
-                    }
+                    wizardStateView.state = "wizardCreateWallet3";
                 }
                 onNextClicked: {
-                    wizardController.wizardStateView.wizardCreateWallet2View.pwField = "";
-                    wizardController.wizardStateView.wizardCreateWallet2View.pwConfirmField = "";
-                    wizardController.writeWallet(function() {
-                        wizardController.useMoneroClicked();
-                        wizardController.walletOptionsIsRecoveringFromDevice = false;
-                    });
+                    daemonSettings.save();
+                    wizardStateView.state = "wizardCreateWallet5";
                 }
             }
         }

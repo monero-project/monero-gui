@@ -43,9 +43,10 @@ RowLayout {
     property bool autoTransition: true
     property alias btnPrev: btnPrev
     property alias btnNext: btnNext
+    property alias wizardProgress: wizardProgress
     property string btnPrevText: qsTr("Previous") + translationManager.emptyString
     property string btnNextText: qsTr("Next") + translationManager.emptyString
-    Layout.topMargin: 20
+    Layout.topMargin: 0
     Layout.preferredHeight: 70
     Layout.preferredWidth: parent.width
 
@@ -70,9 +71,11 @@ RowLayout {
 
         MoneroComponents.StandardButton {
             id: btnPrev
+            width: appWindow.width <= 506 ? 45 : appWindow.width <= 660 ? 120 : 180
             small: true
-            text: menuNav.btnPrevText
-            
+            primary: false
+            text: appWindow.width <= 506 ? "<" : menuNav.btnPrevText
+
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
 
@@ -134,8 +137,9 @@ RowLayout {
 
         MoneroComponents.StandardButton {
             id: btnNext
+            width: appWindow.width <= 506 ? 45 : appWindow.width <= 660 ? 120 : 180
             small: true
-            text: menuNav.btnNextText
+            text: appWindow.width <= 506 ? ">" : menuNav.btnNextText
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right

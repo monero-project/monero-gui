@@ -38,44 +38,60 @@ import QtQuick.Controls 2.0
 ColumnLayout {
     property string title: ""
     property string subtitle: ""
+    property alias imageIcon: icon.source
+    property bool subtitleVisible: true
     spacing: 4
     Layout.maximumWidth: wizardController.wizardSubViewWidth
 
-    Text {
-        text: title
-        font.family: MoneroComponents.Style.fontRegular.name
-        color: MoneroComponents.Style.defaultFontColor
-        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
-        font.pixelSize: {
-            if(wizardController.layoutScale === 2 ){
-                return 34;
-            } else {
-                return 28;
-            }
+    RowLayout {
+        spacing: 0
+
+        Image {
+            id: icon
+            visible: icon.source != ""
+            source: ""
+            width: wizardController.layoutScale == 4 ? 35 : 50
+            height: wizardController.layoutScale == 4 ? 35 : 50
         }
 
-        wrapMode: Text.WordWrap
-        leftPadding: 0
-        topPadding: 0
-        bottomPadding: 0
+        Text {
+            text: title
+            font.family: MoneroComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.defaultFontColor
+            opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+            font.pixelSize: {
+                if (wizardController.layoutScale == 4) {
+                    return 16;
+                } else if (wizardController.layoutScale == 3) {
+                    return 28;
+                } else if (wizardController.layoutScale <= 2) {
+                    return 32;
+                }
+            }
 
-        Rectangle {
-            anchors.fill: parent
-            color: parent.parent.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            wrapMode: Text.WordWrap
+            leftPadding: 0
+            topPadding: 0
+            bottomPadding: 0
+
+            Rectangle {
+                anchors.fill: parent
+                color: parent.parent.parent.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
         }
     }
 
     Text {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignLeft
-        visible: parent.subtitle !== ""
+        visible: parent.subtitle !== "" && subtitleVisible
 
         color: MoneroComponents.Style.dimmedFontColor
         text: subtitle
 
         font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: {
-            if(wizardController.layoutScale === 2 ){
+            if (wizardController.layoutScale <= 2 ) {
                 return 16;
             } else {
                 return 14;

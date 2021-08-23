@@ -189,6 +189,7 @@
         <file>wizard/WizardCreateWallet2.qml</file>
         <file>wizard/WizardCreateWallet3.qml</file>
         <file>wizard/WizardCreateWallet4.qml</file>
+        <file>wizard/WizardCreateWallet5.qml</file>
         <file>wizard/WizardCreateDevice1.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>wizard/WizardHeader.qml</file>
@@ -264,5 +265,16 @@
         <file>images/ledgerNanoX.png</file>
         <file>images/trezor.png</file>
         <file>images/trezor@2x.png</file>
+        <file>images/write-down.png</file>
+        <file>images/write-down-white.png</file>
+        <file>images/write-down@2x.png</file>
+        <file>images/write-down-white@2x.png</file>
+        <file>images/verify.png</file>
+        <file>images/verify-white.png</file>
+        <file>images/verify@2x.png</file>
+        <file>images/verify-white@2x.png</file>
+        <file>wizard/SeedListItem.qml</file>
+        <file>wizard/SeedListGrid.qml</file>
+        <file>wizard/template.pdf</file>
     </qresource>
 </RCC>
