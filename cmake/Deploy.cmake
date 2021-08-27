@@ -17,11 +17,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             add_custom_command(TARGET deploy
                                POST_BUILD
                                COMMAND ${CMAKE_COMMAND} -E copy ${_qt_svg_dylib} $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtGui.framework/Versions/5/QtGui" "@executable_path/../Frameworks/QtGui.fr    amework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtWidgets.framework/Versions/5/QtWidgets" "@executable_path/../Frameworks/    QtGui.framework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtSvg.framework/Versions/5/QtSvg" "@executable_path/../Frameworks/QtGui.fr    amework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtCore.framework/Versions/5/QtCore" "@executable_path/../Frameworks/QtGui.    framework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMENT "Copying libqsvg.dylib, running install_name_tool"
+                               COMMENT "Copying libqsvg.dylib"
             )
         endif()
 
