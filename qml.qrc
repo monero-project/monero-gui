@@ -252,5 +252,9 @@
         <file>images/success@2x.png</file>
         <file>components/SuccessfulTxDialog.qml</file>
         <file>components/TxConfirmationDialog.qml</file>
+        <file>images/ledgerNanoS.png</file>
+        <file>images/ledgerNanoX.png</file>
+        <file>images/trezor.png</file>
+        <file>images/trezor@2x.png</file>
     </qresource>
 </RCC>
