@@ -50,6 +50,7 @@ Rectangle {
     color: "transparent"
     property var model
     property alias receiveHeight: mainLayout.height
+    property var state: "Address"
 
     function renameSubaddressLabel(_index){
         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
@@ -58,6 +59,17 @@ Rectangle {
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open(appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index))
+    }
+
+    function generateQRCodeString() {
+        if (pageReceive.state == "PaymentRequest") {
+            return TxUtils.makeQRCodeString(appWindow.current_address,
+                                           (amountToReceiveXMR.text != "" && parseFloat(amountToReceiveXMR.text) != 0 ? amountToReceiveXMR.text : ""),
+                                           (txDescriptionInput.text != "" ? txDescriptionInput.text : ""),
+                                           (receiverNameInput.text != "" ? receiverNameInput.text : ""));
+        } else {
+            return TxUtils.makeQRCodeString(appWindow.current_address);
+        }
     }
 
     Clipboard { id: clipboard }
@@ -80,6 +92,26 @@ Rectangle {
             spacing: 0
             property int qrSize: 220
 
+            MoneroComponents.Navbar {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.bottomMargin: 10
+
+                MoneroComponents.NavbarItem {
+                    active: state == "Address"
+                    text: qsTr("Address") + translationManager.emptyString
+                    onSelected: state = "Address"
+                }
+
+                MoneroComponents.NavbarItem {
+                    active: state == "PaymentRequest"
+                    text: qsTr("Payment request") + translationManager.emptyString
+                    onSelected: {
+                        state = "PaymentRequest";
+                        qrCodeTextMouseArea.hoverEnabled = true;
+                    }
+                }
+            }
+
             Rectangle {
                 id: qrContainer
                 color: MoneroComponents.Style.blackTheme ? "white" : "transparent"
@@ -95,16 +127,19 @@ Rectangle {
                     anchors.margins: 1
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + TxUtils.makeQRCodeString(appWindow.current_address)
+                    source: "image://qrcode/" + generateQRCodeString();
 
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onEntered: qrCodeTooltip.tooltipPopup.open()
+                        onExited: qrCodeTooltip.tooltipPopup.close()
                         onClicked: {
                             if (mouse.button == Qt.LeftButton){
-                                selectedAddressDetailsColumn.qrSize = selectedAddressDetailsColumn.qrSize == 220 ? 300 : 220;
+                                walletManager.saveQrCodeToClipboard(generateQRCodeString());
+                                appWindow.showStatusMessage(qsTr("QR code copied to clipboard") + translationManager.emptyString, 3);
                             } else if (mouse.button == Qt.RightButton){
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
@@ -119,9 +154,256 @@ Rectangle {
                     title: "QrCode"
 
                     MenuItem {
+                        text: qsTr("Copy to clipboard") + translationManager.emptyString;
+                        onTriggered: walletManager.saveQrCodeToClipboard(generateQRCodeString())
+                    }
+
+                    MenuItem {
                         text: qsTr("Save as Image") + translationManager.emptyString;
                         onTriggered: qrFileDialog.open()
                     }
+                }
+
+                MoneroComponents.Tooltip {
+                    id: qrCodeTooltip
+                    text: qsTr("Left click: copy QR code to clipboard") + "<br>" +  qsTr("Right click: save QR code as image file") + translationManager.emptyString
+                }
+            }
+
+            MoneroComponents.TextPlain {
+                id: qrCodeText
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 6
+                Layout.maximumWidth: 285
+                Layout.minimumHeight: 75
+                verticalAlignment: Text.AlignVCenter
+                visible: paymentRequestGridLayout.visible
+                font.pixelSize: 12
+                color: qrCodeTextMouseArea.containsMouse ? MoneroComponents.Style.orange : MoneroComponents.Style.defaultFontColor
+                text: generateQRCodeString();
+                wrapMode: Text.WrapAnywhere
+                tooltip: qsTr("Copy payment request to clipboard") + translationManager.emptyString
+                themeTransition: false
+
+                MouseArea {
+                    id: qrCodeTextMouseArea
+                    hoverEnabled: false //true when Payment request navbar button is clicked (fix bug displaying tooltip when navbar button is clicked)
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onEntered: parent.tooltipPopup.open()
+                    onExited: parent.tooltipPopup.close()
+                    onClicked: {
+                        clipboard.setText(qrCodeText.text);
+                        appWindow.showStatusMessage(qsTr("Payment request copied to clipboard") + translationManager.emptyString, 3);
+                    }
+                }
+            }
+
+            GridLayout {
+                id: paymentRequestGridLayout
+                columns: 3
+                rows: 4
+                visible: pageReceive.state == "PaymentRequest"
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 6
+                Layout.preferredWidth: 285
+                Layout.maximumWidth: 285
+
+                MoneroComponents.Label {
+                    id: amountTitleFiat
+                    Layout.bottomMargin: 3
+                    Layout.preferredWidth: 90
+                    visible: persistentSettings.fiatPriceEnabled
+                    fontSize: 14
+                    text: qsTr("Amount") + translationManager.emptyString
+                }
+
+                MoneroComponents.Input {
+                    id: amountToReceiveFiat
+                    Layout.preferredWidth: 165
+                    Layout.maximumWidth: 165
+                    visible: persistentSettings.fiatPriceEnabled
+                    topPadding: 5
+                    leftPadding: 5
+                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.pixelSize: 14
+                    font.bold: false
+                    horizontalAlignment: TextInput.AlignLeft
+                    verticalAlignment: TextInput.AlignVCenter
+                    selectByMouse: true
+                    color: MoneroComponents.Style.defaultFontColor
+                    placeholderText: "0.00"
+
+                    background: Rectangle {
+                        color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
+                        radius: 3
+                        border.color: parent.activeFocus ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+                        border.width: 1
+                    }
+                    onTextEdited: {
+                        text = text.trim().replace(",", ".");
+                        const match = text.match(/^0+(\d.*)/);
+                        if (match) {
+                            const cursorPosition = cursorPosition;
+                            text = match[1];
+                            cursorPosition = Math.max(cursorPosition, 1) - 1;
+                        } else if(text.indexOf('.') === 0){
+                            text = '0' + text;
+                            if (text.length > 2) {
+                                cursorPosition = 1;
+                            }
+                        }
+                        if (amountToReceiveFiat.text == "") {
+                            amountToReceiveXMR.text = "";
+                        } else {
+                            amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
+                        }
+                    }
+                    validator: RegExpValidator {
+                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    }
+                }
+
+                MoneroComponents.Label {
+                    Layout.bottomMargin: 3
+                    visible: persistentSettings.fiatPriceEnabled
+                    fontSize: 14
+                    text: appWindow.fiatApiCurrencySymbol();
+                }
+
+                MoneroComponents.Label {
+                    id: amountTitleXMR
+                    Layout.bottomMargin: 3
+                    Layout.preferredWidth: 90
+                    fontSize: 14
+                    text: persistentSettings.fiatPriceEnabled ? "" : qsTr("Amount") + translationManager.emptyString
+                }
+
+                MoneroComponents.Input {
+                    id: amountToReceiveXMR
+                    Layout.preferredWidth: 165
+                    Layout.maximumWidth: 165
+                    topPadding: 5
+                    leftPadding: 5
+                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.pixelSize: 14
+                    font.bold: false
+                    horizontalAlignment: TextInput.AlignLeft
+                    verticalAlignment: TextInput.AlignVCenter
+                    selectByMouse: true
+                    color: MoneroComponents.Style.defaultFontColor
+                    placeholderText: "0.000000000000"
+
+                    background: Rectangle {
+                        color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
+                        radius: 3
+                        border.color: parent.activeFocus ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+                        border.width: 1
+                    }
+                    onTextEdited: {
+                        text = text.trim().replace(",", ".");
+                        const match = text.match(/^0+(\d.*)/);
+                        if (match) {
+                            const cursorPosition = cursorPosition;
+                            text = match[1];
+                            cursorPosition = Math.max(cursorPosition, 1) - 1;
+                        } else if(text.indexOf('.') === 0){
+                            text = '0' + text;
+                            if (text.length > 2) {
+                                cursorPosition = 1;
+                            }
+                        }
+                        if (amountToReceiveXMR.text == "") {
+                            amountToReceiveFiat.text = "";
+                        } else {
+                            amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
+                        }
+                    }
+                    validator: RegExpValidator {
+                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    }
+                }
+
+                MoneroComponents.Label {
+                    Layout.bottomMargin: 3
+                    fontSize: 14
+                    text: "XMR"
+                }
+
+                MoneroComponents.Label {
+                    id: txDescription
+                    Layout.bottomMargin: 3
+                    Layout.preferredWidth: 90
+                    fontSize: 14
+                    text: qsTr("Description") + translationManager.emptyString
+                    tooltip: qsTr("What is being payed for (a product, service, donation) (optional)") + translationManager.emptyString
+                    tooltipIconVisible: true
+                }
+
+                MoneroComponents.Input {
+                    id: txDescriptionInput
+                    Layout.preferredWidth: 165
+                    Layout.maximumWidth: 165
+                    topPadding: 7
+                    leftPadding: 7
+                    font.pixelSize: 14
+                    font.bold: false
+                    horizontalAlignment: TextInput.AlignLeft
+                    verticalAlignment: TextInput.AlignVCenter
+                    selectByMouse: true
+                    color: MoneroComponents.Style.defaultFontColor
+                    placeholderText: qsTr("Visible to the sender") + translationManager.emptyString
+
+                    background: Rectangle {
+                        color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
+                        radius: 3
+                        border.color: parent.activeFocus ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+                        border.width: 1
+                    }
+                }
+
+                MoneroComponents.Label {
+                    Layout.bottomMargin: 3
+                    fontSize: 14
+                    text: ""
+                }
+
+                MoneroComponents.Label {
+                    id: receiverNameLabel
+                    Layout.bottomMargin: 3
+                    Layout.preferredWidth: 90
+                    fontSize: 14
+                    text: qsTr("Your name") + translationManager.emptyString
+                    tooltip: qsTr("Your name, company or website (optional)") + translationManager.emptyString
+                    tooltipIconVisible: true
+                }
+
+                MoneroComponents.Input {
+                    id: receiverNameInput
+                    Layout.preferredWidth: 165
+                    Layout.maximumWidth: 165
+                    topPadding: 7
+                    leftPadding: 7
+                    font.pixelSize: 14
+                    font.bold: false
+                    horizontalAlignment: TextInput.AlignLeft
+                    verticalAlignment: TextInput.AlignVCenter
+                    selectByMouse: true
+                    color: MoneroComponents.Style.defaultFontColor
+                    placeholderText: qsTr("Visible to the sender") + translationManager.emptyString
+
+                    background: Rectangle {
+                        color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
+                        radius: 3
+                        border.color: parent.activeFocus ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+                        border.width: 1
+                    }
+                }
+
+                MoneroComponents.Label {
+                    Layout.bottomMargin: 3
+                    fontSize: 14
+                    text: ""
                 }
             }
 
@@ -131,6 +413,7 @@ Rectangle {
                 Layout.preferredWidth: 220
                 Layout.maximumWidth: 220
                 Layout.topMargin: 15
+                visible: pageReceive.state == "Address"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Address #") + subaddressListView.currentIndex + translationManager.emptyString
                 wrapMode: Text.WordWrap
@@ -147,6 +430,7 @@ Rectangle {
                 Layout.preferredWidth: 220
                 Layout.maximumWidth: 220
                 Layout.topMargin: 10
+                visible: pageReceive.state == "Address"
                 horizontalAlignment: Text.AlignHCenter
                 text: "(" + qsTr("no label") + ")" + translationManager.emptyString
                 wrapMode: Text.WordWrap
@@ -175,6 +459,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: 300
                 Layout.topMargin: 11
+                visible: pageReceive.state == "Address"
                 text: appWindow.current_address ? appWindow.current_address : ""
                 horizontalAlignment: TextInput.AlignHCenter
                 wrapMode: Text.Wrap
@@ -464,12 +749,14 @@ Rectangle {
             selectExisting: false
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(TxUtils.makeQRCodeString(appWindow.current_address), walletManager.urlToLocalPath(fileUrl))) {
+                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
                     console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                     receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
                     receivePageDialog.icon = StandardIcon.Error
                     receivePageDialog.open()
+                } else {
+                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString, 3);
                 }
             }
         }
@@ -477,6 +764,7 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("Receive page loaded");
+        pageReceive.clearFields();
         subaddressListView.model = appWindow.currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
@@ -489,7 +777,10 @@ Rectangle {
     }
 
     function clearFields() {
-        // @TODO: add fields
+        amountToReceiveFiat.text = "";
+        amountToReceiveXMR.text = "";
+        txDescriptionInput.text = "";
+        receiverNameInput.text = "";
     }
 
     function onPageClosed() {

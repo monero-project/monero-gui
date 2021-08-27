@@ -31,6 +31,8 @@
 #include "wallet/api/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
+#include <QClipboard>
+#include <QGuiApplication>
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -478,6 +480,14 @@ bool WalletManager::saveQrCode(const QString &code, const QString &path) const
 {
     QSize size;
     return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
+}
+
+void WalletManager::saveQrCodeToClipboard(const QString &code) const
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    QSize size;
+    clipboard->setImage(QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio), QClipboard::Clipboard);
+    clipboard->setImage(QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio), QClipboard::Selection);
 }
 
 void WalletManager::checkUpdatesAsync(
