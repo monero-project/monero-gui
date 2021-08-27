@@ -129,6 +129,7 @@ Item {
 
                 MoneroComponents.StandardButton {
                     id: cancelButton
+                    primary: false
                     small: true
                     width: 120
                     fontSize: 14
