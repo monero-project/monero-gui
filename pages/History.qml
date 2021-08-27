@@ -1410,7 +1410,7 @@ Rectangle {
         }
 
         if (typeof root.model !== 'undefined' && root.model != null) {
-            toDatePicker.currentDate = new Date(); //today
+            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime
         }
 
         // extract from model, create JS array of txs
