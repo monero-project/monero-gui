@@ -171,6 +171,7 @@ Rectangle {
 
             MoneroComponents.StandardButton {
                 id: cancelButton
+                primary: false
                 text: qsTr("Cancel") + translationManager.emptyString
                 onClicked: {
                     root.close()
