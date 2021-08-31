@@ -18,7 +18,6 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
-include(FindCcache)
 
 if(DEBUG)
 	set(CMAKE_VERBOSE_MAKEFILE ON)
