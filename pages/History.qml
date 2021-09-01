@@ -593,6 +593,9 @@ Rectangle {
             delegate: Rectangle {
                 id: delegate
                 property bool collapsed: root.txDataCollapsed.indexOf(hash) >= 0 ? true : false
+                property bool isConfirmed: confirmations < confirmationsRequired ? false : true
+                property bool walletHasLockedBalance: leftPanel.minutesToUnlock !== ""
+                property int remainingMinutes: (confirmationsRequired - confirmations) * 2
                 anchors.left: parent ? parent.left : undefined
                 anchors.right: parent ? parent.right : undefined
                 height: {
@@ -612,9 +615,9 @@ Rectangle {
                     color: "transparent"
 
                     Rectangle {
-                        visible: !isFailed && !isPending
+                        visible: !isFailed && !isPending && (isConfirmed || (!isConfirmed && !walletHasLockedBalance))
                         anchors.top: parent.top
-                        anchors.topMargin: 24
+                        anchors.topMargin: 26
                         anchors.horizontalCenter: parent.horizontalCenter
                         width: 10
                         height: 10
@@ -623,15 +626,15 @@ Rectangle {
                     }
 
                     MoneroComponents.TextPlain {
-                        visible: isFailed || isPending
+                        visible: isFailed || isPending || (!isConfirmed && walletHasLockedBalance)
                         anchors.top: parent.top
-                        anchors.topMargin: 24
+                        anchors.topMargin: 22
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.family: FontAwesome.fontFamilySolid
-                        font.styleName: isFailed ? "Solid" : ""
+                        font.styleName: isFailed || !isConfirmed ? "Solid" : ""
                         font.pixelSize: 15
-                        text: isFailed ? FontAwesome.times : FontAwesome.clockO
-                        color: isFailed ? "#FF0000" : MoneroComponents.Style.defaultFontColor
+                        text: isFailed ? FontAwesome.times : isPending ? FontAwesome.clockO : FontAwesome.lock
+                        color: isFailed ? "#FF0000" : isPending ? MoneroComponents.Style.defaultFontColor : isout ? "#d85a00" : "#2eb358"
                         themeTransition: false
                     }
                 }
@@ -671,11 +674,44 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + (isFailed ? " (" + qsTr("Failed") + ")" : (isPending ? " (" + qsTr("Pending") + ")" : "")) + translationManager.emptyString
+                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + (isFailed ? " (" + qsTr("Failed") + ")"
+                                                                                                : (isPending ? " (" + qsTr("Pending") + ")"
+                                                                                                             : !isConfirmed && walletHasLockedBalance ? " (" + (isout ? qsTr("Change locked") : qsTr("Funds locked")) + ")"
+                                                                                                                                                              :  "")) + translationManager.emptyString
+                                    tooltip: {
+                                        if (isout) {
+                                            if (isFailed) {
+                                                return qsTr("This transaction was sent to the network but there was a problem") + translationManager.emptyString;
+                                            } else if (isPending) {
+                                                return qsTr("This transaction was sent to the network and is waiting to be confirmed (included in a block) by a miner. This takes on average 2 minutes, but sometimes can take longer.") + translationManager.emptyString;
+                                            } else if (!isConfirmed && walletHasLockedBalance) {
+                                                return qsTr("This transaction was succesfully sent and confirmed. Your change is temporarily locked and will be spendable after 10 confirmations (in approximately %1 minutes).").arg(remainingMinutes) + translationManager.emptyString;
+                                            } else {
+                                                return qsTr("This transaction was succesfully sent and confirmed") + translationManager.emptyString;
+                                            }
+                                        } else {
+                                            if (isPending) {
+                                                return qsTr("This transaction is still waiting to be confirmed. This takes on average 2 minutes, but sometimes can take longer.") + translationManager.emptyString
+                                            } else if (!isConfirmed && walletHasLockedBalance) {
+                                                return qsTr("This transaction was succesfully received and confirmed. Its funds are temporarily locked and will be spendable after 10 confirmations (in approximately %1 minutes).").arg(remainingMinutes) + translationManager.emptyString
+                                            } else {
+                                                return qsTr("This transaction was succesfully received and confirmed") + translationManager.emptyString
+                                            }
+                                        }
+                                    }
+                                    tooltipIconVisible: isFailed || isPending || !isConfirmed && walletHasLockedBalance
+                                    tooltipIconColor: MoneroComponents.Style.historyHeaderTextColor
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                     themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.tooltipPopup.open()
+                                        onExited: parent.tooltipPopup.close()
+                                    }
                                 }
                             }
 
@@ -722,10 +758,18 @@ Rectangle {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
                                     text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee") + translationManager.emptyString
+                                    tooltip: isout ? qsTr("The amount paid for the miner to include this transaction in a block") : confirmationsRequired === 60 ? "" : qsTr("The amount paid for the miner to include this transaction in a block") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                     themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.tooltipPopup.open()
+                                        onExited: parent.tooltipPopup.close()
+                                    }
                                 }
                             }
 
@@ -784,10 +828,18 @@ Rectangle {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
                                     text: (isout ? qsTr("To") : qsTr("In")) + translationManager.emptyString
+                                    tooltip: (isout ? qsTr("The destination address or recipient") : qsTr("The address of your wallet that received this transaction")) + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                     themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.tooltipPopup.open()
+                                        onExited: parent.tooltipPopup.close()
+                                    }
                                 }
                             }
 
@@ -861,10 +913,18 @@ Rectangle {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
                                     text: qsTr("Confirmations") + translationManager.emptyString
+                                    tooltip: qsTr("The number of blocks that were mined (added to the blockchain) after this transaction was included in a block. The higher the number of confirmations, the lower the probability that the transaction will be reversed.") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                     themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.tooltipPopup.open()
+                                        onExited: parent.tooltipPopup.close()
+                                    }
                                 }
                             }
 
@@ -874,11 +934,25 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    property bool confirmed: confirmations < confirmationsRequired ? false : true
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: confirmed ? confirmations : confirmations + "/" + confirmationsRequired
+                                    text: isConfirmed ? confirmations : confirmations + "/" + confirmationsRequired + (confirmations > 0 ? " " + "(~%1 min. to unlock %2)".arg(remainingMinutes).arg(isout && walletHasLockedBalance ? qsTr("change") : qsTr("funds")) : "") + translationManager.emptyString
                                     color: MoneroComponents.Style.defaultFontColor
+                                    tooltip: {
+                                        if (isConfirmed) {
+                                            return qsTr("This transaction is finished and cannot be reversed") + translationManager.emptyString;
+                                        } else {
+                                            if (isout && walletHasLockedBalance) {
+                                                return qsTr("If this transaction has a change, it will be unlocked and you will be able to spend it after 10 confirmations (in approximately %1 minutes).").arg(remainingMinutes) + translationManager.emptyString;
+                                            } else if (isout && !walletHasLockedBalance) {
+                                                return qsTr("After 10 confirmations (in approximately %1 minutes) the funds sent in this transaction will be unlocked on the receiver wallet and the receiver will be able to spend them.").arg(remainingMinutes) + translationManager.emptyString;
+                                            } else if (!isout){
+                                                return qsTr("After 10 confirmations (in approximately %1 minutes) the funds received in this transaction will be unlocked and you will be able to spent them.").arg(remainingMinutes) + translationManager.emptyString;
+                                            }
+                                        }
+                                    }
+                                    tooltipIconVisible: true
+                                    tooltipIconColor: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
 
                                     MouseArea {
@@ -1057,10 +1131,18 @@ Rectangle {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15
                                 text: qsTr("Description") + translationManager.emptyString
+                                tooltip: qsTr("A note for this transaction. The description is saved on your local wallet and is for your control only (the %1 cannot read it and it is not published on the blockchain).").arg(isout ? qsTr("receiver") : qsTr("sender")) + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                 themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.tooltipPopup.open()
+                                    onExited: parent.tooltipPopup.close()
+                                }
                             }
                         }
 
@@ -1128,7 +1210,15 @@ Rectangle {
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                 themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
+                                tooltip: qsTr("A unique identifier for this transaction") + translationManager.emptyString
                                 anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.tooltipPopup.open()
+                                    onExited: parent.tooltipPopup.close()
+                                }
                             }
                         }
 
@@ -1169,10 +1259,20 @@ Rectangle {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15
                                 text: qsTr("Transaction key") + translationManager.emptyString
+                                tooltip: qsTr("A key that can be used to prove that this transaction was made") + translationManager.emptyString
+                                tooltipIconVisible: true
+                                tooltipIconColor: MoneroComponents.Style.historyHeaderTextColor
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                 themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.tooltipPopup.open()
+                                    onExited: parent.tooltipPopup.close()
+                                }
                             }
                         }
 
@@ -1214,10 +1314,20 @@ Rectangle {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15
                                 text: qsTr("Blockheight") + translationManager.emptyString
+                                tooltip: qsTr("The number of the block in which your transaction was included") + translationManager.emptyString
+                                tooltipIconVisible: true
+                                tooltipIconColor: MoneroComponents.Style.historyHeaderTextColor
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
                                 themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.tooltipPopup.open()
+                                    onExited: parent.tooltipPopup.close()
+                                }
                             }
                         }
 
