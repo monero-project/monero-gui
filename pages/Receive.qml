@@ -152,13 +152,16 @@ Rectangle {
                 Menu {
                     id: qrMenu
                     title: "QrCode"
+                    currentIndex: menuItem1.hovered ? 0 : menuItem2.hovered ? 1 : -1
 
                     MenuItem {
+                        id: menuItem1
                         text: qsTr("Copy to clipboard") + translationManager.emptyString;
                         onTriggered: walletManager.saveQrCodeToClipboard(generateQRCodeString())
                     }
 
                     MenuItem {
+                        id: menuItem2
                         text: qsTr("Save as Image") + translationManager.emptyString;
                         onTriggered: qrFileDialog.open()
                     }
