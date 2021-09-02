@@ -70,10 +70,13 @@ ColumnLayout {
         var strengthString;
         if(strength <= 33){
             strengthString = qsTr("Low");
+            fillRect.color = "#FF0000";
         } else if(strength <= 66){
             strengthString = qsTr("Medium");
+            fillRect.color = (MoneroComponents.Style.blackTheme ? "#FFFF00" : "#FFCC00");
         } else {
             strengthString = qsTr("High");
+            fillRect.color = (MoneroComponents.Style.blackTheme ? "#00FF00" : "#008000");
         }
 
         progressText.text = passwordStrengthText + strengthString + translationManager.emptyString;
@@ -91,74 +94,117 @@ ColumnLayout {
     }
 
     ColumnLayout {
-        id: progressLayout
-        spacing: 0
-        visible: !isAndroid && walletManager.getPasswordStrength !== undefined
         Layout.fillWidth: true
 
-        TextInput {
-            id: progressText
-            Layout.topMargin: 6
-            Layout.bottomMargin: 6
-            font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 14
-            font.bold: false
-            color: MoneroComponents.Style.defaultFontColor
-            height: 18
-            passwordCharacter: "*"
-        }
-
-        Rectangle {
-            id: bar
+        MoneroComponents.LineEdit {
+            id: passwordInput
             Layout.fillWidth: true
-            Layout.preferredHeight: 8
+            KeyNavigation.tab: passwordInputConfirm
+            labelFontSize: 14
+            password: true
+            labelText: qsTr("Password") + translationManager.emptyString
+            text: walletOptionsPassword
+        }
 
-            radius: 8
-            color: MoneroComponents.Style.progressBarBackgroundColor
+        ColumnLayout {
+            id: progressLayout
+            spacing: 0
+            visible: !isAndroid && walletManager.getPasswordStrength !== undefined
+            Layout.fillWidth: true
+            Layout.topMargin: 0
 
-            Rectangle {
-                id: fillRect
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                height: bar.height
-                property int maxWidth: bar.width
-                width: (maxWidth * root.passwordFill) / 100
-                radius: 8
-                color: MoneroComponents.Style.orange
+            TextInput {
+                id: progressText
+                Layout.topMargin: 6
+                Layout.bottomMargin: 6
+                font.family: MoneroComponents.Style.fontMedium.name
+                font.pixelSize: 14
+                font.bold: false
+                color: MoneroComponents.Style.defaultFontColor
+                height: 18
+                passwordCharacter: "*"
             }
 
             Rectangle {
-                color: MoneroComponents.Style.defaultFontColor
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.leftMargin: 8
+                id: bar
+                Layout.fillWidth: true
+                Layout.preferredHeight: 8
+
+                radius: 8
+                color: MoneroComponents.Style.progressBarBackgroundColor
+
+                Rectangle {
+                    id: fillRect
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    height: bar.height
+                    property int maxWidth: bar.width
+                    width: (maxWidth * root.passwordFill) / 100
+                    radius: 8
+                    color: "#FF0000"
+                }
+
+                Rectangle {
+                    color: MoneroComponents.Style.defaultFontColor
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: 8
+                }
             }
         }
     }
 
-    MoneroComponents.LineEdit {
-        id: passwordInput
+    ColumnLayout {
         Layout.fillWidth: true
-        KeyNavigation.tab: passwordInputConfirm
 
-        labelFontSize: 14
-        password: true
+        MoneroComponents.LineEdit {
+            id: passwordInputConfirm
+            property bool firstUserInput: true
+            Layout.fillWidth: true
+            Layout.topMargin: 8
+            KeyNavigation.tab: passwordInputConfirm
+            error: !passwordInputMessage.passwordsMatch && passwordInputMessage.visible
+            errorWhenEmpty: passwordInputMessage.passwordsMatch && passwordInputMessage.visible
+            labelFontSize: 14
+            passwordLinked: passwordInput
+            labelText: qsTr("Password (confirm)") + translationManager.emptyString
+            text: walletOptionsPassword
+            onTextChanged:{
+                if (passwordInputConfirm.text.length == passwordInput.text.length) {
+                    firstUserInput = false;
+                }
+            }
+        }
 
-        labelText: qsTr("Password") + translationManager.emptyString
-        text: walletOptionsPassword
-    }
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: 0
+            Layout.minimumHeight: passwordInputMessage.height + 3
 
-    MoneroComponents.LineEdit {
-        id: passwordInputConfirm
-        Layout.fillWidth: true
-        Layout.topMargin: 8
-        KeyNavigation.tab: passwordInputConfirm
+            MoneroComponents.TextPlain {
+                visible: passwordInputMessage.visible
+                font.family: FontAwesome.fontFamilySolid
+                font.styleName: "Solid"
+                font.pixelSize: 15
+                text: passwordInputMessage.passwordsMatch ? FontAwesome.checkCircle : FontAwesome.exclamationCircle
+                color: passwordInputMessage.color
+                themeTransition: false
+            }
 
-        labelFontSize: 14
-        passwordLinked: passwordInput
-
-        labelText: qsTr("Password (confirm)") + translationManager.emptyString
-        text: walletOptionsPassword
+            MoneroComponents.TextPlain {
+                id: passwordInputMessage
+                property bool passwordsMatch: passwordInputConfirm.text === passwordInput.text
+                property bool partialPasswordsMatch: passwordInputConfirm.text === passwordInput.text.substring(0, passwordInputConfirm.text.length)
+                visible: passwordInputConfirm.text.length > 0 && !passwordInputConfirm.firstUserInput || passwordInputConfirm.firstUserInput && !passwordInputMessage.partialPasswordsMatch
+                Layout.topMargin: 3
+                text: passwordsMatch ? qsTr("Passwords match!") : qsTr("Passwords do not match") + translationManager.emptyString
+                textFormat: Text.PlainText
+                color: passwordsMatch ? (MoneroComponents.Style.blackTheme ? "#00FF00" : "#008000") : "#FF0000"
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                themeTransition: false
+            }
+        }
     }
 }
