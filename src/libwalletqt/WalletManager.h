@@ -179,6 +179,7 @@ public:
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const;
     Q_INVOKABLE QVariantMap parse_uri_to_object(const QString &uri) const;
+    Q_INVOKABLE QString make_uri(const QString &address, const quint64 &amount = 0, const QString &tx_description = "", const QString &recipient_name = "") const;
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
     Q_INVOKABLE void saveQrCodeToClipboard(const QString &) const;
     Q_INVOKABLE void checkUpdatesAsync(
