@@ -35,6 +35,7 @@ Object {
     property string arrowLeft : "\uf060"
     property string arrowRight : "\uf061"
     property string cashRegister: "\uf788"
+    property string checkCircle: "\uf058"
     property string clipboard : "\uf0ea"
     property string clockO : "\uf017"
     property string cloud : "\uf0c2"
