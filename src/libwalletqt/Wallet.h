@@ -205,7 +205,7 @@ public:
     Q_INVOKABLE void refreshHeightAsync();
 
     //! export/import key images
-    Q_INVOKABLE bool exportKeyImages(const QString& path);
+    Q_INVOKABLE bool exportKeyImages(const QString& path, bool all = false);
     Q_INVOKABLE bool importKeyImages(const QString& path);
 
     //! refreshes the wallet
