@@ -102,7 +102,6 @@ target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
 	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${X11_INCLUDE_DIR}
-    ${Boost_INCLUDE_DIRS}
     ${OPENSSL_INCLUDE_DIR}
 )
 
@@ -127,10 +126,8 @@ target_link_libraries(monero-wallet-gui
     wallet_api
     qrcodegen
     easylogging
-    ${Boost_LIBRARIES}
     ${QT5_LIBRARIES}
     ${EXTRA_LIBRARIES}
-    ${ICU_LIBRARIES}
     openpgp
     qrdecoder
     translations
