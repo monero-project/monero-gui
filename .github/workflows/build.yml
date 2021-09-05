@@ -65,14 +65,11 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf pkg-config python3 p7zip
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf pkg-config python3 p7zip aria2
     - name: install dependencies
-      run: pip3 install requests semantic_version lxml py7zr
+      run: pip3 install defusedxml
     - name: download qt
-      run: |
-          curl -O https://raw.githubusercontent.com/engnr/qt-downloader/master/qt-downloader
-          chmod +x qt-downloader
-          ./qt-downloader macos desktop 5.15.2 clang_64
+      run: python3 monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
       working-directory: ../
     - name: build
       run: CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/5.15.2/clang_64 make release -j3
