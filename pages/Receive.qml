@@ -63,12 +63,11 @@ Rectangle {
 
     function generateQRCodeString() {
         if (pageReceive.state == "PaymentRequest") {
-            return TxUtils.makeQRCodeString(appWindow.current_address,
-                                           (amountToReceiveXMR.text != "" && parseFloat(amountToReceiveXMR.text) != 0 ? amountToReceiveXMR.text : ""),
-                                           (txDescriptionInput.text != "" ? txDescriptionInput.text : ""),
-                                           (receiverNameInput.text != "" ? receiverNameInput.text : ""));
+            return walletManager.make_uri(appWindow.current_address,
+                walletManager.amountFromString(amountToReceiveXMR.text),
+                txDescriptionInput.text, receiverNameInput.text);
         } else {
-            return TxUtils.makeQRCodeString(appWindow.current_address);
+            return walletManager.make_uri(appWindow.current_address);
         }
     }
 
