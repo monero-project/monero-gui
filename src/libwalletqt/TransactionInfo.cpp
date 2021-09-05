@@ -47,6 +47,10 @@ bool TransactionInfo::isFailed() const
     return m_failed;
 }
 
+bool TransactionInfo::isCoinbase() const
+{
+    return m_coinbase;
+}
 
 double TransactionInfo::amount() const
 {
@@ -126,6 +130,11 @@ QString TransactionInfo::paymentId() const
     return m_paymentId;
 }
 
+QString TransactionInfo::description() const
+{
+    return m_description;
+}
+
 QString TransactionInfo::destinations_formatted() const
 {
     QString destinations;
@@ -144,10 +153,12 @@ TransactionInfo::TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *
     , m_confirmations(pimpl->confirmations())
     , m_direction(static_cast<Direction>(pimpl->direction()))
     , m_failed(pimpl->isFailed())
+    , m_coinbase(pimpl->isCoinbase())
     , m_fee(pimpl->fee())
     , m_hash(QString::fromStdString(pimpl->hash()))
     , m_label(QString::fromStdString(pimpl->label()))
     , m_paymentId(QString::fromStdString(pimpl->paymentId()))
+    , m_description(QString::fromStdString(pimpl->description()))
     , m_pending(pimpl->isPending())
     , m_subaddrAccount(pimpl->subaddrAccount())
     , m_timestamp(QDateTime::fromTime_t(pimpl->timestamp()))
