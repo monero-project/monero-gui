@@ -13,21 +13,31 @@ MenuItem {
 
     background: Rectangle {
         color: MoneroComponents.Style.buttonBackgroundColorDisabledHover
-        opacity: mouse.containsMouse ? 1 : 0
+        opacity: 0
 
         MouseArea {
             id: mouse
 
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: menuItem.triggered()
-            visible: menuItem.enabled
+            onEntered: {
+                parent.opacity = 1;
+            }
+            onExited: {
+                parent.opacity = 0;
+            }
+            onClicked: {
+                if (menuItem.enabled) {
+                    menuItem.triggered();
+                    parent.opacity = 0;
+                }
+            }
         }
     }
 
     contentItem: RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 10
+        anchors.leftMargin: 20
         anchors.rightMargin: 10
         opacity: menuItem.enabled ? 1 : 0.4
         spacing: 8
@@ -42,7 +52,7 @@ MenuItem {
         }
 
         Text {
-            color: MoneroComponents.Style.buttonTextColor
+            color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.buttonTextColor : MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14
             Layout.fillWidth: true
