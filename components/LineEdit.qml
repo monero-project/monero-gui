@@ -218,7 +218,7 @@ ColumnLayout {
         Layout.preferredHeight: inputHeight
 
         leftPadding: item.inputPaddingLeft
-        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight
+        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight + (password || passwordLinked ? 45 : 0)
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
