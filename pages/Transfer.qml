@@ -1140,7 +1140,11 @@ Rectangle {
         selectExisting: false
         onAccepted: {
             console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl))
-            currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true);
+            if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true)) {
+                appWindow.showStatusMessage(qsTr("Key images successfully exported to file") + translationManager.emptyString, 3);
+            } else {
+                appWindow.showStatusMessage(currentWallet.errorString, 5);
+            }
         }
         onRejected: {
             console.log("Canceled");
@@ -1155,7 +1159,11 @@ Rectangle {
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
             console.log(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))
-            currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl));
+            if (currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))) {
+                appWindow.showStatusMessage(qsTr("Key images successfully imported to wallet") + translationManager.emptyString, 3);
+            } else {
+                appWindow.showStatusMessage(currentWallet.errorString, 5);
+            }
         }
         onRejected: {
             console.log("Canceled");
