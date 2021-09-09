@@ -300,6 +300,8 @@ public:
 
     //! Parse URI
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
+    //! Make URI
+    Q_INVOKABLE QString make_uri(const QString &address, const quint64 &amount = 0, const QString &tx_description = "", const QString &recipient_name = "") const;
 
     //! Namespace your cacheAttribute keys to avoid collisions
     Q_INVOKABLE bool setCacheAttribute(const QString &key, const QString &val);

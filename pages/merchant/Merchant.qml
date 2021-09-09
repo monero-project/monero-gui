@@ -211,7 +211,7 @@ Item {
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + TxUtils.makeQRCodeString(appWindow.current_address, amountToReceive.text)
+                    source: "image://qrcode/" + walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text))
 
                     MouseArea {
                         anchors.fill: parent
@@ -400,7 +400,7 @@ Item {
                         font.pixelSize: 12
                         font.bold: true
                         color: _color
-                        text: TxUtils.makeQRCodeString(appWindow.current_address, amountToReceive.text)
+                        text: walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text))
                         themeTransition: false
 
                         MouseArea {
@@ -685,7 +685,7 @@ Item {
         selectExisting: false
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if(!walletManager.saveQrCode(TxUtils.makeQRCodeString(appWindow.current_address, amountToReceive.text), walletManager.urlToLocalPath(fileUrl))) {
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {
                 console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
                 receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                 receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
