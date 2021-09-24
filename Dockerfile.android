@@ -129,6 +129,30 @@ RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
+ARG EXPAT_VERSION=2.4.1
+ARG EXPAT_HASH=2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40
+RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-${EXPAT_VERSION}.tar.bz2 && \
+    echo "${EXPAT_HASH}  expat-${EXPAT_VERSION}.tar.bz2" | sha256sum -c && \
+    tar -xf expat-${EXPAT_VERSION}.tar.bz2 && \
+    rm expat-${EXPAT_VERSION}.tar.bz2 && \
+    cd expat-${EXPAT_VERSION} && \
+    CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --enable-static --disable-shared --prefix=${PREFIX} --host=aarch64-linux-android && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
+
+ARG UNBOUND_VERSION=1.13.2
+ARG UNBOUND_HASH=0a13b547f3b92a026b5ebd0423f54c991e5718037fd9f72445817f6a040e1a83
+RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-${UNBOUND_VERSION}.tar.gz && \
+    echo "${UNBOUND_HASH}  unbound-${UNBOUND_VERSION}.tar.gz" | sha256sum -c && \
+    tar -xzf unbound-${UNBOUND_VERSION}.tar.gz && \
+    rm unbound-${UNBOUND_VERSION}.tar.gz && \
+    cd unbound-${UNBOUND_VERSION} && \
+    CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --disable-shared --enable-static --without-pyunbound --with-libexpat=${PREFIX} --with-ssl=${PREFIX} --with-libevent=no --without-pythonmodule --disable-flto --with-pthreads --with-libunbound-only --host=aarch64-linux-android --with-pic --prefix=${PREFIX} && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
+
 ARG ZMQ_VERSION=v4.3.3
 ARG ZMQ_HASH=04f5bbedee58c538934374dc45182d8fc5926fa3
 RUN git clone https://github.com/zeromq/libzmq.git -b ${ZMQ_VERSION} --depth 1 \
