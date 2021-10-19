@@ -26,7 +26,8 @@
 # STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 # THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-function (write_static_version_header VERSION_TAG_GUI)
+function (write_static_version_header tag)
+    set(VERSION_TAG_GUI "${tag}" CACHE STRING "The tag portion of the Monero GUI software version" FORCE)
   configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/version.js.in" "${CMAKE_CURRENT_SOURCE_DIR}/version.js")
 endfunction ()
 
@@ -36,11 +37,8 @@ if ("$Format:$" STREQUAL "")
   write_static_version_header("release")
 elseif (GIT_FOUND OR Git_FOUND)
   message(STATUS "Found Git: ${GIT_EXECUTABLE}")
-
-  include(GitGetVersionTag)
-  git_get_version_tag(${GIT_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR} VERSION_TAG_GUI)
-  STRING(REGEX REPLACE "^v([0-9])" "\\1" VERSION_TAG_GUI ${VERSION_TAG_GUI})
-  write_static_version_header(${VERSION_TAG_GUI})
+  get_version_tag_from_git("${GIT_EXECUTABLE}")
+  write_static_version_header(${VERSIONTAG})
 else()
   message(STATUS "WARNING: Git was not found!")
   write_static_version_header("unknown")
