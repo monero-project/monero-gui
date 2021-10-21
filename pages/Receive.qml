@@ -346,6 +346,7 @@ Rectangle {
                     id: txDescriptionInput
                     Layout.preferredWidth: 165
                     Layout.maximumWidth: 165
+                    maximumLength: 800
                     topPadding: 7
                     leftPadding: 7
                     font.pixelSize: 14
@@ -393,6 +394,7 @@ Rectangle {
                     selectByMouse: true
                     color: MoneroComponents.Style.defaultFontColor
                     placeholderText: qsTr("Visible to the sender") + translationManager.emptyString
+                    maximumLength: 100
 
                     background: Rectangle {
                         color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
