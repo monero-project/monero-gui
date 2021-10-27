@@ -19,10 +19,6 @@ include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
 
-if(DEBUG)
-	set(CMAKE_VERBOSE_MAKEFILE ON)
-endif()
-
 set(BUILD_GUI_DEPS ON)
 set(ARCH "x86-64" CACHE STRING "Target architecture")
 set(BUILD_64 ON CACHE BOOL "Build 64-bit binaries")
