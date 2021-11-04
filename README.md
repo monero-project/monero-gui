@@ -259,7 +259,7 @@ The following instructions will fetch Qt from your distribution's repositories i
     make release -j4
     ```
     \* `4` - number of CPU threads to use  
-    \* Add `CMAKE_PREFIX_PATH` enviroment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release -j4`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release -j4`
 
 The executable can be found in the build/release/bin folder.
 
@@ -290,7 +290,7 @@ The executable can be found in the build/release/bin folder.
     make release -j4
     ```
     \* `4` - number of CPU threads to use  
-    \* Add `CMAKE_PREFIX_PATH` enviroment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release -j4`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release -j4`
 
 The executable can be found in the `build/release/bin` folder.
 
