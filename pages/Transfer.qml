@@ -394,11 +394,11 @@ Rectangle {
                                 wrapMode: Text.WrapAnywhere
                                 placeholderText: {
                                     if(persistentSettings.nettype == NetworkType.MAINNET){
-                                        return "4.. / 8.. / OpenAlias";
+                                        return "4.. / 8.. / monero:.. / OpenAlias";
                                     } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                                        return "5.. / 7..";
+                                        return "5.. / 7.. / monero:..";
                                     } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                                        return "9.. / B..";
+                                        return "9.. / B.. / monero:..";
                                     }
                                 }
                                 onTextChanged: {
