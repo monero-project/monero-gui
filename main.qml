@@ -1368,6 +1368,7 @@ ApplicationWindow {
         }
 
         property bool askDesktopShortcut: isLinux
+        property bool askStopLocalNode: true
         property string language: 'English (US)'
         property string language_wallet: 'English'
         property string locale: 'en_US'
@@ -2123,7 +2124,7 @@ ApplicationWindow {
             showProcessingSplash(qsTr("Checking local node status..."));
             const handler = function(running) {
                 hideProcessingSplash();
-                if (running) {
+                if (running && persistentSettings.askStopLocalNode) {
                     showDaemonIsRunningDialog(closeAccepted);
                 } else {
                     closeAccepted();

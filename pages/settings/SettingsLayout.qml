@@ -155,6 +155,12 @@ Rectangle {
             onMoved: persistentSettings.lockOnUserInActivityInterval = value
         }
 
+        MoneroComponents.CheckBox {
+            checked: persistentSettings.askStopLocalNode
+            onClicked: persistentSettings.askStopLocalNode = !persistentSettings.askStopLocalNode
+            text: qsTr("Ask to stop local node during program exit") + translationManager.emptyString
+        }
+
         //! Manage pricing
         RowLayout {
             MoneroComponents.CheckBox {
