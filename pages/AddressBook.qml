@@ -235,7 +235,7 @@ Rectangle {
                             }
 
                             MoneroComponents.IconButton {
-                                id: renameButton
+                                id: editEntryButton
                                 image: "qrc:///images/edit.svg"
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: isOpenGL ? 0.5 : 1
@@ -244,7 +244,7 @@ Rectangle {
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
-                                tooltip: qsTr("Edit address label") + translationManager.emptyString
+                                tooltip: qsTr("Edit entry") + translationManager.emptyString
 
                                 onClicked: {
                                     addressBookListView.currentIndex = index;
