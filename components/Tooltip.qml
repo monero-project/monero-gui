@@ -37,6 +37,7 @@ Rectangle {
     property alias text: tooltip.text
     property alias tooltipPopup: popup
     property bool tooltipIconVisible: false
+    property var tooltipIconColor: MoneroComponents.Style.defaultFontColor
     property bool tooltipLeft: false
     property bool tooltipBottom: tooltipIconVisible ? false : true
 
@@ -48,7 +49,7 @@ Rectangle {
     Text {
         id: icon
         visible: tooltipIconVisible
-        color: MoneroComponents.Style.orange
+        color: tooltipIconColor
         font.family: FontAwesome.fontFamily
         font.pixelSize: 10
         font.styleName: "Regular"
@@ -95,11 +96,10 @@ Rectangle {
         delay: 200
 
         RowLayout {
-            Layout.maximumWidth: 350
-
             Text {
                 id: tooltip
-                width: contentWidth
+                Layout.maximumWidth: 360
+                width: implicitWidth > 360 ? 360 : implicitWidth
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 12
