@@ -112,11 +112,8 @@ Rectangle {
         MoneroComponents.LabelSubheader {
             Layout.fillWidth: true
             textFormat: Text.RichText
-            text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                  qsTr("Outputs marked as spent") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
-            onLinkActivated: {
-                sharedRingDBDialog.title  = qsTr("Outputs marked as spent") + translationManager.emptyString;
-                sharedRingDBDialog.text = qsTr(
+            text: qsTr("Outputs marked as spent") + translationManager.emptyString
+            tooltip: qsTr(
                     "In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able " +
                     "to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection " +
                     "afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being " +
@@ -128,9 +125,6 @@ Rectangle {
                     "Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself " +
                     "using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.<br>"
                 ) + translationManager.emptyString
-                sharedRingDBDialog.icon = StandardIcon.Information
-                sharedRingDBDialog.open()
-            }
         }
 
         MoneroComponents.TextPlain {
@@ -249,11 +243,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 24
             textFormat: Text.RichText
-            text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                  qsTr("Rings") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
-            onLinkActivated: {
-                sharedRingDBDialog.title  = qsTr("Rings") + translationManager.emptyString;
-                sharedRingDBDialog.text = qsTr(
+            text: qsTr("Rings") + translationManager.emptyString
+            tooltip: qsTr(
                     "In order to avoid nullifying the protection afforded by Monero's ring signatures, an output should not " +
                     "be spent with different rings on different blockchains. While this is normally not a concern, it can become one " +
                     "when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this " +
@@ -266,9 +257,6 @@ Rectangle {
                     "If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything " +
                     "as it is all automated.<br>"
                 ) + translationManager.emptyString
-                sharedRingDBDialog.icon = StandardIcon.Information
-                sharedRingDBDialog.open()
-            }
         }
 
         MoneroComponents.TextPlain {
