@@ -97,6 +97,8 @@ Rectangle {
             MoneroComponents.StandardButton {
                 id: addFirstEntryButton
                 Layout.topMargin: 20
+                Layout.alignment: Qt.AlignHCenter
+                small: true
                 text: qsTr("Add an address") + translationManager.emptyString
                 onClicked: {
                     root.showAddAddress();
@@ -113,6 +115,18 @@ Rectangle {
                 Layout.bottomMargin: 20
                 fontSize: 32
                 text: qsTr("Address book") + translationManager.emptyString
+            }
+
+            MoneroComponents.StandardButton {
+                id: addAddressButton
+                Layout.bottomMargin: 8
+                Layout.alignment: Qt.AlignRight
+                small: true
+                text: qsTr("Add address") + translationManager.emptyString
+                fontSize: 13
+                onClicked: {
+                    root.showAddAddress();
+                }
             }
 
             ColumnLayout {
@@ -287,23 +301,6 @@ Rectangle {
                     whiteColor: MoneroComponents.Style._w_appWindowBorderColor
                 }
             }
-
-            MoneroComponents.CheckBox {
-                id: addNewEntryCheckbox
-                border: false
-                uncheckedIcon: FontAwesome.plusCircle
-                toggleOnClick: false
-                fontAwesomeIcons: true
-                fontSize: 16
-                iconOnTheLeft: true
-                Layout.fillWidth: true
-                Layout.topMargin: 10
-                text: qsTr("Add address") + translationManager.emptyString;
-                onClicked: {
-                    root.showAddAddress();
-                }
-            }
-
         }
         ColumnLayout {
             id: addContactLayout
@@ -335,7 +332,7 @@ Rectangle {
                 }
                 wrapMode: Text.WrapAnywhere
                 addressValidation: true
-                pasteButton: true
+                pasteButton: false
                 onTextChanged: {
                     const parsed = walletManager.parse_uri_to_object(addressLine.text);
                     if (!parsed.error) {
@@ -437,10 +434,37 @@ Rectangle {
             }
             RowLayout {
                 Layout.topMargin: 20
+                Layout.alignment: Qt.AlignRight
+
+                MoneroComponents.StandardButton {
+                    id: cancelButton
+                    KeyNavigation.backtab: addButton
+                    KeyNavigation.tab: deleteButton.visible ? deleteButton : addressLine
+                    small: true
+                    text: qsTr("Cancel") + translationManager.emptyString
+                    primary: false
+                    onClicked: root.showAddressBook();
+                }
+
+                MoneroComponents.StandardButton {
+                    id: deleteButton
+                    KeyNavigation.backtab: cancelButton
+                    KeyNavigation.tab: addressLine
+                    small: true
+                    visible: root.editEntry
+                    text: qsTr("Delete") + translationManager.emptyString
+                    primary: false
+                    onClicked: {
+                        currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
+                        root.showAddressBook();
+                    }
+                }
+
                 MoneroComponents.StandardButton {
                     id: addButton
                     KeyNavigation.backtab: descriptionLine
                     KeyNavigation.tab: cancelButton
+                    small: true
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
                     onClicked: {
@@ -461,28 +485,6 @@ Rectangle {
                             currentWallet.addressBook.setDescription(addressBookListView.currentIndex, descriptionLine.text);
                         }
                         root.showAddressBook()
-                    }
-                }
-
-                MoneroComponents.StandardButton {
-                    id: cancelButton
-                    KeyNavigation.backtab: addButton
-                    KeyNavigation.tab: deleteButton.visible ? deleteButton : addressLine
-                    text: qsTr("Cancel") + translationManager.emptyString
-                    primary: false
-                    onClicked: root.showAddressBook();
-                }
-
-                MoneroComponents.StandardButton {
-                    id: deleteButton
-                    KeyNavigation.backtab: cancelButton
-                    KeyNavigation.tab: addressLine
-                    visible: root.editEntry
-                    text: qsTr("Delete") + translationManager.emptyString
-                    primary: false
-                    onClicked: {
-                        currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
-                        root.showAddressBook();
                     }
                 }
             }
