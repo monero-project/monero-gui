@@ -70,11 +70,6 @@ Rectangle {
             if (recipientModel.hasInvalidAddress()) {
                 return qsTr("Address is invalid.") + translationManager.emptyString;
             }
-
-            // Amount is nonzero
-            if (recipientModel.hasEmptyAmount()) {
-                return qsTr("Enter an amount.") + translationManager.emptyString;
-            }
         }
 
         return "";
@@ -214,7 +209,7 @@ Rectangle {
 
             function hasEmptyAmount() {
                 for (var index = 0; index < recipientModel.count; ++index) {
-                    if (recipientModel.get(index).amount === "") {
+                    if (recipientModel.get(index).amount === "" || recipientModel.get(index).amount == 0) {
                         return true;
                     }
                 }
@@ -845,28 +840,26 @@ Rectangle {
           visible: paymentIdCheckbox.checked || warningLongPidDescription
       }
 
+      StandardButton {
+          id: sendButton
+          Layout.topMargin: 4
+          Layout.alignment: Qt.AlignHCenter
+          text: qsTr("Review and Send") + translationManager.emptyString
+          width: 350
+          enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !recipientModel.hasEmptyAmount() && !paymentIdWarningBox.visible
+          onClicked: {
+              console.log("Transfer: paymentClicked")
+              var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
+              console.log("priority: " + priority)
+              setPaymentId(paymentIdLine.text.trim());
+              root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
+          }
+      }
+
       MoneroComponents.WarningBox {
           id: sendButtonWarningBox
           text: root.sendButtonWarning
           visible: root.sendButtonWarning !== ""
-      }
-
-      RowLayout {
-          StandardButton {
-              id: sendButton
-              rightIcon: "qrc:///images/rightArrow.png"
-              rightIconInactive: "qrc:///images/rightArrowInactive.png"
-              Layout.topMargin: 4
-              text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
-              onClicked: {
-                  console.log("Transfer: paymentClicked")
-                  var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
-                  console.log("priority: " + priority)
-                  setPaymentId(paymentIdLine.text.trim());
-                  root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
-              }
-          }
       }
 
       function checkInformation() {
