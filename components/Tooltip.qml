@@ -39,6 +39,7 @@ Rectangle {
     property bool tooltipIconVisible: false
     property bool tooltipLeft: false
     property bool tooltipBottom: tooltipIconVisible ? false : true
+    property int tooltipExitAnimationDuration: 150
 
     color: "transparent"
     height: tooltipIconVisible ? icon.height : parent.height
@@ -48,7 +49,7 @@ Rectangle {
     Text {
         id: icon
         visible: tooltipIconVisible
-        color: MoneroComponents.Style.orange
+        color: MoneroComponents.Style.defaultFontColor
         font.family: FontAwesome.fontFamily
         font.pixelSize: 10
         font.styleName: "Regular"
@@ -90,7 +91,7 @@ Rectangle {
         }
 
         exit: Transition {
-            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 150 }
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: tooltipExitAnimationDuration }
         }
         delay: 200
 
