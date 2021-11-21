@@ -39,16 +39,12 @@ Item {
     property bool primary: true
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property color textColor: !button.enabled
-        ? MoneroComponents.Style.buttonTextColorDisabled
-        : primary
-        ? MoneroComponents.Style.buttonTextColor
-        : MoneroComponents.Style.buttonSecondaryTextColor;
+    property color textColor: primary ? MoneroComponents.Style.buttonTextColor : MoneroComponents.Style.buttonSecondaryTextColor;
     property bool small: false
     property alias text: label.text
     property alias fontBold: label.font.bold
     property int fontSize: {
-        if(small) return 14;
+        if(small) return 13.5;
         else return 16;
     }
     property alias label: label
@@ -72,6 +68,7 @@ Item {
         anchors.fill: parent
         radius: 3
         border.width: parent.focus && parent.enabled ? 1 : 0
+        opacity: 1
 
         state: button.enabled ? "active" : "disabled"
         Component.onCompleted: state = state
@@ -102,7 +99,14 @@ Item {
                 when: !button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                    opacity: 0.5
+                    color: primary
+                        ? MoneroComponents.Style.buttonBackgroundColor
+                        : MoneroComponents.Style.buttonSecondaryBackgroundColor
+                }
+                PropertyChanges {
+                    target: label
+                    opacity: 0.5
                 }
             }
         ]
@@ -122,7 +126,7 @@ Item {
         MoneroComponents.TextPlain {
             id: label
             font.family: MoneroComponents.Style.fontBold.name
-            font.bold: true
+            font.bold: button.primary ? true : false
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
@@ -145,6 +149,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
             width: button.small ? 16 : 20
             height: button.small ? 16 : 20
+            opacity: buttonRect.opacity
             source: {
                 if (fontAwesomeIcon) return "";
                 if(button.rightIconInactive !== "" && !button.enabled) {
