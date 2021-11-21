@@ -37,6 +37,7 @@ Rectangle {
     color: "transparent"
     property alias miningHeight: mainLayout.height
     property double currentHashRate: 0
+    property int threads: idealThreadCount / 2
 
     ColumnLayout {
         id: mainLayout
@@ -106,30 +107,56 @@ Rectangle {
                 Layout.fillWidth: true
                 spacing: 16
 
-                MoneroComponents.LineEdit {
-                    id: soloMinerThreadsLine
-                    Layout.minimumWidth: 200
-                    text: "1"
-                    validator: IntValidator { bottom: 1; top: idealThreadCount }
-                }
+                RowLayout {
+                    MoneroComponents.StandardButton {
+                        id: removeThreadButton
+                        small: true
+                        primary: false
+                        text: "−"
+                        enabled: threads > 1
+                        onClicked: threads--
+                    }
 
-                MoneroComponents.TextPlain {
-                    id: numAvailableThreadsText
-                    text: qsTr("Max # of CPU threads available for mining: ") + idealThreadCount + translationManager.emptyString
-                    wrapMode: Text.WordWrap
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14
-                    color: MoneroComponents.Style.defaultFontColor
+                    MoneroComponents.TextPlain {
+                        Layout.bottomMargin: 1
+                        Layout.minimumWidth: 45
+                        color: MoneroComponents.Style.defaultFontColor
+                        text: threads
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: 16
+
+                        MouseArea {
+                            anchors.fill: parent
+                            scrollGestureEnabled: false
+                            onWheel: {
+                                if (wheel.angleDelta.y > 0 && threads < idealThreadCount) {
+                                    return threads++
+                                } else if (wheel.angleDelta.y < 0 && threads > 1) {
+                                    return threads--
+                                }
+                            }
+                        }
+                    }
+
+                    MoneroComponents.StandardButton {
+                        id: addThreadButton
+                        small: true
+                        primary: false
+                        text: "+"
+                        enabled: threads < idealThreadCount
+                        onClicked: threads++
+                    }
                 }
 
                 RowLayout {
                     MoneroComponents.StandardButton {
                         id: autoRecommendedThreadsButton
                         small: true
-                        text: qsTr("Use recommended # of threads") + translationManager.emptyString
+                        primary: false
+                        text: qsTr("Use half (recommended)") +  translationManager.emptyString
                         enabled: startSoloMinerButton.enabled
                         onClicked: {
-                                soloMinerThreadsLine.text = Math.floor(idealThreadCount / 2);
+                                threads = idealThreadCount / 2
                                 appWindow.showStatusMessage(qsTr("Set to use recommended # of threads"),3)
                         }
                     }
@@ -137,22 +164,13 @@ Rectangle {
                     MoneroComponents.StandardButton {
                         id: autoSetMaxThreadsButton
                         small: true
-                        text: qsTr("Use all threads") + translationManager.emptyString
+                        primary: false
+                        text: qsTr("Use all threads") + " (" + idealThreadCount + ")" + translationManager.emptyString
                         enabled: startSoloMinerButton.enabled
                         onClicked: {
-                            soloMinerThreadsLine.text = idealThreadCount
+                            threads = idealThreadCount
                             appWindow.showStatusMessage(qsTr("Set to use all threads") + translationManager.emptyString,3)
                         }
-                    }
-                }
-
-                RowLayout {
-                    MoneroComponents.CheckBox {
-                        id: backgroundMining
-                        enabled: startSoloMinerButton.enabled
-                        checked: persistentSettings.allow_background_mining
-                        onClicked: {persistentSettings.allow_background_mining = checked}
-                        text: qsTr("Background mining (experimental)") + translationManager.emptyString
                     }
                 }
 
@@ -165,6 +183,35 @@ Rectangle {
                         checked: !persistentSettings.miningIgnoreBattery
                         onClicked: {persistentSettings.miningIgnoreBattery = !checked}
                         text: qsTr("Enable mining when running on battery") + translationManager.emptyString
+                    }
+                }
+            }
+
+            ColumnLayout {
+                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                Layout.minimumWidth: 140
+
+                MoneroComponents.Label {
+                    id: optionsLabel
+                    color: MoneroComponents.Style.defaultFontColor
+                    text: qsTr("Options") + translationManager.emptyString
+                    fontSize: 16
+                    wrapMode: Text.Wrap
+                    Layout.preferredWidth: manageSoloMinerLabel.textWidth
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 16
+
+                RowLayout {
+                    MoneroComponents.CheckBox {
+                        id: backgroundMining
+                        enabled: startSoloMinerButton.enabled
+                        checked: persistentSettings.allow_background_mining
+                        onClicked: persistentSettings.allow_background_mining = checked
+                        text: qsTr("Background mining (experimental)") + translationManager.emptyString
                     }
                 }
             }
@@ -191,9 +238,10 @@ Rectangle {
                         visible: true
                         id: startSoloMinerButton
                         small: true
+                        primary: !stopSoloMinerButton.enabled
                         text: qsTr("Start mining") + translationManager.emptyString
                         onClicked: {
-                            var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                            var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                             if (success) {
                                 update()
                             } else {
@@ -211,6 +259,7 @@ Rectangle {
                         visible: true
                         id: stopSoloMinerButton
                         small: true
+                        primary: stopSoloMinerButton.enabled
                         text: qsTr("Stop mining") + translationManager.emptyString
                         onClicked: {
                             walletManager.stopMining()
