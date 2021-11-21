@@ -557,25 +557,6 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         spacing: 0
 
-                        MoneroComponents.StandardButton {
-                            id: addRecipientButton
-                            small: true
-                            primary: false
-                            text: "+ " + qsTr("Add recipient") + translationManager.emptyString
-                            enabled: {
-                                if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
-                                    return false;
-                                }
-                                if (recipientModel.count >= recipientModel.maxRecipients) {
-                                    return false;
-                                }
-                                return true;
-                            }
-                            onClicked: {
-                                recipientModel.newRecipient("", "");
-                            }
-                        }
-
                         MoneroComponents.TextPlain {
                             Layout.fillWidth: true
                             horizontalAlignment: Text.AlignRight
@@ -614,6 +595,27 @@ Rectangle {
                         font.family: MoneroComponents.Style.fontRegular.name
                         text: "XMR"
                         visible: recipientModel.count > 1
+                    }
+
+                    MoneroComponents.StandardButton {
+                        id: addRecipientButton
+                        Layout.column: 0
+                        Layout.row: 1
+                        small: true
+                        primary: false
+                        text: "+ " + qsTr("Add recipient") + translationManager.emptyString
+                        enabled: {
+                            if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
+                                return false;
+                            }
+                            if (recipientModel.count >= recipientModel.maxRecipients) {
+                                return false;
+                            }
+                            return true;
+                        }
+                        onClicked: {
+                            recipientModel.newRecipient("", "");
+                        }
                     }
 
                     MoneroComponents.LineEdit {
@@ -815,6 +817,7 @@ Rectangle {
                       text: FontAwesome.times
                       tooltip: qsTr("Remove description")  + translationManager.emptyString
                       tooltipLeft: true
+                      tooltipExitAnimationDuration: 0
                       visible: descriptionLabel.visible
 
                       MouseArea {
