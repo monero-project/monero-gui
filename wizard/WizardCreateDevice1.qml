@@ -109,29 +109,34 @@ Rectangle {
                          z: 3
                      }
 
-                     MoneroComponents.RadioButton {
-                         id: newDeviceWallet
-                         Layout.topMargin: 20
-                         text: qsTr("Create a new wallet from device.") + translationManager.emptyString
-                         fontSize: 16
-                         checked: true
-                         onClicked: {
-                             checked = true;
-                             restoreDeviceWallet.checked = false;
-                             wizardController.walletOptionsDeviceIsRestore = false;
-                         }
-                     }
+                     RowLayout {
+                         Layout.topMargin: 29
+                         spacing: 30
 
-                     MoneroComponents.RadioButton {
-                         id: restoreDeviceWallet
-                         Layout.topMargin: 10
-                         text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
-                         fontSize: 16
-                         checked: false
-                         onClicked: {
-                             checked = true;
-                             newDeviceWallet.checked = false;
-                             wizardController.walletOptionsDeviceIsRestore = true;
+                         MoneroComponents.RadioButton {
+                             id: newDeviceWallet
+                             text: qsTr("Create a new wallet") + translationManager.emptyString
+                             fontSize: 16
+                             checked: true
+                             tooltip: qsTr("Use this if you have never received Monero in your hardware wallet") + translationManager.emptyString
+                             onClicked: {
+                                 checked = true;
+                                 restoreDeviceWallet.checked = false;
+                                 wizardController.walletOptionsDeviceIsRestore = false;
+                             }
+                         }
+
+                         MoneroComponents.RadioButton {
+                             id: restoreDeviceWallet
+                             text: qsTr("Restore a wallet") + translationManager.emptyString
+                             fontSize: 16
+                             checked: false
+                             tooltip: qsTr("Use this if you have already received Monero in your hardware wallet") + translationManager.emptyString
+                             onClicked: {
+                                 checked = true;
+                                 newDeviceWallet.checked = false;
+                                 wizardController.walletOptionsDeviceIsRestore = true;
+                             }
                          }
                      }
                  }
