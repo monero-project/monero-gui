@@ -199,6 +199,15 @@ Rectangle {
                         wrapMode: TextInput.Wrap
 
                         selectByMouse: true
+                        Keys.onEnterPressed: void(0)
+                        Keys.onReturnPressed: void(0)
+                        Keys.onSpacePressed: {
+                            if (seedInput.text.substring(0, cursorPosition).slice(-1) == " ") {
+                                event.accepted = true;
+                            } else {
+                                event.accepted = false;
+                            }
+                        }
 
                         MoneroComponents.TextPlain {
                             id: memoTextPlaceholder
