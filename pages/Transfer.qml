@@ -151,6 +151,12 @@ Rectangle {
 
       spacing: 30
 
+      MoneroComponents.Label {
+          fontSize: 21
+          text: leftPanel.accountList.count > 1 ? qsTr("Send from Account #") + leftPanel.currentAccountIndex + (leftPanel.currentAccountLabel != "" ? " (" + leftPanel.currentAccountLabel + ")" : "")
+                                                : qsTr("Send") + translationManager.emptyString
+      }
+
       RowLayout {
           visible: root.warningContent !== ""
 

@@ -563,6 +563,10 @@ ApplicationWindow {
             var queuedCmd = IPC.queuedCmd();
             if(/^\w+:\/\/(.*)$/.test(queuedCmd)) appWindow.onUriHandler(queuedCmd); // uri
         }
+
+        // load progress dots below account card on leftPanel
+        appWindow.currentWallet.subaddressAccount.refresh();
+        leftPanel.accountList.model = appWindow.currentWallet.subaddressAccountModel;
     }
 
     function onWalletPassphraseNeededManager(on_device){

@@ -80,6 +80,14 @@ QtObject {
     property string leftPanelBackgroundGradientStart: blackTheme ? _b_leftPanelBackgroundGradientStart : _w_leftPanelBackgroundGradientStart
     property string leftPanelBackgroundGradientStop: blackTheme ? _b_leftPanelBackgroundGradientStop : _w_leftPanelBackgroundGradientStop
     property string historyHeaderTextColor: blackTheme ? _b_historyHeaderTextColor : _w_historyHeaderTextColor
+    property string accountColor0: blackTheme ? _b_accountColor0 : _w_accountColor0
+    property string accountColor1: blackTheme ? _b_accountColor1 : _w_accountColor1
+    property string accountColor2: blackTheme ? _b_accountColor2 : _w_accountColor2
+    property string accountColor3: blackTheme ? _b_accountColor3 : _w_accountColor3
+    property string accountColor4: blackTheme ? _b_accountColor4 : _w_accountColor4
+    property string accountColor5: blackTheme ? _b_accountColor5 : _w_accountColor5
+    property string accountColor6: blackTheme ? _b_accountColor6 : _w_accountColor6
+    property string accountColor7: blackTheme ? _b_accountColor7 : _w_accountColor7
 
     property string _b_defaultFontColor: "white"
     property string _b_dimmedFontColor: "#BBBBBB"
@@ -138,6 +146,15 @@ QtObject {
     property string _b_leftPanelBackgroundGradientStop: "#1a1a1a"
     property string _b_historyHeaderTextColor: "#C0C0C0"
 
+    property string _b_accountColor0: "#6E513C"
+    property string _b_accountColor1: "#842129"
+    property string _b_accountColor2: "#458421"
+    property string _b_accountColor3: "#742184"
+    property string _b_accountColor4: "#291DBE"
+    property string _b_accountColor5: "#846F21"
+    property string _b_accountColor6: "#217F84"
+    property string _b_accountColor7: "#696969"
+
     property string _w_defaultFontColor: "black"
     property string _w_dimmedFontColor: "#3f3f3f"
     property string _w_lightGreyFontColor: "#515151"
@@ -194,4 +211,13 @@ QtObject {
     property string _w_leftPanelBackgroundGradientStart: "white"
     property string _w_leftPanelBackgroundGradientStop: "#f5f5f5"
     property string _w_historyHeaderTextColor: "#515151"
+
+    property string _w_accountColor0: "#6E513C"
+    property string _w_accountColor1: "#842129"
+    property string _w_accountColor2: "#458421"
+    property string _w_accountColor3: "#742184"
+    property string _w_accountColor4: "#291DBE"
+    property string _w_accountColor5: "#846F21"
+    property string _w_accountColor6: "#217F84"
+    property string _w_accountColor7: "#696969"
 }

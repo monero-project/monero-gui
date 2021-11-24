@@ -85,8 +85,9 @@ Rectangle {
             Layout.bottomMargin: 10
 
             MoneroComponents.Label {
-                fontSize: 24
-                text: qsTr("Transactions") + translationManager.emptyString
+                fontSize: 21
+                text: leftPanel.accountList.count > 1 ? qsTr("Transactions in Account #") + leftPanel.currentAccountIndex + (leftPanel.currentAccountLabel != "" ? " (" + leftPanel.currentAccountLabel + ")" : "")
+                                                      : qsTr("Transactions") + translationManager.emptyString
             }
 
             Item {

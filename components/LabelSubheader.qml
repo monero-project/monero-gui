@@ -37,7 +37,7 @@ Label {
 
     Rectangle {
         anchors.top: item.bottom
-        anchors.topMargin: 4
+        anchors.topMargin: 5
         anchors.left: parent.left
         anchors.right: parent.right
         height: 2
