@@ -28,6 +28,7 @@
 
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -35,7 +36,9 @@ import "effects/" as MoneroEffects
 Rectangle {
     id: button
     property alias text: label.text
+    property alias iconText: iconLabel.text
     property bool checked: false
+    property bool bottomButton: false
     property alias symbol: symbolText.text
     property int numSelectedChildren: 0
     property var under: null
@@ -86,24 +89,41 @@ Rectangle {
         opacity: button.checked ? 1 : 0.3
     }
 
+    Rectangle {
+        id: icon
+        color: "transparent"
+        height: 10
+        width: 10
+        anchors.left: parent.left
+        anchors.leftMargin: 24
+        anchors.verticalCenter: parent.verticalCenter
+
+        MoneroComponents.Label {
+            id: iconLabel
+            fontSize: buttonArea.containsMouse ? 19 : 17
+            fontFamily: FontAwesome.fontFamilySolid
+            anchors.centerIn: parent
+            fontColor: MoneroComponents.Style.defaultFontColor
+            styleName: "Solid"
+        }
+    }
+
     // button decorations that are subject to leftMargin offsets
     Rectangle {
         anchors.left: parent.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: bottomButton ? 40 : 20
         height: parent.height
-        width: 2
+        width: bottomButton ? 0 : 2
         color: button.checked ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
 
         // button text
         MoneroComponents.TextPlain {
             id: label
             color: MoneroComponents.Style.menuButtonTextColor
-            themeTransitionBlackColor: MoneroComponents.Style._b_menuButtonTextColor
-            themeTransitionWhiteColor: MoneroComponents.Style._w_menuButtonTextColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: button.getOffset() + 8
-            font.bold: true
+            font.bold: button.checked ? true : false
             font.pixelSize: 14
         }
     }
@@ -114,6 +134,7 @@ Rectangle {
         anchors.leftMargin: parent.getOffset()
         anchors.right: parent.right
         anchors.rightMargin: 20
+        visible: !bottomButton
         height: 14
         width: 8
         image: MoneroComponents.Style.menuButtonImageRightSource
