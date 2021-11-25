@@ -39,6 +39,7 @@ Object {
     property string clipboard : "\uf0ea"
     property string clockO : "\uf017"
     property string cloud : "\uf0c2"
+    property string cog : "\uf013"
     property string desktop : "\uf108"
     property string edit : "\uf044"
     property string ellipsisH : "\uf141"
@@ -71,4 +72,5 @@ Object {
     property string shieldAlt : "\uf3ed"
     property string signOutAlt : "\uf2f5"
     property string times : "\uf00d"
+    property string toolbox : "\uf552"
 }

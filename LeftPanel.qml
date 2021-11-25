@@ -462,47 +462,14 @@ Rectangle {
                 anchors.leftMargin: 20
             }
 
-            // ------------- Advanced tab ---------------
-            MoneroComponents.MenuButton {
-                id: advancedButton
-                visible: appWindow.walletMode >= 2
+            Rectangle {
+                id: menuSeparator
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Advanced") + translationManager.emptyString
-                symbol: qsTr("D") + translationManager.emptyString
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = advancedButton
-                    panel.advancedClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: advancedButton.present && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- Settings tab ---------------
-            MoneroComponents.MenuButton {
-                id: settingsButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Settings") + translationManager.emptyString
-                symbol: qsTr("E") + translationManager.emptyString
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = settingsButton
-                    panel.settingsClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: settingsButton.present
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 70
+                color: "transparent"
             }
 
         } // Column
@@ -515,9 +482,42 @@ Rectangle {
             anchors.right: parent.right
             anchors.leftMargin: 0
             anchors.rightMargin: 0
-            anchors.bottom: progressBar.visible ? progressBar.top : networkStatus.top
+            anchors.bottom: advancedButton.top
             height: 10
             color: "transparent"
+        }
+
+        MoneroComponents.MenuButton {
+            id: advancedButton
+            bottomButton: true
+            iconText: FontAwesome.toolbox
+            visible: appWindow.walletMode >= 2
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: settingsButton.top
+            text: qsTr("Advanced options") + translationManager.emptyString
+            symbol: qsTr("D") + translationManager.emptyString
+            onClicked: {
+                menuColumn.previousButton.checked = false
+                menuColumn.previousButton = advancedButton
+                panel.advancedClicked()
+            }
+        }
+
+        MoneroComponents.MenuButton {
+            id: settingsButton
+            bottomButton: true
+            iconText: FontAwesome.cog
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: progressBar.visible ? progressBar.top : networkStatus.top
+            text: qsTr("Settings") + translationManager.emptyString
+            symbol: qsTr("E") + translationManager.emptyString
+            onClicked: {
+                menuColumn.previousButton.checked = false
+                menuColumn.previousButton = settingsButton
+                panel.settingsClicked()
+            }
         }
 
         MoneroComponents.ProgressBar {
