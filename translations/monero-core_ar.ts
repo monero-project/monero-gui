@@ -47,12 +47,12 @@
     <message>
         <location filename="../pages/Account.qml" line="355"/>
         <source>Create new account</source>
-        <translation type="unfinished"></translation>
+        <translation>أنشئ حساب جديد</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="357"/>
         <source>Set the label of the new account:</source>
-        <translation type="unfinished"></translation>
+        <translation>صنّف الحساب الجديد:</translation>
     </message>
 </context>
 <context>
@@ -65,13 +65,13 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا يسهل إرسال وإستقبال مونيرو ويقلل من الأخطاء أثناء كتابة العناوين يدوياً</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Add an address</source>
-        <translation type="unfinished"></translation>
+        <translation>أضف عنواناً</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="115"/>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="274"/>
         <source>Add address</source>
-        <translation type="unfinished"></translation>
+        <translation>أضف عنواناً</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
         <source>Add a name...</source>
-        <translation type="unfinished"></translation>
+        <translation>أضف اسماً</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>حفظ</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="384"/>
@@ -172,7 +172,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="427"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>حذف</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="487"/>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="37"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>لصق</translation>
     </message>
 </context>
 <context>
@@ -216,12 +216,12 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>كمبيوتر</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>عبارة المرور للمحفظة الخارجية</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
@@ -262,7 +262,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="230"/>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>فرز بحسب</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="251"/>
@@ -274,7 +274,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="369"/>
         <location filename="../pages/History.qml" line="1687"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>القيمة</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="449"/>
@@ -319,12 +319,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="703"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>نعم</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1184"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>معلّق</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="831"/>
