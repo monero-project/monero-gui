@@ -2690,7 +2690,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
         <source>Calculating fee</source>
-        <translation>Berechne Gebühr</translation>
+        <translation>Gebühren werden berechnet</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
