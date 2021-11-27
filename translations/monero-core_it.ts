@@ -1659,7 +1659,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>Daemon username</source>
-        <translation>Username Daemon</translation>
+        <translation>Username per il demone</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="295"/>
