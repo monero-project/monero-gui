@@ -568,7 +568,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
         <source>Primary address &amp; Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>プライマリーアドレスとキー</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
