@@ -3701,7 +3701,7 @@ Se você não tiver a opção de executar seu próprio nó, você pode se conect
     <message>
         <location filename="../main.qml" line="524"/>
         <source>Signing transaction in the device...</source>
-        <translation>Assine a transação no dispositivo...</translation>
+        <translation>Assinando a transação no dispositivo...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
