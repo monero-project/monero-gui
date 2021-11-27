@@ -86,7 +86,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="274"/>
         <source>Add address</source>
-        <translation type="unfinished"></translation>
+        <translation>주소 추가</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
