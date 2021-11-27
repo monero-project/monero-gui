@@ -127,7 +127,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="296"/>
         <source>Address</source>
-        <translation type="unfinished">Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="372"/>
@@ -1171,7 +1171,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося переключити публічну ноду</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
