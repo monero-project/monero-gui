@@ -425,7 +425,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Megerősítésre várás...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
@@ -1081,7 +1081,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/settings/Navbar.qml" line="188"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezelőfelület</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="241"/>
@@ -1356,7 +1356,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
         <source>Wallet path: </source>
-        <translation>Tárca helye:</translation>
+        <translation>Tárca helye: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
@@ -1478,7 +1478,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
         <source>Light theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Világos téma</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="66"/>
@@ -1568,7 +1568,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished"></translation>
+        <translation>frissítések letöltése, árforrások lekérése</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
@@ -2955,7 +2955,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Enter a strong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon egy erős jelszót</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -3183,7 +3183,7 @@ lehet, hogy közbelépésre van szükség.</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
         <source>Welcome to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>A monero csapat üdvözöl</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="76"/>
@@ -3238,7 +3238,7 @@ lehet, hogy közbelépésre van szükség.</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="189"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hálózatváltás:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
