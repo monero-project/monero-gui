@@ -2855,7 +2855,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
@@ -3840,7 +3840,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="1679"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>Compte principal</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1885"/>
