@@ -853,7 +853,7 @@ Zaleca się wpisanie hasła na portfelu sprzętowym dla większego bezpieczeńst
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation>Od Ciebie zależy czy akceptujesz niepotwierdzone transakcje czy nie. Prawdopodobnie zostaną one potwierdzone w krótkim czasie, ale istnieje również możliwość, że nie, więc przy większych kwotach możesz chcieć zaczekać na jedno lub więcej potwierdzeń.</translation>
+        <translation>Od Ciebie zależy czy akceptujesz niepotwierdzone transakcje czy nie. Prawdopodobnie zostaną one potwierdzone w krótkim czasie, ale istnieje również możliwość, że nie zostaną, więc przy większych kwotach możesz chcieć zaczekać na jedno lub więcej potwierdzeń</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
@@ -1435,7 +1435,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="372"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tails: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
@@ -2499,7 +2499,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
         <source>Create a transaction that spends old unmovable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Stwórz transakcję która wykorzysta tylko stare nieprzenośne wyjścia</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="659"/>
@@ -2639,7 +2639,7 @@ Rozmiar pierścienia: </translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="162"/>
         <source>Sweep unmixable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamieć niemieszalne wyjścia</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="164"/>
@@ -2962,7 +2962,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tego hasła nie można odzyskać. Jeśli je zapomnisz, musisz przywrócić portfel ze swojego %1.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
@@ -3291,7 +3291,7 @@ może to wymagać twojego działania.</translation>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tymczasowe korzystanie ze zdalnych węzłów jest przydatne do natychmiastowego uruchomienia Monero (stąd nazwa bootstrap), jednak należy pamiętać, że podczas korzystania z węzłów zdalnych (w tym z ustawieniem ładowania początkowego), węzły mogą śledzić Twój adres IP, śledzić „wysokość przywracania” i powiązane dane z żądań bloków i wysyłać Tobie błędnych informacji, aby dowiedzieć się więcej o dokonywanych transakcjach.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>

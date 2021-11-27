@@ -416,7 +416,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>In</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="768"/>
@@ -438,7 +438,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Adresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
@@ -1381,12 +1381,12 @@ Du kannst eine Blockhöhe oder ein Datum (JJJJ-MM-TT) eingeben:</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Remote node</source>
-        <translation type="unfinished">Drittanbieter-Node</translation>
+        <translation>Entfernter Node</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Local node</source>
-        <translation type="unfinished">Lokaler Node</translation>
+        <translation>Lokaler Node</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
@@ -1568,12 +1568,12 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
         <source>remote node connections, </source>
-        <translation type="unfinished">remote node connections, </translation>
+        <translation>Verbindungen zu entfernten Nodes, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished">updates downloading, fetching price sources</translation>
+        <translation>Updates werden heruntergeladen, Preisquellen werden abgerufen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
@@ -2243,7 +2243,7 @@ auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</tr
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
         <source>Done</source>
-        <translation type="unfinished">Fertig</translation>
+        <translation>Fertig</translation>
     </message>
 </context>
 <context>
@@ -2680,7 +2680,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
         <source>Fee</source>
-        <translation type="unfinished">Gebühr</translation>
+        <translation>Gebühr</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
@@ -3517,7 +3517,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Leer lassen, um eine Wallet nur zur Einsicht zu erstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3873,7 +3873,7 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
     <message>
         <location filename="../main.qml" line="1354"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1477"/>
