@@ -227,8 +227,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation>Selecione onde você deseja inserir a senha.
-Recomenda-se inserir a senha na carteira física para maior segurança.</translation>
+        <translation>Selecione onde você quer inserir a senha.
+Recomenda-se inserir uma senha na carteira física para maior segurança.</translation>
     </message>
 </context>
 <context>
