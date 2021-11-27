@@ -235,7 +235,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="189"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Od data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="203"/>
