@@ -1493,7 +1493,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображать имя кошелька в строке заголовка</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -3517,7 +3517,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставьте поле пустым, чтобы создать кошелек только для просмотра</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
