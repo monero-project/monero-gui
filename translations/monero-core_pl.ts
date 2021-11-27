@@ -3317,7 +3317,7 @@ może to wymagać twojego działania.</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished">Wysokość odtworzenia portfela</translation>
+        <translation>Wysokość bloku odnowienia portfela</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
