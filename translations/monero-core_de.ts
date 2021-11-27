@@ -634,7 +634,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
         <source>Primary address &amp; Keys</source>
-        <translation>Hauptadresse &amp; Keys</translation>
+        <translation>Primäradresse &amp; Schlüssel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
