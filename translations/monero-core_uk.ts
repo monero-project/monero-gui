@@ -1201,7 +1201,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="188"/>
         <source>Successfully switched to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Успішне переключення на іншу публічну ноду</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
