@@ -853,7 +853,7 @@ Zaleca się wpisanie hasła na portfelu sprzętowym dla większego bezpieczeńst
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Od Ciebie zależy czy akceptujesz niepotwierdzone transakcje czy nie. Prawdopodobnie zostaną one potwierdzone w krótkim czasie, ale istnieje również możliwość, że nie, więc przy większych kwotach możesz chcieć zaczekać na jedno lub więcej potwierdzeń.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
@@ -1709,7 +1709,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="373"/>
@@ -2615,7 +2615,7 @@ Rozmiar pierścienia: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="796"/>
         <source>Wallet is connecting to daemon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Portfel łączy się z daemonem.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="807"/>
