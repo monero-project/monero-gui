@@ -305,7 +305,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher par ID de transaction, description, montant ou hauteur de bloc</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="686"/>
