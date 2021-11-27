@@ -2650,7 +2650,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="199"/>
         <source>All unlocked balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamter verfügbarer Betrag</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
@@ -2660,7 +2660,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="251"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Meine Wallet</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="258"/>
@@ -2690,7 +2690,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
         <source>Calculating fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Berechne Gebühr</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
