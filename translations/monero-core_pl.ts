@@ -227,7 +227,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybierz gdzie chcesz wpisać hasło.
+Zaleca się wpisanie hasła na portfelu sprzętowym dla większego bezpieczeństwa.</translation>
     </message>
 </context>
 <context>
@@ -558,7 +559,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysokość odtworzenia portfela</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
@@ -1059,12 +1060,12 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../pages/Mining.qml" line="256"/>
         <source>Mining temporarily suspended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopanie tymczasowo zatrzymane.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie aktualnie %1 H/s. Daje ci to szansę 1 do %2 dziennie znaleźienia bloka.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1171,7 +1172,7 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie powiodło się przełączenie na inny węzeł publiczny</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
@@ -1194,17 +1195,17 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/PasswordDialog.qml" line="161"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>hasło sprzętowego portfela</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wpisz %1 dla: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wpisz %1</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="174"/>
@@ -1224,7 +1225,7 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę potwierdź hasło sprzętowego portfela</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="283"/>
@@ -1390,7 +1391,7 @@ Możesz wpisać wysokość bloków lub datę (YYYY-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Wysokość odtwarzania portfela: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
@@ -1501,7 +1502,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Błędne hasło</translation>
+        <translation>Nieprawidłowe hasło</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
@@ -1561,17 +1562,17 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
         <source>Socks5 proxy (%1%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwer pośredni Socks5 (%1%2)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
         <source>remote node connections, </source>
-        <translation type="unfinished"></translation>
+        <translation>połączenia z węzłami zdalnymi, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished"></translation>
+        <translation>trwa ściąganie aktualizacji, odświeżanie źródeł kursów</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
@@ -1581,7 +1582,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
@@ -1609,7 +1610,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="243"/>
         <source>Failed to send command</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie powiodło się wysłanie komendy</translation>
     </message>
 </context>
 <context>
@@ -1657,7 +1658,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa użytkownika demona</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="295"/>
@@ -2305,7 +2306,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Portfel jest tylko do przeglądania, a wysyłanie jest możliwe tylko przy użyciu podpisywania transakcji offline. O ile nie są importowane obrazy kluczy, saldo odzwierciedla tylko przychodzące, ale nie wychodzące transakcje.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
@@ -2357,7 +2358,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="166"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Środki do wydania: %1 XMR. Poczekaj ok. %2 minut, aż całe saldo będzie dostępne do wydania.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="376"/>
@@ -2382,12 +2383,12 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="428"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawartość pola opisu jest zgodna z formatem długiego identyfikatora płatności.           Nie wklejaj długiego identyfikatora płatności w pole opisu, ponieważ Twoje środki mogą zostać utracone.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="498"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Długie identyfikatory płatności są przeżyte.           Długie identyfikatory płatności nie były szyfrowane w blockchain i mogą zaszkodzić Twojej prywatności.           Jeśli strona, do której wysyłasz, nadal wymaga długiego identyfikatora płatności, powiadom ją.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="517"/>
@@ -2397,7 +2398,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="560"/>
         <source>Key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazy kluczy</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="561"/>
@@ -2412,7 +2413,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymagane dla portfeli tylko do przeglądu, aby wyświetlać rzeczywiste saldo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="577"/>
@@ -2422,17 +2423,17 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="581"/>
         <source>1. Using cold wallet, export the key images into a file</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Korzystając z portfela offline, eksportuj obrazy kluczów do pliku</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="582"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Korzystając z portfela tylko do przeglądania, importuj plik z obrazami kluczy</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="590"/>
         <source>Offline transaction signing</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpisywanie transakcji offline</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="591"/>
@@ -2457,27 +2458,27 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation type="unfinished"></translation>
+        <translation>* Aby utworzyć plik transakcji, wprowadź adres i kwotę powyżej</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="622"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Korzystając z portfela tylko do przeglądu, eksportuj rezultat do pliku</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="623"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Korzystając z portfela offline, importuj plik z rezultatem oraz eksportuj obrazy kluczy</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="624"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Korzystając z portfela tylko do przeglądu, importuj plik z obrazami kluczy oraz wygeneruj plik transakcji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="626"/>
         <source>4. Using cold wallet, sign your transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Korzystając z porftela offline, podpisz Twój plik transakcji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="627"/>
@@ -2492,7 +2493,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="635"/>
         <source>Sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamieć</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
@@ -2718,7 +2719,7 @@ Rozmiar pierścienia: </translation>
         <location filename="../pages/TxKey.qml" line="80"/>
         <location filename="../pages/TxKey.qml" line="153"/>
         <source>Transaction ID</source>
-        <translation>Identyfikator trans.</translation>
+        <translation>ID transakcji</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="63"/>
@@ -2793,12 +2794,12 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa wersja Monero v%1 jest dostępna.</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę odwiedź getmonero.org aby dowiedzieć się szczegółów</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
@@ -2858,7 +2859,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Operacja zapisu się nie powiodła</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
@@ -2877,40 +2878,40 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
         <location filename="../js/Utils.js" line="59"/>
         <source>%n second(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n sekundę temu</numerusform>
+            <numerusform>%n sekundy temu</numerusform>
+            <numerusform>%n sekund temu</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="61"/>
         <source>%n minute(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minutę temu</numerusform>
+            <numerusform>%n minuty temu</numerusform>
+            <numerusform>%n minut temu</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="63"/>
         <source>%n hour(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n godzinę temu</numerusform>
+            <numerusform>%n godziny temu</numerusform>
+            <numerusform>%n godzin temu</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="65"/>
         <source>%n day(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n dzień temu</numerusform>
+            <numerusform>%n dni temu</numerusform>
+            <numerusform>%n dni temu</numerusform>
         </translation>
     </message>
     <message>
@@ -2965,12 +2966,12 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>25 słów frazy odzyskiwania</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>portfel sprzętowy</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2980,7 +2981,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Using letters, numbers, and/or symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Korzystaj z liter, cyfr i/lub symboli</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
@@ -3003,7 +3004,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardController.qml" line="350"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się zapisać portfela</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="431"/>
@@ -3118,7 +3119,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli w przyszłości przywrócisz swój portfel, określenie tego numeru bloku spowoduje szybsze odzyskanie portfela.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -3291,7 +3292,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation>Uświadom sobie te ograniczenie. &lt;b&gt;Użytkownicy którzy kładą priorytet na prywatności i decentralizacji muszą zatem korzystać z pełnego węzła.&lt;/b&gt;</translation>
+        <translation>Uświadom sobie te ograniczenie. &lt;b&gt;Użytkownicy którzy kładą priorytet na prywatności i decentralizacji muszą zatem korzystać z pełnego węzła&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="104"/>
@@ -3319,7 +3320,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="100"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation>Uświadom sobie te ograniczenie. &lt;b&gt;Użytkownicy którzy kładą priorytet na prywatności i decentralizacji muszą zatem korzystać z pełnego węzła.&lt;/b&gt;</translation>
+        <translation>Uświadom sobie te ograniczenie. &lt;b&gt;Użytkownicy którzy kładą priorytet na prywatności i decentralizacji muszą zatem korzystać z pełnego węzła&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="107"/>
@@ -3487,12 +3488,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
         <source>Seed offset passphrase (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło przesunięcia seeda (opcjonalne)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
@@ -3709,7 +3710,7 @@ Jeżeli nie masz opcji aby uruchomić własny węzeł, jest opcja połączenia d
     <message>
         <location filename="../main.qml" line="986"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się zapisać portfela</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1013"/>
@@ -3769,12 +3770,12 @@ Jeżeli nie masz opcji aby uruchomić własny węzeł, jest opcja połączenia d
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Save transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz plik transakcji</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Send transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij transakcję</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1540"/>
