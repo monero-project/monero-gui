@@ -350,7 +350,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/History.qml" line="1139"/>
         <source>Click to reveal</source>
-        <translation>Clic pentru a afișa</translation>
+        <translation>Apasă pentru a arăta</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="777"/>
