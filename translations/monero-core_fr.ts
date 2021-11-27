@@ -426,7 +426,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmation en attente</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
@@ -2217,7 +2217,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="89"/>
         <source>Transaction file successfully saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier de transaction sauvegardé avec succès!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
@@ -2639,7 +2639,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="162"/>
         <source>Sweep unmixable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Balayer les sorties non-mélangeable</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="164"/>
@@ -2684,7 +2684,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
         <source>See on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Voir sur l&apos;appareil</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
