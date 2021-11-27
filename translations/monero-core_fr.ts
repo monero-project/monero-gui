@@ -406,7 +406,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="652"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Montant inconnu</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
@@ -421,7 +421,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="768"/>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>échoué</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="771"/>
@@ -2634,7 +2634,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="160"/>
         <source>Create transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un fichier de transaction</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="162"/>
@@ -2644,7 +2644,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="164"/>
         <source>Confirm send</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer l&apos;envoi</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="199"/>
@@ -2654,27 +2654,27 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>De</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="251"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mon portefeuille</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="258"/>
         <source>Account #</source>
-        <translation type="unfinished"></translation>
+        <translation>Compte #</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="277"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>À</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="299"/>
         <source>Monero address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse Monero</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
@@ -2694,12 +2694,12 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Retour</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="414"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer</translation>
     </message>
 </context>
 <context>
@@ -3374,7 +3374,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="148"/>
         <source>Optional features</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonctionnalités optionnelles</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="149"/>
@@ -3389,7 +3389,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer des portefeuilles portables et utiliser les sur n&apos;importe quel PC. Activer si vous avez installé Monero sur une clé USB, un disque dur externe, ou autre moyen de stockage portable.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="164"/>
@@ -3513,7 +3513,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Laisser vide pour créer un portefeuille en lecture seule</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3774,12 +3774,12 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="1351"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez vous créer un raccourci sur le Bureau pour le GUI Monero ?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1353"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1354"/>
@@ -3895,7 +3895,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer</translation>
     </message>
     <message>
         <location filename="../main.qml" line="878"/>
