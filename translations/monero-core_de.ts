@@ -2839,7 +2839,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="169"/>
         <source>Sweep unmixable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht mischbare Outputs zusammenführen</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="171"/>
