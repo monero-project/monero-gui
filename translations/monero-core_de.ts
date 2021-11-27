@@ -460,7 +460,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/History.qml" line="690"/>
         <source>Unknown amount</source>
-        <translation>Unbekannter Betrag</translation>
+        <translation>Unbekannte Menge</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="786"/>
