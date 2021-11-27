@@ -91,12 +91,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver transações</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="247"/>
         <source>Edit address label</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar rótulo do endereço</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="265"/>
@@ -311,7 +311,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Clean</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="254"/>
@@ -503,7 +503,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../pages/History.qml" line="1023"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar prova de pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1723"/>
@@ -513,7 +513,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Generating payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar prova de pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1732"/>
@@ -867,17 +867,17 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
         <source>Close Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar carteira</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="42"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizar</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema Claro</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
@@ -887,7 +887,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
         <source>Change Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar idioma</translation>
     </message>
 </context>
 <context>
@@ -1333,18 +1333,18 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/Receive.qml" line="122"/>
         <source>Save as Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar como Imagem</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="135"/>
         <source>Address #</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço #</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="151"/>
         <location filename="../pages/Receive.qml" line="424"/>
         <source>no label</source>
-        <translation type="unfinished"></translation>
+        <translation>sem rótulo</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
@@ -1356,7 +1356,7 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
         <location filename="../pages/Receive.qml" line="186"/>
         <location filename="../pages/Receive.qml" line="402"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar endereço para a área de transferência</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="196"/>
@@ -1372,7 +1372,7 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/Receive.qml" line="369"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver transações</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="420"/>
@@ -1395,12 +1395,12 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar nó remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar nó remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="90"/>
@@ -1466,22 +1466,22 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../components/RemoteNodeList.qml" line="48"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar nó remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="108"/>
         <source>Trusted daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon confiável</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="132"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar nó remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="144"/>
         <source>Remove remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover nó remoto</translation>
     </message>
 </context>
 <context>
@@ -1504,12 +1504,12 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/settings/Settings.qml" line="74"/>
         <source>Log</source>
-        <translation type="unfinished">Log</translation>
+        <translation>Registro</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="79"/>
         <source>Info</source>
-        <translation type="unfinished">Info</translation>
+        <translation>Informações</translation>
     </message>
 </context>
 <context>
@@ -1570,7 +1570,7 @@ Você pode escrever uma altura de bloco ou uma data (AAAA-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="53"/>
         <source>portable</source>
-        <translation type="unfinished"></translation>
+        <translation>portátil</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
@@ -1791,7 +1791,7 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="236"/>
         <source>Type a command (e.g &apos;%1&apos; or &apos;%2&apos;) and press Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Digite um comando (ex. &apos;%1&apos; ou &apos;% 2&apos;) e pressione Enter</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
@@ -2381,7 +2381,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>View progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver andamento</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
@@ -2399,7 +2399,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="116"/>
         <source>Close this wallet and return to main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar essa carteira e retornar ao menu principal</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="156"/>
@@ -2409,12 +2409,12 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
         <source>Switch to light theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para o tema claro</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
         <source>Switch to dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para tema escuro</translation>
     </message>
 </context>
 <context>
@@ -2676,42 +2676,42 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="279"/>
         <source>Grab QR code from screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegar o QR code da tela</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Ler QR code</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="311"/>
         <source>Import from address book</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar do catálogo de endereços</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="342"/>
         <source>Send all unlocked balance of this account</source>
-        <translation type="unfinished"></translation>
+        <translation>Envie todo o saldo desbloqueado desta conta</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="519"/>
         <source>Remove recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover destinatário</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="576"/>
         <source>Add recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar destinatário</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Total</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="756"/>
         <source>fee</source>
-        <translation type="unfinished"></translation>
+        <translation>taxa</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="788"/>
@@ -2721,7 +2721,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
         <source>only visible to you</source>
-        <translation type="unfinished"></translation>
+        <translation>Apenas visível para você</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="817"/>
@@ -3467,7 +3467,7 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="192"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Rede</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="212"/>
@@ -3623,7 +3623,7 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardNav.qml" line="118"/>
         <source>Step (%1) of (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Passo (%1) de (%2)</translation>
     </message>
 </context>
 <context>
@@ -3661,17 +3661,17 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
         <source>Mainnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Carteira Mainnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Testnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Carteira Testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Stagenet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Carteira Stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="326"/>
@@ -3835,17 +3835,17 @@ Se você não tiver a opção de executar seu próprio nó, você pode se conect
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="70"/>
         <source>Wallet name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome da carteira está vazio</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="74"/>
         <source>Wallet name is invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome da carteira é inválido</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="80"/>
         <source>Wallet already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Carteira já existe</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="88"/>
@@ -3855,7 +3855,7 @@ Se você não tiver a opção de executar seu próprio nó, você pode se conect
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Wallet location is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>A localização da carteira está vazia</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="113"/>
