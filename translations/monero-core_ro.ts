@@ -96,7 +96,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="332"/>
         <source>Resolve</source>
-        <translation>Soluționează</translation>
+        <translation>Rezolvă</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="347"/>
@@ -193,12 +193,12 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>Se pornește serviciul local în %1 secunde</translation>
+        <translation>Se pornește nodul local în %1 secunde</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="113"/>
         <source>Start daemon (%1)</source>
-        <translation>Pornește serviciul (%1)</translation>
+        <translation>Pornește daemon-ul (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="126"/>
@@ -269,7 +269,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
         <location filename="../pages/History.qml" line="251"/>
         <location filename="../pages/History.qml" line="1168"/>
         <source>Blockheight</source>
-        <translation>Numărul blocului</translation>
+        <translation>Înălțimea blocului</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="369"/>
@@ -498,7 +498,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/History.qml" line="1711"/>
         <source>Please choose a folder</source>
-        <translation>Vă rog alegeți un director</translation>
+        <translation>Alege un director</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1721"/>
@@ -508,12 +508,12 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/History.qml" line="1722"/>
         <source>CSV file written to: %1</source>
-        <translation>Fișier CSV scris: %1</translation>
+        <translation>Fișier CSV scris în: %1</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1723"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
-        <translation>Sfat: Folosiți aplicația de foi de calcul favorită pentru a sorta blockheight-ul</translation>
+        <translation>Sfat: Folosește aplicația de foi de calcul favorită pentru a sorta blockheight-ul.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1727"/>
@@ -549,17 +549,17 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>ATENȚIE: Nu reutilizați cheile Monero în alte rețele. Făcând asta, vă va dăuna confidențialitatea.</translation>
+        <translation>ATENȚIE: Nu reutiliza cheile Monero în alte fork-uri, DECÂT DACĂ în fork sunt integrate măsuri de atenuare la reutilizarea cheii. Făcând asta, vei afecta confidențialitatea.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation>ATENȚIE: Copiatul seminței în memorie vă poate expune la aplicații rău intenționate, care pot să vă înregistreze sămânța și să vă fure Monero. Vă rugăm să scrieți sămânța de mână.</translation>
+        <translation>ATENȚIE: Copierea seed-ului în memorie te poate expune la aplicații rău intenționate, care pot să-ți înregistreze seed-ul și să-ți fure Monero. Scrie seed-ul manual.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation>Nivelul de restaurare a portofelului</translation>
+        <translation>Înălțimea de restaurare a portofelului</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
@@ -591,7 +591,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
         <location filename="../pages/Keys.qml" line="222"/>
         <location filename="../pages/Keys.qml" line="254"/>
         <source>View Only Wallet</source>
-        <translation>Portofel de citire</translation>
+        <translation>Portofel doar vizualizare</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="260"/>
@@ -606,12 +606,12 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
         <source>(View Only Wallet - No mnemonic seed available)</source>
-        <translation>(Portofel doar de vizionat - Sămânță mnemonică indisponibilă)</translation>
+        <translation>(Portofel doar vizualizare - Seed mnemonic indisponibil)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="292"/>
         <source>(View Only Wallet - No secret spend key available)</source>
-        <translation>(Portofel doar de vizionat - Cheia de cheltuit indisponibilă)</translation>
+        <translation>(Portofel doar vizualizare - Cheia de cheltuit secretă indisponibilă)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="299"/>
@@ -621,12 +621,12 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/Keys.qml" line="158"/>
         <source>Secret view key</source>
-        <translation>Cheie secretă de citire</translation>
+        <translation>Cheie de vizualizare secretă</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="167"/>
         <source>Public view key</source>
-        <translation>Cheie publică de citire</translation>
+        <translation>Cheie de vizualizare publică</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="176"/>
@@ -763,7 +763,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../LeftPanel.qml" line="636"/>
         <source>Daemon</source>
-        <translation>Serviciu</translation>
+        <translation>Daemon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="568"/>
@@ -904,7 +904,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="596"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>ATENȚIE: nu există conexiune către serviciu</translation>
+        <translation>ATENȚIE: nu există conexiune către daemon</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
@@ -961,7 +961,7 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/Mining.qml" line="65"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>Serviciul local trebuie să fie sincronizat înainte de a începe minatul</translation>
+        <translation>Daemon-ul trebuie să fie sincronizat înainte de a începe minatul</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="99"/>
@@ -971,16 +971,16 @@ Pentru securitate sporită se recomandă să introduci fraza-parolă în portofe
     <message>
         <location filename="../pages/Mining.qml" line="59"/>
         <source>Mining is only available on local daemons.</source>
-        <translation>Minatul este disponibil în serviciu local</translation>
+        <translation>Minatul este disponibil doar în daemon local.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Minând cu calculatorul dumneavoastră ajutați la întărirea rețelei Monero. Cu cât mai mulți oameni minează, cu atât e mai greu ca rețeaua să fie atacată și orice ajutor e binevenit.
+        <translation>Minând cu calculatorul personal ajuți la întărirea rețelei Monero. Cu cât mai mulți oameni minează, cu atât e mai greu ca rețeaua să fie atacată, orice ajutor e binevenit.
 
-De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Computerul dumneavoastră va căuta niște soluții la blocuri. Dacă găsiți un bloc, veți primi recompensa asociată. Baftă!</translation>
+De asemenea, minând ai o mică ocazie să câștigi niște Monero. Computerul va crea hash-uri și va căuta soluții la blocuri. Dacă găsești un bloc, vei primi recompensa asociată. Baftă!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -995,7 +995,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Use recommended # of threads</source>
-        <translation>Folosiți numărul recomandat de fire de execuție</translation>
+        <translation>Folosește numărul recomandat de fire de execuție</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="133"/>
@@ -1045,7 +1045,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../pages/Mining.qml" line="203"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Minatul e disponibil doar pentru servicii locale. Rulează un serviciu local ca să poți să minezi.&lt;br&gt;</translation>
+        <translation>Minatul e disponibil doar în daemon local. Rulează un daemon local ca să poți să minezi.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="214"/>
@@ -1122,7 +1122,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="56"/>
         <source>Remote node</source>
-        <translation>Serviciu remote</translation>
+        <translation>Nod distant</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="57"/>
@@ -1200,7 +1200,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Introdu %1 pentru: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
@@ -1325,7 +1325,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="88"/>
         <source>Remote Node Hostname / IP</source>
-        <translation>Hostname / IP serviciu remote</translation>
+        <translation>Hostname / IP nod distant</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="111"/>
@@ -1366,7 +1366,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
         <source>Set a new restore height.
 You can enter a block height or a date (YYYY-MM-DD):</source>
         <translation>Setează o nouă înălțime de restaurare.
-Puteți introduce o înălțime a blocului sau o dată calendaristică (AAAA-LL-ZZ):</translation>
+Poți introduce o înălțime a blocului sau o dată calendaristică (AAAA-LL-ZZ):</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="230"/>
@@ -1596,12 +1596,12 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation>Nivel istoric</translation>
+        <translation>Nivel de jurnalizare</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="134"/>
         <source>Daemon log</source>
-        <translation>Jurnal serviciu</translation>
+        <translation>Jurnalizare daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="220"/>
@@ -1654,7 +1654,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="281"/>
         <source>Remote node updated. Trusted daemon has been reset. Mark again, if desired.</source>
-        <translation>Nod la distanță actualizat. Serviciu de încredere a fost resetat. Selectează din nou, dacă dorești</translation>
+        <translation>Nod distant actualizat. Daemon-ul de încredere a fost resetat. Selectează din nou, dacă dorești.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
@@ -1680,7 +1680,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="321"/>
         <source>Mark as Trusted Daemon</source>
-        <translation>Selectat ca Serviciu de Încredere</translation>
+        <translation>Selectat ca Daemon de Încredere</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
@@ -1690,12 +1690,12 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="351"/>
         <source>Start daemon</source>
-        <translation>Pornește serviciu</translation>
+        <translation>Pornește daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="351"/>
         <source>Stop daemon</source>
-        <translation>Oprește serviciul</translation>
+        <translation>Oprește daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
@@ -1720,7 +1720,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="396"/>
         <source>Daemon startup flags</source>
-        <translation>Parametri pornire serviciu</translation>
+        <translation>Parametri pornire daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
@@ -2286,12 +2286,12 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="83"/>
         <source>Start daemon</source>
-        <translation>Pornește serviciu</translation>
+        <translation>Pornește daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="166"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sold disponibil: %1 XMR. Te rugăm să aștepți ~%2 minute pentru ca întregul sold să fie disponibil.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="303"/>
@@ -2442,7 +2442,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation type="unfinished"></translation>
+        <translation>* Pentru a crea un fișier tranzacție, introdu mai sus adresa și suma</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="622"/>
@@ -2472,12 +2472,12 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
         <source>Unmixable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieșiri imiscibile</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="635"/>
         <source>Sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>Schimbă</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
@@ -2599,7 +2599,7 @@ Ringsize: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="780"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Portofelul nu este conectat la serviciu.</translation>
+        <translation>Portofelul nu este conectat la daemon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="796"/>
@@ -2610,13 +2610,13 @@ Ringsize: </translation>
         <location filename="../pages/Transfer.qml" line="802"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Servicul conectat nu este compatibil cu interfața grafică. 
-Actualizează sau conectează-te la un alt serviciu</translation>
+        <translation>Daemon-ul conectat nu este compatibil cu interfața grafică. 
+Actualizează sau conectează-te la un alt daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="807"/>
         <source>Waiting on daemon synchronization to finish.</source>
-        <translation>Așteaptă sincronizarea serviciului să se finalizeze.</translation>
+        <translation>Așteaptă sincronizarea daemon-ului să se finalizeze.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="65"/>
@@ -2850,7 +2850,7 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
         <source>Failed to start download</source>
-        <translation type="unfinished"></translation>
+        <translation>Descărcarea n-a fost începută</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
@@ -3005,7 +3005,7 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../wizard/WizardController.qml" line="350"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul n-a fost stocat</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="431"/>
@@ -3061,7 +3061,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="123"/>
         <source>Restore height</source>
-        <translation>Înălțimea de revenire</translation>
+        <translation>Înălțimea de restaurare</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="141"/>
@@ -3133,7 +3133,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="59"/>
         <source>Daemon settings</source>
-        <translation>Setări serviciu</translation>
+        <translation>Setări daemon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
@@ -3164,7 +3164,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="56"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Pornește serviciu pe fundal (recomandat)</translation>
+        <translation>Pornește un nod automat în fundal (recomandat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="79"/>
@@ -3194,7 +3194,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="162"/>
         <source>Connect to a remote node</source>
-        <translation>Conectare la un serviciu remote</translation>
+        <translation>Conectare la un nod distant</translation>
     </message>
 </context>
 <context>
@@ -3316,7 +3316,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="85"/>
         <source>Remote nodes are useful if you are not able/don&apos;t want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation>Nodurile de la distanță sunt utile în cazul în care nu puteți / nu doriți să descărcați întregul bloc de blocuri, dar trebuie să fiți informat că nodurile rău-intenționate la distanță ar putea compromite confidențialitatea. Aceștia ar putea să vă urmărească adresa IP, să vă urmărească datele privind &quot;recuperarea înălțimii&quot; și datele asociate solicitărilor de bloc și să vă trimită informații inexacte pentru a afla mai multe despre tranzacțiile pe care le faceți.</translation>
+        <translation>Nodurile distante sunt utile în cazul în care nu puteți / nu doriți să descărcați întregul blockchain, dar trebuie să fiți informat că nodurile distante rău-intenționate ar putea compromite confidențialitatea. Aceștia ar putea să vă urmărească adresa IP, datele privind &quot;înălțimea de restaurare&quot; și datele asociate solicitărilor de bloc și să vă trimită informații inexacte pentru a afla mai multe despre tranzacțiile pe care le faceți.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="100"/>
@@ -3489,7 +3489,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
         <source>Seed offset passphrase (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Frază-parolă offset (opțional)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
@@ -3524,7 +3524,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="276"/>
         <source>Restore height</source>
-        <translation>Înălțimea de revenire</translation>
+        <translation>Înălțimea de restaurare</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="297"/>
@@ -3537,7 +3537,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="67"/>
         <source>Daemon settings</source>
-        <translation>Setări serviciu</translation>
+        <translation>Setări daemon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="68"/>
@@ -3582,12 +3582,12 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
         <source>Restore height</source>
-        <translation>Înălțimea de revenire</translation>
+        <translation>Înălțimea de restaurare</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="70"/>
         <source>Daemon address</source>
-        <translation>Adresa serviciului</translation>
+        <translation>Adresa daemon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="77"/>
@@ -3642,22 +3642,22 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="733"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Se așteaptă oprirea serviciului...</translation>
+        <translation>Se așteaptă oprirea daemon-ului...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="762"/>
         <source>Daemon failed to start</source>
-        <translation>Serviciul nu a putut fi pornit</translation>
+        <translation>Daemon-ul nu a putut fi pornit</translation>
     </message>
     <message>
         <location filename="../main.qml" line="763"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Verifică erorile din jurnalul portofelului și jurnalul serviciului. Poți să încerci să pornești %1 manual.</translation>
+        <translation>Verifică erorile din jurnalul portofelului și jurnalul daemon-ului. Poți să încerci să pornești %1 manual.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="831"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Nu s-a putut crea tranzacția: versiune incorectă a serviciului: </translation>
+        <translation>Nu s-a putut crea tranzacția: versiune incorectă a daemon-ului: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="833"/>
@@ -3674,7 +3674,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="680"/>
         <source>Waiting for daemon to sync</source>
-        <translation>Așteptând serviciul să se sincronizeze</translation>
+        <translation>Se așteaptă ca daemon-ul să se sincronizeze</translation>
     </message>
     <message>
         <location filename="../main.qml" line="307"/>
@@ -3711,7 +3711,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="682"/>
         <source>Daemon is synchronized (%1)</source>
-        <translation>Serviciul este sincronizat (%1)</translation>
+        <translation>Daemon-ul este sincronizat (%1)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="684"/>
@@ -3721,7 +3721,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="779"/>
         <source>Daemon is synchronized</source>
-        <translation>Serviciul este sincronizat</translation>
+        <translation>Daemon-ul este sincronizat</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>
@@ -3860,7 +3860,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="2004"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dorești să oprești nodul local sau să ruleze în fundal?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2006"/>
@@ -3870,7 +3870,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="2007"/>
         <source>Keep it running</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuă să ruleze</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2027"/>
@@ -3900,7 +3900,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="878"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation>Suma e incorectă: se dorește un număr între %1 și %2</translation>
+        <translation>Suma e incorectă: se cere un număr între %1 și %2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
