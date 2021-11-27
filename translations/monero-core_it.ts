@@ -1177,7 +1177,7 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Passaggio ad un altro nodo pubblico</translation>
     </message>
 </context>
 <context>
@@ -1425,7 +1425,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
         <source>Wallet mode: </source>
-        <translation>Modalità portafoglio: </translation>
+        <translation>Modalità wallet: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="338"/>
@@ -1710,7 +1710,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristino</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="373"/>
