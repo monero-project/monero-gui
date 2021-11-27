@@ -304,7 +304,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledej podle ID Transakce, Adresy, Popisu, Částky nebo Čísla bloku</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="686"/>
