@@ -64,6 +64,9 @@ Rectangle {
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
+                    passwordFields.password = "";
+                    passwordFields.passwordConfirm = "";
+
                     if(wizardController.walletOptionsIsRecoveringFromDevice){
                         wizardStateView.state = "wizardCreateDevice1";
                     } else {

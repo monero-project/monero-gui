@@ -38,6 +38,7 @@ ColumnLayout {
     id: root
     Layout.fillWidth: true
     property alias password: passwordInput.text
+    property alias passwordConfirm: passwordInputConfirm.text
     property int passwordFill: 0
     property string passwordStrengthText: qsTr("Strength: ") + translationManager.emptyString
 
