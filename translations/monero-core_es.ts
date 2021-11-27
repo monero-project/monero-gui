@@ -2886,7 +2886,7 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="332"/>
         <source>Fee</source>
-        <translation>Tasa</translation>
+        <translation>Comisión</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="347"/>
