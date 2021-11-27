@@ -164,11 +164,48 @@ Rectangle {
             id: addressRow
             spacing: 0
 
-            MoneroComponents.LabelSubheader {
-                Layout.fillWidth: true
-                fontSize: 24
-                textFormat: Text.RichText
-                text: qsTr("Accounts") + translationManager.emptyString
+            RowLayout {
+                spacing: 0
+
+                MoneroComponents.LabelSubheader {
+                    Layout.fillWidth: true
+                    fontSize: 24
+                    textFormat: Text.RichText
+                    text: qsTr("Accounts") + translationManager.emptyString
+                }
+
+                MoneroComponents.StandardButton {
+                    id: createNewAccountButton
+                    visible: !selectAndSend
+                    small: true
+                    text: qsTr("Create new account") + translationManager.emptyString
+                    fontSize: 13
+                    onClicked: {
+                        inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString
+                        inputDialog.onAcceptedCallback = function() {
+                            appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
+                            appWindow.currentWallet.switchSubaddressAccount(appWindow.currentWallet.numSubaddressAccounts() - 1)
+                            appWindow.onWalletUpdate();
+                        }
+                        inputDialog.onRejectedCallback = null;
+                        inputDialog.open()
+                    }
+
+                    Rectangle {
+                        anchors.top: createNewAccountButton.bottom
+                        anchors.topMargin: 8
+                        anchors.left: createNewAccountButton.left
+                        anchors.right: createNewAccountButton.right
+                        height: 2
+                        color: MoneroComponents.Style.appWindowBorderColor
+
+                        MoneroEffects.ColorTransition {
+                            targetObj: parent
+                            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                        }
+                    }
+                }
             }
 
             ColumnLayout {
@@ -347,30 +384,6 @@ Rectangle {
                     targetObj: parent
                     blackColor: MoneroComponents.Style._b_appWindowBorderColor
                     whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                }
-            }
-
-            MoneroComponents.CheckBox { 
-                id: addNewAccountCheckbox 
-                visible: !selectAndSend
-                border: false
-                uncheckedIcon: FontAwesome.plusCircle
-                toggleOnClick: false
-                fontAwesomeIcons: true
-                fontSize: 16
-                iconOnTheLeft: true
-                Layout.fillWidth: true
-                Layout.topMargin: 10
-                text: qsTr("Create new account") + translationManager.emptyString; 
-                onClicked: { 
-                    inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString
-                    inputDialog.onAcceptedCallback = function() {
-                        appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
-                        appWindow.currentWallet.switchSubaddressAccount(appWindow.currentWallet.numSubaddressAccounts() - 1)
-                        appWindow.onWalletUpdate();
-                    }
-                    inputDialog.onRejectedCallback = null;
-                    inputDialog.open()
                 }
             }
         }
