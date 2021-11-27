@@ -661,7 +661,7 @@ A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
         <source>(View Only Wallet - No mnemonic seed available)</source>
-        <translation>(Figyelőtárca - Nincs elérhető mag)</translation>
+        <translation>(Csak olvasható tárca - Nincs elérhető mag)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="292"/>
@@ -995,7 +995,7 @@ A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="128"/>
         <source>unconfirmed</source>
-        <translation type="unfinished"></translation>
+        <translation>megerősítettlen</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="163"/>
@@ -1024,7 +1024,7 @@ A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</
     <message>
         <location filename="../pages/Mining.qml" line="65"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>A daemon-nak szinkronizálnia kell a bányászathoz</translation>
+        <translation>A daemon-nak szinkronizálódnia kell mielőtt megkezdhetné a bányászást</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="99"/>
@@ -1041,7 +1041,9 @@ A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>A számítógépeddel történő bányászat segít megerősíteni a Monero hálózatot. Minél több ember bányászik, annál nehezebben támadható a hálózat, minden apró egység számít.</translation>
+        <translation>A számítógépeddel történő bányászat segít megerősíteni a Monero hálózatot. Minél több ember bányászik, annál nehezebben támadható a hálózat, minden apró segítség számít.
+
+A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógéped &apos;hash&apos;-eket hoz létre, blokkmegoldásokat keresve. Ha találsz egy blokkot, megkapod a hozzá tartozó jutalmat. Sok szerencsét!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1121,7 +1123,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="256"/>
         <source>Mining temporarily suspended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bányászat ideiglenesen felfüggesztve.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
@@ -4084,7 +4086,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="2075"/>
         <source>Local node is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Helyi csomópont használatban</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2076"/>
@@ -4094,7 +4096,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="2078"/>
         <source>Force stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Kényszerített leállítás</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2079"/>
@@ -4119,7 +4121,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="839"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Megerősítés</translation>
     </message>
     <message>
         <location filename="../main.qml" line="957"/>
