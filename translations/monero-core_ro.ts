@@ -32,7 +32,7 @@
     <message>
         <location filename="../pages/Account.qml" line="167"/>
         <source>Accounts</source>
-        <translation>Cont utilizator</translation>
+        <translation>Conturi</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="260"/>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../pages/Account.qml" line="355"/>
         <source>Create new account</source>
-        <translation>Crează cont nou</translation>
+        <translation>Creează cont nou</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="357"/>
@@ -304,7 +304,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>Caută după identificatorul tranzacției, adresă, descriere, sumă sau înălțimea blocului</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="686"/>
@@ -472,7 +472,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1690"/>
         <source>Integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresă integrată</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1691"/>
@@ -568,7 +568,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
         <source>Primary address &amp; Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresă principală &amp; Chei</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
@@ -702,7 +702,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="224"/>
         <source>Syncing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Se sincronizează...</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
@@ -847,22 +847,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="159"/>
         <source>This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Această pagină va scana automat blockchain-ul și tx pool-ul pentru tranzacții primite prin intermediul codului QR.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu decizi să accepți sau nu tranzacții neconfirmate. E posibil ca ele să fie confirmate în scurt timp, însă există și probabilitatea să nu fie, pentru sume mai mari ar fi bine să aștepți o confirmare sau mai multe.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
         <source>Currently selected address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresa curent selectată</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="271"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifică</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="296"/>
@@ -931,7 +931,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="128"/>
         <source>unconfirmed</source>
-        <translation type="unfinished"></translation>
+        <translation>neconfirmate</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="163"/>
@@ -1151,7 +1151,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="66"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Se conectează</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="68"/>
@@ -1281,12 +1281,12 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../pages/Receive.qml" line="295"/>
         <source>Save as image</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvează ca imagine</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
         <source>Show on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Afișează pe dispozitiv</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="324"/>
@@ -1395,7 +1395,7 @@ Puteți introduce o înălțime a blocului sau o dată calendaristică (AAAA-LL-
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifică</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="208"/>
@@ -1487,7 +1487,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="66"/>
         <source>Check for updates periodically</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifică periodic pentru actualizări</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
@@ -1497,7 +1497,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
         <source>Ask for password before sending a transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Cere parola înainte de a efectua o tranzacție</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
@@ -1507,7 +1507,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvare automată</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1517,7 +1517,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>minut(e)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
@@ -1610,7 +1610,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="243"/>
         <source>Failed to send command</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu s-a trimis comanda</translation>
     </message>
 </context>
 <context>
@@ -1704,12 +1704,12 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifică</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Resetează</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="373"/>
@@ -1818,12 +1818,12 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation type="unfinished"></translation>
+        <translation>Primește ușor Monero pentru afacerea ta.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
         <source>Enter merchant mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Accesează modul comerciantului</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
@@ -2275,12 +2275,12 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="72"/>
         <source>Address is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresă incorectă.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="77"/>
         <source>Enter an amount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introdu o sumă.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="83"/>
@@ -2300,7 +2300,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="303"/>
         <source>Change account</source>
-        <translation type="unfinished"></translation>
+        <translation>Schimbă contul</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="411"/>
@@ -2325,7 +2325,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul poate fi doar vizualizat, iar tranzacțiile pot fi trimise doar la semnarea lor offline. Cu excepția importării imaginilor cheie, soldul reflectă numai tranzacțiile primite, nu și cele trimise.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
@@ -2356,7 +2356,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="428"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conținutul câmpului descriere se corelează cu formatul lung al identificatorului de plată. Te rugăm să nu inserezi un identificator de plată lung în câmpul descriere, riști să pierzi fondurile.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="456"/>
@@ -2366,7 +2366,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="498"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificatorii de plată lungi sunt învechiți. Identificatorii de plată lungi nu au fost criptați pe blockchain și ar aduce prejudicii vieții private. Te rugăm să informezi partea căruia îi trimiți și care încă operează cu un identificator de plată lung.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="517"/>
@@ -2381,22 +2381,22 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="560"/>
         <source>Key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagini cheie</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="561"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportă</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="567"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importă</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Necesară pentru portofelele în regim numai vizualizare pentru a afișa soldul curent</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="577"/>
@@ -2406,37 +2406,37 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="581"/>
         <source>1. Using cold wallet, export the key images into a file</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Prin intermediul portofelului rece, exportă imaginile cheie într-un fișier</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="582"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Prin intermediul portofelului în regim numai vizualizare, importă fișierul cu imaginile cheie</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="590"/>
         <source>Offline transaction signing</source>
-        <translation type="unfinished"></translation>
+        <translation>Semnarea tranzacției offline</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="591"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Creează</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="602"/>
         <source>Sign (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Semnează (offline)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="608"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>Trimite</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="614"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Trimite XMR dintr-un portofel rece (offline)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
@@ -2446,27 +2446,27 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="622"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Prin intermediul portofelului în regim numai vizualizare, exportă ieșirile într-un fișier</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="623"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Prin intermediul portofelului rece, importă fișierul cu ieșiri și exportă imaginile cheie</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="624"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Prin intermediul portofelului în regim numai vizualizare, importă imaginile cheie și creează un fișier tranzacție</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="626"/>
         <source>4. Using cold wallet, sign your transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Prin intermediul portofelului rece, semnează fișierul tranzacție</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="627"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>5. Prin intermediul portofelului în regim numai vizualizare, trimite tranzacția semnată</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
@@ -2481,7 +2481,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="641"/>
         <source>Create a transaction that spends old unmovable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Creează o tranzacție care să conțină ieșirile netransferabile învechite</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="722"/>
@@ -2603,7 +2603,7 @@ Ringsize: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="796"/>
         <source>Wallet is connecting to daemon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul se conectează la daemon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="802"/>
@@ -2794,27 +2794,27 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>O versiune nouă Monero v%1 este disponibilă.</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished"></translation>
+        <translation>Accesează getmonero.org pentru detalii</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
         <source>Downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Se descarcă</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizare descărcată, semnătură verificată</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dorești să descarci și să verifici versiunea nouă?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -2829,22 +2829,22 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="142"/>
         <source>Download later</source>
-        <translation type="unfinished"></translation>
+        <translation>Descarcă mai târziu</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Încearcă din nou</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Descarcă</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="164"/>
         <source>Download failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Descărcarea a eșuat</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
@@ -2854,17 +2854,17 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvează ca</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvarea a eșuat</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvează în fișier</translation>
     </message>
 </context>
 <context>
@@ -2976,12 +2976,12 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Enter a strong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Introdu o parolă puternică</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Using letters, numbers, and/or symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Folosind litere, numere, și/sau simboluri</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
@@ -3201,7 +3201,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
         <source>Welcome to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Bun venit la Monero</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="76"/>
@@ -3256,7 +3256,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="189"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schimbă rețeaua:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -3338,7 +3338,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
         <source>Mode selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectează mod</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="75"/>
@@ -3493,7 +3493,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Frază-parolă</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
@@ -3735,7 +3735,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="986"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul n-a fost stocat</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1013"/>
@@ -3839,22 +3839,22 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="1679"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>Cont principal</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1885"/>
         <source>Autosaved the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofel salvat automat</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1887"/>
         <source>Failed to autosave the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul n-a fost salvat automat</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2003"/>
         <source>Local node is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodul local rulează</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2004"/>
@@ -3864,7 +3864,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="2006"/>
         <source>Force stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Oprire forțată</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2007"/>
@@ -3879,7 +3879,7 @@ Dacă nu aveți opțiunea de a rula propriul nod, există o opțiune de conectar
     <message>
         <location filename="../main.qml" line="2042"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished"></translation>
+        <translation>Se verifică statutul nodului local...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1056"/>
