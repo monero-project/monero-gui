@@ -37,12 +37,12 @@
     <message>
         <location filename="../pages/Account.qml" line="300"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить метку счета</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="315"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать адрес в буфер обмена</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -86,22 +86,22 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="218"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить на данный адрес</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотреть транзакции</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="247"/>
         <source>Edit address label</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить метку адреса</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="265"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать адрес в буфер обмена</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="270"/>
@@ -210,22 +210,22 @@
     <message>
         <location filename="../pages/Advanced.qml" line="52"/>
         <source>Mining</source>
-        <translation type="unfinished">Майнинг</translation>
+        <translation>Майнинг</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="57"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Доказать/проверить</translation>
+        <translation>Доказать/проверить</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="62"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">Общая база RingDB</translation>
+        <translation>Общая база RingDB</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="67"/>
         <source>Sign/verify</source>
-        <translation type="unfinished"></translation>
+        <translation>Подписать/проверить</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Clean</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="254"/>
@@ -503,17 +503,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1023"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать доказательство платежа</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1723"/>
         <source>Payment proof</source>
-        <translation type="unfinished">Доказательство платежа</translation>
+        <translation>Доказательство платежа</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Generating payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Создание доказательства платежа</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1732"/>
@@ -836,7 +836,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LineEdit.qml" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished">Вставить</translation>
+        <translation>Вставить</translation>
     </message>
 </context>
 <context>
@@ -862,32 +862,32 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/MenuBar.qml" line="34"/>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
         <source>Close Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть кошелёк</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="42"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлая тема</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмная тема</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
         <source>Change Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить язык</translation>
     </message>
 </context>
 <context>
@@ -1332,30 +1332,30 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="122"/>
         <source>Save as Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как Образ</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="135"/>
         <source>Address #</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес #</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="151"/>
         <location filename="../pages/Receive.qml" line="424"/>
         <source>no label</source>
-        <translation type="unfinished"></translation>
+        <translation>без метки</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
         <location filename="../pages/Receive.qml" line="385"/>
         <source>Edit address label</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить метку адреса</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="186"/>
         <location filename="../pages/Receive.qml" line="402"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать адрес в буфер обмена</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="196"/>
@@ -1371,12 +1371,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="369"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотреть транзакции</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="420"/>
         <source>Primary address</source>
-        <translation type="unfinished">Основной адрес</translation>
+        <translation>Основной адрес</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="460"/>
@@ -1394,57 +1394,57 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить удаленный узел</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить удаленный узел</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="90"/>
         <source>Address</source>
-        <translation type="unfinished">Адрес</translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="91"/>
         <source>Port</source>
-        <translation type="unfinished">Порт</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="102"/>
         <source>Daemon username</source>
-        <translation type="unfinished">Имя пользователя</translation>
+        <translation>Имя пользователя демона</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="103"/>
         <source>(optional)</source>
-        <translation type="unfinished">(необязательно)</translation>
+        <translation>(необязательно)</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="113"/>
         <source>Daemon password</source>
-        <translation type="unfinished">Пароль демона</translation>
+        <translation>Пароль демона</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="114"/>
         <source>Password</source>
-        <translation type="unfinished">Пароль</translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="125"/>
         <source>Mark as Trusted Daemon</source>
-        <translation type="unfinished">Отметить как Доверенного Демона</translation>
+        <translation>Отметить как Доверенного Демона</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="136"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="145"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
@@ -1465,22 +1465,22 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/RemoteNodeList.qml" line="48"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить удаленный узел</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="108"/>
         <source>Trusted daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Доверенный демон</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="132"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить удаленный узел</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="144"/>
         <source>Remove remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить удаленный узел</translation>
     </message>
 </context>
 <context>
@@ -1488,27 +1488,27 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/settings/Settings.qml" line="58"/>
         <source>Wallet</source>
-        <translation type="unfinished">Кошелек</translation>
+        <translation>Кошелёк</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="63"/>
         <source>Interface</source>
-        <translation type="unfinished">Интерфейс</translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="68"/>
         <source>Node</source>
-        <translation type="unfinished">Узел</translation>
+        <translation>Узел</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="74"/>
         <source>Log</source>
-        <translation type="unfinished">Журнал</translation>
+        <translation>Журнал</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="79"/>
         <source>Info</source>
-        <translation type="unfinished">Информация</translation>
+        <translation>Информация</translation>
     </message>
 </context>
 <context>
@@ -1569,7 +1569,7 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="53"/>
         <source>portable</source>
-        <translation type="unfinished"></translation>
+        <translation>портативный</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
@@ -1789,7 +1789,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="236"/>
         <source>Type a command (e.g &apos;%1&apos; or &apos;%2&apos;) and press Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите команду (например, &apos;%1&apos; или &apos;%2&apos;) и нажмите клавишу Ввод</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
@@ -2379,7 +2379,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>View progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр прогресса</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
@@ -2397,22 +2397,22 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/TitleBar.qml" line="116"/>
         <source>Close this wallet and return to main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть текущий кошелёк и вернуться в главное меню</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="156"/>
         <source>Change language</source>
-        <translation type="unfinished">Изменить язык</translation>
+        <translation>Изменить язык</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
         <source>Switch to light theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на светлую тему</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
         <source>Switch to dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на тёмную тему</translation>
     </message>
 </context>
 <context>
@@ -2671,47 +2671,47 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="279"/>
         <source>Grab QR code from screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Захватить QR-код с экрана</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканировать QR-код</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="311"/>
         <source>Import from address book</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать из адресной книги</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="342"/>
         <source>Send all unlocked balance of this account</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить весь разблокированный баланс текущего аккаунта</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="519"/>
         <source>Remove recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить получателя</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="576"/>
         <source>Add recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить получателя</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Всего</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="756"/>
         <source>fee</source>
-        <translation type="unfinished"></translation>
+        <translation>комиссия</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
         <source>only visible to you</source>
-        <translation type="unfinished"></translation>
+        <translation>виден только вам</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="964"/>
@@ -3376,7 +3376,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished">Перезагрузить</translation>
+        <translation>Перезагрузить</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
@@ -3391,7 +3391,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
         <source>Prune blockchain</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрезание блокчейна</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="132"/>
@@ -3459,7 +3459,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="154"/>
         <source>Change wallet mode</source>
-        <translation>Переключить режим кошелька</translation>
+        <translation>Изменить режим кошелька</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="169"/>
@@ -3469,7 +3469,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="192"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Сеть</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="212"/>
@@ -3625,7 +3625,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardNav.qml" line="118"/>
         <source>Step (%1) of (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаг (%1) из (%2)</translation>
     </message>
 </context>
 <context>
@@ -3663,17 +3663,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
         <source>Mainnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Кошелёк в Основной сети</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Testnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Кошелёк в Тестовой сети</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Stagenet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Кошелёк в Отладочной сети</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="326"/>
@@ -3837,17 +3837,17 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="70"/>
         <source>Wallet name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя кошелька не указано</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="74"/>
         <source>Wallet name is invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя кошелька некорректно</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="80"/>
         <source>Wallet already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Данный кошелёк уже существует</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="88"/>
@@ -3857,7 +3857,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Wallet location is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Месторасположение кошелька не указано</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="113"/>
