@@ -48,9 +48,16 @@ TextField {
 
     MoneroComponents.ContextMenu {
         cursorShape: Qt.IBeamCursor
+        onCut: textField.cut();
+        onCopy: textField.copy();
         onPaste: {
-            textField.clear();
+            var previoustextFieldLength = textField.length
+            var previousCursorPosition = textField.cursorPosition;
             textField.paste();
+            textField.forceActiveFocus()
+            textField.cursorPosition = previousCursorPosition + (textField.length - previoustextFieldLength);
         }
+        onRemove: textField.remove(selectionStart, selectionEnd);
+        onSelectAll: textField.selectAll();
     }
 }
