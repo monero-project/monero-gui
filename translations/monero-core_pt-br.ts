@@ -101,7 +101,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="265"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar endereço para a área de transferência</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="270"/>
@@ -877,12 +877,12 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Light Theme</source>
-        <translation>Tema Claro</translation>
+        <translation>Tema claro</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema escuro</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
@@ -1350,7 +1350,7 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
         <location filename="../pages/Receive.qml" line="158"/>
         <location filename="../pages/Receive.qml" line="385"/>
         <source>Edit address label</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar rótulo do endereço</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="186"/>
@@ -1791,7 +1791,7 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="236"/>
         <source>Type a command (e.g &apos;%1&apos; or &apos;%2&apos;) and press Enter</source>
-        <translation>Digite um comando (ex. &apos;%1&apos; ou &apos;% 2&apos;) e pressione Enter</translation>
+        <translation>Digite um comando (ex. &apos;%1&apos; ou &apos;%2&apos;) e pressione Enter</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
@@ -2414,7 +2414,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
         <source>Switch to dark theme</source>
-        <translation>Mudar para tema escuro</translation>
+        <translation>Mudar para o tema escuro</translation>
     </message>
 </context>
 <context>
@@ -3389,7 +3389,7 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
         <source>Prune blockchain</source>
-        <translation type="unfinished"></translation>
+        <translation>Compactar blockchain</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="132"/>
