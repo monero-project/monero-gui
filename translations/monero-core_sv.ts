@@ -314,7 +314,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="686"/>
         <source>Mined</source>
-        <translation type="unfinished"></translation>
+        <translation>Grävt/brutet</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="703"/>
@@ -324,7 +324,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1184"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Pågående</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="831"/>
