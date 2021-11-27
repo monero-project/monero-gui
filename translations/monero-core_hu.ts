@@ -126,12 +126,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="380"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Nem található érvényes cím az OpenAlias címen</translation>
+        <translation>Nem található érvényes cím ezen az OpenAlias címen</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="385"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>A cím megtalálható, de a DNSSEC aláírás érvénytelen. A cím valószínűleg hamis</translation>
+        <translation>A cím megtalálható, de a DNSSEC aláírások nem ellenőrízhetőek, így előfordulhat, hogy ez a cím hamis</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="387"/>
@@ -162,7 +162,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="411"/>
         <source>Add a name...</source>
-        <translation>Név hozzáadása</translation>
+        <translation>Név hozzáadása...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="420"/>
@@ -497,7 +497,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="985"/>
         <location filename="../pages/History.qml" line="1702"/>
         <source>Transaction details</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakciós részletek</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1023"/>
@@ -537,7 +537,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1746"/>
         <source>Integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrált cím</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1747"/>
@@ -628,7 +628,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokk #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="197"/>
@@ -645,17 +645,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/Keys.qml" line="222"/>
         <location filename="../pages/Keys.qml" line="254"/>
         <source>View Only Wallet</source>
-        <translation>Figyelőtárca</translation>
+        <translation>Csak olvasható tárca</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="260"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Kész</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="281"/>
         <source>Mnemonic seed protected by hardware device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mnemonic seed hardvereszköz által védve.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
@@ -670,7 +670,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="299"/>
         <source>(Hardware Device Wallet - No secret spend key available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Hardvertárca - Nincs elérhető titkos fizetési kulcs)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="158"/>
@@ -731,12 +731,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="155"/>
         <source>View Only</source>
-        <translation>Csak figyelés</translation>
+        <translation>Csak olvasható</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="141"/>
         <source>Testnet</source>
-        <translation>Testnet</translation>
+        <translation>Teszthálózat</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="141"/>
@@ -777,7 +777,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="449"/>
         <source>Transactions</source>
-        <translation type="unfinished">Tranzakciók</translation>
+        <translation>Tranzakciók</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="450"/>
@@ -961,7 +961,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="574"/>
         <source>The merchant page requires a larger window</source>
-        <translation>Az ablak nagyítása szükséges</translation>
+        <translation>A kereskedői oldal nagyobb ablakot igényel</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="596"/>
@@ -1040,7 +1040,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>A számítógépeddel történő bányászat segít megerősíteni a Monero hálózatot. Minél több ember bányászik, annál nehezebben támadható a hálózat, minden apró egység számít.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1105,7 +1105,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="203"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Bányászni csak a helyi daemonon lehet. Indíts egy daemon-t a bányászathoz!&lt;br&gt;</translation>
+        <translation>Bányászni csak a helyi daemonon lehet. Indíts egy helyi daemon-t, hogy bányászni tudj!&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="214"/>
@@ -1179,7 +1179,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="64"/>
         <source>Disconnected</source>
-        <translation>Nincs csatlakozva</translation>
+        <translation>Szétkapcsolva</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="66"/>
@@ -1217,17 +1217,17 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="159"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kérem adjon meg új pénztárca jelszót</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="161"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>tárca jelszó</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="161"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>tárca jelmondat</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
@@ -1242,22 +1242,22 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="174"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Figyelem: a jelmondat hoszton történő bevitele biztonsági kockázatot hordoz, mivel malware-ek megszerezhetik azt. Javasoljuk az eszköz alapú jelmondat bevitelt.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="203"/>
         <source>CAPSLOCKS IS ON.</source>
-        <translation type="unfinished"></translation>
+        <translation>A CAPSLOCK BE VAN KAPCSOLVA</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
         <source>Please confirm new password</source>
-        <translation>Erősítsd meg a jelszót</translation>
+        <translation>Erősítsd meg az új jelszót</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Kérem erősítse meg a tárca jelmondatát</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="283"/>
@@ -1314,7 +1314,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
         <source>Show on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Megjelenítés eszközön</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="453"/>
@@ -1363,7 +1363,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="235"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>Új cím készítése</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="369"/>
@@ -1529,7 +1529,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="102"/>
         <source>Embedded Monero version: </source>
-        <translation>Monero verzió:</translation>
+        <translation>Monero beágyazott verziója: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="132"/>
@@ -1588,18 +1588,19 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation>Valóban újra szeretnéd építeni a gyorsítótárat?
+        <translation>Valóban újra szeretné építeni a tárca gyorsítótárát?
 Az alábbi információk törlődnek
 - Kedvezményezettek címei
 - Tx kulcsok
 - Tx leírások
 
-A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható</translation>
+A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="260"/>
         <source>Wallet log path: </source>
-        <translation>Tárca napló helye: </translation>
+        <translation>Tárcanapló helye: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="303"/>
@@ -1609,12 +1610,12 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="334"/>
         <source>Graphics mode: </source>
-        <translation type="unfinished"></translation>
+        <translation>Grafikus mód </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="368"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Végek: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="376"/>
@@ -1657,7 +1658,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="139"/>
         <source>Lock wallet on inactivity</source>
-        <translation>Tárca zárolása ha nem használod</translation>
+        <translation>Tárca zárolása ha nem használja</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
@@ -1702,7 +1703,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="152"/>
         <source>minutes</source>
-        <translation>perc</translation>
+        <translation>percek</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="152"/>
@@ -1722,22 +1723,22 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="184"/>
         <source>Price source</source>
-        <translation type="unfinished"></translation>
+        <translation>Ár forrása</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="199"/>
         <source>Currency</source>
-        <translation type="unfinished"></translation>
+        <translation>Valuta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="223"/>
         <source>Enabling price conversion exposes your IP address to the selected price source.</source>
-        <translation type="unfinished"></translation>
+        <translation>Az árkonverzió bekapcsolása felfedi az IP-címét a választott árforrás előtt</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="230"/>
         <source>Confirm and enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Megerősítés és bekapcsolás</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
@@ -1790,7 +1791,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
         <source>Failed to send command</source>
-        <translation type="unfinished"></translation>
+        <translation>Parancs küldése sikertelen</translation>
     </message>
 </context>
 <context>
@@ -1803,7 +1804,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="131"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>A blokklánc letöltődik a számítógépre. Biztonságosabb, de több tárhelyet igényel.</translation>
+        <translation>Letöltésre kerül a blokklánc a számítógépre. Biztonságosabb, de több tárhelyet igényel.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="208"/>
@@ -1818,7 +1819,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="253"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Távoli szerver használatához írd be a kedvenc keresődbe, hogy &apos;Monero remote node&apos;. Bizonyosodj meg róla, hogy a szerver megbízható!</translation>
+        <translation>Távoli csomópont használatához írja be kedvenc keresőjébe: &apos;Monero remote node&apos;. Bizonyosodjon meg róla, hogy a csomópont megbízható harmadik féltől származik!</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
@@ -1858,7 +1859,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="316"/>
         <source>Daemon startup flags</source>
-        <translation>Daemon indítási beállítások</translation>
+        <translation>Daemon indítási zászlók</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="340"/>
@@ -1886,12 +1887,12 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="64"/>
         <source>Create a view-only wallet</source>
-        <translation>Figyelőtárca létrehozása</translation>
+        <translation>Csak olvasható tárca létrehozása</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="63"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation>Olyan tárca létrehozása ami csak figyelni és kezdeményezni tud tranzakciókat, de a tranzakció véglegesítéséhez (aláírásához) szükséges egy elkölthető tárca is.</translation>
+        <translation>Új csak olvasható és tranzakció kezdeményezésére használható tárca készítése, de a tranzakció küldése előtti aláírásához szükséges egy elkölthető tárca is.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="71"/>
@@ -1903,7 +1904,9 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>A csak olvasható tárca az aktuális tárca jelszavával azonos jelszóval lett létrehozva. Megnyithatja az aktuális tárca bezárása után a &quot;Tárca megnyitása fájlból&quot; menüre kattintva és kiválasztva a tárca megtekintése ebben:
+%1
+A jelszó a tárca beállításaiban megváltoztatható.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="86"/>
@@ -1913,7 +1916,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="85"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Tárold ezt az információt bizalmasan, hogy a jövőben vissza tudd állítani a tárcád!</translation>
+        <translation>Tárolja ezt az információt biztonságosan, hogy a jövőben vissza tudja állítani a tárcáját!</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1945,7 +1948,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="109"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation>Kimenetek sikeresen újraolvasva.</translation>
+        <translation>Elköltött kimenetek sikeresen újraolvasva.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="120"/>
@@ -1965,7 +1968,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
         <source>Change the password of your wallet.</source>
-        <translation>Változtasd meg a tárcád jelszavát.</translation>
+        <translation>Változtassa meg tárcája jelszavát.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="128"/>
@@ -1983,13 +1986,13 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="103"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Itt léphetsz kapcsolatba a megosztott gyűrűadatbázissal. Ezt az adatbázist használja a tárcád és a többi Monero-klón program is.</translation>
+        <translation>Itt léphet kapcsolatba a megosztott gyűrűadatbázissal. Ezt az adatbázist használják a Monero tárcák és azon Monero-klónok tárcái is amelyek újrahasználják a Monero kulcsokat.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="116"/>
         <location filename="../pages/SharedRingDB.qml" line="118"/>
         <source>Outputs marked as spent</source>
-        <translation>Kizárt tranzakció bemenetek</translation>
+        <translation>Elköltöttként megjelölt kimenetek</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="116"/>
@@ -2025,12 +2028,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Filename with outputs to mark as spent</source>
-        <translation>Fájl neve ami a kizárt bemeneteket tartalmazza</translation>
+        <translation>Elköltöttként megjelölt kimenetek fáljának neve</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="180"/>
         <source>Browse</source>
-        <translation>Megnyitás</translation>
+        <translation>Böngészés</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="190"/>
@@ -2055,12 +2058,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="233"/>
         <source>Mark as spent</source>
-        <translation>Kizárás</translation>
+        <translation>Elköltöttnek jelölés</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="241"/>
         <source>Mark as unspent</source>
-        <translation>Engedélyezés</translation>
+        <translation>Elköltetlennek jelölés</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="253"/>
