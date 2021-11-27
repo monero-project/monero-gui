@@ -431,7 +431,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mon portefeuille</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -443,7 +443,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="793"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse inconnue</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1650"/>
@@ -1065,7 +1065,7 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minage à %1 H/s. Cela vous donne quotidiennement 1 chance sur %2 de trouver un bloc.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1107,12 +1107,12 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Starting the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrage du nœud</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Stopping the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêt du nœud</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="54"/>
@@ -1563,12 +1563,12 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
         <source>Socks5 proxy (%1%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy Socks5 (%1%2)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
         <source>remote node connections, </source>
-        <translation type="unfinished"></translation>
+        <translation>connexions à un nœud distant, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
@@ -2795,7 +2795,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation>La nouvelle version de Monero v% 1 est disponible.</translation>
+        <translation>La nouvelle version de Monero v%1 est disponible.</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
