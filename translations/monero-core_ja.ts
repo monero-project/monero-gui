@@ -19,25 +19,30 @@
         <translation>残高合計： </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="119"/>
-        <location filename="../pages/Account.qml" line="152"/>
+        <location filename="../pages/Account.qml" line="121"/>
+        <location filename="../pages/Account.qml" line="156"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="129"/>
+        <location filename="../pages/Account.qml" line="131"/>
         <source>Total unlocked balance: </source>
         <translation>アンロックされた残高の合計: </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="167"/>
+        <location filename="../pages/Account.qml" line="171"/>
         <source>Accounts</source>
         <translation>アカウント</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="260"/>
-        <source>Balance: </source>
-        <translation>残高: </translation>
+        <location filename="../pages/Account.qml" line="300"/>
+        <source>Edit account label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Account.qml" line="315"/>
+        <source>Copy address to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -69,7 +74,7 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
-        <location filename="../pages/AddressBook.qml" line="289"/>
+        <location filename="../pages/AddressBook.qml" line="316"/>
         <source>Add an address</source>
         <translation>アドレスを追加</translation>
     </message>
@@ -79,105 +84,148 @@
         <translation>アドレス帳</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="243"/>
+        <location filename="../pages/AddressBook.qml" line="218"/>
+        <source>Send to this address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="232"/>
+        <source>See transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="247"/>
+        <source>Edit address label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="265"/>
+        <source>Copy address to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="270"/>
         <source>Address copied to clipboard</source>
         <translation>アドレスをクリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="274"/>
+        <location filename="../pages/AddressBook.qml" line="301"/>
         <source>Add address</source>
         <translation>アドレスを追加</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="289"/>
+        <location filename="../pages/AddressBook.qml" line="316"/>
         <source>Edit an address</source>
         <translation>アドレスを編集</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="332"/>
+        <location filename="../pages/AddressBook.qml" line="365"/>
         <source>Resolve</source>
         <translation>名前解決</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="347"/>
+        <location filename="../pages/AddressBook.qml" line="380"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="352"/>
+        <location filename="../pages/AddressBook.qml" line="385"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="354"/>
+        <location filename="../pages/AddressBook.qml" line="387"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つからず、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="357"/>
-        <location filename="../pages/AddressBook.qml" line="360"/>
+        <location filename="../pages/AddressBook.qml" line="390"/>
+        <location filename="../pages/AddressBook.qml" line="393"/>
         <source>Internal error</source>
         <translation>内部エラー</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="363"/>
+        <location filename="../pages/AddressBook.qml" line="396"/>
         <source>No address found</source>
         <translation>アドレスが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="296"/>
+        <location filename="../pages/AddressBook.qml" line="325"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="372"/>
+        <location filename="../pages/AddressBook.qml" line="410"/>
         <source>Description</source>
         <translation>説明</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="373"/>
+        <location filename="../pages/AddressBook.qml" line="411"/>
         <source>Add a name...</source>
         <translation>名前を追加...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="379"/>
+        <location filename="../pages/AddressBook.qml" line="420"/>
         <source>Add</source>
         <translation>追加</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="379"/>
+        <location filename="../pages/AddressBook.qml" line="420"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="384"/>
+        <location filename="../pages/AddressBook.qml" line="425"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="387"/>
+        <location filename="../pages/AddressBook.qml" line="428"/>
         <source>Invalid address</source>
         <translation>不正なアドレス</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="391"/>
+        <location filename="../pages/AddressBook.qml" line="432"/>
         <source>Can&apos;t create entry</source>
         <translation>項目を作成できません</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="410"/>
+        <location filename="../pages/AddressBook.qml" line="449"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="427"/>
+        <location filename="../pages/AddressBook.qml" line="459"/>
         <source>Delete</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="487"/>
+        <location filename="../pages/AddressBook.qml" line="517"/>
         <source>OpenAlias error</source>
         <translation>OpenAliasエラー</translation>
+    </message>
+</context>
+<context>
+    <name>Advanced</name>
+    <message>
+        <location filename="../pages/Advanced.qml" line="52"/>
+        <source>Mining</source>
+        <translation type="unfinished">マイニング</translation>
+    </message>
+    <message>
+        <location filename="../pages/Advanced.qml" line="57"/>
+        <source>Prove/check</source>
+        <translation type="unfinished">証明と検証</translation>
+    </message>
+    <message>
+        <location filename="../pages/Advanced.qml" line="62"/>
+        <source>Shared RingDB</source>
+        <translation type="unfinished">共有リングDB</translation>
+    </message>
+    <message>
+        <location filename="../pages/Advanced.qml" line="67"/>
+        <source>Sign/verify</source>
+        <translation type="unfinished">電子署名</translation>
     </message>
 </context>
 <context>
@@ -191,17 +239,17 @@
 <context>
     <name>DaemonManagerDialog</name>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="93"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="94"/>
         <source>Starting local node in %1 seconds</source>
         <translation>%1秒後にローカルノードを開始します</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="113"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="114"/>
         <source>Start daemon (%1)</source>
         <translation>デーモンを開始 (%1)</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="126"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="127"/>
         <source>Use custom settings</source>
         <translation>カスタム設定を使用</translation>
     </message>
@@ -233,19 +281,19 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>History</name>
     <message>
-        <location filename="../pages/History.qml" line="189"/>
+        <location filename="../pages/History.qml" line="213"/>
         <source>Date from</source>
         <translation>開始日</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="203"/>
+        <location filename="../pages/History.qml" line="227"/>
         <source>Date to</source>
         <translation>終了日</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="310"/>
-        <location filename="../pages/History.qml" line="889"/>
-        <location filename="../pages/History.qml" line="1686"/>
+        <location filename="../pages/History.qml" line="334"/>
+        <location filename="../pages/History.qml" line="921"/>
+        <location filename="../pages/History.qml" line="1742"/>
         <source>Date</source>
         <translation>日付</translation>
     </message>
@@ -260,44 +308,49 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <translation>ソート &amp; フィルター</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="230"/>
+        <location filename="../pages/History.qml" line="191"/>
+        <source>Clean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="254"/>
         <source>Sort by</source>
         <translation>ソート</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="251"/>
-        <location filename="../pages/History.qml" line="1168"/>
+        <location filename="../pages/History.qml" line="275"/>
+        <location filename="../pages/History.qml" line="1216"/>
         <source>Blockheight</source>
         <translation>ブロック高</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="369"/>
-        <location filename="../pages/History.qml" line="1687"/>
+        <location filename="../pages/History.qml" line="393"/>
+        <location filename="../pages/History.qml" line="1743"/>
         <source>Amount</source>
         <translation>金額</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="449"/>
+        <location filename="../pages/History.qml" line="473"/>
         <source>Page</source>
         <translation>ページ</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="479"/>
+        <location filename="../pages/History.qml" line="503"/>
         <source>Jump to page (1-%1)</source>
         <translation>ページ移動 (1-%1)</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="487"/>
+        <location filename="../pages/History.qml" line="511"/>
         <source>Invalid page. Must be a number within the specified range.</source>
         <translation>不正なページです。指定された範囲の数値でなければなりません。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="636"/>
+        <location filename="../pages/History.qml" line="674"/>
         <source>Sent</source>
         <translation>出金</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="636"/>
+        <location filename="../pages/History.qml" line="674"/>
         <source>Received</source>
         <translation>入金</translation>
     </message>
@@ -307,220 +360,232 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="686"/>
+        <location filename="../pages/History.qml" line="724"/>
         <source>Fee</source>
         <translation>手数料</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="686"/>
+        <location filename="../pages/History.qml" line="724"/>
         <source>Mined</source>
         <translation>採掘</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="703"/>
+        <location filename="../pages/History.qml" line="741"/>
         <source>Yes</source>
         <translation>はい</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1184"/>
+        <location filename="../pages/History.qml" line="674"/>
+        <location filename="../pages/History.qml" line="1232"/>
         <source>Pending</source>
         <translation>ペンディング</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="831"/>
+        <location filename="../pages/History.qml" line="863"/>
         <source>Confirmations</source>
         <translation>承認</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1011"/>
+        <location filename="../pages/History.qml" line="1059"/>
         <source>Description</source>
         <translation>説明</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1079"/>
+        <location filename="../pages/History.qml" line="1127"/>
         <source>Transaction ID</source>
         <translation>トランザクションID</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1123"/>
+        <location filename="../pages/History.qml" line="1171"/>
         <source>Transaction key</source>
         <translation>トランザクションキー</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1139"/>
+        <location filename="../pages/History.qml" line="1187"/>
         <source>Click to reveal</source>
         <translation>クリックして見せる</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="777"/>
+        <location filename="../pages/History.qml" line="809"/>
         <source>Unknown recipient</source>
         <translation>不明な宛先</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1327"/>
+        <location filename="../pages/History.qml" line="1377"/>
         <source>Advanced options</source>
         <translation>高度なオプション</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1343"/>
+        <location filename="../pages/History.qml" line="1393"/>
         <source>Human readable date format</source>
         <translation>日時</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1349"/>
+        <location filename="../pages/History.qml" line="1399"/>
         <source>Export all history</source>
         <translation>すべての履歴をエクスポート</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1586"/>
+        <location filename="../pages/History.qml" line="1638"/>
         <source>Set description:</source>
         <translation>説明:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1589"/>
+        <location filename="../pages/History.qml" line="1641"/>
         <source>Updated description.</source>
         <translation>説明を更新しました。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1619"/>
+        <location filename="../pages/History.qml" line="1671"/>
         <source>No transaction history yet.</source>
         <translation>トランザクションの履歴がありません。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1621"/>
+        <location filename="../pages/History.qml" line="1673"/>
         <source>No results.</source>
         <translation>なし。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1623"/>
+        <location filename="../pages/History.qml" line="1675"/>
         <source>%1 transactions total, showing %2.</source>
         <translation>%1 個中 %2 個のトランザクション。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="784"/>
-        <location filename="../pages/History.qml" line="1641"/>
+        <location filename="../pages/History.qml" line="816"/>
+        <location filename="../pages/History.qml" line="1693"/>
         <source>Primary address</source>
         <translation>プライマリーアドレス</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="652"/>
+        <location filename="../pages/History.qml" line="690"/>
         <source>Unknown amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="748"/>
+        <location filename="../pages/History.qml" line="786"/>
         <source>To</source>
         <translation>To</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="748"/>
+        <location filename="../pages/History.qml" line="786"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="768"/>
+        <location filename="../pages/History.qml" line="674"/>
         <source>Failed</source>
         <translation>失敗</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="771"/>
-        <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="779"/>
+        <location filename="../pages/History.qml" line="811"/>
         <source>My wallet</source>
         <translation>マイウォレット</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="784"/>
-        <location filename="../pages/History.qml" line="787"/>
-        <location filename="../pages/History.qml" line="789"/>
+        <location filename="../pages/History.qml" line="816"/>
+        <location filename="../pages/History.qml" line="819"/>
+        <location filename="../pages/History.qml" line="821"/>
         <source>Address</source>
         <translation type="unfinished">アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="793"/>
+        <location filename="../pages/History.qml" line="825"/>
         <source>Unknown address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1650"/>
+        <location filename="../pages/History.qml" line="985"/>
+        <location filename="../pages/History.qml" line="1702"/>
         <source>Transaction details</source>
         <translation>トランザクションの詳細</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1676"/>
+        <location filename="../pages/History.qml" line="1023"/>
+        <source>Generate payment proof</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1723"/>
+        <source>Payment proof</source>
+        <translation type="unfinished">支払いの証明</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1724"/>
+        <source>Generating payment proof</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1732"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1685"/>
+        <location filename="../pages/History.qml" line="1741"/>
         <source>Tx ID:</source>
         <translation>トランザクションID:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1688"/>
+        <location filename="../pages/History.qml" line="1744"/>
         <source>Address:</source>
         <translation>アドレス:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1689"/>
+        <location filename="../pages/History.qml" line="1745"/>
         <source>Payment ID:</source>
         <translation>ペイメントID:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1690"/>
+        <location filename="../pages/History.qml" line="1746"/>
         <source>Integrated address</source>
         <translation>統合アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1691"/>
+        <location filename="../pages/History.qml" line="1747"/>
         <source>Tx key:</source>
         <translation>トランザクションキー:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1692"/>
+        <location filename="../pages/History.qml" line="1748"/>
         <source>Tx note:</source>
         <translation>トランザクションの説明:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1693"/>
+        <location filename="../pages/History.qml" line="1749"/>
         <source>Destinations:</source>
         <translation>宛先:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1694"/>
+        <location filename="../pages/History.qml" line="1750"/>
         <source>Rings:</source>
         <translation>リング:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1711"/>
+        <location filename="../pages/History.qml" line="1757"/>
         <source>Please choose a folder</source>
         <translation>フォルダを選択してください</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1721"/>
+        <location filename="../pages/History.qml" line="1767"/>
         <source>Success</source>
         <translation>成功</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1722"/>
+        <location filename="../pages/History.qml" line="1768"/>
         <source>CSV file written to: %1</source>
         <translation>CSVファイルに書き込みました: %1</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1723"/>
+        <location filename="../pages/History.qml" line="1769"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
         <translation>Tip: お好きなスプレッドシートソフトウェアを使ってブロック高でソートしてください。</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1727"/>
+        <location filename="../pages/History.qml" line="1773"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1728"/>
+        <location filename="../pages/History.qml" line="1774"/>
         <source>Error exporting transaction data.</source>
         <translation>トランザクションデータのエクスポート中にエラーがありました。</translation>
     </message>
@@ -641,7 +706,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>LanguageSidebar</name>
     <message>
-        <location filename="../components/LanguageSidebar.qml" line="138"/>
+        <location filename="../components/LanguageSidebar.qml" line="96"/>
         <source>Language changed.</source>
         <translation>言語が変更されました。</translation>
     </message>
@@ -649,148 +714,108 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="148"/>
+        <location filename="../LeftPanel.qml" line="141"/>
         <source>Testnet</source>
         <translation>テストネット</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="148"/>
+        <location filename="../LeftPanel.qml" line="141"/>
         <source>Stagenet</source>
         <translation>ステージネット</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="162"/>
+        <location filename="../LeftPanel.qml" line="155"/>
         <source>View Only</source>
         <translation>閲覧専用</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="294"/>
+        <location filename="../LeftPanel.qml" line="287"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="185"/>
-        <location filename="../LeftPanel.qml" line="369"/>
+        <location filename="../LeftPanel.qml" line="178"/>
+        <location filename="../LeftPanel.qml" line="362"/>
         <source>Account</source>
         <translation>アカウント</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="224"/>
+        <location filename="../LeftPanel.qml" line="217"/>
         <source>Syncing...</source>
         <translation>同期中。。。</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="370"/>
+        <location filename="../LeftPanel.qml" line="363"/>
         <source>T</source>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="390"/>
+        <location filename="../LeftPanel.qml" line="383"/>
         <source>Send</source>
         <translation>送金する</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="412"/>
+        <location filename="../LeftPanel.qml" line="405"/>
         <source>Address book</source>
         <translation>アドレス帳</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="413"/>
+        <location filename="../LeftPanel.qml" line="406"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="434"/>
+        <location filename="../LeftPanel.qml" line="427"/>
         <source>Receive</source>
         <translation>受け取る</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="435"/>
+        <location filename="../LeftPanel.qml" line="428"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="457"/>
+        <location filename="../LeftPanel.qml" line="450"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="478"/>
+        <location filename="../LeftPanel.qml" line="471"/>
         <source>Advanced</source>
         <translation>高度な機能</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="479"/>
+        <location filename="../LeftPanel.qml" line="472"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="499"/>
-        <source>Mining</source>
-        <translation>マイニング</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="500"/>
-        <source>M</source>
-        <translation>M</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="522"/>
-        <source>Prove/check</source>
-        <translation>証明と検証</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="545"/>
-        <source>Shared RingDB</source>
-        <translation>共有リングDB</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="627"/>
+        <location filename="../LeftPanel.qml" line="529"/>
         <source>Wallet</source>
         <translation>ウォレット</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="636"/>
+        <location filename="../LeftPanel.qml" line="538"/>
         <source>Daemon</source>
         <translation>デーモン</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="523"/>
-        <source>K</source>
-        <translation>K</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="456"/>
+        <location filename="../LeftPanel.qml" line="449"/>
         <source>Transactions</source>
         <translation>トランザクション</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="546"/>
-        <source>G</source>
-        <translation>G</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="568"/>
-        <source>Sign/verify</source>
-        <translation>電子署名</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="569"/>
-        <source>I</source>
-        <translation>I</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="590"/>
+        <location filename="../LeftPanel.qml" line="492"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="591"/>
+        <location filename="../LeftPanel.qml" line="493"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="391"/>
+        <location filename="../LeftPanel.qml" line="384"/>
         <source>S</source>
         <translation>S</translation>
     </message>
@@ -798,32 +823,70 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="164"/>
+        <location filename="../components/LineEdit.qml" line="190"/>
         <source>Copy</source>
         <translation>コピー</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="170"/>
+        <location filename="../components/LineEdit.qml" line="195"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
+    </message>
+    <message>
+        <location filename="../components/LineEdit.qml" line="207"/>
+        <source>Paste</source>
+        <translation type="unfinished">ペースト</translation>
     </message>
 </context>
 <context>
     <name>LineEditMulti</name>
     <message>
-        <location filename="../components/LineEditMulti.qml" line="135"/>
+        <location filename="../components/LineEditMulti.qml" line="139"/>
         <source>Copy</source>
         <translation>コピー</translation>
     </message>
     <message>
-        <location filename="../components/LineEditMulti.qml" line="140"/>
+        <location filename="../components/LineEditMulti.qml" line="144"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../components/LineEditMulti.qml" line="151"/>
+        <location filename="../components/LineEditMulti.qml" line="155"/>
         <source>Paste</source>
         <translation>ペースト</translation>
+    </message>
+</context>
+<context>
+    <name>MenuBar</name>
+    <message>
+        <location filename="../components/MenuBar.qml" line="34"/>
+        <source>File</source>
+        <translation type="unfinished">ファイル</translation>
+    </message>
+    <message>
+        <location filename="../components/MenuBar.qml" line="37"/>
+        <source>Close Wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/MenuBar.qml" line="42"/>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/MenuBar.qml" line="44"/>
+        <source>Light Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/MenuBar.qml" line="44"/>
+        <source>Dark Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/MenuBar.qml" line="50"/>
+        <source>Change Language</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1074,34 +1137,6 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
 </context>
 <context>
-    <name>Navbar</name>
-    <message>
-        <location filename="../pages/settings/Navbar.qml" line="136"/>
-        <source>Wallet</source>
-        <translation>ウォレット</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/Navbar.qml" line="188"/>
-        <source>Interface</source>
-        <translation>インターフェイス</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/Navbar.qml" line="241"/>
-        <source>Node</source>
-        <translation>ノード</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/Navbar.qml" line="294"/>
-        <source>Log</source>
-        <translation>ログ</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/Navbar.qml" line="347"/>
-        <source>Info</source>
-        <translation>情報</translation>
-    </message>
-</context>
-<context>
     <name>NetworkStatusItem</name>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="131"/>
@@ -1261,7 +1296,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
 <context>
     <name>QRCodeScanner</name>
     <message>
-        <location filename="../components/QRCodeScanner.qml" line="137"/>
+        <location filename="../components/QRCodeScanner.qml" line="140"/>
         <source>QrCode Scanned</source>
         <translation>QRコードをスキャンしました</translation>
     </message>
@@ -1274,49 +1309,141 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>選択したアドレスのラベル:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="85"/>
+        <location filename="../pages/Receive.qml" line="229"/>
         <source>Addresses</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="295"/>
-        <source>Save as image</source>
-        <translation>画像として保存する</translation>
-    </message>
-    <message>
-        <location filename="../pages/Receive.qml" line="304"/>
+        <location filename="../pages/Receive.qml" line="206"/>
         <source>Show on device</source>
         <translation>デバイスに表示する</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="324"/>
+        <location filename="../pages/Receive.qml" line="453"/>
         <source>Please choose a name</source>
         <translation>名前を選んでください</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="250"/>
+        <location filename="../pages/Receive.qml" line="238"/>
         <source>Set the label of the new address:</source>
         <translation>新しいアドレスのラベル:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="210"/>
+        <location filename="../pages/Receive.qml" line="122"/>
+        <source>Save as Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="135"/>
+        <source>Address #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="151"/>
+        <location filename="../pages/Receive.qml" line="424"/>
+        <source>no label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="158"/>
+        <location filename="../pages/Receive.qml" line="385"/>
+        <source>Edit address label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="186"/>
+        <location filename="../pages/Receive.qml" line="402"/>
+        <source>Copy address to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="196"/>
+        <location filename="../pages/Receive.qml" line="407"/>
         <source>Address copied to clipboard</source>
         <translation>アドレスをクリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="248"/>
+        <location filename="../pages/Receive.qml" line="235"/>
         <source>Create new address</source>
         <translation>新しいアドレスの作成</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="331"/>
+        <location filename="../pages/Receive.qml" line="369"/>
+        <source>See transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="420"/>
+        <source>Primary address</source>
+        <translation type="unfinished">プライマリーアドレス</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="460"/>
         <source>Save QrCode</source>
         <translation>QRコードを保存</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="332"/>
+        <location filename="../pages/Receive.qml" line="461"/>
         <source>Failed to save QrCode to </source>
         <translation>QRコードの保存に失敗しました </translation>
+    </message>
+</context>
+<context>
+    <name>RemoteNodeDialog</name>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="37"/>
+        <source>Edit remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="37"/>
+        <source>Add remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="90"/>
+        <source>Address</source>
+        <translation type="unfinished">アドレス</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="91"/>
+        <source>Port</source>
+        <translation type="unfinished">ポート番号</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="102"/>
+        <source>Daemon username</source>
+        <translation type="unfinished">デーモンのユーザー名</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="103"/>
+        <source>(optional)</source>
+        <translation type="unfinished">(オプショナル)</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="113"/>
+        <source>Daemon password</source>
+        <translation type="unfinished">デーモンのパスワード</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="114"/>
+        <source>Password</source>
+        <translation type="unfinished">パスワード</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="125"/>
+        <source>Mark as Trusted Daemon</source>
+        <translation type="unfinished">信頼するデーモンとして記録</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="136"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeDialog.qml" line="145"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1327,78 +1454,134 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>リモートノードのホスト名またはIP</translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeEdit.qml" line="111"/>
+        <location filename="../components/RemoteNodeEdit.qml" line="110"/>
         <source>Port</source>
         <translation>ポート番号</translation>
     </message>
 </context>
 <context>
+    <name>RemoteNodeList</name>
+    <message>
+        <location filename="../components/RemoteNodeList.qml" line="48"/>
+        <source>Add remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeList.qml" line="108"/>
+        <source>Trusted daemon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeList.qml" line="132"/>
+        <source>Edit remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/RemoteNodeList.qml" line="144"/>
+        <source>Remove remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <location filename="../pages/settings/Settings.qml" line="58"/>
+        <source>Wallet</source>
+        <translation type="unfinished">ウォレット</translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/Settings.qml" line="63"/>
+        <source>Interface</source>
+        <translation type="unfinished">インターフェイス</translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/Settings.qml" line="68"/>
+        <source>Node</source>
+        <translation type="unfinished">ノード</translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/Settings.qml" line="74"/>
+        <source>Log</source>
+        <translation type="unfinished">ログ</translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/Settings.qml" line="79"/>
+        <source>Info</source>
+        <translation type="unfinished">情報</translation>
+    </message>
+</context>
+<context>
     <name>SettingsInfo</name>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="46"/>
-        <location filename="../pages/settings/SettingsInfo.qml" line="48"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="47"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="49"/>
         <source>Simple mode</source>
         <translation>シンプルモード</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="51"/>
         <source>Advanced mode</source>
         <translation>高度なモード</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="70"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="72"/>
         <source>GUI version: </source>
         <translation>GUIバージョン: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="100"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="102"/>
         <source>Embedded Monero version: </source>
         <translation>組み込まれているMoneroのバージョン: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="132"/>
         <source>Wallet path: </source>
         <translation>ウォレットのパス: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="190"/>
         <source>Set a new restore height.
 You can enter a block height or a date (YYYY-MM-DD):</source>
         <translation>復元を開始するブロック高を入力してください。
 ブロック高あるいは日付 (YYYY-MM-DD) を入力できます:</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="230"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="226"/>
         <source>Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD</source>
         <translation>不正なブロック高が指定されました。数値か YYYY-MM-DD という形式の日付でなければなりません</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="207"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="203"/>
         <source>Rescan wallet cache</source>
         <translation>ウォレットのキャッシュを再スキャン</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="51"/>
         <source>Remote node</source>
         <translation type="unfinished">リモートノード</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="51"/>
         <source>Local node</source>
         <translation type="unfinished">ローカルノード</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="53"/>
+        <source>portable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
         <source>Wallet restore height: </source>
         <translation>復元するブロック高：</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Change</source>
         <translation>編集</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="208"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="204"/>
         <source>Are you sure you want to rebuild the wallet cache?
 The following information will be deleted
 - Recipient addresses
@@ -1417,47 +1600,47 @@ The old wallet cache file will be renamed and can be restored later.
 </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="264"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="260"/>
         <source>Wallet log path: </source>
         <translation>ウォレットログのパス: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="303"/>
         <source>Wallet mode: </source>
         <translation>ウォレットモード: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="338"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="334"/>
         <source>Graphics mode: </source>
         <translation>グラフィックスモード: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="372"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="368"/>
         <source>Tails: </source>
         <translation>Tails: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="376"/>
         <source>persistent</source>
         <translation>永続的</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="376"/>
         <source>persistence disabled</source>
         <translation>存続を無効にしました</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="389"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="385"/>
         <source>Copy to clipboard</source>
         <translation>クリップボードにコピー</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="408"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="404"/>
         <source>Copied to clipboard</source>
         <translation>クリップボードにコピーしました</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="410"/>
         <source>Donate to Monero</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1475,7 +1658,7 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>残高を隠す</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="140"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="139"/>
         <source>Lock wallet on inactivity</source>
         <translation>一定時間でウォレットをロック</translation>
     </message>
@@ -1495,97 +1678,97 @@ The old wallet cache file will be renamed and can be restored later.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="97"/>
         <source>Ask for password before sending a transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="105"/>
         <source>Wrong password</source>
         <translation type="unfinished">パスワードが間違っています</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="119"/>
         <source>Autosave</source>
         <translation>自動保存</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="131"/>
         <source>Every</source>
         <translation>毎</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="131"/>
         <source>minute(s)</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="152"/>
         <source>minutes</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="152"/>
         <source>minute</source>
         <translation>分</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="154"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
         <source>After </source>
         <translation>あと </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="163"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="162"/>
         <source>Enable displaying balance in other currencies</source>
         <translation>他通貨での残高表示を有効にする</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="189"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="184"/>
         <source>Price source</source>
         <translation>価格のソース</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="213"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="199"/>
         <source>Currency</source>
         <translation>通貨</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="242"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="223"/>
         <source>Enabling price conversion exposes your IP address to the selected price source.</source>
         <translation>通貨の変換を有効にすると選択した価格のソースに対しIPアドレスが開示されます。</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="230"/>
         <source>Confirm and enable</source>
         <translation>確認して有効化</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
         <source>Socks5 proxy (%1%2)</source>
         <translation>Socks5 プロキシ (%1%2)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="250"/>
         <source>remote node connections, </source>
         <translation>リモートノード接続、 </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="251"/>
         <source>updates downloading, fetching price sources</source>
         <translation>アップデートをダウンロード中、価格情報を取得中</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="263"/>
         <source>IP address</source>
         <translation>IPアドレス</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="264"/>
         <source>Port</source>
         <translation type="unfinished">ポート番号</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="276"/>
         <source>Change language</source>
         <translation>言語の変更</translation>
     </message>
@@ -1603,12 +1786,12 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>デーモンログ</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLog.qml" line="220"/>
-        <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation>コマンド + enter (e.g &apos;help&apos; あるいは &apos;status&apos;)</translation>
+        <location filename="../pages/settings/SettingsLog.qml" line="236"/>
+        <source>Type a command (e.g &apos;%1&apos; or &apos;%2&apos;) and press Enter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLog.qml" line="243"/>
+        <location filename="../pages/settings/SettingsLog.qml" line="259"/>
         <source>Failed to send command</source>
         <translation>コマンドの送信に失敗しました</translation>
     </message>
@@ -1636,98 +1819,57 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>サードパーティーのサーバを使ってMoneroネットワークに接続します。セキュリティは低くなりますがより簡単です。</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="262"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="253"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation>リモートノードを見つけるには、お好きな検索エンジンで&apos;Monero remote node&apos;と検索してください。ノードが信頼できるサードパーティーによって運営されていることを確認してください。</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="270"/>
-        <source>Address</source>
-        <translation>アドレス</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
-        <source>Port</source>
-        <translation>ポート番号</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="281"/>
-        <source>Remote node updated. Trusted daemon has been reset. Mark again, if desired.</source>
-        <translation>リモートノードが更新され、信頼するデーモンがリセットされました。望むなら再セットしてください。</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
-        <source>Daemon username</source>
-        <translation>デーモンのユーザー名</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="295"/>
-        <location filename="../pages/settings/SettingsNode.qml" line="397"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>(optional)</source>
         <translation>(オプショナル)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="304"/>
-        <source>Daemon password</source>
-        <translation>デーモンのパスワード</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="306"/>
-        <source>Password</source>
-        <translation>パスワード</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="321"/>
-        <source>Mark as Trusted Daemon</source>
-        <translation>信頼するデーモンとして記録</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="328"/>
-        <source>Connect</source>
-        <translation>接続</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="351"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
         <source>Start daemon</source>
         <translation>デーモンの開始</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="351"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
         <source>Stop daemon</source>
         <translation>デーモンを停止</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="370"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
         <source>Blockchain location</source>
         <translation>ブロックチェーンの場所</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="370"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
         <source>Change</source>
         <translation>変更</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="371"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="373"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>(default)</source>
         <translation>(デフォルト)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="396"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="316"/>
         <source>Daemon startup flags</source>
         <translation>デーモンの起動フラグ</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="340"/>
         <source>Bootstrap Address</source>
         <translation>ブートストラップアドレス</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="421"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
         <source>Bootstrap Port</source>
         <translation>ブートストラップポート</translation>
     </message>
@@ -1839,160 +1981,160 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>SharedRingDB</name>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="100"/>
+        <location filename="../pages/SharedRingDB.qml" line="99"/>
         <source>Shared RingDB</source>
         <translation>共有リングDB</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="104"/>
+        <location filename="../pages/SharedRingDB.qml" line="103"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
         <translation>このページでは共有リングデータベースを操作できます。このデータベースはMoneroウォレットおよびMoneroのキーを再利用するMoneroクローンのウォレットで利用するためのものです。</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="117"/>
-        <location filename="../pages/SharedRingDB.qml" line="119"/>
+        <location filename="../pages/SharedRingDB.qml" line="116"/>
+        <location filename="../pages/SharedRingDB.qml" line="118"/>
         <source>Outputs marked as spent</source>
         <translation>排除されたアウトプット</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="117"/>
-        <location filename="../pages/SharedRingDB.qml" line="254"/>
+        <location filename="../pages/SharedRingDB.qml" line="116"/>
+        <location filename="../pages/SharedRingDB.qml" line="253"/>
         <source>Help</source>
         <translation>ヘルプ</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="120"/>
+        <location filename="../pages/SharedRingDB.qml" line="119"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation>第三者がリング内に既知の使用済みインプットを見つけられないことは、Moneroトランザクションのどのインプットが使用されたのかを隠すために必要です。もし見つけられるとリング署名による保護は弱まります。もし1つのインプットを除いてすべてが使用済みだと知られている場合、実際に使用されたインプットは明らかとなり、Moneroが使っている3つの主要なプライバシー保護レイヤーのうちの1つであるリング署名の効果が失われてしまいます。&lt;br&gt;トランザクションでそれらのインプットを避けるため、既知の使用済みインプットのリストを用いてそれらを新規のトランザクションで使用しないようにできます。このようなリストはMoneroプロジェクトによって保守されgetmonero.orgのウェブサイトで公開されており、ここではこのリストをインポートすることができます。&lt;br&gt;あるいはmonero-blockchain-mark-spent-outputsというツールを使い、Moneroのブロックチェーン(およびキーを再利用するMoneroクローンのブロックチェン)を自分でスキャンして既知の使用済みアウトプットのリストを生成できます。&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="141"/>
+        <location filename="../pages/SharedRingDB.qml" line="140"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
         <translation>既知の使用済みアウトプットをセットし、リング署名でプライバシー用のプレースホルダーとして使われないようにします。</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="142"/>
+        <location filename="../pages/SharedRingDB.qml" line="141"/>
         <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
         <translation>リストをリフレッシュしたい場合ファイルをロードするだけです。必要であれば手動で追加と削除が可能です。</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="154"/>
+        <location filename="../pages/SharedRingDB.qml" line="153"/>
         <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>排除するアウトプットをロードするファイルを選んでください</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="168"/>
+        <location filename="../pages/SharedRingDB.qml" line="167"/>
         <source>Path to file</source>
         <translation>ファイルパス</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="170"/>
+        <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Filename with outputs to mark as spent</source>
         <translation>排除するアウトプットを含むファイル名</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="181"/>
+        <location filename="../pages/SharedRingDB.qml" line="180"/>
         <source>Browse</source>
         <translation>選択</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="191"/>
+        <location filename="../pages/SharedRingDB.qml" line="190"/>
         <source>Load</source>
         <translation>ロード</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="208"/>
+        <location filename="../pages/SharedRingDB.qml" line="207"/>
         <source>Or manually mark a single output as spent/unspent:</source>
         <translation>手動でアウトプットを排除/元に戻す:</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="210"/>
+        <location filename="../pages/SharedRingDB.qml" line="209"/>
         <source>Paste output amount</source>
         <translation>金額</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="222"/>
+        <location filename="../pages/SharedRingDB.qml" line="221"/>
         <source>Paste output offset</source>
         <translation>オフセット</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="234"/>
+        <location filename="../pages/SharedRingDB.qml" line="233"/>
         <source>Mark as spent</source>
         <translation>排除</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="242"/>
+        <location filename="../pages/SharedRingDB.qml" line="241"/>
         <source>Mark as unspent</source>
         <translation>元に戻す</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="254"/>
-        <location filename="../pages/SharedRingDB.qml" line="256"/>
+        <location filename="../pages/SharedRingDB.qml" line="253"/>
+        <location filename="../pages/SharedRingDB.qml" line="255"/>
         <source>Rings</source>
         <translation>リング</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="257"/>
+        <location filename="../pages/SharedRingDB.qml" line="256"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation>Moneroのリング署名による保護を無効化しないため、あるアウトプットを使う際に異なるブロックチェーンで異なるリングを使うことは避けなければなりません。これは通常問題になりませんが、キーを再利用するMoneroクローンが既存のアウトプットの使用を許している場合問題になります。この場合、既存のアウトプットは両方のチェーンで同じリングを使わなくてはなりません。&lt;br&gt;これはキーを再利用するソフトウェアが積極的にプライバシーを侵害しようとしない限り自動的に行われます。&lt;br&gt;もしキーを再利用するMoneroクローンを使っていてそのクローンがこの保護を含んでいない場合も、まずクローンの方でアウトプットを使用しその後リングをこのページに手動で追加することで、トランザクションは保護されMoneroを安全に使用できるようになります。&lt;br&gt;これらの機能を提供しないキーを再利用するMoneroクローンを使用していない場合、すべては自動化されているので何もする必要はありません。&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="279"/>
+        <location filename="../pages/SharedRingDB.qml" line="278"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation>キーを再利用するチェーンでアウトプットに使用されたリングを記録し、プライバシーの問題を避けるためMoneroでも同じリングを使うようにします。</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="290"/>
+        <location filename="../pages/SharedRingDB.qml" line="289"/>
         <source>Key image</source>
         <translation>キーイメージ</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="292"/>
+        <location filename="../pages/SharedRingDB.qml" line="291"/>
         <source>Paste key image</source>
         <translation>キーイメージ</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="309"/>
+        <location filename="../pages/SharedRingDB.qml" line="308"/>
         <source>Get ring</source>
         <translation>リングを取得</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="321"/>
+        <location filename="../pages/SharedRingDB.qml" line="320"/>
         <source>Get Ring</source>
         <translation>リングを取得</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="327"/>
+        <location filename="../pages/SharedRingDB.qml" line="326"/>
         <source>No ring found</source>
         <translation>リングが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="345"/>
+        <location filename="../pages/SharedRingDB.qml" line="344"/>
         <source>Set ring</source>
         <translation>リングをセット</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="357"/>
+        <location filename="../pages/SharedRingDB.qml" line="356"/>
         <source>Set Ring</source>
         <translation>リングをセット</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="376"/>
+        <location filename="../pages/SharedRingDB.qml" line="375"/>
         <source>I intend to spend on key-reusing fork(s)</source>
         <translation>キーを再利用するフォークで使うつもりです</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="388"/>
+        <location filename="../pages/SharedRingDB.qml" line="387"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>キーを再利用するフォークで使うかもしれません</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="400"/>
+        <location filename="../pages/SharedRingDB.qml" line="399"/>
         <source>Relative</source>
         <translation>相対</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="418"/>
+        <location filename="../pages/SharedRingDB.qml" line="417"/>
         <source>Set segregation height:</source>
         <translation>分離ブロック高:</translation>
     </message>
@@ -2020,140 +2162,140 @@ You can change the password in the wallet settings.</source>
         <translation>この署名は不正です</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="106"/>
+        <location filename="../pages/Sign.qml" line="105"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
         <translation>このページではメッセージ(またはファイルの内容)とアドレスで署名と検証ができます。</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="136"/>
-        <location filename="../pages/Sign.qml" line="184"/>
-        <location filename="../pages/Sign.qml" line="298"/>
+        <location filename="../pages/Sign.qml" line="135"/>
+        <location filename="../pages/Sign.qml" line="183"/>
+        <location filename="../pages/Sign.qml" line="297"/>
         <source>Message</source>
         <translation>メッセージ</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="102"/>
+        <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
         <translation>電子署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="122"/>
+        <location filename="../pages/Sign.qml" line="121"/>
         <source>Mode</source>
         <translation>モード</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="149"/>
-        <location filename="../pages/Sign.qml" line="201"/>
-        <location filename="../pages/Sign.qml" line="314"/>
+        <location filename="../pages/Sign.qml" line="148"/>
+        <location filename="../pages/Sign.qml" line="200"/>
+        <location filename="../pages/Sign.qml" line="313"/>
         <source>File</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="171"/>
+        <location filename="../pages/Sign.qml" line="170"/>
         <source>Sign file</source>
         <translation>ファイルに署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="171"/>
+        <location filename="../pages/Sign.qml" line="170"/>
         <source>Sign message</source>
         <translation>メッセージに署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="186"/>
+        <location filename="../pages/Sign.qml" line="185"/>
         <source>Enter a message to sign</source>
         <translation>署名するメッセージ</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="203"/>
-        <location filename="../pages/Sign.qml" line="316"/>
+        <location filename="../pages/Sign.qml" line="202"/>
+        <location filename="../pages/Sign.qml" line="315"/>
         <source>Enter path to file</source>
         <translation>ファイルパス</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="215"/>
-        <location filename="../pages/Sign.qml" line="327"/>
+        <location filename="../pages/Sign.qml" line="214"/>
+        <location filename="../pages/Sign.qml" line="326"/>
         <source>Browse</source>
         <translation>選択</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="231"/>
+        <location filename="../pages/Sign.qml" line="230"/>
         <source>Click [Sign Message] to generate signature</source>
         <translation>[メッセージに署名]をクリックして署名を生成</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="231"/>
+        <location filename="../pages/Sign.qml" line="230"/>
         <source>Click [Sign File] to generate signature</source>
         <translation>[ファイルに署名]をクリックして署名を生成</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="245"/>
-        <location filename="../pages/Sign.qml" line="365"/>
+        <location filename="../pages/Sign.qml" line="244"/>
+        <location filename="../pages/Sign.qml" line="364"/>
         <source>Clear</source>
         <translation>クリア</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="258"/>
+        <location filename="../pages/Sign.qml" line="257"/>
         <source>Sign Message</source>
         <translation>メッセージに署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="272"/>
+        <location filename="../pages/Sign.qml" line="271"/>
         <source>Sign File</source>
         <translation>ファイルに署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="290"/>
+        <location filename="../pages/Sign.qml" line="289"/>
         <source>Verify message</source>
         <translation>メッセージを検証</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="290"/>
+        <location filename="../pages/Sign.qml" line="289"/>
         <source>Verify file</source>
         <translation>ファイルを検証</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="300"/>
+        <location filename="../pages/Sign.qml" line="299"/>
         <source>Enter the message to verify</source>
         <translation>検証するメッセージ</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="339"/>
+        <location filename="../pages/Sign.qml" line="338"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="342"/>
+        <location filename="../pages/Sign.qml" line="341"/>
         <source>Enter the Monero Address (example: 44AFFq5kSiGBoZ...)</source>
         <translation>Moneroアドレス (例: 44AFFq5kSiGBoZ...)</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="352"/>
+        <location filename="../pages/Sign.qml" line="351"/>
         <source>Enter the signature to verify</source>
         <translation>検証する署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="380"/>
+        <location filename="../pages/Sign.qml" line="379"/>
         <source>Verify File</source>
         <translation>ファイルを検証</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="392"/>
+        <location filename="../pages/Sign.qml" line="391"/>
         <source>Verify Message</source>
         <translation>メッセージを検証</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="404"/>
+        <location filename="../pages/Sign.qml" line="403"/>
         <source>Please choose a file to sign</source>
         <translation>署名するファイルを選択してください</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="229"/>
-        <location filename="../pages/Sign.qml" line="350"/>
+        <location filename="../pages/Sign.qml" line="228"/>
+        <location filename="../pages/Sign.qml" line="349"/>
         <source>Signature</source>
         <translation>署名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="415"/>
+        <location filename="../pages/Sign.qml" line="414"/>
         <source>Please choose a file to verify</source>
         <translation>検証するファイルを選択してください</translation>
     </message>
@@ -2186,27 +2328,27 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>StandardDropdown</name>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="153"/>
+        <location filename="../components/StandardDropdown.qml" line="173"/>
         <source>Automatic</source>
         <translation>自動</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="154"/>
+        <location filename="../components/StandardDropdown.qml" line="174"/>
         <source>Slow (x0.2 fee)</source>
         <translation>遅い (０.２倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="155"/>
+        <location filename="../components/StandardDropdown.qml" line="175"/>
         <source>Normal (x1 fee)</source>
         <translation>普通 (標準の手数料)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="156"/>
+        <location filename="../components/StandardDropdown.qml" line="176"/>
         <source>Fast (x5 fee)</source>
         <translation>早い (5倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="157"/>
+        <location filename="../components/StandardDropdown.qml" line="177"/>
         <source>Fastest (x200 fee)</source>
         <translation>最速 (２００倍の手数料)</translation>
     </message>
@@ -2235,24 +2377,52 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
+        <source>View progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
         <source>Open folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
+        <location filename="../components/SuccessfulTxDialog.qml" line="170"/>
         <source>Done</source>
         <translation type="unfinished">完了</translation>
     </message>
 </context>
 <context>
+    <name>TitleBar</name>
+    <message>
+        <location filename="../components/TitleBar.qml" line="116"/>
+        <source>Close this wallet and return to main menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/TitleBar.qml" line="156"/>
+        <source>Change language</source>
+        <translation type="unfinished">言語の変更</translation>
+    </message>
+    <message>
+        <location filename="../components/TitleBar.qml" line="195"/>
+        <source>Switch to light theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/TitleBar.qml" line="195"/>
+        <source>Switch to dark theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Transfer</name>
     <message>
-        <location filename="../pages/Transfer.qml" line="89"/>
+        <location filename="../pages/Transfer.qml" line="88"/>
         <source>OpenAlias error</source>
         <translation>OpenAliasエラー</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="395"/>
+        <location filename="../pages/Transfer.qml" line="705"/>
         <source>Transaction priority</source>
         <translation>取引のプライオリティ</translation>
     </message>
@@ -2262,144 +2432,133 @@ You can change the password in the wallet settings.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="261"/>
+        <location filename="../pages/Transfer.qml" line="431"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="336"/>
-        <source>All</source>
-        <translation>すべて</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="410"/>
+        <location filename="../pages/Transfer.qml" line="689"/>
         <source>Automatic</source>
         <translation>自動</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="413"/>
+        <location filename="../pages/Transfer.qml" line="692"/>
         <source>Fast (x5 fee)</source>
         <translation>早い (5倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="266"/>
+        <location filename="../pages/Transfer.qml" line="436"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="270"/>
+        <location filename="../pages/Transfer.qml" line="440"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりませんでしたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="274"/>
-        <location filename="../pages/Transfer.qml" line="278"/>
+        <location filename="../pages/Transfer.qml" line="444"/>
+        <location filename="../pages/Transfer.qml" line="448"/>
         <source>Internal error</source>
         <translation>内部エラー</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="282"/>
+        <location filename="../pages/Transfer.qml" line="452"/>
         <source>No address found</source>
         <translation>アドレスが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="456"/>
+        <location filename="../pages/Transfer.qml" line="800"/>
         <source>Saved to local wallet history</source>
         <translation>ローカル上の履歴に保存されます</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="722"/>
+        <location filename="../pages/Transfer.qml" line="1063"/>
         <source>Monero sent successfully</source>
         <translation>Moneroの送金に成功しました</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="802"/>
+        <location filename="../pages/Transfer.qml" line="1143"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>接続したデーモンはGUIと互換性がありません。
 アップグレードするか別のデーモンに接続してください</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="181"/>
-        <location filename="../pages/Transfer.qml" line="244"/>
+        <location filename="../pages/Transfer.qml" line="415"/>
         <source>Resolve</source>
         <translation>名前解決</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="72"/>
+        <location filename="../pages/Transfer.qml" line="71"/>
         <source>Address is invalid.</source>
         <translation>不正なアドレスです。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="77"/>
+        <location filename="../pages/Transfer.qml" line="76"/>
         <source>Enter an amount.</source>
         <translation>金額を入力してください。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="83"/>
+        <location filename="../pages/Transfer.qml" line="82"/>
         <source>Start daemon</source>
         <translation>デーモンの開始</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="166"/>
+        <location filename="../pages/Transfer.qml" line="169"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="303"/>
+        <location filename="../pages/Transfer.qml" line="333"/>
         <source>Amount</source>
         <translation>金額</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="303"/>
-        <source>Change account</source>
-        <translation>アカウントの切り替え</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="411"/>
+        <location filename="../pages/Transfer.qml" line="690"/>
         <source>Slow (x0.2 fee)</source>
         <translation>遅い (０.２倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="414"/>
+        <location filename="../pages/Transfer.qml" line="693"/>
         <source>Fastest (x200 fee)</source>
         <translation>最速 (２００倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="180"/>
+        <location filename="../pages/Transfer.qml" line="271"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="428"/>
+        <location filename="../pages/Transfer.qml" line="770"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="498"/>
+        <location filename="../pages/Transfer.qml" line="842"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
         <translation>ロングペイメントIDは廃止されました。ロングペイメントIDはブロックチェーンで暗号化されておらず、あなたのプライバシーを毀損します。もしもあなたが送金しようとしている相手がまだロングペイメントIDを要求しているのであれば、相手にもこのことを教えてあげてください。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="517"/>
+        <location filename="../pages/Transfer.qml" line="860"/>
         <source>Send</source>
         <translation>送金</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="659"/>
-        <location filename="../pages/Transfer.qml" line="715"/>
+        <location filename="../pages/Transfer.qml" line="1000"/>
+        <location filename="../pages/Transfer.qml" line="1056"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="721"/>
+        <location filename="../pages/Transfer.qml" line="1062"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="648"/>
-        <location filename="../pages/Transfer.qml" line="709"/>
-        <location filename="../pages/Transfer.qml" line="753"/>
+        <location filename="../pages/Transfer.qml" line="989"/>
+        <location filename="../pages/Transfer.qml" line="1050"/>
+        <location filename="../pages/Transfer.qml" line="1094"/>
         <source>Please choose a file</source>
         <translation>ファイルを選択してください</translation>
     </message>
@@ -2409,216 +2568,256 @@ Please upgrade or connect to another daemon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="376"/>
-        <source>Fee</source>
-        <translation>手数料</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="412"/>
+        <location filename="../pages/Transfer.qml" line="691"/>
         <source>Normal (x1 fee)</source>
         <translation>普通 (標準の手数料)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="446"/>
+        <location filename="../pages/Transfer.qml" line="788"/>
         <source>Add description</source>
         <translation>説明を追加</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="473"/>
+        <location filename="../pages/Transfer.qml" line="817"/>
         <source>Add payment ID</source>
         <translation>ペイメントIDを追加</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="485"/>
+        <location filename="../pages/Transfer.qml" line="829"/>
         <source>64 hexadecimal characters</source>
         <translation>64文字の16進数文字列</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="554"/>
+        <location filename="../pages/Transfer.qml" line="897"/>
         <source>Advanced options</source>
         <translation>高度なオプション</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="560"/>
+        <location filename="../pages/Transfer.qml" line="903"/>
         <source>Key images</source>
         <translation>キーイメージ</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="561"/>
+        <location filename="../pages/Transfer.qml" line="904"/>
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
+        <location filename="../pages/Transfer.qml" line="910"/>
         <source>Import</source>
         <translation>インポート</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="573"/>
+        <location filename="../pages/Transfer.qml" line="921"/>
         <source>Required for view-only wallets to display the real balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="577"/>
+        <location filename="../pages/Transfer.qml" line="919"/>
         <source>* To import, you must connect to a local node or a trusted remote node</source>
         <translation>* インポートするには、ローカルノードもしくは信頼できるリモートノードに接続する必要があります</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="581"/>
+        <location filename="../pages/Transfer.qml" line="925"/>
         <source>1. Using cold wallet, export the key images into a file</source>
         <translation>1. コールドウォレットを使って、キーイメージをファイルにエクスポートする</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="582"/>
+        <location filename="../pages/Transfer.qml" line="926"/>
         <source>2. Using view-only wallet, import the key images file</source>
         <translation>2. 閲覧専用ウォレットを使って、キーイメージをファイルからインポートする</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="590"/>
+        <location filename="../pages/Transfer.qml" line="933"/>
         <source>Offline transaction signing</source>
         <translation>オフライントランザクション署名</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="591"/>
+        <location filename="../pages/Transfer.qml" line="934"/>
         <source>Create</source>
         <translation>作成</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="602"/>
+        <location filename="../pages/Transfer.qml" line="943"/>
         <source>Sign (offline)</source>
         <translation>署名(オフライン)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="608"/>
+        <location filename="../pages/Transfer.qml" line="949"/>
         <source>Submit</source>
         <translation>送信</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="614"/>
+        <location filename="../pages/Transfer.qml" line="960"/>
         <source>Spend XMR from a cold (offline) wallet</source>
         <translation>XMRをコールド(オフライン)ウォレットから消費する</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="618"/>
+        <location filename="../pages/Transfer.qml" line="958"/>
         <source>* To create a transaction file, please enter address and amount above</source>
         <translation>* トランザクションファイルを作成するためには、上部にアドレスと金額を入力してください</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="622"/>
+        <location filename="../pages/Transfer.qml" line="279"/>
+        <source>Grab QR code from screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="301"/>
+        <source>Scan QR code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="311"/>
+        <source>Import from address book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="342"/>
+        <source>Send all unlocked balance of this account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="519"/>
+        <source>Remove recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="576"/>
+        <source>Add recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="589"/>
+        <source>Total</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="756"/>
+        <source>fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="800"/>
+        <source>only visible to you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="964"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
         <translation>1. 閲覧専用ウォレットを使って、出力をファイルにエクスポートします</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="623"/>
+        <location filename="../pages/Transfer.qml" line="965"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
         <translation>2. コールドウォレットを使って、出力ファイルをインポートし、キーイメージをエクスポートします</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="624"/>
+        <location filename="../pages/Transfer.qml" line="966"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="626"/>
+        <location filename="../pages/Transfer.qml" line="968"/>
         <source>4. Using cold wallet, sign your transaction file</source>
         <translation>4. コールドウォレットを使って、トランザクションファイルに署名します</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="627"/>
+        <location filename="../pages/Transfer.qml" line="969"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
         <translation>5. 閲覧専用ウォレットを使って、署名済みトランザクションを送信します</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="634"/>
+        <location filename="../pages/Transfer.qml" line="975"/>
         <source>Unmixable outputs</source>
         <translation>ミックス不可能なアウトプット</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="635"/>
+        <location filename="../pages/Transfer.qml" line="976"/>
         <source>Sweep</source>
         <translation>スイープ</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="641"/>
+        <location filename="../pages/Transfer.qml" line="982"/>
         <source>Create a transaction that spends old unmovable outputs</source>
         <translation>古い移動不可能なアウトプットを消費するトランザクションを作成する</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="660"/>
+        <location filename="../pages/Transfer.qml" line="1001"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>未署名の取引を読み込めませんでした: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="667"/>
+        <location filename="../pages/Transfer.qml" line="1008"/>
         <source>
 Number of transactions: </source>
         <translation>
 取引の数: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="669"/>
+        <location filename="../pages/Transfer.qml" line="1010"/>
         <source>
 Transaction #%1</source>
         <translation>
 取引 #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="670"/>
+        <location filename="../pages/Transfer.qml" line="1011"/>
         <source>
 Recipient: </source>
         <translation>
 宛先: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="671"/>
+        <location filename="../pages/Transfer.qml" line="1012"/>
         <source>
 payment ID: </source>
         <translation>
 ペイメントID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="672"/>
+        <location filename="../pages/Transfer.qml" line="1013"/>
         <source>
 Amount: </source>
         <translation>
 金額: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="673"/>
+        <location filename="../pages/Transfer.qml" line="1014"/>
         <source>
 Fee: </source>
         <translation>
 手数料: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="674"/>
+        <location filename="../pages/Transfer.qml" line="1015"/>
         <source>
 Ringsize: </source>
         <translation>
 リングサイズ: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="688"/>
+        <location filename="../pages/Transfer.qml" line="1029"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="716"/>
+        <location filename="../pages/Transfer.qml" line="1057"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>取引を送信できません: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="780"/>
+        <location filename="../pages/Transfer.qml" line="1121"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>ウォレットがデーモンに接続していません。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="796"/>
+        <location filename="../pages/Transfer.qml" line="1137"/>
         <source>Wallet is connecting to daemon.</source>
         <translation>ウォレットはデーモンに接続中です。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="807"/>
+        <location filename="../pages/Transfer.qml" line="1148"/>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation>デーモンの同期の終了を待っています。</translation>
     </message>
@@ -2631,72 +2830,72 @@ Ringsize: </source>
 <context>
     <name>TxConfirmationDialog</name>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="160"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="167"/>
         <source>Create transaction file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="162"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="169"/>
         <source>Sweep unmixable outputs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="164"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="171"/>
         <source>Confirm send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="199"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="206"/>
         <source>All unlocked balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="230"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="232"/>
         <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="251"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="252"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">マイウォレット</translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="258"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="259"/>
         <source>Account #</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="277"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="273"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">To</translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="299"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="311"/>
         <source>Monero address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="317"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="332"/>
         <source>Fee</source>
         <translation type="unfinished">手数料</translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="333"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="347"/>
         <source>See on device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="335"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="349"/>
         <source>Calculating fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="401"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="415"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/TxConfirmationDialog.qml" line="414"/>
+        <location filename="../components/TxConfirmationDialog.qml" line="428"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2989,27 +3188,27 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="304"/>
+        <location filename="../wizard/WizardController.qml" line="305"/>
         <source>Please choose a file</source>
         <translation>ファイルを選択してください</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="350"/>
+        <location filename="../wizard/WizardController.qml" line="351"/>
         <source>Failed to store the wallet</source>
         <translation>ウォレットへの保存に失敗しました</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="431"/>
+        <location filename="../wizard/WizardController.qml" line="432"/>
         <source>Please proceed to the device...</source>
         <translation>デバイスで続行してください。。。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="435"/>
+        <location filename="../wizard/WizardController.qml" line="436"/>
         <source>Creating wallet from device...</source>
         <translation>デバイスからウォレットを作成しています。。。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="436"/>
+        <location filename="../wizard/WizardController.qml" line="437"/>
         <source>
 
 Please check your hardware wallet –
@@ -3038,48 +3237,48 @@ your input may be required.</source>
         <translation>ハードウェアデバイスを使用。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="88"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="97"/>
         <source>Create a new wallet from device.</source>
         <translation>デバイスを用いて新しいウォレットを作成する。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="101"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="110"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
         <translation>デバイスを用いてウォレットを復元します。以前ハードウェアウォレットを用いていた場合に使用してください。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="120"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="129"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>`YYYY-MM-DD`の形式でウォレットを作成した日時、または復元を開始するブロック高</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="123"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="132"/>
         <source>Restore height</source>
         <translation>復元するブロック高</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="141"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="142"/>
         <source>Advanced options</source>
         <translation>高度なオプション</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="148"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="149"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>サブアドレスの先読み (オプション)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="158"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="219"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="159"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="213"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>ハードウェアデバイスからウォレットを書き出すのに失敗しました。アプリケーションログをチェックしてください。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="175"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="176"/>
         <source>Back to menu</source>
         <translation>メニューに戻る</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="176"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="177"/>
         <source>Create wallet</source>
         <translation>ウォレットを作る</translation>
     </message>
@@ -3156,7 +3355,7 @@ your input may be required.</source>
 <context>
     <name>WizardDaemonSettings</name>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="56"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="55"/>
         <source>Start a node automatically in background (recommended)</source>
         <translation>ノードをバックグラウンドで自動的に開始する (推奨)</translation>
     </message>
@@ -3166,27 +3365,37 @@ your input may be required.</source>
         <translation>ブロックチェーンの位置 (オプション)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="81"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
+        <source>Reset</source>
+        <translation type="unfinished">リセット</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
         <source>Default</source>
         <translation>デフォルト</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="87"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="95"/>
         <source>Browse</source>
         <translation>選択</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="102"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
+        <source>Prune blockchain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="132"/>
         <source>Bootstrap node</source>
         <translation>ブートストラップノード</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="122"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="152"/>
         <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
         <translation>Moneroをすぐに使いたい場合ブートストラップノードを指定できます。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="162"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="192"/>
         <source>Connect to a remote node</source>
         <translation>リモートノードへ接続</translation>
     </message>
@@ -3229,32 +3438,32 @@ your input may be required.</source>
         <translation>コンピュータにある既存の.keysウォレットファイルをインポート。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="136"/>
+        <location filename="../wizard/WizardHome.qml" line="137"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>ニーモニックシードまたはキーからウォレットを復元する</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="137"/>
+        <location filename="../wizard/WizardHome.qml" line="138"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
         <translation>ウォレットを復元するためのプライベートキーまたは25語のニーモニックシード。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="153"/>
+        <location filename="../wizard/WizardHome.qml" line="154"/>
         <source>Change wallet mode</source>
         <translation>ウォレットモードの変更</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="168"/>
+        <location filename="../wizard/WizardHome.qml" line="169"/>
         <source>Advanced options</source>
         <translation>高度なオプション</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="189"/>
-        <source>Change Network:</source>
-        <translation>ネットワークを変更：</translation>
+        <location filename="../wizard/WizardHome.qml" line="192"/>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="219"/>
+        <location filename="../wizard/WizardHome.qml" line="212"/>
         <source>Number of KDF rounds:</source>
         <translation>KDFラウンドの数:</translation>
     </message>
@@ -3357,37 +3566,37 @@ your input may be required.</source>
         <translation>支払いや受け取り、基本的な機能への容易なアクセスを提供します。ブロックチェーンはコンピュータにダウンロードされます。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="137"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="138"/>
         <source>Advanced mode</source>
         <translation>高度なモード</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="138"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="139"/>
         <source>Includes extra features like mining and message verification. The blockchain is downloaded to your computer.</source>
         <translation>マイニングやメッセージ検証といった機能を含みます。ブロックチェーンがコンピュータにダウンロードされます。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="148"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="150"/>
         <source>Optional features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="149"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="151"/>
         <source>Select enhanced functionality you would like to enable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="154"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="156"/>
         <source>Portable mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="155"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="157"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="164"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="166"/>
         <source>Back to menu</source>
         <translation>メニューに戻る</translation>
     </message>
@@ -3395,55 +3604,75 @@ your input may be required.</source>
 <context>
     <name>WizardNav</name>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="44"/>
+        <location filename="../wizard/WizardNav.qml" line="46"/>
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="45"/>
+        <location filename="../wizard/WizardNav.qml" line="47"/>
         <source>Next</source>
         <translation>次へ</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardNav.qml" line="118"/>
+        <source>Step (%1) of (%2)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WizardOpenWallet1</name>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="72"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="75"/>
         <source>Open a wallet from file</source>
         <translation>ファイルからウォレットを開く</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>コンピュータにある既存の.keysウォレットファイルをインポート。</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="85"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
         <source>Recently opened</source>
         <translation>最近開いたウォレット</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="136"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="166"/>
         <source>Mainnet</source>
         <translation>メインネット</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="137"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
         <source>Testnet</source>
         <translation>テストネット</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="138"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
         <source>Stagenet</source>
         <translation>ステージネット</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="288"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
+        <source>Mainnet wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
+        <source>Testnet wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
+        <source>Stagenet wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="326"/>
         <source>Browse filesystem</source>
         <translation>ファイルシステムをブラウズ</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="287"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="325"/>
         <source>Back to menu</source>
         <translation>メニューに戻る</translation>
     </message>
@@ -3597,22 +3826,42 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="73"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="70"/>
+        <source>Wallet name is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardWalletInput.qml" line="74"/>
+        <source>Wallet name is invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <source>Wallet already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
         <source>Wallet name</source>
         <translation>ウォレット名</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="87"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
+        <source>Wallet location is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardWalletInput.qml" line="113"/>
         <source>Wallet location</source>
         <translation>ウォレットの場所</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="98"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="131"/>
         <source>Browse</source>
         <translation>選択</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="111"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="145"/>
         <source>Please choose a directory</source>
         <translation>ディレクトリを選択してください</translation>
     </message>
@@ -3620,310 +3869,294 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="334"/>
-        <location filename="../main.qml" line="966"/>
-        <location filename="../main.qml" line="1070"/>
-        <location filename="../main.qml" line="1590"/>
+        <location filename="../main.qml" line="325"/>
+        <location filename="../main.qml" line="956"/>
+        <location filename="../main.qml" line="1062"/>
+        <location filename="../main.qml" line="1677"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="335"/>
-        <location filename="../main.qml" line="562"/>
+        <location filename="../main.qml" line="326"/>
+        <location filename="../main.qml" line="548"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>ウォレットを開けませんでした: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="510"/>
+        <location filename="../main.qml" line="502"/>
         <source>Please confirm transaction on the device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="524"/>
+        <location filename="../main.qml" line="516"/>
         <source>Signing transaction in the device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="680"/>
+        <location filename="../main.qml" line="669"/>
         <source>Waiting for daemon to sync</source>
         <translation>デーモンの同期を待っています</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="682"/>
+        <location filename="../main.qml" line="671"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>デーモンは同期されています (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="684"/>
+        <location filename="../main.qml" line="673"/>
         <source>Wallet is synchronized</source>
         <translation>ウォレットは同期されています</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="850"/>
+        <location filename="../main.qml" line="839"/>
         <source>Save as file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="850"/>
+        <location filename="../main.qml" line="839"/>
         <source>Confirm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="878"/>
-        <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation>金額が不正です: %1から%2の範囲内としてください</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="833"/>
-        <location filename="../main.qml" line="924"/>
+        <location filename="../main.qml" line="822"/>
+        <location filename="../main.qml" line="914"/>
         <source>Can&apos;t create transaction: </source>
         <translation>取引データを作成できません: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="512"/>
-        <location filename="../main.qml" line="517"/>
+        <location filename="../main.qml" line="504"/>
+        <location filename="../main.qml" line="509"/>
         <source>Please proceed to the device...</source>
         <translation>デバイスで続行してください。。。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="535"/>
+        <location filename="../main.qml" line="527"/>
         <source>Opening wallet ...</source>
         <translation>ウォレットを開いています。。。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="550"/>
-        <location filename="../main.qml" line="557"/>
+        <location filename="../main.qml" line="543"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
         <translation>ウォレットのキャッシュを修復します。ウォレットを再同期しています。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="733"/>
+        <location filename="../main.qml" line="722"/>
         <source>Waiting for daemon to stop...</source>
         <translation>デーモンが停止するのを待っています...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="762"/>
+        <location filename="../main.qml" line="751"/>
         <source>Daemon failed to start</source>
         <translation>デーモンの起動に失敗しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="763"/>
+        <location filename="../main.qml" line="752"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>ウォレットとデーモンのログを参照してエラーを確認してください。手動で%1を起動することもできます。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="779"/>
+        <location filename="../main.qml" line="768"/>
         <source>Daemon is synchronized</source>
         <translation>デーモンは同期されています</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="831"/>
+        <location filename="../main.qml" line="820"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>デーモンのバージョンが不正なため、取引を作成できません: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="840"/>
-        <location filename="../main.qml" line="930"/>
+        <location filename="../main.qml" line="829"/>
+        <location filename="../main.qml" line="920"/>
         <source>No unmixable outputs to sweep</source>
         <translation>スイープするミックス不能なアウトプットがありません</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1053"/>
+        <location filename="../main.qml" line="1045"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>このアドレスは%1XMRを受け取りましたが、取引はまだ承認されていません</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1056"/>
+        <location filename="../main.qml" line="1048"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>このアドレスは%1XMRを受け取り、その取引は%2回承認されました。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1060"/>
+        <location filename="../main.qml" line="1052"/>
         <source>This address received nothing</source>
         <translation>このアドレスはこの取引において何も受け取っていません</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2027"/>
+        <location filename="../main.qml" line="2099"/>
         <source>Tap again to close...</source>
         <translation>もう一度クリックすると閉じます...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="307"/>
+        <location filename="../main.qml" line="298"/>
         <source>Closing wallet...</source>
         <translation>ウォレットを閉じています。。。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
+        <location filename="../main.qml" line="869"/>
         <source>Creating transaction...</source>
         <translation>トランザクションを作成しています。。。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="884"/>
-        <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>残高不足です。ロック解除された残高: %1</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="958"/>
+        <location filename="../main.qml" line="948"/>
         <source>Sending transaction ...</source>
         <translation>トランザクションを送信しています。。。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="967"/>
+        <location filename="../main.qml" line="957"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>送金できませんでした: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1586"/>
+        <location filename="../main.qml" line="1673"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="986"/>
+        <location filename="../main.qml" line="976"/>
         <source>Failed to store the wallet</source>
         <translation>ウォレットの保存に失敗しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1013"/>
-        <source>Payment proof</source>
-        <translation>支払いの証明</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="1016"/>
+        <location filename="../main.qml" line="1010"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>以下の理由により支払いの証明を生成できませんでした:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1046"/>
-        <location filename="../main.qml" line="1065"/>
+        <location filename="../main.qml" line="1038"/>
+        <location filename="../main.qml" line="1057"/>
         <source>Payment proof check</source>
         <translation>支払いの証明を検証</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1049"/>
-        <location filename="../main.qml" line="1067"/>
+        <location filename="../main.qml" line="1041"/>
+        <location filename="../main.qml" line="1059"/>
         <source>Bad signature</source>
         <translation>不正な署名</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1067"/>
+        <location filename="../main.qml" line="1059"/>
         <source>Good signature</source>
         <translation>正しい署名</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1350"/>
+        <location filename="../main.qml" line="1337"/>
         <source>Desktop entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1351"/>
+        <location filename="../main.qml" line="1338"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1353"/>
+        <location filename="../main.qml" line="1340"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1354"/>
+        <location filename="../main.qml" line="1341"/>
         <source>Yes</source>
         <translation type="unfinished">はい</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1477"/>
-        <location filename="../main.qml" line="2151"/>
+        <location filename="../main.qml" line="1560"/>
+        <location filename="../main.qml" line="2226"/>
         <source>Wrong password</source>
         <translation>パスワードが間違っています</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1487"/>
+        <location filename="../main.qml" line="1570"/>
         <source>Save transaction file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1487"/>
+        <location filename="../main.qml" line="1570"/>
         <source>Send transaction</source>
         <translation>トランザクションを送信</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1540"/>
+        <location filename="../main.qml" line="1627"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1543"/>
+        <location filename="../main.qml" line="1630"/>
         <source>Error: Filesystem is read only</source>
         <translation>エラー: ファイルシステムは読み取り専用です</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1545"/>
+        <location filename="../main.qml" line="1632"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>警告: デバイスには%1 GBしか空きがありません。ブロックチェーンには%2 GBほどのデータが必要です。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1547"/>
+        <location filename="../main.qml" line="1634"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>備考: デバイスには%1 GBしか空きがありません。ブロックチェーンには%2 GBほどのデータが必要です。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1549"/>
+        <location filename="../main.qml" line="1636"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>備考: lmdbフォルダが見つかりませんでした。新しいフォルダが作られます。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1587"/>
+        <location filename="../main.qml" line="1674"/>
         <source>Password changed successfully</source>
         <translation>パスワードの変更に成功しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1591"/>
+        <location filename="../main.qml" line="1678"/>
         <source>Error: </source>
         <translation>エラー: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1639"/>
+        <location filename="../main.qml" line="1726"/>
         <source>Please wait...</source>
         <translation>お待ちください...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1679"/>
+        <location filename="../main.qml" line="1766"/>
         <source>Primary account</source>
         <translation>プライマリアカウント</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1885"/>
+        <location filename="../main.qml" line="1957"/>
         <source>Autosaved the wallet</source>
         <translation>ウォレットを自動保存しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1887"/>
+        <location filename="../main.qml" line="1959"/>
         <source>Failed to autosave the wallet</source>
         <translation>ウォレットの自動保存に失敗しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2003"/>
+        <location filename="../main.qml" line="2075"/>
         <source>Local node is running</source>
         <translation>ローカルノードが稼働中</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2004"/>
+        <location filename="../main.qml" line="2076"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation>ローカルノードを停止させますか？それともバックグラウンドで稼働させ続けますか？</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2006"/>
+        <location filename="../main.qml" line="2078"/>
         <source>Force stop</source>
         <translation>強制停止</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2007"/>
+        <location filename="../main.qml" line="2079"/>
         <source>Keep it running</source>
         <translation>稼働させ続ける</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2042"/>
+        <location filename="../main.qml" line="2114"/>
         <source>Checking local node status...</source>
         <translation>ローカルノードの状態を確認中...</translation>
     </message>
