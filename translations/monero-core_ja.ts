@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
         <source>Add a name...</source>
-        <translation>名前を追加。。。</translation>
+        <translation>名前を追加...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
