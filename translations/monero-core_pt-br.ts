@@ -404,7 +404,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../pages/History.qml" line="1187"/>
         <source>Click to reveal</source>
-        <translation>Clicar para revelar</translation>
+        <translation>Clique para revelar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="809"/>
