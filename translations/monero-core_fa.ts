@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/Account.qml" line="96"/>
         <source>Total balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>موجودی کل: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="119"/>
@@ -132,7 +132,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="372"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>توضیحات</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
@@ -167,7 +167,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="410"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>انصراف</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="427"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>شروع گرۀ محلی در %1 ثانیه</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="113"/>
@@ -211,23 +211,24 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>کیف پول سخت‌افزاری</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>کامپیوتر</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>عبارت عبور کیف‌پول سخت‌افزاری</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>لطفاً مکانی که قصد وارد کردن عبارت عبور در آن دارید را انتخاب نمایید.
+به منظور امنیت بیشتر پیشنهاد می‌شود که عبارت عبور را روی کیف‌پول سخت‌افزاری وارد کنید.</translation>
     </message>
 </context>
 <context>
@@ -247,49 +248,49 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="89"/>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>تراکنش‌ها</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="109"/>
         <source>Sort &amp; filter</source>
-        <translation type="unfinished"></translation>
+        <translation>مرتب‌سازی و فیلتر</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="230"/>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>مرتب‌سازی براساس</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="251"/>
         <location filename="../pages/History.qml" line="1168"/>
         <source>Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض بلاک</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="369"/>
         <location filename="../pages/History.qml" line="1687"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>مقدار</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="449"/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>صفحه</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="479"/>
         <source>Jump to page (1-%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>رفتن به صفحۀ (%1-1)</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="487"/>
         <source>Invalid page. Must be a number within the specified range.</source>
-        <translation type="unfinished"></translation>
+        <translation>صفحۀ نامعتبر. باید یک عدد در بازۀ مشخص‌شده باشد.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="636"/>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>ارسال شده</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="636"/>
@@ -309,12 +310,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="686"/>
         <source>Mined</source>
-        <translation type="unfinished"></translation>
+        <translation>استخراج‌شده</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="703"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>بله</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1184"/>
@@ -324,22 +325,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="831"/>
         <source>Confirmations</source>
-        <translation type="unfinished"></translation>
+        <translation>تصدیق‌ها</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1011"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>توضیحات</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1079"/>
         <source>Transaction ID</source>
-        <translation type="unfinished"></translation>
+        <translation>شناسۀ تراکنش</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1123"/>
         <source>Transaction key</source>
-        <translation type="unfinished"></translation>
+        <translation>کلید تراکنش</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1139"/>
@@ -349,17 +350,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="777"/>
         <source>Unknown recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>گیرندۀ ناشناس</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1327"/>
         <source>Advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینه‌های پیشرفته</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1343"/>
         <source>Human readable date format</source>
-        <translation type="unfinished"></translation>
+        <translation>فرمت تاریخ قابل خواندن توسط انسان</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1349"/>
@@ -374,17 +375,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1589"/>
         <source>Updated description.</source>
-        <translation type="unfinished"></translation>
+        <translation>توضیح بروز شده.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1619"/>
         <source>No transaction history yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>هنوز تاریخچۀ تراکنشی وجود ندارد.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1621"/>
         <source>No results.</source>
-        <translation type="unfinished"></translation>
+        <translation>نتیجه‌ای وجود ندارد.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1623"/>
@@ -410,7 +411,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>در</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="768"/>
@@ -420,12 +421,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>در انتظار تاییدیه ...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>کیف پول من</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
