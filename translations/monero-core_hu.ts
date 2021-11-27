@@ -767,7 +767,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="568"/>
         <source>Sign/verify</source>
-        <translation>Aláírás/aláírás ellenőrzése</translation>
+        <translation>Aláírás/ellenőrzés</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="591"/>
@@ -1086,7 +1086,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/settings/Navbar.qml" line="241"/>
         <source>Node</source>
-        <translation>csomópont</translation>
+        <translation>Csomópont</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="294"/>
@@ -1279,7 +1279,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="295"/>
         <source>Save as image</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés képként</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
@@ -1649,12 +1649,12 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="281"/>
         <source>Remote node updated. Trusted daemon has been reset. Mark again, if desired.</source>
-        <translation>Távoli csomópont frissítve. Daemon megbízhatósága visszaállítva. Jelöld újra ha szeretnéd. </translation>
+        <translation>Távoli csomópont frissítve. A megbízható daemon visszaállításra került. Jelölje meg újra ha szükséges.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon felhasználónév</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="295"/>
@@ -1665,7 +1665,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="304"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon jelszó</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="306"/>
@@ -1780,7 +1780,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="95"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation>Ezt az opciót akkor használd, ha a megjelenített egyenleg nem pontos.</translation>
+        <translation>Ezt az opciót akkor használja, ha úgy gondolja, hogy a megjelenített egyenleg nem pontos.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="76"/>
