@@ -191,7 +191,7 @@ ColumnLayout {
                             anchors.leftMargin: 12
                             anchors.rightMargin: 0
                             font.family: MoneroComponents.Style.fontRegular.name
-                            font.bold: true
+                            font.bold: false
                             font.pixelSize: fontItemSize
                             color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
                             text: qsTr(column1) + translationManager.emptyString
