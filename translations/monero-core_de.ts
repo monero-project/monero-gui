@@ -971,7 +971,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/Mining.qml" line="59"/>
         <source>Mining is only available on local daemons.</source>
-        <translation>Mining ist nur mit einem lokalen Hintergrunddienst möglich.</translation>
+        <translation>Mining ist nur auf lokalen Daemons möglich.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
@@ -1010,7 +1010,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../pages/Mining.qml" line="144"/>
         <source>Set to use all threads</source>
-        <translation>Auswählen, um alle Threads zu nutzen</translation>
+        <translation>Nutze alle Threads</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="155"/>
@@ -1132,7 +1132,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="56"/>
         <source>Remote node</source>
-        <translation>Drittanbieter-Node</translation>
+        <translation>Remote node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="57"/>
@@ -1272,7 +1272,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../pages/Receive.qml" line="55"/>
         <source>Set the label of the selected address:</source>
-        <translation>Setze die Beschreibung der gewählten Adresse:</translation>
+        <translation>Wähle einen Namen für die ausgewählte Adresse:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="85"/>
@@ -1759,7 +1759,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
         <location filename="../pages/settings/SettingsWallet.qml" line="71"/>
         <source>Success</source>
         <translatorcomment>seems good</translatorcomment>
-        <translation>Erfolg</translation>
+        <translation>Erfolgreich</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="72"/>
