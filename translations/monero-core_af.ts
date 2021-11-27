@@ -6,12 +6,12 @@
     <message>
         <location filename="../pages/Account.qml" line="57"/>
         <source>Set the label of the selected account:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel etiket vir die geselekteerde rekening:</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="89"/>
         <source>Balance All</source>
-        <translation type="unfinished"></translation>
+        <translation>Versamelde Balans</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="96"/>
@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="119"/>
         <location filename="../pages/Account.qml" line="152"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Gekopieer na knipbord</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="129"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="260"/>
         <source>Balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>Balans: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -86,12 +86,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="274"/>
         <source>Add address</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg adres by</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Edit an address</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysig &apos;n adres</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="332"/>
@@ -117,47 +117,47 @@
         <location filename="../pages/AddressBook.qml" line="357"/>
         <location filename="../pages/AddressBook.qml" line="360"/>
         <source>Internal error</source>
-        <translation type="unfinished"></translation>
+        <translation>Interne fout</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="363"/>
         <source>No address found</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen adres gevind</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="296"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="372"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beskrywing</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
         <source>Add a name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg &apos;n naam by...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg by</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoor</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="384"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="387"/>
         <source>Invalid address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige adres</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="391"/>
