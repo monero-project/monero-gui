@@ -2222,7 +2222,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Transaction envoyée avec succès !</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
@@ -2906,9 +2906,9 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
         <location filename="../js/Utils.js" line="65"/>
         <source>%n day(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Il y a %n jour</numerusform>
+            <numerusform>Il y a %n jours</numerusform>
         </translation>
     </message>
     <message>
@@ -3333,7 +3333,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="47"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec de configuration du mode portatif</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
@@ -3483,7 +3483,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer votre graine mnémonique à 25 mots</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
@@ -3694,7 +3694,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="524"/>
         <source>Signing transaction in the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Signature de la transaction en cours sur le périphérique...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
