@@ -48,7 +48,7 @@ Rectangle {
     Text {
         id: icon
         visible: tooltipIconVisible
-        color: MoneroComponents.Style.orange
+        color: MoneroComponents.Style.defaultFontColor
         font.family: FontAwesome.fontFamily
         font.pixelSize: 10
         font.styleName: "Regular"
