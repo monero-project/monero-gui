@@ -221,7 +221,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation>हार्डवेयर वॉलेट पासफ़्रेज़</translation>
+        <translation>हार्डवेयर बटुआ पासफ़्रेज़</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
@@ -304,7 +304,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>लेन-देन आईडी, पता, विवरण, राशि या ब्लॉकहाइट द्वारा खोजें</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="686"/>
