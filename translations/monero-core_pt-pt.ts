@@ -407,12 +407,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="652"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor desconhecido</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Para</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
@@ -422,17 +422,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="768"/>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>A aguardar confirmação...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Minha carteira</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -444,7 +444,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="793"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço desconhecido</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1650"/>
@@ -933,7 +933,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="128"/>
         <source>unconfirmed</source>
-        <translation type="unfinished"></translation>
+        <translation>não confirmado</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="163"/>
@@ -1067,7 +1067,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished"></translation>
+        <translation>A minar a %1 H/s.. Isso dar-lhe-á 1 em %2 de chance diária para encontrar um bloco.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1109,12 +1109,12 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Starting the node</source>
-        <translation type="unfinished"></translation>
+        <translation>A iniciar o nó</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Stopping the node</source>
-        <translation type="unfinished"></translation>
+        <translation>A parar o nó</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="54"/>
@@ -1179,7 +1179,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>A trocar para outro nó publico</translation>
     </message>
 </context>
 <context>
@@ -1202,7 +1202,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor introduza %1 para: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
@@ -1442,7 +1442,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>persistente</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
@@ -1462,7 +1462,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
         <source>Donate to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Doar para o Monero</translation>
     </message>
 </context>
 <context>
