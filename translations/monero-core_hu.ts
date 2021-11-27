@@ -70,7 +70,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation>Ez egyszerűbbé teszi a Monero küldését vagy fogadását és csökkenti az elütések lehetőségét a manuális megadáshoz képest</translation>
+        <translation>Ez egyszerűbbé teszi a Monero küldését vagy fogadását és csökkenti az elütések lehetőségét a manuális megadáshoz képest.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
@@ -498,7 +498,7 @@ A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</
         <location filename="../pages/History.qml" line="985"/>
         <location filename="../pages/History.qml" line="1702"/>
         <source>Transaction details</source>
-        <translation>Tranzakciós részletek</translation>
+        <translation>Tranzakció részletek</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1023"/>
@@ -1207,7 +1207,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikertelen távoli csomópont váltás</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
@@ -1250,7 +1250,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../components/PasswordDialog.qml" line="203"/>
         <source>CAPSLOCKS IS ON.</source>
-        <translation>A CAPSLOCK BE VAN KAPCSOLVA</translation>
+        <translation>A CAPSLOCK BE VAN KAPCSOLVA.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
@@ -1366,7 +1366,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../pages/Receive.qml" line="235"/>
         <source>Create new address</source>
-        <translation>Új cím készítése</translation>
+        <translation>Új cím létrehozása</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="369"/>
@@ -1386,7 +1386,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../pages/Receive.qml" line="461"/>
         <source>Failed to save QrCode to </source>
-        <translation>Nem sikerült menteni a qr-kódot ehhez</translation>
+        <translation>Nem sikerült menteni a qr-kódot ehhez </translation>
     </message>
 </context>
 <context>
@@ -1527,7 +1527,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="72"/>
         <source>GUI version: </source>
-        <translation>GUI verzió:</translation>
+        <translation>Grafikus/GUI verzió: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="102"/>
@@ -1537,7 +1537,7 @@ A bányászat egy kis esélyt ad arra is, hogy Monero-t keress. A számítógép
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="132"/>
         <source>Wallet path: </source>
-        <translation>Tárca helye:</translation>
+        <translation>Tárca elérési útvonal: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="190"/>
@@ -1574,7 +1574,7 @@ Beírható egy blokkmagasság vagy egy dátum (ÉÉÉÉ-HH-NN):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tárca visszaállítási magasság: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
@@ -1676,12 +1676,12 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pénztárcanév megjelenítése a címsorban</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="97"/>
         <source>Ask for password before sending a transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Jelszó kérése a tranzakció végrehajtása előtt</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="105"/>
@@ -1691,17 +1691,17 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="119"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatikus mentés</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="131"/>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="131"/>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>perc(ek)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="152"/>
@@ -1716,12 +1716,12 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
         <source>After </source>
-        <translation>Után</translation>
+        <translation>Után </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="162"/>
         <source>Enable displaying balance in other currencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyenleg megjelenítése más valutában</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="184"/>
@@ -1736,7 +1736,7 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="223"/>
         <source>Enabling price conversion exposes your IP address to the selected price source.</source>
-        <translation>Az árkonverzió bekapcsolása felfedi az IP-címét a választott árforrás előtt</translation>
+        <translation>Az árkonverzió bekapcsolása felfedi az IP-címét a választott árforrás előtt.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="230"/>
@@ -1746,7 +1746,7 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
         <source>Socks5 proxy (%1%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Socks5 proxy (%1%2)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="250"/>
@@ -1761,7 +1761,7 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="263"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-cím</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="264"/>
@@ -1885,7 +1885,7 @@ A régi gyorsítótár fájlja át lesz nevezve és később visszaállítható
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="55"/>
         <source>Logs out of this wallet.</source>
-        <translation>Kijelentkezés ebből a tárcából</translation>
+        <translation>Kijelentkezés ebből a tárcából.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="64"/>
@@ -1919,7 +1919,7 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="85"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Tárolja ezt az információt biztonságosan, hogy a jövőben vissza tudja állítani a tárcáját!</translation>
+        <translation>Tárolja ezt az információt biztonságosan, hogy a jövőben vissza tudja állítani a tárcáját.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1966,7 +1966,7 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
         <source>Enter merchant mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Kereskedelmi mód</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
@@ -2006,12 +2006,12 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Monero-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Monero anonimitásának háromszintű vedelmét. Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a getmonero.org fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni. Másik lehetőséged a blokklánc átvizsgálása a monero-blockchain-mark-spent-outputs programmal és egy lista készítése.</translation>
+        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Monero-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Monero anonimitásának háromszintű vedelmét.&lt;br&gt;Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a getmonero.org fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni.&lt;br&gt;Másik lehetőséged a blokklánc átvizsgálása a monero-blockchain-mark-spent-outputs programmal és egy lista készítése.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="140"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Itt állíthadod be, hogy mely tranzakció bemeneteket szeretnéd kizárni.</translation>
+        <translation>Itt állíthatja be, hogy mely tranzakció bemeneteket szeretné kizárni. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -2364,12 +2364,12 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakció sikeresen elküldve!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
         <source>Transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakció azonosító:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
@@ -2384,12 +2384,12 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappa megnyitása</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="170"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Kész</translation>
     </message>
 </context>
 <context>
@@ -2440,12 +2440,12 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="71"/>
         <source>Address is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>A cím érvénytelen.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="76"/>
         <source>Enter an amount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adjon meg egy összeget.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="82"/>
@@ -2460,7 +2460,7 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="333"/>
         <source>Amount</source>
-        <translation type="unfinished">Összeg</translation>
+        <translation>Összeg</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="690"/>
@@ -2579,12 +2579,12 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="904"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportálás</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="910"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importálás</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="921"/>
@@ -2614,7 +2614,7 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="934"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Létrehozás</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="943"/>
@@ -2730,43 +2730,50 @@ A jelszó a tárca beállításaiban megváltoztatható.</translation>
         <location filename="../pages/Transfer.qml" line="1008"/>
         <source>
 Number of transactions: </source>
-        <translation>Tranzakciók száma: </translation>
+        <translation>
+Tranzakciók száma: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1010"/>
         <source>
 Transaction #%1</source>
-        <translation>Tranzakció #%1</translation>
+        <translation>
+Tranzakció #%1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1011"/>
         <source>
 Recipient: </source>
-        <translation>Kedvezményezett: </translation>
+        <translation>
+Címzett: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1012"/>
         <source>
 payment ID: </source>
-        <translation>Fizetési azonosító: </translation>
+        <translation>
+Fizetési azonosító: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1013"/>
         <source>
 Amount: </source>
-        <translation>Összeg: </translation>
+        <translation>
+Összeg: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1014"/>
         <source>
 Fee: </source>
-        <translation>Díj: </translation>
+        <translation>
+Díj: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1015"/>
         <source>
 Ringsize: </source>
-        <translation>Gyűrűméret: </translation>
+        <translation>
+Gyűrűméret: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1029"/>
@@ -2786,7 +2793,7 @@ Ringsize: </source>
     <message>
         <location filename="../pages/Transfer.qml" line="1121"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>A tárca nem csatlakozik a daemon-hoz</translation>
+        <translation>A tárca nem csatlakozik a daemon-hoz.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1137"/>
@@ -2881,17 +2888,17 @@ Frissítsd a daemont vagy csatlakozz egy másikhoz</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="349"/>
         <source>Calculating fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Díj kiszámítása</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="415"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Vissza</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="428"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Megerősítés</translation>
     </message>
 </context>
 <context>
@@ -2987,27 +2994,27 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Új Monero verzió v%1 elérhető</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished"></translation>
+        <translation>Látogassa meg a getmonero.org weboldalt részletekért</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
         <source>Downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Letöltés folyamatban</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation type="unfinished"></translation>
+        <translation>Frissítés letöltve, aláírás ellenőrizve</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation type="unfinished"></translation>
+        <translation>Szeretné letölteni és ellenőrizni az új verziót?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -3022,37 +3029,37 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../components/UpdateDialog.qml" line="142"/>
         <source>Download later</source>
-        <translation type="unfinished"></translation>
+        <translation>Letőltés később</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Újrapróbálkozás</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Letöltés</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="164"/>
         <source>Download failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Letöltés sikertelen</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
         <source>Failed to start download</source>
-        <translation type="unfinished"></translation>
+        <translation>A letöltést nem sikerült elkezdeni</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés másként</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés sikertelen</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
@@ -3155,7 +3162,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>25 szavas mag</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
@@ -3165,12 +3172,12 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Enter a strong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Adjon meg egy erős jelszót</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Using letters, numbers, and/or symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Betüket, számokat és speciális karaktereket is használjon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
@@ -3249,7 +3256,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="132"/>
         <source>Restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Visszaálítási magasság</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="142"/>
@@ -3265,7 +3272,7 @@ your input may be required.</source>
         <location filename="../wizard/WizardCreateDevice1.qml" line="159"/>
         <location filename="../wizard/WizardCreateDevice1.qml" line="213"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
-        <translation>Hiba a tárca harveres írása közben. Nézd meg a naplót!</translation>
+        <translation>Hiba a tárca harvderes írása közben. Nézze meg a rendszer naplót!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="176"/>
@@ -3303,7 +3310,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Tárca visszaálítási magasság</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
@@ -3400,7 +3407,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
         <source>Welcome to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Üdvözlünk a Monero-nál</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="76"/>
@@ -3573,7 +3580,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="150"/>
         <source>Optional features</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem kötelező funkciók</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="151"/>
@@ -3702,7 +3709,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Írja be a 25 szavas magot</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
@@ -3712,7 +3719,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Jelmondat</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
@@ -3890,7 +3897,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="752"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Kérlek ellenőrizd a tárcád és a daemon naplóit, vagy próbáld meg manuálisan %1 indítani!</translation>
+        <translation>Kérjük ellenőrizze a tárcáját és a daemon naplóját, vagy próbálja meg manuálisan %1 indítani!</translation>
     </message>
     <message>
         <location filename="../main.qml" line="820"/>
@@ -3917,7 +3924,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="298"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tárca bezásrása...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="502"/>
@@ -3938,7 +3945,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="527"/>
         <source>Opening wallet ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tárca megnyitása...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="543"/>
@@ -3963,12 +3970,12 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="869"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakció létrehozása...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="948"/>
         <source>Sending transaction ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakció küldése...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="976"/>
@@ -4010,12 +4017,12 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="1340"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1341"/>
         <source>Yes</source>
-        <translation type="unfinished">Igen</translation>
+        <translation>Igen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1560"/>
@@ -4031,7 +4038,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="1570"/>
         <source>Send transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakció küldése</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1627"/>
@@ -4071,17 +4078,17 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="1766"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>Elsődleges fiók</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1957"/>
         <source>Autosaved the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tárca autómatikusan mentve</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1959"/>
         <source>Failed to autosave the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>A tárca automatikus mentése sikertelen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2075"/>
@@ -4091,7 +4098,7 @@ Ha nem tudsz saját csomópontot futtatni, csatlakozhatsz egy távolihoz.</trans
     <message>
         <location filename="../main.qml" line="2076"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
-        <translation type="unfinished"></translation>
+        <translation>Megállítani vagy háttérben futtatni szeretné a csomópontot?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2078"/>
