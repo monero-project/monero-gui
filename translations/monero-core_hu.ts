@@ -259,23 +259,24 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardver pénztárca</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Számítógép</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardver pénztárca jelmondat</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kérjük válassza ki hol szeretné megadni a jelmondatát.
+A jelmondatot, biztonsági okokból ajánlott a hardver pénztárcán megadni.</translation>
     </message>
 </context>
 <context>
@@ -305,7 +306,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="109"/>
         <source>Sort &amp; filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendezés és szűrés</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
@@ -357,7 +358,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresés Tranzakció ID, Cím, Leírás, Összeg vagy Blokk magasság szerint</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="724"/>
@@ -408,7 +409,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="809"/>
         <source>Unknown recipient</source>
-        <translation>Ismeretlen fogadó</translation>
+        <translation>Ismeretlen címzett</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1377"/>
@@ -438,17 +439,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1671"/>
         <source>No transaction history yet.</source>
-        <translation>Még nincs tranzakciótörténet</translation>
+        <translation>Még nincs tranzakciótörténet.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1673"/>
         <source>No results.</source>
-        <translation>Nincs találat</translation>
+        <translation>Nincs találat.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1675"/>
         <source>%1 transactions total, showing %2.</source>
-        <translation>%1 tranzakció összesen, megjelenítve %2</translation>
+        <translation>%1 tranzakció összesen, megjelenítve %2.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="816"/>
@@ -459,12 +460,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="690"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen összeg</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="786"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Címzett</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="786"/>
@@ -474,7 +475,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="674"/>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikertelen</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="811"/>
@@ -486,12 +487,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="819"/>
         <location filename="../pages/History.qml" line="821"/>
         <source>Address</source>
-        <translation type="unfinished">Cím</translation>
+        <translation>Cím</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="825"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen cím</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="985"/>
