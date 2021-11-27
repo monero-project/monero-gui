@@ -32,7 +32,7 @@
     <message>
         <location filename="../pages/Account.qml" line="167"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>الحسابات</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="260"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Save your most used addresses here</source>
-        <translation type="unfinished"></translation>
+        <translation>احفظ العناوين الأكثر استخدامًا هنا</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Edit an address</source>
-        <translation type="unfinished"></translation>
+        <translation>قم بتحرير العنوان</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="332"/>
