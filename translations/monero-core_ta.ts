@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/Account.qml" line="57"/>
         <source>Set the label of the selected account:</source>
-        <translation>தேர்ந்தடுத்த கணக்கிற்கான அடையாள குறியை இடுக:</translation>
+        <translation>தேர்ந்தெடுத்த கணக்கிற்கான அடையாளக் குறியை இடுக:</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="89"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="../pages/Account.qml" line="357"/>
         <source>Set the label of the new account:</source>
-        <translation>புதிய கணக்கிற்கான அடையாள குறியை இடுக:</translation>
+        <translation>புதிய கணக்கிற்கான அடையாளக் குறியை இடுக:</translation>
     </message>
 </context>
 <context>
@@ -60,18 +60,18 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Save your most used addresses here</source>
-        <translation>நீங்கள் அதிகம் பயன்படுத்தும் முகவரியை இங்கு சேமிக்கவும்</translation>
+        <translation>நீங்கள் அதிகம் பயன்படுத்தும் முகவரியை இங்குச் சேமிக்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation>இது மோனெரோவை அனுப்ப அல்லது பெறுவதை எளிதாக்குகிறது மற்றும் முகவரிகளை கைமுறையாக தட்டச்சு மூலம் உள்ளிடுவதால் வரும் பிழைகளை குறைக்கிறது.</translation>
+        <translation>இது மோனெரோவை அனுப்ப அல்லது பெறுவதை எளிதாக்குகிறது மற்றும் முகவரிகளைக் கைமுறையாகத் தட்டச்சு மூலம் உள்ளிடுவதால் வரும் பிழைகளைக் குறைக்கிறது.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Add an address</source>
-        <translation>முகவரியை சேர்க்கவும்</translation>
+        <translation>முகவரியைச் சேர்க்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="115"/>
@@ -86,12 +86,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="274"/>
         <source>Add address</source>
-        <translation>முகவரியை சேர்க்கவும்</translation>
+        <translation>முகவரியைச் சேர்க்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Edit an address</source>
-        <translation>முகவரியை திருத்தவும்</translation>
+        <translation>முகவரியைத் திருத்தவும்</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="332"/>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="352"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>முகவரி கிடைத்துவித்தது, ஆனால் DNSSEC கையொப்பங்களை சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
+        <translation>முகவரி கிடைத்துவிட்டது, ஆனால் DNSSEC கையொப்பங்களைச் சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="354"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>சரியான முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் காணப்படவில்லை, DNSSEC கையொப்பத்தையும் சரிபார்க்க முடியவில்லை, எனவே இது ஒரு ஏமாற்று வேலையாக இருக்குலாம்</translation>
+        <translation>சரியான முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் காணப்படவில்லை, DNSSEC கையொப்பத்தையும் சரிபார்க்க முடியவில்லை, எனவே இது ஒரு ஏமாற்று வேலையாக இருக்கலாம்</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="357"/>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
         <source>Add a name...</source>
-        <translation>பெயரை சேர்க்கவும்…</translation>
+        <translation>பெயரைச் சேர்க்கவும்…</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>உள்ளுர் முனையம் இன்னும் %1 விநாடிகளில் துவங்கும்</translation>
+        <translation>உள் கணு இன்னும் %1 விநாடிகளில் துவங்கும்</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="113"/>
@@ -203,7 +203,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="126"/>
         <source>Use custom settings</source>
-        <translation>தனிப்பயனாக்கப்பட்ட அமைப்புகளை பயன்படுத்துக</translation>
+        <translation>தனிப்பயனாக்கப்பட்ட அமைப்புகளைப் பயன்படுத்துக</translation>
     </message>
 </context>
 <context>
@@ -227,7 +227,7 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation>நீங்கள் உங்கள் கடவுத்தொடரை எங்கு பதிவிட விரும்புகிறீர்கள்.
+        <translation>நீங்கள் உங்கள் கடவுத்தொடரை எங்குப் பதிவிட விரும்புகிறீர்கள்.
 மேம்பட்ட பாதுகாப்பிற்கு கடவுத்தொடரை வன்பொருள் பணப்பையில் பதிவிடவும்.</translation>
     </message>
 </context>
@@ -248,7 +248,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="89"/>
         <source>Transactions</source>
-        <translation>பணப்பரிமாற்றங்கள்</translation>
+        <translation>பரிமாற்றங்கள்</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="109"/>
@@ -280,7 +280,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="479"/>
         <source>Jump to page (1-%1)</source>
-        <translation>(1-%1) பக்கத்திற்கு தாவு</translation>
+        <translation>(1-%1) பக்கத்திற்குத் தாவு</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="487"/>
@@ -350,12 +350,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="777"/>
         <source>Unknown recipient</source>
-        <translation>அரியப்படாத பெறுநர்</translation>
+        <translation>அறியப்படாத பெறுநர்</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1327"/>
         <source>Advanced options</source>
-        <translation>கூடுதல் தேர்வுகள்</translation>
+        <translation>மேம்பட்ட விருப்பங்கள்</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1343"/>
@@ -421,7 +421,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation>உறுதிப்படுத்தல்களுக்காக காத்திருக்கிறது…</translation>
+        <translation>உறுதிப்படுத்தல்களுக்காகக் காத்திருக்கிறது…</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
@@ -438,7 +438,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="793"/>
         <source>Unknown address</source>
-        <translation>தெரியாத முகவரி</translation>
+        <translation>அறியாத முகவரி</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1650"/>
@@ -448,7 +448,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1676"/>
         <source>Copied to clipboard</source>
-        <translation>கிளிப்போர்டிற்கு நகலெடுக்கப்பட்டது</translation>
+        <translation>கிளிப்போர்டில் நகலெடுக்கப்பட்டது</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1685"/>
@@ -483,7 +483,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1693"/>
         <source>Destinations:</source>
-        <translation>சேரும் இடம்:</translation>
+        <translation>சேருமிடங்கள்:</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1694"/>
@@ -508,7 +508,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1723"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
-        <translation>கொசுறு: நீங்கள் விரும்பும் விரிதாள் மென்பொருளைக் கொண்டு தொகுதி உயரத்தை வரிசைப்படுத்தலாம்.</translation>
+        <translation>கொசுறு: நீங்கள் விரும்பும் விரித்தாள் மென்பொருளைக் கொண்டு தொகுதி உயரத்தை வரிசைப்படுத்தலாம்.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1727"/>
@@ -518,7 +518,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1728"/>
         <source>Error exporting transaction data.</source>
-        <translation>பரிமாற்ற தரவுகளை பதிவேற்றும் போது பிழை எற்பட்டுவிட்டது.</translation>
+        <translation>பரிமாற்ற தரவுகளைப் பதிவேற்றும் போது பிழை எற்பட்டுவிட்டது.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="189"/>
@@ -554,7 +554,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation>எச்சரிக்கை: உங்கள் நினைவி விதைகளை கிளிப்போர்டுக்கு நகலெடுப்பதால் தீங்கிழைக்கும் மென்பொருட்கள் உங்களை கண்காணிக்க கூடும், இது உங்கள் விதைகளைப் பதிவுசெய்து உங்கள் மோனேரோவைத் திருடக்கூடும். அதனால் தயவு செய்து உங்கள் விதைகளை கைமுறையாக எழுதி வையுங்கள்.</translation>
+        <translation>எச்சரிக்கை: உங்கள் நினைவி விதைகளை கிளிப்போர்டுக்கு நகலெடுப்பதால் தீங்கிழைக்கும் மென்பொருட்கள் உங்களைக் கண்காணிக்கக் கூடும், இது உங்கள் விதைகளைப் பதிவுசெய்து உங்கள் மோனேரோவைத் திருடக்கூடும். அதனால் தயவு செய்து உங்கள் விதைகளைக் கைமுறையாக எழுதி வையுங்கள்.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="197"/>
@@ -591,17 +591,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="292"/>
         <source>(View Only Wallet - No secret spend key available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(பார்க்க-மட்டும் பணப்பை - இரகசிய செலவழி திறவுகோல் எதுவும் கிடைக்கவில்லை)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="299"/>
         <source>(Hardware Device Wallet - No secret spend key available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(வன்பொருள் சாதன பணப்பை - இரகசிய செலவழி திறவுகோல் எதுவும் கிடைக்கவில்லை)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="158"/>
         <source>Secret view key</source>
-        <translation type="unfinished"></translation>
+        <translation>இரகசிய பார்வை திறவுகோல்</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
@@ -631,7 +631,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="176"/>
         <source>Secret spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>இரகசிய செலவழி திறவுகோல்</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="185"/>
@@ -682,7 +682,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="148"/>
         <source>Testnet</source>
-        <translation>ஆய்தல் வலை</translation>
+        <translation>சோதனை வலை</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="148"/>
@@ -753,7 +753,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="545"/>
         <source>Shared RingDB</source>
-        <translation>பகிரப்பட்ட வளைய தரவுத்தளம்</translation>
+        <translation>பகிரப்பட்ட வளையத் தரவுத்தளம்</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="627"/>
@@ -837,12 +837,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="159"/>
         <source>This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>இப்பக்கம் QR குறியீட்டினை கொண்டு உள்வரும் பரிமாற்றங்களுக்கான கல்லேடு மற்றும் சுரங்க குளம் ஆகியவற்றை தன்னியக்கமாக தேட வல்லது.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>உறுதிபடுத்தப்படாத பரிமாற்றங்களை ஏற்கலாமா வேண்டாமா என்பது உங்கள் விருப்பம். குறுகிய காலத்தில் உறுதிபடுத்தப்படும் என்றாலும் உறுதியாகாமல் போவதற்கும் வாய்ப்புகள் உண்டு. எனவே பெரிய அளவிலான பரிமாற்றங்களில் ஒன்று அல்லது அதற்கு மேற்பட்ட உறுதிபடுத்தல்களுக்கு பிறகு ஏற்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="165"/>
@@ -1272,7 +1272,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="55"/>
         <source>Set the label of the selected address:</source>
-        <translation>தேர்ந்தடுத்த முகவரிக்கான அடையாள குறியை இடுக:</translation>
+        <translation>தேர்ந்தெடுத்த முகவரிக்கான அடையாளக் குறியை இடுக:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="85"/>
@@ -1282,7 +1282,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="295"/>
         <source>Save as image</source>
-        <translation type="unfinished"></translation>
+        <translation>படமாகச் சேமி</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
@@ -1297,7 +1297,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="250"/>
         <source>Set the label of the new address:</source>
-        <translation type="unfinished"></translation>
+        <translation>புதிய முகவரிக்கான அடையாளக் குறியை இடுக:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="210"/>
@@ -1312,12 +1312,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="331"/>
         <source>Save QrCode</source>
-        <translation type="unfinished"></translation>
+        <translation>QR குறியீட்டைச் சேமி</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="332"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished"></translation>
+        <translation>QR குறியீட்டை இவ்விடத்தில் சேமிக்க முடியவில்லை </translation>
     </message>
 </context>
 <context>
@@ -1376,7 +1376,7 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="207"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பை தேக்ககத்தை மறு வருடல் செய்க</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
@@ -1473,12 +1473,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="82"/>
         <source>Hide balance</source>
-        <translation type="unfinished"></translation>
+        <translation>இருப்புத் தொகையை மறை</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="140"/>
         <source>Lock wallet on inactivity</source>
-        <translation type="unfinished"></translation>
+        <translation>செயலில் இல்லாத சமயங்களில் பணப்பையைப் பூட்டவும்</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
@@ -1493,12 +1493,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பை பெயரைத் தலைப்புப் பட்டியில் காட்டுக</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
         <source>Ask for password before sending a transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்றத்தை அனுப்பும் முன் கடவுச்சொல்லைக் கேட்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
@@ -1508,7 +1508,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>தானியக்க சேமி</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1553,12 +1553,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="242"/>
         <source>Enabling price conversion exposes your IP address to the selected price source.</source>
-        <translation type="unfinished"></translation>
+        <translation>விலை மாற்றத்தை இயக்குவது உங்கள் IP முகவரியைத் தேர்ந்தெடுக்கப்பட்ட விலை மூலத்திற்கு வெளிப்படுத்துகிறது.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
         <source>Confirm and enable</source>
-        <translation type="unfinished"></translation>
+        <translation>உறுதிப்படுத்தி இயக்கு</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
@@ -1573,7 +1573,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished"></translation>
+        <translation>புதுப்பிப்புகளைப் பதிவிறக்குகிறது, விலை மூலங்களைக் கொணருகிறது</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
@@ -1601,7 +1601,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="134"/>
         <source>Daemon log</source>
-        <translation type="unfinished"></translation>
+        <translation>மறைநிரல் பதிவு</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="220"/>
@@ -1611,7 +1611,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="243"/>
         <source>Failed to send command</source>
-        <translation type="unfinished"></translation>
+        <translation>கட்டளையை அனுப்ப முடியவில்லை</translation>
     </message>
 </context>
 <context>
@@ -1639,7 +1639,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="262"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>தொலைநிலை கணுக்களுக்கு‌ உங்கள் விருப்பமான தேடு பொறியில் &apos;Monero remote note&apos; என் தேடவும். கணு நம்பத்தகுந்த மூன்றாம் தரப்பினர் மூலம் இயக்கப்படுகிறதா என்பதை உறுதிப் படுத்திக் கொள்ளவும்.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="270"/>
@@ -1705,7 +1705,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
         <source>Blockchain location</source>
-        <translation type="unfinished"></translation>
+        <translation>கல்லேட்டின் இருப்பிடம்</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
@@ -1725,12 +1725,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>இயக்கத்தொடக்க முகவரி</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>இயக்கத்தொடக்க துறை</translation>
     </message>
 </context>
 <context>
@@ -1753,7 +1753,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="63"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்றங்களைப் பார்க்க மற்றும் தொடங்க மட்டுமே உபயோகிக்கக் கூடிய புதிய பணப்பையை உருவாக்குகிறது, ஆனால் அனுப்புவதற்கு முன் பரிமாற்றங்களில் கையெழுத்திடச் செலவழிக்கும் பணப்பை தேவை.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="71"/>
@@ -1765,17 +1765,19 @@ The old wallet cache file will be renamed and can be restored later.
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>தற்போதைய பணப்பையின் கடவுச்சொல்லைப் பயன்படுத்திப் பார்க்க-மட்டும் பணப்பை ஒன்று உருவாக்கப்பட்டுள்ளது. இதைத் திறக்க தற்போதைய பணப்பையை மூடி, &quot;கோப்பிலிருந்து பணப்பையைத் திற&quot; விருப்பத்தைத் தட்டி, கீழே கொடுக்கப்பட்டுள்ள பணப்பையைத் தேர்வு செய்யவும்:
+%1
+பணப்பை அமைப்புகளில் நீங்கள் உங்கள் கடவுச்சொல்லை மாற்றிக் கொள்ளலாம்.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="86"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>விதை மற்றும் திறவுகோல்களைக் காட்டு</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="85"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>எதிர்காலத்தில் உங்கள் பணப்பையை மீட்டெடுக்க இந்த தகவலைப் பாதுகாப்பாகச் சேமிக்கவும்.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1840,12 +1842,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="100"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished"></translation>
+        <translation>பகிரப்பட்ட வளையத் தரவுத்தளம்</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation type="unfinished"></translation>
+        <translation>பகிரப்பட்ட வளையத் தரவுத்தளத்துடன் தொடர்பு கொள்ள இந்த பக்கம் உங்களை அனுமதிக்கிறது. இந்த தரவுத்தளம் மோனேரோ பணப்பைகள் மற்றும் மோனேரோ திறவுகோல்களை மீண்டும் பயன்படுத்தும் மோனேரோ நகலிகளின் பணப்பைகள் ஆகியவற்றால் பயன்படுத்தப்படுகிறது.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1862,7 +1864,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>மோனேரோ பரிமாற்றங்களில் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதை மறைப்பதன் மூலம் மூன்றாம் தரப்பினர் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதைக் கூற முடியாத குழப்ப நிலையை அடைவர். இது மிகவும் அவசியம். ஏனென்றால் பரிமாற்றத்திற்குச் சம்பந்தமில்லாத மூன்றாம் தரப்பினர் ஒன்றைத் தவிர மற்ற எல்லா உள்ளீடுகளையும் கண்டுபிடித்து விட்டால், அவர்களால் அந்த பரிமாற்றத்தில் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதை அறிந்து கொள்ள முடியும், இதன்மூலம் மோனேரோ வழங்குகின்ற மூன்று முக்கிய பாதுகாப்பு அடுக்குகளில் ஒன்றான வளையக் கையொப்பம் தருகின்ற பாதுகாப்பு பயனற்று போகிறது.&lt;br&gt;இதனைத் தவிர்க்க, ஏற்கனவே உபயோகிக்கப்பட்ட உள்ளீடுகளை பட்டியலிட்டு புதிய பரிமாற்றங்கள் அவற்றை உபயோகிக்காமல் பார்த்து கொள்ளலாம். இவ்வகை பட்டியல்கள் &quot;Monero Project&quot; குழுவினரால் &quot;getmonero.org&quot; என்னும் இணையதளத்தில் பராமரிக்கப்பட்டு வருகிறது. இவற்றை காணலாம், பதிவிறக்கிக்கொள்ளலாம்.&lt;br&gt;மாற்றாக &quot;monero-blockchain-mark-spend-outputs tool&quot; இன்‌ உதவியோடு நீங்களே கல்லேடு (மற்றும் மோனேரோ நகலிகள் உபயோகிக்கும் கல்லேடு) ஆகியவற்றை வருடி கொள்ளலாம்.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1872,7 +1874,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="142"/>
         <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>நீங்கள் பட்டியலைப் புதுப்பிக்க விரும்பும் போது மட்டுமே கோப்புகளை ஏற்ற வேண்டும். கைமுறை சேர்த்தல்/நீக்குதல் வேண்டுமென்றால் உபயோகிக்கலாம்.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="154"/>
@@ -1902,7 +1904,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="208"/>
         <source>Or manually mark a single output as spent/unspent:</source>
-        <translation type="unfinished"></translation>
+        <translation>அல்லது கைமுறையாக ஒரு வெளியீட்டைச் செலவிட்ட/செலவிடாத தாக குறிக்கவும்:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="210"/>
@@ -1933,12 +1935,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>மோனேரோவின் வளையக் கையொப்ப பாதுகாப்பு சுழியம் ஆகாமல் பாதுகாக்க, வெளியீடுகளை வெவ்வேறு வளையங்களைக் கொண்டு வெவ்வேறு கல்லேட்டில் செலவழிக்கக் கூடாது. பெரும்பாலும் இது கவனிக்கப் பட வேண்டிய ஒன்று இல்லை என்றாலும், திறவுகோல்களை மறுபயனீடு செய்யும் மோனேரோ நகலிகளில் பழைய வெளியீடுகளைக் கொண்டு செலவழிக்கும் ‌‌போது கவனம் பெறுகிறது. இந்த சமயத்தில் ‌‌இரண்டு சங்கிலிகளும் ஒரே வளையத்தை உபயோகிக்கின்றனவா என்பதை உறுதிப் படுத்திக் கொள்ளவும். &lt;br&gt; மோனேரோ‌ மற்றும் பல தனியுரிமையை மதிக்கும் மென்பொருட்கள் இதனை தானியக்கமாகச் செய்கிறது. &lt;br&gt; ஒருவேளை நீங்கள் இவ்வகை பாதுகாப்பு அம்சம் இல்லாத நகலிகளை பயன்படுத்தினால், முதலில் அந்த நகலியில் செலவழித்து பின்‌ கைமுறையாக அந்த வளையத்தை இந்த பக்கத்தில் சேர்க்கலாம். இதன் மூலம் நீங்கள் மோனேரோவை பாதுகாப்பாகச் செலவழிக்க ‌முடியும்.&lt;br&gt;ஒருவேளை நீங்கள் இவ்வகை பாதுகாப்பு அம்சம் இல்லாத நகலிகளை பயன்படுத்தவில்லை என்றால், எல்லாம் தானியக்கமாக நடைபெறும் என்பதால் கூடுதலாக எதுவும் செய்யத் தேவையில்லை.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>இது மோனேரோ வில் செலவிட்ட வெளியீடுகளின் வளையங்களை &quot;திறவுகோல் மறுபயனீடு சங்கிலி&quot; இல் சேமித்து வைத்து,‌‌‌ பின் இந்த வளையங்களைத் தனியுரிமையை பாதுகாக்க மீண்டும் பயன்படுத்துகிறது.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -2016,7 +2018,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="68"/>
         <source>This signature did not verify</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த கையொப்பத்தைச் சரிபார்க்க முடியவில்லை</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="106"/>
@@ -2050,23 +2052,23 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="171"/>
         <source>Sign file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பிற்குக் கையொப்பமிடு</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="171"/>
         <source>Sign message</source>
-        <translation type="unfinished"></translation>
+        <translation>செய்திக்குக் கையொப்பமிடு</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="186"/>
         <source>Enter a message to sign</source>
-        <translation type="unfinished"></translation>
+        <translation>கையொப்பமிடச் செய்தியை உள்ளிடவும்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="203"/>
         <location filename="../pages/Sign.qml" line="316"/>
         <source>Enter path to file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பிற்கான பாதையைக் குறிப்பிடு</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="215"/>
@@ -2077,12 +2079,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="231"/>
         <source>Click [Sign Message] to generate signature</source>
-        <translation type="unfinished"></translation>
+        <translation>கையொப்பத்தை‌ உற்பத்தி செய்ய [செய்திக்குக் கையொப்பமிடு] ஐ தட்டவும்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="231"/>
         <source>Click [Sign File] to generate signature</source>
-        <translation type="unfinished"></translation>
+        <translation>கையொப்பத்தை உற்பத்தி செய்ய [கோப்பிற்குக் கையொப்பமிடு] ஐ தட்டவும்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="245"/>
@@ -2093,17 +2095,17 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="258"/>
         <source>Sign Message</source>
-        <translation type="unfinished"></translation>
+        <translation>செய்திக்குக் கையொப்பமிடு</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="272"/>
         <source>Sign File</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பிற்குக் கையொப்பமிடு</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
         <source>Verify message</source>
-        <translation type="unfinished"></translation>
+        <translation>செய்தியைச் சரிபார்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
@@ -2113,7 +2115,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="300"/>
         <source>Enter the message to verify</source>
-        <translation type="unfinished"></translation>
+        <translation>சரிபார்க்கச் செய்தியை உள்ளிடவும்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="339"/>
@@ -2128,7 +2130,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="352"/>
         <source>Enter the signature to verify</source>
-        <translation type="unfinished"></translation>
+        <translation>சரிபார்க்கக் கையொப்பத்தை உள்ளிடவும்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="380"/>
@@ -2138,7 +2140,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="392"/>
         <source>Verify Message</source>
-        <translation type="unfinished"></translation>
+        <translation>செய்தியைச் சரிபார்</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="404"/>
@@ -2215,7 +2217,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="89"/>
         <source>Transaction file successfully saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்ற கோப்பு வெற்றிகரமாகச் சேமிக்கப்பட்டது!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
@@ -2235,7 +2237,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்புறையைத் திற</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
@@ -2248,7 +2250,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="89"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished"></translation>
+        <translation>ஓப்பன் அளியாஸ் பிழை</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="395"/>
@@ -2289,7 +2291,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="166"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
-        <translation type="unfinished"></translation>
+        <translation>செலவிடத்தக்கக் காசுகள்: %1 XMR. தயவு செய்து காத்திருக்கவும். இன்னும் ~%2 நிமிடங்களில் உங்கள் இருப்பு செலவிடத்தக்கதாகி விடும்.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="303"/>
@@ -2324,12 +2326,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished"></translation>
+        <translation>முகவரி கிடைத்துவிட்டது, ஆனால் DNSSEC கையொப்பங்களைச் சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="270"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished"></translation>
+        <translation>செல்லுபடியாகக் கூடிய முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் காணப்படவில்லை, DNSSEC கையொப்பத்தையும் சரிபார்க்க முடியவில்லை, எனவே இது ஒரு ஏமாற்று வேலையாக இருக்கலாம்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="274"/>
@@ -2360,7 +2362,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="498"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
-        <translation type="unfinished"></translation>
+        <translation>நீண்ட செலுத்தல் ID கள் வழக்கொழிந்த ஒன்றாகும். இவை கல்லேடில் மறையாக்கம் செய்யப்படுவதில்லை. ஆகையால் இவை தனியுரிமைக்குக் குந்தகம் விளைவிக்க வாய்ப்புள்ளது. நீங்கள் காசு அனுப்ப விரும்புவோர்க்கு நீண்ட செலுத்தல் ID தேவைப்பட்டால் இத்தகவலை அவருக்கு தெரியப்படுத்தவும்.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="517"/>
@@ -2383,12 +2385,12 @@ You can change the password in the wallet settings.</source>
         <location filename="../pages/Transfer.qml" line="709"/>
         <location filename="../pages/Transfer.qml" line="753"/>
         <source>Please choose a file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு ஒன்றைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த பணப்பை பார்க்க மட்டுமே. &quot;முடக்கலைப் பரிமாற்ற கையொப்பமிடும்&quot; ஐ உபயோகித்து மட்டுமே காசுகளை அனுப்ப முடியும். திறவுகோல் படங்களை இறக்குமதி செய்யாத வரை உள்வரு பரிமாற்றங்கள் அல்லாது வெளிச்செல்லும் பரிமாற்றங்கள் மட்டுமே இருப்பில் காண் முடியும்.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="412"/>
@@ -2398,7 +2400,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="446"/>
         <source>Add description</source>
-        <translation type="unfinished"></translation>
+        <translation>விளக்கத்தைச் சேர்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="473"/>
@@ -2433,7 +2435,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation type="unfinished"></translation>
+        <translation>உண்மையான இருப்பு விவரத்தைக் காண்பிக்கப் பார்க்க-மட்டும் பணப்பைகளுக்கு இது தேவை</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="577"/>
@@ -2453,7 +2455,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="590"/>
         <source>Offline transaction signing</source>
-        <translation type="unfinished"></translation>
+        <translation>முடக்கலைப் பரிமாற்ற கையொப்பமிடுதல்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="591"/>
@@ -2473,12 +2475,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="614"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>XMR காசுகளைக் குளிர் (முடக்கலை) பணப்பையிலிருந்து செலவழிக்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation type="unfinished"></translation>
+        <translation>* பரிமாற்ற கோப்பு ஒன்றைத் தயாரிக்க, முகவரி மற்றும் தொகையை மேலே உள்ளிடவும்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="622"/>
@@ -2503,7 +2505,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="627"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>5. பார்க்க-மட்டும் பணப்பையை உபயோகித்துக் கையொப்பமிட்ட உங்கள் பரிமாற்றத்தைச் சமர்ப்பிக்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
@@ -2582,7 +2584,7 @@ Ringsize: </source>
     <message>
         <location filename="../pages/Transfer.qml" line="716"/>
         <source>Can&apos;t submit transaction: </source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்றத்தைச் சமர்ப்பிக்க முடியவில்லை: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="722"/>
@@ -2609,7 +2611,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="807"/>
         <source>Waiting on daemon synchronization to finish.</source>
-        <translation type="unfinished"></translation>
+        <translation>மறைநிரல் ஒத்திசைவு முடிவடையக் காத்திருக்கிறது.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="65"/>
@@ -2716,7 +2718,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="63"/>
         <source>Prove Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்றத்தை நிரூபிக்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="95"/>
@@ -2744,7 +2746,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="136"/>
         <source>Check Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்றத்தைச் சரிபார்க்கவும்</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="190"/>
@@ -2766,7 +2768,8 @@ Please upgrade or connect to another daemon</source>
         <location filename="../pages/TxKey.qml" line="68"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation>பரிமாற்ற ID, பெறுநர் முகவரி அதோடு விருப்பத்தேர்வு செய்தி ஆகியவற்றை அளித்தால் உங்களுடைய உள்வரு/வெளிசெல் செலுத்தலுக்கான சான்று ஒன்றை உற்பத்தி செய்து கொள்ளலாம்.
+அதோடு நீங்கள் மேற்கொண்ட வெளிசெல் செலுத்தல்களை நீங்கள்தான் மேற்கொண்டீர்கள் என்பதை நிரூபிக்க &quot;செலவிடப்பட்டது&quot; என்ற சான்றைப் பெற்றுக் கொள்ளலாம். இதற்கு பெறுநர் முகவரி தேவையில்லை.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="83"/>
@@ -2778,7 +2781,8 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="140"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation>காசுகள் குறிப்பிட்ட ஒரு முகவரிக்குத் தான் அனுப்பப்பட்டது என்பதை உறுதி படுத்த பரிமாற்ற ID, பெறுநர் முகவரி, கையொப்பத்திற்குப் பயன்படுத்தப்பட்ட செய்தி மற்றும் கையொப்பம் ஆகியவற்றை அளிக்கவும்.
+&quot;செலவிடப்பட்டது சான்று&quot; க்கு பெறுநர் முகவரியை அளிக்கத் தேவையில்லை.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="200"/>
@@ -2796,7 +2800,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished"></translation>
+        <translation>மேலும் விவரங்களுக்கு getmonero.org என்ற இணையதளத்தை அணுகவும்</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
@@ -2811,7 +2815,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation type="unfinished"></translation>
+        <translation>புதிய பதிப்பைப் பதிவிறக்கிச் சரிபார்க்க விரும்புகிறீர்களா?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -2846,7 +2850,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
         <source>Failed to start download</source>
-        <translation type="unfinished"></translation>
+        <translation>பதிவிறக்கத்தைத் துவக்க இயலவில்லை</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
@@ -2910,7 +2914,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="71"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>சோதனை வலை</translation>
     </message>
     <message>
         <location filename="../js/Utils.js" line="71"/>
@@ -2949,7 +2953,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished"></translation>
+        <translation>உங்கள் பணப்பைக்கு ஒரு கடவுச்சொல்லைத் தருக</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
@@ -2974,7 +2978,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Using letters, numbers, and/or symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>எழுத்துக்கள், எண்கள் ‌மற்றும்/அல்லது சின்னங்களை‌க் கொண்டு</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
@@ -2992,12 +2996,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardController.qml" line="304"/>
         <source>Please choose a file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பு ஒன்றைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="350"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பையை‌ச் சேமிக்க முடியவில்லை</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="431"/>
@@ -3015,7 +3019,10 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+தயவு செய்து உங்கள் வன்பொருள் சாதன பணப்பையைச் சரிபார்க்கவும் –
+உங்கள் உள்ளீடு தேவைப்படலாம்.</translation>
     </message>
 </context>
 <context>
@@ -3023,7 +3030,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="51"/>
         <source>Choose your hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>உங்கள் வன்பொருள் சாதனத்தைத் தேர்வு செய்யவும்</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="73"/>
@@ -3033,7 +3040,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
         <source>Using a hardware device.</source>
-        <translation type="unfinished"></translation>
+        <translation>வன்பொருள் சாதனத்தைக் கொண்டு.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="88"/>
@@ -3043,7 +3050,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="101"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation type="unfinished"></translation>
+        <translation>வன்பொருள் சாதனத்தில் இருந்து பணப்பையை மீட்டமை. நீங்கள் உங்கள் வன்பொருள் சாதன பணப்பையை முன்பு உபயோகித்து இருந்தால் இதைத் தேர்வு செய்யவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="120"/>
@@ -3069,12 +3076,12 @@ your input may be required.</source>
         <location filename="../wizard/WizardCreateDevice1.qml" line="158"/>
         <location filename="../wizard/WizardCreateDevice1.qml" line="219"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
-        <translation type="unfinished"></translation>
+        <translation>வன்பொருள் சாதனத்தில் இருந்து பணப்பையை எழுதும்போது தோல்வி அடைந்தது. பயன்பாடு பதிவுகளைச் சரிபார்க்கவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="175"/>
         <source>Back to menu</source>
-        <translation type="unfinished"></translation>
+        <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="176"/>
@@ -3117,7 +3124,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
         <source>Back to menu</source>
-        <translation type="unfinished"></translation>
+        <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
 </context>
 <context>
@@ -3176,12 +3183,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="102"/>
         <source>Bootstrap node</source>
-        <translation type="unfinished"></translation>
+        <translation>இயக்கத்தொடக்கக் கணு</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="122"/>
         <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>கூடுதலாக, மோனேரோவை உடனே உபயோகிப்பதற்கு ஒரு இயக்கத்தொடக்கக் கணுவை குறிப்பிடவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="162"/>
@@ -3204,7 +3211,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="77"/>
         <source>Choose this option if this is your first time using Monero.</source>
-        <translation type="unfinished"></translation>
+        <translation>முதல் முறையாக நீங்கள் மோனேரோவை பயன்படுத்துகிறீர்கள் என்றால் இந்த விருப்பத்தைத் தேர்வு செய்யவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="97"/>
@@ -3219,7 +3226,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="117"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished"></translation>
+        <translation>கோப்பில் இருந்து ஒரு பணப்பையைத் திறக்கவும்</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="118"/>
@@ -3275,17 +3282,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="72"/>
         <source>This mode will use a remote node whilst also syncing the blockchain. This is different from the first menu option (Simple mode), since it will only use the remote node until the blockchain is fully synced locally. It is a reasonable tradeoff for most people who care about privacy but also want the convenience of an automatic fallback option.</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த பயன்முறை கல்லேட்டை ஒத்திசைத்துக்கொண்டிருக்கும் போதே தொலைநிலை கணுவை பயன்படுத்தத் துவங்கிவிடுகிறது. இது முதல் விருப்பத்தேர்வு (எளிய பயன்முறை) ஐ‌ விடச் சற்று மாறுபட்டது. ஏனென்றால் எளிய பயன்முறையில் கல்லேடு ஒத்திசைவு முழுவதும் முடிந்த பின்னரே தொலைநிலை கணுவை பயன்படுத்த ஆரம்பிக்கும். தனியுரிமை பற்றி கவலை கொள்பவர்களுக்கும், தன்னியக்கமாக முந்தைய நிலைக்கு எளிதில் செல்ல விரும்புவோர்க்கும் இது ஒரு நல்ல தேர்வாகும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>மோனேரோவை உடனே பயன்படுத்தத் தற்காலிகமாகத் தொலைநிலை கணுவை தொடக்கி உபயோகிப்பது நல்ல பலனைத் தருகிறது (அதனால்தான் இதை &quot;இயக்கத்தொடக்கம்&quot; என்று அழைக்கிறார்கள்). எனினும் தொலைநிலை கணுக்களைப் பயன்படுத்தும் போது சற்று கவனமாக இருங்கள். இவை உங்கள் IP முகவரி, மீட்டமை உயரம் மற்றும் அதனோடு தொடர்புடைய &apos;தொகுதி கோரிக்கை தரவு&apos; களை கண்காணிக்கவும், தவறான தகவல்களை தந்து உங்கள் பரிமாற்ற விவரங்களை அறிந்து கொள்ளவும் வாய்ப்புள்ளது.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த வரம்புகள் பற்றி விழிப்புடன் இருங்கள். &lt;b&gt;தனியுரிமை மற்றும் பரவலாக்கத்திற்கு முன்னுரிமை அளிக்கக்கூடிய பயனர்கள் இதற்குப் பதிலாக முழு கணுவை பயன்படுத்த வேண்டும்&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="104"/>
@@ -3303,17 +3310,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="72"/>
         <source>This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த பயன்முறை சிறு தொகையிலான மோனேரோ காசுகளை உடையவர்களுக்கு மிக பொருத்தமானதாகும். இதன்மூலம் உங்களால் அடிப்படை அமைப்புகளான பரிமாற்றங்களை நிகழ்த்துவது மற்றும் நிர்வகிப்பது ஆகியவற்றைச் செய்ய முடியும். மேலும் இது தன்னியக்கமாக மோனேரோ வலையமைப்போடு இணைக்கப்படுவதால் நீங்கள் உடனே மோனேரோவை பயன்படுத்தலாம்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="85"/>
         <source>Remote nodes are useful if you are not able/don&apos;t want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>கல்லேடை முழுவதுமாக பதிவிறக்க விரும்பாதோர் அல்லது இயலாதோர் இந்த தொலைநிலை கணுக்களைப் பயன்படுத்திக்கொள்ளலாம். ஆனால் நினைவு இருக்கட்டும், இவை உங்கள் தனியுரிமையைச் சமரசம் செய்ய வாய்ப்புள்ளது. மேலும் இவை உங்கள் IP முகவரி, மீட்டமை உயரம் மற்றும் அதனோடு தொடர்புடைய &apos;தொகுதி கோரிக்கை தரவு&apos; களை கண்காணிக்கவும், தவறான தகவல்களைத் தந்து உங்கள் பரிமாற்ற விவரங்களை அறிந்து கொள்ளவும் வாய்ப்புள்ளது.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="100"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த வரம்புகள் பற்றி விழிப்புடன் இருங்கள். &lt;b&gt;தனியுரிமை மற்றும் பரவலாக்கத்திற்கு முன்னுரிமை அளிக்கக்கூடிய பயனர்கள் இதற்குப் பதிலாக முழு கணுவை பயன்படுத்த வேண்டும்&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="107"/>
@@ -3326,7 +3333,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="47"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>எடுத்துச்செல்லத்தக்கப் பயன்முறையை உள்ளமைக்க முடியவில்லை</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
@@ -3336,7 +3343,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="75"/>
         <source>Please select the statement that best matches you.</source>
-        <translation type="unfinished"></translation>
+        <translation>உங்களுக்குச் சிறப்பாகப் பொருந்தும் கூற்றுரைத் தேர்ந்தெடுக்கவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="81"/>
@@ -3382,12 +3389,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>எடுத்துச்செல்லத்தக்கப் பணப்பையை உருவாக்கி எந்த கணினியிலும் பயன்படுத்தலாம். மோனேரோவை ஒரு USB குச்சி, வெளிப்புற இயக்கி அல்லது வேறு எதாவது எடுத்துச்செல்லத்தக்க இயக்ககத்தில் நிறுவ விரும்பினால் இதைத் தேர்வு செய்யவும்.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="164"/>
         <source>Back to menu</source>
-        <translation type="unfinished"></translation>
+        <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
 </context>
 <context>
@@ -3408,7 +3415,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="72"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பை ஒன்றைக் கோப்பில் இருந்து திற</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
@@ -3428,7 +3435,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="137"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>சோதனை வலை</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="138"/>
@@ -3443,7 +3450,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="287"/>
         <source>Back to menu</source>
-        <translation type="unfinished"></translation>
+        <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
 </context>
 <context>
@@ -3466,12 +3473,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
         <source>Restore from keys</source>
-        <translation type="unfinished"></translation>
+        <translation>திறவுகோல்களைக் கொண்டு மீட்டமை</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="146"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR குறியீட்டைக் கொண்டு மீட்டமை</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
@@ -3521,7 +3528,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="297"/>
         <source>Back to menu</source>
-        <translation type="unfinished"></translation>
+        <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
 </context>
 <context>
@@ -3536,7 +3543,9 @@ your input may be required.</source>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation type="unfinished"></translation>
+        <translation>மோனேரோ வலையமைப்போடு தொடர்பு கொள்ள வேண்டும் என்றால் முதலில் உங்கள் பணப்பை ஒரு மோனேரோ கணுவோடு இணைக்கப்பட்டிருக்க வேண்டும். சிறந்த தனியுரிமைக்கு உங்கள் சொந்த கணுவை இயக்க பரிந்துரைக்கப்படுகிறது.
+
+உங்கள் சொந்த கணுவோடு இணைக்க வாய்ப்பில்லை என்றால் தொலைநிலை கணு வசதியைப் பயன்படுத்திக் கொள்ளலாம்.</translation>
     </message>
 </context>
 <context>
@@ -3642,7 +3651,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="763"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>பிழைகளுக்கு உங்கள் பணப்பையை மற்றும் மறைநிரல் பதிவைச் சரிபார்க்கவும். நீங்கள் %1 ஐ கைமுறையாகத் தொடங்கவும் முயற்சி செய்யலாம்.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="831"/>
@@ -3669,7 +3678,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="680"/>
         <source>Waiting for daemon to sync</source>
-        <translation type="unfinished"></translation>
+        <translation>மறைநிரல் ஒத்திசைவு நிறைவடையக் காத்திருக்கிறது</translation>
     </message>
     <message>
         <location filename="../main.qml" line="512"/>
@@ -3696,7 +3705,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../main.qml" line="550"/>
         <location filename="../main.qml" line="557"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>பொருந்தாத பணப்பை தேக்ககத்தைச் சரிசெய்கிறது. பணப்பையை மீண்டும் ஒத்திசைக்கிறது.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="682"/>
@@ -3726,7 +3735,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="986"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பையைச் சேமிக்க முடியவில்லை</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1013"/>
@@ -3755,7 +3764,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1056"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>இந்த முகவரி %2 உறுதிப்படுத்தல்(கள்) மூலம் %1 மோனேரோ காசுகளைப் பெற்றுள்ளது.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1067"/>
@@ -3770,7 +3779,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1351"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>மோனேரோ வரைகலைப் பணிச்சூழல் (GUI) திரைபலக உள்ளீட்டைப் பதிவு செய்ய விரும்புகிறீர்களா?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1353"/>
@@ -3811,12 +3820,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1545"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>எச்சரிக்கை: சாதனத்தில்‌ %1 GB மட்டுமே இடம் உள்ளது. கல்லேடு தரவுகளுக்கு %2 GB இடம் தேவைப்படுகிறது.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1547"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>குறிப்பு: சாதனத்தில்‌ %1 GB அளவிற்கு இடம் உள்ளது. கல்லேடு தரவுகளுக்கு %2 GB இடம் தேவைப்படுகிறது.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1549"/>
@@ -3841,7 +3850,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1885"/>
         <source>Autosaved the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>பணப்பை தன்னியக்கமாகச் சேமிக்கப்பட்டது</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1887"/>
@@ -3876,7 +3885,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="2042"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished"></translation>
+        <translation>உள் கணு நிலையைச் சரிபார்க்கிறது…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="878"/>
@@ -3896,7 +3905,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="884"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>போதுமான காசுகள் இல்லை. திறக்கப்பட்ட இருப்பு:‌‌ %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="967"/>
