@@ -2845,7 +2845,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../components/UpdateDialog.qml" line="164"/>
         <source>Download failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Le téléchargement a échoué</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
