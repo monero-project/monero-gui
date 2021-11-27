@@ -569,7 +569,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
         <source>Primary address &amp; Keys</source>
-        <translation>Indirizzo primario &amp; chiavi</translation>
+        <translation>Indirizzo principale e chiavi</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
