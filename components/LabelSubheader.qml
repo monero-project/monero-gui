@@ -34,6 +34,7 @@ import "../components/effects/" as MoneroEffects
 Label {
     id: item
     fontSize: 18
+    tooltipIconVisible: true
 
     Rectangle {
         anchors.top: item.bottom
