@@ -211,17 +211,17 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Hårdvaruplånbok</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Dator</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hårdvaruplånbok lösenordsfras</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
