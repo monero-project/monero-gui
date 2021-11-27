@@ -301,7 +301,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/History.qml" line="89"/>
         <source>Transactions</source>
-        <translation>Transacciones </translation>
+        <translation>Transacciones</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="109"/>
@@ -2532,7 +2532,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="71"/>
         <source>Address is invalid.</source>
-        <translation>La dirección es invalida.</translation>
+        <translation>La dirección es inválida.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="76"/>
@@ -2846,7 +2846,7 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="169"/>
         <source>Sweep unmixable outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar las salidas no mezclables</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="171"/>
@@ -3007,7 +3007,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation>Visita getmonero.org para más detalles</translation>
+        <translation>Por favor, visita getmonero.org para más detalles</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
@@ -3022,8 +3022,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation>¿Desea descargar y verificar una nueva versión?
-</translation>
+        <translation>¿Desea descargar y verificar una nueva versión?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -3551,7 +3550,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="47"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al configurar el modo portátil</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
