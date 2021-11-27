@@ -433,7 +433,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Διεύθυνση</translation>
+        <translation>Διεύθυνση</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
@@ -1381,12 +1381,12 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Remote node</source>
-        <translation type="unfinished">Απομακρυσμένος κόμβος</translation>
+        <translation>Απομακρυσμένος κόμβος</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Local node</source>
-        <translation type="unfinished">Τοπικός κόμβος</translation>
+        <translation>Τοπικός κόμβος</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
@@ -1450,7 +1450,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="389"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Αντιγραφή στο πρόχειρο</translation>
+        <translation>Αντιγραφή στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="408"/>
@@ -1493,7 +1493,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ονόματος πορτοφολιού στη γραμμή τίτλου</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -1503,7 +1503,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Λάθος κωδικός</translation>
+        <translation>Λάθος κωδικός</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
@@ -1583,7 +1583,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
         <source>Port</source>
-        <translation type="unfinished">Θύρα</translation>
+        <translation>Θύρα</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
@@ -1705,7 +1705,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
         <source>Change</source>
-        <translation type="unfinished">Αλλαγή</translation>
+        <translation>Αλλαγή</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
@@ -1804,7 +1804,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="108"/>
         <source>Information</source>
-        <translation type="unfinished">Πληροφορίες</translation>
+        <translation>Πληροφορίες</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="109"/>
@@ -1834,7 +1834,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="128"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Λάθος κωδικός</translation>
+        <translation>Λάθος κωδικός</translation>
     </message>
 </context>
 <context>
@@ -2120,7 +2120,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="339"/>
         <source>Address</source>
-        <translation type="unfinished">Διεύθυνση</translation>
+        <translation>Διεύθυνση</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="342"/>
@@ -2242,7 +2242,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
         <source>Done</source>
-        <translation type="unfinished">Ολοκληρώθηκε</translation>
+        <translation>Ολοκληρώθηκε</translation>
     </message>
 </context>
 <context>
@@ -2286,7 +2286,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="83"/>
         <source>Start daemon</source>
-        <translation type="unfinished">Έναρξη daemon</translation>
+        <translation>Έναρξη daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="166"/>
@@ -2316,7 +2316,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="180"/>
         <source>Address</source>
-        <translation type="unfinished">Διεύθυνση</translation>
+        <translation>Διεύθυνση</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="261"/>
@@ -2367,7 +2367,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="517"/>
         <source>Send</source>
-        <translation type="unfinished">Αποστολή</translation>
+        <translation>Αποστολή</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="659"/>
@@ -2378,7 +2378,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="721"/>
         <source>Information</source>
-        <translation type="unfinished">Πληροφορίες</translation>
+        <translation>Πληροφορίες</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="648"/>
@@ -2713,7 +2713,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../pages/TxKey.qml" line="92"/>
         <location filename="../pages/TxKey.qml" line="165"/>
         <source>Address</source>
-        <translation type="unfinished">Διεύθυνση</translation>
+        <translation>Διεύθυνση</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="63"/>
@@ -2873,7 +2873,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Λάθος κωδικός</translation>
+        <translation>Λάθος κωδικός</translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="59"/>
@@ -2983,7 +2983,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
         <source>Password</source>
-        <translation type="unfinished">Κωδικός</translation>
+        <translation>Κωδικός</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="161"/>
@@ -3114,7 +3114,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished">Ύψος επαναφοράς πορτοφολιού</translation>
+        <translation>Ύψος επαναφοράς πορτοφολιού</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
@@ -3349,7 +3349,7 @@ your input may be required.</source>
         <location filename="../wizard/WizardModeSelection.qml" line="81"/>
         <location filename="../wizard/WizardModeSelection.qml" line="110"/>
         <source>Simple mode</source>
-        <translation type="unfinished">Απλή λειτουργία</translation>
+        <translation>Απλή λειτουργία</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="84"/>
@@ -3364,7 +3364,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="137"/>
         <source>Advanced mode</source>
-        <translation type="unfinished">Προηγμένη λειτουργία</translation>
+        <translation>Προηγμένη λειτουργία</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="138"/>
@@ -3513,7 +3513,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφήστε κενό για να δημιουργήσετε ένα πορτοφόλι μόνο για προβολή</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3789,7 +3789,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1354"/>
         <source>Yes</source>
-        <translation type="unfinished">Ναι</translation>
+        <translation>Ναι</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1477"/>
