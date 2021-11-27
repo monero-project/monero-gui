@@ -269,7 +269,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Frază de acces pentru portofelul hardware</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
@@ -1123,12 +1123,12 @@ De asemenea, minând ai o mică ocazie să câștigi niște Monero. Computerul v
     <message>
         <location filename="../pages/Mining.qml" line="256"/>
         <source>Mining temporarily suspended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minatul a fost temporar suspendat.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se minează cu %1 H/s. Ai o șansă de 1 în %2 zilnic de a găsi un bloc.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1202,12 +1202,12 @@ De asemenea, minând ai o mică ocazie să câștigi niște Monero. Computerul v
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="188"/>
         <source>Successfully switched to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>S-a trecut cu succes pe un alt nod public</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>A eșuat trecerea pe alt nod public</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
@@ -1618,7 +1618,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="368"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tails: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="376"/>
@@ -1746,7 +1746,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
         <source>Socks5 proxy (%1%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Socks5 proxy (%1%2)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="250"/>
@@ -2359,12 +2359,12 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="89"/>
         <source>Transaction file successfully saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fișierul tranzacției a fost salvat cu succes!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzacție trimisă cu succes!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
