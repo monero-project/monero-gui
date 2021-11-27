@@ -1066,7 +1066,7 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation>Minerando com %1 H/s. Você tem 1 chance em %2 diariamente de encontrar um bloco.</translation>
+        <translation>Minerando com %1 H/s. Diariamente, você tem 1 chance em %2 de encontrar um bloco.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -2323,7 +2323,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation>Esta carteira é somente leitura e só pode enviar transações previamente assinadas em uma carteira offline (cold wallet). Ao menos que as imagens-chave sejam importadas, o saldo só refletirá as transações de entrada e não as de saída.</translation>
+        <translation>A carteira é somente leitura e envios só são possíveis usando transações assinadas offline. Ao menos que imagens-chave sejam importadas, o saldo só refletirá as transações de entrada e não as de saída.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
@@ -2434,7 +2434,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation>* Para criar um arquivo de transação, favor insira acima o endereço e a quantia</translation>
+        <translation>* Para criar um arquivo de transação, favor inserir o endereço e a quantia acima</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="622"/>
@@ -3774,7 +3774,7 @@ Se você não tiver a opção de executar seu próprio nó, você pode se conect
     <message>
         <location filename="../main.qml" line="1351"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Gostaria de adicionar um atalho na área de trabalho para a Monero GUI?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1353"/>
