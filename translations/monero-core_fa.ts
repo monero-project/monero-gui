@@ -60,7 +60,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Save your most used addresses here</source>
-        <translation type="unfinished"></translation>
+        <translation>نشانی های پر استفاده را در اینجا ذخیره کنید</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
@@ -71,7 +71,7 @@
         <location filename="../pages/AddressBook.qml" line="100"/>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Add an address</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن نشانی</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="115"/>
@@ -86,12 +86,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="274"/>
         <source>Add address</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن نشانی</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Edit an address</source>
-        <translation type="unfinished"></translation>
+        <translation>ویرایش نشانی</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="332"/>
@@ -127,7 +127,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="296"/>
         <source>Address</source>
-        <translation type="unfinished">نشانی</translation>
+        <translation>نشانی</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="372"/>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="373"/>
         <source>Add a name...</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن نام...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="379"/>
@@ -530,7 +530,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/InputDialog.qml" line="135"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ابطال</translation>
     </message>
     <message>
         <location filename="../components/InputDialog.qml" line="147"/>
