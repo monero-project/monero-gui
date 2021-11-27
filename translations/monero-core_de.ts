@@ -1870,7 +1870,7 @@ auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</tr
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Hier wird festgelegt, welche Outputs bekanntermaßen ausgegeben wurden und somit nicht als Verschleierungspartner für die Privatsphäre in Ringsignaturen verwendet werden.</translation>
+        <translation>Hier wird festgelegt, welche Outputs bekanntermaßen ausgegeben wurden und somit nicht als Verschleierungspartner für die Privatsphäre in Ringsignaturen verwendet werden. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="142"/>
@@ -2223,7 +2223,7 @@ auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</tr
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Transaktion erfolgreich gesendet!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
@@ -2233,7 +2233,7 @@ auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</tr
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicherort der Transaktionsdatei:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
@@ -3858,7 +3858,7 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
     <message>
         <location filename="../main.qml" line="1350"/>
         <source>Desktop entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop-Eintrag</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1351"/>
