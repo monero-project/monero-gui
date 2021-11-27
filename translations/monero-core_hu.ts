@@ -60,18 +60,18 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Save your most used addresses here</source>
-        <translation type="unfinished"></translation>
+        <translation>Ide mentse a leggyakrabban használt címeket</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez egyszerűbbé teszi a Monero küldését vagy fogadását és csökkenti az elütések lehetőségét a manuális megadáshoz képest</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
         <location filename="../pages/AddressBook.qml" line="289"/>
         <source>Add an address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adjon hozzá egy címet</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="115"/>
@@ -172,7 +172,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="427"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Törlés</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="487"/>
@@ -252,7 +252,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="89"/>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakciók</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="109"/>
@@ -262,7 +262,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="230"/>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendezés</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="251"/>
@@ -274,22 +274,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="369"/>
         <location filename="../pages/History.qml" line="1687"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Összeg</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="449"/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Oldal</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="479"/>
         <source>Jump to page (1-%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugrás az oldalra (1-%1)</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="487"/>
         <source>Invalid page. Must be a number within the specified range.</source>
-        <translation type="unfinished"></translation>
+        <translation>Érvénytelen oldal. A megadott határon belüli számnak kell lennie.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="636"/>
@@ -314,22 +314,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="686"/>
         <source>Mined</source>
-        <translation type="unfinished"></translation>
+        <translation>Bányászott</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="703"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Igen</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1184"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Függőben levő</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="831"/>
         <source>Confirmations</source>
-        <translation type="unfinished"></translation>
+        <translation>Megerősítés</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1011"/>
@@ -344,17 +344,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1123"/>
         <source>Transaction key</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakciós kulcs</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1139"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikk a megjelenítéshez</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="777"/>
         <source>Unknown recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen fogadó</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1327"/>
@@ -364,12 +364,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1343"/>
         <source>Human readable date format</source>
-        <translation type="unfinished"></translation>
+        <translation>Emberek számára olvasható dátumformátum</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1349"/>
         <source>Export all history</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden előzmény exportálása</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1586"/>
@@ -384,17 +384,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1619"/>
         <source>No transaction history yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Még nincs tranzakciótörténet</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1621"/>
         <source>No results.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs találat</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1623"/>
         <source>%1 transactions total, showing %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tranzakció összesen, megjelenítve %2</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -497,7 +497,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1711"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kérem válasszon egy mappát</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1721"/>
