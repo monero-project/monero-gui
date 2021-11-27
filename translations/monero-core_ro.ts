@@ -211,12 +211,12 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofel Hardware</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculator</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
@@ -227,7 +227,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Te rog să selectezi unde dorești să introduci fraza-parolă.
+Pentru securitate sporită se recomandă să introduci fraza-parolă în portofelul hardware.</translation>
     </message>
 </context>
 <context>
@@ -349,7 +350,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1139"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Clic pentru a afișa</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="777"/>
@@ -364,7 +365,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1343"/>
         <source>Human readable date format</source>
-        <translation>Format dată descifrabil pentru om</translation>
+        <translation>Format dată lizibil pentru om</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1349"/>
@@ -384,7 +385,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1619"/>
         <source>No transaction history yet.</source>
-        <translation>Nici un istoric al tranzacțiilor încă</translation>
+        <translation>Încă nu există istoric al tranzacțiilor.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1621"/>
@@ -394,7 +395,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1623"/>
         <source>%1 transactions total, showing %2.</source>
-        <translation>%1 tranzacții totale, arată %2.</translation>
+        <translation>%1 tranzacții totale, se afișează %2.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -405,22 +406,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="652"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumă necunoscută</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>La</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>În</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="768"/>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Eșuat</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="771"/>
@@ -430,19 +431,19 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portofelul meu</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Adresă</translation>
+        <translation>Adresă</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresă necunoscută</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1650"/>
@@ -852,7 +853,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation>Tu decizi să accepți sau nu tranzacții neconfirmate. E posibil ca ele să fie confirmate în scurt timp, însă există și probabilitatea să nu fie, pentru sume mai mari ar fi bine să aștepți o confirmare sau mai multe.</translation>
+        <translation>Tu decizi să accepți sau nu tranzacții neconfirmate. E posibil ca ele să fie confirmate în scurt timp, însă există și probabilitatea să nu fie, pentru sume mai mari ar fi bine să aștepți o confirmare sau mai multe</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
@@ -989,7 +990,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../pages/Mining.qml" line="118"/>
         <source>Max # of CPU threads available for mining: </source>
-        <translation>Numărul maxim de fire de execuție disponibile pentru minat:</translation>
+        <translation>Numărul maxim de fire de execuție disponibile pentru minat: </translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
@@ -1106,12 +1107,12 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Starting the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Se pornește nodul</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Stopping the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Se oprește nodul</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="54"/>
@@ -1176,7 +1177,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Se trece pe alt nod public</translation>
     </message>
 </context>
 <context>
@@ -1250,7 +1251,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/ProgressBar.qml" line="38"/>
         <source>%1 blocks remaining: </source>
-        <translation>%1 blocuri rămase:</translation>
+        <translation>%1 blocuri rămase: </translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="72"/>
@@ -1390,7 +1391,7 @@ Puteți introduce o înălțime a blocului sau o dată calendaristică (AAAA-LL-
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
         <source>Wallet restore height: </source>
-        <translation>Înălțimea de restaurare a portofelului:</translation>
+        <translation>Înălțimea de restaurare a portofelului: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
@@ -1424,7 +1425,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
         <source>Wallet mode: </source>
-        <translation>Mod portofel:</translation>
+        <translation>Mod portofel: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="338"/>
@@ -1459,7 +1460,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
         <source>Donate to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Donează pentru Monero</translation>
     </message>
 </context>
 <context>
@@ -1492,7 +1493,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Afișează numele portofelului în bara de titlu</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -1502,7 +1503,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Parolă incorectă</translation>
+        <translation>Parolă incorectă</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
@@ -1512,7 +1513,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiecare</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1532,7 +1533,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="154"/>
         <source>After </source>
-        <translation>După</translation>
+        <translation>După </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="163"/>
@@ -1567,22 +1568,22 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
         <source>remote node connections, </source>
-        <translation type="unfinished"></translation>
+        <translation>conexiuni la nodul distant, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished"></translation>
+        <translation>se descarcă actualizările, se preiau sursele de prețuri</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresă IP</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
@@ -1742,7 +1743,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="55"/>
         <source>Logs out of this wallet.</source>
-        <translation>Deloghează-te de pe acest protofel</translation>
+        <translation>Deloghează-te de pe acest portofel.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="64"/>
@@ -1752,7 +1753,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="63"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation>Crează un portofel nou care poate doar vedea și iniția tranzacțiile, dar necesită un portofel de cheltuială pentru a semna tranzacțiile înainte de trimitere</translation>
+        <translation>Crează un portofel nou care poate doar vedea și iniția tranzacțiile, dar necesită un portofel de cheltuială pentru a semna tranzacțiile înainte de trimitere.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="71"/>
@@ -1786,7 +1787,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="95"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation>Folosește această opțiune dacă crezi că balanța arătată nu este corectă</translation>
+        <translation>Folosește această opțiune dacă crezi că balanța arătată nu este corectă.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="76"/>
@@ -1841,7 +1842,7 @@ Puteți schimba parola în setările portofelului.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="100"/>
         <source>Shared RingDB</source>
-        <translation>RingDB distribuite.</translation>
+        <translation>RingDB distribuite</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
@@ -3246,7 +3247,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="153"/>
         <source>Change wallet mode</source>
-        <translation>Schimbă modul portofel.</translation>
+        <translation>Schimbă modul portofel</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="168"/>
