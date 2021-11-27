@@ -2372,7 +2372,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="72"/>
         <source>Address is invalid.</source>
-        <translation>La dirección es invalida</translation>
+        <translation>La dirección es invalida.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="77"/>
@@ -2407,7 +2407,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="428"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
-        <translation>El contenido del campo de descripción coincide con el formato de ID de pago. Por favor no pegues el ID de pago en el campo de descripción, podrías perder tus fondos. </translation>
+        <translation>El contenido del campo de descripción coincide con el formato de ID de pago. Por favor no pegues el ID de pago en el campo de descripción, podrías perder tus fondos.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="446"/>
@@ -2447,8 +2447,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation>Requerido para monederos de solo-lectura para mostrar el balance real
-</translation>
+        <translation>Requerido para monederos de solo-lectura para mostrar el balance real</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="577"/>
@@ -2463,8 +2462,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="582"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation>2. Usando monederos de solo-lectura, importar la clave de archivo
-</translation>
+        <translation>2. Usando monederos de solo-lectura, importar la clave de archivo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="590"/>
@@ -2810,7 +2808,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation>Visita getmonero.org para más detalles.</translation>
+        <translation>Visita getmonero.org para más detalles</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
@@ -2846,7 +2844,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Retry</source>
-        <translation>Reintentar </translation>
+        <translation>Reintentar</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
