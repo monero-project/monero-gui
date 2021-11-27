@@ -349,7 +349,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1139"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>देखने की लिए क्लिक करें</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="777"/>
@@ -497,7 +497,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1711"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया एक फ़ोल्डर चुनें</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1721"/>
@@ -558,12 +558,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>बटुआ इस ऊंचाई से बहाल करें</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>ब्लॉक संख्या</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
@@ -600,7 +600,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="281"/>
         <source>Mnemonic seed protected by hardware device.</source>
-        <translation type="unfinished"></translation>
+        <translation>हार्डवेयर यन्त्र से स्मरक बीज सुरक्षित है</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
@@ -615,7 +615,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="299"/>
         <source>(Hardware Device Wallet - No secret spend key available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(हार्डवेयर यन्त्र बटुआ - कोई गुप्त खर्च कुंजी उपलब्ध नहीं है)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="158"/>
@@ -1057,7 +1057,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="256"/>
         <source>Mining temporarily suspended.</source>
-        <translation type="unfinished"></translation>
+        <translation>खनन अस्थायी रूप से रुक गया है l</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
@@ -1164,17 +1164,17 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="188"/>
         <source>Successfully switched to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>दूसरे सार्वजनिक नोड पर स्थान्तरण सफल</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>नोड का स्थान्तरण करने में विफल</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>दूसरे सार्वजनिक रोड पर स्थानांतरण हो रहा है</translation>
     </message>
 </context>
 <context>
@@ -1182,7 +1182,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="159"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया नया बटुआ पासवर्ड दर्ज करें</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="161"/>
@@ -1197,22 +1197,22 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया %1 दर्ज करें इसके लिए: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया %1 दर्ज करें</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="174"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>चेतावनी: होस्ट पर पासफ़्रेज़ प्रविष्टि एक सुरक्षा जोखिम है क्योंकि इसे मैलवेयर द्वारा कैप्चर किया जा सकता है। डिवाइस-आधारित पासफ़्रेज़ प्रविष्टि को प्राथमिकता देने की सलाह दी जाती है।</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="203"/>
         <source>CAPSLOCKS IS ON.</source>
-        <translation type="unfinished"></translation>
+        <translation>कैप्स लॉक चालू है</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
@@ -1222,7 +1222,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया वॉलेट डिवाइस पासफ़्रेज़ की पुष्टि करें</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="283"/>
@@ -1279,12 +1279,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="295"/>
         <source>Save as image</source>
-        <translation type="unfinished"></translation>
+        <translation>छवि के रूप में सहेजें</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
         <source>Show on device</source>
-        <translation type="unfinished"></translation>
+        <translation>डिवाइस पर दिखाएं</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="324"/>
@@ -1362,12 +1362,13 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Set a new restore height.
 You can enter a block height or a date (YYYY-MM-DD):</source>
-        <translation type="unfinished"></translation>
+        <translation>एक नई पुनर्स्थापना ऊंचाई सेट करें।
+आप एक ब्लॉक ऊंचाई या दिनांक (YYYY-MM-DD) दर्ज कर सकते हैं:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="230"/>
         <source>Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD</source>
-        <translation type="unfinished"></translation>
+        <translation>अमान्य पुनर्स्थापना ऊंचाई निर्दिष्ट है। स्वरूपित संख्या या दिनांक YYYY-MM-DD होनी चाहिए</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="207"/>
@@ -1436,12 +1437,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>दृढ़</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>दृढ़ता निष्क्रिय हुई</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="389"/>
@@ -1456,7 +1457,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
         <source>Donate to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>मोनेरो के लिए दान करें</translation>
     </message>
 </context>
 <context>
@@ -1484,7 +1485,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="66"/>
         <source>Check for updates periodically</source>
-        <translation type="unfinished"></translation>
+        <translation>समय-समय पर अद्यतन के लिए जाँच करें</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
@@ -1504,7 +1505,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वतः सहेजना</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1514,7 +1515,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>मिनिट</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
@@ -1534,27 +1535,27 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="163"/>
         <source>Enable displaying balance in other currencies</source>
-        <translation type="unfinished"></translation>
+        <translation>अन्य मुद्राओं में रोकड़-बाकी प्रदर्शित करने को सक्षम करें</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="189"/>
         <source>Price source</source>
-        <translation type="unfinished"></translation>
+        <translation>मूल्य स्रोत</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="213"/>
         <source>Currency</source>
-        <translation type="unfinished"></translation>
+        <translation>मुद्रा</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="242"/>
         <source>Enabling price conversion exposes your IP address to the selected price source.</source>
-        <translation type="unfinished"></translation>
+        <translation>मूल्य रूपांतरण को सक्षम करना आपके आईपी पते को चयनित मूल्य स्रोत में उजागर करता है।</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="249"/>
         <source>Confirm and enable</source>
-        <translation type="unfinished"></translation>
+        <translation>पुष्टि के साथ सक्षम करें</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
@@ -1607,7 +1608,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="243"/>
         <source>Failed to send command</source>
-        <translation type="unfinished"></translation>
+        <translation>आदेश भेजने में विफल</translation>
     </message>
 </context>
 <context>
@@ -1655,7 +1656,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमॉन उपयोगकर्ता नाम</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="295"/>
@@ -1691,7 +1692,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="351"/>
         <source>Stop daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमोन रोकें</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
@@ -1701,12 +1702,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="370"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>बदलें</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="371"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>रीसेट</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="373"/>
@@ -1815,7 +1816,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation type="unfinished"></translation>
+        <translation>अपने व्यवसाय के लिए, आसानी से मोनरो प्राप्त करें।</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
@@ -1991,7 +1992,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="418"/>
         <source>Set segregation height:</source>
-        <translation type="unfinished"></translation>
+        <translation>अलगाव की ऊंचाई निर्धारित करें:</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2186,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/StandardDropdown.qml" line="153"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वचालित</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="154"/>
@@ -2200,7 +2201,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/StandardDropdown.qml" line="156"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>तेज़ (x5 शुल्क)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="157"/>
@@ -2267,12 +2268,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="336"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="413"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>तेज़ (x5 शुल्क)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
@@ -2303,7 +2304,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="456"/>
         <source>Saved to local wallet history</source>
-        <translation type="unfinished"></translation>
+        <translation>स्थानीय वॉलेट इतिहास में सहेजा गया</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="554"/>
@@ -2388,7 +2389,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="624"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>3. दर्शनीय बटुए का उपयोग करके, मुख्य छवि वाली फ़ाइल आयात करें और लेनदेन की फ़ाइल बनाएँ</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="626"/>
@@ -2398,7 +2399,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="627"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>5. केवल दर्शनीय बटुए का उपयोग करके, अपने हस्ताक्षरित लेनदेन को जमा करें</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
@@ -2418,7 +2419,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="722"/>
         <source>Monero sent successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>मोनेरो सफलतापूर्वक भेजे गए</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="181"/>
@@ -2469,7 +2470,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="412"/>
         <source>Normal (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>सामान्य (१x शुल्क)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="414"/>
@@ -2484,12 +2485,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="428"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>आपका विवरण, लंबी भुगतान आईडी प्रारूप से मेल खाती है।            कृपया विवरण में लंबी भुगतान आईडी न डालें, आपके फंड खो सकते हैं।</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="498"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
-        <translation type="unfinished"></translation>
+        <translation>लंबी भुगतान आईडी अब प्रचलन में नहीं हैं। लंबे भुगतान आईडी ब्लॉकचैन पर एन्क्रिप्ट नहीं किए गए थे और आपकी गोपनीयता को नुकसान पहुंचा सकते थे। यदि आप किसी ऐसी पार्टी को अभी भी भेज रहे हैं जिसने एक लंबी भुगतान आईडी मांगी है, तो कृपया उन्हें इससे अवगत कराएं।</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="517"/>
@@ -2512,22 +2513,22 @@ You can change the password in the wallet settings.</source>
         <location filename="../pages/Transfer.qml" line="709"/>
         <location filename="../pages/Transfer.qml" line="753"/>
         <source>Please choose a file</source>
-        <translation type="unfinished"></translation>
+        <translation>कृपया एक फ़ाइल चुनें</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="410"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>स्वचालित</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="446"/>
         <source>Add description</source>
-        <translation type="unfinished"></translation>
+        <translation>विवरण जोड़ें</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="473"/>
         <source>Add payment ID</source>
-        <translation type="unfinished"></translation>
+        <translation>भुगतान आईडी जोड़ें</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="485"/>
@@ -2537,43 +2538,49 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="660"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation type="unfinished"></translation>
+        <translation>अहस्ताक्षरित लेन-देन लोड नहीं किया जा सकता: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="667"/>
         <source>
 Number of transactions: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+लेन-देन की संख्या: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
         <source>
 Transaction #%1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+लेनदेन संख्या %1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="670"/>
         <source>
 Recipient: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+प्राप्त करने वाला: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="671"/>
         <source>
 payment ID: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+भुगतान आईडी: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="672"/>
         <source>
 Amount: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+रकम: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="673"/>
         <source>
 Fee: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+शुल्क: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="674"/>
@@ -2782,12 +2789,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>नया मोनेरो संस्करण v%1 उपलब्ध है।</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished"></translation>
+        <translation>विवरण के लिए कृपया getmonero.org पर जाएं</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
@@ -2802,7 +2809,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation type="unfinished"></translation>
+        <translation>क्या आप नए संस्करण को डाउनलोड और सत्यापित करना चाहते हैं?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -2812,32 +2819,32 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="140"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="142"/>
         <source>Download later</source>
-        <translation type="unfinished"></translation>
+        <translation>बाद में डाउनलोड करें</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>पुनः प्रयास करें</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>डाउनलोड</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="164"/>
         <source>Download failed</source>
-        <translation type="unfinished"></translation>
+        <translation>डाउनलोड विफल हुआ</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
         <source>Failed to start download</source>
-        <translation type="unfinished"></translation>
+        <translation>डाउनलोड शुरू होने में विफल</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
@@ -2847,12 +2854,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>सहेजने की क्रिया विफल रही</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>फाइल में सहेजें</translation>
     </message>
 </context>
 <context>
@@ -2866,36 +2873,36 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../js/Utils.js" line="59"/>
         <source>%n second(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%nसेकंड पहले</numerusform>
+            <numerusform>%nसेकंडों पहले</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="61"/>
         <source>%n minute(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%nमिनट पहले</numerusform>
+            <numerusform>%nमिनटों पहले</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="63"/>
         <source>%n hour(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%nघंटा पहले</numerusform>
+            <numerusform>%nघंटे पहले</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="65"/>
         <source>%n day(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n दिन पहले</numerusform>
+            <numerusform>%n दिनों पहले</numerusform>
         </translation>
     </message>
     <message>
@@ -3851,27 +3858,27 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="878"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>राशि गलत है: अपेक्षित संख्या %1 से %2 तक</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>अपर्याप्त कोष। खुला हुआ बैलेंस: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1053"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation type="unfinished"></translation>
+        <translation>इस पते पर% 1 मोनेरो प्राप्त हुए, लेकिन लेनदेन अभी तक खनन नहीं हुआ है</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1056"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>इस पते को %1 मोनेरो मिले, %2 पुष्टिकरण के साथ।</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1060"/>
         <source>This address received nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>इस पते को कुछ नहीं मिला</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1639"/>
