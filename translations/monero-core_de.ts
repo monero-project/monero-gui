@@ -1065,7 +1065,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation>Mining bei %1 H/s ergibt eine tägliche Chance von 1:%2, einen neuen Block zu finden.</translation>
+        <translation>Mining bei %1 H/s. Gibt dir eine tägliche Chance von 1:%2 einen neuen Block zu finden.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
