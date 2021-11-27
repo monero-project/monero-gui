@@ -411,12 +411,12 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Vers</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Dans</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="768"/>
@@ -438,7 +438,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Adresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
@@ -1172,12 +1172,12 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la bascule vers un nœud publique</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished"></translation>
+        <translation>Bascule vers un autre nœud publique</translation>
     </message>
 </context>
 <context>
@@ -1381,12 +1381,12 @@ Vous pouvez entrer une hauteur de bloc ou une date (AAAA-MM-JJ) :</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Remote node</source>
-        <translation type="unfinished">Démon distant</translation>
+        <translation>Noeud distant</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Local node</source>
-        <translation type="unfinished">Nœud local</translation>
+        <translation>Nœud local</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
@@ -1493,7 +1493,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le nom du portefeuille dans la barre de fenêtre</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -1513,7 +1513,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1573,17 +1573,17 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished"></translation>
+        <translation>téléchargement des mises à jour, récupération des références de prix</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse IP</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
@@ -2227,22 +2227,22 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
         <source>Transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifiant de Transaction:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement du fichier de transaction:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir dossier</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
         <source>Done</source>
-        <translation type="unfinished">Fait</translation>
+        <translation>Fait</translation>
     </message>
 </context>
 <context>
@@ -2291,7 +2291,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../pages/Transfer.qml" line="166"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonds disponibles : %1 XMR. Merci de patienter ~%2 minutes pour la disponibilité de l&apos;intégralité des fonds.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="303"/>
@@ -2326,7 +2326,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le portefeuille est en lecture seule et les transferts sont uniquement possibles par signature de transaction hors ligne. A moins que les images de clefs ne soient importées, le solde ne reflète que les transactions entrantes, pas les transactions sortantes.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="266"/>
@@ -2649,7 +2649,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="199"/>
         <source>All unlocked balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout solde déverouillé</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
@@ -2679,7 +2679,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
         <source>Fee</source>
-        <translation type="unfinished">Frais</translation>
+        <translation>Frais</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
@@ -2689,7 +2689,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
         <source>Calculating fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcul des frais</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
@@ -2795,7 +2795,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>La nouvelle version de Monero v% 1 est disponible.</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
@@ -2810,7 +2810,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour téléchargée, signature vérifiée</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
@@ -2879,27 +2879,27 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
         <location filename="../js/Utils.js" line="59"/>
         <source>%n second(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n seconde</numerusform>
+            <numerusform>%n secondes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="61"/>
         <source>%n minute(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minute</numerusform>
+            <numerusform>%n minutes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="63"/>
         <source>%n hour(s) ago</source>
         <comment>0</comment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n heure</numerusform>
+            <numerusform>%n heures</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -3001,7 +3001,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../wizard/WizardController.qml" line="350"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec du stockage du portefeuille</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="431"/>
@@ -3338,7 +3338,7 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
         <source>Mode selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection du mode</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="75"/>
@@ -3379,12 +3379,12 @@ votre contribution peut être nécessaire.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="149"/>
         <source>Select enhanced functionality you would like to enable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez la fonctionnalité améliorée que vous aimeriez activer.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="154"/>
         <source>Portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode portable</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
@@ -3683,7 +3683,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="510"/>
         <source>Please confirm transaction on the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez confirmer la transaction sur le périphérique.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="512"/>
@@ -3735,7 +3735,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="986"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec du stockage du portefeuille</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1013"/>
@@ -3795,12 +3795,12 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Save transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le fichier de transaction.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Send transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer la transaction</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1540"/>
@@ -3855,7 +3855,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="2003"/>
         <source>Local node is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nœud local est en cours d&apos;exécution</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2004"/>
@@ -3870,7 +3870,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="2007"/>
         <source>Keep it running</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer l&apos;exécution</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2027"/>
@@ -3880,7 +3880,7 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     <message>
         <location filename="../main.qml" line="2042"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérification du statut du nœud local...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1056"/>
