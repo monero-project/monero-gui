@@ -37,12 +37,12 @@
     <message>
         <location filename="../pages/Account.qml" line="300"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar rótulo da conta</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="315"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar endereço para a área de transferência</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="218"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar para este endereço</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
@@ -210,22 +210,22 @@
     <message>
         <location filename="../pages/Advanced.qml" line="52"/>
         <source>Mining</source>
-        <translation type="unfinished">Mineração</translation>
+        <translation>Mineração</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="57"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Provar/conferir</translation>
+        <translation>Provar/conferir</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="62"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">RingDB Compartilhado</translation>
+        <translation>RingDB Compartilhado</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="67"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Assinar/Verificar</translation>
+        <translation>Assinar/Verificar</translation>
     </message>
 </context>
 <context>
@@ -508,7 +508,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../pages/History.qml" line="1723"/>
         <source>Payment proof</source>
-        <translation type="unfinished">Prova do pagamento</translation>
+        <translation>Prova do pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
@@ -836,7 +836,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../components/LineEdit.qml" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished">Colar</translation>
+        <translation>Colar</translation>
     </message>
 </context>
 <context>
@@ -862,7 +862,7 @@ Recomenda-se inserir uma senha na carteira física para maior segurança.</trans
     <message>
         <location filename="../components/MenuBar.qml" line="34"/>
         <source>File</source>
-        <translation type="unfinished">Arquivo</translation>
+        <translation>Arquivo</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
@@ -1377,7 +1377,7 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/Receive.qml" line="420"/>
         <source>Primary address</source>
-        <translation type="unfinished">Endereço primário</translation>
+        <translation>Endereço primário</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="460"/>
@@ -1405,47 +1405,47 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="90"/>
         <source>Address</source>
-        <translation type="unfinished">Endereço</translation>
+        <translation>Endereço</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="91"/>
         <source>Port</source>
-        <translation type="unfinished">Porta</translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="102"/>
         <source>Daemon username</source>
-        <translation type="unfinished">nome do usuário do Daemon</translation>
+        <translation>nome do usuário do Daemon</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="103"/>
         <source>(optional)</source>
-        <translation type="unfinished">(opcional)</translation>
+        <translation>(opcional)</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="113"/>
         <source>Daemon password</source>
-        <translation type="unfinished">Senha do Daemon</translation>
+        <translation>Senha do Daemon</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="114"/>
         <source>Password</source>
-        <translation type="unfinished">Senha</translation>
+        <translation>Senha</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="125"/>
         <source>Mark as Trusted Daemon</source>
-        <translation type="unfinished">Marcar como daemon confiável</translation>
+        <translation>Marcar como daemon confiável</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="136"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="145"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1489,17 +1489,17 @@ A mineração também lhe dá uma pequena chance de ganhar Monero. Seu computado
     <message>
         <location filename="../pages/settings/Settings.qml" line="58"/>
         <source>Wallet</source>
-        <translation type="unfinished">Carteira</translation>
+        <translation>Carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="63"/>
         <source>Interface</source>
-        <translation type="unfinished">Interface</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="68"/>
         <source>Node</source>
-        <translation type="unfinished">Nó</translation>
+        <translation>Nó</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="74"/>
@@ -2404,7 +2404,7 @@ Você pode alterar a senha nas configurações da carteira.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="156"/>
         <source>Change language</source>
-        <translation type="unfinished">Mudar idioma</translation>
+        <translation>Mudar idioma</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="195"/>
@@ -3374,7 +3374,7 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished">Redefinir</translation>
+        <translation>Redefinir</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
