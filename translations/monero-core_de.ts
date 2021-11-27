@@ -406,7 +406,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/History.qml" line="652"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Betrag</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
@@ -431,7 +431,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Meine Wallet</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -2344,7 +2344,7 @@ auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</tr
     <message>
         <location filename="../pages/Transfer.qml" line="807"/>
         <source>Waiting on daemon synchronization to finish.</source>
-        <translation>Wartet auf Synchronisierung des Hintergrunddienstes</translation>
+        <translation>Wartet auf Synchronisierung des Hintergrunddienstes.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="65"/>
@@ -3103,7 +3103,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="64"/>
         <source>Creates a new wallet on this computer.</source>
-        <translation>Erstellt eine neue Wallet auf diesem Computer</translation>
+        <translation>Erstellt eine neue Wallet auf diesem Computer.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="92"/>
@@ -3383,7 +3383,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="149"/>
         <source>Select enhanced functionality you would like to enable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine erweiterte Funktionalität, die sie gern aktivieren würden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="154"/>
