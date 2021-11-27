@@ -1495,7 +1495,7 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar nome da carteira na barra de título</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -3515,7 +3515,7 @@ uma intervenção pode ser necessária.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Deixar em branco para criar uma carteira somente-leitura</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3769,7 +3769,7 @@ Se você não tiver a opção de executar seu próprio nó, você pode se conect
     <message>
         <location filename="../main.qml" line="1350"/>
         <source>Desktop entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho na área de trabalho</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1351"/>

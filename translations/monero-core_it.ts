@@ -227,7 +227,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare dove si desidera inserire la passphrase.
+Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior sicurezza.</translation>
     </message>
 </context>
 <context>
@@ -410,12 +411,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>In</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="768"/>
@@ -425,24 +426,24 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>In attesa di conferma...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mio portafolgio</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Indirizzo</translation>
+        <translation>Indirizzo</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo sconosciuto</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1650"/>
@@ -1116,12 +1117,12 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Starting the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviando il nodo</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Stopping the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrestando il nodo</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="54"/>
@@ -1380,12 +1381,12 @@ Puoi inserire un&apos;altezza di blocco o una data (AAAA-MM-GG):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Remote node</source>
-        <translation type="unfinished">Nodo remoto</translation>
+        <translation>Nodo remoto</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Local node</source>
-        <translation type="unfinished">Nodo locale</translation>
+        <translation>Nodo locale</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
@@ -1502,7 +1503,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Password errata</translation>
+        <translation>Password errata</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
@@ -1567,7 +1568,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
         <source>remote node connections, </source>
-        <translation type="unfinished"></translation>
+        <translation>connessioni a nodi remoti, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="270"/>
@@ -1582,7 +1583,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
         <source>Port</source>
-        <translation type="unfinished">Porta</translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="295"/>
@@ -2218,27 +2219,27 @@ Puoi cambiare la password nelle impostazioni del portafoglio.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="89"/>
         <source>Transaction file successfully saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>File di transazione salvato con successo!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Transazione inviata con successo!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
         <source>Transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID transazione:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Posizione del file della transazione:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri cartella</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
@@ -3804,7 +3805,7 @@ Se non si ha la possibilità di operare un proprio nodo locale, ci si può conne
     <message>
         <location filename="../main.qml" line="1354"/>
         <source>Yes</source>
-        <translation type="unfinished">Si</translation>
+        <translation>Si</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1477"/>
