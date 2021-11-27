@@ -411,7 +411,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/History.qml" line="748"/>
         <source>To</source>
-        <translation>Zu</translation>
+        <translation>An</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="748"/>
@@ -549,7 +549,7 @@ Für mehr Sicherheit wird empfohlen, das Passwort über die Hardware-Wallet einz
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>ACHTUNG: Verwende deine Moneroschlüssel nicht auf einer anderen Fork, AUSSER diese verfügt über einen Replay-Schutz. Wenn du dies tust, wird deine Privatsphäre gefährdet.</translation>
+        <translation>ACHTUNG: Verwende deine Moneroschlüssel nicht auf einer anderen Fork wieder, AUSSER diese verfügt über eingebaute Schadenminderungsmaßnahmen zwecks der Wiederverwendung von Schlüsseln. Wenn du dies tust, wird deine Privatsphäre gefährdet.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
@@ -995,12 +995,12 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Use recommended # of threads</source>
-        <translation>Empfohlene Anzahl an Threads verwenden</translation>
+        <translation>Empfohlene # an Threads verwenden</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="133"/>
         <source>Set to use recommended # of threads</source>
-        <translation>Auswählen, um mit der empfohlenen Anzahl an Threads zu minen</translation>
+        <translation>Nutze empfohlene # an Threads</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="140"/>
@@ -1287,7 +1287,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
         <source>Show on device</source>
-        <translation>Auf Gerät anzeigen</translation>
+        <translation>Am Gerät anzeigen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="324"/>
@@ -1493,7 +1493,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Wallet-Namen in Titelleiste anzeigen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -2665,7 +2665,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="258"/>
         <source>Account #</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto #</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="277"/>
@@ -2685,7 +2685,7 @@ Bitte aktualisiere oder verbinde Dich mit einem anderen Dienst.</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
         <source>See on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Siehe Gerät</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
@@ -3337,7 +3337,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="47"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration des portablen Modus fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
@@ -3393,7 +3393,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Portable Wallets erstellen und diese auf jedem PC verwenden. Funktion nutzen falls Monero auf einem USB-Stick, einer externen Festplatte oder anderen mobilen Datenträgern verwendet werden soll.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="164"/>
@@ -3487,7 +3487,7 @@ deine Eingabe könnte erforderlich sein.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>25 Worte umfassenden mnemonischen Seed eingeben</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
@@ -3884,12 +3884,12 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Save transaction file</source>
-        <translation type="unfinished">Save transaction file</translation>
+        <translation>Transaktionsdatei speichern</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1487"/>
         <source>Send transaction</source>
-        <translation type="unfinished">Send transaction</translation>
+        <translation>Transaktion senden</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1540"/>
