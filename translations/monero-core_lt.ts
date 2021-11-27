@@ -11,7 +11,7 @@
     <message>
         <location filename="../pages/Account.qml" line="89"/>
         <source>Balance All</source>
-        <translation type="unfinished"></translation>
+        <translation>Likučiai</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="96"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai palengvina Monero siuntimą ir gavimą bei sumažina klaidų riziką rašant adresus ranka.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="100"/>
@@ -425,12 +425,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laukiama patvirtinimo...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mano piniginė</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="784"/>
@@ -643,7 +643,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LanguageSidebar.qml" line="138"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalba pakeista.</translation>
     </message>
 </context>
 <context>
@@ -1279,7 +1279,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Receive.qml" line="295"/>
         <source>Save as image</source>
-        <translation type="unfinished"></translation>
+        <translation>Išsaugoti kaip paveiksliuką</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="304"/>
