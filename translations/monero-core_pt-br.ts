@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="119"/>
         <location filename="../pages/Account.qml" line="152"/>
         <source>Copied to clipboard</source>
-        <translation>Copiado para a área de transferência</translation>
+        <translation>Copiado para área de transferência</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="129"/>
