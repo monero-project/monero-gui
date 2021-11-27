@@ -211,12 +211,12 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation>Monedero Hardware</translation>
+        <translation>Monedero físico</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation>PC</translation>
+        <translation>Ordenador</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
@@ -227,7 +227,7 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation>Por favor seleccione donde quieres introducir la frase clave.
+        <translation>Por favor seleccione donde quieres introducir la contraseña.
 Es recomendable escribirla en la billetera física para mayor seguridad.</translation>
     </message>
 </context>
@@ -2652,12 +2652,12 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="164"/>
         <source>Confirm send</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar envío</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="199"/>
         <source>All unlocked balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Balance total desbloqueado</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
@@ -2687,7 +2687,7 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
         <source>Fee</source>
-        <translation type="unfinished">Comisión</translation>
+        <translation>Tasa</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
@@ -3393,7 +3393,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="154"/>
         <source>Portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo portátil</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
@@ -3492,7 +3492,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduce tu semilla mnemónica de 25 palabras</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
@@ -3522,7 +3522,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejar en blanco para crear una cartera de solo lectura</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3828,7 +3828,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1351"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Le gustaría registrar un acceso directo para Monero GUI?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1353"/>
@@ -3838,7 +3838,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1354"/>
         <source>Yes</source>
-        <translation type="unfinished">Si</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1487"/>
