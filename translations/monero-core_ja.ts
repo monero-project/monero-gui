@@ -862,7 +862,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="271"/>
         <source>Change</source>
-        <translation type="unfinished">編集</translation>
+        <translation>変更</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="296"/>
