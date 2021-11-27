@@ -2240,17 +2240,17 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicación del archivo de transacción:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
         <source>Done</source>
-        <translation type="unfinished">Hecho</translation>
+        <translation>Hecho</translation>
     </message>
 </context>
 <context>
@@ -2642,7 +2642,7 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="160"/>
         <source>Create transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear archivo de transacción</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="162"/>
@@ -2662,27 +2662,27 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Desde</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="251"/>
         <source>My wallet</source>
-        <translation type="unfinished">Mi billetera</translation>
+        <translation>Mi cartera</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="258"/>
         <source>Account #</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta #</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="277"/>
         <source>To</source>
-        <translation type="unfinished">Para</translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="299"/>
         <source>Monero address</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección de Monero</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
@@ -2692,22 +2692,22 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
         <source>See on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver en dispositivo</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
         <source>Calculating fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculando comisión</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Atras</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="414"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar</translation>
     </message>
 </context>
 <context>
@@ -3383,12 +3383,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="148"/>
         <source>Optional features</source>
-        <translation type="unfinished"></translation>
+        <translation>Características opcionales</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="149"/>
         <source>Select enhanced functionality you would like to enable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la funcionalidad mejorada que le gustaría habilitar.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="154"/>
@@ -3704,7 +3704,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="510"/>
         <source>Please confirm transaction on the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor confirme la transacción en el dispositivo...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="512"/>
@@ -3715,7 +3715,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="524"/>
         <source>Signing transaction in the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Firmando transacción en el dispositivo...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
@@ -3756,12 +3756,12 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="850"/>
         <source>Save as file</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar como archivo</translation>
     </message>
     <message>
         <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>
@@ -3833,7 +3833,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1353"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1354"/>
