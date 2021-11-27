@@ -193,7 +193,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>Uruchamianie lokalnego węzła za %1 sekund</translation>
+        <translation>Uruchomienie lokalnego węzła za %1 sekund</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="113"/>
@@ -211,7 +211,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portfel sprzętowy</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasło portfela sprzętowego</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
@@ -1117,12 +1117,12 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Starting the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchamianie węzła</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Stopping the node</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymanie węzła</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="54"/>
@@ -1381,12 +1381,12 @@ Możesz wpisać wysokość bloków lub datę (YYYY-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Remote node</source>
-        <translation type="unfinished">Węzeł zdalny</translation>
+        <translation>Węzeł zdalny</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="50"/>
         <source>Local node</source>
-        <translation type="unfinished">Węzeł lokalny</translation>
+        <translation>Węzeł lokalny</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="176"/>
@@ -1414,7 +1414,8 @@ Następujące informacje zostaną usunięte
 - Klucze transakcji
 - Opisy transakcji
 
-Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i może być później przywrócona.</translation>
+Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i może być później przywrócona.
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="264"/>
@@ -1459,7 +1460,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
         <source>Donate to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Przekaż darowiznę dla Monero</translation>
     </message>
 </context>
 <context>
@@ -1492,7 +1493,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl nazwe portfela w tytule</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
@@ -1577,7 +1578,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>adres IP</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
@@ -1818,7 +1819,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation type="unfinished"></translation>
+        <translation>Przyjmuj Monero w swoim biznesie, z łatwością.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
@@ -2216,32 +2217,32 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="89"/>
         <source>Transaction file successfully saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik transakcji zapisany pomyślnie!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="91"/>
         <source>Transaction successfully sent!</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcja pomyślnie wysłana!</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
         <source>Transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID transakcji:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokalizacja pliku transakcji:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz folder</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="156"/>
         <source>Done</source>
-        <translation type="unfinished">Gotowe</translation>
+        <translation>Gotowe</translation>
     </message>
 </context>
 <context>
@@ -2453,7 +2454,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="614"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij XMR z zimnego (offline) portfela</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
@@ -2483,7 +2484,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="627"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>5. Korzystając z portfela tylko do przeglądu, wyślij swoją podpisaną transackję</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
@@ -2633,7 +2634,7 @@ Rozmiar pierścienia: </translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="160"/>
         <source>Create transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Stwórz plik transakcji</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="162"/>
@@ -2643,62 +2644,62 @@ Rozmiar pierścienia: </translation>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="164"/>
         <source>Confirm send</source>
-        <translation type="unfinished"></translation>
+        <translation>Potwierdź wysłanie</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="199"/>
         <source>All unlocked balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Całe odblokowane saldo</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="230"/>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="251"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mój portfel</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="258"/>
         <source>Account #</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto #</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="277"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Do</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="299"/>
         <source>Monero address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres Monero</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="317"/>
         <source>Fee</source>
-        <translation type="unfinished">Opłata</translation>
+        <translation>Opłata</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="333"/>
         <source>See on device</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl na urządzeniu</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="335"/>
         <source>Calculating fee</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblicz prowizję</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="401"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Cofnij</translation>
     </message>
     <message>
         <location filename="../components/TxConfirmationDialog.qml" line="414"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Potwierdź</translation>
     </message>
 </context>
 <context>
@@ -2809,7 +2810,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizacja ściągnięta, sygnatura zweryfikowana</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
@@ -3022,7 +3023,10 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Proszę sprawdź swój portfel sprzętowy –
+może to wymagać twojego działania.</translation>
     </message>
 </context>
 <context>
@@ -3333,7 +3337,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="47"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się skonfigurować trybu przenośnego</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
@@ -3374,22 +3378,22 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="148"/>
         <source>Optional features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funkcje opcjonalne</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="149"/>
         <source>Select enhanced functionality you would like to enable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz rozszerzoną funkcjonalność, którą chcesz włączyć.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="154"/>
         <source>Portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb przenośny</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="155"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Twórz przenośne portfele i używaj ich na każdym komputerze. Włącz, jeśli zainstalowałeś Monero na pamięci USB, dysku zewnętrznym lub innym przenośnym nośniku pamięci.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="164"/>
@@ -3483,7 +3487,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz swoje 25 słów mnemotechnicznych</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
@@ -3513,7 +3517,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozostaw puste, aby utworzyć portfel w trybie do odczytu</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -3744,22 +3748,22 @@ Jeżeli nie masz opcji aby uruchomić własny węzeł, jest opcja połączenia d
     <message>
         <location filename="../main.qml" line="1350"/>
         <source>Desktop entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpis na pulpicie</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1351"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz zarejestrować wpis Monero GUI Desktop?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1353"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1354"/>
         <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1477"/>
@@ -3870,7 +3874,7 @@ Jeżeli nie masz opcji aby uruchomić własny węzeł, jest opcja połączenia d
     <message>
         <location filename="../main.qml" line="524"/>
         <source>Signing transaction in the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpisywanie transakcji w urządzeniu...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="680"/>
@@ -3920,12 +3924,12 @@ Jeżeli nie masz opcji aby uruchomić własny węzeł, jest opcja połączenia d
     <message>
         <location filename="../main.qml" line="850"/>
         <source>Save as file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz jako plik</translation>
     </message>
     <message>
         <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Potwierdź</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1060"/>
