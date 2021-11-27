@@ -211,7 +211,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Portafoglio hardware</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Passphrase del portafoglio hardware</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
@@ -1065,7 +1065,7 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mining a %1 H/s. Dà una probabilità di trovare un blocco di 1 su %2 al giorno.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1425,7 +1425,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
         <source>Wallet mode: </source>
-        <translation>Modalità portafoglio:</translation>
+        <translation>Modalità portafoglio: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="338"/>
@@ -1460,7 +1460,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="414"/>
         <source>Donate to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Dona a Monero</translation>
     </message>
 </context>
 <context>
@@ -1498,7 +1498,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
         <source>Ask for password before sending a transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiedere la password prima di inviare una transazione</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
@@ -1508,7 +1508,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvataggio automatico</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
@@ -1563,7 +1563,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="268"/>
         <source>Socks5 proxy (%1%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Socks5 proxy (%1%2)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="269"/>
@@ -1578,7 +1578,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="282"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo IP</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="283"/>
@@ -1624,8 +1624,7 @@ La vecchia cache del wallet verrà rinominata e potrà essere ripristinata succe
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="131"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>La blockchain viene scaricata nel tuo computer. Fornisce maggiore sicurezza e richiede più spazio di archiviazione locale.
-</translation>
+        <translation>La blockchain viene scaricata nel tuo computer. Fornisce maggiore sicurezza e richiede più spazio di archiviazione locale.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="208"/>
@@ -1778,8 +1777,7 @@ Puoi cambiare la password nelle impostazioni del portafoglio.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="85"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Conserva queste informazioni in modo sicuro per recuperare il tuo portafoglio in futuro.
-</translation>
+        <translation>Conserva queste informazioni in modo sicuro per recuperare il tuo portafoglio in futuro.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1821,12 +1819,12 @@ Puoi cambiare la password nelle impostazioni del portafoglio.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricevi facilmente Monero per la tua attività.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
         <source>Enter merchant mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrare in modalità commerciante</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
@@ -2273,7 +2271,8 @@ Puoi cambiare la password nelle impostazioni del portafoglio.</translation>
         <location filename="../pages/Transfer.qml" line="802"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Il daemon connesso non è compatibile con l&apos;interfaccia grafica. Aggiorna o connetti ad un altro daemon</translation>
+        <translation>Il daemon connesso non è compatibile con l&apos;interfaccia grafica. 
+Aggiorna o connetti ad un altro daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="89"/>
@@ -2861,7 +2860,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Operazione di salvataggio non riuscita</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
@@ -3288,7 +3287,7 @@ potrebbe essere richiesta una azione da parte tua.</translation>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation>L&apos;utilizzo temporaneo di nodi remoti è utile per iniziare a usare immediatamente Monero (da qui il nome bootstrap), tuttavia tieni presente che quando si usano nodi remoti (incluso con l&apos;impostazione bootstrap), i nodi potrebbero tracciare il tuo indirizzo IP, tracciare la tua &quot;altezza di ripristino&quot; e i dati associati alla richiesta di blocchi, nonché  inviarti informazioni inesatte sulle transazioni effettuate.</translation>
+        <translation>L&apos;utilizzo temporaneo di nodi remoti è utile per iniziare a usare immediatamente Monero (da qui il nome bootstrap), tuttavia tieni presente che quando si usano nodi remoti (incluso con l&apos;impostazione bootstrap), i nodi potrebbero tracciare il tuo indirizzo IP, tracciare la tua &quot;altezza di ripristino&quot; e i dati associati alla richiesta di blocchi, nonché inviarti informazioni inesatte sulle transazioni effettuate.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3489,12 +3488,12 @@ potrebbe essere richiesta una azione da parte tua.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
         <source>Seed offset passphrase (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Passphrase del seed offset (opzionale)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Passphrase</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
