@@ -439,7 +439,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="787"/>
         <location filename="../pages/History.qml" line="789"/>
         <source>Address</source>
-        <translation type="unfinished">Endereço</translation>
+        <translation>Endereço</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="793"/>
@@ -1207,7 +1207,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor introduz %1</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="174"/>
@@ -1227,7 +1227,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="238"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor confirma a frase-passe do dispositivo da tua carteira</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="283"/>
@@ -1447,7 +1447,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="380"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>persistência desactivada</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="389"/>
@@ -1490,17 +1490,17 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="66"/>
         <source>Check for updates periodically</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar atualizações periodicamente</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar o nome da carteira na faixa do título</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="98"/>
         <source>Ask for password before sending a transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedir a palavra-passe antes de enviar uma transação</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="106"/>
@@ -1510,17 +1510,17 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="120"/>
         <source>Autosave</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar automaticamente</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="132"/>
         <source>minute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>minuto(s)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="153"/>
