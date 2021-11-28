@@ -185,6 +185,7 @@ Rectangle {
 
                 CheckBox2 {
                     id: showAdvancedCheckbox
+                    visible: appWindow.walletMode >= 2
                     checked: false
                     text: qsTr("Advanced options") + translationManager.emptyString
                 }
