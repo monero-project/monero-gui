@@ -213,6 +213,16 @@
         <file>images/restore-wallet-from-hardware.png</file>
         <file>images/open-wallet-from-file@2x.png</file>
         <file>images/open-wallet-from-file.png</file>
+        <file>images/open-wallet-from-file-mainnet@2x.png</file>
+        <file>images/open-wallet-from-file-mainnet.png</file>
+        <file>images/open-wallet-from-file-stagenet@2x.png</file>
+        <file>images/open-wallet-from-file-stagenet.png</file>
+        <file>images/open-wallet-from-file-testnet@2x.png</file>
+        <file>images/open-wallet-from-file-testnet.png</file>
+        <file>images/open-wallet-from-file-view-only@2x.png</file>
+        <file>images/open-wallet-from-file-view-only.png</file>
+        <file>images/open-wallet-from-file-trezor@2x.png</file>
+        <file>images/open-wallet-from-file-trezor.png</file>
         <file>images/restore-wallet@2x.png</file>
         <file>images/restore-wallet.png</file>
         <file>images/create-wallet@2x.png</file>

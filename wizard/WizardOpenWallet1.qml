@@ -163,7 +163,7 @@ Rectangle {
                             return parent.width / 3
                         }
                         property string networkType: {
-                            if(networktype === 0) return qsTr("Mainnet");
+                            if(networktype === 0 && appWindow.walletMode >= 2) return qsTr("Mainnet");
                             else if(networktype === 1) return qsTr("Testnet");
                             else if(networktype === 2) return qsTr("Stagenet");
                             return "";
@@ -218,7 +218,14 @@ Rectangle {
                                     anchors.left: parent.left
                                     anchors.verticalCenter: parent.verticalCenter
                                     fillMode: Image.PreserveAspectFit
-                                    source: "qrc:///images/open-wallet-from-file.png"
+                                    source: {
+                                        if (networktype === 0 && fileName.toLowerCase().includes("viewonly")) return "qrc:///images/open-wallet-from-file-view-only.png";
+                                        else if (networktype === 0 && fileName.toLowerCase().includes("trezor")) return "qrc:///images/open-wallet-from-file-trezor.png";
+                                        else if (networktype === 0 && fileName.toLowerCase().includes("ledger")) return "qrc:///images/restore-wallet-from-hardware.png";
+                                        else if (networktype === 0) return "qrc:///images/open-wallet-from-file-mainnet.png";
+                                        else if (networktype === 1) return "qrc:///images/open-wallet-from-file-testnet.png";
+                                        else if (networktype === 2) return "qrc:///images/open-wallet-from-file-stagenet.png";
+                                    }
                                     visible: {
                                         if(!isOpenGL) return true;
                                         if(MoneroComponents.Style.blackTheme) return true;
@@ -263,12 +270,12 @@ Rectangle {
 
                                     wrapMode: Text.WordWrap
                                     leftPadding: 0
-                                    topPadding: networktype !== -1 ? 8 : 4
+                                    topPadding: networkType !== "" ? 8 : 4
                                     bottomPadding: 0
                                 }
 
                                 Text {
-                                    visible: networktype !== -1
+                                    visible: networkType !== ""
                                     Layout.preferredHeight: 24
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     Layout.fillWidth: true
