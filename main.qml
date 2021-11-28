@@ -1898,7 +1898,7 @@ ApplicationWindow {
         TitleBar {
             id: titleBar
             visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
-            walletName: persistentSettings.displayWalletNameInTitleBar ? appWindow.walletName : ""
+            walletName: persistentSettings.displayWalletNameInTitleBar && rootItem.state != "wizard" ? appWindow.walletName : ""
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
