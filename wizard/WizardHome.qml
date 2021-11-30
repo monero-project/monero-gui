@@ -73,7 +73,12 @@ Rectangle {
             }
 
             WizardMenuItem {
-                headerText: qsTr("Create a new wallet") + translationManager.emptyString
+                headerText: {
+                    var nettype = persistentSettings.nettype;
+                    return qsTr("Create a new wallet") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
+                                                                        : nettype === 1 ? " (" + qsTr("testnet") + ")"
+                                                                                        : "") + translationManager.emptyString
+                }
                 bodyText: qsTr("Choose this option if this is your first time using Monero.") + translationManager.emptyString
                 imageIcon: "qrc:///images/create-wallet.png"
 
@@ -94,7 +99,12 @@ Rectangle {
             }
 
             WizardMenuItem {
-                headerText: qsTr("Create a new wallet from hardware") + translationManager.emptyString
+                headerText: {
+                    var nettype = persistentSettings.nettype;
+                    return qsTr("Create a new wallet from hardware") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
+                                                                        : nettype === 1 ? " (" + qsTr("testnet") + ")"
+                                                                                        : "") + translationManager.emptyString
+                }
                 bodyText: qsTr("Connect your hardware wallet to create a new Monero wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet-from-hardware.png"
 

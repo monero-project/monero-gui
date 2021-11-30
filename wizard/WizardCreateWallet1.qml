@@ -60,7 +60,12 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("Create a new wallet") + translationManager.emptyString
+                title: {
+                    var nettype = persistentSettings.nettype;
+                    return qsTr("Create a new wallet") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
+                                                                        : nettype === 1 ? " (" + qsTr("testnet") + ")"
+                                                                                        : "") + translationManager.emptyString
+                }
                 subtitle: qsTr("Creates a new wallet on this computer.") + translationManager.emptyString
             }
 
