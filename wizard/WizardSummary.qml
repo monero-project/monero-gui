@@ -53,7 +53,7 @@ ColumnLayout {
 
     WizardSummaryItem {
         Layout.fillWidth: true
-        header: qsTr("Language") + translationManager.emptyString
+        header: qsTr("Mnemonic seed language") + translationManager.emptyString
         value: persistentSettings.language
     }
 
