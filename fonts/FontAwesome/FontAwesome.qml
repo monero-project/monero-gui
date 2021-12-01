@@ -71,4 +71,6 @@ Object {
     property string shieldAlt : "\uf3ed"
     property string signOutAlt : "\uf2f5"
     property string times : "\uf00d"
+    property string windowMaximize : "\uf2d0"
+    property string windowRestore : "\uf2d2"
 }

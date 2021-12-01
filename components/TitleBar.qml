@@ -94,7 +94,7 @@ Rectangle {
         // collapse sidebar
         Rectangle {
             id: btnCloseWallet
-            color: "transparent"
+            color: btnCloseWalletMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
@@ -117,17 +117,12 @@ Rectangle {
             }
 
             MouseArea {
+                id: btnCloseWalletMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: {
-                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                    btnCloseWalletTooltip.tooltipPopup.open()
-                }
-                onExited: {
-                    parent.color = "transparent"
-                    btnCloseWalletTooltip.tooltipPopup.close()
-                }
+                onEntered: btnCloseWalletTooltip.tooltipPopup.open()
+                onExited: btnCloseWalletTooltip.tooltipPopup.close()
                 onClicked: root.closeWalletClicked(leftPanel.visible)
             }
         }
@@ -135,7 +130,7 @@ Rectangle {
         // language selection
         Rectangle {
             id: btnLanguageToggle
-            color: "transparent"
+            color: btnLanguageToggleMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
@@ -157,24 +152,19 @@ Rectangle {
             }
 
             MouseArea {
+                id: btnLanguageToggleMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: {
-                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                    btnLanguageToggleTooltip.tooltipPopup.open()
-                }
-                onExited: {
-                    parent.color = "transparent"
-                    btnLanguageToggleTooltip.tooltipPopup.close()
-                }
+                onEntered: btnLanguageToggleTooltip.tooltipPopup.open()
+                onExited: btnLanguageToggleTooltip.tooltipPopup.close()
                 onClicked: root.languageClicked()
             }
         }
 
         // switch theme
         Rectangle {
-            color: "transparent"
+            color: switchThemeMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
@@ -196,17 +186,12 @@ Rectangle {
             }
 
             MouseArea {
+                id: switchThemeMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: {
-                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                    btnSwitchThemeTooltip.tooltipPopup.open()
-                }
-                onExited: {
-                    parent.color = "transparent"
-                    btnSwitchThemeTooltip.tooltipPopup.close()
-                }
+                onEntered: btnSwitchThemeTooltip.tooltipPopup.open()
+                onExited: btnSwitchThemeTooltip.tooltipPopup.close()
                 onClicked: {
                     MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
                 }
@@ -270,7 +255,7 @@ Rectangle {
 
         // minimize
         Rectangle {
-            color: "transparent"
+            color: minimizeMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             visible: root.showMinimizeButton
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
@@ -285,47 +270,62 @@ Rectangle {
                 color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: FontAwesome.minus
                 fontAwesomeFallbackSize: 18
-                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
+                fontAwesomeFallbackOpacity: 1
                 opacity: 0.75
             }
 
+            MoneroComponents.Tooltip {
+                id: minimizeTooltip
+                anchors.fill: parent
+                text: qsTr("Minimize") + translationManager.emptyString
+                tooltipLeft: true
+            }
+
             MouseArea {
+                id: minimizeMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: minimizeTooltip.tooltipPopup.open()
+                onExited: minimizeTooltip.tooltipPopup.close()
                 onClicked: root.minimizeClicked();
             }
         }
 
         // maximize
         Rectangle {
-            id: test
             visible: root.showMaximizeButton
-            color: "transparent"
+            color: maximizeMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
-            Image {
+            MoneroEffects.ImageMask {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: MoneroComponents.Style.titleBarFullscreenSource
-                sourceSize.width: 16
-                sourceSize.height: 16
-                smooth: true
-                mipmap: true
+                image: appWindow.visibility === Window.Maximized ? MoneroComponents.Style.titleBarRestoreSource : MoneroComponents.Style.titleBarFullscreenSource
+                color: MoneroComponents.Style.defaultFontColor
+                width: 16
+                height: 16
                 opacity: 0.75
-                rotation: appWindow.visibility === Window.FullScreen ? 180 : 0
+                fontAwesomeFallbackIcon: appWindow.visibility === Window.Maximized ? FontAwesome.windowRestore : FontAwesome.windowMaximize
+                fontAwesomeFallbackSize: 21
+                fontAwesomeFallbackOpacity: 1
+            }
+
+            MoneroComponents.Tooltip {
+                id: maximizeTooltip
+                anchors.fill: parent
+                text: appWindow.visibility === Window.Maximized ? qsTr("Restore") : qsTr("Maximize") + translationManager.emptyString
+                tooltipLeft: true
             }
 
             MouseArea {
-                id: buttonArea
+                id: maximizeMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: maximizeTooltip.tooltipPopup.open()
+                onExited: maximizeTooltip.tooltipPopup.close()
                 onClicked: root.maximizeClicked();
             }
         }
@@ -333,7 +333,7 @@ Rectangle {
         // close
         Rectangle {
             visible: root.showCloseButton
-            color: "transparent"
+            color: closeMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
@@ -346,16 +346,24 @@ Rectangle {
                 color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: FontAwesome.times
                 fontAwesomeFallbackSize: 21
-                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
+                fontAwesomeFallbackOpacity: 1
                 opacity: 0.75
             }
 
+            MoneroComponents.Tooltip {
+                id: closeTooltip
+                anchors.fill: parent
+                text: qsTr("Close Monero GUI") + translationManager.emptyString
+                tooltipLeft: true
+            }
+
             MouseArea {
+                id: closeMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: closeTooltip.tooltipPopup.open()
+                onExited: closeTooltip.tooltipPopup.close()
                 onClicked: root.closeClicked();
             }
         }
