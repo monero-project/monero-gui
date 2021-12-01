@@ -221,7 +221,7 @@ Rectangle {
                 progress: 0
                 btnNext.enabled: walletInput.verify() && wizardCreateDevice1.deviceName;
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
-                btnNext.text: qsTr("Create wallet") + translationManager.emptyString
+                btnNext.text: newDeviceWallet.checked ? qsTr("Create wallet") : qsTr("Restore wallet") + translationManager.emptyString
                 onPrevClicked: {
                     wizardStateView.state = "wizardHome";
                 }
