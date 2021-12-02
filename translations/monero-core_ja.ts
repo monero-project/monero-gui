@@ -425,7 +425,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="771"/>
         <source>Waiting confirmation...</source>
-        <translation type="unfinished"></translation>
+        <translation>承認待ち...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="779"/>
