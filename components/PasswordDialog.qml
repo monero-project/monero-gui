@@ -108,7 +108,11 @@ Item {
         leftPanel.enabled = true
         middlePanel.enabled = true
         wizard.enabled = true
-        titleBar.state = "default"
+        if (rootItem.state == "wizard") {
+            titleBar.state = "essentials"
+        } else {
+            titleBar.state = "default"
+        }
 
         root.visible = false;
         appWindow.hideBalanceForced = false;
