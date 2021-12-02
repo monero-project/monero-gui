@@ -249,6 +249,13 @@ Rectangle {
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
             walletInput.reset();
+            deviceNameDropdown.currentIndex = 0;
+            newDeviceWallet.checked = true;
+            restoreDeviceWallet.checked = false;
+            wizardController.walletOptionsDeviceIsRestore = false;
+            restoreHeight.text = "";
+            lookahead.text = "";
+            errorMsg.text = "";
         }
     }
 
