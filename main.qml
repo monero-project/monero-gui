@@ -259,9 +259,6 @@ ApplicationWindow {
             walletPassword,
             persistentSettings.nettype,
             persistentSettings.kdfRounds);
-
-        // Hide titlebar based on persistentSettings.customDecorations
-        titleBar.visible = persistentSettings.customDecorations;
     }
 
     function closeWallet(callback) {
