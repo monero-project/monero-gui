@@ -67,6 +67,9 @@ Rectangle {
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
+                    passwordFields.password = "";
+                    passwordFields.passwordConfirm = "";
+
                     wizardStateView.state = "wizardRestoreWallet1";
                 }
                 onNextClicked: {
