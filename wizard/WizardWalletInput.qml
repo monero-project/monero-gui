@@ -70,7 +70,7 @@ GridLayout {
                 errorMessageWalletName.text = qsTr("Wallet name is empty") + translationManager.emptyString;
                 return false;
             }
-            if (/[\\\/]/.test(walletName.text)) {
+            if (/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$|([.<>:"\/\\|?*])|(\.|\s)$/ig.test(walletName.text)) {
                 errorMessageWalletName.text = qsTr("Wallet name is invalid") + translationManager.emptyString;
                 return false;
             }
