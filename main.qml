@@ -210,6 +210,7 @@ ApplicationWindow {
         passwordDialog.onRejectedCallback = function() {
             if (prevState) {
                 appWindow.viewState = prevState;
+                if (prevState == "wizard" && wizard.wizardState == "wizardHome") wizard.wizardStateView.wizardHomeView.pageRoot.forceActiveFocus();
             }
             if (wizard.wizardState == "wizardOpenWallet1") {
                 wizard.wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
@@ -1094,6 +1095,7 @@ ApplicationWindow {
             wizard.restart();
             wizard.wizardState = "wizardHome";
             rootItem.state = "wizard"
+            wizard.wizardStateView.wizardHomeView.pageRoot.forceActiveFocus();
             // reset balance, clear spendable funds message
             clearMoneroCardLabelText();
             leftPanel.minutesToUnlock = "";

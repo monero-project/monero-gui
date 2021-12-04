@@ -39,6 +39,7 @@ Rectangle {
     color: "transparent"
 
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardModeSelection1"
     property bool portable: persistentSettings.portable
 
