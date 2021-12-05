@@ -63,6 +63,8 @@ RowLayout {
             visible: !rowlayout.checkbox && (!isOpenGL || MoneroComponents.Style.blackTheme)
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
+            width: iconMouseArea.containsMouse || headerMouseArea.containsMouse || bodyMouseArea.containsMouse ? 65 : 60
+            height: iconMouseArea.containsMouse || headerMouseArea.containsMouse || bodyMouseArea.containsMouse ? 65 : 60
             source: ""
         }
 
@@ -79,7 +81,9 @@ RowLayout {
         }
 
         MouseArea {
+            id: iconMouseArea
             cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
             anchors.fill: parent
             onClicked: {
                 rowlayout.menuClicked();
@@ -110,7 +114,9 @@ RowLayout {
             }
 
             MouseArea {
+                id: headerMouseArea
                 cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
                 anchors.fill: parent
                 onClicked: {
                     rowlayout.menuClicked();
@@ -135,7 +141,9 @@ RowLayout {
             themeTransition: false
 
             MouseArea {
+                id: bodyMouseArea
                 cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
                 anchors.fill: parent
                 onClicked: {
                     rowlayout.menuClicked();
