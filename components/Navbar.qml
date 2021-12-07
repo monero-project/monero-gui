@@ -32,6 +32,8 @@ import "." as MoneroComponents
 
 Rectangle {
     default property list<MoneroComponents.NavbarItem> items
+    property alias currentIndex: repeater.currentIndex
+    property alias previousIndex: repeater.previousIndex
 
     color: "transparent"
     height: grid.height
@@ -100,7 +102,10 @@ Rectangle {
         }
 
         Repeater {
+            id: repeater
             model: items.length
+            property int currentIndex: 0
+            property int previousIndex: 0
 
             RowLayout {
                 spacing: 0
@@ -149,7 +154,11 @@ Rectangle {
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
 
-                            onClicked: items[index].selected()
+                            onClicked: {
+                                repeater.previousIndex = repeater.currentIndex;
+                                repeater.currentIndex = index;
+                                items[index].selected()
+                            }
                         }
                     }
 
