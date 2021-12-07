@@ -242,9 +242,9 @@ RUN git clone -b v1.0.23 --depth 1 https://github.com/libusb/libusb && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b hidapi-0.9.0 --depth 1 https://github.com/libusb/hidapi && \
+RUN git clone -b hidapi-0.11.0 --depth 1 https://github.com/libusb/hidapi && \
     cd hidapi && \
-    git reset --hard 7da5cc91fc0d2dbe4df4f08cd31f6ca1a262418f && \
+    git reset --hard 0ec60c03cbe87cdbfb9fb199c7536fdcbc0a94b8 && \
     ./bootstrap && \
     ./configure --disable-shared --enable-static && \
     make -j$THREADS && \
