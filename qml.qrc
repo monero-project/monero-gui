@@ -264,5 +264,10 @@
         <file>images/ledgerNanoX.png</file>
         <file>images/trezor.png</file>
         <file>images/trezor@2x.png</file>
+        <file>images/taskbarIconConnected.png</file>
+        <file>images/taskbarIconDisconnected.png</file>
+        <file>images/taskbarIconMining.png</file>
+        <file>images/taskbarIconSyncing.png</file>
+        <file>components/WindowsTaskbarButton.qml</file>
     </qresource>
 </RCC>
