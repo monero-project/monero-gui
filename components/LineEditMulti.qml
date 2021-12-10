@@ -198,6 +198,12 @@ ColumnLayout {
         }
 
         Rectangle {
+            anchors.fill: parent
+            anchors.topMargin: 1
+            color: item.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
+        }
+
+        Rectangle {
             color: "transparent"
             border.width: 1
             border.color: item.borderColor

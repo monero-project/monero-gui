@@ -38,6 +38,7 @@ GridLayout {
     columns: 2
     columnSpacing: 32
     id: root
+    property bool enabled: true
     property alias daemonAddrText: daemonAddr.text
     property alias daemonPortText: daemonPort.text
     property alias daemonAddrLabelText: daemonAddr.labelText
@@ -85,6 +86,7 @@ GridLayout {
     MoneroComponents.LineEdit {
         id: daemonAddr
         Layout.preferredWidth: root.width/3
+        enabled: root.enabled
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
@@ -107,6 +109,7 @@ GridLayout {
     MoneroComponents.LineEdit {
         id: daemonPort
         Layout.preferredWidth: root.width/3
+        enabled: root.enabled
         placeholderText: qsTr("Port") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
