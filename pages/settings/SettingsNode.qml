@@ -313,12 +313,12 @@ Rectangle{
                 labelFontSize: 14
                 fontSize: 15
                 wrapMode: Text.WrapAnywhere
-                labelText: qsTr("Daemon startup flags") + translationManager.emptyString
-                placeholderText: qsTr("(optional)") + translationManager.emptyString
+                labelText: qsTr("Daemon startup flags") + " " + qsTr("(optional)") + translationManager.emptyString
+                placeholderText: qsTr("Enter an option (e.g. '%1' or '%2')").arg("--start-mining [" + qsTr("main address") + "]").arg("--testnet") + translationManager.emptyString
                 placeholderFontSize: 15
                 text: persistentSettings.daemonFlags
                 addressValidation: false
-                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address|non-interactive)/)
+                error: text.length == 1 && !text.startsWith("-") || text.length > 1 && !text.startsWith("--") || text.match(/(^|\s)--(data-dir|bootstrap-daemon-address|non-interactive)/)
                 onEditingFinished: {
                     if (!daemonFlags.error) {
                         persistentSettings.daemonFlags = daemonFlags.text;
