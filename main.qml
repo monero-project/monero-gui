@@ -730,14 +730,18 @@ ApplicationWindow {
     function onDaemonStarted(){
         console.log("daemon started");
         daemonStartStopInProgress = 0;
-        currentWallet.connected(true);
-        // resume refresh
-        currentWallet.startRefresh();
+        if (currentWallet) {
+            currentWallet.connected(true);
+            // resume refresh
+            currentWallet.startRefresh();
+        }
         // resume simplemode connection timer
         appWindow.disconnectedEpoch = Utils.epoch();
     }
     function onDaemonStopped(){
-        currentWallet.connected(true);
+        if (currentWallet) {
+            currentWallet.connected(true);
+        }
     }
 
     function onDaemonStartFailure(error) {
