@@ -104,7 +104,6 @@ ColumnLayout {
             labelFontSize: 14
             password: true
             labelText: qsTr("Password") + translationManager.emptyString
-            text: walletOptionsPassword
         }
 
         ColumnLayout {
@@ -170,7 +169,6 @@ ColumnLayout {
             labelFontSize: 14
             passwordLinked: passwordInput
             labelText: qsTr("Password (confirm)") + translationManager.emptyString
-            text: walletOptionsPassword
             onTextChanged:{
                 if (passwordInputConfirm.text.length == passwordInput.text.length) {
                     firstUserInput = false;
