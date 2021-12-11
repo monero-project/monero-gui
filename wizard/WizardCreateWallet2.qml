@@ -39,6 +39,11 @@ Rectangle {
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateWallet2"
 
+    function onPageCompleted() {
+        passwordFields.password = Qt.binding(function() { return wizardController.walletOptionsPassword })
+        passwordFields.passwordConfirm = Qt.binding(function() { return wizardController.walletOptionsPassword })
+    }
+
     ColumnLayout {
         id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
@@ -64,8 +69,7 @@ Rectangle {
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
-                    passwordFields.password = "";
-                    passwordFields.passwordConfirm = "";
+                    wizardController.walletOptionsPassword = '';
 
                     if(wizardController.walletOptionsIsRecoveringFromDevice){
                         wizardStateView.state = "wizardCreateDevice1";

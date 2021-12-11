@@ -42,6 +42,11 @@ Rectangle {
     property string viewName: "wizardRestoreWallet2"
     property int recoveryMode: 1
 
+    function onPageCompleted() {
+        passwordFields.password = Qt.binding(function() { return wizardController.walletOptionsPassword })
+        passwordFields.passwordConfirm = Qt.binding(function() { return wizardController.walletOptionsPassword })
+    }
+
     ColumnLayout {
         id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
@@ -67,9 +72,7 @@ Rectangle {
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
-                    passwordFields.password = "";
-                    passwordFields.passwordConfirm = "";
-
+                    wizardController.walletOptionsPassword = '';
                     wizardStateView.state = "wizardRestoreWallet1";
                 }
                 onNextClicked: {
