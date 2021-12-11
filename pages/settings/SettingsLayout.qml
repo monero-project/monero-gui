@@ -91,7 +91,16 @@ Rectangle {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
             }
         }
-        
+
+        MoneroComponents.CheckBox {
+            id: playSoundsCheckbox
+            checked: persistentSettings.playSounds
+            text: qsTr("Play sounds") + translationManager.emptyString
+            onClicked: {
+                 persistentSettings.playSounds = !persistentSettings.playSounds
+            }
+        }
+
         MoneroComponents.CheckBox {
             checked: persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
