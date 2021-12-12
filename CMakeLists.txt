@@ -272,6 +272,13 @@ if(STATIC)
     )
   endif()
 
+  if(UNIX)
+    list(APPEND QT5_EXTRA_LIBRARIES_LIST
+      declarative_multimedia
+      Qt5MultimediaQuick
+    )
+  endif()
+
   list(APPEND QT5_EXTRA_LIBRARIES_LIST
     qtgraphicaleffectsplugin
     qtgraphicaleffectsprivate
