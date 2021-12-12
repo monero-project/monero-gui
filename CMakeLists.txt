@@ -146,6 +146,10 @@ if(WITH_SCANNER)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
 
+if(UNIX)
+  list(APPEND QT5_LIBRARIES Qt5Multimedia)
+endif()
+
 if(APPLE)
   list(APPEND QT5_LIBRARIES Qt5MacExtras)
 endif()
