@@ -147,7 +147,7 @@ if(WITH_SCANNER)
 endif()
 
 if(UNIX)
-  find_package(Qt5Multimedia REQUIRED)
+  find_package(Qt5Multimedia)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
 
