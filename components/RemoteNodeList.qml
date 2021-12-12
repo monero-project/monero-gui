@@ -144,6 +144,9 @@ ColumnLayout {
                         tooltipLeft: true
                         onClicked: remoteNodeDialog.edit(remoteNodesModel.get(index), function (remoteNode) {
                             remoteNodesModel.set(index, remoteNode)
+                            if (index === remoteNodesModel.selected) {
+                                remoteNodesModel.applyRemoteNode(index)
+                            }
                         })
                     }
 
