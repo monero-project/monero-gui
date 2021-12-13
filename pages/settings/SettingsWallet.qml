@@ -100,7 +100,11 @@ Rectangle {
                 if (!currentWallet.rescanSpent()) {
                     console.error("Error: ", currentWallet.errorString);
                     informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                    informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
+                    if (currentWallet.errorString == "Rescan spent can only be used with a trusted daemon") {
+                        informationPopup.text = qsTr("Error: ") + qsTr("Rescan spent can only be used with a trusted remote node. If you trust the current node you are connected to (%1), you can mark it as trusted in Settings > Node page.").arg(remoteNodesModel.currentRemoteNode().address) + translationManager.emptyString;
+                    } else {
+                        informationPopup.text = qsTr("Error: ") + currentWallet.errorString;
+                    }
                     informationPopup.icon  = StandardIcon.Critical
                     informationPopup.onCloseCallback = null
                     informationPopup.open();
