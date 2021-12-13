@@ -89,7 +89,7 @@ ColumnLayout {
                     anchors.fill: parent
                     anchors.rightMargin: 80
                     color: "transparent"
-                    property var trusted: remoteNodesModel.get(index).trusted
+                    property var trusted: remoteNodesModel.get(index) ? remoteNodesModel.get(index).trusted : false
 
                     MoneroComponents.TextPlain {
                         id: addressText
