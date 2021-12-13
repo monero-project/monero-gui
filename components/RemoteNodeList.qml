@@ -107,8 +107,9 @@ ColumnLayout {
                     MoneroComponents.Label {
                         id: trustedDaemonCheckMark
                         anchors.left: addressText.right
-                        anchors.leftMargin: 6
+                        anchors.leftMargin: 3
                         anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: 2
                         z: itemMouseArea.z + 1
                         fontSize: 16
                         fontFamily: FontAwesome.fontFamilySolid
