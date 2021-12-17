@@ -1334,7 +1334,8 @@ ApplicationWindow {
             appWindow.fiatTimerStart();
         }
 
-        if (persistentSettings.askDesktopShortcut && !persistentSettings.portable) {
+        const desktopEntryEnabled = (typeof builtWithDesktopEntry != "undefined") && builtWithDesktopEntry;
+        if (persistentSettings.askDesktopShortcut && !persistentSettings.portable && desktopEntryEnabled) {
             persistentSettings.askDesktopShortcut = false;
 
             if (isTails) {
