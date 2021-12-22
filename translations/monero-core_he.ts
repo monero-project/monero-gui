@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/Account.qml" line="57"/>
         <source>Set the label of the selected account:</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר שם לחשבון שנבחר:</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="89"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/Account.qml" line="96"/>
         <source>Total balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>יתרה כוללת: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -27,12 +27,12 @@
     <message>
         <location filename="../pages/Account.qml" line="131"/>
         <source>Total unlocked balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>יתרה זמינה כוללת: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="171"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>חשבונות</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="300"/>
@@ -52,12 +52,12 @@
     <message>
         <location filename="../pages/Account.qml" line="355"/>
         <source>Create new account</source>
-        <translation type="unfinished"></translation>
+        <translation>צור חשבון חדש</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="357"/>
         <source>Set the label of the new account:</source>
-        <translation type="unfinished"></translation>
+        <translation>בחר שם לחשבון החדש:</translation>
     </message>
 </context>
 <context>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Save your most used addresses here</source>
-        <translation type="unfinished"></translation>
+        <translation>שמור את הכתובות הכי משומשות שלך כאן</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
@@ -76,7 +76,7 @@
         <location filename="../pages/AddressBook.qml" line="100"/>
         <location filename="../pages/AddressBook.qml" line="316"/>
         <source>Add an address</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף כתובת</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="115"/>
@@ -111,12 +111,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="301"/>
         <source>Add address</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף כתובת</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="316"/>
         <source>Edit an address</source>
-        <translation type="unfinished"></translation>
+        <translation>ערוך כתובת</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="365"/>
@@ -152,17 +152,17 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="325"/>
         <source>Address</source>
-        <translation type="unfinished">כתובת</translation>
+        <translation>כתובת</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="410"/>
         <source>Description</source>
-        <translation type="unfinished">תיאור</translation>
+        <translation>תיאור</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="411"/>
         <source>Add a name...</source>
-        <translation type="unfinished"></translation>
+        <translation>הוסף שם...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="420"/>
@@ -172,7 +172,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="420"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="425"/>
@@ -192,12 +192,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="449"/>
         <source>Cancel</source>
-        <translation type="unfinished">ביטול</translation>
+        <translation>ביטול</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="459"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>מחק</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="517"/>
@@ -233,7 +233,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="37"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>הדבק</translation>
     </message>
 </context>
 <context>
@@ -283,7 +283,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="213"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>תאריך מ</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="227"/>
@@ -295,12 +295,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="921"/>
         <location filename="../pages/History.qml" line="1742"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>תאריך</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="89"/>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>העברות</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="109"/>
@@ -315,7 +315,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="254"/>
         <source>Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>מיין לפי</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="275"/>
@@ -327,7 +327,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="393"/>
         <location filename="../pages/History.qml" line="1743"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>סכום</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="473"/>
@@ -337,7 +337,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="503"/>
         <source>Jump to page (1-%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>קפוץ לדף (1-%1)</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="511"/>
@@ -357,7 +357,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>חפש לפי מזהה העברה, כתובת, תיאור, סכום או גובה בלוק</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="724"/>
@@ -618,7 +618,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>אזהרה: העתקת הגרעין ללוח עלולה לחשוף אותך לתוכנות זדוניות, שעשויות לשמור את הגרעין שלך ולגנוב את המונרו שברשותך. אנא שמור את הגרעין שלך באופן ידני.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
@@ -638,7 +638,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
         <source>Primary address</source>
-        <translation type="unfinished"></translation>
+        <translation>כתובת ראשית</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="197"/>
@@ -660,7 +660,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="260"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>בוצע</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="281"/>
@@ -752,7 +752,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../LeftPanel.qml" line="178"/>
         <location filename="../LeftPanel.qml" line="362"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>חשבון</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="217"/>
@@ -777,7 +777,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="449"/>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>העברות</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="450"/>
@@ -825,7 +825,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LineEdit.qml" line="190"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>העתק</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="195"/>
@@ -843,7 +843,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LineEditMulti.qml" line="139"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>העתק</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="144"/>
@@ -853,7 +853,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LineEditMulti.qml" line="155"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>הדבק</translation>
     </message>
 </context>
 <context>
@@ -2324,12 +2324,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/StandardDropdown.qml" line="173"/>
         <source>Automatic</source>
-        <translation type="unfinished">אוטומטי</translation>
+        <translation>אוטומטי</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="174"/>
         <source>Slow (x0.2 fee)</source>
-        <translation type="unfinished">איטי (עמלה x0.25) {0.2 ?}</translation>
+        <translation>איטי (עמלה x0.2)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="175"/>
@@ -2344,7 +2344,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/StandardDropdown.qml" line="177"/>
         <source>Fastest (x200 fee)</source>
-        <translation type="unfinished">הכי מהיר (עמלה x41.5) {200 ?}</translation>
+        <translation>הכי מהיר (עמלה x200)</translation>
     </message>
 </context>
 <context>
@@ -2547,17 +2547,17 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="690"/>
         <source>Slow (x0.2 fee)</source>
-        <translation type="unfinished">איטי (עמלה x0.25) {0.2 ?}</translation>
+        <translation>איטי (עמלה x0.2)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="693"/>
         <source>Fastest (x200 fee)</source>
-        <translation type="unfinished">הכי מהיר (עמלה x41.5) {200 ?}</translation>
+        <translation>הכי מהיר (עמלה x200)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="271"/>
         <source>Address</source>
-        <translation type="unfinished">כתובת</translation>
+        <translation>כתובת</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="770"/>
@@ -3062,7 +3062,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">סיסמה שגויה</translation>
+        <translation>סיסמה שגויה</translation>
     </message>
     <message numerus="yes">
         <location filename="../js/Utils.js" line="59"/>
@@ -3341,7 +3341,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="68"/>
         <source>Create wallet</source>
-        <translation type="unfinished">צור ארנק</translation>
+        <translation>צור ארנק</translation>
     </message>
 </context>
 <context>

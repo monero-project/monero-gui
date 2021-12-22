@@ -4079,7 +4079,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1766"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>主账户</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1957"/>
