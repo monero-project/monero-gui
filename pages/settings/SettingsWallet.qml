@@ -91,6 +91,7 @@ Rectangle {
         }
 
         MoneroComponents.SettingsListItem {
+            enabled: leftPanel.progressBar.fillLevel == 100
             iconText: FontAwesome.repeat
             description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
             title: qsTr("Rescan wallet balance") + translationManager.emptyString

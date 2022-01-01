@@ -10,6 +10,7 @@ ColumnLayout {
     property alias description: area.text
     property alias title: header.text
     property bool isLast: false
+    property bool enabled: true
     signal clicked()
 
     Layout.fillWidth: true
@@ -37,6 +38,7 @@ ColumnLayout {
             width: parent.width
             height: header.height + area.contentHeight
             color: "transparent";
+            opacity: settingsListItem.enabled ? 1 : 0.25
             anchors.left: parent.left
             anchors.bottomMargin: 4
             anchors.topMargin: 4
@@ -102,6 +104,7 @@ ColumnLayout {
         }
 
         MouseArea {
+            visible: settingsListItem.enabled
             cursorShape: Qt.PointingHandCursor
             anchors.fill: parent
             hoverEnabled: true
