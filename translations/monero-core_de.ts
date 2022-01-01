@@ -1167,7 +1167,7 @@ Durch Mining hast du eine kleine Chance, Monero zu verdienen. Dein Computer erre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="56"/>
         <source>Remote node</source>
-        <translation>Remote node</translation>
+        <translation>Remote-Node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="57"/>

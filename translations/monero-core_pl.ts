@@ -1643,7 +1643,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="410"/>
         <source>Donate to Monero</source>
-        <translation>Przekaż darowiznę dla Monero</translation>
+        <translation>Wesprzyj Monero darowizną</translation>
     </message>
 </context>
 <context>
@@ -1852,7 +1852,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Reset</source>
-        <translation>Reset</translation>
+        <translation>Resetuj</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
@@ -1961,7 +1961,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation>Przyjmuj Monero w swoim biznesie, z łatwością.</translation>
+        <translation>Przyjmuj Monero dla twojego biznesu, z łatwością.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
@@ -1995,7 +1995,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
         <location filename="../pages/SharedRingDB.qml" line="116"/>
         <location filename="../pages/SharedRingDB.qml" line="118"/>
         <source>Outputs marked as spent</source>
-        <translation>Zablokowane wyjścia</translation>
+        <translation>Wyjścia zaznaczone jako wydane</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="116"/>
@@ -2021,7 +2021,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="153"/>
         <source>Please choose a file from which to load outputs to mark as spent</source>
-        <translation>Wybierz plik, z którego załadować zablokowane wyjścia</translation>
+        <translation>Wybierz plik, z którego załadować wyjścia i zaznaczyć jako wydane</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="167"/>
@@ -2031,7 +2031,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Filename with outputs to mark as spent</source>
-        <translation>Nazwa pliku z wyjściami do zablokowania</translation>
+        <translation>Nazwa pliku z wyjściami do zaznaczenia jako wydane</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="180"/>
@@ -2046,7 +2046,7 @@ Możesz zmienić hasło w ustawieniach portfela.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="207"/>
         <source>Or manually mark a single output as spent/unspent:</source>
-        <translation>Lub ręcznie zablokuj/odblokuj pojedyncze wyjście:</translation>
+        <translation>Lub ręcznie zaznacz pojedyncze wyjście jako wydane/niewydane:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="209"/>
@@ -2608,7 +2608,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="960"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation>Wyślij XMR z zimnego (offline) portfela</translation>
+        <translation>Wyślij XMR z portfela offline</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="958"/>
@@ -2638,7 +2638,7 @@ Uaktualnij go lub podłącz się do innego demona</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="969"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation>5. Korzystając z portfela tylko do przeglądu, wyślij swoją podpisaną transackję</translation>
+        <translation>5. Korzystając z portfela tylko do przeglądu, wyślij Twoją podpisaną transackję</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="975"/>
@@ -2815,7 +2815,7 @@ Rozmiar pierścienia: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="1137"/>
         <source>Wallet is connecting to daemon.</source>
-        <translation>Portfel łączy się z daemonem.</translation>
+        <translation>Portfel łączy się z demonem.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1148"/>
@@ -3009,7 +3009,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation>Aktualizacja ściągnięta, sygnatura zweryfikowana</translation>
+        <translation>Aktualizacja ściągnięta, podpis zweryfikowany</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
@@ -3224,8 +3224,8 @@ Please check your hardware wallet –
 your input may be required.</source>
         <translation>
 
-Proszę sprawdź swój portfel sprzętowy –
-może to wymagać twojego działania.</translation>
+Proszę sprawdź Twój portfel sprzętowy –
+może być wymagany Twój wkład.</translation>
     </message>
 </context>
 <context>

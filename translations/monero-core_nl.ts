@@ -917,22 +917,22 @@ Het is aanbevolen de wachtwoordzin te gebruiken op de hardware portemonnee voor 
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="159"/>
         <source>This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</source>
-        <translation type="unfinished">This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</translation>
+        <translation>Deze pagina zal automatisch de blockchain en de tx pool scannen voor inkomende transacties met behulp van de QR code.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation type="unfinished">It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</translation>
+        <translation>Het is aan u of u onbevestigde transacties accepteert of niet. Het is waarschijnlijk dat ze in korte tijd worden bevestigd, maar er is nog steeds een mogelijkheid dat ze niet worden bevestigd, dus voor grotere waarden wilt u misschien wachten op een of meer bevestiging(en)</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
         <source>Currently selected address</source>
-        <translation type="unfinished">Currently selected address</translation>
+        <translation>Geselecteerd adres</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="271"/>
         <source>Change</source>
-        <translation type="unfinished">Change</translation>
+        <translation>Wijzigen</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="296"/>
@@ -1134,7 +1134,7 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     <message>
         <location filename="../pages/Mining.qml" line="265"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation type="unfinished">Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</translation>
+        <translation>Mijnbouw op %1 H/s. Het geeft u een kans van 1 op %2 per dag om een blok te vinden.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="242"/>
@@ -1208,17 +1208,17 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="188"/>
         <source>Successfully switched to another public node</source>
-        <translation type="unfinished">Successfully switched to another public node</translation>
+        <translation>Succesvol veranderd naar andere publieke node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="191"/>
         <source>Failed to switch public node</source>
-        <translation type="unfinished">Failed to switch public node</translation>
+        <translation>Node wisselen mislukt</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="201"/>
         <source>Switching to another public node</source>
-        <translation type="unfinished">Switching to another public node</translation>
+        <translation>Wisselen van publieke node</translation>
     </message>
 </context>
 <context>
@@ -1585,7 +1585,7 @@ U kunt een blokhoogte of datum invoeren (JJJJ-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Change</source>
-        <translation type="unfinished">Change</translation>
+        <translation>Wijzigen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="204"/>
@@ -1757,17 +1757,17 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="250"/>
         <source>remote node connections, </source>
-        <translation type="unfinished">remote node connections, </translation>
+        <translation>verbindingen op afstand met het knooppunt, </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="251"/>
         <source>updates downloading, fetching price sources</source>
-        <translation type="unfinished">updates downloading, fetching price sources</translation>
+        <translation>updates downloaden, prijsbronnen ophalen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="263"/>
         <source>IP address</source>
-        <translation type="unfinished">IP address</translation>
+        <translation>IP adres</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="264"/>
@@ -1800,7 +1800,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
         <source>Failed to send command</source>
-        <translation type="unfinished">Failed to send command</translation>
+        <translation>Opdracht verzenden mislukt</translation>
     </message>
 </context>
 <context>
@@ -1853,12 +1853,12 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="290"/>
         <source>Change</source>
-        <translation type="unfinished">Change</translation>
+        <translation>Wijzigen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Reset</source>
-        <translation type="unfinished">Reset</translation>
+        <translation>Herstarten</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
@@ -1967,12 +1967,12 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Receive Monero for your business, easily.</source>
-        <translation type="unfinished">Receive Monero for your business, easily.</translation>
+        <translation>Ontvang met gemak monero voor uw bedrijf.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
         <source>Enter merchant mode</source>
-        <translation type="unfinished">Enter merchant mode</translation>
+        <translation>Handelaarsmodus starten</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
@@ -2452,12 +2452,12 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="71"/>
         <source>Address is invalid.</source>
-        <translation type="unfinished">Address is invalid.</translation>
+        <translation>Het adres is ongeldig.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="76"/>
         <source>Enter an amount.</source>
-        <translation type="unfinished">Enter an amount.</translation>
+        <translation>Voer een bedrag in.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="82"/>
@@ -2467,7 +2467,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="169"/>
         <source>Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</source>
-        <translation type="unfinished">Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.</translation>
+        <translation>Besteedbaar geld: %1 XMR. Wacht ~%2 minuten tot uw hele saldo besteedbaar is.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="333"/>
@@ -2497,7 +2497,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation type="unfinished">Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</translation>
+        <translation>Portemonnee is view-only en verzenden is alleen mogelijk door gebruik te maken van offline transactie ondertekening. Tenzij sleutelafbeeldingen worden geïmporteerd, geeft het saldo alleen inkomende maar geen uitgaande transacties weer.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="436"/>
@@ -2523,7 +2523,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="770"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
-        <translation type="unfinished">Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</translation>
+        <translation>De inhoud van het veld komt overeen met het formaat van de lange betaal-ID.           Plak a.u.b. geen lange betalings-ID in het beschrijvingsveld, uw geld kan verloren gaan.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
@@ -2533,7 +2533,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="842"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
-        <translation type="unfinished">Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</translation>
+        <translation>Lange betaal-ID&apos;s zijn verouderd.           Lange betaal-ID&apos;s werden niet gecodeerd op de blokketen en schaden uw privacy.           Als de partij waar u naartoe verstuurt nog steeds een lange betaal ID nodig heeft, laat het dan aan hen weten.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="860"/>
@@ -2543,107 +2543,107 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="903"/>
         <source>Key images</source>
-        <translation type="unfinished">Key images</translation>
+        <translation>Belangrijke afbeeldingen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="904"/>
         <source>Export</source>
-        <translation type="unfinished">Export</translation>
+        <translation>Exporteren</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="910"/>
         <source>Import</source>
-        <translation type="unfinished">Import</translation>
+        <translation>Importeren</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="921"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation type="unfinished">Required for view-only wallets to display the real balance</translation>
+        <translation>Vereist voor view-only portemonnees om de echte balans weer te geven</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="919"/>
         <source>* To import, you must connect to a local node or a trusted remote node</source>
-        <translation type="unfinished">* To import, you must connect to a local node or a trusted remote node</translation>
+        <translation>* Om te importeren moet u verbinding maken met een lokaal knooppunt of een vertrouwd extern knooppunt</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="925"/>
         <source>1. Using cold wallet, export the key images into a file</source>
-        <translation type="unfinished">1. Using cold wallet, export the key images into a file</translation>
+        <translation type="unfinished">1. 1. Exporteer met behulp van de koude portefeuille de belangrijkste afbeeldingen naar een bestand</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="926"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation type="unfinished">2. Using view-only wallet, import the key images file</translation>
+        <translation type="unfinished">2. 2. Met behulp van de view-only portemonnee, importeert u het bestand met de belangrijkste afbeeldingen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="933"/>
         <source>Offline transaction signing</source>
-        <translation type="unfinished">Offline transaction signing</translation>
+        <translation>Offline ondertekening van transacties</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="934"/>
         <source>Create</source>
-        <translation type="unfinished">Create</translation>
+        <translation>Aanmaken</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="943"/>
         <source>Sign (offline)</source>
-        <translation type="unfinished">Sign (offline)</translation>
+        <translation>Tekenen (offline)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="949"/>
         <source>Submit</source>
-        <translation type="unfinished">Submit</translation>
+        <translation>Verzenden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="960"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation type="unfinished">Spend XMR from a cold (offline) wallet</translation>
+        <translation>Besteed XMR uit een koude (offline) portemonnee</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="958"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation type="unfinished">* To create a transaction file, please enter address and amount above</translation>
+        <translation>* Om een transactiebestand aan te maken, voert u bovenstaand adres en bedrag in</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="964"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
-        <translation type="unfinished">1. Using view-only wallet, export the outputs into a file</translation>
+        <translation>1. Exporteer met behulp van de view-only portemonnee de outputs naar een bestand</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="965"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
-        <translation type="unfinished">2. Using cold wallet, import the outputs file and export the key images</translation>
+        <translation>2. Gebruik de koude portemonnee, importeer het uitvoerbestand en exporteer de belangrijkste afbeeldingen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="966"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
-        <translation type="unfinished">3. Using view-only wallet, import the key images file and create a transaction file</translation>
+        <translation>3. Met behulp van de view-only portemonnee, importeert u het bestand met de belangrijkste afbeeldingen en maakt u een transactiebestand aan</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="968"/>
         <source>4. Using cold wallet, sign your transaction file</source>
-        <translation type="unfinished">4. Using cold wallet, sign your transaction file</translation>
+        <translation>4. Gebruik de koude portemonnee om uw transactiebestand te ondertekenen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="969"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation type="unfinished">5. Using view-only wallet, submit your signed transaction</translation>
+        <translation>5. Gebruik de view-only portemonnee om uw getekende transactie in te dienen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="975"/>
         <source>Unmixable outputs</source>
-        <translation type="unfinished">Unmixable outputs</translation>
+        <translation>Niet-vermengbare uitgangen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="976"/>
         <source>Sweep</source>
-        <translation type="unfinished">Sweep</translation>
+        <translation>Veeg</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="982"/>
         <source>Create a transaction that spends old unmovable outputs</source>
-        <translation type="unfinished">Create a transaction that spends old unmovable outputs</translation>
+        <translation>Maak een transactie die oude onbeweeglijke outputs uitgeeft</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1063"/>
@@ -2653,7 +2653,7 @@ U kunt het wachtwoord wijzigen in de portemonnee-instellingen.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="1137"/>
         <source>Wallet is connecting to daemon.</source>
-        <translation type="unfinished">Wallet is connecting to daemon.</translation>
+        <translation>De portemonnee wordt verbonden met de daemon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1143"/>
@@ -3001,27 +3001,27 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../components/UpdateDialog.qml" line="77"/>
         <source>New Monero version v%1 is available.</source>
-        <translation type="unfinished">New Monero version v%1 is available.</translation>
+        <translation>Nieuwe monero versie v%1 is beschikbaar.</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="98"/>
         <source>Please visit getmonero.org for details</source>
-        <translation type="unfinished">Please visit getmonero.org for details</translation>
+        <translation>Ga naar getmonero.org voor meer informatie</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="102"/>
         <source>Downloading</source>
-        <translation type="unfinished">Downloading</translation>
+        <translation>Downloaden</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="107"/>
         <source>Update downloaded, signature verified</source>
-        <translation type="unfinished">Update downloaded, signature verified</translation>
+        <translation>Update gedownload, handtekening geverifieerd</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="109"/>
         <source>Do you want to download and verify new version?</source>
-        <translation type="unfinished">Do you want to download and verify new version?</translation>
+        <translation>Wilt u een nieuwe versie downloaden en verifiëren?</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="137"/>
@@ -3036,42 +3036,42 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../components/UpdateDialog.qml" line="142"/>
         <source>Download later</source>
-        <translation type="unfinished">Download later</translation>
+        <translation>Later downloaden</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Retry</source>
-        <translation type="unfinished">Retry</translation>
+        <translation>Opnieuw proberen</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="155"/>
         <source>Download</source>
-        <translation type="unfinished">Download</translation>
+        <translation>Downloaden</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="164"/>
         <source>Download failed</source>
-        <translation type="unfinished">Download failed</translation>
+        <translation>Downloaden is mislukt</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="170"/>
         <source>Failed to start download</source>
-        <translation type="unfinished">Failed to start download</translation>
+        <translation>Starten van downloaden mislukt</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="181"/>
         <source>Save as</source>
-        <translation type="unfinished">Save as</translation>
+        <translation>Opslaan als</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="191"/>
         <source>Save operation failed</source>
-        <translation type="unfinished">Save operation failed</translation>
+        <translation>Opslaan mislukt</translation>
     </message>
     <message>
         <location filename="../components/UpdateDialog.qml" line="194"/>
         <source>Save to file</source>
-        <translation type="unfinished">Save to file</translation>
+        <translation>Opslaan in bestand</translation>
     </message>
 </context>
 <context>
@@ -3179,12 +3179,12 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Enter a strong password</source>
-        <translation type="unfinished">Enter a strong password</translation>
+        <translation>Voer een sterk wachtwoord in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>Using letters, numbers, and/or symbols</source>
-        <translation type="unfinished">Using letters, numbers, and/or symbols</translation>
+        <translation>Gebruik letters, cijfers en/of symbolen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="148"/>
@@ -3207,7 +3207,7 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardController.qml" line="351"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished">Failed to store the wallet</translation>
+        <translation>De portemonnee is niet bewaard</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="432"/>
@@ -3417,7 +3417,7 @@ invoer is wellicht vereist.</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
         <source>Welcome to Monero</source>
-        <translation type="unfinished">Welcome to Monero</translation>
+        <translation>Welkom bij monero</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="76"/>
@@ -3554,7 +3554,7 @@ invoer is wellicht vereist.</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="74"/>
         <source>Mode selection</source>
-        <translation type="unfinished">Mode selection</translation>
+        <translation>Modus selectie</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="75"/>
@@ -3724,12 +3724,12 @@ invoer is wellicht vereist.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
         <source>Seed offset passphrase (optional)</source>
-        <translation type="unfinished">Seed offset passphrase (optional)</translation>
+        <translation>Zaad offset wachtwoordzin (optioneel)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished">Passphrase</translation>
+        <translation>Wachtwoordzin</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
@@ -4000,7 +4000,7 @@ Als het niet mogelijk is om uw eigen node te draaien, dan is er een optie om ver
     <message>
         <location filename="../main.qml" line="976"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished">Failed to store the wallet</translation>
+        <translation>De portemonnee is niet bewaard</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1010"/>
@@ -4054,52 +4054,52 @@ Als het niet mogelijk is om uw eigen node te draaien, dan is er een optie om ver
     <message>
         <location filename="../main.qml" line="1570"/>
         <source>Save transaction file</source>
-        <translation type="unfinished">Save transaction file</translation>
+        <translation>Transactiebestand opslaan</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1570"/>
         <source>Send transaction</source>
-        <translation type="unfinished">Send transaction</translation>
+        <translation>Transactie verzenden</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1766"/>
         <source>Primary account</source>
-        <translation type="unfinished">Primary account</translation>
+        <translation>Primaire rekening</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1957"/>
         <source>Autosaved the wallet</source>
-        <translation type="unfinished">Autosaved the wallet</translation>
+        <translation>Portemonnee automatisch opgeslagen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1959"/>
         <source>Failed to autosave the wallet</source>
-        <translation type="unfinished">Failed to autosave the wallet</translation>
+        <translation>De portemonnee is niet automatisch opgeslagen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2075"/>
         <source>Local node is running</source>
-        <translation type="unfinished">Local node is running</translation>
+        <translation>Lokaal knooppunt is actief</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2076"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
-        <translation type="unfinished">Do you want to stop local node or keep it running in the background?</translation>
+        <translation>Wilt u het lokale knooppunt stoppen of op de achtergrond actief laten blijven?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2078"/>
         <source>Force stop</source>
-        <translation type="unfinished">Force stop</translation>
+        <translation>Geforceerd stoppen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2079"/>
         <source>Keep it running</source>
-        <translation type="unfinished">Keep it running</translation>
+        <translation>Houd het actief</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2114"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished">Checking local node status...</translation>
+        <translation>Controle van de status van het lokale knooppunt...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1560"/>
