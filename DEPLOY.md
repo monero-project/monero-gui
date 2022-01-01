@@ -8,11 +8,16 @@ Use macOS 10.12 - 10.13 for better backwards compability.
 
 3. `git clone --recursive -b v0.X.Y.Z --depth 1 https://github.com/monero-project/monero-gui` 
 
-4. `CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 make release`
+4. Compile `monero-wallet-gui.app`
 
-5. `cd build/release && make deploy`
+```
+mkdir build && cd build
+cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 ..
+make
+make deploy
+```
 
-6. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
+5. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
 
 ## Codesigning and notarizing
 
