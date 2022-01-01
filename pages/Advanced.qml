@@ -43,6 +43,7 @@ ColumnLayout {
     property alias state: stateView.state
 
     MoneroComponents.Navbar {
+        id: navbarId
         Layout.alignment: Qt.AlignHCenter
         Layout.topMargin: height
         Layout.bottomMargin: height
@@ -128,7 +129,7 @@ ColumnLayout {
                     PropertyAnimation {
                         target: enterItem
                         property: "x"
-                        from: 0 - target.width
+                        from: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * - target.width
                         to: 0
                         duration: 300
                         easing.type: Easing.OutCubic
@@ -137,7 +138,7 @@ ColumnLayout {
                         target: exitItem
                         property: "x"
                         from: 0
-                        to: target.width
+                        to: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * target.width
                         duration: 300
                         easing.type: Easing.OutCubic
                     }
