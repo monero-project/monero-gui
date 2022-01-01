@@ -77,6 +77,8 @@ Rectangle {
                     }
                 }
                 onNextClicked: {
+                    wizardController.wizardStateView.wizardRestoreWallet2View.pwField = "";
+                    wizardController.wizardStateView.wizardRestoreWallet2View.pwConfirmField = "";
                     wizardController.recoveryWallet();
                     wizardController.writeWallet(function() {
                         wizardController.useMoneroClicked();

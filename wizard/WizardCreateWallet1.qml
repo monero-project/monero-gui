@@ -194,6 +194,8 @@ Rectangle {
                 btnNext.enabled: walletInput.verify();
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
                 onPrevClicked: {
+                    wizardController.wizardStateView.wizardCreateWallet2View.pwField = "";
+                    wizardController.wizardStateView.wizardCreateWallet2View.pwConfirmField = "";
                     wizardStateView.state = "wizardHome";
                 }
                 onNextClicked: {

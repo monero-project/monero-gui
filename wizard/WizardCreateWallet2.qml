@@ -38,6 +38,8 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateWallet2"
+    property alias pwField: passwordFields.password
+    property alias pwConfirmField: passwordFields.passwordConfirm
 
     ColumnLayout {
         id: pageRoot
@@ -64,9 +66,6 @@ Rectangle {
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
-                    passwordFields.password = "";
-                    passwordFields.passwordConfirm = "";
-
                     if(wizardController.walletOptionsIsRecoveringFromDevice){
                         wizardStateView.state = "wizardCreateDevice1";
                     } else {
