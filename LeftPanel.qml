@@ -360,7 +360,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Account") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "T" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "T" + translationManager.emptyString
 
                 onClicked: {
                     parent.previousButton.checked = false
@@ -382,7 +382,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Send") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "S" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "S" + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = transferButton
@@ -404,7 +404,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Address book") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "B" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "B" + translationManager.emptyString
                 under: transferButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -426,7 +426,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Receive") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "R" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "R" + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = receiveButton
@@ -448,7 +448,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Transactions") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "H" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "H" + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = historyButton
@@ -470,7 +470,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "D" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "D" + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
@@ -491,7 +491,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Settings") + translationManager.emptyString
-                symbol: (isMac ? "⌘" : qsTr("Ctrl+")) + "E" + translationManager.emptyString
+                symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "E" + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = settingsButton
