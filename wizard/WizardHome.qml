@@ -30,15 +30,20 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
+import QtGraphicalEffects 1.0
 import moneroComponents.NetworkType 1.0
+import moneroComponents.WalletKeysFilesModel 1.0
 
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
 
 Rectangle {
     id: wizardHome
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardHome"
+    property int walletCount: walletKeysFilesModel2.rowCount()
 
     ColumnLayout {
         id: pageRoot
@@ -70,6 +75,283 @@ Rectangle {
                 MoneroComponents.LanguageButton {
                     Layout.bottomMargin: 8
                 }
+            }
+
+            WalletKeysFilesModel {
+                id: walletKeysFilesModel2
+            }
+
+            Flow {
+                id: flow
+                visible: wizardHome.walletCount > 0
+                spacing: 0
+                clip: true
+
+                property int _height: 0
+                property int itemHeight: 140
+                property int maxRows: 1
+                property bool collapsed: true
+
+                Layout.topMargin: 10
+                Layout.fillWidth: true
+                Layout.preferredHeight: _height
+
+                function calcHeight(){
+                    var itemsHeight = Math.ceil(wizardHome.walletCount / 3) * itemHeight;
+                    if(itemsHeight >= (flow.itemHeight * flow.maxRows))
+                        return flow.itemHeight * flow.maxRows;
+                    else
+                        return itemsHeight;
+                }
+
+                NumberAnimation on _height {
+                    id: flowAnimation
+                    duration: 150;
+                    running: false
+                    easing.type: Easing.InQuad;
+                    alwaysRunToEnd: true
+                    onStopped: {
+                        flow.collapsed = !flow.collapsed
+                    }
+                }
+
+                Repeater {
+                    id: recentList
+                    clip: true
+                    model: walletKeysFilesModel2.proxyModel
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: flow.itemHeight
+                    Layout.preferredHeight: parent.height
+
+                    function openSelectedWalletFile(networktype, path) {
+                        persistentSettings.nettype = parseInt(networktype);
+                        wizardController.openWalletFile(path);
+                    }
+
+                    delegate: Rectangle {
+                        // inherited roles from walletKeysFilesModel:
+                        // index, fileName, modified, accessed, path, networktype, address
+                        id: item
+                        height: flow.itemHeight
+                        width: wizardHome.walletCount < 4 ? parent.width / wizardHome.walletCount
+                                                                                     : parent.width / 5
+                        property string networkType: {
+                            if(networktype === 0) return qsTr("Mainnet");
+                            else if(networktype === 1) return qsTr("Testnet");
+                            else if(networktype === 2) return qsTr("Stagenet");
+                            return "";
+                        }
+                        color: item.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+                        border.width: item.focus ? 3 : 0
+                        border.color: MoneroComponents.Style.inputBorderColorActive
+
+                        ColumnLayout {
+                            height: 90
+                            width: parent.width
+                            spacing: 0
+                            anchors.top: parent.top
+                            anchors.topMargin: networkType == "" ? 8 : 2
+
+                            Rectangle {
+                                id: walletIcon
+                                Layout.preferredWidth: 90
+                                Layout.preferredHeight: 90
+                                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                color: "transparent"
+
+                                Image {
+                                    id: icon
+                                    height: itemMouseArea.containsMouse ? 95 : 90
+                                    width: itemMouseArea.containsMouse ? 95 : 90
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    source: {
+                                        if (networktype === 0 && fileName.toLowerCase().includes("viewonly")) return "qrc:///images/open-wallet-from-file-view-only@2x.png";
+                                        else if (networktype === 0 && fileName.toLowerCase().includes("trezor")) return "qrc:///images/open-wallet-from-file-trezor@2x.png";
+                                        else if (networktype === 0 && fileName.toLowerCase().includes("ledger")) return "qrc:///images/restore-wallet-from-hardware@2x.png";
+                                        else if (networktype === 0) return "qrc:///images/open-wallet-from-file-mainnet@2x.png";
+                                        else if (networktype === 1) return "qrc:///images/open-wallet-from-file-testnet@2x.png";
+                                        else if (networktype === 2) return "qrc:///images/open-wallet-from-file-stagenet@2x.png";
+                                    }
+                                    visible: {
+                                        if(!isOpenGL) return true;
+                                        if(MoneroComponents.Style.blackTheme) return true;
+                                        return false;
+                                    }
+                                }
+
+                                Colorize {
+                                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                                    anchors.fill: icon
+                                    source: icon
+                                    lightness: itemMouseArea.containsMouse ? 0.40 : 0.65 // +65%
+                                    saturation: 0.0
+                                }
+                            }
+
+                            ColumnLayout {
+                                id: walletTextRectangle
+                                Layout.preferredWidth: 90
+                                Layout.preferredHeight: walletTypeText.visible ? 40 : 20
+                                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+                                Text {
+                                    id: walletNameText
+                                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                                    text: {
+                                        // truncate on window width
+                                        var maxLength = wizardController.layoutScale <= 1 ? 12 : 20
+                                        if (fileName.length > maxLength)
+                                            return fileName.substring(0, maxLength) + "...";
+                                        return fileName;
+                                    }
+                                    Layout.fillWidth: true
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    font.pixelSize: 16
+                                    font.bold: itemMouseArea.containsMouse ? true : false
+                                    horizontalAlignment: Text.AlignHCenter
+
+                                    wrapMode: Text.WordWrap
+                                    leftPadding: 0
+                                    topPadding: 0
+                                    bottomPadding: 0
+                                }
+
+                                Text {
+                                    id: walletTypeText
+                                    opacity: appWindow.walletMode >= 2 ? 1 : 0
+                                    Layout.fillWidth: true
+                                    text: item.networkType
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    color: MoneroComponents.Style.dimmedFontColor
+                                    font.pixelSize: 14
+                                    horizontalAlignment: Text.AlignHCenter
+
+                                    wrapMode: Text.WordWrap
+                                    leftPadding: 0
+                                    topPadding: 0
+                                    bottomPadding: 0
+                                }
+                            }
+                        }
+
+                        MouseArea {
+                            id: itemMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: recentList.openSelectedWalletFile(networktype, path);
+                        }
+                    }
+                }
+
+                Item {
+                    Layout.fillWidth: true
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: appWindow.walletMode >= 2 ? 5 : 0
+                Layout.bottomMargin: flow.collapsed ? 0 : 5
+                visible: wizardHome.walletCount > 5
+
+                Rectangle {
+                    height: 35
+                    width: 240
+                    color: "transparent"
+
+                    ColumnLayout {
+                        anchors.horizontalCenter: parent.horizontalCenter
+
+                        MoneroEffects.ImageMask {
+                            id: arrowUp
+                            Layout.alignment: Qt.AlignHCenter
+                            visible: !flow.collapsed
+                            width: 12
+                            height: 8
+                            image: "qrc:///images/whiteDropIndicator.png"
+                            color: MoneroComponents.Style.defaultFontColor
+                            opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75
+                            fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                            fontAwesomeFallbackSize: 14
+                            rotation: 180
+
+                            MoneroEffects.ColorTransition {
+                                targetObj: arrowUp
+                                blackColor: "white"
+                                whiteColor: "black"
+                                duration: 500
+                            }
+                        }
+
+                        MoneroComponents.TextPlain {
+                            id: showWalletsLabel
+                            Layout.alignment: Qt.AlignHCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.pixelSize: 15
+                            font.bold: showWalletsMouseArea.containsMouse ? true : false
+                            color: showWalletsMouseArea.containsMouse ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
+                            text: {
+                                if (flow.collapsed) {
+                                    qsTr("Show wallets") + " (" + wizardHome.walletCount + ")" + translationManager.emptyString
+                                } else {
+                                    qsTr("Hide wallets") + translationManager.emptyString
+                                }
+                            }
+                        }
+
+                        MoneroEffects.ImageMask {
+                            id: arrowDown
+                            Layout.alignment: Qt.AlignHCenter
+                            visible: flow.collapsed
+                            width: 12
+                            height: 8
+                            image: "qrc:///images/whiteDropIndicator.png"
+                            color: MoneroComponents.Style.defaultFontColor
+                            opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75
+                            fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                            fontAwesomeFallbackSize: 14
+
+                            MoneroEffects.ColorTransition {
+                                targetObj: arrowDown
+                                blackColor: "white"
+                                whiteColor: "black"
+                                duration: 500
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        id: showWalletsMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            if (flow.collapsed) {
+                                flow.maxRows = Math.ceil(wizardHome.walletCount / 5);
+                            } else {
+                                flow.maxRows = 1;
+                            }
+                            flowAnimation.from = flow._height;
+                            flowAnimation.to = flow.calcHeight();
+                            flowAnimation.start();
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                Layout.preferredHeight: 1
+                Layout.topMargin: 3
+                Layout.bottomMargin: 3
+                Layout.fillWidth: true
+                visible: wizardHome.walletCount > 0
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -119,8 +401,7 @@ Rectangle {
                 imageIcon: "qrc:///images/open-wallet-from-file.png"
 
                 onMenuClicked: {
-                    wizardStateView.state = "wizardOpenWallet1"
-                    wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
+                    wizardController.openWallet();
                 }
             }
 
@@ -241,5 +522,8 @@ Rectangle {
 
     function onPageCompleted(){
         wizardController.walletOptionsIsRecoveringFromDevice = false;
+        walletKeysFilesModel2.refresh(appWindow.accountsDir);
+        wizardHome.walletCount = walletKeysFilesModel2.rowCount();
+        flow._height = flow.calcHeight();
     }
 }

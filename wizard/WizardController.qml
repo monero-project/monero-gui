@@ -55,6 +55,11 @@ Rectangle {
         // is the temp. wallet object whilst creating new wallets.
         // This function is called automatically by navigating to `wizardHome`.
         wizardStateView.state = "wizardHome"
+        if (wizardStateView.currentView) {
+            if (typeof wizardStateView.currentView.onPageCompleted === "function") {
+                wizardStateView.currentView.onPageCompleted(wizardStateView.previousView);
+            }
+        }
         wizardController.walletOptionsName = defaultAccountName;
         wizardController.walletOptionsLocation = '';
         wizardController.walletOptionsPassword = '';
@@ -136,7 +141,6 @@ Rectangle {
         property WizardRestoreWallet3 wizardRestoreWallet3View: WizardRestoreWallet3 { }
         property WizardRestoreWallet4 wizardRestoreWallet4View: WizardRestoreWallet4 { }
         property WizardCreateDevice1 wizardCreateDevice1View: WizardCreateDevice1 { }
-        property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
         property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
@@ -215,10 +219,6 @@ Rectangle {
                 name: "wizardCreateDevice1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateDevice1View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice1View.pageHeight + 80 }
-            }, State {
-                name: "wizardOpenWallet1"
-                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.pageHeight + 80 }
             }, State {
                 name: "wizardModeSelection"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeSelectionView }
