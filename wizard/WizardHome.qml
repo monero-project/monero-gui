@@ -202,6 +202,7 @@ Rectangle {
                             persistentSettings.nettype = NetworkType.TESTNET
                         }
                         appWindow.disconnectRemoteNode()
+                        networkTypeDropdown.currentIndex = Qt.binding(function() { return persistentSettings.nettype });
                     }
                 }
 
@@ -241,5 +242,8 @@ Rectangle {
 
     function onPageCompleted(){
         wizardController.walletOptionsIsRecoveringFromDevice = false;
+        if (networkTypeDropdown.currentIndex != 0) {
+            showAdvancedCheckbox.checked = true;
+        }
     }
 }
