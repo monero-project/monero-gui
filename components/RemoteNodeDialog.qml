@@ -34,13 +34,14 @@ import "." as MoneroComponents
 
 MoneroComponents.Dialog {
     id: root
-    title: (editMode ? qsTr("Edit remote node") : qsTr("Add remote node")) + translationManager.emptyString
-
+    title: (editMode ? qsTr("Edit remote node") + (persistentSettings.nettype != 0 ? " (%1)".arg(networkTypeAsString()) : "")
+                     : qsTr("Add remote node") + (persistentSettings.nettype != 0 ? " (%1)".arg(networkTypeAsString()) : "")
+           ) + translationManager.emptyString
     property var callbackOnSuccess: null
     property bool editMode: false
     property bool success: false
 
-    onActiveFocusChanged: activeFocus && remoteNodeAddress.forceActiveFocus()
+    onActiveFocusChanged: activeFocus && remoteNodeLabel.forceActiveFocus()
 
     function add(callbackOnSuccess) {
         root.editMode = false;
@@ -55,6 +56,9 @@ MoneroComponents.Dialog {
             remoteNodeAddress.daemonAddrText = hostPort[1];
             remoteNodeAddress.daemonPortText = hostPort[2];
         }
+        if (remoteNode.label) {
+            remoteNodeLabel.text = remoteNode.label;
+        }
         daemonUsername.text = remoteNode.username;
         daemonPassword.text = remoteNode.password;
         setTrustedDaemonCheckBox.checked = remoteNode.trusted;
@@ -67,6 +71,8 @@ MoneroComponents.Dialog {
     onClosed: {
         if (root.success && callbackOnSuccess) {
             callbackOnSuccess({
+                label: remoteNodeLabel.text,
+                networkType: persistentSettings.nettype.toString(),
                 address: remoteNodeAddress.getAddress(),
                 username: daemonUsername.text,
                 password: daemonPassword.text,
@@ -74,12 +80,25 @@ MoneroComponents.Dialog {
             });
         }
 
+        remoteNodeLabel.text = "";
         remoteNodeAddress.daemonAddrText = "";
         remoteNodeAddress.daemonPortText = "";
         daemonUsername.text = "";
         daemonPassword.text = "";
         setTrustedDaemonCheckBox.checked = false;
         root.success = false;
+    }
+
+    MoneroComponents.LineEdit {
+        id: remoteNodeLabel
+        Layout.fillWidth: true
+        Layout.minimumWidth: 220
+        labelText: qsTr("Label") + translationManager.emptyString
+        placeholderText: qsTr("(optional)") + translationManager.emptyString
+        placeholderFontSize: 15
+        text: ""
+        labelFontSize: 14
+        fontSize: 15
     }
 
     MoneroComponents.RemoteNodeEdit {
