@@ -434,7 +434,7 @@ Rectangle {
 
     function creatingWalletDeviceSplash(){
         var splashMsg = qsTr("Creating wallet from device...");
-        splashMsg += wizardController.walletOptionsDeviceName === "Ledger" ? qsTr("\n\nPlease check your hardware wallet –\nyour input may be required.") : "";
+        splashMsg += wizardController.walletOptionsDeviceName === "Ledger" ? qsTr("\n\nPlease check your hardware wallet: –\nit is strongly recommended to export the view key.") : "";
         appWindow.showProcessingSplash(splashMsg);
     }
 
