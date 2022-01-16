@@ -151,7 +151,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 color: MoneroComponents.Style.dimmedFontColor
-                text: qsTr("The next page will display your recovery phrase, also known as mnemonic seed. ") + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
+                text: qsTr("The next page will display your recovery phrase, also known as mnemonic seed.") + " " + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
 
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
@@ -159,7 +159,7 @@ Rectangle {
                 leftPadding: 0
                 topPadding: 0
                 Accessible.role: Accessible.StaticText
-                Accessible.name: qsTr("The next page will display your recovery phrase, also known as mnemonic seed. ") + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
+                Accessible.name: qsTr("The next page will display your recovery phrase, also known as mnemonic seed.") + " " + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
                 KeyNavigation.up: mobileImage
                 KeyNavigation.backtab: mobileImage
                 KeyNavigation.down: displaySeedButton
@@ -279,7 +279,6 @@ Rectangle {
                     small: true
                     primary: false
                     text: qsTr("Create new seed") + translationManager.emptyString
-                    tooltip: qsTr("Generate a new seed") + translationManager.emptyString
                     onClicked: {
                         wizardController.restart(true);
                         wizardController.createWallet();
@@ -288,7 +287,7 @@ Rectangle {
                         checkSeedListGridDestruction.start();
                     }
                     Accessible.role: Accessible.Button
-                    Accessible.name: qsTr("Generate a new seed") + translationManager.emptyString
+                    Accessible.name: qsTr("Create new seed") + translationManager.emptyString
                     KeyNavigation.up: (wizardCreateWallet2.seedListGrid && seedListGridColumn.children[0]) ? seedListGridColumn.children[0].children[24] : recoveryPhraseLabel
                     KeyNavigation.backtab: (wizardCreateWallet2.seedListGrid && seedListGridColumn.children[0]) ? seedListGridColumn.children[0].children[24] : recoveryPhraseLabel
                     KeyNavigation.down: copyToClipboardButton
@@ -301,7 +300,6 @@ Rectangle {
                     small: true
                     primary: false
                     text: qsTr("Copy to clipboard") + translationManager.emptyString
-                    tooltip: qsTr("Copy the mnemonic seed to the clipboard") + translationManager.emptyString
                     onClicked: {
                         clipboard.setText(wizardController.walletOptionsSeed);
                         appWindow.showStatusMessage(qsTr("Recovery phrase copied to clipboard"),3);
@@ -325,7 +323,7 @@ Rectangle {
                         oshelper.openFile("wizard/template.pdf")
                     }
                     Accessible.role: Accessible.Button
-                    Accessible.name: qsTr("Print a blank template to write down your seed") + translationManager.emptyString
+                    Accessible.name: qsTr("Print a template to write down your seed") + translationManager.emptyString
                     KeyNavigation.up: copyToClipboardButton.visible ? copyToClipboardButton : (wizardCreateWallet2.seedListGrid && seedListGridColumn.children[0]) ? seedListGridColumn.children[0].children[24] : recoveryPhraseLabel
                     KeyNavigation.backtab: copyToClipboardButton.visible ? copyToClipboardButton : (wizardCreateWallet2.seedListGrid && seedListGridColumn.children[0]) ? seedListGridColumn.children[0].children[24] : recoveryPhraseLabel
                     KeyNavigation.down: walletCreationDate
@@ -389,7 +387,7 @@ Rectangle {
                         tooltipIconVisible: true
                         themeTransition: false
                         Accessible.role: Accessible.StaticText
-                        Accessible.name: qsTr("Wallet restore height") + " " + Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0) + translationManager.emptyString
+                        Accessible.name: qsTr("Restore height") + " " + Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0) + translationManager.emptyString
                         KeyNavigation.up: walletCreationDate
                         KeyNavigation.backtab: walletCreationDate
                         Keys.onDownPressed: navigation.btnPrev.forceActiveFocus();
