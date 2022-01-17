@@ -43,6 +43,7 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateDevice1"
+    property alias restoreDeviceWallet: restoreDeviceWallet
 
     property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
     property var ledgerType: deviceName == "Ledger" ? deviceNameModel.get(deviceNameDropdown.currentIndex).column1 : null
@@ -225,6 +226,8 @@ Rectangle {
                 btnNext.text: newDeviceWallet.checked ? qsTr("Create wallet") : qsTr("Restore wallet") + translationManager.emptyString
                 onPrevClicked: {
                     wizardStateView.state = "wizardHome";
+                    //reset restoreDeviceWallet.checked, since wizardCreateWallet4 reads it
+                    restoreDeviceWallet.checked = false;
                 }
                 onNextClicked: {
                     wizardController.walletOptionsName = walletInput.walletName.text;

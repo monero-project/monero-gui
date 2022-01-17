@@ -58,14 +58,14 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("You're all set up!") + translationManager.emptyString
-                subtitle: qsTr("New wallet details:") + translationManager.emptyString
+                subtitle: qsTr("Details of the wallet to be restored:") + translationManager.emptyString
             }
 
             WizardSummary {}
 
             WizardNav {
                 Layout.topMargin: 24
-                btnNextText: qsTr("Create wallet") + translationManager.emptyString
+                btnNextText: qsTr("Restore wallet") + translationManager.emptyString
                 progressSteps: appWindow.walletMode <= 1 ? 3 : 4
                 progress: appWindow.walletMode <= 1 ? 2 : 3
 
