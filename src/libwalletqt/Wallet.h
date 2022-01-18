@@ -318,6 +318,8 @@ public:
     Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
     Q_INVOKABLE void getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &callback);
     Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
+    Q_INVOKABLE QString getReserveProof(bool all, quint32 account_index, quint64 amount, const QString &message) const;
+    Q_INVOKABLE QString checkReserveProof(const QString &address, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 

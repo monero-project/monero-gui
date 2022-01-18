@@ -61,6 +61,10 @@ function checkSignature(signature) {
         if ((signature.length - 12) % 88 != 0)
             return false;
         return check256(signature, signature.length);
+    } else if (signature.indexOf("ReserveProofV") === 0) {
+        if ((signature.length - 14) % 447 != 0)
+            return false;
+        return check256(signature, signature.length);
     }
     return false;
 }
