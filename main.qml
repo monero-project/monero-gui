@@ -1073,7 +1073,7 @@ ApplicationWindow {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
             informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
-            informationPopup.text = good ? qsTr("Good signature on ") + results[2] + qsTr(" total and ") + results[3] + qsTr(" spent.") : qsTr("Bad signature");
+            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(results[2]).arg(results[3]) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;

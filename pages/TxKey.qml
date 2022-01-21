@@ -60,13 +60,13 @@ Rectangle {
             MoneroComponents.Label {
                 id: soloTitleLabel
                 fontSize: 24
-                text: qsTr("Prove Transaction / Reserve") + translationManager.emptyString
+                text: qsTr("Prove Transaction") + " / " + qsTr("Reserve") + translationManager.emptyString
             }
 
             MoneroComponents.TextPlain {
                 Layout.fillWidth: true
                 text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
-                           "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address. \nFor reserve proofs you don't need to specify tx id or address.") + translationManager.emptyString
+                           "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + qsTr("\nFor reserve proofs you don't need to specify tx id or address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
@@ -166,12 +166,12 @@ Rectangle {
             MoneroComponents.Label {
                 id: soloTitleLabel2
                 fontSize: 24
-                text: qsTr("Check Transaction / Reserve") + translationManager.emptyString
+                text: qsTr("Check Transaction") + " / " + qsTr("Reserve") + translationManager.emptyString
             }
 
             MoneroComponents.TextPlain {
                 text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
-                           "For the case with Spend Proof, you don't need to specify the recipient address.\nTransaction is not needed for reserve proof.") + translationManager.emptyString
+                           "For the case with Spend Proof, you don't need to specify the recipient address.") + "\n" + qsTr("Transaction is not needed for reserve proof.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
                 font.family: MoneroComponents.Style.fontRegular.name
@@ -222,7 +222,7 @@ Rectangle {
                 labelFontSize: 14
                 labelText: qsTr("Signature") + translationManager.emptyString
                 placeholderFontSize: 16
-                placeholderText: qsTr("Paste tx / reserve proof") + translationManager.emptyString;
+                placeholderText: qsTr("Paste tx proof") + " / " + qsTr("reserve proof") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true
             }
@@ -255,7 +255,7 @@ Rectangle {
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
-            }            
+            }
         }
     }
 
