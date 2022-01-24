@@ -1013,6 +1013,7 @@ Rectangle {
 
                                 MoneroComponents.StandardButton {
                                     visible: isout
+                                    enabled: currentWallet ? !currentWallet.isHwBacked() : false
                                     anchors.left: btnDetails.right
                                     anchors.leftMargin: 10
                                     text: FontAwesome.productHunt
