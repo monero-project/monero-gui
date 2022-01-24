@@ -42,11 +42,6 @@ Rectangle {
     property string viewName: "wizardRestoreWallet3"
     property int recoveryMode: 1
 
-    function verify() {
-        // @TODO: check if walletName already exists in walletLocation
-        return walletName.text !== '';
-    }
-
     ColumnLayout {
         id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
