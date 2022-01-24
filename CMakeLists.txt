@@ -12,6 +12,7 @@ option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
+option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
@@ -110,6 +111,10 @@ message(STATUS "${CMAKE_MODULE_PATH}")
 
 if(WITH_SCANNER)
     add_definitions(-DWITH_SCANNER)
+endif()
+
+if(WITH_DESKTOP_ENTRY)
+    add_definitions(-DWITH_DESKTOP_ENTRY)
 endif()
 
 # Sodium

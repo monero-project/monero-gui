@@ -503,6 +503,12 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
+    bool builtWithDesktopEntry = false;
+#ifdef WITH_DESKTOP_ENTRY
+    builtWithDesktopEntry = true;
+#endif
+    engine.rootContext()->setContextProperty("builtWithDesktopEntry", builtWithDesktopEntry);
+
     engine.rootContext()->setContextProperty("moneroVersion", MONERO_VERSION_FULL);
 
     // Load main window (context properties needs to be defined obove this line)
