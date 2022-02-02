@@ -97,6 +97,9 @@
         <file>lang/flags/gb.png</file>
         <file>lang/flags/us.png</file>
         <file>lang/flags/nb_NO.png</file>
+        <file>lang/flags/el.png</file>
+        <file>lang/flags/vi.png</file>
+        <file>lang/flags/is.png</file>
         <file>pages/Receive.qml</file>
         <file>pages/TxKey.qml</file>
         <file>pages/SharedRingDB.qml</file>
