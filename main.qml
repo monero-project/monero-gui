@@ -1692,6 +1692,9 @@ ApplicationWindow {
             informationPopup.open();
         }
         onRejectedNewPassword: {}
+        Keys.enabled: !passwordDialog.visible && informationPopup.visible
+        Keys.onEnterPressed: informationPopup.close()
+        Keys.onReturnPressed: informationPopup.close()
     }
 
     DevicePassphraseDialog {
