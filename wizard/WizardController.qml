@@ -349,6 +349,8 @@ Rectangle {
         const handler = function(success) {
             if (!success) {
                 appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
+                wizardStateView.wizardRestoreWallet4View.wizardNav.btnNext.enabled = true;
+                wizardStateView.wizardCreateWallet4View.wizardNav.btnNext.enabled = true;
                 return;
             }
 

@@ -38,6 +38,7 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias wizardNav: wizardNav
     property string viewName: "wizardRestoreWallet4"
 
     ColumnLayout {
@@ -64,6 +65,7 @@ Rectangle {
             WizardSummary {}
 
             WizardNav {
+                id: wizardNav
                 Layout.topMargin: 24
                 btnNextText: qsTr("Create wallet") + translationManager.emptyString
                 progressSteps: appWindow.walletMode <= 1 ? 3 : 4
@@ -77,11 +79,13 @@ Rectangle {
                     }
                 }
                 onNextClicked: {
+                    btnNext.enabled = false;
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwField = "";
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwConfirmField = "";
                     wizardController.recoveryWallet();
                     wizardController.writeWallet(function() {
                         wizardController.useMoneroClicked();
+                        btnNext.enabled = true;
                     });
                 }
             }
