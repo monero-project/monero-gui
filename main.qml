@@ -985,24 +985,28 @@ ApplicationWindow {
     }
 
     // called on "getProof"
-    function handleGetProof(txid, address, message) {
-        console.log("Getting payment proof: ")
-        console.log("\ttxid: ", txid,
-                    ", address: ", address,
-                    ", message: ", message);
-
-        function spendProofFallback(txid, result){
-            if (!result || result.indexOf("error|") === 0) {
-                currentWallet.getSpendProofAsync(txid, message, txProofComputed);
-            } else {
-                txProofComputed(txid, result);
+    function handleGetProof(txid, address, message, amount) {
+        if (amount.length > 0) {
+            var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message)
+            txProofComputed(null, result)
+        } else {
+            console.log("Getting payment proof: ")
+            console.log("\ttxid: ", txid,
+                        ", address: ", address,
+                        ", message: ", message);
+            function spendProofFallback(txid, result){
+                if (!result || result.indexOf("error|") === 0) {
+                    currentWallet.getSpendProofAsync(txid, message, txProofComputed);
+                } else {
+                    txProofComputed(txid, result);
+                }
             }
+            if (address.length > 0)
+                currentWallet.getTxProofAsync(txid, address, message, spendProofFallback);
+            else
+                spendProofFallback(txid, null);
         }
-
-        if (address.length > 0)
-            currentWallet.getTxProofAsync(txid, address, message, spendProofFallback);
-        else
-            spendProofFallback(txid, null);
+        informationPopup.open()
     }
 
     function txProofComputed(txid, result){
@@ -1025,12 +1029,18 @@ ApplicationWindow {
                     ", signature: ", signature);
 
         var result;
-        if (address.length > 0)
+        var isReserveProof = signature.indexOf("ReserveProofV") === 0;
+        if (address.length > 0 && !isReserveProof) {
             result = currentWallet.checkTxProof(txid, address, message, signature);
-        else
+        } 
+        else if (isReserveProof) {
+            result = currentWallet.checkReserveProof(address, message, signature);
+        } 
+        else {
             result = currentWallet.checkSpendProof(txid, message, signature);
+        }
         var results = result.split("|");
-        if (address.length > 0 && results.length == 5 && results[0] === "true") {
+        if (address.length > 0 && results.length == 5 && results[0] === "true" && !isReserveProof) {
             var good = results[1] === "true";
             var received = results[2];
             var in_pool = results[3] === "true";
@@ -1058,6 +1068,12 @@ ApplicationWindow {
             informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
             informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
+        } 
+        else if (isReserveProof && results[0] === "true") {
+            var good = results[1] === "true";
+            informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
+            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
+            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(results[2]).arg(results[3]) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;

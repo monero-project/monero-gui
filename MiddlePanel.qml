@@ -66,7 +66,7 @@ Rectangle {
     signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
-    signal getProofClicked(string txid, string address, string message);
+    signal getProofClicked(string txid, string address, string message, string amount);
     signal checkProofClicked(string txid, string address, string message, string signature);
 
     Rectangle {
