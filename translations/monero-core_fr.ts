@@ -30,32 +30,32 @@
         <translation>Solde total déverrouillé : </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="171"/>
+        <location filename="../pages/Account.qml" line="174"/>
         <source>Accounts</source>
         <translation>Comptes</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="300"/>
+        <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="315"/>
+        <location filename="../pages/Account.qml" line="361"/>
         <source>Copy address to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="320"/>
+        <location filename="../pages/Account.qml" line="366"/>
         <source>Address copied to clipboard</source>
         <translation>Adresse copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="355"/>
+        <location filename="../pages/Account.qml" line="181"/>
         <source>Create new account</source>
         <translation>Créer un nouveau compte</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="357"/>
+        <location filename="../pages/Account.qml" line="184"/>
         <source>Set the label of the new account:</source>
         <translation>Définir l&apos;étiquette du nouveau compte :</translation>
     </message>
@@ -73,134 +73,135 @@
         <translation>Cela facilite l&apos;envoie et la réception de Monero et réduit les erreurs de saisie manuelle des adresses.</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="100"/>
-        <location filename="../pages/AddressBook.qml" line="316"/>
+        <location filename="../pages/AddressBook.qml" line="102"/>
+        <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Add an address</source>
         <translation>Ajouter une adresse</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="115"/>
+        <location filename="../pages/AddressBook.qml" line="117"/>
         <source>Address book</source>
         <translation>Carnet d&apos;adresses</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="218"/>
+        <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="232"/>
+        <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="247"/>
-        <source>Edit address label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="265"/>
+        <location filename="../pages/AddressBook.qml" line="279"/>
         <source>Copy address to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="270"/>
+        <location filename="../pages/AddressBook.qml" line="284"/>
         <source>Address copied to clipboard</source>
         <translation>Adresse copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="301"/>
+        <location filename="../pages/AddressBook.qml" line="125"/>
         <source>Add address</source>
         <translation>Ajouter une adresse</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="316"/>
-        <source>Edit an address</source>
-        <translation>Modifier une adresse</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="365"/>
+        <location filename="../pages/AddressBook.qml" line="386"/>
         <source>Resolve</source>
         <translation>Résoudre</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="380"/>
+        <location filename="../pages/AddressBook.qml" line="401"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Pas d&apos;adresse valide trouvée à cette adresse OpenAlias</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="385"/>
+        <location filename="../pages/AddressBook.qml" line="406"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Adresse trouvée, mais les signatures DNSSEC n&apos;ont pas pu être vérifiées, donc cette adresse pourrait avoir été usurpée</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="387"/>
+        <location filename="../pages/AddressBook.qml" line="408"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Pas d&apos;adresse valide trouvée à cette adresse OpenAlias, mais les signatures DNSSEC n&apos;ont pas pu être vérifiées, donc cela pourrait avoir été falsifié</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="390"/>
-        <location filename="../pages/AddressBook.qml" line="393"/>
+        <location filename="../pages/AddressBook.qml" line="411"/>
+        <location filename="../pages/AddressBook.qml" line="414"/>
         <source>Internal error</source>
         <translation>Erreur interne</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="396"/>
+        <location filename="../pages/AddressBook.qml" line="417"/>
         <source>No address found</source>
         <translation>Pas d&apos;adresse trouvée</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="325"/>
+        <location filename="../pages/AddressBook.qml" line="323"/>
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="410"/>
+        <location filename="../pages/AddressBook.qml" line="261"/>
+        <location filename="../pages/AddressBook.qml" line="313"/>
+        <source>Edit entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="351"/>
+        <source>Grab QR code from screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="431"/>
         <source>Description</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="411"/>
+        <location filename="../pages/AddressBook.qml" line="432"/>
         <source>Add a name...</source>
         <translation>Ajouter un nom...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="420"/>
+        <location filename="../pages/AddressBook.qml" line="468"/>
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="420"/>
+        <location filename="../pages/AddressBook.qml" line="468"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="425"/>
+        <location filename="../pages/AddressBook.qml" line="473"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="428"/>
+        <location filename="../pages/AddressBook.qml" line="476"/>
         <source>Invalid address</source>
         <translation>Adresse invalide</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="432"/>
+        <location filename="../pages/AddressBook.qml" line="480"/>
         <source>Can&apos;t create entry</source>
         <translation>Impossible de créer l&apos;entrée</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="449"/>
+        <location filename="../pages/AddressBook.qml" line="444"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="459"/>
+        <location filename="../pages/AddressBook.qml" line="455"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="517"/>
+        <location filename="../pages/AddressBook.qml" line="541"/>
         <source>OpenAlias error</source>
         <translation>Erreur OpenAlias</translation>
     </message>
@@ -208,22 +209,22 @@
 <context>
     <name>Advanced</name>
     <message>
-        <location filename="../pages/Advanced.qml" line="52"/>
+        <location filename="../pages/Advanced.qml" line="53"/>
         <source>Mining</source>
         <translation type="unfinished">Mine</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="57"/>
+        <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
         <translation type="unfinished">Prouver/Vérifier</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="62"/>
+        <location filename="../pages/Advanced.qml" line="63"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Base de données partagée de cercles</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="67"/>
+        <location filename="../pages/Advanced.qml" line="68"/>
         <source>Sign/verify</source>
         <translation type="unfinished">Signer/vérifier</translation>
     </message>
@@ -231,9 +232,29 @@
 <context>
     <name>ContextMenu</name>
     <message>
-        <location filename="../components/ContextMenu.qml" line="37"/>
+        <location filename="../components/ContextMenu.qml" line="51"/>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/ContextMenu.qml" line="57"/>
+        <source>Copy</source>
+        <translation type="unfinished">Copier</translation>
+    </message>
+    <message>
+        <location filename="../components/ContextMenu.qml" line="63"/>
         <source>Paste</source>
         <translation>Coller</translation>
+    </message>
+    <message>
+        <location filename="../components/ContextMenu.qml" line="69"/>
+        <source>Delete</source>
+        <translation type="unfinished">Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../components/ContextMenu.qml" line="75"/>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -294,7 +315,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="334"/>
         <location filename="../pages/History.qml" line="921"/>
-        <location filename="../pages/History.qml" line="1742"/>
+        <location filename="../pages/History.qml" line="1743"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -320,13 +341,13 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     </message>
     <message>
         <location filename="../pages/History.qml" line="275"/>
-        <location filename="../pages/History.qml" line="1216"/>
+        <location filename="../pages/History.qml" line="1217"/>
         <source>Blockheight</source>
         <translation>Hauteur de bloc</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="393"/>
-        <location filename="../pages/History.qml" line="1743"/>
+        <location filename="../pages/History.qml" line="1744"/>
         <source>Amount</source>
         <translation>Montant</translation>
     </message>
@@ -377,7 +398,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
-        <location filename="../pages/History.qml" line="1232"/>
+        <location filename="../pages/History.qml" line="1233"/>
         <source>Pending</source>
         <translation>En attente</translation>
     </message>
@@ -387,22 +408,22 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <translation>Confirmations</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1059"/>
+        <location filename="../pages/History.qml" line="1060"/>
         <source>Description</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1127"/>
+        <location filename="../pages/History.qml" line="1128"/>
         <source>Transaction ID</source>
         <translation>ID de transaction</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1171"/>
+        <location filename="../pages/History.qml" line="1172"/>
         <source>Transaction key</source>
         <translation>Clé de transaction</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1187"/>
+        <location filename="../pages/History.qml" line="1188"/>
         <source>Click to reveal</source>
         <translation>Cliquer pour révéler</translation>
     </message>
@@ -412,48 +433,48 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <translation>Destinataire inconnu</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1377"/>
+        <location filename="../pages/History.qml" line="1378"/>
         <source>Advanced options</source>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1393"/>
+        <location filename="../pages/History.qml" line="1394"/>
         <source>Human readable date format</source>
         <translation>Format de date lisible</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1399"/>
+        <location filename="../pages/History.qml" line="1400"/>
         <source>Export all history</source>
         <translation>Exporter tout l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1638"/>
+        <location filename="../pages/History.qml" line="1639"/>
         <source>Set description:</source>
         <translation>Définir une description :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1641"/>
+        <location filename="../pages/History.qml" line="1642"/>
         <source>Updated description.</source>
         <translation>Description mise à jour.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1671"/>
+        <location filename="../pages/History.qml" line="1672"/>
         <source>No transaction history yet.</source>
         <translation>Pas d&apos;historique de transaction pour le moment.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1673"/>
+        <location filename="../pages/History.qml" line="1674"/>
         <source>No results.</source>
         <translation>Pas de résultat.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1675"/>
+        <location filename="../pages/History.qml" line="1676"/>
         <source>%1 transactions total, showing %2.</source>
         <translation>%1 transactions au total, %2 affichées.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="816"/>
-        <location filename="../pages/History.qml" line="1693"/>
+        <location filename="../pages/History.qml" line="1694"/>
         <source>Primary address</source>
         <translation>Adresse primaire</translation>
     </message>
@@ -496,97 +517,97 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     </message>
     <message>
         <location filename="../pages/History.qml" line="985"/>
-        <location filename="../pages/History.qml" line="1702"/>
+        <location filename="../pages/History.qml" line="1703"/>
         <source>Transaction details</source>
         <translation>Détails de la transaction</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1023"/>
+        <location filename="../pages/History.qml" line="1024"/>
         <source>Generate payment proof</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1723"/>
+        <location filename="../pages/History.qml" line="1724"/>
         <source>Payment proof</source>
         <translation type="unfinished">Preuve de Paiement</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1724"/>
+        <location filename="../pages/History.qml" line="1725"/>
         <source>Generating payment proof</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1732"/>
+        <location filename="../pages/History.qml" line="1733"/>
         <source>Copied to clipboard</source>
         <translation>Copié dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1741"/>
+        <location filename="../pages/History.qml" line="1742"/>
         <source>Tx ID:</source>
         <translation>ID de transaction :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1744"/>
+        <location filename="../pages/History.qml" line="1745"/>
         <source>Address:</source>
         <translation>Adresse :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1745"/>
+        <location filename="../pages/History.qml" line="1746"/>
         <source>Payment ID:</source>
         <translation>ID de paiement :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1746"/>
+        <location filename="../pages/History.qml" line="1747"/>
         <source>Integrated address</source>
         <translation>Adresse intégrée</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1747"/>
+        <location filename="../pages/History.qml" line="1748"/>
         <source>Tx key:</source>
         <translation>Clé de transaction :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1748"/>
+        <location filename="../pages/History.qml" line="1749"/>
         <source>Tx note:</source>
         <translation>Note de transaction :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1749"/>
+        <location filename="../pages/History.qml" line="1750"/>
         <source>Destinations:</source>
         <translation>Destinations :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1750"/>
+        <location filename="../pages/History.qml" line="1751"/>
         <source>Rings:</source>
         <translation>Cercles :</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1757"/>
+        <location filename="../pages/History.qml" line="1758"/>
         <source>Please choose a folder</source>
         <translation>Merci de choisir un répertoire</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1767"/>
+        <location filename="../pages/History.qml" line="1768"/>
         <source>Success</source>
         <translation>Succès</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1768"/>
+        <location filename="../pages/History.qml" line="1769"/>
         <source>CSV file written to: %1</source>
         <translation>Fichier CSV écrit à : %1</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1769"/>
+        <location filename="../pages/History.qml" line="1770"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
         <translation>Astuce : Utilisez votre tableur préféré pour trier selon la hauteur de bloc.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1773"/>
+        <location filename="../pages/History.qml" line="1774"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1774"/>
+        <location filename="../pages/History.qml" line="1775"/>
         <source>Error exporting transaction data.</source>
         <translation>Erreur d&apos;exportation des données de transaction.</translation>
     </message>
@@ -594,12 +615,12 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
 <context>
     <name>InputDialog</name>
     <message>
-        <location filename="../components/InputDialog.qml" line="135"/>
+        <location filename="../components/InputDialog.qml" line="136"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../components/InputDialog.qml" line="147"/>
+        <location filename="../components/InputDialog.qml" line="148"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -715,19 +736,14 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="383"/>
+        <location filename="../LeftPanel.qml" line="384"/>
         <source>Send</source>
         <translation>Envoyer</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="427"/>
+        <location filename="../LeftPanel.qml" line="428"/>
         <source>Receive</source>
         <translation>Recevoir</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="428"/>
-        <source>R</source>
-        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="155"/>
@@ -750,6 +766,17 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <translation>Copié dans le presse-papier</translation>
     </message>
     <message>
+        <location filename="../LeftPanel.qml" line="363"/>
+        <location filename="../LeftPanel.qml" line="385"/>
+        <location filename="../LeftPanel.qml" line="407"/>
+        <location filename="../LeftPanel.qml" line="429"/>
+        <location filename="../LeftPanel.qml" line="451"/>
+        <location filename="../LeftPanel.qml" line="473"/>
+        <location filename="../LeftPanel.qml" line="494"/>
+        <source>Ctrl+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../LeftPanel.qml" line="178"/>
         <location filename="../LeftPanel.qml" line="362"/>
         <source>Account</source>
@@ -761,62 +788,32 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <translation>Synchronisation..</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="363"/>
-        <source>T</source>
-        <translation>T</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="405"/>
+        <location filename="../LeftPanel.qml" line="406"/>
         <source>Address book</source>
         <translation>Carnet d&apos;adresses</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="406"/>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="449"/>
+        <location filename="../LeftPanel.qml" line="450"/>
         <source>Transactions</source>
         <translation>Transactions</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="450"/>
-        <source>H</source>
-        <translation>H</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="471"/>
+        <location filename="../LeftPanel.qml" line="472"/>
         <source>Advanced</source>
         <translation>Avancé</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="472"/>
-        <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="529"/>
+        <location filename="../LeftPanel.qml" line="530"/>
         <source>Wallet</source>
         <translation>Portefeuille</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="538"/>
+        <location filename="../LeftPanel.qml" line="539"/>
         <source>Daemon</source>
         <translation>Démon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="493"/>
-        <source>E</source>
-        <translation>E</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="384"/>
-        <source>S</source>
-        <translation>S</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="492"/>
         <source>Settings</source>
         <translation>Réglages</translation>
     </message>
@@ -1017,122 +1014,120 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="54"/>
+        <location filename="../pages/Mining.qml" line="55"/>
         <source>Solo mining</source>
         <translation>Extraction minière en solo</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="65"/>
+        <location filename="../pages/Mining.qml" line="66"/>
         <source>Your daemon must be synchronized before you can start mining</source>
         <translation>Votre démon doit être synchronisé avant de pouvoir démarrer l&apos;extraction minière</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="99"/>
+        <location filename="../pages/Mining.qml" line="100"/>
         <source>CPU threads</source>
         <translation>Threads CPU</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="59"/>
+        <location filename="../pages/Mining.qml" line="60"/>
         <source>Mining is only available on local daemons.</source>
         <translation>L&apos;extraction minière est uniquement disponible sur les démons locaux.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
-
-Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>L&apos;extraction minière depuis votre ordinateur participe à renforcer le réseau Monero. Le plus de personnes minent, le plus difficile une attaque du réseau sera, et chaque petit geste compte.
-
-L&apos;extraction minière vous offre également une petite chance de gagner quelques Monero. Votre ordinateur va créer des hachages en cherchant des solutions au bloc. Si vous trouvez un bloc, vous obtiendrez la récompense associée. Bonne chance !</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="83"/>
+        <location filename="../pages/Mining.qml" line="84"/>
         <source>Mining may reduce the performance of other running applications and processes.</source>
         <translation>L&apos;extraction minière peut réduire la performance d&apos;autres applications et processus en cours.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="118"/>
-        <source>Max # of CPU threads available for mining: </source>
-        <translation>Nombre max de threads CPU disponibles pour miner : </translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="129"/>
-        <source>Use recommended # of threads</source>
-        <translation>Utiliser le nombre de threads recommandés</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="133"/>
+        <location filename="../pages/Mining.qml" line="160"/>
         <source>Set to use recommended # of threads</source>
         <translation>Configuré pour utiliser le nombre recommandé de threads</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="140"/>
+        <location filename="../pages/Mining.qml" line="168"/>
         <source>Use all threads</source>
         <translation>Utiliser tous les threads</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="144"/>
+        <location filename="../pages/Mining.qml" line="172"/>
         <source>Set to use all threads</source>
         <translation>Configuré pour utiliser tous les threads</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="155"/>
+        <location filename="../pages/Mining.qml" line="214"/>
         <source>Background mining (experimental)</source>
         <translation>Mine en arrière plan (expérimental)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="167"/>
+        <location filename="../pages/Mining.qml" line="185"/>
         <source>Enable mining when running on battery</source>
         <translation>Activer la mine en cas de fonctionnement sur batterie</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="178"/>
+        <location filename="../pages/Mining.qml" line="72"/>
+        <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
+
+Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="156"/>
+        <source>Use half (recommended)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="197"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="225"/>
         <source>Manage miner</source>
         <translation>Gérer le mineur</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="194"/>
+        <location filename="../pages/Mining.qml" line="242"/>
         <source>Start mining</source>
         <translation>Démarrer</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="200"/>
+        <location filename="../pages/Mining.qml" line="248"/>
         <source>Error starting mining</source>
         <translation>Erreur lors du démarrage de l&apos;extraction minière</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="201"/>
+        <location filename="../pages/Mining.qml" line="249"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Impossible de démarrer l&apos;extraction minière.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="203"/>
+        <location filename="../pages/Mining.qml" line="251"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>L&apos;extraction minière n&apos;est disponible que pour les démons locaux. Démarrez un démon local pour pouvoir l&apos;utiliser.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="214"/>
+        <location filename="../pages/Mining.qml" line="263"/>
         <source>Stop mining</source>
         <translation>Arrêter</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="230"/>
+        <location filename="../pages/Mining.qml" line="279"/>
         <source>Status</source>
         <translation>État</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="256"/>
+        <location filename="../pages/Mining.qml" line="305"/>
         <source>Mining temporarily suspended.</source>
         <translation>Extraction minière suspendue temporairement.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="265"/>
+        <location filename="../pages/Mining.qml" line="314"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
         <translation>Minage à %1 H/s. Cela vous donne quotidiennement 1 chance sur %2 de trouver un bloc.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="242"/>
-        <location filename="../pages/Mining.qml" line="269"/>
+        <location filename="../pages/Mining.qml" line="291"/>
+        <location filename="../pages/Mining.qml" line="318"/>
         <source>Not mining</source>
         <translation>Pas d&apos;extraction minière</translation>
     </message>
@@ -1200,17 +1195,22 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
         <translation>État du réseau</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="188"/>
+        <location filename="../components/NetworkStatusItem.qml" line="173"/>
+        <source>Switch to another public remote node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/NetworkStatusItem.qml" line="192"/>
         <source>Successfully switched to another public node</source>
         <translation>Changement vers un noeud publique réussi</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="191"/>
+        <location filename="../components/NetworkStatusItem.qml" line="195"/>
         <source>Failed to switch public node</source>
         <translation>Échec de la bascule vers un nœud publique</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="201"/>
+        <location filename="../components/NetworkStatusItem.qml" line="205"/>
         <source>Switching to another public node</source>
         <translation>Bascule vers un autre nœud publique</translation>
     </message>
@@ -1218,57 +1218,57 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="159"/>
+        <location filename="../components/PasswordDialog.qml" line="163"/>
         <source>Please enter new wallet password</source>
         <translation>Entrer le mot de passe du nouveau portefeuille</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="161"/>
+        <location filename="../components/PasswordDialog.qml" line="165"/>
         <source>wallet password</source>
         <translation>mot de passe du portefeuille</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="161"/>
+        <location filename="../components/PasswordDialog.qml" line="165"/>
         <source>wallet device passphrase</source>
         <translation>mot de passe du portefeuille matériel</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="162"/>
+        <location filename="../components/PasswordDialog.qml" line="166"/>
         <source>Please enter %1 for: </source>
         <translation>Veuillez entrer %1 pour : </translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="162"/>
+        <location filename="../components/PasswordDialog.qml" line="166"/>
         <source>Please enter %1</source>
         <translation>Veuillez entrer %1</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="174"/>
+        <location filename="../components/PasswordDialog.qml" line="178"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
         <translation>Attention : la saisie d&apos;un mot de passe sur un ordinateur est un risque de sécurité car il peut être capturé par un programme malveillant. Il est recommandé de favoriser la saisie d&apos;un mot de passe sur le périphérique.</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="203"/>
+        <location filename="../components/PasswordDialog.qml" line="207"/>
         <source>CAPSLOCKS IS ON.</source>
         <translation>VERR. MAJ. EST ACTIVÉ.</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="238"/>
+        <location filename="../components/PasswordDialog.qml" line="242"/>
         <source>Please confirm new password</source>
         <translation>Veuillez confirmer votre nouveau mot de passe</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="238"/>
+        <location filename="../components/PasswordDialog.qml" line="242"/>
         <source>Please confirm wallet device passphrase</source>
         <translation>Veuillez confirmer le mot de passe du portefeuille matériel</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="283"/>
+        <location filename="../components/PasswordDialog.qml" line="287"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="293"/>
+        <location filename="../components/PasswordDialog.qml" line="297"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -1305,88 +1305,165 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
 <context>
     <name>Receive</name>
     <message>
-        <location filename="../pages/Receive.qml" line="55"/>
+        <location filename="../pages/Receive.qml" line="56"/>
         <source>Set the label of the selected address:</source>
         <translation>Étiqueter l&apos;adresse sélectionnée :</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="229"/>
+        <location filename="../pages/Receive.qml" line="518"/>
         <source>Addresses</source>
         <translation>Adresses</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="206"/>
+        <location filename="../pages/Receive.qml" line="495"/>
         <source>Show on device</source>
         <translation>Voir sur l&apos;appareil</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="453"/>
+        <location filename="../pages/Receive.qml" line="751"/>
         <source>Please choose a name</source>
         <translation>Veuillez choisir un nom</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="238"/>
+        <location filename="../pages/Receive.qml" line="527"/>
         <source>Set the label of the new address:</source>
         <translation>Étiqueter cette nouvelle adresse :</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="122"/>
-        <source>Save as Image</source>
+        <location filename="../pages/Receive.qml" line="100"/>
+        <source>Address</source>
+        <translation type="unfinished">Adresse</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="106"/>
+        <source>Payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="135"/>
-        <source>Address #</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/Receive.qml" line="151"/>
-        <location filename="../pages/Receive.qml" line="424"/>
-        <source>no label</source>
+        <location filename="../pages/Receive.qml" line="141"/>
+        <source>QR code copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
-        <location filename="../pages/Receive.qml" line="385"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Copier dans le presse-papiers</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="164"/>
+        <source>Save as Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="171"/>
+        <source>Left click: copy QR code to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="171"/>
+        <source>Right click: save QR code as image file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="187"/>
+        <source>Copy payment request to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="199"/>
+        <source>Payment request copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="220"/>
+        <location filename="../pages/Receive.qml" line="281"/>
+        <source>Amount</source>
+        <translation type="unfinished">Montant</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="340"/>
+        <source>Description</source>
+        <translation type="unfinished">Description</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="341"/>
+        <source>What is being payed for (a product, service, donation) (optional)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="358"/>
+        <location filename="../pages/Receive.qml" line="396"/>
+        <source>Visible to the sender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="379"/>
+        <source>Your name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="380"/>
+        <source>Your name, company or website (optional)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="422"/>
+        <source>Address #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="439"/>
+        <location filename="../pages/Receive.qml" line="722"/>
+        <source>no label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="446"/>
+        <location filename="../pages/Receive.qml" line="683"/>
         <source>Edit address label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="186"/>
-        <location filename="../pages/Receive.qml" line="402"/>
+        <location filename="../pages/Receive.qml" line="475"/>
+        <location filename="../pages/Receive.qml" line="700"/>
         <source>Copy address to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="196"/>
-        <location filename="../pages/Receive.qml" line="407"/>
+        <location filename="../pages/Receive.qml" line="485"/>
+        <location filename="../pages/Receive.qml" line="705"/>
         <source>Address copied to clipboard</source>
         <translation>Adresse copiée dans le presse-papier</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="235"/>
+        <location filename="../pages/Receive.qml" line="524"/>
         <source>Create new address</source>
         <translation>Créer une nouvelle adresse</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="369"/>
+        <location filename="../pages/Receive.qml" line="667"/>
         <source>See transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="420"/>
+        <location filename="../pages/Receive.qml" line="718"/>
         <source>Primary address</source>
         <translation type="unfinished">Adresse primaire</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="460"/>
+        <location filename="../pages/Receive.qml" line="758"/>
         <source>Save QrCode</source>
         <translation>Enregistrer le code QR</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="461"/>
+        <location filename="../pages/Receive.qml" line="759"/>
         <source>Failed to save QrCode to </source>
         <translation>Impossible d&apos;enregistrer le code QR vers </translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="763"/>
+        <source>QR code saved to </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1468,17 +1545,17 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeList.qml" line="108"/>
+        <location filename="../components/RemoteNodeList.qml" line="120"/>
         <source>Trusted daemon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeList.qml" line="132"/>
+        <location filename="../components/RemoteNodeList.qml" line="144"/>
         <source>Edit remote node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeList.qml" line="144"/>
+        <location filename="../components/RemoteNodeList.qml" line="159"/>
         <source>Remove remote node</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1486,27 +1563,27 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="58"/>
+        <location filename="../pages/settings/Settings.qml" line="59"/>
         <source>Wallet</source>
         <translation type="unfinished">Portefeuille</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="63"/>
+        <location filename="../pages/settings/Settings.qml" line="64"/>
         <source>Interface</source>
         <translation type="unfinished">Interface</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="68"/>
+        <location filename="../pages/settings/Settings.qml" line="69"/>
         <source>Node</source>
         <translation type="unfinished">Nœud</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="74"/>
+        <location filename="../pages/settings/Settings.qml" line="75"/>
         <source>Log</source>
         <translation type="unfinished">Journal</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="79"/>
+        <location filename="../pages/settings/Settings.qml" line="80"/>
         <source>Info</source>
         <translation type="unfinished">Info</translation>
     </message>
@@ -1644,6 +1721,11 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
         <location filename="../pages/settings/SettingsInfo.qml" line="410"/>
         <source>Donate to Monero</source>
         <translation>Faire un don à Monero</translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsInfo.qml" line="412"/>
+        <source>Donation to Monero Core Team</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1922,59 +2004,65 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
         <translation>Conservez ces informations en toute sécurité pour récupérer votre portefeuille ultérieurement.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="97"/>
         <source>Rescan wallet balance</source>
         <translation>Rescanner le solde du portefeuille</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="95"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
         <translation>Utilisez cette fonction si vous pensez que le solde affiché n&apos;est pas correct.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="76"/>
-        <location filename="../pages/settings/SettingsWallet.qml" line="102"/>
-        <location filename="../pages/settings/SettingsWallet.qml" line="127"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="103"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="132"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="103"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="105"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="107"/>
         <source>Error: </source>
         <translation>Erreur : </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="108"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="105"/>
+        <source>Rescan spent can only be used with a trusted remote node. If you trust the current node you are connected to (%1), you can mark it as trusted in Settings &gt; Node page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsWallet.qml" line="113"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="109"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="114"/>
         <source>Successfully rescanned spent outputs.</source>
         <translation>Sorties dépensées rescannées avec succès.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="120"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="125"/>
         <source>Change wallet password</source>
         <translation>Changer le mot de passe du portefeuille</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="148"/>
         <source>Receive Monero for your business, easily.</source>
         <translation>Recevez des Monero pour votre entreprise, facilement.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="144"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="149"/>
         <source>Enter merchant mode</source>
         <translation>Entrer en mode commercial</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="119"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="124"/>
         <source>Change the password of your wallet.</source>
         <translation>Changer le mot de passe de votre portefeuille.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="128"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="133"/>
         <source>Wrong password</source>
         <translation>Mot de passe incorrect</translation>
     </message>
@@ -1992,150 +2080,142 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
         <translation>Cette page vous permet d&apos;utiliser la base de données partagée de cercles. Cette base de données sert aux portefeuilles Monero et aux portefeuilles des clones de Monero qui réutilisent les clés Monero.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="116"/>
-        <location filename="../pages/SharedRingDB.qml" line="118"/>
+        <location filename="../pages/SharedRingDB.qml" line="115"/>
         <source>Outputs marked as spent</source>
         <translation>Sorties marquées dépensées</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="116"/>
-        <location filename="../pages/SharedRingDB.qml" line="253"/>
-        <source>Help</source>
-        <translation>Aide</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="119"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation>Afin de masquer quelles entrées d&apos;une transaction monero sont dépensées, un tiers ne doit pas pouvoir dire quelles entrées d&apos;un cercle ont déjà été dépensées. En être capable affaiblirait la protection apportée par les signatures de cercle. Si toutes les entrées sauf une sont des dépenses connues, alors l&apos;entrée en cours de dépense devient visible, annulant ainsi les effets des signatures de cercle, l&apos;un des trois piliers de la protection de la confidentialité utilisés pas Monero.&lt;br&gt;Pour permettre aux transactions d&apos;éviter ces entrées, une liste de celles qui sont connues peut être utilisée afin d&apos;éviter de les employer dans de nouvelles transactions. Une telle liste est maintenue par le projet Monero et est disponible sur le site getmonero.org. Vous pouvez importer cette liste ici.&lt;br&gt;Sinon, vous pouvez scanner la chaîne de blocs (et la chaîne de blocs des clones de Monero réutilisant les clefs) vous-même en utilisant l&apos;outil monero-blockchain-mark-spent-outputs pour créer une liste de sorties dépensées connue.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="140"/>
+        <location filename="../pages/SharedRingDB.qml" line="134"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
         <translation>Cela indique quelles sorties sont des dépenses connues et ne doivent donc pas être utilisées comme substituts de confidentialité dans les signatures de cercle. </translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="141"/>
+        <location filename="../pages/SharedRingDB.qml" line="135"/>
         <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
         <translation>Vous ne devriez avoir qu&apos;à charger un fichier lorsque vous voulez mettre à jour la liste. Des ajouts/suppressions manuels sont possibles si nécessaire.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="153"/>
+        <location filename="../pages/SharedRingDB.qml" line="147"/>
         <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>Choisissez un fichier à partir duquel charger les sorties à marquer dépensées</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="167"/>
+        <location filename="../pages/SharedRingDB.qml" line="161"/>
         <source>Path to file</source>
         <translation>Chemin du fichier</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="169"/>
+        <location filename="../pages/SharedRingDB.qml" line="163"/>
         <source>Filename with outputs to mark as spent</source>
         <translation>Nom du fichier avec les sorties à marquer dépensées</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="180"/>
+        <location filename="../pages/SharedRingDB.qml" line="174"/>
         <source>Browse</source>
         <translation>Naviguer</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="190"/>
+        <location filename="../pages/SharedRingDB.qml" line="184"/>
         <source>Load</source>
         <translation>Charger</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="207"/>
+        <location filename="../pages/SharedRingDB.qml" line="201"/>
         <source>Or manually mark a single output as spent/unspent:</source>
         <translation>Ou marquer dépensée une seule sortie manuellement :</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="209"/>
+        <location filename="../pages/SharedRingDB.qml" line="203"/>
         <source>Paste output amount</source>
         <translation>Coller le montant de la sortie</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="221"/>
+        <location filename="../pages/SharedRingDB.qml" line="215"/>
         <source>Paste output offset</source>
         <translation>Coller le décalage de sortie</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="233"/>
+        <location filename="../pages/SharedRingDB.qml" line="227"/>
         <source>Mark as spent</source>
         <translation>Marquer dépensée(s)</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="241"/>
+        <location filename="../pages/SharedRingDB.qml" line="235"/>
         <source>Mark as unspent</source>
         <translation>Marquer non dépensée(s)</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="253"/>
-        <location filename="../pages/SharedRingDB.qml" line="255"/>
+        <location filename="../pages/SharedRingDB.qml" line="246"/>
         <source>Rings</source>
         <translation>Cercles</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="256"/>
+        <location filename="../pages/SharedRingDB.qml" line="247"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation>Afin de ne pas invalider la protection offerte par les signatures de cercle de Monero, une sortie ne doit pas être dépensée avec des cercles différents sur des chaînes de blocs différentes. Alors que ce n&apos;est normalement pas une problématique, cela peut en devenir une lorqu&apos;un clone de Monero à réutilisation de clefs vous permet de dépensez des sorties existantes. Dans ce cas, vous devez vous assurer que cette sortie existante utilise le même cercle sur les deux chaînes.&lt;br&gt;Cela sera fait automatiquement par Monero et tout logiciel à réutilisation de clef qui ne tenterait pas activement de vous dépouiller de votre confidentialité.&lt;br&gt;Si vous utilisez également un clone de Monero à réutilisation de clefs, et que celui-ci n&apos;implémente pas cette protection, vous pouvez toujours vous assurer que vos transactions sont protégées en dépensant en premier sur le clone, puis en ajoutant manuellement le cercle sur cette page, ce qui vous permet de dépenser vos Monero en toute sécurité.&lt;br&gt;Si vous n&apos;utilisez pas un clone à réutilisation de clefs qui n&apos;implémente pas ces protections, alors vous n&apos;avez rien à faire car tout est automatisé.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="278"/>
+        <location filename="../pages/SharedRingDB.qml" line="266"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation>Enregistrer des cercles utilisés par des sorties dépensées sur une chaîne qui réutilise des clés Monero pour que le même cercle puisse être utilisé pour éviter des problèmes de confidentialité.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="289"/>
+        <location filename="../pages/SharedRingDB.qml" line="277"/>
         <source>Key image</source>
         <translation>Image de clé</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="291"/>
+        <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>Paste key image</source>
         <translation>Coller l&apos;image de clé</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="308"/>
+        <location filename="../pages/SharedRingDB.qml" line="296"/>
         <source>Get ring</source>
         <translation>Obtenir le cercle</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="320"/>
+        <location filename="../pages/SharedRingDB.qml" line="308"/>
         <source>Get Ring</source>
         <translation>Obtenir le cercle</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="326"/>
+        <location filename="../pages/SharedRingDB.qml" line="314"/>
         <source>No ring found</source>
         <translation>Pas de cercle trouvé</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="344"/>
+        <location filename="../pages/SharedRingDB.qml" line="332"/>
         <source>Set ring</source>
         <translation>Sélectionnez le cercle</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="356"/>
+        <location filename="../pages/SharedRingDB.qml" line="344"/>
         <source>Set Ring</source>
         <translation>Sélectionnez le cercle</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="375"/>
+        <location filename="../pages/SharedRingDB.qml" line="363"/>
         <source>I intend to spend on key-reusing fork(s)</source>
         <translation>J&apos;ai l&apos;intention d&apos;utiliser un fork qui réutilise des clés Monero</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="387"/>
+        <location filename="../pages/SharedRingDB.qml" line="375"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>J&apos;ai peut-être l&apos;intention d&apos;utiliser un fork qui réutilise des clés Monero</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="399"/>
+        <location filename="../pages/SharedRingDB.qml" line="387"/>
         <source>Relative</source>
         <translation>Relatif</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="417"/>
+        <location filename="../pages/SharedRingDB.qml" line="405"/>
         <source>Set segregation height:</source>
         <translation>Définir la hauteur de ségrégation :</translation>
     </message>
@@ -2315,13 +2395,13 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="95"/>
-        <location filename="../components/StandardDialog.qml" line="174"/>
+        <location filename="../components/StandardDialog.qml" line="175"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="94"/>
-        <location filename="../components/StandardDialog.qml" line="183"/>
+        <location filename="../components/StandardDialog.qml" line="184"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -2524,140 +2604,144 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
         <translation>Les ID de paiement long-format sont obsolètes.           Les ID de paiement long-format ne sont pas chiffrés sur la chaîne de bloc et nuisent à votre confidentialité.           Si le destinataire exige toujours un ID de paiement long-format, merci de l&apos;en avertir.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="860"/>
+        <location filename="../pages/Transfer.qml" line="859"/>
         <source>Send</source>
         <translation>Envoyer</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="897"/>
+        <location filename="../pages/Transfer.qml" line="896"/>
         <source>Advanced options</source>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="903"/>
+        <location filename="../pages/Transfer.qml" line="928"/>
         <source>Key images</source>
         <translation>Images clef</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="904"/>
+        <location filename="../pages/Transfer.qml" line="903"/>
+        <location filename="../pages/Transfer.qml" line="929"/>
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="910"/>
+        <location filename="../pages/Transfer.qml" line="909"/>
+        <location filename="../pages/Transfer.qml" line="935"/>
         <source>Import</source>
         <translation>Importer</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="921"/>
+        <location filename="../pages/Transfer.qml" line="946"/>
         <source>Required for view-only wallets to display the real balance</source>
         <translation>Nécessaire pour que les portefeuilles en lecture seule affiche le solde réel</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="919"/>
+        <location filename="../pages/Transfer.qml" line="944"/>
         <source>* To import, you must connect to a local node or a trusted remote node</source>
         <translation>* Pour importer, vous devez vous connecter à un nœud local ou à un nœud distant approuvé</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="925"/>
+        <location filename="../pages/Transfer.qml" line="950"/>
         <source>1. Using cold wallet, export the key images into a file</source>
         <translation>1. Avec un portefeuille froid, exporter les images clés dans un fichier</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="926"/>
+        <location filename="../pages/Transfer.qml" line="951"/>
         <source>2. Using view-only wallet, import the key images file</source>
         <translation>2. Avec un portefeuille en lecture seule, importer le fichier d&apos;images clés</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="933"/>
+        <location filename="../pages/Transfer.qml" line="958"/>
         <source>Offline transaction signing</source>
         <translation>Signature de transaction hors-ligne</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="934"/>
+        <location filename="../pages/Transfer.qml" line="959"/>
         <source>Create</source>
         <translation>Créer</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="943"/>
+        <location filename="../pages/Transfer.qml" line="968"/>
         <source>Sign (offline)</source>
         <translation>Signer (hors ligne)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="949"/>
+        <location filename="../pages/Transfer.qml" line="974"/>
         <source>Submit</source>
         <translation>Soumettre</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="960"/>
+        <location filename="../pages/Transfer.qml" line="985"/>
         <source>Spend XMR from a cold (offline) wallet</source>
         <translation>Dépenser des XMR depuis un portefeuille froid (hors-ligne)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="958"/>
+        <location filename="../pages/Transfer.qml" line="983"/>
         <source>* To create a transaction file, please enter address and amount above</source>
         <translation>*Pour créer un fichier de transaction, merci de renseigner l&apos;adresse et le montant ci-dessus</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="964"/>
+        <location filename="../pages/Transfer.qml" line="920"/>
+        <location filename="../pages/Transfer.qml" line="989"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
         <translation>1. Avec un portefeuille en lecture-seule, exporter les sorties dans un fichier</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="965"/>
+        <location filename="../pages/Transfer.qml" line="990"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
         <translation>2. Avec un portefeuille froid, importer le fichier des sorties et exporter les images clés</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="966"/>
+        <location filename="../pages/Transfer.qml" line="991"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
         <translation>3. Avec un portefeuille en lecture seule, importer le fichier d&apos;images clés et créer un fichier de transaction</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="968"/>
+        <location filename="../pages/Transfer.qml" line="993"/>
         <source>4. Using cold wallet, sign your transaction file</source>
         <translation>4. Avec un portefeuille froid, signer votre fichier de transaction</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="969"/>
+        <location filename="../pages/Transfer.qml" line="994"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
         <translation>5. Avec un portefeuille froid, soumettre votre fichier de transaction</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="975"/>
+        <location filename="../pages/Transfer.qml" line="1000"/>
         <source>Unmixable outputs</source>
         <translation>Sorties non mélangeables</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="976"/>
+        <location filename="../pages/Transfer.qml" line="1001"/>
         <source>Sweep</source>
         <translation>Balayer</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="982"/>
+        <location filename="../pages/Transfer.qml" line="1007"/>
         <source>Create a transaction that spends old unmovable outputs</source>
         <translation>Créer une transaction dépensant d&apos;anciennes sorties inamovibles</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1063"/>
+        <location filename="../pages/Transfer.qml" line="1088"/>
         <source>Monero sent successfully</source>
         <translation>Monero envoyé avec succès</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1000"/>
-        <location filename="../pages/Transfer.qml" line="1056"/>
+        <location filename="../pages/Transfer.qml" line="1025"/>
+        <location filename="../pages/Transfer.qml" line="1081"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1062"/>
+        <location filename="../pages/Transfer.qml" line="1087"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="989"/>
-        <location filename="../pages/Transfer.qml" line="1050"/>
-        <location filename="../pages/Transfer.qml" line="1094"/>
+        <location filename="../pages/Transfer.qml" line="1014"/>
+        <location filename="../pages/Transfer.qml" line="1075"/>
+        <location filename="../pages/Transfer.qml" line="1121"/>
+        <location filename="../pages/Transfer.qml" line="1158"/>
         <source>Please choose a file</source>
         <translation>Veuillez sélectionner un fichier</translation>
     </message>
@@ -2732,88 +2816,123 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
         <translation>64 caractères hexadécimaux</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1001"/>
+        <location filename="../pages/Transfer.qml" line="902"/>
+        <source>Outputs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="916"/>
+        <source>Required for cold wallets to sign their corresponding key images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="921"/>
+        <source>2. Using cold wallet, import the outputs file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="1026"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Impossible de charger une transaction non signée : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1008"/>
+        <location filename="../pages/Transfer.qml" line="1033"/>
         <source>
 Number of transactions: </source>
         <translation>
 Quantité de transactions : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1010"/>
+        <location filename="../pages/Transfer.qml" line="1035"/>
         <source>
 Transaction #%1</source>
         <translation>
 Transaction #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1011"/>
+        <location filename="../pages/Transfer.qml" line="1036"/>
         <source>
 Recipient: </source>
         <translation>
 Destinataire : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1012"/>
+        <location filename="../pages/Transfer.qml" line="1037"/>
         <source>
 payment ID: </source>
         <translation>
 identifiant de paiement : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1013"/>
+        <location filename="../pages/Transfer.qml" line="1038"/>
         <source>
 Amount: </source>
         <translation>
 Montant : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1014"/>
+        <location filename="../pages/Transfer.qml" line="1039"/>
         <source>
 Fee: </source>
         <translation>
 Frais : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1015"/>
+        <location filename="../pages/Transfer.qml" line="1040"/>
         <source>
 Ringsize: </source>
         <translation>
 Taille du cercle : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1029"/>
+        <location filename="../pages/Transfer.qml" line="1054"/>
         <source>Confirmation</source>
         <translation>Confirmation</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1057"/>
+        <location filename="../pages/Transfer.qml" line="1082"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Impossible de soumettre la transaction : </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1121"/>
+        <location filename="../pages/Transfer.qml" line="1107"/>
+        <source>Outputs successfully exported to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="1125"/>
+        <source>Outputs successfully imported to wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="1143"/>
+        <source>Key images successfully exported to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="1162"/>
+        <source>Key images successfully imported to wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="1189"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Le portefeuille n&apos;est pas connecté au démon.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1137"/>
+        <location filename="../pages/Transfer.qml" line="1205"/>
         <source>Wallet is connecting to daemon.</source>
         <translation>Le portefeuille se connecte au démon.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1143"/>
+        <location filename="../pages/Transfer.qml" line="1211"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Le démon connecté n&apos;est pas compatible avec la GUI. 
 Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1148"/>
+        <location filename="../pages/Transfer.qml" line="1216"/>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation>En attente de la synchronisation du démon pour terminer.</translation>
     </message>
@@ -3129,65 +3248,75 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
 <context>
     <name>WizardAskPassword</name>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="42"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="43"/>
         <source>Strength: </source>
         <translation>Robustesse : </translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="53"/>
-        <location filename="../wizard/WizardAskPassword.qml" line="72"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="54"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Low</source>
         <translation>Faible</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="74"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="76"/>
         <source>Medium</source>
         <translation>Moyen</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="76"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="79"/>
         <source>High</source>
         <translation>Élevé</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="85"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="89"/>
         <source>Give your wallet a password</source>
         <translation>Attribuez un mot de passe à votre portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="86"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
         <translation>Ce mot de passe ne peut pas être récupéré. Si vous l&apos;oubliez le portefeuille devra être restauré à partir de votre %1.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="86"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>25 word mnemonic seed</source>
         <translation>phrase mnémonique de 25 mots</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="86"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>hardware wallet</source>
         <translation>portefeuille matériel</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="94"/>
         <source>Enter a strong password</source>
         <translation>Entrer un mot de passe fort</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="94"/>
         <source>Using letters, numbers, and/or symbols</source>
         <translation>Utiliser des lettres, des chiffres et/ou des caractères spéciaux</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="148"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="106"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="161"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="171"/>
         <source>Password (confirm)</source>
         <translation>Mot de passe (confirmer)</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardAskPassword.qml" line="200"/>
+        <source>Passwords match!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardAskPassword.qml" line="200"/>
+        <source>Passwords do not match</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3227,101 +3356,131 @@ votre contribution peut être nécessaire.</translation>
 <context>
     <name>WizardCreateDevice1</name>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="51"/>
-        <source>Choose your hardware device</source>
-        <translation>Choisissez votre périphérique physique</translation>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="53"/>
+        <source>Choose your hardware wallet</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="73"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="78"/>
         <source>Create a new wallet</source>
         <translation>Créer un nouveau portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="78"/>
+        <source>stagenet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <source>testnet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="82"/>
         <source>Using a hardware device.</source>
         <translation>En utilisant un périphérique matériel.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="97"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="106"/>
+        <source>Hardware wallet model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="120"/>
         <source>Create a new wallet from device.</source>
         <translation>Créer un nouveau portefeuille à partir du périphérique.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="110"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="133"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
         <translation>Restaurer un portefeuille à partir du périphérique. Utilisez ceci si vous avez déjà utilisé votre portefeuille matériel.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="129"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="181"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>Date de création du portefeuille au format &apos;AAAA-MM-JJ&apos; ou hauteur de restauration</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="132"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="184"/>
         <source>Restore height</source>
         <translation>Hauteur de restauration</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="142"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
         <source>Advanced options</source>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="149"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="202"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Pré-génération de sous-adresses (facultatif)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="159"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="213"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="212"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="273"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Erreur d&apos;écriture du portefeuille à partir du périphérique matériel. Consultez les journaux de l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="176"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="229"/>
         <source>Back to menu</source>
         <translation>Retour au menu</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="177"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="230"/>
         <source>Create wallet</source>
         <translation>Créer un portefeuille</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="230"/>
+        <source>Restore wallet</source>
+        <translation type="unfinished">Restaurer un portefeuille</translation>
     </message>
 </context>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="63"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
         <source>Create a new wallet</source>
         <translation>Créer un nouveau portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="64"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <source>stagenet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="66"/>
+        <source>testnet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
         <source>Creates a new wallet on this computer.</source>
         <translation>Créé un nouveau portefeuille sur cet ordinateur.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="92"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="97"/>
         <source>Mnemonic seed</source>
         <translation>Phrase mnémonique</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="130"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
         <translation>Il est &lt;b&gt;très&lt;/b&gt; important d&apos;&apos;écrire cette phrase mnémonique sur papier et de la garder secrète. C&apos;est tout ce dont vous avez besoin pour sauvegarder et restaurer votre portefeuille.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
         <source>Wallet restore height</source>
         <translation>Hauteur de restauration du portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
         <translation>Si vous devez restaurer votre portefeuille dans le futur, spécifier ce numéro de bloc permettra de récupérer votre portefeuille plus rapidement.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
         <source>Back to menu</source>
         <translation>Retour au menu</translation>
     </message>
@@ -3413,62 +3572,74 @@ votre contribution peut être nécessaire.</translation>
         <translation>Bienvenue dans Monero</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="76"/>
+        <location filename="../wizard/WizardHome.qml" line="78"/>
         <source>Create a new wallet</source>
         <translation>Créer un nouveau portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="77"/>
+        <location filename="../wizard/WizardHome.qml" line="78"/>
+        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <source>stagenet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardHome.qml" line="79"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
+        <source>testnet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardHome.qml" line="82"/>
         <source>Choose this option if this is your first time using Monero.</source>
         <translation>Choisissez cette option si c&apos;est la première fois que vous utilisez Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="97"/>
+        <location filename="../wizard/WizardHome.qml" line="104"/>
         <source>Create a new wallet from hardware</source>
         <translation>Créer un nouveau portefeuille matériel</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="98"/>
+        <location filename="../wizard/WizardHome.qml" line="108"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
         <translation>Branchez votre portefeuille matériel afin de créer un nouveau portefeuille Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="117"/>
+        <location filename="../wizard/WizardHome.qml" line="127"/>
         <source>Open a wallet from file</source>
         <translation>Ouvrir un fichier de portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="118"/>
+        <location filename="../wizard/WizardHome.qml" line="128"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>Importez un fichier de portefeuille .keys existant depuis votre ordinateur.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="137"/>
+        <location filename="../wizard/WizardHome.qml" line="147"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>Restaurer un portefeuille à partir des clés ou de la phrase mnémonique</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="138"/>
+        <location filename="../wizard/WizardHome.qml" line="148"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
         <translation>Entrez vos clés privées ou votre phrase mnémonique de 25 mots pour restaurer votre portefeuille.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="154"/>
+        <location filename="../wizard/WizardHome.qml" line="164"/>
         <source>Change wallet mode</source>
         <translation>Changer le mode du portefeuille</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="169"/>
+        <location filename="../wizard/WizardHome.qml" line="179"/>
         <source>Advanced options</source>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="192"/>
+        <location filename="../wizard/WizardHome.qml" line="202"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="212"/>
+        <location filename="../wizard/WizardHome.qml" line="223"/>
         <source>Number of KDF rounds:</source>
         <translation>Nombre de tours KDF :</translation>
     </message>
@@ -3672,12 +3843,12 @@ votre contribution peut être nécessaire.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="326"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
         <source>Browse filesystem</source>
         <translation>Parcourir le système de fichier</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="325"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="332"/>
         <source>Back to menu</source>
         <translation>Retour au menu</translation>
     </message>
@@ -3763,12 +3934,12 @@ votre contribution peut être nécessaire.</translation>
 <context>
     <name>WizardRestoreWallet3</name>
     <message>
-        <location filename="../wizard/WizardRestoreWallet3.qml" line="67"/>
+        <location filename="../wizard/WizardRestoreWallet3.qml" line="62"/>
         <source>Daemon settings</source>
         <translation>Paramètres du démon</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet3.qml" line="68"/>
+        <location filename="../wizard/WizardRestoreWallet3.qml" line="63"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
@@ -3789,6 +3960,11 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
         <source>New wallet details:</source>
         <translation>Détails du nouveau portefeuille :</translation>
     </message>
+    <message>
+        <location filename="../wizard/WizardRestoreWallet4.qml" line="68"/>
+        <source>Create wallet</source>
+        <translation type="unfinished">Créer un portefeuille</translation>
+    </message>
 </context>
 <context>
     <name>WizardSummary</name>
@@ -3804,8 +3980,8 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
-        <source>Language</source>
-        <translation>Langue</translation>
+        <source>Mnemonic seed language</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
@@ -3874,294 +4050,294 @@ Si vous n&apos;avez pas la possibilité d&apos;exécuter votre propre nœud, vou
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="325"/>
-        <location filename="../main.qml" line="956"/>
-        <location filename="../main.qml" line="1062"/>
-        <location filename="../main.qml" line="1677"/>
+        <location filename="../main.qml" line="322"/>
+        <location filename="../main.qml" line="957"/>
+        <location filename="../main.qml" line="1063"/>
+        <location filename="../main.qml" line="1688"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="326"/>
-        <location filename="../main.qml" line="548"/>
+        <location filename="../main.qml" line="323"/>
+        <location filename="../main.qml" line="545"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Impossible d&apos;ouvrir le portefeuille : </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="722"/>
+        <location filename="../main.qml" line="719"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Attente de l&apos;arrêt du démon...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="751"/>
+        <location filename="../main.qml" line="752"/>
         <source>Daemon failed to start</source>
         <translation>Échec du lancement du démon</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="752"/>
+        <location filename="../main.qml" line="753"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Veuillez vérifier les erreurs dans les journaux du portefeuille et du démon. Vous pouvez aussi essayer de lancer %1 manuellement.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="820"/>
+        <location filename="../main.qml" line="821"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Impossible de créer la transaction : mauvaise version de démon : </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="822"/>
-        <location filename="../main.qml" line="914"/>
+        <location filename="../main.qml" line="823"/>
+        <location filename="../main.qml" line="915"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Impossible de créer la transaction : </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="829"/>
-        <location filename="../main.qml" line="920"/>
+        <location filename="../main.qml" line="830"/>
+        <location filename="../main.qml" line="921"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Aucune sortie non mélangeable à balayer</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="669"/>
+        <location filename="../main.qml" line="666"/>
         <source>Waiting for daemon to sync</source>
         <translation>Attente de la synchronisation du démon</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="298"/>
+        <location filename="../main.qml" line="295"/>
         <source>Closing wallet...</source>
         <translation>Fermeture du portefeuille...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="502"/>
+        <location filename="../main.qml" line="499"/>
         <source>Please confirm transaction on the device...</source>
         <translation>Veuillez confirmer la transaction sur le périphérique.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="504"/>
-        <location filename="../main.qml" line="509"/>
+        <location filename="../main.qml" line="501"/>
+        <location filename="../main.qml" line="506"/>
         <source>Please proceed to the device...</source>
         <translation>Merci de continuer sur le périphérique...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="516"/>
+        <location filename="../main.qml" line="513"/>
         <source>Signing transaction in the device...</source>
         <translation>Signature de la transaction en cours sur le périphérique...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="527"/>
+        <location filename="../main.qml" line="524"/>
         <source>Opening wallet ...</source>
         <translation>Ouverture du portefeuille ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="543"/>
+        <location filename="../main.qml" line="540"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
         <translation>Réparation d&apos;un cache de portefeuille incompatible. Resynchronisation du portefeuille.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="671"/>
+        <location filename="../main.qml" line="668"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Démon synchronisé (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="673"/>
+        <location filename="../main.qml" line="670"/>
         <source>Wallet is synchronized</source>
         <translation>Le portefeuille est synchronisé</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="768"/>
+        <location filename="../main.qml" line="769"/>
         <source>Daemon is synchronized</source>
         <translation>Le démon est synchronisé</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="869"/>
+        <location filename="../main.qml" line="870"/>
         <source>Creating transaction...</source>
         <translation>Création de la transaction...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="948"/>
+        <location filename="../main.qml" line="949"/>
         <source>Sending transaction ...</source>
         <translation>Envoi de la transaction ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="976"/>
+        <location filename="../main.qml" line="977"/>
         <source>Failed to store the wallet</source>
         <translation>Echec du stockage du portefeuille</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1010"/>
+        <location filename="../main.qml" line="1011"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Impossible de générer une preuve pour la raison suivante : 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1038"/>
-        <location filename="../main.qml" line="1057"/>
+        <location filename="../main.qml" line="1039"/>
+        <location filename="../main.qml" line="1058"/>
         <source>Payment proof check</source>
         <translation>Vérification de preuve de paiement</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1041"/>
-        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1042"/>
+        <location filename="../main.qml" line="1060"/>
         <source>Bad signature</source>
         <translation>Mauvaise signature</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1060"/>
         <source>Good signature</source>
         <translation>Signature correcte</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1337"/>
+        <location filename="../main.qml" line="1348"/>
         <source>Desktop entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1338"/>
+        <location filename="../main.qml" line="1349"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
         <translation>Voulez vous créer un raccourci sur le Bureau pour le GUI Monero ?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1340"/>
+        <location filename="../main.qml" line="1351"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1341"/>
+        <location filename="../main.qml" line="1352"/>
         <source>Yes</source>
         <translation type="unfinished">Oui</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1560"/>
-        <location filename="../main.qml" line="2226"/>
+        <location filename="../main.qml" line="1571"/>
+        <location filename="../main.qml" line="2237"/>
         <source>Wrong password</source>
         <translation>Mot de passe incorrect</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1570"/>
+        <location filename="../main.qml" line="1581"/>
         <source>Save transaction file</source>
         <translation>Enregistrer le fichier de transaction.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1570"/>
+        <location filename="../main.qml" line="1581"/>
         <source>Send transaction</source>
         <translation>Envoyer la transaction</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1627"/>
+        <location filename="../main.qml" line="1638"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1630"/>
+        <location filename="../main.qml" line="1641"/>
         <source>Error: Filesystem is read only</source>
         <translation>Erreur : Système de fichiers en lecture seule</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1632"/>
+        <location filename="../main.qml" line="1643"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Attention : Il y a seulement %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1634"/>
+        <location filename="../main.qml" line="1645"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Note : Il y a %1 GB disponibles sur le appareil. La chaîne de blocs a besoin de ~%2 GB.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1636"/>
+        <location filename="../main.qml" line="1647"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Note : dossier lmdb introuvable. Un nouveau répertoire va être créé.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1674"/>
+        <location filename="../main.qml" line="1685"/>
         <source>Password changed successfully</source>
         <translation>Mot de passe modifié avec succès</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1678"/>
+        <location filename="../main.qml" line="1689"/>
         <source>Error: </source>
         <translation>Erreur : </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1766"/>
+        <location filename="../main.qml" line="1777"/>
         <source>Primary account</source>
         <translation>Compte principal</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1957"/>
+        <location filename="../main.qml" line="1968"/>
         <source>Autosaved the wallet</source>
         <translation>Sauvegarde automatique du portefeuille</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1959"/>
+        <location filename="../main.qml" line="1970"/>
         <source>Failed to autosave the wallet</source>
         <translation>Échec de la sauvegarde automatique du portefeuille</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2075"/>
+        <location filename="../main.qml" line="2086"/>
         <source>Local node is running</source>
         <translation>Le nœud local est en cours d&apos;exécution</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2076"/>
+        <location filename="../main.qml" line="2087"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation>Voulez-vous arrêter le nœud local ou le laisser fonctionner en arrière-plan ?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2078"/>
+        <location filename="../main.qml" line="2089"/>
         <source>Force stop</source>
         <translation>Forcer l’arrêt</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2079"/>
+        <location filename="../main.qml" line="2090"/>
         <source>Keep it running</source>
         <translation>Continuer l&apos;exécution</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2099"/>
+        <location filename="../main.qml" line="2110"/>
         <source>Tap again to close...</source>
         <translation>Tapez encore pour fermer...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2114"/>
+        <location filename="../main.qml" line="2125"/>
         <source>Checking local node status...</source>
         <translation>Vérification du statut du nœud local...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1048"/>
+        <location filename="../main.qml" line="1049"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Cette adresse a reçu %1 monero, avec %2 confirmation(s).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="839"/>
+        <location filename="../main.qml" line="840"/>
         <source>Save as file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="839"/>
+        <location filename="../main.qml" line="840"/>
         <source>Confirm</source>
         <translation>Confirmer</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="957"/>
+        <location filename="../main.qml" line="958"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Impossible d&apos;envoyer l&apos;argent : </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1673"/>
+        <location filename="../main.qml" line="1684"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1045"/>
+        <location filename="../main.qml" line="1046"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Cette adresse a reçu %1 monero, mais la transaction n&apos;a pas encore été incluse dans un bloc</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1052"/>
+        <location filename="../main.qml" line="1053"/>
         <source>This address received nothing</source>
         <translation>Cette adresse n&apos;a rien reçu</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1726"/>
+        <location filename="../main.qml" line="1737"/>
         <source>Please wait...</source>
         <translation>Veuillez patienter…</translation>
     </message>

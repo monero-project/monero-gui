@@ -61,4 +61,9 @@ Lojban
         <!-- <language display_name="کورمانجی" locale="kmr_KMR" wallet_language="English" flag="/lang/flags/ku.png" qs="none"/> -->
         <!-- <language display_name="বাংলা" locale="bn_BN" wallet_language="English" flag="/lang/flags/bd.png" qs="none"/> -->
         <!-- <language display_name="Gaeilge" locale="ga_GA" wallet_language="English" flag="/lang/flags/irl.png" qs="none"/> -->
+	<language display_name="Afrikaans" locale="af_AF" wallet_language="English" flag="/lang/flags/za.png" qs="none"/>
+	<language display_name="Ελληνικά" locale="el_GR" wallet_language="English" flag="/lang/flags/el.png" qs="none"/>
+	<language display_name="தமிழ்" locale="ta_IN" wallet_language="English" flag="/lang/flags/in.png" qs="none"/>
+	<language display_name="Tiếng Việt" locale="vi_VN" wallet_language="English" flag="/lang/flags/vi.png" qs="none"/>
+	<language display_name="Íslenska" locale="is_IS" wallet_language="English" flag="/lang/flags/is.png" qs="none"/>
 </languages>
