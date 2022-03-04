@@ -856,8 +856,8 @@ Q_INVOKABLE QString Wallet::getReserveProof(bool all, quint32 account_index, qui
 Q_INVOKABLE QString Wallet::checkReserveProof(const QString &address, const QString &message, const QString &signature) const
 {
     bool good;
-    u_int64_t total;
-    u_int64_t spent;
+    uint64_t total;
+    uint64_t spent;
     bool success = m_walletImpl->checkReserveProof(address.toStdString(), message.toStdString(), signature.toStdString(), good, total, spent);
     std::string result = std::string(success ? "true" : "false") + "|" + std::string(good ? "true" : "false") + "|" + QString::number(total).toStdString() + "|" + QString::number(spent).toStdString();
     return QString::fromStdString(result);
