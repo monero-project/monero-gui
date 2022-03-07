@@ -37,8 +37,8 @@ Lojban
         <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/pt.png" qs="none"/>
         <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/br.png" qs="none"/>
         <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/ru.png" qs="none"/>
-        <language display_name="简体中文 (中国)" locale="zh-cn_CN" wallet_language="简体中文 (中国)" flag="/lang/flags/cn.png" qs="none"/>
-        <language display_name="繁體中文 (台灣)" locale="zh-tw_CN" wallet_language="English" flag="/lang/flags/tw.png" qs="none"/>
+        <language display_name="简体中文（中国）" locale="zh-cn_CN" wallet_language="简体中文（中国）" flag="/lang/flags/cn.png" qs="none"/>
+        <language display_name="繁體中文（中國港澳台地區）" locale="zh-tw_CN" wallet_language="繁體中文（中國港澳台地區）" flag="/lang/flags/cn.png" qs="none"/>
         <language display_name="עברית" locale="he_HE" wallet_language="English" flag="/lang/flags/il.png" qs="none"/>
         <language display_name="한국어" locale="ko_KO" wallet_language="English" flag="/lang/flags/kr.png" qs="none"/>
         <language display_name="Română" locale="ro_RO" wallet_language="English" flag="/lang/flags/ro.png" qs="none"/>
