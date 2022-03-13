@@ -51,6 +51,14 @@ Rectangle {
         spacing: 0
 
         MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.lock
+            description: qsTr("Locks the wallet on demand.") + translationManager.emptyString
+            title: qsTr("Lock this wallet") + translationManager.emptyString
+            symbol: (isMac ? "⌃" : qsTr("Ctrl+")) + "L" + translationManager.emptyString
+            onClicked: appWindow.lock();
+        }
+
+        MoneroComponents.SettingsListItem {
             iconText: FontAwesome.signOutAlt
             description: qsTr("Logs out of this wallet.") + translationManager.emptyString
             title: qsTr("Close this wallet") + translationManager.emptyString

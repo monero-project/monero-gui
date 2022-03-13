@@ -57,6 +57,7 @@ Rectangle {
     signal minimizeClicked
     signal languageClicked
     signal closeWalletClicked
+    signal lockWalletClicked
 
     state: "default"
     states: [
@@ -90,6 +91,46 @@ Rectangle {
         z: parent.z + 2
         spacing: 0
         anchors.fill: parent
+
+        // lock wallet
+        Rectangle {
+            id: btnLockWallet
+            color: "transparent"
+            Layout.preferredWidth: parent.height
+            Layout.preferredHeight: parent.height
+
+            Text {
+                text: FontAwesome.lock
+                font.family: FontAwesome.fontFamilySolid
+                font.pixelSize: 16
+                color: MoneroComponents.Style.defaultFontColor
+                font.styleName: "Solid"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                opacity: 0.75
+            }
+
+            MoneroComponents.Tooltip {
+                id: btnLockWalletTooltip
+                anchors.fill: parent
+                text: qsTr("Lock this wallet") + translationManager.emptyString
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: {
+                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
+                    btnLockWalletTooltip.tooltipPopup.open()
+                }
+                onExited: {
+                    parent.color = "transparent"
+                    btnLockWalletTooltip.tooltipPopup.close()
+                }
+                onClicked: root.lockWalletClicked(leftPanel.visible)
+            }
+        }
 
         // collapse sidebar
         Rectangle {
