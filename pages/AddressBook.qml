@@ -481,8 +481,6 @@ Rectangle {
 
                             informationPopup.onCloseCallback = null
                             informationPopup.open();
-                        } else {
-                            currentWallet.addressBook.setDescription(addressBookListView.currentIndex, descriptionLine.text);
                         }
                         root.showAddressBook()
                     }
