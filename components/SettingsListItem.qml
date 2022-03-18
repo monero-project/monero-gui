@@ -7,6 +7,7 @@ import "../components" as MoneroComponents
 ColumnLayout {
     id: settingsListItem
     property alias iconText: iconLabel.text
+    property alias symbol: symbolText.text
     property alias description: area.text
     property alias title: header.text
     property bool isLast: false
@@ -113,6 +114,18 @@ ColumnLayout {
             onClicked: {
                 settingsListItem.clicked()
             }
+        }
+
+        MoneroComponents.TextPlain {
+            id: symbolText
+            anchors.right: parent.right
+            anchors.rightMargin: 44
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 12
+            font.bold: true
+            color: MoneroComponents.Style.menuButtonTextColor
+            visible: appWindow.ctrlPressed
+            themeTransition: false
         }
     }
 }

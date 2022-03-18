@@ -131,6 +131,17 @@ ApplicationWindow {
         leftPanel.selectItem(page)
     }
 
+    function lock() {
+        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.onAcceptedCallback = function() {
+            if(walletPassword === passwordDialog.password)
+                passwordDialog.close();
+            else 
+                passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
+        }
+        passwordDialog.open(usefulName(persistentSettings.wallet_path));
+    }
+
     function sequencePressed(obj, seq) {
         if(seq === undefined || !leftPanel.enabled)
             return
@@ -139,6 +150,8 @@ ApplicationWindow {
             return
         }
 
+        // lock wallet on demand
+        if(seq === "Ctrl+L" && !passwordDialog.visible) lock()
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
@@ -1923,6 +1936,7 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
+            onLockWalletClicked: appWindow.lock();
             onLanguageClicked: appWindow.toggleLanguageView();
             onCloseWalletClicked: appWindow.showWizard();
             onMaximizeClicked: appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized : Window.Windowed
