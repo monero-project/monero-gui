@@ -468,21 +468,25 @@ Rectangle {
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
                     onClicked: {
-                        console.log("Add")
-                        if (!root.editEntry && !currentWallet.addressBook.addRow(addressLine.text.trim(),"", descriptionLine.text)) {
-                            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                            // TODO: check currentWallet.addressBook.errorString() instead.
-                            if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
-                                 informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
-                            else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
-                                 informationPopup.text  = currentWallet.addressBook.errorString()
-                            else
-                                 informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
+                        if (!root.editEntry) {
+                            if (currentWallet.addressBook.addRow(addressLine.text.trim(),"", descriptionLine.text)) {
+                                console.log("Entry added")
+                            } else {
+                                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                                // TODO: check currentWallet.addressBook.errorString() instead.
+                                if (currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                                    informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                                else if (currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                                    informationPopup.text  = currentWallet.addressBook.errorString()
+                                else
+                                    informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
 
-                            informationPopup.onCloseCallback = null
-                            informationPopup.open();
+                                informationPopup.onCloseCallback = null
+                                informationPopup.open();
+                            }
                         } else {
                             currentWallet.addressBook.setDescription(addressBookListView.currentIndex, descriptionLine.text);
+                            console.log("Description edited")
                         }
                         root.showAddressBook()
                     }
