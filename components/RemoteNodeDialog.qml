@@ -42,6 +42,13 @@ MoneroComponents.Dialog {
 
     onActiveFocusChanged: activeFocus && remoteNodeAddress.forceActiveFocus()
 
+    function onOk() {
+        root.success = true;
+        root.close();
+    }
+
+    function onCancel() { root.close(); }
+
     function add(callbackOnSuccess) {
         root.editMode = false;
         root.callbackOnSuccess = callbackOnSuccess;
@@ -89,6 +96,11 @@ MoneroComponents.Dialog {
 
         daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
         daemonPortLabelText: qsTr("Port") + translationManager.emptyString
+
+        Keys.enabled: root.visible
+        Keys.onEnterPressed: root.onOk()
+        Keys.onReturnPressed: root.onOk()
+        Keys.onEscapePressed: root.onCancel()
     }
 
     RowLayout {
@@ -116,6 +128,11 @@ MoneroComponents.Dialog {
             placeholderFontSize: 15
             labelFontSize: 14
             fontSize: 15
+
+            Keys.enabled: root.visible
+            Keys.onEnterPressed: root.onOk()
+            Keys.onReturnPressed: root.onOk()
+            Keys.onEscapePressed: root.onCancel()
         }
     }
 
