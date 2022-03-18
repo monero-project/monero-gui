@@ -347,10 +347,7 @@ endif()
 list(APPEND EXTRA_LIBRARIES ${CMAKE_DL_LIBS})
 
 if(APPLE)
-  include_directories(SYSTEM /usr/include/malloc)
-  if(POLICY CMP0042)
-    cmake_policy(SET CMP0042 NEW)
-  endif()
+  cmake_policy(SET CMP0042 NEW)
 endif()
 
 if (APPLE AND NOT IOS)
