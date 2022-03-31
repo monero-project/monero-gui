@@ -42,9 +42,17 @@ Rectangle {
         switch (appWindow.daemonStartStopInProgress)
         {
             case 1:
-                return qsTr("Starting the node");
+                if (appWindow.walletMode == 0) {
+                    return qsTr("Starting remote node seeker");
+                } else {
+                    return qsTr("Starting local node");
+                }
             case 2:
-                return qsTr("Stopping the node");
+                if (appWindow.walletMode == 0 && splash.visible || appWindow.walletMode == 1 && !splash.visible) {
+                    return qsTr("Stopping remote node seeker");
+                } else {
+                    return qsTr("Stopping local node");
+                }
             default:
                 break;
         }
@@ -52,14 +60,12 @@ Rectangle {
             case Wallet.ConnectionStatus_Connected:
                 if (!appWindow.daemonSynced)
                     return qsTr("Synchronizing");
-                if (persistentSettings.useRemoteNode)
-                    return qsTr("Remote node");
                 return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
             case Wallet.ConnectionStatus_WrongVersion:
                 return qsTr("Wrong version");
             case Wallet.ConnectionStatus_Disconnected:
-                if (appWindow.walletMode <= 1) {
-                    return qsTr("Searching node") + translationManager.emptyString;
+                if (appWindow.walletMode == 0) {
+                    return qsTr("Starting remote node seeker") + translationManager.emptyString;
                 }
                 return qsTr("Disconnected");
             case Wallet.ConnectionStatus_Connecting:
@@ -77,7 +83,7 @@ Rectangle {
             width: 40
             height: 40
             opacity: {
-                if(item.connected == Wallet.ConnectionStatus_Connected){
+                if(item.connected == Wallet.ConnectionStatus_Connected && appWindow.daemonStartStopInProgress == 0){
                     return 1
                 } else {
                     MoneroComponents.Style.blackTheme ? 0.5 : 0.3
@@ -92,7 +98,7 @@ Rectangle {
                 source: {
                     if(appWindow.isMining) {
                        return "qrc:///images/miningxmr.png"
-                    } else if(item.connected == Wallet.ConnectionStatus_Connected || !MoneroComponents.Style.blackTheme) {
+                    } else if(item.connected == Wallet.ConnectionStatus_Connected && appWindow.daemonStartStopInProgress == 0|| !MoneroComponents.Style.blackTheme) {
                         return "qrc:///images/lightning.png"
                     } else {
                         return "qrc:///images/lightning-white.png"
@@ -128,7 +134,19 @@ Rectangle {
                 font.pixelSize: 13
                 color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
                 opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.75
-                text: qsTr("Network status") + translationManager.emptyString
+                text: {
+                    if (appWindow.walletMode == 0) {
+                        return qsTr("Public remote node") + (persistentSettings.proxyEnabled ? " + " + qsTr("SOCKS5 proxy") : "" ) + translationManager.emptyString;
+                    } else if (appWindow.walletMode == 1) {
+                        return qsTr("Local node") + (persistentSettings.proxyEnabled ? " + " + qsTr("SOCKS5") : "") + " + " + (persistentSettings.proxyEnabled ? qsTr("bootstrap node") : qsTr("public bootstrap node")) + translationManager.emptyString;
+                    } else if (appWindow.walletMode == 2) {
+                        if (persistentSettings.useRemoteNode) {
+                            return (appWindow.isTrustedDaemon() ? qsTr("Trusted remote node") : qsTr("Remote node")) + (persistentSettings.proxyEnabled ? " + " + qsTr("SOCKS5 proxy") : "" ) + translationManager.emptyString;
+                        } else {
+                            return qsTr("Local node") + (persistentSettings.proxyEnabled ? " + " + (persistentSettings.bootstrapNodeAddress == "" ? qsTr("SOCKS5 proxy") : qsTr("SOCKS5")) : "" ) + (persistentSettings.bootstrapNodeAddress != "" ? " + " + qsTr("bootstrap node") : "") + translationManager.emptyString;
+                        }
+                    }
+                }
                 themeTransition: false
             }
 
@@ -136,9 +154,9 @@ Rectangle {
                 id: statusTextVal
                 anchors.left: parent.left
                 anchors.top: parent.top
-                anchors.topMargin: 14
+                anchors.topMargin: 16
                 font.family: MoneroComponents.Style.fontMedium.name
-                font.pixelSize: 20
+                font.pixelSize: 17
                 color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
                 opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.7
@@ -161,19 +179,20 @@ Rectangle {
 
             MoneroComponents.TextPlain {
                 anchors.left: statusTextVal.right
-                anchors.leftMargin: 16
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: 10
+                anchors.verticalCenter: statusTextVal.verticalCenter
                 color: refreshMouseArea.containsMouse ?  MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                 font.family: FontAwesome.fontFamilySolid
-                font.pixelSize: 24
+                font.pixelSize: 18
                 font.styleName: "Solid"
                 opacity: 0.85
                 text: FontAwesome.random
                 themeTransition: false
-                tooltip: qsTr("Switch to another public remote node") + translationManager.emptyString;
+                tooltip: appWindow.walletMode == 0 ? qsTr("Switch to another public remote node") : qsTr("Switch to another bootstrap node") + translationManager.emptyString;
                 visible: (
                     !appWindow.disconnected &&
                     !persistentSettings.useRemoteNode &&
+                    appWindow.daemonStartStopInProgress == 0 &&
                     (persistentSettings.bootstrapNodeAddress == "auto" || persistentSettings.walletMode < 2)
                 )
 
@@ -189,10 +208,10 @@ Rectangle {
                         const callback = function(result) {
                             refreshMouseArea.visible = true;
                             if (result) {
-                                appWindow.showStatusMessage(qsTr("Successfully switched to another public node"), 3);
+                                appWindow.showStatusMessage((appWindow.walletMode == 0 ? qsTr("Successfully switched to another public remote node") : qsTr("Successfully switched to another public bootstrap node")), 3);
                                 appWindow.currentWallet.refreshHeightAsync();
                             } else {
-                                appWindow.showStatusMessage(qsTr("Failed to switch public node"), 3);
+                                appWindow.showStatusMessage((appWindow.walletMode == 0 ? qsTr("Failed to switch public remote node") : qsTr("Failed to switch public bootstrap node")), 3);
                             }
                         };
 
@@ -202,7 +221,7 @@ Rectangle {
                             callback);
 
                         refreshMouseArea.visible = false;
-                        appWindow.showStatusMessage(qsTr("Switching to another public node"), 3);
+                        appWindow.showStatusMessage((appWindow.walletMode == 0 ? qsTr("Switching to another public remote node") : qsTr("Switching to another public boostrap node")), 3);
                     }
                 }
             }
