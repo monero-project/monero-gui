@@ -57,13 +57,13 @@ Rectangle {
 
         MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
-            text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
+            text: qsTr("A local node is required for solo mining.") + translationManager.emptyString
             visible: persistentSettings.useRemoteNode
         }
 
         MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
-            text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
+            text: qsTr("Your local node must be synchronized before you can start mining") + translationManager.emptyString
             visible: !persistentSettings.useRemoteNode && !appWindow.daemonSynced
         }
 
@@ -246,9 +246,9 @@ Rectangle {
                                 update()
                             } else {
                                 errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-                                errorPopup.text = qsTr("Couldn't start mining.<br>") + translationManager.emptyString
+                                errorPopup.text = qsTr("Couldn't start mining.") + "<br>" + translationManager.emptyString
                                 if (persistentSettings.useRemoteNode)
-                                    errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
+                                    errorPopup.text += qsTr("A local node is required for solo mining. To start a local node, go to Settings > Node page.") + "<br>" + translationManager.emptyString
                                 errorPopup.icon = StandardIcon.Critical
                                 errorPopup.open()
                             }
