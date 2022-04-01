@@ -42,6 +42,7 @@ import moneroComponents.WalletManager 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Settings 1.0
+import moneroComponents.P2PoolManager 1.0
 
 import "components"
 import "components" as MoneroComponents
@@ -731,6 +732,7 @@ ApplicationWindow {
         if (splash) {
             appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
         }
+        p2poolManager.exit()
         daemonManager.stopAsync(persistentSettings.nettype, function(result) {
             daemonStartStopInProgress = 0;
             if (splash) {
@@ -1405,6 +1407,8 @@ ApplicationWindow {
         property string account_name
         property string wallet_path
         property bool   allow_background_mining : false
+        property bool   allow_p2pool_mining : false
+        property bool   allowRemoteNodeMining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
@@ -1413,6 +1417,7 @@ ApplicationWindow {
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
+        property string p2poolFlags
         property int logLevel: 0
         property string logCategories: ""
         property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
@@ -2177,7 +2182,7 @@ ApplicationWindow {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
-        
+        p2poolManager.exit();
         closeWallet(Qt.quit);
     }
 
