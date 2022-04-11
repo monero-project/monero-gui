@@ -1123,21 +1123,20 @@ ApplicationWindow {
     // close wallet and show wizard
     function showWizard(){
         walletInitialized = false;
-        closeWallet(function() {
-            wizard.restart();
-            wizard.wizardState = "wizardHome";
-            rootItem.state = "wizard"
-            // reset balance, clear spendable funds message
-            clearMoneroCardLabelText();
-            leftPanel.minutesToUnlock = "";
-            // reset fields
-            middlePanel.addressBookView.clearFields();
-            middlePanel.transferView.clearFields();
-            middlePanel.receiveView.clearFields();
-            middlePanel.historyView.clearFields();
-            // disable timers
-            userInActivityTimer.running = false;
-        });
+        closeWallet();
+        wizard.restart();
+        wizard.wizardState = "wizardHome";
+        rootItem.state = "wizard"
+        // reset balance, clear spendable funds message
+        clearMoneroCardLabelText();
+        leftPanel.minutesToUnlock = "";
+        // reset fields
+        middlePanel.addressBookView.clearFields();
+        middlePanel.transferView.clearFields();
+        middlePanel.receiveView.clearFields();
+        middlePanel.historyView.clearFields();
+        // disable timers
+        userInActivityTimer.running = false;
     }
 
     objectName: "appWindow"
@@ -2125,7 +2124,7 @@ ApplicationWindow {
             onClose();
         }
         confirmationDialog.onRejectedCallback = function() {
-            stopDaemon(onClose);
+            stopDaemon(onClose, true);
         };
         confirmationDialog.open();
     }
@@ -2178,7 +2177,8 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         
-        closeWallet(Qt.quit);
+        closeWallet();
+        Qt.quit();
     }
 
     function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {
