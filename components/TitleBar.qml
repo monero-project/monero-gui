@@ -64,11 +64,13 @@ Rectangle {
         State {
             name: "default";
             PropertyChanges { target: btnCloseWallet; visible: true}
+            PropertyChanges { target: btnLockWallet; visible: true}
             PropertyChanges { target: btnLanguageToggle; visible: true}
         }, State {
             // show only theme switcher and window controls
             name: "essentials";
             PropertyChanges { target: btnCloseWallet; visible: false}
+            PropertyChanges { target: btnLockWallet; visible: false}
             PropertyChanges { target: btnLanguageToggle; visible: false}
         }
     ]
