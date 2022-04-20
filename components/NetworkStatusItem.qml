@@ -52,6 +52,8 @@ Rectangle {
             case Wallet.ConnectionStatus_Connected:
                 if (!appWindow.daemonSynced)
                     return qsTr("Synchronizing");
+                if (persistentSettings.useRemoteNode && persistentSettings.allowRemoteNodeMining && appWindow.isMining)
+                    return qsTr("Remote node") + " + " + qsTr("Mining");
                 if (persistentSettings.useRemoteNode)
                     return qsTr("Remote node");
                 return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");

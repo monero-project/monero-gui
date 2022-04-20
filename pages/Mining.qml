@@ -26,11 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQml.Models 2.2
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
+import moneroComponents.P2PoolManager 1.0
+import moneroComponents.DaemonManager 1.0
 
 Rectangle {
     id: root
@@ -52,13 +55,14 @@ Rectangle {
         MoneroComponents.Label {
             id: soloTitleLabel
             fontSize: 24
-            text: qsTr("Solo mining") + translationManager.emptyString
+            text: qsTr("Mining") + translationManager.emptyString
         }
 
         MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
+            id: localDaemonWarning
             text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
-            visible: persistentSettings.useRemoteNode
+            visible: persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining
         }
 
         MoneroComponents.WarningBox {
@@ -69,7 +73,7 @@ Rectangle {
 
         MoneroComponents.TextPlain {
             id: soloMainLabel
-            text: qsTr("Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.\n\nMining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
+            text: qsTr("Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.\n\nMining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + "\n\n" + qsTr("P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             font.family: MoneroComponents.Style.fontRegular.name
@@ -89,6 +93,43 @@ Rectangle {
             Layout.fillWidth: true
             columnSpacing: 20
             rowSpacing: 16
+
+            ListModel {
+                id: miningModeModel
+
+                ListElement { column1: qsTr("Solo") ; column2: ""; priority: 0}
+                ListElement { column1: "P2Pool" ; column2: ""; priority: 1}
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
+
+                MoneroComponents.Label {
+                    id: miningModeLabel
+                    color: MoneroComponents.Style.defaultFontColor
+                    text: qsTr("Mining mode") + translationManager.emptyString
+                    fontSize: 16
+                }
+            }
+
+            ColumnLayout {
+                Layout.topMargin: 5
+                spacing: 10
+
+                MoneroComponents.StandardDropdown {
+                    Layout.maximumWidth: 200
+                    id: miningModeDropdown
+                    visible: true
+                    currentIndex: 0
+                    dataModel: miningModeModel
+                    onChanged: {
+                        persistentSettings.allow_p2pool_mining = miningModeDropdown.currentIndex === 1;
+                        walletManager.stopMining();
+                        p2poolManager.exit();
+                    }
+                }
+            }
 
             ColumnLayout {
                 Layout.fillWidth: true
@@ -194,6 +235,7 @@ Rectangle {
                 MoneroComponents.Label {
                     id: optionsLabel
                     color: MoneroComponents.Style.defaultFontColor
+                    visible: !persistentSettings.allow_p2pool_mining
                     text: qsTr("Options") + translationManager.emptyString
                     fontSize: 16
                     wrapMode: Text.Wrap
@@ -208,7 +250,8 @@ Rectangle {
                 RowLayout {
                     MoneroComponents.CheckBox {
                         id: backgroundMining
-                        enabled: startSoloMinerButton.enabled
+                        visible: !persistentSettings.allow_p2pool_mining
+                        enabled: startSoloMinerButton.enabled && !persistentSettings.allow_p2pool_mining
                         checked: persistentSettings.allow_background_mining
                         onClicked: persistentSettings.allow_background_mining = checked
                         text: qsTr("Background mining (experimental)") + translationManager.emptyString
@@ -241,16 +284,52 @@ Rectangle {
                         primary: !stopSoloMinerButton.enabled
                         text: qsTr("Start mining") + translationManager.emptyString
                         onClicked: {
-                            var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
-                            if (success) {
-                                update()
-                            } else {
-                                errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-                                errorPopup.text = qsTr("Couldn't start mining.<br>") + translationManager.emptyString
-                                if (persistentSettings.useRemoteNode)
-                                    errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
-                                errorPopup.icon = StandardIcon.Critical
-                                errorPopup.open()
+                            var daemonReady = appWindow.daemonSynced && appWindow.daemonRunning && !persistentSettings.useRemoteNode
+                            if (persistentSettings.allowRemoteNodeMining) {
+                                daemonReady = persistentSettings.useRemoteNode && appWindow.daemonSynced
+                            }
+                            if (daemonReady) {
+                                var success;
+                                if (persistentSettings.allow_p2pool_mining) {
+                                    if (p2poolManager.isInstalled()) {
+                                        if (persistentSettings.allowRemoteNodeMining) {
+                                            startP2Pool()
+                                        }
+                                        else {
+                                            daemonManager.stopAsync(persistentSettings.nettype, startP2PoolLocal)
+                                        }
+                                    }
+                                    else {
+                                        confirmationDialog.title = qsTr("P2Pool installation") + translationManager.emptyString;
+                                        confirmationDialog.text  = qsTr("P2Pool will be installed at %1. Proceed?").arg(applicationDirectory) + translationManager.emptyString;
+                                        confirmationDialog.icon = StandardIcon.Question;
+                                        confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
+                                        confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
+                                        confirmationDialog.onAcceptedCallback = function() {
+                                            p2poolManager.download();
+                                            statusMessageText.text = "Downloading P2Pool...";
+                                            statusMessage.visible = true
+                                            startSoloMinerButton.enabled = false;
+                                            stopSoloMinerButton.enabled = false;
+                                        }
+                                        confirmationDialog.open();
+                                    }
+                                }
+                                else 
+                                {
+                                    success = walletManager.startMining(appWindow.currentWallet.address(0, 0), threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                                    if (success) 
+                                    {
+                                        update()
+                                    } 
+                                    else 
+                                    {
+                                        miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+                                    }
+                                }
+                            }
+                            else {
+                                miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
                             }
                         }
                     }
@@ -263,6 +342,7 @@ Rectangle {
                         text: qsTr("Stop mining") + translationManager.emptyString
                         onClicked: {
                             walletManager.stopMining()
+                            p2poolManager.exit()
                             update()
                         }
                     }
@@ -295,23 +375,161 @@ Rectangle {
                     inputPaddingLeft: 0
                 }
             }
+
+            ListModel {
+                id: chainModel
+
+                ListElement { column1: qsTr("Mini") ; column2: ""; priority: 0}
+                ListElement { column1: qsTr("Main") ; column2: ""; priority: 1}
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
+
+                MoneroComponents.Label {
+                    id: chainLabel
+                    color: MoneroComponents.Style.defaultFontColor
+                    visible: persistentSettings.allow_p2pool_mining
+                    text: qsTr("Chain") + translationManager.emptyString
+                    fontSize: 16
+                }
+
+                MoneroComponents.Tooltip {
+                    id: chainsHelpTooltip
+                    text: qsTr("Use the mini chain if you have a low hashrate.") + translationManager.emptyString
+                }
+
+                MouseArea {
+                    id: chainsTooltipArea
+                    width: parent.width
+                    height: parent.height
+                    enabled: persistentSettings.allow_p2pool_mining
+                    hoverEnabled: true
+                    onEntered: {
+                        chainsHelpTooltip.tooltipPopup.open();
+                    }
+                    onExited: {
+                        chainsHelpTooltip.tooltipPopup.close();
+                    }
+                }
+            }
+
+            ColumnLayout {
+                Layout.topMargin: 5
+                spacing: 10
+
+                MoneroComponents.StandardDropdown {
+                    Layout.maximumWidth: 200
+                    id: chainDropdown
+                    visible: persistentSettings.allow_p2pool_mining
+                    currentIndex: 0
+                    dataModel: chainModel
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
+
+                MoneroComponents.Label {
+                    id: flagsLabel
+                    visible: persistentSettings.allow_p2pool_mining
+                    color: MoneroComponents.Style.defaultFontColor
+                    text: qsTr("Flags") + translationManager.emptyString
+                    fontSize: 16
+                }
+
+                MoneroComponents.Tooltip {
+                    id: flagsHelpTooltip
+                    text: "
+                    Usage:<br>
+                        --wallet             Wallet address to mine to. Subaddresses and integrated addresses are not supported!<br>
+                        --host               IP address of your Monero node, default is 127.0.0.1<br>
+                        --rpc-port           monerod RPC API port number, default is 18081<br>
+                        --zmq-port           monerod ZMQ pub port number, default is 18083 (same port as in monerod\'s \"--zmq-pub\" command line parameter)<br>
+                        --stratum            Comma-separated list of IP:port for stratum server to listen on<br>
+                        --p2p                Comma-separated list of IP:port for p2p server to listen on<br>
+                        --addpeers           Comma-separated list of IP:port of other p2pool nodes to connect to<br>
+                        --light-mode         Don't allocate RandomX dataset, saves 2GB of RAM<br>
+                        --loglevel           Verbosity of the log, integer number between 0 and 6<br>
+                        --config             Name of the p2pool config file<br>
+                        --data-api           Path to the p2pool JSON data (use it in tandem with an external web-server)<br>
+                        --local-api          Enable /local/ path in api path for Stratum Server and built-in miner statistics<br>
+                        --stratum-api        An alias for --local-api<br>
+                        --no-cache           Disable p2pool.cache<br>
+                        --no-color           Disable colors in console output<br>
+                        --no-randomx         Disable internal RandomX hasher: p2pool will use RPC calls to monerod to check PoW hashes<br>
+                        --out-peers N        Maximum number of outgoing connections for p2p server (any value between 10 and 1000)<br>
+                        --in-peers N         Maximum number of incoming connections for p2p server (any value between 10 and 1000)<br>
+                        --start-mining N     Start built-in miner using N threads (any value between 1 and 64)<br>
+                        --help               Show this help message
+                    "
+                }
+
+                MouseArea {
+                    id: flagsTooltipArea
+                    width: parent.width
+                    height: parent.height
+                    enabled: persistentSettings.allow_p2pool_mining
+                    hoverEnabled: true
+                    onEntered: {
+                        flagsHelpTooltip.tooltipPopup.open();
+                    }
+                    onExited: {
+                        flagsHelpTooltip.tooltipPopup.close();
+                    }
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                MoneroComponents.LineEditMulti {
+                    id: p2poolFlags
+                    Layout.minimumWidth: 100
+                    Layout.bottomMargin: 20
+                    labelFontSize: 14
+                    fontSize: 15
+                    visible: persistentSettings.allow_p2pool_mining
+                    wrapMode: Text.WrapAnywhere
+                    labelText: qsTr("P2Pool startup flags") + translationManager.emptyString
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                    placeholderFontSize: 15
+                    text: persistentSettings.p2poolFlags
+                    addressValidation: false
+                    onEditingFinished:  {
+                        persistentSettings.allowRemoteNodeMining = p2poolFlags.text.includes("--host");
+                        persistentSettings.p2poolFlags = p2poolFlags.text;
+                    }
+                }
+            }
         }
     }
 
-    function updateStatusText() {
+    function updateStatusText(p2poolHashrate) {
         if (appWindow.isMining) {
-            var userHashRate = walletManager.miningHashRate();
-            if (userHashRate === 0) {
-                statusText.text = qsTr("Mining temporarily suspended.") + translationManager.emptyString;
+            if (persistentSettings.allow_p2pool_mining) {
+                if (p2poolHashrate === 0) {
+                    statusText.text = qsTr("Starting P2Pool") + translationManager.emptyString;
+                }
+                else {
+                    statusText.text = qsTr("Mining with P2Pool, at %1 H/s").arg(p2poolHashrate) + translationManager.emptyString;
+                }
             }
             else {
-                var blockTime = 120;
-                var blocksPerDay = 86400 / blockTime;
-                var globalHashRate = walletManager.networkDifficulty() / blockTime;
-                var probabilityFindNextBlock = userHashRate / globalHashRate;
-                var probabilityFindBlockDay = 1 - Math.pow(1 - probabilityFindNextBlock, blocksPerDay);
-                var chanceFindBlockDay = Math.round(1 / probabilityFindBlockDay);
-                statusText.text = qsTr("Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.").arg(userHashRate).arg(chanceFindBlockDay) + translationManager.emptyString;
+                var userHashRate = walletManager.miningHashRate();
+                if (userHashRate === 0) {
+                    statusText.text = qsTr("Mining temporarily suspended.") + translationManager.emptyString;
+                }
+                else {
+                    var blockTime = 120;
+                    var blocksPerDay = 86400 / blockTime;
+                    var globalHashRate = walletManager.networkDifficulty() / blockTime;
+                    var probabilityFindNextBlock = userHashRate / globalHashRate;
+                    var probabilityFindBlockDay = 1 - Math.pow(1 - probabilityFindNextBlock, blocksPerDay);
+                    var chanceFindBlockDay = Math.round(1 / probabilityFindBlockDay);
+                    statusText.text = qsTr("Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.").arg(userHashRate).arg(chanceFindBlockDay) + translationManager.emptyString;
+                }  
             }
         }
         else {
@@ -319,16 +537,35 @@ Rectangle {
         }
     }
 
-    function onMiningStatus(isMining) {
-        var daemonReady = !persistentSettings.useRemoteNode && appWindow.daemonSynced
+    function onMiningStatus(isMining, hashrate) {
+        var daemonReady = appWindow.daemonSynced
+        if (!persistentSettings.allowRemoteNodeMining) {
+            var daemonReady = !persistentSettings.useRemoteNode && daemonReady
+        }
         appWindow.isMining = isMining;
-        updateStatusText()
+        updateStatusText(hashrate)
         startSoloMinerButton.enabled = !appWindow.isMining && daemonReady
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady
     }
 
     function update() {
-        walletManager.miningStatusAsync();
+        persistentSettings.allow_p2pool_mining = miningModeDropdown.currentIndex === 1;
+        if (persistentSettings.allow_p2pool_mining) {
+            p2poolManager.getStatus();
+        }
+        else {
+            walletManager.miningStatusAsync();
+        } 
+    }
+
+    function miningError(message) {
+        p2poolManager.exit()
+        errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
+        errorPopup.text = message
+        if (persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining)
+            errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
+        errorPopup.icon = StandardIcon.Critical
+        errorPopup.open()
     }
 
     MoneroComponents.StandardDialog {
@@ -345,14 +582,68 @@ Rectangle {
     function onPageCompleted() {
         console.log("Mining page loaded");
         update()
-        timer.running = !persistentSettings.useRemoteNode
+        timer.running = !persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining
     }
 
     function onPageClosed() {
         timer.running = false
     }
 
+    function startP2PoolLocal() {
+        var noSync = false;
+        var customDaemonArgs = persistentSettings.daemonFlags.toLowerCase();
+        var daemonArgs = "--zmq-pub " + "tcp://127.0.0.1:18083 " + "--disable-dns-checkpoints "
+        if (!customDaemonArgs.includes("--zmq-pub") && !customDaemonArgs.includes("--disable-dns-checkpoints") && !customDaemonArgs.includes("--no-zmq")) {
+            daemonArgs = daemonArgs + customDaemonArgs;
+        }
+        var success = daemonManager.start(daemonArgs, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain)
+        if (success) {
+            startP2Pool()
+        }
+        else {
+            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+        }
+    }
+
+    function startP2Pool() {
+        var address = currentWallet.address(0, 0);
+        var chain = "mini"
+        if (chainDropdown.currentIndex === 1) {
+            chain = "main"
+        }
+        var p2poolArgs = persistentSettings.p2poolFlags;
+        var success = p2poolManager.start(p2poolArgs, address, chain, threads);
+        if (success) 
+        {
+            update()
+        }
+        else {
+            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+        }
+    }
+
+    function p2poolDownloadFailed() {
+        statusMessage.visible = false
+        errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
+        errorPopup.text = "P2Pool installation failed."
+        errorPopup.icon = StandardIcon.Critical
+        errorPopup.open()
+        update()
+    }
+
+    function p2poolDownloadSucceeded() {
+        statusMessage.visible = false
+        informationPopup.title  = qsTr("P2Pool Installation Succeeded") + translationManager.emptyString;
+        informationPopup.text = qsTr("P2Pool has successfully installed.");
+        informationPopup.icon = StandardIcon.Critical
+        informationPopup.open()
+        update()
+    }
+
     Component.onCompleted: {
         walletManager.miningStatus.connect(onMiningStatus);
+        p2poolManager.p2poolStatus.connect(onMiningStatus);
+        p2poolManager.p2poolDownloadFailure.connect(p2poolDownloadFailed);
+        p2poolManager.p2poolDownloadSuccess.connect(p2poolDownloadSucceeded);
     }
 }
