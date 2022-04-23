@@ -1156,13 +1156,10 @@ ApplicationWindow {
     Timer {
         id: fiatPriceTimer
         interval: 1000 * 60;
-        running: persistentSettings.fiatPriceEnabled;
+        running: persistentSettings.fiatPriceEnabled && currentWallet !== undefined
         repeat: true
-        onTriggered: {
-            if(persistentSettings.fiatPriceEnabled)
-                appWindow.fiatApiRefresh();
-        }
-        triggeredOnStart: false
+        onTriggered: appWindow.fiatApiRefresh()
+        triggeredOnStart: true
     }
 
     function fiatApiParseTicker(url, resp, currency){
@@ -1301,14 +1298,6 @@ ApplicationWindow {
         leftPanel.balanceFiatString = bFiat;
     }
 
-    function fiatTimerStart(){
-        fiatPriceTimer.start();
-    }
-
-    function fiatTimerStop(){
-        fiatPriceTimer.stop();
-    }
-
     function fiatApiError(msg){
         console.log("fiatPriceError: " + msg);
     }
@@ -1362,11 +1351,6 @@ ApplicationWindow {
             rootItem.state = "normal"
             logger.resetLogFilePath(persistentSettings.portable);
             openWallet("wizard");
-        }
-
-        if(persistentSettings.fiatPriceEnabled){
-            appWindow.fiatApiRefresh();
-            appWindow.fiatTimerStart();
         }
 
         const desktopEntryEnabled = (typeof builtWithDesktopEntry != "undefined") && builtWithDesktopEntry;
