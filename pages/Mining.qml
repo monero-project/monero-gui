@@ -575,18 +575,10 @@ Rectangle {
 
     Timer {
         id: timer
-        interval: 2000; running: false; repeat: true
+        interval: 2000
+        running: middlePanel.advancedView.state === "Mining" && middlePanel.state === "Advanced" && currentWallet !== undefined && (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining)
+        repeat: true
         onTriggered: update()
-    }
-
-    function onPageCompleted() {
-        console.log("Mining page loaded");
-        update()
-        timer.running = !persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining
-    }
-
-    function onPageClosed() {
-        timer.running = false
     }
 
     function startP2PoolLocal() {
