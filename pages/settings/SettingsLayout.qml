@@ -165,7 +165,6 @@ Rectangle {
                     if (!checked) {
                         console.log("Disabled price conversion");
                         persistentSettings.fiatPriceEnabled = false;
-                        appWindow.fiatTimerStop();
                     }
                 }
             }
@@ -232,8 +231,6 @@ Rectangle {
                 onClicked: {
                     console.log("Enabled price conversion");
                     persistentSettings.fiatPriceEnabled = true;
-                    appWindow.fiatApiRefresh();
-                    appWindow.fiatTimerStart();
                 }
             }
         }
