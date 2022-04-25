@@ -95,7 +95,7 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - uses: satackey/action-docker-layer-caching@v0.0.10
+    - uses: satackey/action-docker-layer-caching@v0.0.11
       if: "!startsWith(github.ref, 'refs/tags/v')"
       continue-on-error: true
       with:
@@ -125,7 +125,7 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - uses: satackey/action-docker-layer-caching@v0.0.10
+    - uses: satackey/action-docker-layer-caching@v0.0.11
       if: "!startsWith(github.ref, 'refs/tags/v')"
       continue-on-error: true
       with:
