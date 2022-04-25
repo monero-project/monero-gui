@@ -53,9 +53,6 @@ private:
         return qMakePair(false, QFuture<T>());
     }
 
-    QFutureWatcher<void> schedule(std::function<void()> function);
-    QFutureWatcher<QJSValueList> schedule(std::function<QJSValueList() noexcept> function, const QJSValue &callback);
-
 private:
     size_t Alive;
     QWaitCondition Condition;
