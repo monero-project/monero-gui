@@ -338,8 +338,9 @@ Rectangle {
                 spacing: 16
 
                 Text {
-                    color: MoneroComponents.Style.defaultFontColor
-                    font.pixelSize: 15
+                    property bool maliciousTxFee: parseFloat(root.transactionFee) > 0.01
+                    color: maliciousTxFee ? "red" : MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: maliciousTxFee ? 20 : 15
                     text: {
                         if (currentWallet) {
                             if (!root.transactionFee) {
@@ -349,7 +350,7 @@ Rectangle {
                                     return qsTr("Calculating fee") + "..." +  translationManager.emptyString;
                                 }
                             } else {
-                                return root.transactionFee + " XMR"
+                                return root.transactionFee + " XMR" + (maliciousTxFee ? " (HIGH FEE)" : "")
                             }
                         } else {
                             return "";
