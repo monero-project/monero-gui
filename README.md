@@ -4,6 +4,7 @@ Copyright (c) 2014-2019, The Monero Project
 
 ## Table of Contents
   * [Development resources](#development-resources)
+  * [website](https://www.getmonero.org/)
   * [Vulnerability response](#vulnerability-response)
   * [Introduction](#introduction)
   * [About this project](#about-this-project)
@@ -25,7 +26,7 @@ Copyright (c) 2014-2019, The Monero Project
 - Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
 - Github: [https://github.com/monero-project/monero-gui](https://github.com/monero-project/monero-gui)
 - IRC: [#monero-gui on Libera](irc://irc.libera.chat/#monero-gui)
-- Translation platform (Weblate): [translate.getmonero.org](https://translate.getmonero.org)
+- Translation platform (Weblate powered): [translate.getmonero.org](https://translate.getmonero.org)
 - UI Design: [Monero-GUI on Figma](https://www.figma.com/file/DplJ2DDQfIKiuRvolHX2hN/Monero-GUI)
 
 ## Vulnerability response
