@@ -1,4 +1,5 @@
-var flagsCustomDecorations = (Qt.FramelessWindowHint | Qt.CustomizeWindowHint | Qt.WindowSystemMenuHint | Qt.Window);
+var flagsCustomDecorationsBase = (Qt.FramelessWindowHint | Qt.CustomizeWindowHint | Qt.WindowSystemMenuHint | Qt.Window);
+var flagsCustomDecorations = isWindows ? (flagsCustomDecorationsBase | Qt.WindowMinimizeButtonHint) : flagsCustomDecorationsBase;
 var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint | Qt.WindowFullscreenButtonHint);
 
 /**
