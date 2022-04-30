@@ -190,9 +190,15 @@ Rectangle {
                     inputDialog.labelText = qsTr("Set a new restore height.\nYou can enter a block height or a date (YYYY-MM-DD):") + translationManager.emptyString;
                     inputDialog.onAcceptedCallback = function() {
                         var _restoreHeight;
-                        if (inputDialog.inputText) {
-                            _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText);
+                        var device = "";
+                        if (currentWallet) {
+                            if (currentWallet.isTrezor()) {
+                                device = "Trezor";
+                            } else if (currentWallet.isLedger()) {
+                                device = "Ledger";
+                            }
                         }
+                        _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText, device);
                         if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {
                                 currentWallet.walletCreationHeight = _restoreHeight
