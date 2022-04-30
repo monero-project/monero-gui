@@ -52,6 +52,7 @@ Rectangle {
         id: deviceNameModel
         ListElement { column1: qsTr("Choose your hardware wallet"); column2: "";}
         ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
+        ListElement { column1: "Ledger Nano S Plus"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
     }
@@ -159,7 +160,20 @@ Rectangle {
 
                          Image {
                              Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                             source: hardwareWalletType == "Trezor" ? "qrc:///images/trezor.png" : hardwareWalletType == "Ledger" ? (ledgerType == "Ledger Nano S" ? "qrc:///images/ledgerNanoS.png" : "qrc:///images/ledgerNanoX.png") : ""
+                             source: {
+                                if (hardwareWalletType == "Trezor") {
+                                    return "qrc:///images/trezor.png";
+                                } else if (hardwareWalletType == "Ledger") {
+                                    if (ledgerType == "Ledger Nano S") {
+                                        return "qrc:///images/ledgerNanoS.png";
+                                    } else if (ledgerType == "Ledger Nano S Plus") {
+                                        return "qrc:///images/ledgerNanoSPlus.png";
+                                    } else if (ledgerType == "Ledger Nano X") {
+                                        return "qrc:///images/ledgerNanoX.png";
+                                    }
+                                }
+                                return "";
+                             }
                              z: parent.z + 1
                              width: parent.width
                              height: 165
