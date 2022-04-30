@@ -82,12 +82,30 @@ Rectangle {
                 subtitle: qsTr("Using a hardware device.") + translationManager.emptyString
             }
 
-            WizardWalletInput{
+            MoneroComponents.StandardDropdown {
+                id: deviceNameDropdown
+                dataModel: deviceNameModel
+                labelText: qsTr("Hardware wallet model") + translationManager.emptyString
+                Layout.preferredWidth: 450
+                Layout.topMargin: 6
+                z: 3
+                onChanged: {
+                    if (deviceNameDropdown.currentIndex == 0) {
+                        walletInput.reset();
+                    } else {
+                        walletInput.reset(deviceNameModel.get(deviceNameDropdown.currentIndex).column1);
+                    }
+                }
+            }
+
+            WizardWalletInput {
                 id: walletInput
+                opacity: deviceNameDropdown.currentIndex != 0 ? 1 : 0
             }
 
             RowLayout {
                 id: mainRow
+                opacity: deviceNameDropdown.currentIndex != 0 ? 1 : 0
                 spacing: 0
                 Layout.topMargin: -10
                 Layout.fillWidth: true
@@ -97,26 +115,8 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
 
-                    MoneroComponents.TextPlain {
-                         font.family: MoneroComponents.Style.fontRegular.name
-                         font.pixelSize: 14
-                         color: MoneroComponents.Style.defaultFontColor
-                         wrapMode: Text.Wrap
-                         Layout.fillWidth: true
-                         text: qsTr("Hardware wallet model")
-                     }
-
-                     MoneroComponents.StandardDropdown {
-                         id: deviceNameDropdown
-                         dataModel: deviceNameModel
-                         Layout.preferredWidth: 450
-                         Layout.topMargin: 6
-                         z: 3
-                     }
-
                      MoneroComponents.RadioButton {
                          id: newDeviceWallet
-                         Layout.topMargin: 20
                          text: qsTr("Create a new wallet from device.") + translationManager.emptyString
                          fontSize: 16
                          checked: true
@@ -138,6 +138,21 @@ Rectangle {
                              newDeviceWallet.checked = false;
                              wizardController.walletOptionsDeviceIsRestore = true;
                          }
+                     }
+
+                     MoneroComponents.LineEdit {
+                         id: restoreHeight
+                         visible: !newDeviceWallet.checked
+                         Layout.fillWidth: true
+                         Layout.topMargin: 25
+                         labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
+                         labelFontSize: 14
+                         placeholderFontSize: 16
+                         placeholderText: qsTr("Restore height") + translationManager.emptyString
+                         validator: RegExpValidator {
+                             regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                         }
+                         text: "0"
                      }
                  }
 
@@ -172,21 +187,8 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
+                opacity: deviceNameDropdown.currentIndex != 0 ? 1 : 0
                 spacing: 20
-
-                MoneroComponents.LineEdit {
-                    id: restoreHeight
-                    visible: !newDeviceWallet.checked
-                    Layout.fillWidth: true
-                    labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
-                    labelFontSize: 14
-                    placeholderFontSize: 16
-                    placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
-                    }
-                    text: "0"
-                }
 
                 CheckBox2 {
                     id: showAdvancedCheckbox

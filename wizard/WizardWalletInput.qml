@@ -54,11 +54,15 @@ GridLayout {
         return false;
     }
 
-    function reset() {
+    function reset(deviceName) {
         walletName.error = !walletName.verify();
         walletLocation.error = !walletLocation.verify();
         walletLocation.text = appWindow.accountsDir;
-        walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
+        if (wizardStateView.state == "wizardCreateDevice1" && !deviceName) {
+            walletName.text = "";
+        } else {
+            walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager, deviceName);
+        }
     }
 
     MoneroComponents.LineEdit {
