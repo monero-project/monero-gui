@@ -185,7 +185,7 @@ Rectangle {
                     validator: RegExpValidator {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
-                    text: "0"
+                    text: "1"
                 }
 
                 CheckBox2 {
@@ -237,7 +237,7 @@ Rectangle {
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
                     if(lookahead.text)
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
-                    if(restoreHeight.text){
+                    if (restoreHeight.text && wizardController.walletOptionsDeviceIsRestore) {
                         wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
                     }
 
@@ -259,7 +259,7 @@ Rectangle {
             newDeviceWallet.checked = true;
             restoreDeviceWallet.checked = false;
             wizardController.walletOptionsDeviceIsRestore = false;
-            restoreHeight.text = "";
+            restoreHeight.text = "1";
             lookahead.text = "";
             errorMsg.text = "";
         }
