@@ -81,7 +81,7 @@ Rectangle {
                 headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
+                        return qsTr("Easy access to sending, receiving and basic functionality. Your wallet permanently connects to a third-party remote node. No blockchain is downloaded to your computer.") + translationManager.emptyString;
                     } else {
                         return "Available on mainnet.";
                     }
@@ -110,7 +110,7 @@ Rectangle {
                 headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
+                        return qsTr("Easy access to sending, receiving and basic functionality. Your wallet starts a local node and downloads a pruned blockchain. While the download is not finished, your wallet temporarily connects to a third-party remote node.") + translationManager.emptyString;
                     } else {
                         return "Available on mainnet.";
                     }
@@ -136,7 +136,7 @@ Rectangle {
 
             WizardMenuItem {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
-                bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
+                bodyText: qsTr("Choose whether your wallet starts a local node (with a full or pruned blockchain) or connects to a custom remote node. Includes extra features like changing fees/transaction priority, solo mining, message verification, transaction proof/check, offline transaction signing, key images importing, changing blockchain location, and daemon log.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
