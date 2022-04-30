@@ -16,7 +16,7 @@ Rectangle {
     color: MoneroComponents.Style.titleBarButtonHoverColor
     radius: 4
     border.color: MoneroComponents.Style.inputBorderColorInActive
-    border.width: 1
+    border.width: root.focus ? 3 : 1
 
     signal linkActivated;
 

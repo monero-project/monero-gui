@@ -38,6 +38,7 @@ Rectangle {
     id: wizardHome
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardHome"
 
     ColumnLayout {
@@ -166,6 +167,7 @@ Rectangle {
                     onClicked: {
                         wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardModeSelection';
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }                    
                 }
             }

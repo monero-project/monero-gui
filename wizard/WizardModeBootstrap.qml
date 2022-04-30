@@ -38,6 +38,7 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardModeBootstrap"
     property bool understood: false
 
@@ -47,6 +48,7 @@ Rectangle {
         width: parent.width - 100
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
+        KeyNavigation.tab: aboutBootStrapModeHeader
 
         spacing: 10
 
@@ -58,8 +60,15 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
+                id: aboutBootStrapModeHeader
                 title: qsTr("About the bootstrap mode") + translationManager.emptyString
                 subtitle: ""
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title
+                Keys.onUpPressed: wizardNav.btnNext.forceActiveFocus();
+                Keys.onBacktabPressed: wizardNav.btnNext.forceActiveFocus();
+                KeyNavigation.down: text1
+                KeyNavigation.tab: text1
             }
 
             ColumnLayout {
@@ -69,6 +78,7 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
+                    id: text1
                     text: qsTr("This mode will use a remote node whilst also syncing the blockchain. This is different from the first menu option (Simple mode), since it will only use the remote node until the blockchain is fully synced locally. It is a reasonable tradeoff for most people who care about privacy but also want the convenience of an automatic fallback option.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
@@ -78,9 +88,16 @@ Rectangle {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: text
+                    KeyNavigation.up: aboutBootStrapModeHeader
+                    KeyNavigation.backtab: aboutBootStrapModeHeader
+                    KeyNavigation.down: text2
+                    KeyNavigation.tab: text2
                 }
 
                 MoneroComponents.TextPlain {
+                    id: text2
                     text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
@@ -89,12 +106,25 @@ Rectangle {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: text
+                    KeyNavigation.up: text1
+                    KeyNavigation.backtab: text1
+                    KeyNavigation.down: warningBox
+                    KeyNavigation.tab: warningBox
                 }
 
                 MoneroComponents.WarningBox{
+                    id: warningBox
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
-                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
+                    text: qsTr("Remain aware of these limitations.") + " <b>" + qsTr("Users who prioritize privacy and decentralization must use a full node instead.") + "</b>" + translationManager.emptyString
+                    Accessible.role: Accessible.AlertMessage
+                    Accessible.name: qsTr("Remain aware of these limitations.") + " " + qsTr("Users who prioritize privacy and decentralization must use a full node instead.") + translationManager.emptyString
+                    KeyNavigation.up: text2
+                    KeyNavigation.backtab: text2
+                    KeyNavigation.down: understoodCheckbox
+                    KeyNavigation.tab: understoodCheckbox
                 }
 
                 MoneroComponents.CheckBox {
@@ -105,20 +135,31 @@ Rectangle {
                     onClicked: {
                         wizardModeBootstrapWarning.understood = !wizardModeBootstrapWarning.understood
                     }
+                    Accessible.role: Accessible.CheckBox
+                    Accessible.name: text
+                    KeyNavigation.up: warningBox
+                    KeyNavigation.backtab: warningBox
+                    KeyNavigation.down: wizardNav.btnPrev
+                    KeyNavigation.tab: wizardNav.btnPrev
                 }
 
                 WizardNav {
+                    id: wizardNav
                     Layout.topMargin: 4
                     btnNext.enabled: wizardModeBootstrapWarning.understood
-                    progressSteps: 0
+                    progressEnabled: false
+                    btnPrevKeyNavigationBackTab: understoodCheckbox
+                    btnNextKeyNavigationTab: aboutBootStrapModeHeader
 
                     onPrevClicked: {
                         wizardController.wizardState = 'wizardModeSelection';
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }
 
                     onNextClicked: {
                         appWindow.changeWalletMode(1);
                         wizardController.wizardState = 'wizardHome';
+                        wizardStateView.wizardHomeView.pageRoot.forceActiveFocus();
                     }
                 }
             }

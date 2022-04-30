@@ -67,6 +67,11 @@ Item {
         checkBox.clicked()
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: checkBox.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
+
     RowLayout {
         id: checkBoxLayout
         layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
@@ -83,6 +88,7 @@ Item {
                 anchors.fill: parent
                 radius: 3
                 color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
+                border.width: checkBox.focus ? 3 : 1
                 border.color:
                     if (checkBox.activeFocus) {
                         return MoneroComponents.Style.inputBorderColorActive;
