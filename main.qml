@@ -70,6 +70,7 @@ ApplicationWindow {
     property string accountsDir: !persistentSettings.portable ? moneroAccountsDir : persistentSettings.portableFolderName + "/wallets"
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
+    property bool offline: currentWallet ? currentWallet.offline : false
     property var transaction;
     property var walletPassword
     property int restoreHeight:0
@@ -321,6 +322,11 @@ ApplicationWindow {
     function connectWallet(wallet) {
         currentWallet = wallet
 
+        if (persistentSettings.useOffline) {
+            console.log("Setting offline mode on")
+            appWindow.currentWallet.offline = true;
+            leftPanel.networkStatus.connected = Wallet.ConnectionStatus_OfflineMode
+        }
         // TODO:
         // When the wallet variable is undefined, it yields a zero balance.
         // This can scare users, restart the GUI (as a quick fix).
@@ -489,7 +495,7 @@ ApplicationWindow {
         }
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
+        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !persistentSettings.useOffline && !walletInitialized && disconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
@@ -621,6 +627,7 @@ ApplicationWindow {
     function connectRemoteNode() {
         console.log("connecting remote node");
 
+        appWindow.currentWallet.offline = false;
         const callback = function() {
             persistentSettings.useRemoteNode = true;
             const remoteNode = remoteNodesModel.currentRemoteNode();
@@ -1412,6 +1419,7 @@ ApplicationWindow {
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
+        property bool useOffline: false
         property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
         property string remoteNodesSerialized: JSON.stringify({
                 selected: 0,

@@ -54,11 +54,13 @@ ColumnLayout {
         Layout.fillWidth: true
         text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
         fontSize: 16
-        checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
+        checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS && !appWindow.persistentSettings.useOffline
         visible: !isAndroid && !isIOS
         onClicked: {
             checked = true;
             remoteNode.checked = false;
+            offlineMode.checked = false
+            appWindow.persistentSettings.useOffline = false
         }
     }
 
@@ -191,10 +193,12 @@ ColumnLayout {
         Layout.topMargin: 8
         text: qsTr("Connect to a remote node") + translationManager.emptyString
         fontSize: 16
-        checked: appWindow.persistentSettings.useRemoteNode
+        checked: appWindow.persistentSettings.useRemoteNode && !appWindow.persistentSettings.useOffline
         onClicked: {
             checked = true
             localNode.checked = false
+            offlineMode.checked = false
+            appWindow.persistentSettings.useOffline = false
         }
     }
 
@@ -202,5 +206,20 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.topMargin: 8
         visible: remoteNode.checked
+    }
+
+    MoneroComponents.RadioButton {
+        id: offlineMode
+        Layout.fillWidth: true
+        Layout.topMargin: 8
+        text: qsTr("Don't connect to any node (offline mode)") + translationManager.emptyString
+        fontSize: 16
+        checked: appWindow.persistentSettings.useOffline
+        onClicked: {
+            checked = true
+            appWindow.persistentSettings.useOffline = true
+            localNode.checked = false
+            remoteNode.checked = false
+        }
     }
 }
