@@ -498,7 +498,11 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("homePath", QDir::homePath());
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
+#ifdef WITH_UPDATER
     engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", parser.isSet(disableCheckUpdatesOption));
+#else
+    engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", true);
+#endif
     engine.rootContext()->setContextProperty("socksProxyFlag", parser.value(socksProxyOption));
     engine.rootContext()->setContextProperty("socksProxyFlagSet", parser.isSet(socksProxyOption));
 
