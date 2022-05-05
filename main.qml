@@ -999,7 +999,7 @@ ApplicationWindow {
 
     // called on "getProof"
     function handleGetProof(txid, address, message, amount) {
-        if (amount.length > 0) {
+        if (amount !== null && amount.length > 0) {
             var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message)
             txProofComputed(null, result)
         } else {
