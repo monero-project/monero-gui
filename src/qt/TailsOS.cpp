@@ -1,4 +1,3 @@
-#include <QRegExp>
 #include <QMessageBox>
 #include <QPixmap>
 #include <QTranslator>

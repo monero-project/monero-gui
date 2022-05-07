@@ -36,7 +36,6 @@
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
-#include <QRegExp>
 #include <QThread>
 
 #include <version.h>
