@@ -206,15 +206,17 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
 void P2PoolManager::exit()
 {
     qDebug("P2PoolManager: exit()");
+    if (started) {
     #ifdef Q_OS_WIN
         QProcess::execute("taskkill",  {"/F", "/IM", "p2pool.exe"});
     #else
         QProcess::execute("pkill", {"p2pool"});
     #endif
-    started = false;
-    QString dirName = QApplication::applicationDirPath() + "/stats/";
-    QDir dir(dirName);
-    dir.removeRecursively();
+        started = false;
+        QString dirName = QApplication::applicationDirPath() + "/stats/";
+        QDir dir(dirName);
+        dir.removeRecursively();
+    }
 }
 
 P2PoolManager::P2PoolManager(QObject *parent)
