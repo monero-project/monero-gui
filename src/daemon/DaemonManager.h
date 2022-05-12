@@ -58,6 +58,7 @@ public:
     Q_INVOKABLE void exit();
     Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
     Q_INVOKABLE bool checkLmdbExists(QString datadir);
+    Q_INVOKABLE QString getArgs();
 
 private:
 
@@ -82,6 +83,7 @@ private:
     QString m_monerod;
     bool m_app_exit = false;
     bool m_noSync = false;
+    QString args = "";
 
     mutable FutureScheduler m_scheduler;
 };

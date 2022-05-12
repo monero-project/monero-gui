@@ -292,6 +292,7 @@ Rectangle {
                                 var success;
                                 if (persistentSettings.allow_p2pool_mining) {
                                     if (p2poolManager.isInstalled()) {
+                                        daemonManager.getArgs() //updates arguments
                                         if (persistentSettings.allowRemoteNodeMining) {
                                             startP2Pool()
                                         }
@@ -583,7 +584,7 @@ Rectangle {
 
     function startP2PoolLocal() {
         var noSync = false;
-        var customDaemonArgs = persistentSettings.daemonFlags.toLowerCase();
+        var customDaemonArgs = daemonManager.getArgs();
         var daemonArgs = "--zmq-pub " + "tcp://127.0.0.1:18083 " + "--disable-dns-checkpoints "
         if (!customDaemonArgs.includes("--zmq-pub") && !customDaemonArgs.includes("--disable-dns-checkpoints") && !customDaemonArgs.includes("--no-zmq")) {
             daemonArgs = daemonArgs + customDaemonArgs;

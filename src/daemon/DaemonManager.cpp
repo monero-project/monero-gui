@@ -337,6 +337,76 @@ bool DaemonManager::checkLmdbExists(QString datadir) {
     return validateDataDir(datadir).value("lmdbExists").value<bool>();
 }
 
+QString DaemonManager::getArgs() {
+    if (!running(NetworkType::MAINNET)) {
+        return args;
+    }
+    QProcess p;
+    QStringList tempArgs;
+    #ifdef Q_OS_WIN
+        //powershell
+        tempArgs << "-Command";
+        tempArgs << "Get-CimInstance";
+        tempArgs << "-Query";
+        tempArgs << "\"SELECT * from Win32_Process WHERE name LIKE \'monerod.exe\'\"";
+        tempArgs << "|";
+        tempArgs << "Select-Object";
+        tempArgs << "-Property";
+        tempArgs << "CommandLine";
+        p.setProgram("powershell");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        QString mArgs = p.readAllStandardOutput().simplified().trimmed();
+        int index = mArgs.indexOf("monerod");
+        mArgs.remove(0, index);
+        if (mArgs.contains("--")) {
+            index = mArgs.indexOf("--");
+            mArgs.remove(0, index);
+        }
+        else {
+            mArgs = "";
+        }
+        args = mArgs;
+
+    #elif defined(Q_OS_UNIX)
+        //pgrep
+        tempArgs << "monerod";
+        p.setProgram("pgrep");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        QString pid = p.readAllStandardOutput().trimmed();
+        if (pid.isEmpty()) {
+            return args;
+        }
+
+        tempArgs.clear();
+
+        //ps
+        tempArgs << "-o";
+        tempArgs << "args=";
+        tempArgs << "-ww";
+        tempArgs << "-fp";
+        tempArgs << pid;
+        p.setProgram("ps");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        QString mArgs = p.readAllStandardOutput().trimmed();
+        if (mArgs.contains("--")) {
+            int index = mArgs.indexOf("--");
+            mArgs.remove(0, index);
+        }
+        else {
+            mArgs = "";
+        }
+        args = mArgs;
+
+    #endif
+    return args;
+}
+
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
     , m_scheduler(this)
