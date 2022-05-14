@@ -1,7 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ARG THREADS=1
 ARG QT_VERSION=v5.15.3-lts-lgpl
+ARG DEBIAN_FRONTEND=noninteractive
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
@@ -10,8 +11,8 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
-    libpng12-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
-    pkg-config python wget xutils-dev
+    libpng12-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
+    libx11-xcb-dev libxext-dev mesa-common-dev pkg-config python wget xutils-dev
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && \
@@ -194,9 +195,9 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.13.2.tar.gz && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
-    rm /usr/lib/x86_64-linux-gnu/libXext.a && \
-    rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
+RUN rm /usr/lib/$(uname -m)-linux-gnu/libX11.a && \
+    rm /usr/lib/$(uname -m)-linux-gnu/libXext.a && \
+    rm /usr/lib/$(uname -m)-linux-gnu/libX11-xcb.a && \
     git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd qt5 && \
     git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
@@ -215,7 +216,7 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
     sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
-    ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
+    ./configure --prefix=/usr -opensource -confirm-license -release -static -no-avx \
     -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
     -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
