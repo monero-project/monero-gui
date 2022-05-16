@@ -138,13 +138,17 @@ Packaging for your favorite distribution would be a welcome contribution!
    docker build --tag monero:build-env-linux --build-arg THREADS=4 --file Dockerfile.linux .
    ```
    \* `4` - number of CPU threads to use
+   
+   For arm64 builds, add `--build-arg UBUNTU_VERSION=18.04` as an argument.
 
 4. Build
    ```
    docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static -j4'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `release-static` - replace with `release-static-linux-armv8` if building for arm64  
    \* `4` - number of CPU threads to use
+   
 5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
 6. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
    ```
