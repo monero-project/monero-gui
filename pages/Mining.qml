@@ -41,6 +41,7 @@ Rectangle {
     property alias miningHeight: mainLayout.height
     property double currentHashRate: 0
     property int threads: idealThreadCount / 2
+    property bool p2poolSelectedWithoutSupport: persistentSettings.allow_p2pool_mining && !builtWithP2Pool
 
     ColumnLayout {
         id: mainLayout
@@ -86,6 +87,11 @@ Rectangle {
             Layout.topMargin: 8
             Layout.bottomMargin: 8
             text: qsTr("Mining may reduce the performance of other running applications and processes.") + translationManager.emptyString
+        }
+
+        MoneroComponents.WarningBox {
+            text: qsTr("Monero GUI is compiled with P2Pool support disabled.") + translationManager.emptyString
+            visible: p2poolSelectedWithoutSupport
         }
 
         GridLayout {
@@ -544,8 +550,8 @@ Rectangle {
         }
         appWindow.isMining = isMining;
         updateStatusText(hashrate)
-        startSoloMinerButton.enabled = !appWindow.isMining && daemonReady
-        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady
+        startSoloMinerButton.enabled = !appWindow.isMining && daemonReady && !p2poolSelectedWithoutSupport
+        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady && !p2poolSelectedWithoutSupport
     }
 
     function update() {
