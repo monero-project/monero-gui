@@ -514,6 +514,12 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #endif
     engine.rootContext()->setContextProperty("builtWithDesktopEntry", builtWithDesktopEntry);
 
+    bool builtWithP2Pool = false;
+#ifdef WITH_P2POOL
+    builtWithP2Pool = true;
+#endif
+    engine.rootContext()->setContextProperty("builtWithP2Pool", builtWithP2Pool);
+
     engine.rootContext()->setContextProperty("moneroVersion", MONERO_VERSION_FULL);
 
     // Load main window (context properties needs to be defined obove this line)
