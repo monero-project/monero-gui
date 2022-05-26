@@ -1,6 +1,6 @@
 # Monero GUI
 
-Copyright (c) 2014-2019, The Monero Project
+Copyright (c) 2014-2022, The Monero Project
 
 ## Table of Contents
   * [Development resources](#development-resources)
@@ -108,7 +108,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.17.3.2`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
