@@ -212,6 +212,9 @@ public:
     Q_INVOKABLE bool exportOutputs(const QString& path, bool all = false);
     Q_INVOKABLE bool importOutputs(const QString& path);
 
+    //! scan transactions
+    Q_INVOKABLE bool scanTransactions(const QVector<QString> &txids);
+
     //! refreshes the wallet
     Q_INVOKABLE bool refresh(bool historyAndSubaddresses = true);
 
