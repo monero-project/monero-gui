@@ -1394,6 +1394,8 @@ ApplicationWindow {
         property bool   allow_p2pool_mining : false
         property bool   allowRemoteNodeMining : false
         property bool   miningIgnoreBattery : true
+        property int    miningModeSelected: 0
+        property int    chainDropdownSelected: 0
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
         property bool   is_trusted_daemon : false  // TODO: drop after v0.17.2.0 release
