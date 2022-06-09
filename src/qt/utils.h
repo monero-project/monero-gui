@@ -30,7 +30,7 @@
 #define UTILS_H
 
 #include <QtCore>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QApplication>
 
 bool fileExists(QString path);
@@ -42,7 +42,7 @@ QString getAccountName();
 QString xdgMime();
 void registerXdgMime();
 #endif
-const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
+const static QRegularExpression reURI = QRegularExpression("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
 QString randomUserAgent();
 
 #endif // UTILS_H
