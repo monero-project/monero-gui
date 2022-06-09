@@ -206,6 +206,13 @@ int main(int argc, char *argv[])
 
     qputenv("QML_DISABLE_DISK_CACHE", "1");
 
+    for (int i = 0; i < argc; i++) {
+        if (QString(argv[i]).contains("platformpluginpath")) {
+            qCritical() << "Setting -platformpluginpath as an argument is disabled"; // CVE-2021-3401
+            return 1;
+        }
+    }
+
     MainApp app(argc, argv);
 
 #if defined(Q_OS_WIN)
