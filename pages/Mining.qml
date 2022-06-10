@@ -617,7 +617,7 @@ Rectangle {
     function p2poolDownloadFailed() {
         statusMessage.visible = false
         errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
-        errorPopup.text = "P2Pool installation failed."
+        errorPopup.text = qsTr("P2Pool installation failed.") + isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : ""
         errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()
