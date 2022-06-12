@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,206 +26,241 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
 
-Rectangle {
+import "../js/TxUtils.js" as TxUtils
 
-    color: "#F0EEEE"
-    property alias addressText : addressLine.text
-    property alias txIdText : txIdLine.text
-    property alias txKeyText : txKeyLine.text
+Rectangle {
+    color: "transparent"
+    property alias txkeyHeight: mainLayout.height
 
     Clipboard { id: clipboard }
-
-    function checkAddress(address, testnet) {
-      return walletManager.addressValid(address, testnet)
-    }
-
-    function check256(str) {
-        if (str.length != 64)
-            return false;
-        for (var i = 0; i < 64; ++i) {
-            if (str[i] >= '0' && str[i] <= '9')
-                continue;
-            if (str[i] >= 'a' && str[i] <= 'z')
-                continue;
-            if (str[i] >= 'A' && str[i] <= 'Z')
-                continue;
-            return false;
-        }
-        return true;
-    }
-
-    function checkTxID(txid) {
-        return check256(txid)
-    }
-
-    function checkTxKey(txid) {
-        return check256(txid)
-    }
 
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 20
+        anchors.topMargin: 0
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-
         spacing: 20
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 12
 
-        RowLayout {
-            ColumnLayout {
+        // solo
+        ColumnLayout {
+            id: soloBox
+            spacing: 20
 
-                Text {
-                    text: qsTr("Verify that a third party made a payment by supplying:") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                }
-                Text {
-                    text: qsTr(" - the recipient address") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                }
-                Text {
-                    text: qsTr(" - the transaction ID") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                }
-                Text {
-                    text: qsTr(" - the secret transaction key supplied by the sender") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                }
-                Text {
-                    text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                    Layout.fillWidth: true;
-                }
-            }
-        }
-
-        RowLayout {
-            id: addressRow
-
-            Label {
-                id: addressLabel
-                fontSize: 14
-                text: qsTr("Address") + translationManager.emptyString
-                width: mainLayout.labelWidth
+            MoneroComponents.Label {
+                id: soloTitleLabel
+                fontSize: 24
+                text: qsTr("Prove Transaction") + " / " + qsTr("Reserve") + translationManager.emptyString
             }
 
-            LineEdit {
-                id: addressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
-                readOnly: false
-                width: mainLayout.editWidth
+            MoneroComponents.TextPlain {
                 Layout.fillWidth: true
-                onTextChanged: cursorPosition = 0
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (addressLine.text.length > 0) {
-                            clipboard.setText(addressLine.text)
-                        }
-                    }
-                }
-            }
-        }
-
-        RowLayout {
-            id: txIdRow
-            Label {
-                id: txIdLabel
-                fontSize: 14
-                text: qsTr("Transaction ID") + translationManager.emptyString
-                width: mainLayout.labelWidth
+                text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
+                           "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + qsTr("\nFor reserve proofs you don't need to specify tx id or address.") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: MoneroComponents.Style.defaultFontColor
             }
 
-
-            LineEdit {
-
-                id: txIdLine
-                fontSize: mainLayout.lineEditFontSize
+            MoneroComponents.LineEdit {
+                id: getProofTxIdLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Transaction ID") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
                 placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
                 readOnly: false
-                width: mainLayout.editWidth
+                copyButton: true
+                enabled: getReserveProofAmtLine.text.length === 0
+            }
+
+            MoneroComponents.LineEdit {
+                id: getProofAddressLine
                 Layout.fillWidth: true
-
-                onTextChanged: cursorPosition = 0
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (txIdLine.text.length > 0) {
-                            clipboard.setText(txIdLine.text)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        RowLayout {
-            id: txKeyRow
-            Label {
-                id: paymentIdLabel
-                fontSize: 14
-                text: qsTr("Transaction key") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-                id: txKeyLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Paste tx key") + translationManager.emptyString;
+                labelFontSize: 14
+                labelText: qsTr("Address") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
                 readOnly: false
+                copyButton: true
+                enabled: getReserveProofAmtLine.text.length === 0
+            }
 
-                width: mainLayout.editWidth
+            MoneroComponents.LineEdit {
+                id: getReserveProofAmtLine
                 Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (TxKeyLine.text.length > 0) {
-                            clipboard.setText(TxKeyLine.text)
+                labelFontSize: 14
+                labelText: qsTr("Amount") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste amount of XMR (reserve proof only)") + translationManager.emptyString
+                readOnly: false
+                copyButton: true
+                enabled: getProofAddressLine.text.length === 0 && getProofTxIdLine.text.length === 0
+                onTextChanged: {
+                    text = text.trim().replace(",", ".");
+                    const match = text.match(/^0+(\d.*)/);
+                    if (match) {
+                        const cursorPosition = cursorPosition;
+                        text = match[1];
+                        cursorPosition = Math.max(cursorPosition, 1) - 1;
+                        } else if(text.indexOf('.') === 0) {
+                            text = '0' + text;
+                            if (text.length > 2) {
+                                cursorPosition = 1;
+                            }
                         }
+                        error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
                     }
+                    validator: RegExpValidator {
+                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                 }
             }
-        }
 
-        StandardButton {
-            id: checkButton
-            anchors.left: parent.left
-            anchors.top: txKeyRow.bottom
-            anchors.topMargin: 17
-            width: 60
-            text: qsTr("CHECK") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            enabled: checkAddress(addressLine.text, appWindow.persistentSettings.testnet) && checkTxID(txIdLine.text) && checkTxKey(txKeyLine.text)
-            onClicked: {
-                console.log("TxKey: Check clicked: address " + addressLine.text + ", txid " << txIdLine.text + ", tx key " + txKeyLine.text);
-                root.checkPaymentClicked(addressLine.text, txIdLine.text, txKeyLine.text)
+            MoneroComponents.LineEdit {
+                id: getProofMessageLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Message") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
+            }
+
+            MoneroComponents.StandardButton {
+                Layout.topMargin: 16
+                small: true
+                text: qsTr("Generate") + translationManager.emptyString
+                enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype)) || getReserveProofAmtLine.text.length != 0 && walletManager.amountFromString(getReserveProofAmtLine.text) < appWindow.getUnlockedBalance() && walletManager.amountFromString(getReserveProofAmtLine.text) > 0
+                onClicked: {
+                    console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
+                    middlePanel.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text, getReserveProofAmtLine.text)
+                }
+            }
+
+            // underline
+            Rectangle {
+                height: 1
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                anchors.bottomMargin: 3
+            }
+
+            MoneroComponents.Label {
+                id: soloTitleLabel2
+                fontSize: 24
+                text: qsTr("Check Transaction") + " / " + qsTr("Reserve") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextPlain {
+                text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
+                           "For the case with Spend Proof, you don't need to specify the recipient address.") + "\n" + qsTr("Transaction is not needed for reserve proof.") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: MoneroComponents.Style.defaultFontColor
+            }
+
+            MoneroComponents.LineEdit {
+                id: checkProofTxIdLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Transaction ID") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
+                readOnly: false
+                copyButton: true
+            }
+
+            MoneroComponents.LineEdit {
+                id: checkProofAddressLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Address") + translationManager.emptyString
+                fontSize: 16
+                placeholderFontSize: 16
+                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
+            }
+
+            MoneroComponents.LineEdit {
+                id: checkProofMessageLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Message") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
+            }
+
+            MoneroComponents.LineEdit {
+                id: checkProofSignatureLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Signature") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Paste tx proof") + " / " + qsTr("reserve proof") + translationManager.emptyString;
+                readOnly: false
+                copyButton: true
+            }
+
+            MoneroComponents.StandardButton {
+                Layout.topMargin: 16
+                small: true
+                text: qsTr("Check") + translationManager.emptyString
+                enabled: (TxUtils.checkTxID(checkProofTxIdLine.text) && TxUtils.checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype)))) || (TxUtils.checkSignature(checkProofSignatureLine.text) && checkProofSignatureLine.text.indexOf("ReserveProofV") === 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype))
+                onClicked: {
+                    console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
+                    middlePanel.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
+                }
+            }
+
+            // underline
+            Rectangle {
+                height: 1
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                anchors.bottomMargin: 3
+            }
+
+            MoneroComponents.TextPlain {
+                text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: MoneroComponents.Style.defaultFontColor
             }
         }
-
     }
 
     function onPageCompleted() {
         console.log("TxKey page loaded");
 
     }
-
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
@@ -39,17 +39,29 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-
+    property int countDown: 10;
     signal rejected()
     signal started();
 
     function open() {
         show()
+        countDown = 10;
+        timer.start();
     }
 
     // TODO: implement without hardcoding sizes
     width: 480
     height: 200
+    color: MoneroComponents.Style.middlePanelBackgroundColor
+
+    // Make window draggable
+    MouseArea {
+        anchors.fill: parent
+        property point lastMousePos: Qt.point(0, 0)
+        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
+        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
+        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
+    }
 
     ColumnLayout {
         id: mainLayout
@@ -61,15 +73,31 @@ Window {
             //anchors {fill: parent; margins: 16 }
             Layout.alignment: Qt.AlignHCenter
 
-            Label {
-                text: qsTr("Daemon doesn't appear to be running")
+            Timer {
+                id: timer
+                interval: 1000;
+                running: false;
+                repeat: true
+                onTriggered: {
+                    countDown--;
+                    if(countDown < 0){
+                        running = false;
+                        // Start daemon
+                        root.close()
+                        appWindow.startDaemon(persistentSettings.daemonFlags);
+                        root.started();
+                    }
+                }
+            }
+
+            MoneroComponents.TextPlain {
+                text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
+                font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
-                Layout.columnSpan: 2
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 24
-                font.family: "Arial"
-                color: "#555555"
+                themeTransition: false
+                color: MoneroComponents.Style.defaultFontColor
             }
 
         }
@@ -81,57 +109,31 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
+                visible:false
                 fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Start daemon")
+                text: qsTr("Start daemon (%1)").arg(countDown) + translationManager.emptyString
                 KeyNavigation.tab: cancelButton
                 onClicked: {
+                    timer.stop();
                     root.close()
-                    appWindow.startDaemon(daemonFlags.text);
+                    appWindow.startDaemon(persistentSettings.daemonFlags);
                     root.started()
                 }
             }
 
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
                 fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Cancel")
+                text: qsTr("Use custom settings") + translationManager.emptyString
 
                 onClicked: {
+                    timer.stop();
                     root.close()
                     root.rejected()
                 }
             }
         }
-        RowLayout {
-            id: advancedRow
-            MoneroComponents.Label {
-                id: daemonFlagsLabel
-                color: "#4A4949"
-                text: qsTr("Daemon startup flags") + translationManager.emptyString
-                fontSize: 16
-            }
-
-            MoneroComponents.LineEdit {
-                id: daemonFlags
-                Layout.preferredWidth:  200
-                Layout.fillWidth: true
-                text: appWindow.persistentSettings.daemonFlags;
-                placeholderText: qsTr("(optional)")
-            }
-
-        }
     }
-
 }
 
 

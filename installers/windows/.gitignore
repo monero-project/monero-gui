@@ -1,0 +1,5 @@
+# The subdirectory with the individual GUI Wallet files
+bin/
+
+# The subdirectory with the generated installer "mysetup.exe"
+Output/

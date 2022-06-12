@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,47 +26,42 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQuick 2.9
+import "../components" as MoneroComponents
+import "../components/effects" as MoneroEffects
 
-import QtQuick 2.0
+MoneroEffects.ImageMask {
+    id: button
+    z: 666
+    color: MoneroComponents.Style.defaultFontColor
+    image: ""
 
-Item {
-    property alias imageSource : buttonImage.source
-
+    property alias tooltip: tooltip.text
     signal clicked(var mouse)
 
-
-    id: button
-    width: parent.height
-    height: parent.height
-    anchors.right: parent.right
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-
-    Image {
-        id: buttonImage
-        source: ""
-        x : (parent.width - width) / 2
-        y : (parent.height - height)  /2
-        z: 100
+    MoneroComponents.Tooltip {
+        id: tooltip
+        anchors.fill: parent
+        tooltipLeft: true
     }
 
     MouseArea {
-        id: buttonArea
         anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
-
-        onPressed: {
-            buttonImage.x = buttonImage.x + 2
-            buttonImage.y = buttonImage.y + 2
-        }
-        onReleased: {
-            buttonImage.x = buttonImage.x - 2
-            buttonImage.y = buttonImage.y - 2
+        onEntered: {
+            tooltip.text ? tooltip.tooltipPopup.open() : ""
+            button.width = button.width + 2
+            button.height = button.height + 2
         }
 
-        onClicked: {
-            parent.clicked(mouse)
+        onExited: {
+            tooltip.text ? tooltip.tooltipPopup.close() : ""
+            button.width = button.width - 2
+            button.height = button.height - 2
         }
+
+        onClicked: button.clicked(mouse)
     }
-
 }

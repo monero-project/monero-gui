@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,30 +26,24 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
-import "../components"
 import moneroComponents.Clipboard 1.0
 import moneroComponents.WalletManager 1.0
+import "../components" as MoneroComponents
 
 Rectangle {
-    id: mainLayout
+    property alias signHeight: mainLayout.height
+    property bool messageMode: true
+    property bool fileMode: false
 
-    property int labelWidth: 120
-    property int editWidth: 400
-    property int lineEditFontSize: 12
-
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
-
-    function checkAddress(address, testnet) {
-      return walletManager.addressValid(address, testnet)
-    }
 
     MessageDialog {
         // dynamically change onclose handler
@@ -92,402 +86,337 @@ Rectangle {
 
     // sign / verify
     ColumnLayout {
-        anchors.margins: 10
+        id: mainLayout
+        Layout.fillWidth: true
+        anchors.margins: 20
+        anchors.topMargin: 0
         anchors.left: parent.left
-        anchors.right: parent.right
         anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.right: parent.right
 
         spacing: 20
 
-        Rectangle {
-            anchors.fill: signBox
-            color: "#00000000"
-            border.width: 2
-            border.color: "#CCCCCC"
-            anchors.margins: -15
+        MoneroComponents.Label {
+            fontSize: 24
+            text: qsTr("Sign/verify") + translationManager.emptyString
         }
 
-        // sign
-        ColumnLayout {
-            id: signBox
-            anchors.margins: 40
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
+        MoneroComponents.TextPlain {
+            text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+            color: MoneroComponents.Style.defaultFontColor
+        }
 
-            RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 16
+        ColumnLayout {
+            id: modeRow
+            Layout.fillWidth: true
+
+            MoneroComponents.TextPlain {
+                id: modeText
+                Layout.fillWidth: true
+                Layout.topMargin: 12
+                text: qsTr("Mode") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 20
+                textFormat: Text.RichText
+                color: MoneroComponents.Style.defaultFontColor
+            }
+
+            ColumnLayout {
+                id: modeButtonsColumn
+                Layout.topMargin: 10
+
+                MoneroComponents.RadioButton {
+                    id: handleMessageButton
+                    text: qsTr("Message") + translationManager.emptyString
+                    fontSize: 16
+                    checked: true
+                    onClicked: {
+                        checked = true;
+                        handleFileButton.checked = false;
+                        messageMode = true;
+                        fileMode = false;
                     }
-                    Label {}
+                }
+
+                MoneroComponents.RadioButton {
+                    id: handleFileButton
+                    text: qsTr("File") + translationManager.emptyString
+                    fontSize: 16
+                    checked: false
+                    onClicked: {
+                        checked = true;
+                        handleMessageButton.checked = false;
+                        fileMode = true;
+                        messageMode = false;
+                    }
+                }
+            }
+        }
+
+        ColumnLayout {
+            id: signSection
+            spacing: 10
+
+            MoneroComponents.LabelSubheader {
+                Layout.fillWidth: true
+                Layout.topMargin: 12
+                Layout.bottomMargin: 24
+                textFormat: Text.RichText
+                text: fileMode ? qsTr("Sign file") + translationManager.emptyString : qsTr("Sign message") + translationManager.emptyString
+            }
+
+            ColumnLayout{
+                id: signMessageRow
+                Layout.fillWidth: true
+                spacing: 10
+                visible: messageMode
+
+                MoneroComponents.LineEditMulti{
+                    id: signMessageLine
+                    Layout.fillWidth: true
+                    labelFontSize: 14
+                    labelText: qsTr("Message") + translationManager.emptyString;
+                    placeholderFontSize: 16
+                    placeholderText: qsTr("Enter a message to sign") + translationManager.emptyString;
+                    readOnly: false
+                    onTextChanged: signSignatureLine.text = ''
+                    wrapMode: Text.WrapAnywhere
                 }
             }
 
-            Label {
-                id: signMessageLabel
-                fontSize: 14
-                text: qsTr("Either message:") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
             RowLayout {
-                id: signMessageRow
-                anchors.topMargin: 17
-                anchors.left: parent.left
-                anchors.right: parent.right
+                id: signFileRow
+                Layout.fillWidth: true
+                visible: fileMode
 
-                LineEdit {
-                    id: signMessageLine
-                    anchors.left: parent.left
-                    anchors.right: signMessageButton.left
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Message to sign") + translationManager.emptyString;
+                MoneroComponents.LineEditMulti {
+                    id: signFileLine
+                    labelFontSize: 14
+                    labelText: qsTr("File") + translationManager.emptyString
+                    placeholderFontSize: 16
+                    placeholderText: qsTr("Enter path to file") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
                     onTextChanged: signSignatureLine.text = ""
+                    wrapMode: Text.WrapAnywhere
+                    text: ''
+                }
 
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (signMessageLine.text.length > 0) {
-                                clipboard.setText(signMessageLine.text)
-                            }
-                        }
+                MoneroComponents.StandardButton {
+                    id: loadFileToSignButton
+                    Layout.alignment: Qt.AlignBottom
+                    small: false
+                    text: qsTr("Browse") + translationManager.emptyString
+                    enabled: true
+                    onClicked: {
+                      signFileDialog.open();
+                    }
+                }
+            }
+
+            ColumnLayout {
+                id: signSignatureRow
+
+                MoneroComponents.LineEditMulti {
+                    id: signSignatureLine
+                    labelFontSize: 14
+                    labelText: qsTr("Signature") + translationManager.emptyString
+                    placeholderFontSize: 16
+                    placeholderText: messageMode ? qsTr("Click [Sign Message] to generate signature") + translationManager.emptyString : qsTr("Click [Sign File] to generate signature") + translationManager.emptyString;
+                    readOnly: true
+                    Layout.fillWidth: true
+                    copyButton: true
+                    wrapMode: Text.WrapAnywhere
+                }
+            }
+
+            RowLayout{
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight
+
+                MoneroComponents.StandardButton {
+                    id: clearSignButton
+                    text: qsTr("Clear") + translationManager.emptyString
+                    enabled: signMessageLine.text !== '' || signFileLine.text !== ''
+                    small: true
+                    onClicked: {
+                        signMessageLine.text = '';
+                        signSignatureLine.text = '';
+                        signFileLine.text = '';
                     }
                 }
 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: signMessageButton
-                    anchors.right: parent.right
-                    width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
+                    visible: messageMode
+                    text: qsTr("Sign Message") + translationManager.emptyString
+                    enabled: signMessageLine.text !== ''
+                    small: true
                     onClicked: {
                       var signature = appWindow.currentWallet.signMessage(signMessageLine.text, false)
                       signSignatureLine.text = signature
                     }
                 }
-            }
 
-            Label {
-                id: signMessageFileLabel
-                fontSize: 14
-                text: qsTr("Or file:") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-            RowLayout {
-                id: signFileRow
-                anchors.topMargin: 17
-                anchors.left: parent.left
-		anchors.right: parent.right
-
-                FileDialog {
-                    id: signFileDialog
-                    title: "Please choose a file to sign"
-                    folder: "file://"
-                    nameFilters: [ "*"]
-
-                    onAccepted: {
-                        signFileLine.text = walletManager.urlToLocalPath(signFileDialog.fileUrl)
-                    }
-                }
-
-                StandardButton {
-                    id: loadFileToSignButton
-                    anchors.rightMargin: 17
-                    width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
-                    onClicked: {
-                      signFileDialog.open()
-                    }
-                }
-                LineEdit {
-                    id: signFileLine
-                    anchors.left: loadFileToSignButton.right
-                    anchors.right: signFileButton.left
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Filename with message to sign") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    onTextChanged: signSignatureLine.text = ""
-
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (signFileLine.text.length > 0) {
-                                clipboard.setText(signFileLine.text)
-                            }
-                        }
-                    }
-                }
-
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: signFileButton
-                    anchors.right: parent.right
-                    width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
+                    visible: fileMode
+                    small: true
+                    Layout.alignment: Qt.AlignBottom
+                    text: qsTr("Sign File") + translationManager.emptyString
+                    enabled: signFileLine.text !== ''
                     onClicked: {
-                      var signature = appWindow.currentWallet.signMessage(signFileLine.text, true)
-                      signSignatureLine.text = signature
-                    }
-                }
-            }
-
-            RowLayout {
-                id: signSignatureRow
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.topMargin: 17
-
-                Label {
-                    id: signSignatureLabel
-                    fontSize: 14
-                    text: qsTr("Signature") + translationManager.emptyString
-                    width: mainLayout.labelWidth
-                }
-
-                LineEdit {
-                    id: signSignatureLine
-                    anchors.left: signSignatureLabel.right
-                    anchors.right: parent.right
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Signature") + translationManager.emptyString;
-                    readOnly: true
-                    Layout.fillWidth: true
-
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (signSignatureLine.text.length > 0) {
-                                clipboard.setText(signSignatureLine.text)
-                            }
-                        }
+                        var signature = appWindow.currentWallet.signMessage(signFileLine.text, true);
+                        signSignatureLine.text = signature;
                     }
                 }
             }
         }
 
-        Rectangle {
-            anchors.fill: verifyBox
-            color: "#00000000"
-            border.width: 2
-            border.color: "#CCCCCC"
-            anchors.margins: -15
-        }
-
-        // verify
         ColumnLayout {
-            id: verifyBox
-            anchors.margins: 40
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: signBox.bottom
+            id: verifySection
+            spacing: 16
 
-            RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 16
-                    }
-                    Label {}
-                }
+            MoneroComponents.LabelSubheader {
+                Layout.fillWidth: true
+                Layout.bottomMargin: 24
+                textFormat: Text.RichText
+                text: fileMode ? qsTr("Verify file") + translationManager.emptyString : qsTr("Verify message") + translationManager.emptyString
             }
 
-            Label {
-                id: verifyMessageLabel
-                fontSize: 14
-                text: qsTr("Either message:") + translationManager.emptyString
-                width: mainLayout.labelWidth
+            MoneroComponents.LineEditMulti {
+                id: verifyMessageLine
+                visible: messageMode
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Message") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Enter the message to verify") + translationManager.emptyString
+                readOnly: false
+                wrapMode: Text.WrapAnywhere
+                text: ''
             }
 
             RowLayout {
-                id: verifyMessageRow
-                anchors.topMargin: 17
-                anchors.left: parent.left
-                anchors.right: parent.right
+                id: verifyFileRow
+                Layout.fillWidth: true
+                visible: fileMode
 
-                LineEdit {
-                    id: verifyMessageLine
-                    anchors.left: parent.left
-                    anchors.right: verifyMessageButton.left
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Message to verify") + translationManager.emptyString;
+                MoneroComponents.LineEditMulti {
+                    id: verifyFileLine
+                    labelFontSize: 14
+                    labelText: qsTr("File") + translationManager.emptyString
+                    placeholderFontSize: 16
+                    placeholderText: qsTr("Enter path to file") + translationManager.emptyString
                     readOnly: false
                     Layout.fillWidth: true
+                    wrapMode: Text.WrapAnywhere
+                    text: ''
+                }
 
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (verifyMessageLine.text.length > 0) {
-                                clipboard.setText(verifyMessageLine.text)
-                            }
-                        }
+                MoneroComponents.StandardButton {
+                    id: loadFileToVerifyButton
+                    Layout.alignment: Qt.AlignBottom
+                    small: false
+                    text: qsTr("Browse") + translationManager.emptyString;
+                    enabled: true
+                    onClicked: {
+                      verifyFileDialog.open()
+                    }
+                }
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: verifyAddressLine
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Address") + translationManager.emptyString
+                addressValidation: true
+                placeholderFontSize: 16
+                placeholderText: qsTr("Enter the Monero Address (example: 44AFFq5kSiGBoZ...)") + translationManager.emptyString
+                wrapMode: Text.WrapAnywhere
+                text: ''
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: verifySignatureLine
+                labelFontSize: 14
+                labelText: qsTr("Signature") + translationManager.emptyString
+                placeholderFontSize: 16
+                placeholderText: qsTr("Enter the signature to verify") + translationManager.emptyString
+                Layout.fillWidth: true
+                wrapMode: Text.WrapAnywhere
+                text: ''
+            }
+
+            RowLayout{
+                Layout.fillWidth: true
+                Layout.topMargin: 12
+                Layout.alignment: Qt.AlignRight
+
+                MoneroComponents.StandardButton {
+                    id: clearVerifyButton
+                    text: qsTr("Clear") + translationManager.emptyString
+                    enabled: verifyMessageLine.text !== '' || verifyFileLine.text !== '' || verifyAddressLine.text !== '' || verifySignatureLine.text  !== ''
+                    small: true
+                    onClicked: {
+                        verifyMessageLine.text = '';
+                        verifySignatureLine.text = '';
+                        verifyAddressLine.text = '';
+                        verifyFileLine.text = '';
                     }
                 }
 
-                StandardButton {
+                MoneroComponents.StandardButton {
+                    id: verifyFileButton
+                    visible: fileMode
+                    small: true
+                    text: qsTr("Verify File") + translationManager.emptyString
+                    enabled: verifyFileLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''
+                    onClicked: {
+                      var verified = appWindow.currentWallet.verifySignedMessage(verifyFileLine.text, verifyAddressLine.text, verifySignatureLine.text, true)
+                      displayVerificationResult(verified)
+                    }
+                }
+
+                MoneroComponents.StandardButton {
                     id: verifyMessageButton
-                    anchors.right: parent.right
-                    width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
+                    visible: messageMode
+                    small: true
+                    text: qsTr("Verify Message") + translationManager.emptyString
+                    enabled: verifyMessageLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''
                     onClicked: {
                       var verified = appWindow.currentWallet.verifySignedMessage(verifyMessageLine.text, verifyAddressLine.text, verifySignatureLine.text, false)
                       displayVerificationResult(verified)
                     }
                 }
             }
+        }
 
-            Label {
-                id: verifyMessageFileLabel
-                fontSize: 14
-                text: qsTr("Or file:") + translationManager.emptyString
-                width: mainLayout.labelWidth
+        FileDialog {
+            id: signFileDialog
+            title: qsTr("Please choose a file to sign") + translationManager.emptyString;
+            folder: "file://"
+            nameFilters: [ "*"]
+
+            onAccepted: {
+                signFileLine.text = walletManager.urlToLocalPath(signFileDialog.fileUrl)
             }
+        }
 
-            RowLayout {
-                id: verifyFileRow
-                anchors.topMargin: 17
-                anchors.left: parent.left
-		anchors.right: parent.right
+        FileDialog {
+            id: verifyFileDialog
+            title: qsTr("Please choose a file to verify") + translationManager.emptyString;
+            folder: "file://"
+            nameFilters: [ "*"]
 
-                FileDialog {
-                    id: verifyFileDialog
-                    title: "Please choose a file to verify"
-                    folder: "file://"
-                    nameFilters: [ "*"]
-
-                    onAccepted: {
-                        verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.fileUrl)
-                    }
-                }
-
-                StandardButton {
-                    id: loadFileToVerifyButton
-                    anchors.rightMargin: 17
-                    width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
-                    onClicked: {
-                      verifyFileDialog.open()
-                    }
-                }
-                LineEdit {
-                    id: verifyFileLine
-                    anchors.left: loadFileToVerifyButton.right
-                    anchors.right: verifyFileButton.left
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Filename with message to verify") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (verifyFileLine.text.length > 0) {
-                                clipboard.setText(verifyFileLine.text)
-                            }
-                        }
-                    }
-                }
-
-                StandardButton {
-                    id: verifyFileButton
-                    anchors.right: parent.right
-                    width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    enabled: true
-                    onClicked: {
-                      var verified = appWindow.currentWallet.verifySignedMessage(verifyFileLine.text, verifyAddressLine.text, verifySignatureLine.text, true)
-                      displayVerificationResult(verified)
-                    }
-                }
-            }
-
-            Label {
-                id: verifyAddressLabel
-                fontSize: 14
-                width: mainLayout.labelWidth
-                textFormat: Text.RichText
-                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                            Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                      + translationManager.emptyString
-
-        onLinkActivated: appWindow.showPageRequest("AddressBook")
-            }
-
-            LineEdit {
-                id: verifyAddressLine
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: verifyAddressLabel.bottom
-                anchors.topMargin: 5
-                placeholderText: "4..."
-                // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
-            }
-
-            RowLayout {
-                id: verifySignatureRow
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.topMargin: 17
-
-                Label {
-                    id: verifySignatureLabel
-                    fontSize: 14
-                    text: qsTr("Signature") + translationManager.emptyString
-                    width: mainLayout.labelWidth
-                }
-
-                LineEdit {
-                    id: verifySignatureLine
-                    anchors.left: verifySignatureLabel.right
-                    anchors.right: parent.right
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Signature") + translationManager.emptyString;
-                    Layout.fillWidth: true
-
-                    IconButton {
-                        imageSource: "../images/copyToClipboard.png"
-                        onClicked: {
-                            if (verifySignatureLine.text.length > 0) {
-                                clipboard.setText(verifySignatureLine.text)
-                            }
-                        }
-                    }
-                }
+            onAccepted: {
+                verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.fileUrl)
             }
         }
     }
@@ -495,5 +424,4 @@ Rectangle {
     function onPageCompleted() {
         console.log("Sign/verify page loaded");
     }
-
 }

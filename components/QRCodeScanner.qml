@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2014-2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtMultimedia 5.4
 import QtQuick.Dialogs 1.2
 import moneroComponents.QRCodeScanner 1.0
@@ -44,7 +44,7 @@ Rectangle {
     color: "black"
     state: "Stopped"
 
-    signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name)
+    signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name, var extra_parameters)
 
     states: [
         State {
@@ -53,6 +53,7 @@ Rectangle {
                 script: {
 		    root.visible = true
                     camera.captureMode = Camera.CaptureStillImage
+                    camera.cameraState = Camera.ActiveState
                     camera.start()
                     finder.enabled = true
                 }
@@ -65,6 +66,7 @@ Rectangle {
                     camera.stop()
 		    root.visible = false
                     finder.enabled = false
+                    camera.cameraState = Camera.UnloadedState
                 }
             }
         }
@@ -74,6 +76,7 @@ Rectangle {
         id: camera
         objectName: "qrCameraQML"
         captureMode: Camera.CaptureStillImage
+        cameraState: Camera.UnloadedState
 
         focus {
             focusMode: Camera.FocusContinuous
@@ -83,9 +86,17 @@ Rectangle {
         id : finder
         objectName: "QrFinder"
         onDecoded : {
-            root.qrcode_decoded(address, payment_id, amount, tx_description, recipient_name)
-            root.state = "Stopped"
-	}
+            const parsed = walletManager.parse_uri_to_object(data);
+            if (!parsed.error) {
+                root.qrcode_decoded(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name, parsed.extra_parameters);
+                root.state = "Stopped";
+            } else if (walletManager.addressValid(data, appWindow.persistentSettings.nettype)) {
+                root.qrcode_decoded(data, "", "", "", "", null);
+                root.state = "Stopped";
+            } else {
+                onNotifyError(parsed.error);
+            }
+        }
         onNotifyError : {
             if( warning )
                 messageDialog.icon = StandardIcon.Critical
@@ -126,9 +137,16 @@ Rectangle {
 
     MessageDialog {
         id: messageDialog
-        title: "Scanning QrCode"
+        title: qsTr("QrCode Scanned")  + translationManager.emptyString
         onAccepted: {
             root.state = "Stopped"
+        }
+    }
+
+    Component.onCompleted: {
+        if( QtMultimedia.availableCameras.length == 0) {
+            console.log("No camera available. Disable qrScannerEnabled");
+            appWindow.qrScannerEnabled = false;
         }
     }
 }

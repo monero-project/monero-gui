@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,57 +26,87 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 
-Window {
-    id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window
-    property alias messageText: messageTitle.text
-    property alias heightProgressText : heightProgress.text
+import "../components" as MoneroComponents
 
-    width: 200
-    height: 100
-    opacity: 0.7
+Rectangle {
+    id: root
+    color: MoneroComponents.Style.blackTheme ? "black" : "white"
+    visible: false
+    radius: 10
+    border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
+    border.width: 1
+    z: 11
+    property alias messageText: messageTitle.text
+
+    width: 100
+    height: 50
+
+    function show() {
+        root.visible = true;
+    }
+
+    function close() {
+        root.visible = false;
+    }
 
     ColumnLayout {
         id: rootLayout
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.centerIn: parent
 
         anchors.leftMargin: 30
         anchors.rightMargin: 30
 
-        BusyIndicator {
-            running: parent.visible
+        spacing: 21
+
+        Item {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.preferredHeight: 80
+
+            Image {
+                id: imgLogo
+                width: 60
+                height: 60
+                anchors.centerIn: parent
+                source: "qrc:///images/monero-vector.svg"
+                mipmap: true
+            }
+
+            BusyIndicator {
+                running: parent.visible
+                anchors.centerIn: imgLogo
+                style: BusyIndicatorStyle {
+                    indicator: Image {
+                        visible: control.running
+                        source: "qrc:///images/busy-indicator.png"
+                        RotationAnimator on rotation {
+                            running: control.running
+                            loops: Animation.Infinite
+                            duration: 1000
+                            from: 0
+                            to: 360
+                        }
+                    }
+                }
+            }
         }
 
-        Text {
+
+        MoneroComponents.TextPlain {
             id: messageTitle
-            text: "Please wait..."
-            font {
-                pointSize: 22
-            }
+            text: qsTr("Please wait...") + translationManager.emptyString
+            font.pixelSize: 24
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             Layout.fillWidth: true
-        }
-
-
-        Text {
-            id: heightProgress
-            font {
-                pointSize: 18
-            }
-            horizontalAlignment: Text.AlignHCenter
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth: true
+            themeTransition: false
+            color: MoneroComponents.Style.defaultFontColor
         }
     }
 }

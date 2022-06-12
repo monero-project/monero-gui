@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -31,9 +31,7 @@
 
 #include <QImage>
 #include <QVideoFrame>
-#ifdef WITH_SCANNER
 #include "QrScanThread.h"
-#endif
 
 class QVideoProbe;
 class QCamera;
@@ -46,28 +44,24 @@ class QrCodeScanner : public QObject
 
 public:
     QrCodeScanner(QObject *parent = Q_NULLPTR);
-
+    ~QrCodeScanner();
     void setSource(QCamera*);
 
     bool enabled() const;
     void setEnabled(bool enabled);
 
 public Q_SLOTS:
-    void processCode(int type, const QString &data);
     void processFrame(QVideoFrame);
 
 Q_SIGNALS:
     void enabledChanged();
 
-    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name);
-    void decode(int type, const QString &data);
+    void decoded(const QString &data);
     void notifyError(const QString &error, bool warning = false);
 
 protected:
-#ifdef WITH_SCANNER
     void timerEvent(QTimerEvent *);
     QrScanThread *m_thread;
-#endif
     int m_processTimerId;
     int m_processInterval;
     int m_enabled;

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,63 +26,109 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
+import QtQuick.Layouts 1.1
+import FontAwesome 1.0
+
+import "." as MoneroComponents
+import "effects/" as MoneroEffects
 
 Item {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon
+    property string checkedIcon: "qrc:///images/check-white.svg"
     property string uncheckedIcon
+    property bool fontAwesomeIcons: false
+    property int imgWidth: 13
+    property int imgHeight: 13
+    property bool toggleOnClick: true
     property bool checked: false
     property alias background: backgroundRect.color
+    property bool border: true
     property int fontSize: 14
     property alias fontColor: label.color
+    property bool iconOnTheLeft: true
+    property alias tooltipIconVisible: label.tooltipIconVisible
+    property alias tooltip: label.tooltip
     signal clicked()
+
     height: 25
-    width: label.x + label.width
-    clip: true
+    width: checkBoxLayout.width
+    opacity: enabled ? 1 : 0.7
 
-    Rectangle {
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 0
-        color: "#DBDBDB"
-    }
+    Keys.onEnterPressed: toggle()
+    Keys.onReturnPressed: Keys.onEnterPressed(event)
+    Keys.onSpacePressed: Keys.onEnterPressed(event)
 
-    Rectangle {
-        id: backgroundRect
-        anchors.left: parent.left
-        height: parent.height - 1
-        width: 25
-        //radius: 4
-        y: 1
-        color: "#FFFFFF"
-
-        Image {
-            anchors.centerIn: parent
-            source: checkBox.checked ? checkBox.checkedIcon :
-                                       checkBox.uncheckedIcon
+    function toggle(){
+        if (checkBox.toggleOnClick) {
+            checkBox.checked = !checkBox.checked
         }
+        checkBox.clicked()
     }
 
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 25 + 12
-        font.family: "Arial"
-        font.pixelSize: checkBox.fontSize
-        font.letterSpacing: -1
-        color: "#525252"
+    RowLayout {
+        id: checkBoxLayout
+        layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
+        spacing: 10
+
+        Item {
+            id: checkMark
+            height: checkBox.height
+            width: checkBox.height
+
+            Rectangle {
+                id: backgroundRect
+                visible: checkBox.border
+                anchors.fill: parent
+                radius: 3
+                color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
+                border.color:
+                    if (checkBox.activeFocus) {
+                        return MoneroComponents.Style.inputBorderColorActive;
+                    } else {
+                        return MoneroComponents.Style.inputBorderColorInActive;
+                    }
+            }
+
+            MoneroEffects.ImageMask {
+                id: img
+                visible: checkBox.checked || checkBox.uncheckedIcon != ""
+                anchors.centerIn: parent
+                width: checkBox.imgWidth
+                height: checkBox.imgHeight
+                color: MoneroComponents.Style.defaultFontColor
+                fontAwesomeFallbackIcon: checkBox.fontAwesomeIcons ? getIcon() : FontAwesome.plus
+                fontAwesomeFallbackSize: 14
+                image: checkBox.fontAwesomeIcons ? "" : getIcon()
+
+                function getIcon() {
+                    if (checkBox.checked || checkBox.uncheckedIcon == "")
+                        return checkBox.checkedIcon;
+                    return checkBox.uncheckedIcon;
+                }
+            }
+        }
+
+        MoneroComponents.TextPlain {
+            id: label
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: checkBox.fontSize
+            color: MoneroComponents.Style.defaultFontColor
+            textFormat: Text.RichText
+            wrapMode: Text.NoWrap
+            visible: text != ""
+        }
     }
 
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onEntered: !label.tooltipIconVisible && label.tooltip ? label.tooltipPopup.open() : ""
+        onExited:  !label.tooltipIconVisible && label.tooltip ? label.tooltipPopup.close() : ""
         onClicked: {
-            checkBox.checked = !checkBox.checked
-            checkBox.clicked()
+            toggle()
         }
     }
 }

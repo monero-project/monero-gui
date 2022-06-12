@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -28,40 +28,67 @@
 
 
 import QtQml 2.0
-import QtQuick 2.2
+import QtQuick 2.9
+import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 
 import "./pages"
+import "./pages/settings"
+import "./pages/merchant"
+import "./components" as MoneroComponents
+import "./components/effects/" as MoneroEffects
 
 Rectangle {
     id: root
 
     property Item currentView
     property Item previousView
-    property bool basicMode : false
-    property string balanceLabelText: qsTr("Balance")
-    property string balanceText
-    property string unlockedBalanceText
+    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800
+    property alias contentHeight: mainFlickable.contentHeight
+    property alias flickable: mainFlickable
 
-    property Transfer transferView: Transfer { }
+    property Transfer transferView: Transfer {
+        onPaymentClicked: root.paymentClicked(recipients, paymentId, mixinCount, priority, description)
+        onSweepUnmixableClicked: root.sweepUnmixableClicked()
+    }
     property Receive receiveView: Receive { }
-    property TxKey txkeyView: TxKey { }
+    property Merchant merchantView: Merchant { }
     property History historyView: History { }
-    property Sign signView: Sign { }
+    property Advanced advancedView: Advanced { }
     property Settings settingsView: Settings { }
-    property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
+    property Keys keysView: Keys { }
+    property Account accountView: Account { }
 
-
-    signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
+    signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
-    signal checkPaymentClicked(string address, string txid, string txkey);
+    signal getProofClicked(string txid, string address, string message, string amount);
+    signal checkProofClicked(string txid, string address, string message, string signature);
 
-    color: "#F0EEEE"
+    Rectangle {
+        // grey background on merchantView
+        visible: currentView === merchantView
+        color: MoneroComponents.Style.moneroGrey
+        anchors.fill: parent
+    }
+
+    MoneroEffects.GradientBackground {
+        visible: currentView !== merchantView
+        anchors.fill: parent
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
+    }
 
     onCurrentViewChanged: {
         if (previousView) {
@@ -72,7 +99,6 @@ Rectangle {
         previousView = currentView
         if (currentView) {
             stackView.replace(currentView)
-
             // Component.onCompleted is called before wallet is initilized
             if (typeof currentView.onPageCompleted === "function") {
                 currentView.onPageCompleted();
@@ -90,258 +116,142 @@ Rectangle {
         transferView.sendTo(address, paymentId, description);
     }
 
-
-    //   XXX: just for memo, to be removed
-    //    states: [
-    //        State {
-    //            name: "Dashboard"
-    //            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-    //        }, State {
-    //            name: "History"
-    //            PropertyChanges { target: loader; source: "pages/History.qml" }
-    //        }, State {
-    //            name: "Transfer"
-    //            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-    //        }, State {
-    //           name: "Receive"
-    //           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-    //        }, State {
-    //            name: "AddressBook"
-    //            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-    //        }, State {
-    //            name: "Settings"
-    //            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-    //        }, State {
-    //            name: "Mining"
-    //            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-    //        }
-    //    ]
+    // open Transactions page with search term in search field
+    function searchInHistory(searchTerm){
+        root.state = "History";
+        historyView.searchInHistory(searchTerm);
+    }
 
         states: [
             State {
-                name: "Dashboard"
-                PropertyChanges {  }
-            }, State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
-                PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 80}
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
+                PropertyChanges { target: mainFlickable; contentHeight: transferView.transferHeight1 + transferView.transferHeight2 + 80 }
             }, State {
-               name: "Receive"
-               PropertyChanges { target: root; currentView: receiveView }
+                name: "Receive"
+                PropertyChanges { target: root; currentView: receiveView }
+                PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 80 }
             }, State {
-               name: "TxKey"
-               PropertyChanges { target: root; currentView: txkeyView }
+                name: "Merchant"
+                PropertyChanges { target: root; currentView: merchantView }
+                PropertyChanges { target: mainFlickable; contentHeight: merchantView.merchantHeight + 80 }
             }, State {
                 name: "AddressBook"
-                PropertyChanges {  target: root; currentView: addressBookView  }
+                PropertyChanges { target: root; currentView: addressBookView }
+                PropertyChanges { target: mainFlickable; contentHeight: addressBookView.addressbookHeight + 80 }
             }, State {
-                name: "Sign"
-               PropertyChanges { target: root; currentView: signView }
+                name: "Advanced"
+                PropertyChanges { target: root; currentView: advancedView }
+                PropertyChanges { target: mainFlickable; contentHeight: advancedView.panelHeight }
             }, State {
                 name: "Settings"
-               PropertyChanges { target: root; currentView: settingsView }
+                PropertyChanges { target: root; currentView: settingsView }
+                PropertyChanges { target: mainFlickable; contentHeight: settingsView.settingsHeight }
             }, State {
-                name: "Mining"
-                PropertyChanges { target: root; currentView: miningView }
+                name: "Keys"
+                PropertyChanges { target: root; currentView: keysView }
+                PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight + 80}
+            }, State {
+                name: "Account"
+                PropertyChanges { target: root; currentView: accountView }
+                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }
             }
         ]
 
-    // color stripe at the top
-    Row {
-        id: styledRow
-        height: 4
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-
-        Rectangle { height: 4; width: parent.width / 5; color: "#FFE00A" }
-        Rectangle { height: 4; width: parent.width / 5; color: "#6B0072" }
-        Rectangle { height: 4; width: parent.width / 5; color: "#FF6C3C" }
-        Rectangle { height: 4; width: parent.width / 5; color: "#FFD781" }
-        Rectangle { height: 4; width: parent.width / 5; color: "#FF4F41" }
-    }
-
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 2
-        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 30 : 0
+        anchors.margins: {
+            if(currentView === merchantView || currentView === historyView)
+                return 0;
+
+            return 20;
+        }
+
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
+        anchors.bottomMargin: 0
         spacing: 0
 
-
-        // BasicPanel header
-        Rectangle {
-            id: header
-            anchors.leftMargin: 1
-            anchors.rightMargin: 1
-            Layout.fillWidth: true
-            Layout.preferredHeight: 64
-            color: "#FFFFFF"
-            visible: basicMode
-
-            Image {
-                id: logo
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: -5
-                anchors.left: parent.left
-                anchors.leftMargin: appWindow.persistentSettings.customDecorations ? 20 : 40
-                source: "images/moneroLogo2.png"
-            }
-
-            Grid {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.topMargin: 10
-                width: 256
-                columns: 3
-
-                Text {
-                    id: balanceLabel
-                    width: 116
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    font.letterSpacing: -1
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#535353"
-                    text: root.balanceLabelText + ":"
-                }
-
-                Text {
-                    id: balanceText
-                    width: 110
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    font.letterSpacing: -1
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#000000"
-                    text: root.balanceText
-                }
-
-                Item {
-                    height: 20
-                    width: 20
-
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        source: "images/lockIcon.png"
-                    }
-                }
-
-                Text {
-                    width: 116
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    font.letterSpacing: -1
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#535353"
-                    text: qsTr("Unlocked Balance:")
-                }
-
-                Text {
-                    id: availableBalanceText
-                    width: 110
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 14
-                    font.letterSpacing: -1
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#000000"
-                    text: root.unlockedBalanceText
-                }
-            }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: "#DBDBDB"
-            }
-        }
-
-        // Views container
-        StackView {
-            id: stackView
-            initialItem: transferView
-            anchors.topMargin: 30
+        Flickable {
+            id: mainFlickable
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.margins: 4
-            clip: true // otherwise animation will affect left panel
+            clip: true
+            boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-            delegate: StackViewDelegate {
-                pushTransition: StackViewTransition {
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: 0 - target.width
-                        to: 0
-                        duration: 300
-                    }
-                    PropertyAnimation {
-                        target: exitItem
-                        property: "x"
-                        from: 0
-                        to: target.width
-                        duration: 300
+            ScrollBar.vertical: ScrollBar {
+                parent: root
+                anchors.left: parent.right
+                anchors.leftMargin: -14 // 10 margin + 4 scrollbar width
+                anchors.top: parent.top
+                anchors.topMargin: persistentSettings.customDecorations ? 60 : 10
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: persistentSettings.customDecorations ? 15 : 10
+                onActiveChanged: if (!active && !isMac) active = true
+            }
+
+            onFlickingChanged: {
+                releaseFocus();
+            }
+
+            // Views container
+            StackView {
+                id: stackView
+                initialItem: transferView
+                anchors.fill:parent
+                clip: true // otherwise animation will affect left panel
+
+                delegate: StackViewDelegate {
+                    pushTransition: StackViewTransition {
+                        PropertyAnimation {
+                            target: enterItem
+                            property: "x"
+                            from: 0 - target.width
+                            to: 0
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
+                        PropertyAnimation {
+                            target: exitItem
+                            property: "x"
+                            from: 0
+                            to: target.width
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
                     }
                 }
             }
-        }
+
+        }// flickable
     }
+
     // border
     Rectangle {
-        anchors.top: styledRow.bottom
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.top: styledRow.bottom
+        id: borderLeft
+        visible: middlePanel.state !== "Merchant"
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: "#DBDBDB"
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
     }
 
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    // border shadow
+    Image {
+        source: "qrc:///images/middlePanelShadow.png"
+        width: 12
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
-        height: 1
-        color: "#DBDBDB"
-
-    }
-
-    /* connect "payment" click */
-    Connections {
-        ignoreUnknownSignals: false
-        target: transferView
-        onPaymentClicked : {
-            console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority, description)
-        }
-        onSweepUnmixableClicked : {
-            console.log("MiddlePanel: sweepUnmixableClicked")
-            sweepUnmixableClicked()
-        }
+        anchors.left: borderLeft.right
     }
 }

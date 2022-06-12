@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,21 +26,38 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick 2.2
+import QtQuick.Controls 2.0
+import QtQuick 2.9
+
+import "../components" as MoneroComponents
 
 TextField {
-    font.family: "Arial"
+    id: textField
+    font.family: MoneroComponents.Style.fontRegular.name
+    font.pixelSize: 18
+    font.bold: true
     horizontalAlignment: TextInput.AlignLeft
+    selectByMouse: true
+    color: MoneroComponents.Style.defaultFontColor
+    selectionColor: MoneroComponents.Style.textSelectionColor
+    selectedTextColor: MoneroComponents.Style.textSelectedColor
 
-    style: TextFieldStyle {
-        textColor: "#3F3F3F"
-        placeholderTextColor: "#BABABA"
+    background: Rectangle {
+        color: "transparent"
+    }
 
-        background: Rectangle {
-            border.width: 0
-            color: "transparent"
+    MoneroComponents.ContextMenu {
+        cursorShape: Qt.IBeamCursor
+        onCut: textField.cut();
+        onCopy: textField.copy();
+        onPaste: {
+            var previoustextFieldLength = textField.length
+            var previousCursorPosition = textField.cursorPosition;
+            textField.paste();
+            textField.forceActiveFocus()
+            textField.cursorPosition = previousCursorPosition + (textField.length - previoustextFieldLength);
         }
+        onRemove: textField.remove(selectionStart, selectionEnd);
+        onSelectAll: textField.selectAll();
     }
 }

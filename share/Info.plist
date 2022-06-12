@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>LSMinimumSystemVersion</key>
+  <string>10.10.0</string>
+
+  <key>NSPrincipalClass</key>
+  <string>NSApplication</string>
+
+  <key>CFBundleIconFile</key>
+  <string>appicon.icns</string>
+
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+
+  <key>CFBundleSignature</key>
+  <string>????</string>
+
+  <key>CFBundleExecutable</key>
+  <string>monero-wallet-gui</string>
+  
+  <key>CFBundleName</key>
+  <string>Monero GUI</string>
+
+  <key>NSHumanReadableCopyright</key>
+  <string>Copyright © 2014-2020 The Monero Project</string>
+
+  <key>CFBundleIdentifier</key>
+  <string>org.monero-project.monero-wallet-gui</string>
+
+  <key>CFBundleVersion</key>
+  <string>@VERSION_LONG@</string>
+
+  <key>CFBundleShortVersionString</key>
+  <string>@VERSION@</string>
+
+  <key>NSSupportsAutomaticGraphicsSwitching</key>
+  <true/>
+
+  <key>NSRequiresAquaSystemAppearance</key>
+  <string>True</string>
+
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>monero Handler</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>monero</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>moneroseed Handler</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>moneroseed</string>
+      </array>
+    </dict>
+  </array>
+</dict>
+</plist>

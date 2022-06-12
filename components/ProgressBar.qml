@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,68 +26,111 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import moneroComponents.Wallet 1.0
 
-Item {
+import "../components" as MoneroComponents
+
+Rectangle {
     id: item
     property int fillLevel: 0
-    height: 22
-    anchors.margins:15
+    property string syncType // Wallet or Daemon
+    property string syncText: qsTr("%1 blocks remaining: ").arg(syncType)
     visible: false
-    //clip: true
+    color: "transparent"
 
-    function updateProgress(currentBlock,targetBlock){
+    function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
         if(targetBlock > 0) {
-            var progressLevel = ((currentBlock/targetBlock) * 100).toFixed(0);
+            var remaining = (currentBlock < targetBlock) ? targetBlock - currentBlock : 0
+            var progressLevel = (blocksToSync > 0 ) ? (100*(blocksToSync - remaining)/blocksToSync).toFixed(0) : 100
             fillLevel = progressLevel
-            progressText.text = qsTr("Synchronizing blocks %1/%2").arg(currentBlock.toFixed(0)).arg(targetBlock.toFixed(0));
-            progressBar.visible = currentBlock < targetBlock
+            if(typeof statusTxt != "undefined" && statusTxt != "") {
+                progressText.text = statusTxt;
+                progressTextValue.text = "";
+            } else {
+                progressText.text = syncText;
+                progressTextValue.text = remaining.toFixed(0);
+            }
         }
     }
 
-    Rectangle {
-        id: bar
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: 22
-        radius: 2
-        color: "#FFFFFF"
+    Item {
+        anchors.top: item.top
+        anchors.topMargin: 10
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
+        anchors.fill: parent
 
-        Rectangle {
-            id: fillRect
+        MoneroComponents.TextPlain {
+            id: progressText
             anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.margins: 2
-            height: bar.height
-            property int maxWidth: parent.width - 4
-            width: (maxWidth * fillLevel) / 100
-            color: {
-               if(item.fillLevel < 99 ) return "#FF6C3C"
-               //if(item.fillLevel < 99) return "#FFE00A"
-                return "#36B25C"
-            }
+            anchors.topMargin: 6
+            font.family: MoneroComponents.Style.fontMedium.name
+            font.pixelSize: 13
+            font.bold: MoneroComponents.Style.progressBarProgressTextBold
+            color: MoneroComponents.Style.defaultFontColor
+            text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
+            height: 18
+        }
 
+        MoneroComponents.TextPlain {
+            id: progressTextValue
+            anchors.top: parent.top
+            anchors.topMargin: 6
+            anchors.right: parent.right
+            font.family: MoneroComponents.Style.fontMedium.name
+            font.pixelSize: 13
+            font.bold: MoneroComponents.Style.progressBarProgressTextBold
+            color: MoneroComponents.Style.defaultFontColor
+            height:18
         }
 
         Rectangle {
-            color:"#333"
-            anchors.bottom: parent.bottom
+            id: bar
             anchors.left: parent.left
-            anchors.leftMargin: 8
+            anchors.right: parent.right
+            anchors.top: progressText.bottom
+            anchors.topMargin: 4
+            height: 8
+            radius: 8
+            color: MoneroComponents.Style.progressBarBackgroundColor
 
-            Text {
-                id:progressText
+            states: [
+                State {
+                    name: "black";
+                    when: MoneroComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: MoneroComponents.Style._b_progressBarBackgroundColor}
+                }, State {
+                    name: "white";
+                    when: !MoneroComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: MoneroComponents.Style._w_progressBarBackgroundColor}
+                }
+            ]
+
+            transitions: Transition {
+                enabled: appWindow.themeTransition
+                ColorAnimation { properties: "color"; easing.type: Easing.InOutQuad; duration: 300 }
+            }
+
+            Rectangle {
+                id: fillRect
+                anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                font.family: "Arial"
-                font.pixelSize: 12
-                color: "#000"
-                text: qsTr("Synchronizing blocks")
-                height:18
+                anchors.left: parent.left
+                height: bar.height
+                property int maxWidth: bar.width
+                width: (maxWidth * fillLevel) / 100
+                radius: 8
+                color: "#FA6800"
+            }
+
+            Rectangle {
+                color:"#333"
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.leftMargin: 8
             }
         }
-    }
 
+    }
 }
