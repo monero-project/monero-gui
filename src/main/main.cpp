@@ -36,7 +36,6 @@
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
-#include <QRegExp>
 #include <QThread>
 
 #include <version.h>
@@ -205,6 +204,13 @@ int main(int argc, char *argv[])
 #endif
 
     qputenv("QML_DISABLE_DISK_CACHE", "1");
+
+    for (int i = 0; i < argc; i++) {
+        if (QString(argv[i]).contains("platformpluginpath")) {
+            qCritical() << "Setting -platformpluginpath as an argument is disabled"; // CVE-2021-3401
+            return 1;
+        }
+    }
 
     MainApp app(argc, argv);
 
@@ -498,7 +504,11 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("homePath", QDir::homePath());
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
+#ifdef WITH_UPDATER
     engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", parser.isSet(disableCheckUpdatesOption));
+#else
+    engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", true);
+#endif
     engine.rootContext()->setContextProperty("socksProxyFlag", parser.value(socksProxyOption));
     engine.rootContext()->setContextProperty("socksProxyFlagSet", parser.isSet(socksProxyOption));
 

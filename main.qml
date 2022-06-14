@@ -321,27 +321,6 @@ ApplicationWindow {
     function connectWallet(wallet) {
         currentWallet = wallet
 
-        // TODO:
-        // When the wallet variable is undefined, it yields a zero balance.
-        // This can scare users, restart the GUI (as a quick fix).
-        //
-        // To reproduce, follow these steps:
-        // 1) Open the GUI, load up a wallet that has a balance
-        // 2) Settings -> close wallet
-        // 3) Create a new wallet
-        // 4) Settings -> close wallet
-        // 5) Open the wallet from step 1
-
-        if(!wallet || wallet === undefined || wallet.path === undefined){
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = qsTr("Couldn't open wallet: ") + 'please restart GUI.';
-            informationPopup.icon = StandardIcon.Critical
-            informationPopup.open()
-            informationPopup.onCloseCallback = function() {
-                appWindow.close();
-            }
-        }
-
         walletName = usefulName(wallet.path)
 
         viewOnly = currentWallet.viewOnly;
@@ -1001,7 +980,7 @@ ApplicationWindow {
 
     // called on "getProof"
     function handleGetProof(txid, address, message, amount) {
-        if (amount.length > 0) {
+        if (amount !== null && amount.length > 0) {
             var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message)
             txProofComputed(null, result)
         } else {
@@ -1394,6 +1373,8 @@ ApplicationWindow {
         property bool   allow_p2pool_mining : false
         property bool   allowRemoteNodeMining : false
         property bool   miningIgnoreBattery : true
+        property int    miningModeSelected: 0
+        property int    chainDropdownSelected: 0
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
         property bool   is_trusted_daemon : false  // TODO: drop after v0.17.2.0 release

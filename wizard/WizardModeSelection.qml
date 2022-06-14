@@ -41,6 +41,7 @@ Rectangle {
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardModeSelection1"
     property bool portable: persistentSettings.portable
+    property bool simpleModeAvailable: !isTails && appWindow.persistentSettings.nettype == 0
 
     function applyWalletMode(mode, wizardState) {
         if (!persistentSettings.setPortable(portable)) {
@@ -76,21 +77,25 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
+                opacity: simpleModeAvailable ? 1.0 : 0.5
                 Layout.topMargin: 20
                 headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
+                    if (isTails) {
+                        return qsTr("Not available on Tails.") + translationManager.emptyString;
                     } else {
-                        return "Available on mainnet.";
+                        if (appWindow.persistentSettings.nettype == 0) {
+                            return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
+                        } else {
+                            return qsTr("Available on mainnet.") + translationManager.emptyString;
+                        }
                     }
                 }
 
                 imageIcon: "qrc:///images/remote-node.png"
 
                 onMenuClicked: {
-                    if(appWindow.persistentSettings.nettype == 0){
+                    if (simpleModeAvailable) {
                         applyWalletMode(0, 'wizardModeRemoteNodeWarning');
                     }
                 }
@@ -106,19 +111,23 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
+                opacity: simpleModeAvailable ? 1.0 : 0.5
                 headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
                 bodyText: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
+                    if (isTails) {
+                        return qsTr("Not available on Tails.") + translationManager.emptyString;
                     } else {
-                        return "Available on mainnet.";
+                        if (appWindow.persistentSettings.nettype == 0) {
+                            return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
+                        } else {
+                            return qsTr("Available on mainnet.") + translationManager.emptyString;
+                        }
                     }
                 }
                 imageIcon: "qrc:///images/local-node.png"
 
                 onMenuClicked: {
-                    if(appWindow.persistentSettings.nettype == 0){
+                    if (simpleModeAvailable) {
                         appWindow.persistentSettings.pruneBlockchain = true;
                         applyWalletMode(1, 'wizardModeBootstrap');
                     }
