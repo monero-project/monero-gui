@@ -55,7 +55,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard acf790d7752f36e450d476ad79807d4012ec863b && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -66,7 +66,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard d882052fb2ce439c6483fce944ba8f16f7294639 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -77,7 +77,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0e51ee5570a6a80bdf98770b975dfe8a57f4eeb1 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -88,7 +88,7 @@ RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0317caf63de532fd7a0493ed6afa871a67253747 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -99,7 +99,7 @@ RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 24eb17df2e1245885e72c9d4bbb0a0f69f0700f2 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
