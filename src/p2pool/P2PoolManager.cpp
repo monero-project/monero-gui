@@ -49,17 +49,17 @@ void P2PoolManager::download() {
         QString fileName;
         QString validHash;
         #ifdef Q_OS_WIN
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-windows-x64.zip";
-            fileName = m_p2poolPath + "/p2pool-v1.9-windows-x64.zip";
-            validHash = "2587903dc04a4879dca2b6f5c5b584e869928e716274a7660e24b219c9f18839";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2/p2pool-v2.2-windows-x64.zip";
+            fileName = m_p2poolPath + "/p2pool-v2.2-windows-x64.zip";
+            validHash = "5abf7c7f90dff1a6080c9cd1866ca1084f71760d1395105d619ebc89edceebc2";
         #elif defined(Q_OS_LINUX)
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-linux-x64.tar.gz";
-            fileName = m_p2poolPath + "/p2pool-v1.9-linux-x64.tar.gz";
-            validHash = "0cd85d933ac4a76708d326698d9db3155bb29d0be82984c735fabd9e9a351b8e";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2/p2pool-v2.2-linux-x64.tar.gz";
+            fileName = m_p2poolPath + "/p2pool-v2.2-linux-x64.tar.gz";
+            validHash = "8527683965fc5963b8221937fc61b35a5e54fcfb4d756ba620a8862a5315dea5";
         #elif defined(Q_OS_MACOS)
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-macos-x64.tar.gz";
-            fileName = m_p2poolPath + "/p2pool-v1.9-macos-x64.tar.gz";
-            validHash = "47fbdd69d719da80597dd5487f109b61e30b540499cced7b93de1ee01344351e";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2/p2pool-v2.2-macos-x64.tar.gz";
+            fileName = m_p2poolPath + "/p2pool-v2.2-macos-x64.tar.gz";
+            validHash = "ab928f86cd0b1cd1754b680b09bf45c9ad132222d1143968b23db7a045c1fb47";
         #endif
         QFile file(fileName);
         epee::net_utils::http::http_simple_client http_client;
