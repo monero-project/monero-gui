@@ -30,7 +30,9 @@
 
 #include <chrono>
 #include <stdexcept>
+#include <string>
 #include <thread>
+#include <vector>
 
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
@@ -505,6 +507,16 @@ bool Wallet::exportOutputs(const QString& path, bool all) {
 
 bool Wallet::importOutputs(const QString& path) {
     return m_walletImpl->importOutputs(path.toStdString());
+}
+
+bool Wallet::scanTransactions(const QVector<QString> &txids)
+{
+    std::vector<std::string> c;
+    for (const auto &v : txids)
+    {
+        c.push_back(v.toStdString());
+    }
+    return m_walletImpl->scanTransactions(c);
 }
 
 bool Wallet::refresh(bool historyAndSubaddresses /* = true */)

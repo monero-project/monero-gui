@@ -128,6 +128,27 @@ Rectangle {
         }
 
         MoneroComponents.SettingsListItem {
+            enabled: leftPanel.progressBar.fillLevel == 100
+            iconText: FontAwesome.magnifyingGlass
+            description: qsTr("Use this feature if a transaction is missing in your wallet history. This will expose the transaction ID to the remote node, which can harm your privacy.") + translationManager.emptyString
+            title: qsTr("Scan transaction") + translationManager.emptyString
+
+            onClicked: {
+                inputDialog.labelText = qsTr("Enter a transaction ID:") + translationManager.emptyString;
+                inputDialog.onAcceptedCallback = function() {
+                    var txid = inputDialog.inputText.trim();
+                    if (currentWallet.scanTransactions([txid])) {
+                        appWindow.showStatusMessage(qsTr("Transaction successfully scanned"), 3);
+                    } else {
+                        appWindow.showStatusMessage(qsTr("Failed to scan transaction") + ": " + currentWallet.errorString, 5);
+                    }
+                }
+                inputDialog.onRejectedCallback = null;
+                inputDialog.open()
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
             iconText: FontAwesome.ellipsisH
             description: qsTr("Change the password of your wallet.") + translationManager.emptyString
             title: qsTr("Change wallet password") + translationManager.emptyString
