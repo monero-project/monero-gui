@@ -2253,7 +2253,7 @@ ApplicationWindow {
     }
 
     function getDefaultDaemonRpcPort(networkType) {
-        switch (networkType) {
+        switch (parseInt(networkType)) {
             case NetworkType.STAGENET:
                 return 38081;
             case NetworkType.TESTNET:
