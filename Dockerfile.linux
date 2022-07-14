@@ -164,11 +164,11 @@ RUN wget https://downloads.sourceforge.net/project/boost/boost/1.73.0/boost_1_73
     ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static cflags="${CFLAGS}" cxxflags="${CXXFLAGS}" install -a --prefix=/usr && \
     rm -rf $(pwd)
 
-RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
-    echo "ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46 openssl-1.1.1g.tar.gz" | sha256sum -c && \
-    tar -xzf openssl-1.1.1g.tar.gz && \
-    rm openssl-1.1.1g.tar.gz && \
-    cd openssl-1.1.1g && \
+RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz && \
+    echo "d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca openssl-1.1.1q.tar.gz" | sha256sum -c && \
+    tar -xzf openssl-1.1.1q.tar.gz && \
+    rm openssl-1.1.1q.tar.gz && \
+    cd openssl-1.1.1q && \
     ./config no-asm no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \

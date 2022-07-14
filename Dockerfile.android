@@ -115,8 +115,8 @@ RUN wget -q https://downloads.sourceforge.net/project/boost/boost/${BOOST_VERSIO
     install -j${THREADS} \
     && rm -rf $(pwd)
 
-ARG OPENSSL_VERSION=1.1.1g
-ARG OPENSSL_HASH=ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46
+ARG OPENSSL_VERSION=1.1.1q
+ARG OPENSSL_HASH=d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca
 RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
     && echo "${OPENSSL_HASH}  openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf openssl-${OPENSSL_VERSION}.tar.gz \
