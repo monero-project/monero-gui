@@ -32,17 +32,17 @@
     <message>
         <location filename="../pages/Account.qml" line="174"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Các tài khoản</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chỉnh nhãn mác tài khoản</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> địa chỉ vào clipboard</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="366"/>
@@ -86,17 +86,17 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gửi tới tài khoản này</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Xem giao dịch</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="279"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lưu địa chỉ vào clipboard </translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="284"/>
@@ -148,12 +148,12 @@
         <location filename="../pages/AddressBook.qml" line="261"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Edit entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chỉnh khoản điền</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="351"/>
         <source>Grab QR code from screen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lấy mã QR từ màn hình</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="431"/>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="432"/>
         <source>Add a name...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Thêm tên...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="468"/>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="51"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cắt</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
@@ -254,7 +254,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chọn tất cả</translation>
     </message>
 </context>
 <context>
@@ -280,23 +280,23 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ví trữ lạnh</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Máy tính</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
         <source>Hardware wallet passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mật mã của ví trữ lạnh</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Xin chọn nơi bạn muốn ghi lại mật mã. Chúng tôi khuyên nên ghi mật mã trên ví trữ lạnh để bảo toàn hơn. </translation>
     </message>
 </context>
 <context>
@@ -304,7 +304,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="227"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ngày tới</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="334"/>
@@ -326,7 +326,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Clean</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dọn</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="254"/>
@@ -358,7 +358,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="511"/>
         <source>Invalid page. Must be a number within the specified range.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trang không tồn tại. Phải là số trong khoảng nhất định</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
@@ -383,12 +383,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="724"/>
         <source>Mined</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Đã mài</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="741"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nhất </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
@@ -475,27 +475,27 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="690"/>
         <source>Unknown amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Số lượng không nhất định</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="786"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tới</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="786"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trong</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Thất bại</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="811"/>
         <source>My wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ví của tôi</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="816"/>
@@ -507,7 +507,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="825"/>
         <source>Unknown address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Địa chỉ không xác định</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="985"/>
@@ -518,17 +518,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1024"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tạo chứng nhận thanh toán</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chứng nhận thanh toán</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1725"/>
         <source>Generating payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Đang tạo chứng nhận thanh </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1733"/>
@@ -639,7 +639,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CẢNH BÁO: Lưu seed vào clipboard có nguy cơ bị hại bởi virus máy tính, có thể trộm seed và Monero. Xin ghi lại seed bằng cách thủ công.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="197"/>
@@ -729,7 +729,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LanguageSidebar.qml" line="96"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ngôn ngữ đã thay </translation>
     </message>
 </context>
 <context>
