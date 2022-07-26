@@ -68,7 +68,11 @@ Rectangle {
                 progressSteps: 4
                 progress: 2
                 onPrevClicked: {
-                    wizardStateView.state = "wizardCreateWallet2";
+                    if (wizardController.m_wallet.isMultisig) {
+                        wizardStateView.state = "wizardCreateMultisig2";
+                    } else {
+                        wizardStateView.state = "wizardCreateWallet2";
+                    }
                 }
                 onNextClicked: {
                     daemonSettings.save();

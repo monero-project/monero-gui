@@ -28,7 +28,7 @@
 
 import QtQml.Models 2.2
 import QtQuick 2.9
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
@@ -81,6 +81,7 @@ Rectangle {
     }
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property bool hasMultisigPartialKeyImages: appWindow.isMultisig ? currentWallet.hasMultisigPartialKeyImages() : false;
 
     Clipboard { id: clipboard }
 
@@ -167,6 +168,14 @@ Rectangle {
 
           MoneroComponents.WarningBox {
               text: qsTr("Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.").arg(leftPanel.balanceUnlockedString).arg(leftPanel.minutesToUnlock)
+          }
+      }
+
+      RowLayout {
+          visible: hasMultisigPartialKeyImages
+
+          MoneroComponents.WarningBox {
+              text: qsTr("Partial key images found. Import key images before spending") + translationManager.emptyString
           }
       }
 
@@ -873,6 +882,31 @@ Rectangle {
             recipientModel.getAmountTotal() <= appWindow.getUnlockedBalance() &&
             !recipientModel.hasInvalidAddress();
       }
+        AdvancedOptionsItem {
+            visible: isMultisig
+            title: qsTr("Partial key images") + translationManager.emptyString
+            button1.text: qsTr("Export") + translationManager.emptyString
+            button1.enabled: isMultisig
+            button1.onClicked: {
+                console.log("Transfer: export partial key images clicked")
+                exportMultisigKeyImagesDialog.open();
+            }
+            button2.text: qsTr("Import") + translationManager.emptyString
+            button2.enabled: isMultisig && appWindow.isTrustedDaemon()
+            button2.onClicked: {
+                console.log("Transfer: import partial key images clicked")
+                importMultisigKeyImagesDialog.open(); 
+            }
+            helpTextLarge.text: qsTr("Required to sync multisig wallets to view true balance and create transactions") + translationManager.emptyString
+            helpTextSmall.text: {
+                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor +
+                       ";} p.orange{color:#ff9323;}</style>" +
+                       "<p>" + qsTr("1. Export key images from each wallet into two seperate files") + "</p>" +
+                       "<p>" + qsTr("2. Import the images into opposite wallets") + "</p>" +
+                       errorMessage + translationManager.emptyString
+            }
+            helpTextSmall.themeTransition: false
+        }
 
     } // pageRoot
 
@@ -884,6 +918,7 @@ Rectangle {
         anchors.topMargin: 32
         spacing: 10
         enabled: !viewOnly || pageRoot.enabled
+        visible: !isMultisig
 
         RowLayout {
             visible: appWindow.walletMode >= 2
@@ -957,7 +992,7 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
             button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation()
+            button1.enabled: (appWindow.viewOnly || isMultisig) && pageRoot.checkInformation()
             button1.onClicked: {
                 console.log("Transfer: saveTx Clicked")
                 var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -1146,6 +1181,145 @@ Rectangle {
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
             }
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
+    
+    StandardDialog {
+        id: exportMultisigKeyImagesDialog
+        title: qsTr("Export Partial Key Images") + translationManager.emptyString
+        text: qsTr("You may choose to view your parial key image data in plain text (ASCII) or save it as a binary file") +translationManager.emptyString
+        height: 220
+
+        cancelText: qsTr("Plain text") + translationManager.emptyString
+        onRejected: {
+            exportMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            exportMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            exportPartialKeyImagesDialogASCII.text = currentWallet.exportMultisigImages() // looks strange i know but we cant set the text as soon as the page is rendered
+            exportPartialKeyImagesDialogASCII.open()
+        }
+
+        okText: qsTr("Save as file") + translationManager.emptyString
+        onAccepted: {
+            exportMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            exportMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            exportMultisigKeyImagesFileDialog.open()
+        }
+    }
+
+    StandardDialog {
+        id: importMultisigKeyImagesDialog
+        title: qsTr("Import Partial Key Images") + translationManager.emptyString
+        text: qsTr("You may choose to load a binary file or paste plain text key images") +translationManager.emptyString
+        height: 220
+
+        cancelText: qsTr("Plain text") + translationManager.emptyString
+        onRejected: {
+            importMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            importMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            importPartialKeyImagesDialogASCII.open()
+        }
+
+        okText: qsTr("Load file") + translationManager.emptyString
+        onAccepted: {
+            importMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
+            importMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            importMultisigKeyImagesFileDialog.open()
+        }
+    }
+
+    StandardDialog {
+        id: exportPartialKeyImagesDialogASCII
+        title: qsTr("ASCII encoded partial key images") + translationManager.emptyString
+        cancelVisible: false
+    }
+
+    Dialog {
+        id: importPartialKeyImagesDialogASCII
+        x: parent.width/2 - root.width/2
+        y: 100
+        title: "Paste your ASCII Encoded partial key images here"
+
+        Flickable {
+            id: flickable
+            anchors.fill: parent
+            anchors.topMargin: 30
+            anchors.bottomMargin: 40
+            ScrollBar.vertical: ScrollBar {
+                onActiveChanged: if (!active && !isMac) active = true
+                }
+            boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+            height: textField.height
+            TextArea.flickable: TextArea {
+                id: textField
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                wrapMode: TextEdit.Wrap
+                background: Rectangle {
+                        border.color: MoneroComponents.Style.inputBorderColorActive
+                        border.width: 1
+                        color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    }
+                font.family: MoneroComponents.Style.fontLight.name
+                font.pixelSize: 14
+                color: MoneroComponents.Style.defaultFontColor
+            }
+        }
+
+        RowLayout {
+            id: buttons
+            spacing: 60
+            Layout.alignment: Qt.AlignHCenter
+
+            MoneroComponents.StandardButton {
+                id: cancelButton
+                text: qsTr("Cancel") + translationManager.emptyString
+                onClicked: {
+                    console.log("Key image import by plain text cancelled");
+                    importPartialKeyImagesDialogASCII.close();
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                id: okButton
+                text: qsTr("OK") + translationManager.emptyString
+                KeyNavigation.tab: cancelButton
+                onClicked: {
+                    console.log("trying import: " + textField.text);
+                    importPartialKeyImagesDialogASCII.close();
+                    currentWallet.importMultisigImagesAscii(textField.text);
+                }
+            }
+        }
+    }
+
+    //exportMultisigKeyImagesFileDialog
+    FileDialog {
+        id: exportMultisigKeyImagesFileDialog
+        selectMultiple: false
+        selectExisting: false
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(exportMultisigKeyImagesFileDialog.fileUrl))
+            currentWallet.exportMultisigImages(walletManager.urlToLocalPath(exportMultisigKeyImagesFileDialog.fileUrl));
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
+    //ImportMultisigKeyImagesFileDialog
+    FileDialog {
+        id: importMultisigKeyImagesFileDialog
+        selectMultiple: false
+        selectExisting: true
+        title: qsTr("Please choose a file") + translationManager.emptyString
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(importMultisigKeyImagesFileDialog.fileUrl))
+            currentWallet.importMultisigImages(walletManager.urlToLocalPath(importMultisigKeyImagesFileDialog.fileUrl));
+            hasMultisigPartialKeyImages = currentWallet.hasMultisigPartialKeyImages();
         }
         onRejected: {
             console.log("Canceled");

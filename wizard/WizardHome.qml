@@ -124,6 +124,27 @@ Rectangle {
             }
 
             WizardMenuItem {
+                headerText: qsTr("Create a new multisig wallet") + translationManager.emptyString
+                bodyText: qsTr("Choose this option to create a new 2/2 multisig wallet") + translationManager.emptyString
+                imageIcon: "qrc:///images/create-wallet.png" // TODO: get cool multisig graphic
+
+                onMenuClicked: {
+                    wizardController.restart();
+                    wizardController.createWallet();
+                    wizardStateView.state = "wizardCreateMultisig1"
+                }
+            }
+
+            Rectangle {
+                Layout.preferredHeight: 1
+                Layout.topMargin: 3
+                Layout.bottomMargin: 3
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            WizardMenuItem {
                 headerText: qsTr("Open a wallet from file") + translationManager.emptyString
                 bodyText: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/open-wallet-from-file.png"

@@ -426,6 +426,75 @@ void Wallet::deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, 
     });
 }
 
+Monero::MultisigState Wallet::getMultisigState()
+{
+    return m_walletImpl->multisig();
+}
+
+bool Wallet::isMultisig()
+{
+    return getMultisigState().isMultisig;
+}
+
+QString Wallet::getMultisigInfo()
+{
+    return QString::fromStdString(m_walletImpl->getMultisigInfo());
+}
+
+QString Wallet::makeMultisig(QString info)
+{
+    const std::vector<std::string> infoVector = { info.toStdString() };
+    return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, 2));
+}
+
+bool Wallet::hasMultisigPartialKeyImages()
+{
+    return m_walletImpl->hasMultisigPartialKeyImages();
+}
+
+QString Wallet::exportMultisigImages()
+{
+    std::string images;
+    m_walletImpl->exportMultisigImages(images, "", true);
+    return QString::fromStdString(images);
+}
+
+bool Wallet::exportMultisigImages(QString filename)
+{
+    std::string images;
+    return m_walletImpl->exportMultisigImages(images, filename.toStdString());
+}
+
+void Wallet::importMultisigImages(QString filename)
+{
+    m_walletImpl->importMultisigImages(filename.toStdString());
+}
+
+void Wallet::importMultisigImagesAscii(QString ascii)
+{
+    m_walletImpl->importMultisigImagesAscii(ascii.toStdString());
+}
+
+PendingTransaction* Wallet::loadMultisigTxFromFile(QString filename)
+{
+    try {
+        Monero::PendingTransaction* txptr = m_walletImpl->loadMultisigTxFromFile(filename.toStdString());
+        if (txptr == nullptr)
+        {
+            throw std::runtime_error("Failed to read tx file, txptr is null");
+        }
+        return new PendingTransaction(txptr,this);
+    } catch (const std::exception &e) {
+        qDebug() << e.what();
+    }
+    return nullptr;
+}
+
+bool Wallet::signMultisigTxFromFile(QString filename)
+{
+    return m_walletImpl->signMultisigTxFromFile(filename.toStdString());
+}
+
 void Wallet::refreshHeightAsync()
 {
     m_scheduler.run([this] {
