@@ -115,12 +115,12 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
         QFileInfo keysFileinfo = it.fileInfo();
 
         constexpr const char keysFileExtension[] = "keys";
-        if (!keysFileinfo.isFile() || keysFileinfo.completeSuffix() != keysFileExtension)
+        if (!keysFileinfo.isFile() || keysFileinfo.suffix() != keysFileExtension)
         {
             continue;
         }
 
-        QString wallet(keysFileinfo.path() + QDir::separator() + keysFileinfo.baseName());
+        QString wallet(keysFileinfo.path() + QDir::separator() + keysFileinfo.completeBaseName());
         quint8 networkType = NetworkType::MAINNET;
         QString address = QString("");
 
@@ -128,7 +128,7 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
         if(fileExists(wallet + ".address.txt")){
             QFile file(wallet + ".address.txt");
             file.open(QFile::ReadOnly | QFile::Text);
-            QString _address = QTextCodec::codecForMib(106)->toUnicode(file.readAll());
+            QString _address = QString(file.readAll());
 
             if(!_address.isEmpty()){
                 address = _address;

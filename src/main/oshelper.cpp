@@ -174,7 +174,7 @@ bool OSHelper::openContainingFolder(const QString &filePath) const
     }
 #endif
 
-    QUrl url = QUrl::fromLocalFile(canonicalFilePath);
+    QUrl url = QUrl::fromLocalFile(QFileInfo(filePath).canonicalPath());
     if (!url.isValid())
     {
         qWarning() << "Malformed file path" << canonicalFilePath << url.errorString();

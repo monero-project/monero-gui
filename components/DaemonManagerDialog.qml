@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
+import moneroComponents.Wallet 1.0
 
 import "../components" as MoneroComponents
 
@@ -79,6 +80,10 @@ Window {
                 running: false;
                 repeat: true
                 onTriggered: {
+                    if (currentWallet.connected() == Wallet.ConnectionStatus_Connected) {
+                        running = false;
+                        root.close();
+                    }
                     countDown--;
                     if(countDown < 0){
                         running = false;

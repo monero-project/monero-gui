@@ -103,7 +103,7 @@ jobs:
         restore-keys: |
           docker-linux-static-
     - name: install dependencies
-      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0
+      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxcb-shape0 libxkbcommon-x11-0
     - name: prepare build environment
       run: docker build --tag monero:build-env-linux --build-arg THREADS=3 --file Dockerfile.linux .
     - name: build
@@ -151,6 +151,13 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+      if: "!startsWith(github.ref, 'refs/tags/v')"
+      continue-on-error: true
+      with:
+        key: docker-android-static-{hash}
+        restore-keys: |
+          docker-android-static-
     - name: prepare build environment
       run: docker build --tag monero:build-env-android --build-arg THREADS=3 --file Dockerfile.android .
     - name: build

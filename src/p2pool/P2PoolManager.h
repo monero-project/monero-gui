@@ -64,6 +64,7 @@ private:
     std::unique_ptr<QProcess> m_p2poold;
     QMutex m_p2poolMutex;
     QString m_p2pool;
+    QString m_p2poolPath;
     bool started = false;
 
     mutable FutureScheduler m_scheduler;

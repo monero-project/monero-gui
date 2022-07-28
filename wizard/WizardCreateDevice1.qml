@@ -52,6 +52,7 @@ Rectangle {
         id: deviceNameModel
         ListElement { column1: qsTr("Choose your hardware wallet"); column2: "";}
         ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
+        ListElement { column1: "Ledger Nano S Plus"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
     }
@@ -159,7 +160,20 @@ Rectangle {
 
                          Image {
                              Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                             source: hardwareWalletType == "Trezor" ? "qrc:///images/trezor.png" : hardwareWalletType == "Ledger" ? (ledgerType == "Ledger Nano S" ? "qrc:///images/ledgerNanoS.png" : "qrc:///images/ledgerNanoX.png") : ""
+                             source: {
+                                if (hardwareWalletType == "Trezor") {
+                                    return "qrc:///images/trezor.png";
+                                } else if (hardwareWalletType == "Ledger") {
+                                    if (ledgerType == "Ledger Nano S") {
+                                        return "qrc:///images/ledgerNanoS.png";
+                                    } else if (ledgerType == "Ledger Nano S Plus") {
+                                        return "qrc:///images/ledgerNanoSPlus.png";
+                                    } else if (ledgerType == "Ledger Nano X") {
+                                        return "qrc:///images/ledgerNanoX.png";
+                                    }
+                                }
+                                return "";
+                             }
                              z: parent.z + 1
                              width: parent.width
                              height: 165
@@ -185,7 +199,7 @@ Rectangle {
                     validator: RegExpValidator {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
-                    text: "0"
+                    text: "1"
                 }
 
                 CheckBox2 {
@@ -237,7 +251,7 @@ Rectangle {
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
                     if(lookahead.text)
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
-                    if(restoreHeight.text){
+                    if (restoreHeight.text && wizardController.walletOptionsDeviceIsRestore) {
                         wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
                     }
 
@@ -259,7 +273,7 @@ Rectangle {
             newDeviceWallet.checked = true;
             restoreDeviceWallet.checked = false;
             wizardController.walletOptionsDeviceIsRestore = false;
-            restoreHeight.text = "";
+            restoreHeight.text = "1";
             lookahead.text = "";
             errorMsg.text = "";
         }

@@ -121,10 +121,11 @@ Rectangle {
                     Layout.maximumWidth: 200
                     id: miningModeDropdown
                     visible: true
-                    currentIndex: 0
+                    currentIndex: persistentSettings.miningModeSelected
                     dataModel: miningModeModel
                     onChanged: {
                         persistentSettings.allow_p2pool_mining = miningModeDropdown.currentIndex === 1;
+                        persistentSettings.miningModeSelected = miningModeDropdown.currentIndex;
                         walletManager.stopMining();
                         p2poolManager.exit();
                     }
@@ -423,8 +424,9 @@ Rectangle {
                     Layout.maximumWidth: 200
                     id: chainDropdown
                     visible: persistentSettings.allow_p2pool_mining
-                    currentIndex: 0
+                    currentIndex: persistentSettings.chainDropdownSelected
                     dataModel: chainModel
+                    onChanged: persistentSettings.chainDropdownSelected = chainDropdown.currentIndex;
                 }
             }
 
@@ -617,7 +619,7 @@ Rectangle {
     function p2poolDownloadFailed() {
         statusMessage.visible = false
         errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
-        errorPopup.text = "P2Pool installation failed."
+        errorPopup.text = qsTr("P2Pool installation failed.") + isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : ""
         errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()

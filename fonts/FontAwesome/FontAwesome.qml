@@ -54,6 +54,7 @@ Object {
     property string key : "\uf084"
     property string language : "\uf1ab"
     property string lock : "\uf023"
+    property string magnifyingGlass : "\uf002"
     property string minus : "\uf068"
     property string minusCircle : "\uf056"
     property string moonO : "\uf186"

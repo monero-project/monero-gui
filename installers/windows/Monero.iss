@@ -1,4 +1,4 @@
-; Monero Oxygen Orion GUI Wallet Installer for Windows
+; Monero Fluorine Fermi GUI Wallet Installer for Windows
 ; Copyright (c) 2017-2020, The Monero Project
 ; See LICENSE
 #define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
@@ -54,6 +54,9 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 ; Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
 
+[Dirs]
+Name: "{app}";
+Name: "{app}\p2pool"; Permissions: users-full
 
 [Files]
 ; The use of the flag "ignoreversion" for the following entries leads to the following behaviour:
@@ -135,6 +138,7 @@ Type: filesandordirs; Name: "{app}\QtQuick.2"
 Type: filesandordirs; Name: "{app}\Material"
 Type: filesandordirs; Name: "{app}\Universal"
 Type: filesandordirs; Name: "{app}\scenegraph"
+Type: filesandordirs; Name: "{app}\p2pool"
 Type: files; Name: "{app}\D3Dcompiler_47.dll"
 Type: files; Name: "{app}\libbz2-1.dll"
 Type: files; Name: "{app}\libEGL.dll"

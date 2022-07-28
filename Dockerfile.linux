@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.3-lts-lgpl
+ARG QT_VERSION=v5.15.5-lts-lgpl
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
@@ -55,7 +55,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard acf790d7752f36e450d476ad79807d4012ec863b && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -66,7 +66,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard d882052fb2ce439c6483fce944ba8f16f7294639 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -77,7 +77,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0e51ee5570a6a80bdf98770b975dfe8a57f4eeb1 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -88,7 +88,7 @@ RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0317caf63de532fd7a0493ed6afa871a67253747 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -99,7 +99,7 @@ RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 24eb17df2e1245885e72c9d4bbb0a0f69f0700f2 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -164,11 +164,11 @@ RUN wget https://downloads.sourceforge.net/project/boost/boost/1.73.0/boost_1_73
     ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static cflags="${CFLAGS}" cxxflags="${CXXFLAGS}" install -a --prefix=/usr && \
     rm -rf $(pwd)
 
-RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
-    echo "ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46 openssl-1.1.1g.tar.gz" | sha256sum -c && \
-    tar -xzf openssl-1.1.1g.tar.gz && \
-    rm openssl-1.1.1g.tar.gz && \
-    cd openssl-1.1.1g && \
+RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz && \
+    echo "d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca openssl-1.1.1q.tar.gz" | sha256sum -c && \
+    tar -xzf openssl-1.1.1q.tar.gz && \
+    rm openssl-1.1.1q.tar.gz && \
+    cd openssl-1.1.1q && \
     ./config no-asm no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \

@@ -989,7 +989,7 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
             button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: (appWindow.viewOnly || isMultisig) && pageRoot.checkInformation()
+            button1.enabled: (appWindow.viewOnly || isMultisig) && pageRoot.checkInformation() && appWindow.daemonSynced
             button1.onClicked: {
                 console.log("Transfer: saveTx Clicked")
                 var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority

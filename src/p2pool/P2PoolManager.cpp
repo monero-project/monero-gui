@@ -49,17 +49,17 @@ void P2PoolManager::download() {
         QString fileName;
         QString validHash;
         #ifdef Q_OS_WIN
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-windows-x64.zip";
-            fileName = "p2pool-v1.9-windows-x64.zip";
-            validHash = "2587903dc04a4879dca2b6f5c5b584e869928e716274a7660e24b219c9f18839";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2.1/p2pool-v2.2.1-windows-x64.zip";
+            fileName = m_p2poolPath + "/p2pool-v2.2.1-windows-x64.zip";
+            validHash = "06b6fe302600c959007bf94e7a5b445f45f823dc4e43ae6cf03b3b98a805167a";
         #elif defined(Q_OS_LINUX)
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-linux-x64.tar.gz";
-            fileName = "p2pool-v1.9-linux-x64.tar.gz";
-            validHash = "0cd85d933ac4a76708d326698d9db3155bb29d0be82984c735fabd9e9a351b8e";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2.1/p2pool-v2.2.1-linux-x64.tar.gz";
+            fileName = m_p2poolPath + "/p2pool-v2.2.1-linux-x64.tar.gz";
+            validHash = "02f1daea0f8f99076b7da3368a43cc3989b800f8b5afaf4dfc7e8f9bdc27d274";
         #elif defined(Q_OS_MACOS)
-            url = "https://github.com/SChernykh/p2pool/releases/download/v1.9/p2pool-v1.9-macos-x64.tar.gz";
-            fileName = "p2pool-v1.9-macos-x64.tar.gz";
-            validHash = "47fbdd69d719da80597dd5487f109b61e30b540499cced7b93de1ee01344351e";
+            url = "https://github.com/SChernykh/p2pool/releases/download/v2.2.1/p2pool-v2.2.1-macos-x64.tar.gz";
+            fileName = m_p2poolPath + "/p2pool-v2.2.1-macos-x64.tar.gz";
+            validHash = "d973a8dca922f209dfb6f203006f93664e19d870975621bec07e9d855e79d7d5";
         #endif
         QFile file(fileName);
         epee::net_utils::http::http_simple_client http_client;
@@ -96,7 +96,7 @@ void P2PoolManager::download() {
                 file.open(QIODevice::WriteOnly);
                 file.write(data);
                 file.close();
-                QProcess::execute("tar", {"-xzf", fileName, "--strip=1", "-C", QApplication::applicationDirPath()});
+                QProcess::execute("tar", {"-xzf", fileName, "--strip=1", "-C", m_p2poolPath});
                 QFile::remove(fileName);
                 if (isInstalled()) {
                     emit p2poolDownloadSuccess();
@@ -119,7 +119,7 @@ bool P2PoolManager::isInstalled() {
 }
 
 void P2PoolManager::getStatus() {
-    QString statsPath = QApplication::applicationDirPath() + "/stats/local/miner";
+    QString statsPath = m_p2poolPath + "/stats/local/miner";
     bool status = true;
     if (!QFileInfo(statsPath).isFile() || !started)
     {
@@ -158,7 +158,7 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
 
     if (!arguments.contains("--data-api")) {
         QDir dir;
-        QString dirName = QApplication::applicationDirPath() + "/stats/";
+        QString dirName = m_p2poolPath + "/stats/";
         QDir statsDir(dirName);
         if (dir.exists(dirName)) {
             statsDir.removeRecursively();
@@ -170,7 +170,7 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     if (!arguments.contains("--start-mining")) {
         arguments << "--start-mining" << threads;
     }
-    
+
     if (chain == "mini") {
         arguments << "--mini";
     }
@@ -178,7 +178,7 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     if (!arguments.contains("--wallet")) {
         arguments << "--wallet" << address;
     }
-    
+
     qDebug() << "starting p2pool " + m_p2pool;
     qDebug() << "With command line arguments " << arguments;
 
@@ -189,7 +189,7 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     // Set program parameters
     m_p2poold->setProgram(m_p2pool);
     m_p2poold->setArguments(arguments);
-    m_p2poold->setWorkingDirectory(QApplication::applicationDirPath());
+    m_p2poold->setWorkingDirectory(m_p2poolPath);
 
     // Start p2pool
     started = m_p2poold->startDetached();
@@ -206,15 +206,17 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
 void P2PoolManager::exit()
 {
     qDebug("P2PoolManager: exit()");
+    if (started) {
     #ifdef Q_OS_WIN
         QProcess::execute("taskkill",  {"/F", "/IM", "p2pool.exe"});
     #else
         QProcess::execute("pkill", {"p2pool"});
     #endif
-    started = false;
-    QString dirName = QApplication::applicationDirPath() + "/stats/";
-    QDir dir(dirName);
-    dir.removeRecursively();
+        started = false;
+        QString dirName = m_p2poolPath + "/stats/";
+        QDir dir(dirName);
+        dir.removeRecursively();
+    }
 }
 
 P2PoolManager::P2PoolManager(QObject *parent)
@@ -224,9 +226,14 @@ P2PoolManager::P2PoolManager(QObject *parent)
     started = false;
     // Platform dependent path to p2pool
 #ifdef Q_OS_WIN
-    m_p2pool = QApplication::applicationDirPath() + "/p2pool.exe";
+    m_p2poolPath = QApplication::applicationDirPath() + "/p2pool";
+    if (!QDir(m_p2poolPath).exists()) {
+        QDir().mkdir(m_p2poolPath);
+    }
+    m_p2pool = m_p2poolPath + "/p2pool.exe";
 #elif defined(Q_OS_UNIX)
-    m_p2pool = QApplication::applicationDirPath() + "/p2pool";
+    m_p2poolPath = QApplication::applicationDirPath();
+    m_p2pool = m_p2poolPath + "/p2pool";
 #endif
     if (m_p2pool.length() == 0) {
         qCritical() << "no p2pool binary defined for current platform";

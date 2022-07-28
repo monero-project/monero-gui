@@ -3,9 +3,9 @@ project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
-set(VERSION_MAJOR "17")
-set(VERSION_MINOR "3")
-set(VERSION_REVISION "2")
+set(VERSION_MAJOR "18")
+set(VERSION_MINOR "0")
+set(VERSION_REVISION "0")
 set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
@@ -13,6 +13,7 @@ option(STATIC "Link libraries statically, requires static Qt")
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
+option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
@@ -85,6 +86,10 @@ endif()
 
 if(WITH_DESKTOP_ENTRY)
     add_definitions(-DWITH_DESKTOP_ENTRY)
+endif()
+
+if(WITH_UPDATER)
+    add_definitions(-DWITH_UPDATER)
 endif()
 
 # Sodium
