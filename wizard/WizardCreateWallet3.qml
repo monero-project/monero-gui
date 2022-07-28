@@ -66,7 +66,7 @@ Rectangle {
 
             WizardNav {
                 progressSteps: 4
-                progress: 2
+                progress: 3
                 onPrevClicked: {
                     if (wizardController.m_wallet.isMultisig) {
                         wizardStateView.state = "wizardCreateMultisig2";

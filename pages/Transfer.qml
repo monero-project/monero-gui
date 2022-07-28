@@ -897,15 +897,12 @@ Rectangle {
                 console.log("Transfer: import partial key images clicked")
                 importMultisigKeyImagesDialog.open(); 
             }
-            helpTextLarge.text: qsTr("Required to sync multisig wallets to view true balance and create transactions") + translationManager.emptyString
-            helpTextSmall.text: {
-                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor +
-                       ";} p.orange{color:#ff9323;}</style>" +
-                       "<p>" + qsTr("1. Export key images from each wallet into two seperate files") + "</p>" +
-                       "<p>" + qsTr("2. Import the images into opposite wallets") + "</p>" +
-                       errorMessage + translationManager.emptyString
+            tooltip: {
+                qsTr("Required to sync multisig wallets to view true balance and create transactions") + translationManager.emptyString + 
+                "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor + 
+                ";} p.orange{color:#ff9323;}</style>" + "<p>" + qsTr("1. Export key images from each wallet into two seperate files") + "</p>" + 
+                "<p>" + qsTr("2. Import the images into opposite wallets") + "</p>" + errorMessage + translationManager.emptyString
             }
-            helpTextSmall.themeTransition: false
         }
 
     } // pageRoot

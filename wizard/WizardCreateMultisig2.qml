@@ -57,7 +57,7 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("Multisig Keys") + translationManager.emptyString
+                title: qsTr("Prepare Multisig") + translationManager.emptyString
                 subtitle: qsTr("In order to initalize a multisig wallet both wallet managers must exchange this information") + translationManager.emptyString
             }
 
@@ -132,8 +132,8 @@ Rectangle {
                 }
                 onNextClicked: {
                     wizardController.walletOptionsMultisigInfo2 = multisigKey2Input.text;
-                    wizardController.m_wallet.makeMultisig(wizardController.walletOptionsMultisigInfo2);
-                    wizardStateView.state = "wizardCreateWallet3";
+                    wizardController.walletOptionsMultisigKex = wizardController.m_wallet.makeMultisig(wizardController.walletOptionsMultisigInfo2);
+                    wizardStateView.state = "wizardCreateMultisig3";
                 }
             }
         }

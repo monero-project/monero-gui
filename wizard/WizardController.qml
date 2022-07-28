@@ -73,6 +73,7 @@ Rectangle {
         wizardController.tmpWalletFilename = '';
         wizardController.walletOptionsSubaddressLookahead = '';
         wizardController.walletOptionsMultisigInfo2 = '';
+        wizardController.walletOptionsMultsigKex = '';
         
         disconnect();
 
@@ -109,6 +110,8 @@ Rectangle {
     property string walletOptionsDeviceName: ''
     property bool   walletOptionsDeviceIsRestore: false
     property string walletOptionsMultisigInfo2: '' // other participant's multisig keys
+    property string walletOptionsMultisigKex: ''
+    property string walletOptionsMultisigKex2: '' // other participant's kex output
     property string tmpWalletFilename: ''
 
     // recovery made (restore wallet)
@@ -141,6 +144,7 @@ Rectangle {
         property WizardCreateDevice1 wizardCreateDevice1View: WizardCreateDevice1 { }
         property WizardCreateMultisig1 wizardCreateMultisig1View: WizardCreateMultisig1 { }
         property WizardCreateMultisig2 wizardCreateMultisig2View: WizardCreateMultisig2 { }
+        property WizardCreateMultisig3 wizardCreateMultisig3View: WizardCreateMultisig3 { }
         property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
@@ -229,6 +233,10 @@ Rectangle {
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig2View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig2View.pageHeight + 80 }
             }, State {
+                name: "wizardCreateMultisig3"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig3View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig3View.pageHeight + 80 }
+            },State {
                 name: "wizardOpenWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.pageHeight + 80 }
