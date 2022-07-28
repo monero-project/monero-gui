@@ -191,7 +191,7 @@ Rectangle {
                     inputDialog.onAcceptedCallback = function() {
                         var _restoreHeight;
                         if (inputDialog.inputText) {
-                            _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText);
+                            _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText.trim());
                         }
                         if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {
