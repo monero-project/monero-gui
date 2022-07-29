@@ -107,7 +107,7 @@ Rectangle {
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + firstKeyRow.firstKex
+                    source: "image://qrcode/" + firstKexRow.firstKex
                 }
 
                 closePolicy: Popup.CloseOnPressOutside
@@ -125,16 +125,13 @@ Rectangle {
             WizardNav {
                 progressSteps: 4
                 progress: 2
-                btnNext.enabled: multisigKeyxInput.text != "" // TODO: some sort of validation on this
+                btnNext.enabled: multisigKex2Input.text != "" // TODO: some sort of validation on this
                 onPrevClicked: {
                     wizardStateView.state = "wizardCreateMultisig2";
                 }
                 onNextClicked: {
                     wizardController.walletOptionsMultisigKex2 = multisigKex2Input.text;
-                    
-                    // TODO: exchange_multisig_keys
-                    wizardController.m_wallet.???(wizardController.walletOptionsMultisigKex2);
-
+                    wizardController.m_wallet.exchangeMultisigKeys(wizardController.walletOptionsMultisigKex, wizardController.walletOptionsMultisigKex2);
                     wizardStateView.state = "wizardCreateWallet3";
                 }
             }

@@ -73,7 +73,8 @@ Rectangle {
         wizardController.tmpWalletFilename = '';
         wizardController.walletOptionsSubaddressLookahead = '';
         wizardController.walletOptionsMultisigInfo2 = '';
-        wizardController.walletOptionsMultsigKex = '';
+        wizardController.walletOptionsMultisigKex = '';
+        wizardController.walletOptionsMultisigKex2 = '';
         
         disconnect();
 
