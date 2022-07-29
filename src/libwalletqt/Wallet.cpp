@@ -449,6 +449,17 @@ QString Wallet::makeMultisig(QString info)
     return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, 2));
 }
 
+QString Wallet::prepareMultisig()
+{
+    return QString::fromStdString(m_walletImpl->prepareMultisig());
+}
+
+QString Wallet::exchangeMultisigKeys(QString info)
+{
+    const std::vector<std::string> infoVector = { info.toStdString() };
+    return QString::fromStdString(m_walletImpl->exchangeMultisigKeys(infoVector));
+}
+
 bool Wallet::hasMultisigPartialKeyImages()
 {
     return m_walletImpl->hasMultisigPartialKeyImages();

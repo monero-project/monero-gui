@@ -199,7 +199,9 @@ public:
     Q_INVOKABLE Monero::MultisigState getMultisigState();
     Q_INVOKABLE bool isMultisig();
     Q_INVOKABLE QString getMultisigInfo();
+    Q_INVOKABLE QString prepareMultisig();
     Q_INVOKABLE QString makeMultisig(QString info);
+    Q_INVOKABLE QString exchangeMultisigKeys(QString info);
     Q_INVOKABLE bool hasMultisigPartialKeyImages();
     Q_INVOKABLE QString exportMultisigImages();
     Q_INVOKABLE bool exportMultisigImages(QString filename);

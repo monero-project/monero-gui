@@ -131,7 +131,7 @@ Rectangle {
                 }
                 onNextClicked: {
                     wizardController.walletOptionsMultisigKex2 = multisigKex2Input.text;
-                    wizardController.m_wallet.exchangeMultisigKeys(wizardController.walletOptionsMultisigKex, wizardController.walletOptionsMultisigKex2);
+                    wizardController.m_wallet.exchangeMultisigKeys(wizardController.walletOptionsMultisigKex2);
                     wizardStateView.state = "wizardCreateWallet3";
                 }
             }
