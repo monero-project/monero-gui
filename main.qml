@@ -971,7 +971,7 @@ ApplicationWindow {
             // Clear tx fields
             middlePanel.transferView.clearFields()
             txConfirmationPopup.clearFields()
-            successfulTxPopup.open(txid)
+            successfulTxPopup.open(transaction.txid ? transaction.txid : "")
         }
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
