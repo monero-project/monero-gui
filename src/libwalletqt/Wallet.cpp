@@ -443,10 +443,10 @@ QString Wallet::getMultisigInfo()
     return QString::fromStdString(m_walletImpl->getMultisigInfo());
 }
 
-QString Wallet::makeMultisig(QString info)
+QString Wallet::makeMultisig(QString info, quint8 threshold)
 {
     const std::vector<std::string> infoVector = { info.toStdString() };
-    return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, 2));
+    return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, threshold));
 }
 
 QString Wallet::prepareMultisig()

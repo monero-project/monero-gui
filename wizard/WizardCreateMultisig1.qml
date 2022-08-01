@@ -93,6 +93,22 @@ Rectangle {
                 text: "<b>%1</b> (%2).".arg(qsTr("Enter a strong password")).arg(qsTr("Beware this password cannot be recovered")) + translationManager.emptyString
             }
 
+            MoneroComponents.LineEdit {
+                    id: thresholdText
+                    Layout.maximumWidth: 180
+
+                    labelText: qsTr("Threshold (max signers = 16):") + translationManager.emptyString
+                    labelFontSize: 14
+                    fontSize: 16
+                    placeholderFontSize: 16
+                    placeholderText: "2"
+                    validator: IntValidator { bottom: 2 }
+                    text: persistentSettings.multisigThreshold ? persistentSettings.multisigThreshold : "2"
+                    onTextChanged: {
+                        persistentSettings.multisigThreshold = parseInt(thresholdText.text) >= 2 && parseInt(thresholdText.text) <= 16 ? parseInt(thresholdText.text) : 2;
+                    }
+                }
+
             WizardNav {
                 progressSteps: 4
                 progress: 0

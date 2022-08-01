@@ -125,7 +125,7 @@ Rectangle {
 
             WizardMenuItem {
                 headerText: qsTr("Create a new multisig wallet") + translationManager.emptyString
-                bodyText: qsTr("Choose this option to create a new 2/2 multisig wallet") + translationManager.emptyString
+                bodyText: qsTr("Choose this option to create a new multisig wallet") + translationManager.emptyString
                 imageIcon: "qrc:///images/create-wallet.png" // TODO: get cool multisig graphic
 
                 onMenuClicked: {

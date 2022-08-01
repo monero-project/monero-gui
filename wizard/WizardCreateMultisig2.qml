@@ -132,7 +132,7 @@ Rectangle {
                 }
                 onNextClicked: {
                     wizardController.walletOptionsMultisigInfo2 = multisigKey2Input.text;
-                    wizardController.walletOptionsMultisigKex = wizardController.m_wallet.makeMultisig(wizardController.walletOptionsMultisigInfo2);
+                    wizardController.walletOptionsMultisigKex = wizardController.m_wallet.makeMultisig(wizardController.walletOptionsMultisigInfo2, persistentSettings.multisigThreshold);
                     wizardStateView.state = "wizardCreateMultisig3";
                 }
             }
