@@ -168,7 +168,7 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     id: multisigLabel
                     visible: isMultisig
-                    text: qsTr("Multisig") + translationManager.emptyString
+                    text: qsTr("Multisig ") + persistentSettings.multisigThreshold + "/" + parseInt(persistentSettings.multisigSigners + 1) + translationManager.emptyString
                     anchors.top: parent.top
                     anchors.topMargin: 4
                     anchors.left: multisigLabel.visible ? multisigLabel.right : parent.left

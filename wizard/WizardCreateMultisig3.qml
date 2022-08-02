@@ -57,7 +57,7 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("Exchange Multisig Keys") + translationManager.emptyString
+                title: qsTr("Make Multisig") + translationManager.emptyString
                 subtitle: qsTr("In order to initalize a multisig wallet both wallet managers must exchange this information") + translationManager.emptyString
             }
 
@@ -117,7 +117,7 @@ Rectangle {
                 id: multisigKex2Input
                 Layout.fillWidth: true
                 labelFontSize: 14
-
+                placeholderText: qsTr("Comma separated info (e.g. info1,info2...infoN") + translationManager.emptyString
                 labelText: qsTr("Other participant's multisig kex output") + translationManager.emptyString
                 text: wizardController.walletOptionsMultisigKex2
             }

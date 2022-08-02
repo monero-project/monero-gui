@@ -42,7 +42,6 @@ import "." 1.0
 import "../js/TxUtils.js" as TxUtils
 import "../js/Utils.js" as Utils
 
-
 Rectangle {
     id: root
     signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)

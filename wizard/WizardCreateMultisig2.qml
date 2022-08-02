@@ -118,7 +118,7 @@ Rectangle {
                 id: multisigKey2Input
                 Layout.fillWidth: true
                 labelFontSize: 14
-
+                placeholderText: qsTr("Comma separated info (e.g. info1,info2...infoN") + translationManager.emptyString
                 labelText: qsTr("Other participant's multisig information") + translationManager.emptyString
                 text: wizardController.walletOptionsMultisigInfo2
             }
