@@ -200,8 +200,8 @@ public:
     Q_INVOKABLE bool isMultisig();
     Q_INVOKABLE QString getMultisigInfo();
     Q_INVOKABLE QString prepareMultisig();
-    Q_INVOKABLE QString makeMultisig(QString info, quint8);
-    Q_INVOKABLE QString exchangeMultisigKeys(QString info);
+    Q_INVOKABLE QString makeMultisig(const QVector<QString> &info, quint8 threshold);
+    Q_INVOKABLE QString exchangeMultisigKeys(const QVector<QString> &info);
     Q_INVOKABLE bool hasMultisigPartialKeyImages();
     Q_INVOKABLE QString exportMultisigImages();
     Q_INVOKABLE bool exportMultisigImages(QString filename);

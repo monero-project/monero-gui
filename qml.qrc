@@ -197,6 +197,7 @@
         <file>wizard/WizardCreateMultisig1.qml</file>
         <file>wizard/WizardCreateMultisig2.qml</file>
         <file>wizard/WizardCreateMultisig3.qml</file>
+        <file>wizard/WizardCreateMultisig4.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>wizard/WizardHeader.qml</file>
         <file>wizard/WizardHome.qml</file>

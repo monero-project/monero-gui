@@ -1420,6 +1420,7 @@ ApplicationWindow {
         property int segregationHeight: 0
         property int kdfRounds: 1
         property int multisigThreshold: 2
+        property int multisigSigners: 1
         property bool displayWalletNameInTitleBar: true
         property bool hideBalance: false
         property bool askPasswordBeforeSending: true

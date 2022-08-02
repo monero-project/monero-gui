@@ -75,6 +75,8 @@ Rectangle {
         wizardController.walletOptionsMultisigInfo2 = '';
         wizardController.walletOptionsMultisigKex = '';
         wizardController.walletOptionsMultisigKex2 = '';
+        wizardController.walletOptionsMultisigKex3 = '';
+        wizardController.walletOptionsMultisigKex4 = '';
         
         disconnect();
 
@@ -113,6 +115,8 @@ Rectangle {
     property string walletOptionsMultisigInfo2: '' // other participant's multisig keys
     property string walletOptionsMultisigKex: ''
     property string walletOptionsMultisigKex2: '' // other participant's kex output
+    property string walletOptionsMultisigKex3: ''
+    property string walletOptionsMultisigKex4: '' // other participant's kex booster output
     property string tmpWalletFilename: ''
 
     // recovery made (restore wallet)
@@ -146,6 +150,7 @@ Rectangle {
         property WizardCreateMultisig1 wizardCreateMultisig1View: WizardCreateMultisig1 { }
         property WizardCreateMultisig2 wizardCreateMultisig2View: WizardCreateMultisig2 { }
         property WizardCreateMultisig3 wizardCreateMultisig3View: WizardCreateMultisig3 { }
+        property WizardCreateMultisig4 wizardCreateMultisig4View: WizardCreateMultisig4 { }
         property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
@@ -237,7 +242,11 @@ Rectangle {
                 name: "wizardCreateMultisig3"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig3View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig3View.pageHeight + 80 }
-            },State {
+            }, State {
+                name: "wizardCreateMultisig4"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig4View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig4View.pageHeight + 80 }
+            }, State {
                 name: "wizardOpenWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.pageHeight + 80 }

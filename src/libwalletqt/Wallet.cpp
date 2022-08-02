@@ -443,21 +443,29 @@ QString Wallet::getMultisigInfo()
     return QString::fromStdString(m_walletImpl->getMultisigInfo());
 }
 
-QString Wallet::makeMultisig(QString info, quint8 threshold)
-{
-    const std::vector<std::string> infoVector = { info.toStdString() };
-    return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, threshold));
-}
-
 QString Wallet::prepareMultisig()
 {
     return QString::fromStdString(m_walletImpl->prepareMultisig());
 }
 
-QString Wallet::exchangeMultisigKeys(QString info)
+QString Wallet::makeMultisig(const QVector<QString> &info, quint8 threshold)
 {
-    const std::vector<std::string> infoVector = { info.toStdString() };
-    return QString::fromStdString(m_walletImpl->exchangeMultisigKeys(infoVector));
+    std::vector<std::string> iv;
+    for (const auto &k : info)
+    {
+        iv.push_back(k.toStdString());
+    }
+    return QString::fromStdString(m_walletImpl->makeMultisig(iv, threshold));
+}
+
+QString Wallet::exchangeMultisigKeys(const QVector<QString> &info)
+{
+    std::vector<std::string> iv;
+    for (const auto &k : info)
+    {
+        iv.push_back(k.toStdString());
+    }
+    return QString::fromStdString(m_walletImpl->exchangeMultisigKeys(iv));
 }
 
 bool Wallet::hasMultisigPartialKeyImages()

@@ -34,11 +34,11 @@ import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
 Rectangle {
-    id: wizardCreateMultisig3
+    id: wizardCreateMultisig4
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
-    property string viewName: "wizardCreateMultisig3"
+    property string viewName: "wizardCreateMultisig4"
 
     ColumnLayout {
         id: pageRoot
@@ -57,15 +57,15 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("Exchange Multisig Keys") + translationManager.emptyString
+                title: qsTr("Key Exchange Round Booster") + translationManager.emptyString
                 subtitle: qsTr("In order to initalize a multisig wallet both wallet managers must exchange this information") + translationManager.emptyString
             }
 
             RowLayout {
-                id: firstKexRow
-                property var firstKex: wizardController.walletOptionsMultisigKex
+                id: secondKexRow
+                property var secondKex: wizardController.walletOptionsMultisigKex3
                 MoneroComponents.LineEditMulti {
-                    id: multisigKex
+                    id: multisigKexBooster
 
                     spacing: 0
                     inputPaddingLeft: 16
@@ -80,7 +80,7 @@ Rectangle {
                     labelFontSize: 14
                     copyButton: true
                     readOnly: true
-                    text: parent.firstKex
+                    text: parent.secondKex
                 }
                 MoneroComponents.StandardButton {
                     id: showQR
@@ -107,37 +107,33 @@ Rectangle {
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + firstKexRow.firstKex
+                    source: "image://qrcode/" + secondKexRow.secondKex
                 }
 
                 closePolicy: Popup.CloseOnPressOutside
             }
 
             MoneroComponents.LineEdit {
-                id: multisigKex2Input
+                id: multisigKex4Input
                 Layout.fillWidth: true
                 labelFontSize: 14
 
                 labelText: qsTr("Other participant's multisig kex output") + translationManager.emptyString
-                text: wizardController.walletOptionsMultisigKex2
+                text: wizardController.walletOptionsMultisigKex4
             }
 
             WizardNav {
-                progressSteps: 4
-                progress: 2
-                btnNext.enabled: persistentSettings.multisigThreshold <= persistentSettings.multisigSigners && multisigKex2Input.text != "" // TODO: some sort of validation on this
+                progressSteps: 5
+                progress: 3
+                btnNext.enabled: multisigKexBooster2Input.text != "" // TODO: some sort of validation on this
                 onPrevClicked: {
-                    wizardStateView.state = "wizardCreateMultisig2";
+                    wizardStateView.state = "wizardCreateMultisig3";
                 }
                 onNextClicked: {
-                    wizardController.walletOptionsMultisigKex2 = multisigKex2Input.text;
-                    var infoList = wizardController.walletOptionsMultisigKex2.trim().split(",");
-                    wizardController.walletOptionsMultisigKex3 = wizardController.m_wallet.exchangeMultisigKeys(infoList);
-                    if (persistentSettings.multisigSigners + 1 === persistentSettings.multisigThreshold) {
-                        wizardStateView.state = "wizardCreateWallet3";
-                    } else {
-                        wizardStateView.state = "wizardCreateMultisig4";
-                    }
+                    wizardController.walletOptionsMultisigKex4 = multisigKex4Input.text;
+                    var infoList = wizardController.walletOptionsMultisigKex4.trim().split(",");
+                    wizardController.m_wallet.exchangeMultisigKeys(infoList);
+                    wizardStateView.state = "wizardCreateWallet3";
                 }
             }
         }
