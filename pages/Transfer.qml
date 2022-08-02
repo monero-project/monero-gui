@@ -1215,14 +1215,14 @@ Rectangle {
         cancelText: qsTr("Plain text") + translationManager.emptyString
         onRejected: {
             importMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
-            importMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            importMultisigKeyImagesDialog.okText = qsTr("Open file") + translationManager.emptyString;
             importPartialKeyImagesDialogASCII.open()
         }
 
         okText: qsTr("Load file") + translationManager.emptyString
         onAccepted: {
             importMultisigKeyImagesDialog.cancelText = qsTr("Plain text") + translationManager.emptyString; // workaround so button labels dont get reset
-            importMultisigKeyImagesDialog.okText = qsTr("Save as file") + translationManager.emptyString;
+            importMultisigKeyImagesDialog.okText = qsTr("Open file") + translationManager.emptyString;
             importMultisigKeyImagesFileDialog.open()
         }
     }
