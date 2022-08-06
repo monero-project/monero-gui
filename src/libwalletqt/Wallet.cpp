@@ -545,6 +545,7 @@ bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 void Wallet::startRefresh()
 {
     m_refreshEnabled = true;
+    m_refreshNow = true;
 }
 
 void Wallet::pauseRefresh()
@@ -1142,6 +1143,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_subaddressModel(nullptr)
     , m_subaddressAccount(new SubaddressAccount(m_walletImpl->subaddressAccount(), this))
     , m_subaddressAccountModel(nullptr)
+    , m_refreshNow(false)
     , m_refreshEnabled(false)
     , m_refreshing(false)
     , m_scheduler(this)
@@ -1195,10 +1197,11 @@ void Wallet::startRefreshThread()
             {
                 const auto now = std::chrono::steady_clock::now();
                 const auto elapsed = now - last;
-                if (elapsed >= refreshInterval)
+                if (elapsed >= refreshInterval || m_refreshNow)
                 {
                     refresh(false);
                     last = std::chrono::steady_clock::now();
+                    m_refreshNow = false;
                 }
             }
 
