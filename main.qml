@@ -481,7 +481,9 @@ ApplicationWindow {
             walletInitialized = true
 
             // check if daemon was already mining and add mining logo if true
-            middlePanel.advancedView.miningView.update();
+            if (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining) {
+                middlePanel.advancedView.miningView.update();
+            }
         }
     }
 
