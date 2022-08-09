@@ -5,12 +5,12 @@ ARG ANDROID_NDK_REVISION=21e
 ARG ANDROID_NDK_HASH=c3ebc83c96a4d7f539bd72c241b2be9dcd29bda9
 ARG ANDROID_SDK_REVISION=7302050_latest
 ARG ANDROID_SDK_HASH=7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
-ARG QT_VERSION=5.15.2
+ARG QT_VERSION=v5.15.6-lts-lgpl
 
 WORKDIR /opt/android
 ENV WORKDIR=/opt/android
 
-ENV ANDROID_NATIVE_API_LEVEL=28
+ENV ANDROID_NATIVE_API_LEVEL=29
 ENV ANDROID_API=android-${ANDROID_NATIVE_API_LEVEL}
 ENV ANDROID_CLANG=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang
 ENV ANDROID_CLANGPP=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang++
@@ -79,7 +79,6 @@ RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
     -skip qtpurchasing \
     -skip qtgamepad -skip qtscript -skip qtdoc \
     -no-warnings-are-errors \
-    && sed -i '213,215d' qtbase/src/3rdparty/pcre2/src/sljit/sljitConfigInternal.h \
     && PATH=${HOST_PATH} make -j${THREADS} \
     && PATH=${HOST_PATH} make -j${THREADS} install \
     && cd qttools/src/linguist/lrelease \
