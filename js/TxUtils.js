@@ -71,9 +71,8 @@ function checkSignature(signature) {
 
 function isValidOpenAliasAddress(address) {
     address = address.trim()
-    var dot = address.indexOf('.')
-    if (dot < 0)
-        return false
     // we can get an awful lot of valid domains, including non ASCII chars... accept anything
-    return true
+    // there should be something after the .
+    // make sure it is not some kind of floating number
+    return address.length > 2 && isNaN(parseFloat(address)) && address.indexOf('.') >= 0
 }
