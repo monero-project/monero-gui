@@ -473,6 +473,7 @@ private:
     QString m_daemonPassword;
     QString m_proxyAddress;
     mutable QMutex m_proxyMutex;
+    std::atomic<bool> m_refreshNow;
     std::atomic<bool> m_refreshEnabled;
     std::atomic<bool> m_refreshing;
     WalletListenerImpl *m_walletListener;
