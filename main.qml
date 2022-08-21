@@ -2034,7 +2034,7 @@ ApplicationWindow {
             return;
         }
 
-        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16";
+        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16 --no-igd";
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon(function() {
                 appWindow.startDaemon(simpleModeFlags)
