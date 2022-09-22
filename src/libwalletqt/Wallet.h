@@ -461,6 +461,7 @@ private:
     mutable QElapsedTimer m_connectionStatusTime;
     bool m_disconnected;
     std::atomic<bool> m_initialized;
+    std::atomic<bool> m_initializing;
     uint32_t m_currentSubaddressAccount;
     Subaddress * m_subaddress;
     mutable SubaddressModel * m_subaddressModel;
