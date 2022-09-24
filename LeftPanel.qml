@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
@@ -50,6 +51,7 @@ Rectangle {
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
+    property alias accountList : accountList
 
     property int titleBarHeight: 50
     property string copyValue: ""
@@ -120,7 +122,40 @@ Rectangle {
                     width: 260
                     height: 135
                     fillMode: Image.PreserveAspectFit
-                    source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black.png" : "qrc:///images/card-background-white.png"
+                    source: {
+                        if (MoneroComponents.Style.blackTheme) {
+                            if ([0, 8, 16, 24, 32].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black0.png"
+                            else if ([1, 9, 17, 25, 33].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black1.png"
+                            else if ([2, 10, 18, 26, 34].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black2.png"
+                            else if ([3, 11, 19, 27, 35].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black3.png"
+                            else if ([4, 12, 20, 28, 36].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black4.png"
+                            else if ([5, 13, 21, 29, 37].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black5.png"
+                            else if ([6, 14, 22, 30, 38].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black6.png"
+                            else if ([7, 15, 23, 31, 39].indexOf(currentAccountIndex) >= 0) return "qrc:///images/card-background-black7.png"
+                            else return "qrc:///images/card-background-black0.png"
+                        } else {
+                            return "qrc:///images/card-background-white.png"
+                        }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        scrollGestureEnabled: false
+                        hoverEnabled: false
+                        onWheel: {
+                            if (wheel.angleDelta.y < 0 && currentAccountIndex + 1 < accountList.count) {
+                                appWindow.currentWallet.switchSubaddressAccount(currentAccountIndex + 1);
+                            } else if (wheel.angleDelta.y > 0 && currentAccountIndex > 0) {
+                                appWindow.currentWallet.switchSubaddressAccount(currentAccountIndex - 1);
+                            }
+                            // select first address on receive page
+                            middlePanel.receiveView.subaddressListView.currentIndex = 0;
+                            // refresh transfer page
+                            if (middlePanel.state == "History") {
+                                middlePanel.historyView.onPageClosed()
+                                middlePanel.historyView.onPageCompleted()
+                            }
+                        }
+                    }
                 }
 
                 DropShadow {
@@ -161,6 +196,40 @@ Rectangle {
                     font.bold: true
                     color: "#ff9323"
                     themeTransition: false
+                }
+
+                Rectangle {
+                    // progress dots
+                    anchors.top: card.bottom
+                    anchors.topMargin: 10
+                    anchors.horizontalCenter: card.horizontalCenter
+                    color: "transparent"
+
+                    ListView {
+                        id: accountList
+                        // model is loaded in main.qml after wallet is initialized
+                        // model: currentWallet.subaddressAccountModel
+                        visible: false
+                        delegate: Item {}
+                    }
+
+                    PageIndicator {
+                        id: accountIndicator
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: count > 1 && count < 42
+                        currentIndex: currentAccountIndex
+                        count: accountList.count
+                        interactive: false
+                        spacing: count > 26 ? 2 : count > 20 ? 5 : count > 17 ? 8 : count > 13 ? 10 : count > 7 ? 15 : 25
+                        delegate: Rectangle {
+                            implicitWidth: accountIndicator.count > 26 ? 5 : 6
+                            implicitHeight: accountIndicator.count > 26 ? 5 : 6
+                            radius: accountIndicator.count > 26 ? 5 : 6
+                            // @TODO: Qt 5.10+ replace === with <=
+                            color: index === currentAccountIndex ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.progressBarBackgroundColor
+                        }
+                    }
                 }
             }
 

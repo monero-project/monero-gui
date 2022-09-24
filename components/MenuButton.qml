@@ -92,7 +92,21 @@ Rectangle {
         anchors.leftMargin: 20
         height: parent.height
         width: 2
-        color: button.checked ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
+        color: {
+            if (button.checked) {
+                if ([0, 8, 16, 24, 32].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor0
+                else if ([1, 9, 17, 25, 33].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor1
+                else if ([2, 10, 18, 26, 34].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor2
+                else if ([3, 11, 19, 27, 35].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor3
+                else if ([4, 12, 20, 28, 36].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor4
+                else if ([5, 13, 21, 29, 37].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor5
+                else if ([6, 14, 22, 30, 38].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor6
+                else if ([7, 15, 23, 31, 39].indexOf(currentAccountIndex) >= 0) return MoneroComponents.Style.accountColor7
+                else return MoneroComponents.Style.accountColor0
+            } else {
+                return "transparent"
+            }
+        }
 
         // button text
         MoneroComponents.TextPlain {
