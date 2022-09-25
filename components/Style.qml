@@ -81,6 +81,7 @@ QtObject {
     property string leftPanelBackgroundGradientStart: blackTheme ? _b_leftPanelBackgroundGradientStart : _w_leftPanelBackgroundGradientStart
     property string leftPanelBackgroundGradientStop: blackTheme ? _b_leftPanelBackgroundGradientStop : _w_leftPanelBackgroundGradientStop
     property string historyHeaderTextColor: blackTheme ? _b_historyHeaderTextColor : _w_historyHeaderTextColor
+    property var accountColors: blackTheme ? _b_accountColors : _w_accountColors
 
     property string _b_defaultFontColor: "white"
     property string _b_dimmedFontColor: "#BBBBBB"
@@ -142,6 +143,7 @@ QtObject {
     property string _b_leftPanelBackgroundGradientStart: "#222222"
     property string _b_leftPanelBackgroundGradientStop: "#1a1a1a"
     property string _b_historyHeaderTextColor: "#C0C0C0"
+    property var _b_accountColors: ["#6E513C", "#842129", "#458421", "#742184", "#291DBE", "#846F21", "#217F84", "#696969"]
 
     property string _w_defaultFontColor: "black"
     property string _w_dimmedFontColor: "#3f3f3f"
@@ -203,4 +205,5 @@ QtObject {
     property string _w_leftPanelBackgroundGradientStart: "white"
     property string _w_leftPanelBackgroundGradientStop: "#f5f5f5"
     property string _w_historyHeaderTextColor: "#515151"
+    property var _w_accountColors: ["#6E513C", "#6E513C", "#842129", "#458421", "#742184", "#291DBE", "#846F21", "#217F84", "#696969"]
 }
