@@ -227,6 +227,7 @@ CMD set -ex \
     -DLRELEASE_PATH="${PREFIX}/bin" \
     -DQT_ANDROID_APPLICATION_BINARY="monero-wallet-gui" \
     -DWITH_SCANNER=ON \
+    -DWITH_DESKTOP_ENTRY=OFF \
     ../../.. \
     && PATH=${HOST_PATH} make generate_translations_header \
     && make -j${THREADS} -C src \
