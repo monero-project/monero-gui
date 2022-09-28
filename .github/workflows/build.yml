@@ -162,6 +162,8 @@ jobs:
       run: docker build --tag monero:build-env-android --build-arg THREADS=3 --file Dockerfile.android .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -e THREADS=3 monero:build-env-android
+    - name: Remove obsolete docker layers
+      run: docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi || true
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ github.job }}
