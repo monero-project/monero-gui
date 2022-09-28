@@ -580,7 +580,8 @@ Rectangle {
                             Layout.fillHeight: true
                             anchors.top: parent.top
                             anchors.bottom: parent.bottom
-                            color: "darkgrey"
+                            property int currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
+                            color: MoneroComponents.Style.accountColors[currentAccountIndex % MoneroComponents.Style.accountColors.length]
                             width: 2
                         }
 

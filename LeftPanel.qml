@@ -120,7 +120,7 @@ Rectangle {
                     width: 260
                     height: 135
                     fillMode: Image.PreserveAspectFit
-                    source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black.png" : "qrc:///images/card-background-white.png"
+                    source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
                 }
 
                 DropShadow {
