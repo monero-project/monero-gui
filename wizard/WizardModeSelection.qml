@@ -41,7 +41,7 @@ Rectangle {
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardModeSelection1"
     property bool portable: persistentSettings.portable
-    property bool simpleModeAvailable: !isTails && appWindow.persistentSettings.nettype == 0
+    property bool simpleModeAvailable: !isTails && appWindow.persistentSettings.nettype == 0 && !isAndroid
 
     function applyWalletMode(mode, wizardState) {
         if (!persistentSettings.setPortable(portable)) {
