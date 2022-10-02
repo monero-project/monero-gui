@@ -74,6 +74,7 @@ ColumnLayout {
             active: settingsStateView.state == "Log"
             text: qsTr("Log") + translationManager.emptyString
             onSelected: settingsStateView.state = "Log"
+            visible: !isAndroid
         }
         MoneroComponents.NavbarItem {
             active: settingsStateView.state == "Info"
