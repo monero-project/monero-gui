@@ -55,6 +55,7 @@ Rectangle{
             Layout.fillWidth: true
             Layout.preferredHeight: 90
             color: "transparent"
+            visible: !isAndroid
 
             Rectangle {
                 id: localNodeDivider
