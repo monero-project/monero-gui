@@ -52,7 +52,8 @@ Rectangle {
         font.pixelSize: 12
         font.bold: true
         text: ""
-        color: MoneroComponents.Style.inlineButtonTextColor
+        color: labelButton.enabled ? MoneroComponents.Style.inlineButtonTextColor : MoneroComponents.Style.buttonTextColorDisabled
+        themeTransition: false
     }
 
     MouseArea {

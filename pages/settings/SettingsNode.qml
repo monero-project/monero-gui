@@ -280,36 +280,67 @@ Rectangle{
             }
 
             RowLayout {
-                MoneroComponents.LineEditMulti {
+                MoneroComponents.LineEdit {
                     id: blockchainFolder
+                    function getDefaultBlockchainDataDir() {
+                        if (isLinux) {
+                            return "/home/" + defaultAccountName + "/.bitmonero";
+                        } else if (isWindows) {
+                            return "C:\\ProgramData\\bitmonero";
+                        } else if (isMac) {
+                            return "/Users/" + defaultAccountName +"/.bitmonero";
+                        } else {
+                            return "";
+                        }
+                    }
                     Layout.preferredWidth: 200
                     Layout.fillWidth: true
+                    enabled: !appWindow.daemonRunning
                     fontSize: 15
                     labelFontSize: 14
-                    property string style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
-                    labelText: qsTr("Blockchain location") + style + " <a href='#'> (%1)</a>".arg(qsTr("Change")) + translationManager.emptyString
-                    labelButtonText: qsTr("Reset") + translationManager.emptyString
-                    labelButtonVisible: text
-                    placeholderText: qsTr("(default)") + translationManager.emptyString
-                    placeholderFontSize: 15
-                    readOnly: true
-                    text: persistentSettings.blockchainDataDir
-                    addressValidation: false
-                    onInputLabelLinkActivated: {
-                        //mouse.accepted = false
-                        if(persistentSettings.blockchainDataDir !== ""){
-                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
-                        }
-                        blockchainFileDialog.open();
-                        blockchainFolder.focus = true;
+                    labelText: qsTr("Blockchain location") + translationManager.emptyString
+                    resetButton: persistentSettings.blockchainDataDir !== ""
+                    onResetButtonClicked: {
+                        persistentSettings.blockchainDataDir = ""
                     }
-                    onLabelButtonClicked: persistentSettings.blockchainDataDir = ""
+                    readOnly: true
+                    text: persistentSettings.blockchainDataDir !== "" ? persistentSettings.blockchainDataDir
+                                                                      : getDefaultBlockchainDataDir() + translationManager.emptyString
+
+                    MoneroComponents.InlineButton {
+                        enabled: !appWindow.daemonRunning
+                        fontFamily: FontAwesome.fontFamilySolid
+                        fontStyleName: "Solid"
+                        fontPixelSize: 18
+                        text: FontAwesome.folderOpen
+                        tooltip: qsTr("Change") + translationManager.emptyString
+                        tooltipLeft: true
+                        onClicked: {
+                            if (persistentSettings.blockchainDataDir !== "") {
+                                blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                            } else {
+                                if (blockchainFolder.text == blockchainFolder.getDefaultBlockchainDataDir()) {
+                                    persistentSettings.blockchainDataDir = "";
+                                } else {
+                                    persistentSettings.blockchainDataDir = blockchainFolder.text;
+                                }
+                                if (isMac) {
+                                    blockchainFileDialog.folder = "file://" + blockchainFolder.getDefaultBlockchainDataDir();
+                                } else {
+                                    blockchainFileDialog.folder = walletManager.localPathToUrl(blockchainFolder.text);
+                                }
+                            }
+                            blockchainFileDialog.open();
+                            blockchainFolder.focus = true;
+                        }
+                    }
                 }
             }
 
             MoneroComponents.LineEditMulti {
                 id: daemonFlags
                 Layout.fillWidth: true
+                enabled: !appWindow.daemonRunning
                 labelFontSize: 14
                 fontSize: 15
                 wrapMode: Text.WrapAnywhere
@@ -336,7 +367,7 @@ Rectangle{
                         id: bootstrapNodeEdit
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20
-
+                        enabled: !appWindow.daemonRunning
                         daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
                         daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
                         initialAddress: persistentSettings.bootstrapNodeAddress

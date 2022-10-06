@@ -73,16 +73,10 @@ Item {
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: inlineButton.isFontAwesomeIcon ? 22 : inlineButton.small ? 14 : 16
-            color: inlineButton.textColor
+            color: inlineButton.enabled ? inlineButton.textColor : MoneroComponents.Style.buttonTextColorDisabled
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             themeTransition: false
-
-            MoneroEffects.ColorTransition {
-                targetObj: inlineText
-                blackColor: MoneroComponents.Style._b_inlineButtonTextColor
-                whiteColor: MoneroComponents.Style._w_inlineButtonTextColor
-            }
         }
 
         MoneroComponents.Tooltip {

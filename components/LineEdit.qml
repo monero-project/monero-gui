@@ -73,6 +73,8 @@ ColumnLayout {
     property alias cursorPosition: input.cursorPosition
     property bool copyButton: false
     property bool pasteButton: false
+    property bool resetButton: false
+
     property alias copyButtonText: copyButtonId.text
     property alias copyButtonEnabled: copyButtonId.enabled
 
@@ -109,6 +111,7 @@ ColumnLayout {
     signal editingFinished();
     signal accepted();
     signal textUpdated();
+    signal resetButtonClicked();
 
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
@@ -196,6 +199,7 @@ ColumnLayout {
                     }
                 }
                 visible: copyButton && input.text !== ""
+                enabled: item.enabled
             }
 
             MoneroComponents.LabelButton {
@@ -206,6 +210,17 @@ ColumnLayout {
                 }
                 text: qsTr("Paste") + translationManager.emptyString
                 visible: pasteButton
+                enabled: item.enabled
+            }
+
+            MoneroComponents.LabelButton {
+                id: resetButtonId
+                onClicked: {
+                    item.resetButtonClicked()
+                }
+                text: qsTr("Reset") + translationManager.emptyString
+                visible: resetButton
+                enabled: item.enabled
             }
         }
     }
