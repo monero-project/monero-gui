@@ -469,7 +469,7 @@ ApplicationWindow {
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
         if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
-            daemonManager.runningAsync(persistentSettings.nettype, function(running) {
+            daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
                 }
@@ -714,7 +714,7 @@ ApplicationWindow {
             appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
         }
         p2poolManager.exit()
-        daemonManager.stopAsync(persistentSettings.nettype, function(result) {
+        daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(result) {
             daemonStartStopInProgress = 0;
             if (splash) {
                 hideProcessingSplash();
@@ -2141,7 +2141,7 @@ ApplicationWindow {
             if (currentWallet) {
                 handler(!currentWallet.disconnected);
             } else {
-                daemonManager.runningAsync(persistentSettings.nettype, handler);
+                daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, handler);
             }
         }
     }

@@ -297,7 +297,7 @@ Rectangle {
                                             startP2Pool()
                                         }
                                         else {
-                                            daemonManager.stopAsync(persistentSettings.nettype, startP2PoolLocal)
+                                            daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, startP2PoolLocal)
                                         }
                                     }
                                     else {
