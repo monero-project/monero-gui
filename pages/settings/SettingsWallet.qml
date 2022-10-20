@@ -138,6 +138,7 @@ Rectangle {
                 inputDialog.onAcceptedCallback = function() {
                     var txid = inputDialog.inputText.trim();
                     if (currentWallet.scanTransactions([txid])) {
+                        updateBalance();
                         appWindow.showStatusMessage(qsTr("Transaction successfully scanned"), 3);
                     } else {
                         appWindow.showStatusMessage(qsTr("Failed to scan transaction") + ": " + currentWallet.errorString, 5);
