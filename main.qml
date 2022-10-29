@@ -694,7 +694,8 @@ ApplicationWindow {
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet ? currentWallet.connected() : Wallet.ConnectionStatus_Disconnected
 
-        currentWallet.refreshHeightAsync();
+        if (currentWallet)
+            currentWallet.refreshHeightAsync();
     }
 
     function startDaemon(flags){
