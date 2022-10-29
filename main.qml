@@ -379,7 +379,7 @@ ApplicationWindow {
     }
 
     function isTrustedDaemon() {
-        return !persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted;
+        return appWindow.walletMode >= 2 && (!persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted);
     }
 
     function usefulName(path) {
