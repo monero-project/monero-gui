@@ -144,7 +144,7 @@ Rectangle {
                         console.error("Error: ", currentWallet.errorString);
                         if (currentWallet.errorString == "The wallet has already seen 1 or more recent transactions than the scanned tx") {
                             informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                            informationPopup.text = currentWallet.errorString + ".\n\nIn order to rescan the transaction, you can re-sync your wallet by resetting the wallet restore height in the Settings > Info page. Make sure to use a restore height from before your wallet's earliest transaction." + translationManager.emptyString;
+                            informationPopup.text = qsTr("The wallet has already seen 1 or more recent transactions than the scanned transaction.\n\nIn order to rescan the transaction, you can re-sync your wallet by resetting the wallet restore height in the Settings > Info page. Make sure to use a restore height from before your wallet's earliest transaction.") + translationManager.emptyString;
                             informationPopup.icon = StandardIcon.Critical
                             informationPopup.onCloseCallback = null
                             informationPopup.open();
