@@ -3531,12 +3531,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="121"/>
         <source>Create a new wallet from device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Създайте ново портмоен от устройство.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation type="unfinished"></translation>
+        <translation>Възстановете портмоне от устройство. Използвайте това ако преди сте ползвали хардуерно устройство.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
@@ -3577,7 +3577,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Възстанови портфейл</translation>
+        <translation>Възстанови портфейл</translation>
     </message>
 </context>
 <context>
@@ -3615,12 +3615,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Възстановете височина на портмонето</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако е нувно да възстановите портмоне в бъдещето, оточняването на номера на блока ще възстнови портмонето ви по-бързо.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
@@ -3674,7 +3674,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновяване</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
@@ -3689,7 +3689,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
         <source>Prune blockchain</source>
-        <translation type="unfinished"></translation>
+        <translation>Прунирайте блокчейна</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="132"/>
@@ -3712,7 +3712,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
         <source>Welcome to Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Добре дошли в Монеро!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
@@ -3779,7 +3779,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="202"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Мрежа</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="224"/>
@@ -3810,7 +3810,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Временната полза на дистанционнен адрес би била полезна за да ползвате Монеро моментално (поради това името bootstrap), но знайте, че докато ползвате дистанционнен нод (включително с настройката bootstrap), нодовете могат да ви следят IP адреса, данните в блока и могат да ви пращат неточна информация за транзакциите.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3856,12 +3856,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="48"/>
         <source>Failed to configure portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Провали се конфигурацията на подвижен режим</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="75"/>
         <source>Mode selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Избор на режим</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="76"/>
@@ -3878,7 +3878,7 @@ your input may be required.</source>
         <location filename="../wizard/WizardModeSelection.qml" line="85"/>
         <location filename="../wizard/WizardModeSelection.qml" line="118"/>
         <source>Not available on Tails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е достъпно в Tails</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="88"/>
@@ -3889,7 +3889,7 @@ your input may be required.</source>
         <location filename="../wizard/WizardModeSelection.qml" line="90"/>
         <location filename="../wizard/WizardModeSelection.qml" line="123"/>
         <source>Available on mainnet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Достъпно на mainnet.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="121"/>
@@ -3909,22 +3909,22 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="159"/>
         <source>Optional features</source>
-        <translation type="unfinished"></translation>
+        <translation>Избираеми функции</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="160"/>
         <source>Select enhanced functionality you would like to enable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изберете подобрена функция която искате да включите</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="165"/>
         <source>Portable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Подвижен режим</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="166"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Създайте подвижни портмонета и ги използвайте на всеки компютър. Включете това ако искате Монеро на USB, външен драйв, или друг подвижен съхранителен медиум.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="175"/>
@@ -3947,7 +3947,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardNav.qml" line="118"/>
         <source>Step (%1) of (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Стъпка (%1) от (%2)</translation>
     </message>
 </context>
 <context>
@@ -3965,7 +3965,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
         <source>Recently opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Наскоро отворени</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="166"/>
@@ -3985,17 +3985,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
         <source>Mainnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Mainnet портмоне</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Testnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testnet портмоне</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Stagenet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Stagenet портмоне</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
@@ -4033,22 +4033,22 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="146"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Възстановете от QR код</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="211"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Въведете 25 думов мнемоничен сийд</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="220"/>
         <source>Seed offset passphrase (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Паролна фраза за сийда (по избор)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="228"/>
         <source>Passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Паролна фраза</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
@@ -4068,7 +4068,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Leave blank to create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставете празно за да създадете портмоне в режим само гледане</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
@@ -4118,7 +4118,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="70"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Създай портфейл</translation>
+        <translation>Създай портфейл</translation>
     </message>
 </context>
 <context>
@@ -4136,7 +4136,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Mnemonic seed language</source>
-        <translation type="unfinished"></translation>
+        <translation>Език на мнемоничния сийд</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
@@ -4164,17 +4164,17 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="70"/>
         <source>Wallet name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Името нан портмонето е празно</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="74"/>
         <source>Wallet name is invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Името на портмонето е невалидно</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="80"/>
         <source>Wallet already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Портмонето вече съществува</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="88"/>
@@ -4184,7 +4184,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Wallet location is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Местоположението на портмонето е празно</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="113"/>
@@ -4256,33 +4256,33 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="309"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Затваряне на портмонето...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="494"/>
         <source>Please confirm transaction on the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля потвърдете транзакцията на устройството...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="496"/>
         <location filename="../main.qml" line="501"/>
         <source>Please proceed to the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Моля проължете към устройството...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="508"/>
         <source>Signing transaction in the device...</source>
-        <translation type="unfinished"></translation>
+        <translation>Подписване на транзакцията в устройството...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="519"/>
         <source>Opening wallet ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Отваряне на портмонето...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поправка на несъвместимият кеш на портмонето. Портмонето се ресинхронизира.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="663"/>
@@ -4302,17 +4302,17 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="866"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Създаване на транзакция...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="945"/>
         <source>Sending transaction ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпращане на транзакция...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="973"/>
         <source>Failed to store the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Провали се съхранението на портмонето</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1011"/>
@@ -4346,32 +4346,32 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1070"/>
         <source>Reserve proof check</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка на резервно доказателство</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1072"/>
         <source>Good signature on %1 total and %2 spent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добър подпис на %1 общо и %2 изхарчени</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1344"/>
         <source>Desktop entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Записка на десктопа</translation> 
     </message>
     <message>
         <location filename="../main.qml" line="1345"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Бихте ли искали да регистрирате Monero GUI Desktop записка?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1347"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Не</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1348"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../main.qml" line="141"/>
@@ -4383,12 +4383,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1583"/>
         <source>Save transaction file</source>
-        <translation type="unfinished"></translation>
+        <translation>Запазете транзакционен файл</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1583"/>
         <source>Send transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпратете транзакция</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1640"/>
@@ -4428,37 +4428,37 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1782"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>Главен акаунт</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1974"/>
         <source>Autosaved the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Портмонето бе запазено автоматично</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1976"/>
         <source>Failed to autosave the wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Провали се автоматичното запазване на портмонето</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2092"/>
         <source>Local node is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Местният нод върви</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2093"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
-        <translation type="unfinished"></translation>
+        <translation>Искате ли да спрете местният нод или да върви във фона?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2095"/>
         <source>Force stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Ръчно спиране</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2096"/>
         <source>Keep it running</source>
-        <translation type="unfinished"></translation>
+        <translation>Оставете го да върви</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2116"/>
@@ -4468,17 +4468,17 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="2131"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка на статуса на местния нод...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
         <source>Save as file</source>
-        <translation type="unfinished"></translation>
+        <translation>Запазване като файл</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Потвърждение</translation>
     </message>
     <message>
         <location filename="../main.qml" line="954"/>
