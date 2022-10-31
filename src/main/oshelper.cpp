@@ -31,6 +31,7 @@
 #include <unordered_set>
 
 #include <QCoreApplication>
+#include <QClipboard>
 #include <QGuiApplication>
 #include <QFileDialog>
 #include <QScreen>
@@ -156,6 +157,26 @@ QList<QString> OSHelper::grabQrCodesFromScreen() const
         qWarning() << e.what();
     }
 
+    return codes;
+}
+
+QList<QString> OSHelper::grabQrCodesFromClipboard() const
+{
+    QList<QString> codes;
+
+    try
+    {
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        const QImage clipboardImage = clipboard->image();
+        const std::vector<std::string> decoded = QrDecoder().decode(clipboardImage);
+        std::for_each(decoded.begin(), decoded.end(), [&codes](const std::string &code) {
+            codes.push_back(QString::fromStdString(code));
+        });
+    }
+    catch (const std::exception &e)
+    {
+        qWarning() << e.what();
+    }
     return codes;
 }
 

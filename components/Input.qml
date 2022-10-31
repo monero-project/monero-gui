@@ -42,6 +42,20 @@ TextField {
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
 
+    Keys.onPressed: {
+        if (event.matches(StandardKey.Paste)) {
+            const codes = oshelper.grabQrCodesFromClipboard()
+            if (codes) {
+                for (var index = 0; index < codes.length; ++index) {
+                    const parsed = walletManager.parse_uri_to_object(codes[index]);
+                    if (!parsed.error) {
+                        textField.text = walletManager.make_uri(parsed.address, walletManager.amountFromString(parsed.amount), parsed.tx_description, parsed.recipient_name)
+                    }
+                }
+            }
+        }
+    }
+
     background: Rectangle {
         color: "transparent"
     }
