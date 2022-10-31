@@ -281,8 +281,10 @@ Rectangle {
 
     function onCreateWalletFromDeviceCompleted(written){
         hideProcessingSplash();
-        if(written){
+        if (written && wizardController.walletOptionsDeviceIsRestore) {
             wizardStateView.state = "wizardCreateWallet2";
+        } else if (written && !wizardController.walletOptionsDeviceIsRestore) {
+            wizardStateView.state = "wizardCreateDevice2";
         } else {
             errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
         }

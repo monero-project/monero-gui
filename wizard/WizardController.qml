@@ -136,6 +136,7 @@ Rectangle {
         property WizardRestoreWallet3 wizardRestoreWallet3View: WizardRestoreWallet3 { }
         property WizardRestoreWallet4 wizardRestoreWallet4View: WizardRestoreWallet4 { }
         property WizardCreateDevice1 wizardCreateDevice1View: WizardCreateDevice1 { }
+        property WizardCreateDevice2 wizardCreateDevice2View: WizardCreateDevice2 { }
         property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
@@ -215,6 +216,10 @@ Rectangle {
                 name: "wizardCreateDevice1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateDevice1View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice1View.pageHeight + 80 }
+            }, State {
+                name: "wizardCreateDevice2"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateDevice2View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice2View.pageHeight + 80 }
             }, State {
                 name: "wizardOpenWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
