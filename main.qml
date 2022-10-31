@@ -602,6 +602,7 @@ ApplicationWindow {
     function connectRemoteNode() {
         console.log("connecting remote node");
 
+        currentWallet.setOffline(false); // make sure
         const callback = function() {
             persistentSettings.useRemoteNode = true;
             const remoteNode = remoteNodesModel.currentRemoteNode();
@@ -1726,6 +1727,12 @@ ApplicationWindow {
 
     DaemonManagerDialog {
         id: daemonManagerDialog
+        onRemoteChose: {
+            connectRemoteNode();
+        }
+        onOfflineChose: {
+            currentWallet.setOffline(true);
+        }
         onRejected: {
             middlePanel.settingsView.settingsStateViewState = "Node";
             loadPage("Settings");
