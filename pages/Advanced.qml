@@ -40,6 +40,7 @@ ColumnLayout {
     spacing: 0
     property int panelHeight: 900
     property alias miningView: stateView.miningView
+    property alias signView: stateView.signView
     property alias state: stateView.state
 
     MoneroComponents.Navbar {
@@ -146,4 +147,9 @@ ColumnLayout {
             }
         }
     }
+
+    function clearFields() {
+        signView.clearFields();
+    }
+    
 }
