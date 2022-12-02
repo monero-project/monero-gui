@@ -48,23 +48,23 @@ public:
     ~DaemonManager();
 
     Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false);
-    Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
+    Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
     // return true if daemon process is started
-    Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QJSValue& callback) const;
+    Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const;
     // Send daemon command from qml and prints output in console window.
-    Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const;
+    Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const;
     Q_INVOKABLE void exit();
     Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
     Q_INVOKABLE bool checkLmdbExists(QString datadir);
 
 private:
 
-    bool running(NetworkType::Type nettype) const;
-    bool sendCommand(const QStringList &cmd, NetworkType::Type nettype, QString &message) const;
-    bool startWatcher(NetworkType::Type nettype) const;
-    bool stopWatcher(NetworkType::Type nettype) const;
+    bool running(NetworkType::Type nettype, const QString &dataDir) const;
+    bool sendCommand(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, QString &message) const;
+    bool startWatcher(NetworkType::Type nettype, const QString &dataDir) const;
+    bool stopWatcher(NetworkType::Type nettype, const QString &dataDir) const;
 signals:
     void daemonStarted() const;
     void daemonStopped() const;

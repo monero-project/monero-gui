@@ -201,6 +201,7 @@ Rectangle {
                         daemonManager.sendCommandAsync(
                             ["set_bootstrap_daemon", "auto"],
                             appWindow.currentWallet.nettype,
+                            persistentSettings.blockchainDataDir,
                             callback);
 
                         refreshMouseArea.visible = false;
