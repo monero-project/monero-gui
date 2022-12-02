@@ -421,6 +421,16 @@ Rectangle {
         }
     }
 
+    function clearFields() {
+        verifyMessageLine.text = ""
+        signMessageLine.text = ""
+        signSignatureLine.text = ""
+        verifyAddressLine.text = ""
+        verifySignatureLine.text = ""
+        signFileLine.text = ""
+        verifyFileLine.text = ""
+     }
+
     function onPageCompleted() {
         console.log("Sign/verify page loaded");
     }

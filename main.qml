@@ -1119,6 +1119,7 @@ ApplicationWindow {
             middlePanel.transferView.clearFields();
             middlePanel.receiveView.clearFields();
             middlePanel.historyView.clearFields();
+            middlePanel.advancedView.clearFields();
             // disable timers
             userInActivityTimer.running = false;
         });
