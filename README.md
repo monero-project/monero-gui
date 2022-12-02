@@ -221,15 +221,15 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
 
  The recommended way is to install 5.9.7 from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
 The following instructions will fetch Qt from your distribution's repositories instead. Take note of what version it installs. Your mileage may vary.
 
-  - For Ubuntu 17.10+
+  - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+    `sudo apt install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
 
   - For Gentoo
   
@@ -240,7 +240,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
   - Optional : To build the flag `WITH_SCANNER`
 
-    - For Ubuntu
+    - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
       `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia`
 
