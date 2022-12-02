@@ -52,6 +52,7 @@ ColumnLayout {
             active: state == "Mining"
             text: qsTr("Mining") + translationManager.emptyString
             onSelected: state = "Mining"
+            visible: !isAndroid
         }
         MoneroComponents.NavbarItem {
             active: state == "Prove"
@@ -81,7 +82,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: panelHeight
         color: "transparent"
-        state: "Mining"
+        state: isAndroid ? "Prove" : "Mining"
 
         onCurrentViewChanged: {
             if (previousView) {
@@ -120,7 +121,7 @@ ColumnLayout {
 
         StackView {
             id: stackView
-            initialItem: stateView.miningView
+            initialItem: isAndroid ? stateView.prooveView : stateView.miningView
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
