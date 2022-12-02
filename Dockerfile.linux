@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.6-lts-lgpl
+ARG QT_VERSION=v5.15.7-lts-lgpl
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
