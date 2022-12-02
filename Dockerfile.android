@@ -206,6 +206,16 @@ RUN git clone -b v3.24.2 --depth 1 https://github.com/Kitware/CMake \
     && PATH=${HOST_PATH} make -j${THREADS} install \
     && rm -rf $(pwd)
 
+RUN GRADLE_VERSION=5.6.4 \
+    && GRADLE_HASH=1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d \
+    && wget -q https\://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
+    && echo "${GRADLE_HASH}  gradle-${GRADLE_VERSION}-bin.zip" | sha256sum -c \
+    && GRADLE_LOCAL_PATH=gradle/wrapper/dists/gradle-${GRADLE_VERSION}-bin/bxirm19lnfz6nurbatndyydux \
+    && mkdir -p ${GRADLE_LOCAL_PATH} \
+    && mv gradle-${GRADLE_VERSION}-bin.zip ${GRADLE_LOCAL_PATH}
+
+ENV GRADLE_USER_HOME=${WORKDIR}/gradle
+
 CMD set -ex \
     && cd /monero-gui \
     && mkdir -p build/Android/release \
