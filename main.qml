@@ -1426,6 +1426,7 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+        property bool playSounds: true
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false

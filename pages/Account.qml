@@ -51,6 +51,7 @@ Rectangle {
     property alias balanceAllText: balanceAll.text
     property alias unlockedBalanceAllText: unlockedBalanceAll.text
     property bool selectAndSend: false
+    property bool isChangingAccount: false
     property int currentAccountIndex
 
     function renameSubaddressAccountLabel(_index){
@@ -319,6 +320,7 @@ Rectangle {
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 onClicked: {
+                                    pageAccount.isChangingAccount = true;
                                     appWindow.currentWallet.switchSubaddressAccount(index);
                                     if (selectAndSend)
                                         appWindow.showPageRequest("Transfer");

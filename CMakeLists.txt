@@ -126,6 +126,11 @@ if(WITH_SCANNER)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
 
+if(UNIX)
+  find_package(Qt5Multimedia)
+  list(APPEND QT5_LIBRARIES Qt5Multimedia)
+endif()
+
 if(APPLE)
   list(APPEND QT5_LIBRARIES Qt5MacExtras)
 endif()
@@ -242,6 +247,13 @@ if(STATIC)
   )
 
   if(WITH_SCANNER)
+    list(APPEND QT5_EXTRA_LIBRARIES_LIST
+      declarative_multimedia
+      Qt5MultimediaQuick
+    )
+  endif()
+
+  if(UNIX)
     list(APPEND QT5_EXTRA_LIBRARIES_LIST
       declarative_multimedia
       Qt5MultimediaQuick

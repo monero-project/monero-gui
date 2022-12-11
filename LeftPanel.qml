@@ -33,6 +33,7 @@ import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
 import FontAwesome 1.0
+import QtMultimedia 5.15
 
 import "components" as MoneroComponents
 import "components/effects/" as MoneroEffects
@@ -42,6 +43,7 @@ Rectangle {
 
     property int currentAccountIndex
     property alias currentAccountLabel: accountLabel.text
+    property string previousBalanceString: balanceString
     property string balanceString: "?.??"
     property string balanceUnlockedString: "?.??"
     property string balanceFiatString: "?.??"
@@ -62,6 +64,30 @@ Rectangle {
     signal settingsClicked()
     signal addressBookClicked()
     signal accountClicked()
+
+    onBalanceStringChanged: {
+        if (middlePanel.accountView.isChangingAccount) {
+            middlePanel.accountView.isChangingAccount = false;
+            return;
+        }
+        if (previousBalanceString != "?.??" && balanceString != "?.??") {
+            var differenceInBalance = parseFloat(balanceString) - parseFloat(previousBalanceString)
+            if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                differenceInBalance = fiatApiConvertToFiat(differenceInBalance);
+            }
+            newBalanceNotification.text = (differenceInBalance.toFixed(12) > 0 ? "+" : "") + differenceInBalance.toFixed(12);
+            newBalanceNotification.color = (differenceInBalance.toFixed(12) > 0 ? (MoneroComponents.Style.blackTheme ? "lime" : "green") : "red")
+            showNewBalanceNotificationAnimation.running = true;
+            newBalanceNotificationTimer.running = false;
+            hideNewBalanceNotificationAnimation.running = false;
+            if (differenceInBalance.toFixed(12) > 0 && persistentSettings.playSounds) incomingCoinsSound.play()
+        }
+    }
+
+    SoundEffect {
+        id: incomingCoinsSound
+        source: "media/moneybag.wav"
+    }
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -309,6 +335,47 @@ Rectangle {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: balancePart1MouseArea.clicked(mouse)
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    id: newBalanceNotification
+                    opacity: 0
+                    themeTransition: false
+                    anchors.top: balancePart2.bottom
+                    anchors.topMargin: -2
+                    anchors.right: balancePart2.right
+                    anchors.leftMargin: 0
+                    color: balancePart1.color
+                    font.pixelSize: 16
+
+                    NumberAnimation {
+                        id: showNewBalanceNotificationAnimation
+                        target: newBalanceNotification
+                        running: false
+                        property: "opacity"
+                        duration: 400
+                        from: 0
+                        to: 1
+                        onStopped: {
+                            newBalanceNotificationTimer.start()
+                        }
+                    }
+
+                    Timer {
+                        id: newBalanceNotificationTimer
+                        interval: 2000; running: false; repeat: false
+                        onTriggered: hideNewBalanceNotificationAnimation.running = true
+                    }
+
+                    NumberAnimation {
+                        id: hideNewBalanceNotificationAnimation
+                        target: newBalanceNotification
+                        property: "opacity"
+                        running: false
+                        duration: 3000
+                        from: 1
+                        to: 0
                     }
                 }
 
