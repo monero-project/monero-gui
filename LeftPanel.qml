@@ -529,6 +529,19 @@ Rectangle {
             height: 48
             syncType: qsTr("Wallet") + translationManager.emptyString
             visible: !appWindow.disconnected
+            onFillLevelChanged: {
+                if (progressBar.fillLevel < 100 && networkStatus.connected == Wallet.ConnectionStatus_Connected) {
+                    if (isWindows && taskbarButtonLoader.status == Loader.Ready) {
+                        taskbarButtonLoader.item.progress.visible = true;
+                        taskbarButtonLoader.item.progress.value = progressBar.fillLevel;
+                    }
+                }
+                if (progressBar.fillLevel == 100 && networkStatus.connected == Wallet.ConnectionStatus_Connected) {
+                    if (isWindows && taskbarButtonLoader.status == Loader.Ready) {
+                        taskbarButtonLoader.item.progress.visible = false;
+                    }
+                }
+            }
         }
 
         MoneroComponents.ProgressBar {
@@ -539,6 +552,14 @@ Rectangle {
             syncType: qsTr("Daemon") + translationManager.emptyString
             visible: !appWindow.disconnected
             height: 62
+            onFillLevelChanged: {
+                if (daemonProgressBar.fillLevel < 100  && networkStatus.connected == Wallet.ConnectionStatus_Connected) {
+                    if (isWindows && taskbarButtonLoader.status == Loader.Ready) {
+                        taskbarButtonLoader.item.progress.visible = true;
+                        taskbarButtonLoader.item.progress.value = daemonProgressBar.fillLevel;
+                    }
+                }
+            }
         }
         
         MoneroComponents.NetworkStatusItem {
@@ -550,7 +571,21 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 5
             connected: Wallet.ConnectionStatus_Disconnected
+            onConnectedChanged: {
+                if (networkStatus.connected != Wallet.ConnectionStatus_Connected) {
+                    if (isWindows && taskbarButtonLoader.status == Loader.Ready)
+                        taskbarButtonLoader.item.progress.stop()
+                } else {
+                    if (isWindows && taskbarButtonLoader.status == Loader.Ready)
+                        taskbarButtonLoader.item.progress.resume()
+                }
+            }
             height: 48
         }
+    }
+
+    Loader {
+        id: taskbarButtonLoader
+        source: isWindows ? "components/WindowsTaskbarButton.qml" : ""
     }
 }

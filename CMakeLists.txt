@@ -130,6 +130,10 @@ if(APPLE)
   list(APPEND QT5_LIBRARIES Qt5MacExtras)
 endif()
 
+if(WIN32)
+    list(APPEND QT5_LIBRARIES Qt5WinExtras)
+endif()
+
 if(UNIX)
   if(NOT CMAKE_PREFIX_PATH AND DEFINED ENV{CMAKE_PREFIX_PATH})
     message(STATUS "Using CMAKE_PREFIX_PATH environment variable: '$ENV{CMAKE_PREFIX_PATH}'")
