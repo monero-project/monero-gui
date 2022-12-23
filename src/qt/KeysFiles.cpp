@@ -39,6 +39,7 @@
 #include "libwalletqt/WalletManager.h"
 #include "NetworkType.h"
 #include "qt/utils.h"
+#include "main/oshelper.h"
 
 #include "KeysFiles.h"
 
@@ -121,26 +122,9 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
         }
 
         QString wallet(keysFileinfo.path() + QDir::separator() + keysFileinfo.completeBaseName());
-        quint8 networkType = NetworkType::MAINNET;
-        QString address = QString("");
-
-        // attempt to retreive wallet address
-        if(fileExists(wallet + ".address.txt")){
-            QFile file(wallet + ".address.txt");
-            file.open(QFile::ReadOnly | QFile::Text);
-            QString _address = QString(file.readAll());
-
-            if(!_address.isEmpty()){
-                address = _address;
-                if(address.startsWith("5") || address.startsWith("7")){
-                    networkType = NetworkType::STAGENET;
-                } else if(address.startsWith("9") || address.startsWith("B")){
-                    networkType = NetworkType::TESTNET;
-                }
-            }
-
-            file.close();
-        }
+        auto networkTypeAndAddress = OSHelper::getNetworkTypeAndAddressFromFile(wallet);
+        quint8 networkType = networkTypeAndAddress.first;
+        QString address = networkTypeAndAddress.second;
 
         this->addWalletKeysFile(WalletKeysFiles(wallet, networkType, std::move(address)));
     }

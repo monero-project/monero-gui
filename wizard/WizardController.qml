@@ -308,7 +308,9 @@ Rectangle {
         sidebarVisible: false
 
         onAccepted: {
-            wizardController.openWalletFile(fileDialog.fileUrl);
+            var keysPath = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            persistentSettings.nettype = oshelper.getNetworkTypeFromFile(keysPath);
+            wizardController.openWalletFile(keysPath);
         }
         onRejected: {
             console.log("Canceled")
