@@ -282,5 +282,6 @@
         <file>images/ledgerNanoX.png</file>
         <file>images/trezor.png</file>
         <file>images/trezor@2x.png</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>
