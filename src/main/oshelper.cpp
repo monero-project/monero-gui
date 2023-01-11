@@ -63,6 +63,7 @@
 
 #include "QR-Code-scanner/Decoder.h"
 #include "qt/ScopeGuard.h"
+#include "NetworkType.h"
 
 namespace
 {
@@ -279,4 +280,36 @@ bool OSHelper::installed() const
 #else
     return false;
 #endif
+}
+
+std::pair<quint8, QString> OSHelper::getNetworkTypeAndAddressFromFile(const QString &wallet)
+{
+    quint8 networkType = NetworkType::MAINNET;
+    QString address = QString("");
+    // attempt to retreive wallet address
+    if(QFile::exists(wallet + ".address.txt")){
+        QFile file(wallet + ".address.txt");
+        file.open(QFile::ReadOnly | QFile::Text);
+        QString _address = QString(file.readAll());
+        if(!_address.isEmpty()){
+            address = _address;
+            if(address.startsWith("5") || address.startsWith("7")){
+                networkType = NetworkType::STAGENET;
+            } else if(address.startsWith("9") || address.startsWith("B")){
+                networkType = NetworkType::TESTNET;
+            }
+        }
+
+        file.close();
+    }
+    return std::make_pair(networkType, address);
+}
+
+quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath) const
+{
+    QString walletPath = keysPath;
+    if(keysPath.endsWith(".keys")){
+        walletPath = keysPath.mid(0,keysPath.length()-5);
+    }
+    return getNetworkTypeAndAddressFromFile(walletPath).first;
 }

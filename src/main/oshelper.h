@@ -52,7 +52,9 @@ public:
     Q_INVOKABLE QString temporaryPath() const;
     Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;
     Q_INVOKABLE bool isCapsLock() const;
+    Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath) const;
 
+    static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
 private:
     bool installed() const;
 
