@@ -748,6 +748,12 @@ ApplicationWindow {
         currentWallet.startRefresh();
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
         informationPopup.text  = error + ".\n\n" + qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        if (middlePanel.advancedView.miningView.stopMiningEnabled == true) {
+            walletManager.stopMining()
+            p2poolManager.exit()
+            middlePanel.advancedView.miningView.update()
+            informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
+        }
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();

@@ -342,6 +342,85 @@ bool DaemonManager::checkLmdbExists(QString datadir) {
     return validateDataDir(datadir).value("lmdbExists").value<bool>();
 }
 
+bool DaemonManager::checkUnderSystemd() {
+    #ifdef Q_OS_LINUX
+        QProcess p;
+        QStringList args;
+        args << "monerod";
+        p.setProgram("pgrep");
+        p.setArguments(args);
+        p.start();
+        p.waitForFinished();
+        QString pid = p.readAllStandardOutput().trimmed();
+        if (pid.isEmpty()) {
+            return false;
+        }
+        args.clear();
+
+        args << "-c";
+        args << "ps -eo pid,cgroup | grep " + pid + " | grep -q .service$";
+        p.setProgram("sh");
+        p.setArguments(args);
+        p.start();
+        p.waitForFinished();
+        if (p.exitCode() == 0) {
+            return true;
+        }
+    #endif
+    return false;
+}
+
+QString DaemonManager::getArgs(const QString &dataDir) {
+    if (!running(NetworkType::MAINNET, dataDir)) {
+        return args;
+    }
+    QProcess p;
+    QStringList tempArgs;
+    #ifdef Q_OS_WIN
+        //powershell
+        tempArgs << "Get-CimInstance Win32_Process -Filter \"name = 'monerod.exe'\" | select -ExpandProperty CommandLine ";
+        p.setProgram("powershell");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        args = p.readAllStandardOutput().simplified().trimmed();
+
+    #elif defined(Q_OS_UNIX)
+        //pgrep
+        tempArgs << "monerod";
+        p.setProgram("pgrep");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        QString pid = p.readAllStandardOutput().trimmed();
+        if (pid.isEmpty()) {
+            return args;
+        }
+
+        tempArgs.clear();
+
+        //ps
+        tempArgs << "-o";
+        tempArgs << "args=";
+        tempArgs << "-fp";
+        tempArgs << pid;
+        p.setProgram("ps");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        args = p.readAllStandardOutput().trimmed();
+
+    #endif
+    if (args.contains("--")) {
+        int index = args.indexOf("--");
+        args.remove(0, index);
+    }
+    else {
+        args = "";
+    }
+    return args;
+}
+
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
     , m_scheduler(this)
