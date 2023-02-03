@@ -602,6 +602,9 @@ ApplicationWindow {
     function connectRemoteNode() {
         console.log("connecting remote node");
 
+        p2poolManager.exit();
+        p2poolManager.getStatus();
+
         const callback = function() {
             persistentSettings.useRemoteNode = true;
             const remoteNode = remoteNodesModel.currentRemoteNode();
@@ -630,6 +633,10 @@ ApplicationWindow {
             return;
 
         console.log("disconnecting remote node");
+
+        p2poolManager.exit();
+        p2poolManager.getStatus();
+
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.setDaemonLogin("", "");
