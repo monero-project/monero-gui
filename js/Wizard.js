@@ -76,8 +76,9 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
         var path = accountsDir + filename;
     else
         var path = directory + filename + "/" + filename;
+        var path2 = directory + filename;
 
-    if (walletManager.walletExists(path))
+    if (walletManager.walletExists(path) || walletManager.walletExists(path2))
         return true;
     return false;
 }
