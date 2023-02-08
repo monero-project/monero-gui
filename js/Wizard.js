@@ -83,10 +83,10 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
     return false;
 }
 
-function unusedWalletName(directory, filename, walletManager) {
+function unusedWalletName(directory, filename, isIOS, walletManager) {
     for (var i = 0; i < 100; i++) {
         var walletName = filename + (i > 0 ? "_" + i : "");
-        if (!walletManager.walletExists(directory + "/" + walletName + "/" + walletName)) {
+        if (!walletPathExists(directory, directory, walletName, isIOS, walletManager)) {
             return walletName;
         }
     }
