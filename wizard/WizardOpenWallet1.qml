@@ -34,6 +34,7 @@ import QtGraphicalEffects 1.0
 import Qt.labs.folderlistmodel 2.1
 import moneroComponents.NetworkType 1.0
 import moneroComponents.WalletKeysFilesModel 1.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -329,8 +330,9 @@ Rectangle {
                 id: wizardNav
                 Layout.topMargin: 0
                 progressEnabled: false
-                btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
-                btnNext.text: qsTr("Browse filesystem") + translationManager.emptyString
+                btnPrev.text: appWindow.width <= 506 ? "<" : qsTr("Back to menu") + translationManager.emptyString
+                btnNext.text: appWindow.width <= 506 ? qsTr("Browse") : qsTr("Browse filesystem") + translationManager.emptyString
+                btnNext.width: appWindow.width <= 506 ? 80 : appWindow.width <= 660 ? 120 : 180
                 btnNext.visible: true
                 btnPrevKeyNavigationBackTab: recentList.itemAt(recentList.count - 1)
                 btnNextKeyNavigationTab: openWalletFromFileHeader

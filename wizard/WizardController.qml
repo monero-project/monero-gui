@@ -50,13 +50,14 @@ Rectangle {
     signal useMoneroClicked()
     signal walletCreatedFromDevice(bool success)
 
-    function restart() {
+    function restart(generatingNewSeed) {
         // Clear up any state, including `m_wallet`, which
         // is the temp. wallet object whilst creating new wallets.
         // This function is called automatically by navigating to `wizardHome`.
-        wizardStateView.state = "wizardHome"
-        wizardController.walletOptionsName = defaultAccountName;
-        wizardController.walletOptionsLocation = '';
+        if(!generatingNewSeed) {
+            wizardController.walletOptionsName = defaultAccountName;
+            wizardController.walletOptionsLocation = '';
+        }
         wizardController.walletOptionsPassword = '';
         wizardController.walletOptionsSeed = '';
         wizardController.walletOptionsSeedOffset = '';
@@ -113,10 +114,18 @@ Rectangle {
 
 
     property int layoutScale: {
-        if(appWindow.width < 800){
-            return 1;
-        } else {
+        if (appWindow.width < 506) {
+            //mobile (25 word mnemonic seed displayed in 2 columns)
+            return 4;
+        } else if (appWindow.width < 660) {
+            //tablet (25 word mnemonic seed displayed in 3 columns)
+            return 3;
+        } else if (appWindow.width < 842) {
+            //tablet (25 word mnemonic seed displayed in 4 columns)
             return 2;
+        } else if (appWindow.width >= 842) {
+            //desktop (25 word mnemonic seed displayed in 5 columns)
+            return 1;
         }
     }
 
@@ -131,6 +140,7 @@ Rectangle {
         property WizardCreateWallet2 wizardCreateWallet2View: WizardCreateWallet2 { }
         property WizardCreateWallet3 wizardCreateWallet3View: WizardCreateWallet3 { }
         property WizardCreateWallet4 wizardCreateWallet4View: WizardCreateWallet4 { }
+        property WizardCreateWallet5 wizardCreateWallet5View: WizardCreateWallet5 { }
         property WizardRestoreWallet1 wizardRestoreWallet1View: WizardRestoreWallet1 { }
         property WizardRestoreWallet2 wizardRestoreWallet2View: WizardRestoreWallet2 { }
         property WizardRestoreWallet3 wizardRestoreWallet3View: WizardRestoreWallet3 { }
@@ -195,6 +205,10 @@ Rectangle {
                 name: "wizardCreateWallet4"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet4View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet4View.pageHeight + 80 }
+            }, State {
+                name: "wizardCreateWallet5"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet5View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet5View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet1View }
@@ -354,6 +368,10 @@ Rectangle {
                 wizardStateView.wizardRestoreWallet4View.wizardNav.btnNext.enabled = true;
                 wizardStateView.wizardCreateWallet4View.wizardNav.btnNext.enabled = true;
                 return;
+            }
+
+            if (wizardStateView.wizardCreateWallet2View.seedListGrid) {
+                wizardStateView.wizardCreateWallet2View.seedListGrid.destroy();
             }
 
             // make sure temporary wallet files are deleted

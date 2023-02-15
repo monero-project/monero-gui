@@ -86,6 +86,7 @@ Rectangle {
                     wizardController.restart();
                     wizardController.createWallet();
                     wizardStateView.state = "wizardCreateWallet1"
+                    wizardStateView.wizardCreateWallet1View.pageRoot.forceActiveFocus();
                 }
             }
 

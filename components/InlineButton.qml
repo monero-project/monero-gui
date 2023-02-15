@@ -66,7 +66,7 @@ Item {
         anchors.fill: parent
         color: buttonArea.containsMouse ? MoneroComponents.Style.buttonInlineBackgroundColorHover : MoneroComponents.Style.buttonInlineBackgroundColor
         radius: 4
-
+        border.width: parent.focus && parent.enabled ? 1 : 0
 
         MoneroComponents.TextPlain {
             id: inlineText
