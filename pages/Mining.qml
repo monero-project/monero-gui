@@ -299,13 +299,7 @@ Rectangle {
                                             startP2Pool()
                                         }
                                         else {
-                                            var underSystemd = daemonManager.checkUnderSystemd();
-                                            if (underSystemd) {
-                                                miningError(qsTr("Monerod is managed by Systemd. Manually add --zmq-pub tcp://127.0.0.1:18083 to the unit file <br>") + translationManager.emptyString)
-                                            }
-                                            else {
-                                                daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, startP2PoolLocal)
-                                            }
+                                            daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, startP2PoolLocal)
                                         }
                                     }
                                     else {

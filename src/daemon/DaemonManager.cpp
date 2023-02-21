@@ -342,34 +342,6 @@ bool DaemonManager::checkLmdbExists(QString datadir) {
     return validateDataDir(datadir).value("lmdbExists").value<bool>();
 }
 
-bool DaemonManager::checkUnderSystemd() {
-    #ifdef Q_OS_LINUX
-        QProcess p;
-        QStringList args;
-        args << "monerod";
-        p.setProgram("pgrep");
-        p.setArguments(args);
-        p.start();
-        p.waitForFinished();
-        QString pid = p.readAllStandardOutput().trimmed();
-        if (pid.isEmpty()) {
-            return false;
-        }
-        args.clear();
-
-        args << "-c";
-        args << "ps -eo pid,cgroup | grep " + pid + " | grep -q .service$";
-        p.setProgram("sh");
-        p.setArguments(args);
-        p.start();
-        p.waitForFinished();
-        if (p.exitCode() == 0) {
-            return true;
-        }
-    #endif
-    return false;
-}
-
 QString DaemonManager::getArgs(const QString &dataDir) {
     if (!running(NetworkType::MAINNET, dataDir)) {
         return args;
