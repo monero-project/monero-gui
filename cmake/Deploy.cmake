@@ -42,7 +42,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             zlib1.dll
             libzstd.dll
             libwinpthread-1.dll
-            libtiff-5.dll
+            libtiff-6.dll
             libstdc++-6.dll
             libpng16-16.dll
             libpcre16-0.dll
@@ -69,8 +69,8 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             #platform files
             libgcc_s_seh-1.dll
             #openssl files
-            libssl-1_1-x64.dll
-            libcrypto-1_1-x64.dll
+            libssl-3-x64.dll
+            libcrypto-3-x64.dll
         )
         if(CMAKE_BUILD_TYPE STREQUAL "Debug")
             list(APPEND WIN_DEPLOY_DLLS
