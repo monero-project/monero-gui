@@ -12,9 +12,9 @@ RUN apt update && \
 RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
     update-alternatives --set x86_64-w64-mingw32-gcc $(which x86_64-w64-mingw32-gcc-posix)
 
-RUN git clone -b v0.18.1.0 --depth 1 https://github.com/monero-project/monero && \
+RUN git clone -b v0.18.2.0 --depth 1 https://github.com/monero-project/monero && \
     cd monero && \
-    git reset --hard 727bc5b6878170332bf2d838f2c60d1c8dc685c8 && \
+    git reset --hard 99be9a044f3854f339548e2d99c539c18d7b1b01 && \
     cp -a contrib/depends / && \
     cd .. && \
     rm -rf monero
