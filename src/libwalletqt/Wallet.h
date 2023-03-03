@@ -341,12 +341,6 @@ public:
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
 
-    // Blackalled outputs
-    Q_INVOKABLE bool blackballOutput(const QString &amount, const QString &offset);
-    Q_INVOKABLE bool blackballOutputs(const QList<QString> &outputs, bool add);
-    Q_INVOKABLE bool blackballOutputs(const QString &filename, bool add);
-    Q_INVOKABLE bool unblackballOutput(const QString &amount, const QString &offset);
-
     // Rings
     Q_INVOKABLE QString getRing(const QString &key_image);
     Q_INVOKABLE QString getRings(const QString &txid);
