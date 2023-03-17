@@ -54,6 +54,7 @@ Rectangle {
         ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano S Plus"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
+        ListElement { column1: "Ledger Stax"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
     }
 
