@@ -92,7 +92,7 @@ Rectangle {
         anchors.leftMargin: 20
         height: parent.height
         width: 2
-        color: button.checked ? MoneroComponents.Style.buttonBackgroundColor : "transparent"
+        color: button.checked ? MoneroComponents.Style.accountColors[currentAccountIndex % MoneroComponents.Style.accountColors.length] : "transparent"
 
         // button text
         MoneroComponents.TextPlain {

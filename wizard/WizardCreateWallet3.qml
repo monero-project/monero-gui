@@ -38,6 +38,8 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateWallet3"
+    property alias pwField: passwordFields.password
+    property alias pwConfirmField: passwordFields.passwordConfirm
 
     ColumnLayout {
         id: pageRoot
@@ -53,26 +55,32 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20
+            spacing: 0
 
-            WizardHeader {
-                title: qsTr("Daemon settings") + translationManager.emptyString
-                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
-            }
-
-            WizardDaemonSettings {
-                id: daemonSettings
+            WizardAskPassword {
+                id: passwordFields
             }
 
             WizardNav {
-                progressSteps: 4
+                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
                 progress: 2
+                btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
-                    wizardStateView.state = "wizardCreateWallet2";
+                    if(wizardController.walletOptionsIsRecoveringFromDevice){
+                        wizardStateView.state = "wizardCreateDevice1";
+                    } else {
+                        wizardStateView.state = "wizardCreateWallet2";
+                        wizardStateView.wizardCreateWallet2View.pageRoot.forceActiveFocus();
+                    }
                 }
                 onNextClicked: {
-                    daemonSettings.save();
-                    wizardStateView.state = "wizardCreateWallet4";
+                    wizardController.walletOptionsPassword = passwordFields.password;
+
+                    if (appWindow.walletMode < 2) {
+                        wizardStateView.state = "wizardCreateWallet5";
+                    } else {
+                        wizardStateView.state = "wizardCreateWallet4";
+                    }
                 }
             }
         }

@@ -40,6 +40,8 @@ ColumnLayout {
     default property alias content: inlineButtons.children
 
     property alias input: input
+    property bool inputHasFocus: input.activeFocus
+    property bool tabNavigationEnabled: true
     property alias text: input.text
 
     property int inputPaddingLeft: 10
@@ -109,6 +111,8 @@ ColumnLayout {
     signal editingFinished();
     signal accepted();
     signal textUpdated();
+    signal backtabPressed();
+    signal tabPressed();
 
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
@@ -212,8 +216,18 @@ ColumnLayout {
 
     MoneroComponents.Input {
         id: input
-        KeyNavigation.backtab: item.KeyNavigation.backtab
-        KeyNavigation.tab: item.KeyNavigation.tab
+        Keys.onBacktabPressed: {
+            item.backtabPressed();
+            if (item.KeyNavigation.backtab) {
+                item.KeyNavigation.backtab.forceActiveFocus()
+            }
+        }
+        Keys.onTabPressed: {
+            item.tabPressed();
+            if (item.KeyNavigation.tab) {
+                item.KeyNavigation.tab.forceActiveFocus()
+            }
+        }
         Layout.fillWidth: true
         Layout.preferredHeight: inputHeight
 

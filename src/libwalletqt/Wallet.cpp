@@ -30,7 +30,9 @@
 
 #include <chrono>
 #include <stdexcept>
+#include <string>
 #include <thread>
+#include <vector>
 
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
@@ -99,20 +101,30 @@ NetworkType::Type Wallet::nettype() const
 void Wallet::updateConnectionStatusAsync()
 {
     m_scheduler.run([this] {
+        qDebug() << "updateConnectionStatusAsync current status:" << m_connectionStatus;
         if (m_connectionStatus == Wallet::ConnectionStatus_Disconnected)
         {
             setConnectionStatus(ConnectionStatus_Connecting);
         }
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
-        setConnectionStatus(newStatus);
+        qDebug() << "Newest wallet status:" << newStatus;
+        if (m_connectionStatus != newStatus)
+        {
+            setConnectionStatus(newStatus);
+            if (newStatus == ConnectionStatus_Connected)
+            {
+                startRefresh();
+            }
+        }
         // Release lock
         m_connectionStatusRunning = false;
+        m_connectionStatusTime.restart();
     });
 }
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
-    if (!m_initialized)
+    if (!m_initialized || m_initializing)
     {
         return ConnectionStatus_Connecting;
     }
@@ -121,7 +133,6 @@ Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
     if (forceCheck || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
         qDebug() << "Checking connection status";
         m_connectionStatusRunning = true;
-        m_connectionStatusTime.restart();
         updateConnectionStatusAsync();
     }
 
@@ -154,10 +165,9 @@ void Wallet::setConnectionStatus(ConnectionStatus value)
     }
 
     m_connectionStatus = value;
-    emit connectionStatusChanged(m_connectionStatus);
+    emit connectionStatusChanged(value);
 
-    bool disconnected = m_connectionStatus == Wallet::ConnectionStatus_Connecting ||
-        m_connectionStatus == Wallet::ConnectionStatus_Disconnected;
+    bool disconnected = value != Wallet::ConnectionStatus_Connected;
 
     if (m_disconnected != disconnected)
     {
@@ -278,6 +288,8 @@ void Wallet::initAsync(
     const QString &proxyAddress /* = "" */)
 {
     qDebug() << "initAsync: " + daemonAddress;
+    m_initializing = true;
+    pauseRefresh();
     const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
         m_initialized = init(
             daemonAddress,
@@ -287,12 +299,12 @@ void Wallet::initAsync(
             isRecoveringFromDevice,
             restoreHeight,
             proxyAddress);
+        m_initializing = false;
         if (m_initialized)
         {
             emit walletCreationHeightChanged();
-            qDebug() << "init async finished - starting refresh";
+            qDebug() << "init async finished: " + daemonAddress;
             connected(true);
-            startRefresh();
         }
         else
         {
@@ -507,6 +519,16 @@ bool Wallet::importOutputs(const QString& path) {
     return m_walletImpl->importOutputs(path.toStdString());
 }
 
+bool Wallet::scanTransactions(const QVector<QString> &txids)
+{
+    std::vector<std::string> c;
+    for (const auto &v : txids)
+    {
+        c.push_back(v.toStdString());
+    }
+    return m_walletImpl->scanTransactions(c);
+}
+
 bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 {
     refreshingSet(true);
@@ -532,11 +554,14 @@ bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 
 void Wallet::startRefresh()
 {
+    qDebug() << "Starting refresh";
     m_refreshEnabled = true;
+    m_refreshNow = true;
 }
 
 void Wallet::pauseRefresh()
 {
+    qDebug() << "Pausing refresh";
     m_refreshEnabled = false;
 }
 
@@ -1125,11 +1150,13 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
     , m_disconnected(true)
     , m_initialized(false)
+    , m_initializing(false)
     , m_currentSubaddressAccount(0)
     , m_subaddress(new Subaddress(m_walletImpl->subaddress(), this))
     , m_subaddressModel(nullptr)
     , m_subaddressAccount(new SubaddressAccount(m_walletImpl->subaddressAccount(), this))
     , m_subaddressAccountModel(nullptr)
+    , m_refreshNow(false)
     , m_refreshEnabled(false)
     , m_refreshing(false)
     , m_scheduler(this)
@@ -1183,10 +1210,11 @@ void Wallet::startRefreshThread()
             {
                 const auto now = std::chrono::steady_clock::now();
                 const auto elapsed = now - last;
-                if (elapsed >= refreshInterval)
+                if (elapsed >= refreshInterval || m_refreshNow)
                 {
                     refresh(false);
                     last = std::chrono::steady_clock::now();
+                    m_refreshNow = false;
                 }
             }
 

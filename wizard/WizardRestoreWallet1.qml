@@ -50,8 +50,8 @@ Rectangle {
         if(wizardController.walletRestoreMode === "keys") {
             return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
         } else if(wizardController.walletRestoreMode === "seed") {
-            seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text);
-            return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text);
+            seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text.trim());
+            return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text.trim());
         }
 
         return false;
@@ -306,7 +306,7 @@ Rectangle {
 
                     switch (wizardController.walletRestoreMode) {
                         case 'seed':
-                            wizardController.walletOptionsSeed = seedInput.text;
+                            wizardController.walletOptionsSeed = seedInput.text.trim();
                             wizardController.walletOptionsSeedOffset = seedOffsetCheckbox.checked ? seedOffset.text : "";
                             break;
                         default: // walletRestoreMode = keys or qr

@@ -41,7 +41,8 @@ Rectangle {
     property alias miningHeight: mainLayout.height
     property double currentHashRate: 0
     property int threads: idealThreadCount / 2
-
+    property alias stopMiningEnabled: stopSoloMinerButton.enabled
+    property string args: ""
     ColumnLayout {
         id: mainLayout
         Layout.fillWidth: true
@@ -293,11 +294,12 @@ Rectangle {
                                 var success;
                                 if (persistentSettings.allow_p2pool_mining) {
                                     if (p2poolManager.isInstalled()) {
-                                        if (persistentSettings.allowRemoteNodeMining) {
+                                        args = daemonManager.getArgs(persistentSettings.blockchainDataDir) //updates arguments
+                                        if (persistentSettings.allowRemoteNodeMining || (args.includes("--zmq-pub tcp://127.0.0.1:18083") || args.includes("--zmq-pub=tcp://127.0.0.1:18083")) && !args.includes("--no-zmq")) {
                                             startP2Pool()
                                         }
                                         else {
-                                            daemonManager.stopAsync(persistentSettings.nettype, startP2PoolLocal)
+                                            daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, startP2PoolLocal)
                                         }
                                     }
                                     else {
@@ -585,12 +587,35 @@ Rectangle {
 
     function startP2PoolLocal() {
         var noSync = false;
-        var customDaemonArgs = persistentSettings.daemonFlags.toLowerCase();
-        var daemonArgs = "--zmq-pub " + "tcp://127.0.0.1:18083 " + "--disable-dns-checkpoints "
-        if (!customDaemonArgs.includes("--zmq-pub") && !customDaemonArgs.includes("--disable-dns-checkpoints") && !customDaemonArgs.includes("--no-zmq")) {
-            daemonArgs = daemonArgs + customDaemonArgs;
+        //these args will be deleted because DaemonManager::start will re-add them later.
+        //--no-zmq must be deleted. removing '--zmq-pub=tcp...' lets us blindly add '--zmq-pub tcp...' later without risking duplication.
+        var defaultArgs = ["--detach","--data-dir","--bootstrap-daemon-address","--prune-blockchain","--no-sync","--check-updates","--non-interactive","--max-concurrency","--no-zmq","--zmq-pub=tcp://127.0.0.1:18083"]
+        var customDaemonArgsArray = args.split(' ');
+        var flag = "";
+        var allArgs = [];
+        var p2poolArgs = ["--zmq-pub tcp://127.0.0.1:18083"];
+        //create an array (allArgs) of ['--arg value','--arg2','--arg3']
+        for (let i = 0; i < customDaemonArgsArray.length; i++) {
+            if(!customDaemonArgsArray[i].startsWith("--")) {
+                flag += " " + customDaemonArgsArray[i]
+            } else {
+                if(flag){
+                    allArgs.push(flag)
+                }
+                flag = customDaemonArgsArray[i]
+            }
         }
-        var success = daemonManager.start(daemonArgs, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain)
+        allArgs.push(flag)
+        //pop from allArgs if value is inside the deleteme array (defaultArgs)
+allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
+        //append required p2pool flags
+        for (let i = 0; i < p2poolArgs.length; i++) {
+            if(!allArgs.includes(p2poolArgs[i])) {
+                allArgs.push(p2poolArgs[i])
+                continue
+            }
+        }
+        var success = daemonManager.start(allArgs.join(" "), persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain)
         if (success) {
             startP2Pool()
         }
@@ -619,7 +644,7 @@ Rectangle {
     function p2poolDownloadFailed() {
         statusMessage.visible = false
         errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
-        errorPopup.text = "P2Pool installation failed."
+        errorPopup.text = qsTr("P2Pool installation failed.") + isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : ""
         errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()

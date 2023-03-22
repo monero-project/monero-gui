@@ -1,4 +1,4 @@
-; Monero Oxygen Orion GUI Wallet Installer for Windows
+; Monero Fluorine Fermi GUI Wallet Installer for Windows
 ; Copyright (c) 2017-2020, The Monero Project
 ; See LICENSE
 #define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
@@ -16,7 +16,7 @@ DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64
-ArchitecturesAllowed=x64
+ArchitecturesAllowed=x64 arm64
 WizardSmallImageFile=WizardSmallImage.bmp
 WizardImageFile=WelcomeImage.bmp
 DisableWelcomePage=no

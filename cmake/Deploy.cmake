@@ -42,7 +42,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             zlib1.dll
             libzstd.dll
             libwinpthread-1.dll
-            libtiff-5.dll
+            libtiff-6.dll
             libstdc++-6.dll
             libpng16-16.dll
             libpcre16-0.dll
@@ -69,24 +69,24 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             #platform files
             libgcc_s_seh-1.dll
             #openssl files
-            libssl-1_1-x64.dll
-            libcrypto-1_1-x64.dll
+            libssl-3-x64.dll
+            libcrypto-3-x64.dll
         )
         if(CMAKE_BUILD_TYPE STREQUAL "Debug")
             list(APPEND WIN_DEPLOY_DLLS
-                libicudtd69.dll
-                libicuind69.dll
-                libicuiod69.dll
-                libicutud69.dll
-                libicuucd69.dll
+                libicudtd72.dll
+                libicuind72.dll
+                libicuiod72.dll
+                libicutud72.dll
+                libicuucd72.dll
             )
         else() # assume release
             list(APPEND WIN_DEPLOY_DLLS
-                libicudt69.dll
-                libicuin69.dll
-                libicuio69.dll
-                libicutu69.dll
-                libicuuc69.dll
+                libicudt72.dll
+                libicuin72.dll
+                libicuio72.dll
+                libicutu72.dll
+                libicuuc72.dll
             )
         endif()
         list(TRANSFORM WIN_DEPLOY_DLLS PREPEND "$ENV{MSYSTEM_PREFIX}/bin/")

@@ -130,8 +130,8 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     // Start start watcher
-    m_scheduler.run([this, nettype, noSync] {
-        if (startWatcher(nettype)) {
+    m_scheduler.run([this, nettype, dataDir, noSync] {
+        if (startWatcher(nettype, dataDir)) {
             emit daemonStarted();
             m_noSync = noSync;
         } else {
@@ -142,13 +142,13 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     return true;
 }
 
-void DaemonManager::stopAsync(NetworkType::Type nettype, const QJSValue& callback)
+void DaemonManager::stopAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback)
 {
-    const auto feature = m_scheduler.run([this, nettype] {
+    const auto feature = m_scheduler.run([this, nettype, dataDir] {
         QString message;
-        sendCommand({"exit"}, nettype, message);
+        sendCommand({"exit"}, nettype, dataDir, message);
 
-        return QJSValueList({stopWatcher(nettype)});
+        return QJSValueList({stopWatcher(nettype, dataDir)});
     }, callback);
 
     if (!feature.first)
@@ -157,14 +157,14 @@ void DaemonManager::stopAsync(NetworkType::Type nettype, const QJSValue& callbac
     }
 }
 
-bool DaemonManager::startWatcher(NetworkType::Type nettype) const
+bool DaemonManager::startWatcher(NetworkType::Type nettype, const QString &dataDir) const
 {
     // Check if daemon is started every 2 seconds
     QElapsedTimer timer;
     timer.start();
     while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
         QThread::sleep(2);
-        if(!running(nettype)) {
+        if(!running(nettype, dataDir)) {
             qDebug() << "daemon not running. checking again in 2 seconds.";
         } else {
             qDebug() << "daemon is started. Waiting 5 seconds to let daemon catch up";
@@ -175,14 +175,14 @@ bool DaemonManager::startWatcher(NetworkType::Type nettype) const
     return false;
 }
 
-bool DaemonManager::stopWatcher(NetworkType::Type nettype) const
+bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDir) const
 {
     // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
     int counter = 0;
     while(true && !m_app_exit) {
         QThread::sleep(2);
         counter++;
-        if(running(nettype)) {
+        if(running(nettype, dataDir)) {
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
@@ -236,10 +236,10 @@ void DaemonManager::printError()
     }
 }
 
-bool DaemonManager::running(NetworkType::Type nettype) const
+bool DaemonManager::running(NetworkType::Type nettype, const QString &dataDir) const
 { 
     QString status;
-    sendCommand({"sync_info"}, nettype, status);
+    sendCommand({"sync_info"}, nettype, dataDir, status);
     qDebug() << status;
     return status.contains("Height:");
 }
@@ -249,14 +249,14 @@ bool DaemonManager::noSync() const noexcept
     return m_noSync;
 }
 
-void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& callback) const
+void DaemonManager::runningAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const
 { 
-    m_scheduler.run([this, nettype] {
-        return QJSValueList({running(nettype)});
+    m_scheduler.run([this, nettype, dataDir] {
+        return QJSValueList({running(nettype, dataDir)});
     }, callback);
 }
 
-bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, QString &message) const
+bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, QString &message) const
 {
     QProcess p;
     QStringList external_cmd(cmd);
@@ -266,6 +266,11 @@ bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettyp
         external_cmd << "--testnet";
     else if (nettype == NetworkType::STAGENET)
         external_cmd << "--stagenet";
+
+    // Custom data-dir
+    if (!dataDir.isEmpty()) {
+        external_cmd << "--data-dir" << dataDir;
+    }
 
     qDebug() << "sending external cmd: " << external_cmd;
 
@@ -278,11 +283,11 @@ bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettyp
     return started;
 }
 
-void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const
+void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const
 {
-    m_scheduler.run([this, cmd, nettype] {
+    m_scheduler.run([this, cmd, nettype, dataDir] {
         QString message;
-        return QJSValueList({sendCommand(cmd, nettype, message)});
+        return QJSValueList({sendCommand(cmd, nettype, dataDir, message)});
     }, callback);
 }
 
@@ -335,6 +340,57 @@ bool DaemonManager::checkLmdbExists(QString datadir) {
         datadir = QString::fromStdString(tools::get_default_data_dir());
     }
     return validateDataDir(datadir).value("lmdbExists").value<bool>();
+}
+
+QString DaemonManager::getArgs(const QString &dataDir) {
+    if (!running(NetworkType::MAINNET, dataDir)) {
+        return args;
+    }
+    QProcess p;
+    QStringList tempArgs;
+    #ifdef Q_OS_WIN
+        //powershell
+        tempArgs << "Get-CimInstance Win32_Process -Filter \"name = 'monerod.exe'\" | select -ExpandProperty CommandLine ";
+        p.setProgram("powershell");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        args = p.readAllStandardOutput().simplified().trimmed();
+
+    #elif defined(Q_OS_UNIX)
+        //pgrep
+        tempArgs << "monerod";
+        p.setProgram("pgrep");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        QString pid = p.readAllStandardOutput().trimmed();
+        if (pid.isEmpty()) {
+            return args;
+        }
+
+        tempArgs.clear();
+
+        //ps
+        tempArgs << "-o";
+        tempArgs << "args=";
+        tempArgs << "-fp";
+        tempArgs << pid;
+        p.setProgram("ps");
+        p.setArguments(tempArgs);
+        p.start();
+        p.waitForFinished();
+        args = p.readAllStandardOutput().trimmed();
+
+    #endif
+    if (args.contains("--")) {
+        int index = args.indexOf("--");
+        args.remove(0, index);
+    }
+    else {
+        args = "";
+    }
+    return args;
 }
 
 DaemonManager::DaemonManager(QObject *parent)

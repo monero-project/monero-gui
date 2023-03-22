@@ -51,7 +51,7 @@ Rectangle {
     color: "transparent"
     property alias transferHeight1: pageRoot.height
     property alias transferHeight2: advancedLayout.height
-    property int mixin: 10  // (ring size 11)
+    property int mixin: 15  // (ring size 16)
     property string warningContent: ""
     property string sendButtonWarning: {
         // Currently opened wallet is not view-only
@@ -957,7 +957,7 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
             button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation()
+            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation() && appWindow.daemonSynced
             button1.onClicked: {
                 console.log("Transfer: saveTx Clicked")
                 var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority

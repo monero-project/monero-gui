@@ -238,7 +238,7 @@ Rectangle {
                             Layout.fillHeight: true
                             anchors.top: parent.top
                             anchors.bottom: parent.bottom
-                            color: "darkgrey"
+                            color: MoneroComponents.Style.accountColors[currentAccountIndex % MoneroComponents.Style.accountColors.length]
                             width: 2
                         }
 

@@ -1,6 +1,6 @@
 # Monero GUI
 
-Copyright (c) 2014-2019, The Monero Project
+Copyright (c) 2014-2022, The Monero Project
 
 ## Table of Contents
   * [Development resources](#development-resources)
@@ -108,7 +108,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.2.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -131,7 +131,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.2.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -213,7 +213,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind dev-libs/libsodium dev-libs/hidapi dev-libs/libgcrypt`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind dev-libs/libsodium dev-libs/hidapi dev-libs/libgcrypt`
 
   - For Fedora
 
@@ -221,15 +221,15 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
 
  The recommended way is to install 5.9.7 from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
 The following instructions will fetch Qt from your distribution's repositories instead. Take note of what version it installs. Your mileage may vary.
 
-  - For Ubuntu 17.10+
+  - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+    `sudo apt install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
 
   - For Gentoo
   
@@ -240,7 +240,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
   - Optional : To build the flag `WITH_SCANNER`
 
-    - For Ubuntu
+    - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
       `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia`
 
@@ -283,7 +283,7 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install cmake pkg-config openssl boost unbound hidapi zmq libpgm libsodium miniupnpc ldns expat libunwind-headers protobuf libgcrypt`
+  `brew install cmake pkg-config openssl boost unbound hidapi zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf libgcrypt`
 
 4. Install Qt:
 
@@ -319,7 +319,7 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 3. Install MSYS2 packages for Monero dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt
+    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-unbound
     ```
 
     You find more details about those dependencies in the [Monero documentation](https://github.com/monero-project/monero). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.

@@ -119,8 +119,22 @@
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
         <file>images/appicon.ico</file>
-        <file>images/card-background-black.png</file>
-        <file>images/card-background-black@2x.png</file>
+        <file>images/card-background-black0.png</file>
+        <file>images/card-background-black1.png</file>
+        <file>images/card-background-black2.png</file>
+        <file>images/card-background-black3.png</file>
+        <file>images/card-background-black4.png</file>
+        <file>images/card-background-black5.png</file>
+        <file>images/card-background-black6.png</file>
+        <file>images/card-background-black7.png</file>
+        <file>images/card-background-black0@2x.png</file>
+        <file>images/card-background-black1@2x.png</file>
+        <file>images/card-background-black2@2x.png</file>
+        <file>images/card-background-black3@2x.png</file>
+        <file>images/card-background-black4@2x.png</file>
+        <file>images/card-background-black5@2x.png</file>
+        <file>images/card-background-black6@2x.png</file>
+        <file>images/card-background-black7@2x.png</file>
         <file>images/card-background-white.png</file>
         <file>images/card-background-white@2x.png</file>
         <file>images/moneroLogo_white.png</file>
@@ -192,6 +206,7 @@
         <file>wizard/WizardCreateWallet2.qml</file>
         <file>wizard/WizardCreateWallet3.qml</file>
         <file>wizard/WizardCreateWallet4.qml</file>
+        <file>wizard/WizardCreateWallet5.qml</file>
         <file>wizard/WizardCreateDevice1.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>wizard/WizardHeader.qml</file>
@@ -268,5 +283,17 @@
         <file>images/ledgerNanoX.png</file>
         <file>images/trezor.png</file>
         <file>images/trezor@2x.png</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>images/write-down.png</file>
+        <file>images/write-down-white.png</file>
+        <file>images/write-down@2x.png</file>
+        <file>images/write-down-white@2x.png</file>
+        <file>images/verify.png</file>
+        <file>images/verify-white.png</file>
+        <file>images/verify@2x.png</file>
+        <file>images/verify-white@2x.png</file>
+        <file>wizard/SeedListItem.qml</file>
+        <file>wizard/SeedListGrid.qml</file>
+        <file>wizard/template.pdf</file>
     </qresource>
 </RCC>

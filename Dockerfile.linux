@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.4-lts-lgpl
+ARG QT_VERSION=v5.15.8-lts-lgpl
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
@@ -55,7 +55,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard acf790d7752f36e450d476ad79807d4012ec863b && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -66,7 +66,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard d882052fb2ce439c6483fce944ba8f16f7294639 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -77,7 +77,7 @@ RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0e51ee5570a6a80bdf98770b975dfe8a57f4eeb1 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -88,7 +88,7 @@ RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 0317caf63de532fd7a0493ed6afa871a67253747 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -99,7 +99,7 @@ RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     git reset --hard 24eb17df2e1245885e72c9d4bbb0a0f69f0700f2 && \
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
+    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
     ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -155,40 +155,40 @@ RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN wget https://downloads.sourceforge.net/project/boost/boost/1.73.0/boost_1_73_0.tar.gz && \
-    echo "9995e192e68528793755692917f9eb6422f3052a53c5e13ba278a228af6c7acf boost_1_73_0.tar.gz" | sha256sum -c && \
-    tar -xzf boost_1_73_0.tar.gz && \
-    rm boost_1_73_0.tar.gz && \
-    cd boost_1_73_0 && \
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz && \
+    echo "4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847 boost_1_80_0.tar.gz" | sha256sum -c && \
+    tar -xzf boost_1_80_0.tar.gz && \
+    rm boost_1_80_0.tar.gz && \
+    cd boost_1_80_0 && \
     ./bootstrap.sh && \
     ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static cflags="${CFLAGS}" cxxflags="${CXXFLAGS}" install -a --prefix=/usr && \
     rm -rf $(pwd)
 
-RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
-    echo "ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46 openssl-1.1.1g.tar.gz" | sha256sum -c && \
-    tar -xzf openssl-1.1.1g.tar.gz && \
-    rm openssl-1.1.1g.tar.gz && \
-    cd openssl-1.1.1g && \
+RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz && \
+    echo "d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca openssl-1.1.1q.tar.gz" | sha256sum -c && \
+    tar -xzf openssl-1.1.1q.tar.gz && \
+    rm openssl-1.1.1q.tar.gz && \
+    cd openssl-1.1.1q && \
     ./config no-asm no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.bz2 && \
-    echo "2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40 expat-2.4.1.tar.bz2" | sha256sum -c && \
-    tar -xf expat-2.4.1.tar.bz2 && \
-    rm expat-2.4.1.tar.bz2 && \
-    cd expat-2.4.1 && \
+RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.bz2 && \
+    echo "a247a7f6bbb21cf2ca81ea4cbb916bfb9717ca523631675f99b3d4a5678dcd16 expat-2.4.8.tar.bz2" | sha256sum -c && \
+    tar -xf expat-2.4.8.tar.bz2 && \
+    rm expat-2.4.8.tar.bz2 && \
+    cd expat-2.4.8 && \
     ./configure --enable-static --disable-shared --prefix=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.13.2.tar.gz && \
-    echo "0a13b547f3b92a026b5ebd0423f54c991e5718037fd9f72445817f6a040e1a83 unbound-1.13.2.tar.gz" | sha256sum -c && \
-    tar -xzf unbound-1.13.2.tar.gz && \
-    rm unbound-1.13.2.tar.gz && \
-    cd unbound-1.13.2 && \
+RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
+    echo "2e32f283820c24c51ca1dd8afecfdb747c7385a137abe865c99db4b257403581 unbound-1.16.2.tar.gz" | sha256sum -c && \
+    tar -xzf unbound-1.16.2.tar.gz && \
+    rm unbound-1.16.2.tar.gz && \
+    cd unbound-1.16.2 && \
     ./configure --disable-shared --enable-static --without-pyunbound --with-libexpat=/usr --with-ssl=/usr --with-libevent=no --without-pythonmodule --disable-flto --with-pthreads --with-libunbound-only --with-pic && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -234,62 +234,62 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     cd ../../../.. && \
     rm -rf $(pwd)
 
-RUN git clone -b v1.0.23 --depth 1 https://github.com/libusb/libusb && \
+RUN git clone -b v1.0.26 --depth 1 https://github.com/libusb/libusb && \
     cd libusb && \
-    git reset --hard e782eeb2514266f6738e242cdcb18e3ae1ed06fa && \
+    git reset --hard 4239bc3a50014b8e6a5a2a59df1fff3b7469543b && \
     ./autogen.sh --disable-shared --enable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b hidapi-0.11.0 --depth 1 https://github.com/libusb/hidapi && \
+RUN git clone -b hidapi-0.13.1 --depth 1 https://github.com/libusb/hidapi && \
     cd hidapi && \
-    git reset --hard 0ec60c03cbe87cdbfb9fb199c7536fdcbc0a94b8 && \
+    git reset --hard 4ebce6b5059b086d05ca7e091ce04a5fd08ac3ac && \
     ./bootstrap && \
     ./configure --disable-shared --enable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v4.3.2 --depth 1 https://github.com/zeromq/libzmq && \
+RUN git clone -b v4.3.4 --depth 1 https://github.com/zeromq/libzmq && \
     cd libzmq && \
-    git reset --hard a84ffa12b2eb3569ced199660bac5ad128bff1f0 && \
+    git reset --hard 4097855ddaaa65ed7b5e8cb86d143842a594eebd && \
     ./autogen.sh && \
     ./configure --disable-shared --enable-static --disable-libunwind --with-libsodium && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.38 --depth 1 git://git.gnupg.org/libgpg-error.git && \
+RUN git clone -b libgpg-error-1.45 --depth 1 git://git.gnupg.org/libgpg-error.git && \
     cd libgpg-error && \
-    git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 && \
+    git reset --hard dbac537e5e865fb6f3aa8596d213aa8c47a9dea1 && \
     ./autogen.sh && \
     ./configure --disable-shared --enable-static --disable-doc --disable-tests && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.8.5 --depth 1 git://git.gnupg.org/libgcrypt.git && \
+RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git && \
     cd libgcrypt && \
-    git reset --hard 56606331bc2a80536db9fc11ad53695126007298 && \
+    git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 && \
     ./autogen.sh && \
     ./configure --disable-shared --enable-static --disable-doc && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v3.10.0 --depth 1 https://github.com/protocolbuffers/protobuf && \
+RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && \
     cd protobuf && \
-    git reset --hard 6d4e7fd7966c989e38024a8ea693db83758944f1 && \
+    git reset --hard ab840345966d0fa8e7100d771c92a73bfbadd25c && \
     ./autogen.sh && \
     ./configure --enable-static --disable-shared && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v3.18.4 --depth 1 https://github.com/Kitware/CMake && \
+RUN git clone -b v3.24.0 --depth 1 https://github.com/Kitware/CMake && \
     cd CMake && \
-    git reset --hard 3cc3d42aba879fff5e85b363ae8f21386a3f9f9b && \
+    git reset --hard 4be24f031a4829db75b85062cc67125035d8831e && \
     ./bootstrap && \
     make -j$THREADS && \
     make -j$THREADS install && \

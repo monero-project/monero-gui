@@ -212,6 +212,9 @@ public:
     Q_INVOKABLE bool exportOutputs(const QString& path, bool all = false);
     Q_INVOKABLE bool importOutputs(const QString& path);
 
+    //! scan transactions
+    Q_INVOKABLE bool scanTransactions(const QVector<QString> &txids);
+
     //! refreshes the wallet
     Q_INVOKABLE bool refresh(bool historyAndSubaddresses = true);
 
@@ -458,6 +461,7 @@ private:
     mutable QElapsedTimer m_connectionStatusTime;
     bool m_disconnected;
     std::atomic<bool> m_initialized;
+    std::atomic<bool> m_initializing;
     uint32_t m_currentSubaddressAccount;
     Subaddress * m_subaddress;
     mutable SubaddressModel * m_subaddressModel;
@@ -470,6 +474,7 @@ private:
     QString m_daemonPassword;
     QString m_proxyAddress;
     mutable QMutex m_proxyMutex;
+    std::atomic<bool> m_refreshNow;
     std::atomic<bool> m_refreshEnabled;
     std::atomic<bool> m_refreshing;
     WalletListenerImpl *m_walletListener;

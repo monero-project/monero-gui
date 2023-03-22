@@ -10,7 +10,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc ldns expat libunwind-headers protobuf qt5 pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -34,7 +34,7 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
+      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -52,7 +52,7 @@ jobs:
     - uses: eine/setup-msys2@v2
       with:
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
     - name: build
       run: DEV_MODE=ON make release-win64 -j2
     - name: deploy
@@ -68,7 +68,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc ldns expat libunwind-headers protobuf pkg-config python3 p7zip aria2
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config python3 p7zip aria2
     - name: install dependencies
       run: pip3 install defusedxml
     - name: download qt
@@ -103,7 +103,7 @@ jobs:
         restore-keys: |
           docker-linux-static-
     - name: install dependencies
-      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0
+      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxcb-shape0 libxkbcommon-x11-0
     - name: prepare build environment
       run: docker build --tag monero:build-env-linux --build-arg THREADS=3 --file Dockerfile.linux .
     - name: build
@@ -162,6 +162,8 @@ jobs:
       run: docker build --tag monero:build-env-android --build-arg THREADS=3 --file Dockerfile.android .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -e THREADS=3 monero:build-env-android
+    - name: Remove obsolete docker layers
+      run: docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi || true
     - uses: actions/upload-artifact@v2
       with:
         name: ${{ github.job }}

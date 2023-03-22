@@ -94,7 +94,7 @@ ApplicationWindow {
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
-    property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 40 : 105 // GB
+    property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 55 : 150 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
@@ -469,7 +469,7 @@ ApplicationWindow {
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
         if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
-            daemonManager.runningAsync(persistentSettings.nettype, function(running) {
+            daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
                 }
@@ -481,7 +481,9 @@ ApplicationWindow {
             walletInitialized = true
 
             // check if daemon was already mining and add mining logo if true
-            middlePanel.advancedView.miningView.update();
+            if (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining) {
+                middlePanel.advancedView.miningView.update();
+            }
         }
     }
 
@@ -600,6 +602,9 @@ ApplicationWindow {
     function connectRemoteNode() {
         console.log("connecting remote node");
 
+        p2poolManager.exit();
+        p2poolManager.getStatus();
+
         const callback = function() {
             persistentSettings.useRemoteNode = true;
             const remoteNode = remoteNodesModel.currentRemoteNode();
@@ -628,6 +633,10 @@ ApplicationWindow {
             return;
 
         console.log("disconnecting remote node");
+
+        p2poolManager.exit();
+        p2poolManager.getStatus();
+
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.setDaemonLogin("", "");
@@ -692,7 +701,8 @@ ApplicationWindow {
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet ? currentWallet.connected() : Wallet.ConnectionStatus_Disconnected
 
-        currentWallet.refreshHeightAsync();
+        if (currentWallet)
+            currentWallet.refreshHeightAsync();
     }
 
     function startDaemon(flags){
@@ -712,7 +722,7 @@ ApplicationWindow {
             appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
         }
         p2poolManager.exit()
-        daemonManager.stopAsync(persistentSettings.nettype, function(result) {
+        daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(result) {
             daemonStartStopInProgress = 0;
             if (splash) {
                 hideProcessingSplash();
@@ -745,6 +755,12 @@ ApplicationWindow {
         currentWallet.startRefresh();
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
         informationPopup.text  = error + ".\n\n" + qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        if (middlePanel.advancedView.miningView.stopMiningEnabled == true) {
+            walletManager.stopMining()
+            p2poolManager.exit()
+            middlePanel.advancedView.miningView.update()
+            informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
+        }
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -1116,6 +1132,7 @@ ApplicationWindow {
             middlePanel.transferView.clearFields();
             middlePanel.receiveView.clearFields();
             middlePanel.historyView.clearFields();
+            middlePanel.advancedView.clearFields();
             // disable timers
             userInActivityTimer.running = false;
         });
@@ -1364,6 +1381,7 @@ ApplicationWindow {
         }
 
         property bool askDesktopShortcut: isLinux
+        property bool askStopLocalNode: true
         property string language: 'English (US)'
         property string language_wallet: 'English'
         property string locale: 'en_US'
@@ -1392,7 +1410,7 @@ ApplicationWindow {
         property bool historyShowAdvanced: false
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
-        property bool useRemoteNode: false
+        property bool useRemoteNode: isAndroid
         property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
         property string remoteNodesSerialized: JSON.stringify({
                 selected: 0,
@@ -1442,8 +1460,15 @@ ApplicationWindow {
         function getWalletProxyAddress() {
             if (!useRemoteNode) {
                 return "";
+            } else {
+                const remoteAddress = remoteNodesModel.currentRemoteNode().address;
+                // skip proxy when using localhost remote node
+                if (remoteAddress.startsWith("127.0.0.1:") || remoteAddress.startsWith("localhost:")) {
+                    return "";
+                } else {
+                    return getProxyAddress();
+                }
             }
-            return getProxyAddress();
         }
 
         Component.onCompleted: {
@@ -2031,7 +2056,7 @@ ApplicationWindow {
             return;
         }
 
-        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16";
+        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16 --no-igd";
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon(function() {
                 appWindow.startDaemon(simpleModeFlags)
@@ -2128,7 +2153,7 @@ ApplicationWindow {
             showProcessingSplash(qsTr("Checking local node status..."));
             const handler = function(running) {
                 hideProcessingSplash();
-                if (running) {
+                if (running && persistentSettings.askStopLocalNode) {
                     showDaemonIsRunningDialog(closeAccepted);
                 } else {
                     closeAccepted();
@@ -2138,7 +2163,7 @@ ApplicationWindow {
             if (currentWallet) {
                 handler(!currentWallet.disconnected);
             } else {
-                daemonManager.runningAsync(persistentSettings.nettype, handler);
+                daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, handler);
             }
         }
     }
@@ -2253,7 +2278,7 @@ ApplicationWindow {
     }
 
     function getDefaultDaemonRpcPort(networkType) {
-        switch (networkType) {
+        switch (parseInt(networkType)) {
             case NetworkType.STAGENET:
                 return 38081;
             case NetworkType.TESTNET:
