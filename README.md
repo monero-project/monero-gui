@@ -87,7 +87,6 @@ Status of the translations:
 
 Packages are available for
 * Arch Linux: [monero-gui](https://www.archlinux.org/packages/community/x86_64/monero-gui/)
-* Debian: See the [whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
 * Void Linux: `xbps-install -S monero-gui`
 * Flatpak: [Monero GUI](https://flathub.org/apps/details/org.getmonero.Monero)
 * GuixSD: `guix package -i monero-gui`
