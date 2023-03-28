@@ -1013,46 +1013,6 @@ QString Wallet::getDaemonLogPath() const
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
 }
 
-bool Wallet::blackballOutput(const QString &amount, const QString &offset)
-{
-    return m_walletImpl->blackballOutput(amount.toStdString(), offset.toStdString());
-}
-
-bool Wallet::blackballOutputs(const QList<QString> &pubkeys, bool add)
-{
-    std::vector<std::string> std_pubkeys;
-    foreach (const QString &pubkey, pubkeys) {
-        std_pubkeys.push_back(pubkey.toStdString());
-    }
-    return m_walletImpl->blackballOutputs(std_pubkeys, add);
-}
-
-bool Wallet::blackballOutputs(const QString &filename, bool add)
-{
-    QFile file(filename);
-
-    try {
-        if (!file.open(QIODevice::ReadOnly))
-            return false;
-        QList<QString> outputs;
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            outputs.push_back(in.readLine());
-        }
-        file.close();
-        return blackballOutputs(outputs, add);
-    }
-    catch (const std::exception &e) {
-        file.close();
-        return false;
-    }
-}
-
-bool Wallet::unblackballOutput(const QString &amount, const QString &offset)
-{
-    return m_walletImpl->unblackballOutput(amount.toStdString(), offset.toStdString());
-}
-
 QString Wallet::getRing(const QString &key_image)
 {
     std::vector<uint64_t> cring;
