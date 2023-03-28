@@ -130,6 +130,16 @@ RUN git clone -b VER-2-10-2 --depth 1 https://git.savannah.gnu.org/git/freetype/
     make -j$THREADS install && \
     rm -rf $(pwd)
 
+RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.bz2 && \
+    echo "a247a7f6bbb21cf2ca81ea4cbb916bfb9717ca523631675f99b3d4a5678dcd16 expat-2.4.8.tar.bz2" | sha256sum -c && \
+    tar -xf expat-2.4.8.tar.bz2 && \
+    rm expat-2.4.8.tar.bz2 && \
+    cd expat-2.4.8 && \
+    ./configure --enable-static --disable-shared --prefix=/usr && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
+
 RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fontconfig && \
     cd fontconfig && \
     git reset --hard b1df1101a643ae16cdfa1d83b939de2497b1bf27 && \
@@ -161,16 +171,6 @@ RUN wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz && \
     rm openssl-1.1.1q.tar.gz && \
     cd openssl-1.1.1q && \
     ./config no-asm no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.bz2 && \
-    echo "a247a7f6bbb21cf2ca81ea4cbb916bfb9717ca523631675f99b3d4a5678dcd16 expat-2.4.8.tar.bz2" | sha256sum -c && \
-    tar -xf expat-2.4.8.tar.bz2 && \
-    rm expat-2.4.8.tar.bz2 && \
-    cd expat-2.4.8 && \
-    ./configure --enable-static --disable-shared --prefix=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
