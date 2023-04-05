@@ -257,17 +257,12 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 4. Build
 
-    If on x86-64:
+    If on x86-64 or ARM:
 
     ```
     make release -j4
     ```
-    If on ARM64:
-
-    ```
-    make release-linux-armv8 -j4
-    ```
-
+    
     If on ppc64le:
 
     ```
