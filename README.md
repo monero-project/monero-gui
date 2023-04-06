@@ -257,16 +257,8 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 4. Build
 
-    If on x86-64:
-
     ```
     make release -j4
-    ```
-
-    If on ppc64le:
-
-    ```
-    make release-linux-ppc64le -j4
     ```
 
     \* `4` - number of CPU threads to use  
