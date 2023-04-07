@@ -171,6 +171,8 @@ Rectangle {
                                         return "qrc:///images/ledgerNanoSPlus.png";
                                     } else if (ledgerType == "Ledger Nano X") {
                                         return "qrc:///images/ledgerNanoX.png";
+                                    } else if (ledgerType == "Ledger Stax") {
+                                        return "qrc:///images/ledgerStax.png";
                                     }
                                 }
                                 return "";
