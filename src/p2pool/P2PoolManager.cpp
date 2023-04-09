@@ -68,7 +68,10 @@ void P2PoolManager::download() {
         std::chrono::milliseconds timeout = std::chrono::seconds(10);
         http_client.set_server(url.host().toStdString(), "443", {});
         bool success = http_client.invoke_get(url.path().toStdString(), timeout, {}, std::addressof(response), {{"User-Agent", userAgent}});
-        if (response->m_response_code == 302) {
+        if (response->m_response_code == 404) {
+            emit p2poolDownloadFailure(BinaryNotAvailable);
+            return;
+        } else if (response->m_response_code == 302) {
             epee::net_utils::http::fields_list fields = response->m_header_info.m_etc_fields;
             for (std::pair<std::string, std::string> i : fields) {
                 if (i.first == "Location") {
@@ -82,7 +85,7 @@ void P2PoolManager::download() {
             }
         }
         if (!success) {
-            emit p2poolDownloadFailure();
+            emit p2poolDownloadFailure(ConnectionIssue);
         }
         else {
             std::string stringData = response->m_body;
@@ -90,7 +93,7 @@ void P2PoolManager::download() {
             QByteArray hashData = QCryptographicHash::hash(data, QCryptographicHash::Sha256);
             QString hash = hashData.toHex();
             if (hash != validHash) {
-                emit p2poolDownloadFailure();
+                emit p2poolDownloadFailure(HashVerificationFailed);
             }
             else {
                 file.open(QIODevice::WriteOnly);
@@ -102,7 +105,7 @@ void P2PoolManager::download() {
                     emit p2poolDownloadSuccess();
                 }
                 else {
-                    emit p2poolDownloadFailure();
+                    emit p2poolDownloadFailure(InstallationFailed);
                 }
             }
         }
