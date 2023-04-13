@@ -63,6 +63,13 @@ Rectangle {
     signal addressBookClicked()
     signal accountClicked()
 
+    onBalanceStringChanged: {
+        if (middlePanel.state == "History") {
+            middlePanel.historyView.onPageClosed()
+            middlePanel.historyView.onPageCompleted()
+        }
+    }
+
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
         if(pos === "History") menuColumn.previousButton = historyButton
