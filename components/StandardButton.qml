@@ -51,6 +51,7 @@ Item {
     property alias tooltip: tooltip.text
     property alias tooltipLeft: tooltip.tooltipLeft
     property alias tooltipPopup: tooltip.tooltipPopup
+    property alias maximumTooltipWidth: tooltip.maximumTooltipWidth
     signal clicked()
 
     height: small ?  30 : 36
