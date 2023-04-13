@@ -13,6 +13,7 @@ Text {
     property string themeTransitionBlackColor: ""
     property string themeTransitionWhiteColor: ""
     property alias tooltip: tooltip.text
+    property alias tooltipExitAnimationDuration: tooltip.tooltipExitAnimationDuration
     property alias tooltipLeft: tooltip.tooltipLeft
     property alias tooltipIconVisible: tooltip.tooltipIconVisible
     property alias tooltipPopup: tooltip.tooltipPopup

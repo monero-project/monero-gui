@@ -70,11 +70,6 @@ Rectangle {
             if (recipientModel.hasInvalidAddress()) {
                 return qsTr("Address is invalid.") + translationManager.emptyString;
             }
-
-            // Amount is nonzero
-            if (recipientModel.hasEmptyAmount()) {
-                return qsTr("Enter an amount.") + translationManager.emptyString;
-            }
         }
 
         return "";
@@ -112,8 +107,10 @@ Rectangle {
     }
 
     function setDescription(value) {
-        descriptionLine.text = value;
-        descriptionCheckbox.checked = descriptionLine.text != "";
+        if (value != "") {
+            descriptionLine.text = value;
+            descriptionLabel.visible = true;
+        }
     }
 
     function setPaymentId(value) {
@@ -125,6 +122,8 @@ Rectangle {
         recipientModel.clear();
         fillPaymentDetails("", "", "", "", "");
         priorityDropdown.currentIndex = 0
+        descriptionLine.text = "";
+        descriptionLabel.visible = false;
     }
 
     // Information dialog
@@ -214,7 +213,7 @@ Rectangle {
 
             function hasEmptyAmount() {
                 for (var index = 0; index < recipientModel.count; ++index) {
-                    if (recipientModel.get(index).amount === "") {
+                    if (recipientModel.get(index).amount === "" || recipientModel.get(index).amount == 0) {
                         return true;
                     }
                 }
@@ -424,7 +423,7 @@ Rectangle {
                                                     if (address_ok) {
                                                         // prepend openalias to description
                                                         descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
-                                                        descriptionCheckbox.checked = true
+                                                        descriptionLabel.visible = true
                                                         recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
                                                     }
                                                     else
@@ -558,29 +557,6 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         spacing: 0
 
-                        CheckBox {
-                            border: false
-                            checked: false
-                            enabled: {
-                                if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
-                                    return false;
-                                }
-                                if (recipientModel.count >= recipientModel.maxRecipients) {
-                                    return false;
-                                }
-                                return true;
-                            }
-                            fontAwesomeIcons: true
-                            fontSize: descriptionLine.labelFontSize
-                            iconOnTheLeft: true
-                            text: qsTr("Add recipient") + translationManager.emptyString
-                            toggleOnClick: false
-                            uncheckedIcon: FontAwesome.plusCircle
-                            onClicked: {
-                                recipientModel.newRecipient("", "");
-                            }
-                        }
-
                         MoneroComponents.TextPlain {
                             Layout.fillWidth: true
                             horizontalAlignment: Text.AlignRight
@@ -619,6 +595,27 @@ Rectangle {
                         font.family: MoneroComponents.Style.fontRegular.name
                         text: "XMR"
                         visible: recipientModel.count > 1
+                    }
+
+                    MoneroComponents.StandardButton {
+                        id: addRecipientButton
+                        Layout.column: 0
+                        Layout.row: 1
+                        small: true
+                        primary: false
+                        text: "+ " + qsTr("Add recipient") + translationManager.emptyString
+                        enabled: {
+                            if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
+                                return false;
+                            }
+                            if (recipientModel.count >= recipientModel.maxRecipients) {
+                                return false;
+                            }
+                            return true;
+                        }
+                        onClicked: {
+                            recipientModel.newRecipient("", "");
+                        }
                     }
 
                     MoneroComponents.LineEdit {
@@ -697,7 +694,7 @@ Rectangle {
                 Layout.topMargin: 5
                 spacing: 10
 
-                StandardDropdown {
+                MoneroComponents.StandardDropdown {
                     Layout.maximumWidth: 200
                     id: priorityDropdown
                     currentIndex: 0
@@ -776,30 +773,66 @@ Rectangle {
           spacing: 15
 
           ColumnLayout {
-              CheckBox {
-                  id: descriptionCheckbox
-                  border: false
-                  checkedIcon: FontAwesome.minusCircle
-                  uncheckedIcon: FontAwesome.plusCircle
-                  fontAwesomeIcons: true
-                  fontSize: descriptionLine.labelFontSize
-                  iconOnTheLeft: true
-                  Layout.fillWidth: true
-                  text: qsTr("Add description") + translationManager.emptyString
+
+              MoneroComponents.StandardButton {
+                  id: addDescriptionButton
+                  Layout.bottomMargin: 28
+                  small: true
+                  primary: false
+                  text: "+ " + qsTr("Add description") + translationManager.emptyString
+                  visible: !descriptionLabel.visible
                   onClicked: {
-                      if (!descriptionCheckbox.checked) {
-                        descriptionLine.text = "";
-                      }
+                      descriptionLabel.visible = true
                   }
               }
 
-              LineEdit {
-                  id: descriptionLine
-                  placeholderFontSize: 16
-                  fontSize: 16
-                  placeholderText: qsTr("Saved to local wallet history") + " (" + qsTr("only visible to you") + ")" + translationManager.emptyString
-                  Layout.fillWidth: true
-                  visible: descriptionCheckbox.checked
+              MoneroComponents.TextPlain {
+                  id: descriptionLabel
+                  font.family: MoneroComponents.Style.fontRegular.name
+                  font.pixelSize: 16
+                  color: MoneroComponents.Style.defaultFontColor
+                  text: qsTr("Description") + translationManager.emptyString
+                  visible: false
+              }
+
+              RowLayout {
+                  spacing: 0
+                  Layout.topMargin: 5
+
+                  MoneroComponents.LineEdit {
+                      id: descriptionLine
+                      placeholderFontSize: 15
+                      fontSize: 15
+                      placeholderText: qsTr("Saved to local wallet history") + " (" + qsTr("only visible to you") + ")" + translationManager.emptyString
+                      Layout.fillWidth: true
+                      visible: descriptionLabel.visible
+                  }
+
+                  MoneroComponents.TextPlain {
+                      Layout.preferredWidth: recipientLayout.thirdRowWidth
+                      font.family: FontAwesome.fontFamilySolid
+                      font.styleName: "Solid"
+                      horizontalAlignment: Text.AlignHCenter
+                      opacity: mouseArea.containsMouse ? 1 : 0.85
+                      text: FontAwesome.times
+                      tooltip: qsTr("Remove description")  + translationManager.emptyString
+                      tooltipLeft: true
+                      tooltipExitAnimationDuration: 0
+                      visible: descriptionLabel.visible
+
+                      MouseArea {
+                          id: mouseArea
+                          anchors.fill: parent
+                          cursorShape: Qt.PointingHandCursor
+                          hoverEnabled: true
+                          onEntered: parent.tooltipPopup.open()
+                          onExited: parent.tooltipPopup.close()
+                          onClicked: {
+                              descriptionLabel.visible = false;
+                              descriptionLine.text = "";
+                          }
+                      }
+                  }
               }
           }
 
@@ -845,19 +878,29 @@ Rectangle {
           visible: paymentIdCheckbox.checked || warningLongPidDescription
       }
 
-      MoneroComponents.WarningBox {
-          id: sendButtonWarningBox
-          text: root.sendButtonWarning
-          visible: root.sendButtonWarning !== ""
-      }
-
       RowLayout {
-          StandardButton {
+          Layout.alignment: Qt.AlignRight
+          Layout.rightMargin: 50
+          spacing: 15
+
+          MoneroComponents.StandardButton {
+              id: clearButton
+              Layout.topMargin: 4
+              text: qsTr("Clear") + translationManager.emptyString
+              primary: false
+              small: true
+              onClicked: {
+                  clearFields();
+              }
+          }
+
+          MoneroComponents.StandardButton {
               id: sendButton
               rightIcon: "qrc:///images/rightArrow.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
+              small: true
+              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !recipientModel.hasEmptyAmount() && !paymentIdWarningBox.visible
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -866,6 +909,12 @@ Rectangle {
                   root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
+      }
+
+      MoneroComponents.WarningBox {
+          id: sendButtonWarningBox
+          text: root.sendButtonWarning
+          visible: root.sendButtonWarning !== ""
       }
 
       function checkInformation() {
