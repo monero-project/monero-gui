@@ -84,6 +84,21 @@ Rectangle {
                 subtitle: qsTr("Using a hardware device.") + translationManager.emptyString
             }
 
+            Text {
+                id: errorMsg
+                text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
+                visible: errorMsg.text !== ""
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.errorColor
+                font.pixelSize: 14
+
+                wrapMode: Text.WordWrap
+                leftPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+            }
+
             WizardWalletInput{
                 id: walletInput
             }
@@ -222,21 +237,6 @@ Rectangle {
                 }
             }
 
-            Text {
-                id: errorMsg
-                text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
-                visible: errorMsg.text !== ""
-                Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.errorColor
-                font.pixelSize: 16
-
-                wrapMode: Text.WordWrap
-                leftPadding: 0
-                topPadding: 0
-                bottomPadding: 0
-            }
-
             WizardNav {
                 progressSteps: appWindow.walletMode <= 1 ? 3 : 4
                 progress: 0
@@ -285,7 +285,21 @@ Rectangle {
         if(written){
             wizardStateView.state = "wizardCreateWallet3";
         } else {
-            errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
+            errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + "<br>" +
+                            qsTr("Troubleshooting") + ":" + "<br>" +
+                            qsTr("- Check if your device is plugged in and unlocked") + "<br>" +
+                            (wizardCreateDevice1.deviceName == "Trezor" ? qsTr("- Push the USB cable into your Trezor device until you hear/feel a click (this might require a little bit of force)") + "<br>" : "") +
+                            qsTr("- Check if your device has already been initialized before (your device already has a recovery seed)") + "<br>" +
+                            (wizardCreateDevice1.deviceName == "Ledger" ? qsTr("- Check if your device has the most recent firmware version (available in Manager section of Ledger Live desktop app)") + "<br>" +
+                                                                          qsTr("- Check if your device has the Monero app installed (available in Ledger Live desktop app)") + "<br>" +
+                                                                          qsTr("- Check if your device is running the Monero app") + "<br>" +
+                                                                          qsTr("- Close any cryptocurrency wallet running in the background, like Ledger Live") + "<br>" : "") +
+                            (wizardCreateDevice1.deviceName == "Trezor" ? qsTr("- Check if your device has the most recent firmware version (available in Trezor Suite)") + "<br>" +
+                                                                          qsTr("- Close any cryptocurrency wallet running in the background, like Trezor Suite, Exodus, Feather or Monero CLI") + "<br>" +
+                                                                          qsTr("- Try installing Trezor Bridge") + "<br>" : "") +
+                            qsTr("- Restart your computer and try again") + "<br>" +
+                            qsTr("- Try using a different USB cable or changing the USB port. Avoid using USB hubs.") + "<br>" +
+                            translationManager.emptyString;
         }
         wizardController.walletCreatedFromDevice.disconnect(onCreateWalletFromDeviceCompleted);
     }
