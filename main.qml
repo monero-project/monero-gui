@@ -2186,7 +2186,7 @@ ApplicationWindow {
 
     function getBuildTag() {
         if (isMac) {
-            return "mac-x64";
+            return isARM ? "mac-armv8" : "mac-x64";
         }
         if (isWindows) {
             return oshelper.installed ? "install-win-x64" : "win-x64";
