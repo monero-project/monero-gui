@@ -387,34 +387,17 @@ Rectangle {
                 visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
                 enabled : visible
                 onClicked: {
-                    var result = walletManager.resolveOpenAlias(addressLine.text)
-                    if (result) {
-                        var parts = result.split("|")
-                        if (parts.length === 2) {
-                            var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                            if (parts[0] === "true") {
-                                if (address_ok) {
-                                    // prepend openalias to description
-                                    descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
-                                    addressLine.text = parts[1]
-                                } else {
-                                    root.oa_message(qsTr("No valid address found at this OpenAlias address"))
-                                }
-                            } else if (parts[0] === "false") {
-                                if (address_ok) {
-                                    addressLine.text = parts[1]
-                                    root.oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                                } else {
-                                    root.oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                                }
-                            } else {
-                                root.oa_message(qsTr("Internal error"))
-                            }
-                        } else {
-                            root.oa_message(qsTr("Internal error"))
+                    const response = TxUtils.handleOpenAliasResolution(addressLine.text, descriptionLine.text);
+                    if (response) {
+                        if (response.message) {
+                            oa_message(response.message);
                         }
-                    } else {
-                        root.oa_message(qsTr("No address found"))
+                        if (response.address) {
+                            addressLine.text = response.address;
+                        }
+                        if (response.description) {
+                            descriptionLine.text = response.description;
+                        }
                     }
                 }
             }

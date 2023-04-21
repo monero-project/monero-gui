@@ -415,41 +415,18 @@ Rectangle {
                                     text: qsTr("Resolve") + translationManager.emptyString
                                     visible: TxUtils.isValidOpenAliasAddress(address)
                                     onClicked: {
-                                        var result = walletManager.resolveOpenAlias(address)
-                                        if (result) {
-                                            var parts = result.split("|")
-                                            if (parts.length == 2) {
-                                                var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                                                if (parts[0] === "true") {
-                                                    if (address_ok) {
-                                                        // prepend openalias to description
-                                                        descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
-                                                        descriptionCheckbox.checked = true
-                                                        recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
-                                                    }
-                                                    else
-                                                        oa_message(qsTr("No valid address found at this OpenAlias address"))
-                                                }
-                                                else if (parts[0] === "false") {
-                                                        if (address_ok) {
-                                                            recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
-                                                            oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                                                        }
-                                                        else
-                                                        {
-                                                            oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                                                        }
-                                                }
-                                                else {
-                                                    oa_message(qsTr("Internal error"))
-                                                }
+                                        const response = TxUtils.handleOpenAliasResolution(address, descriptionLine.text);
+                                        if (response) {
+                                            if (response.message) {
+                                                oa_message(response.message);
                                             }
-                                            else {
-                                                oa_message(qsTr("Internal error"))
+                                            if (response.address) {
+                                                recipientRepeater.itemAt(index).children[1].children[0].text = response.address;
                                             }
-                                        }
-                                        else {
-                                            oa_message(qsTr("No address found"))
+                                            if (response.description) {
+                                                descriptionLine.text = response.description;
+                                                descriptionCheckbox.checked = true;
+                                            }
                                         }
                                     }
                                 }
