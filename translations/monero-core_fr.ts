@@ -1068,12 +1068,14 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>Miner avec votre ordinateur aide à renforcer le réseau Monero. Plus les mineurs sont nombreux, plus il est difficile pour le réseau d&apos;être attaqué. Peu importe sa taille ou ses moyens, chaque mineur renforce le réseau.
+
+Miner vous donne aussi une petite chance de gagner un peu de Monero. Votre ordinateur va créer des hachages à la recherche de solutions de blocs. Si vous trouvez un bloc, vous recevrez la récompense associée. Bonne chance !</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Miner avec P2Pool est une manière décentralisée de miner en pool qui assure un revenu plus fréquent qu&apos;en minant en solo, tout en soutenant le réseau.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="100"/>
@@ -1108,7 +1110,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="304"/>
         <source>P2Pool installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Installation de P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="305"/>
@@ -1148,7 +1150,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="441"/>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="498"/>
@@ -2652,7 +2654,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../components/TitleBar.qml" line="238"/>
         <source>Switch to dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le mode sombre</translation>
     </message>
 </context>
 <context>
