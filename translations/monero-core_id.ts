@@ -583,7 +583,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1758"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mohon pilih sebuah folder</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1768"/>
@@ -593,7 +593,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1769"/>
         <source>CSV file written to: %1</source>
-        <translation>File CSV disimpan di: %1</translation>
+        <translation>Berkas CSV ditulis ke: %1</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1770"/>
@@ -608,7 +608,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1775"/>
         <source>Error exporting transaction data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kesalahan mengekspor data transaksi.</translation>
     </message>
 </context>
 <context>
@@ -729,7 +729,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LanguageSidebar.qml" line="96"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahasa diubah.</translation>
     </message>
 </context>
 <context>
@@ -883,7 +883,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
         <source>Change Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubah Bahasa</translation>
     </message>
 </context>
 <context>
@@ -4234,7 +4234,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="519"/>
         <source>Opening wallet ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Membuka dompet …</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
@@ -4324,7 +4324,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="309"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Menutup dompet…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="494"/>
@@ -4359,12 +4359,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="866"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Membuat transaksi…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="945"/>
         <source>Sending transaction ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mengirim transaksi…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
