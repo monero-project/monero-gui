@@ -91,7 +91,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>دیدن تراکنش‌ها</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="279"/>
