@@ -879,7 +879,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>深色主题</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
@@ -913,7 +913,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
         <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>你可以自行决定是否接受尚未确认的交易，虽然通常过一会就会完成确认，但还是可能出现问题，因此交易大规模金额时你最好等待一个或更多的交易确认</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="269"/>
@@ -1075,7 +1075,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool 挖矿是一种去中心化的矿池挖矿方式，与单独挖矿相比它支付频率更高，同时还支持网络。</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="100"/>
