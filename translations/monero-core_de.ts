@@ -1130,7 +1130,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="383"/>
         <source>Mini</source>
-        <translation type="unfinished"></translation>
+        <translation>Mini</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="384"/>
