@@ -216,7 +216,7 @@
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Prouver/Vérifier</translation>
+        <translation>Prouver/vérifier</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
@@ -534,7 +534,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../pages/History.qml" line="1725"/>
         <source>Generating payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>La preuve de paiement est en cours de génération</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1733"/>
@@ -884,7 +884,7 @@ Il est préférable d&apos;entrer le mot de passe sur le portefeuille physique.<
     <message>
         <location filename="../components/MenuBar.qml" line="50"/>
         <source>Change Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer la Langue</translation>
     </message>
 </context>
 <context>
