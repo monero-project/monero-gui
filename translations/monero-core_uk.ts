@@ -655,7 +655,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="134"/>
         <source>Primary address &amp; Keys</source>
-        <translation>Первинний адрес та ключі</translation>
+        <translation>Первинна Адреса та Ключі</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="149"/>
@@ -992,7 +992,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="128"/>
         <source>unconfirmed</source>
-        <translation>непідтверджений</translation>
+        <translation>не підтверджена</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="163"/>
