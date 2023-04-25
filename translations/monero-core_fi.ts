@@ -3170,7 +3170,8 @@ Päivitä tai yhdistä toiseen daemoniin</translation>
         <location filename="../pages/TxKey.qml" line="69"/>
         <source>
 For reserve proofs you don&apos;t need to specify tx id or address.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Varaukset todistuksia varten sinun ei tarvitse määrittää tx-tunnusta tai osoitetta.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="96"/>
@@ -3888,7 +3889,7 @@ se saattaa vaatia sinulta toimintoja.</translation>
         <location filename="../wizard/WizardModeSelection.qml" line="85"/>
         <location filename="../wizard/WizardModeSelection.qml" line="118"/>
         <source>Not available on Tails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei saatavilla Tails.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="88"/>
@@ -3957,7 +3958,7 @@ se saattaa vaatia sinulta toimintoja.</translation>
     <message>
         <location filename="../wizard/WizardNav.qml" line="118"/>
         <source>Step (%1) of (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Askel (%1) - (%2)</translation>
     </message>
 </context>
 <context>
