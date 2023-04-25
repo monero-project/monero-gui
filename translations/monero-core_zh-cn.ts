@@ -730,7 +730,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LanguageSidebar.qml" line="96"/>
         <source>Language changed.</source>
-        <translation type="unfinished">语言修改成功。</translation>
+        <translation>语言更改成功</translation>
     </message>
 </context>
 <context>
