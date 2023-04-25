@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit název účtu</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
