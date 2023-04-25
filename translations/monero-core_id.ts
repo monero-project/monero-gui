@@ -296,7 +296,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Silahkan pilih dimana Anda akan memasukkan frasa sandi.
+Direkomendasikan untuk memasukkan frasa sandi di dompet hardware untuk keamanan yang lebih baik.</translation>
     </message>
 </context>
 <context>
@@ -363,7 +364,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="511"/>
         <source>Invalid page. Must be a number within the specified range.</source>
-        <translation type="unfinished"></translation>
+        <translation>Halaman tidak valid. Harus angka dalam rentang tertentu.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
@@ -686,12 +687,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Keys.qml" line="281"/>
         <source>Mnemonic seed protected by hardware device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seed mnemonik diproteksi oleh perangkat hardware.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
         <source>(View Only Wallet - No mnemonic seed available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Hanya Dompet Pantau - Tidak ada seed mnemonik tersedia)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="292"/>
@@ -1067,7 +1068,9 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>Menambang dengan komputer akan membantu memperkuat jaringan Monero. Semakin banyak orang yang menambang, makin sulit jaringan untuk diserang, dan setiap bit kecil akan membantu.
+
+Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Komputer Anda akan membuat hash untuk mencari solusi blok. Jika menemukan blok, Anda akan mendapatkan rewardnya. Semoga beruntung!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -1306,7 +1309,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="175"/>
         <source>Switch to another public remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Pindah ke node remot publik lainnya</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="194"/>
