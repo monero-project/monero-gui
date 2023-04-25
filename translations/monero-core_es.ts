@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation>Editar etiqueta de la cuenta</translation>
+        <translation>Editar nombre de cuenta</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
