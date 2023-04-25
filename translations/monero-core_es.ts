@@ -216,7 +216,7 @@
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Probar/verificar</translation>
+        <translation>Probar/verificar</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
