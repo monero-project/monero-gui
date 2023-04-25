@@ -87,7 +87,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar para este endereço</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
@@ -212,7 +212,7 @@
     <message>
         <location filename="../pages/Advanced.qml" line="53"/>
         <source>Mining</source>
-        <translation type="unfinished">Minerar</translation>
+        <translation>Minerar</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="63"/>
@@ -530,7 +530,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Payment proof</source>
-        <translation type="unfinished">Prova de pagamento</translation>
+        <translation>Prova de pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1725"/>
