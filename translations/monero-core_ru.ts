@@ -349,7 +349,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="393"/>
         <location filename="../pages/History.qml" line="1744"/>
         <source>Amount</source>
-        <translation>Количество</translation>
+        <translation>Сумма</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="473"/>
@@ -369,12 +369,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="674"/>
         <source>Sent</source>
-        <translation>Отправленные</translation>
+        <translation>Отправлено</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
         <source>Received</source>
-        <translation>Полученные</translation>
+        <translation>Полученно</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="159"/>
@@ -491,7 +491,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="786"/>
         <source>In</source>
-        <translation>В</translation>
+        <translation>На</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
@@ -1490,7 +1490,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <location filename="../pages/Receive.qml" line="220"/>
         <location filename="../pages/Receive.qml" line="281"/>
         <source>Amount</source>
-        <translation>Количество</translation>
+        <translation>Сумма</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="340"/>
@@ -2031,12 +2031,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="271"/>
         <source>Start daemon</source>
-        <translation>Запустить демона</translation>
+        <translation>Запустить демон</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="271"/>
         <source>Stop daemon</source>
-        <translation>Остановить демона</translation>
+        <translation>Остановить демон</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="290"/>
@@ -2692,7 +2692,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="333"/>
         <source>Amount</source>
-        <translation>Количество</translation>
+        <translation>Сумма</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="689"/>
@@ -3235,7 +3235,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../pages/TxKey.qml" line="174"/>
         <source>Transaction is not needed for reserve proof.</source>
-        <translation>Для зарезервированных доказательств не требуется транзакция</translation>
+        <translation>Для зарезервированных доказательств не требуется транзакция.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="223"/>

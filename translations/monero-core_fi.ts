@@ -1807,7 +1807,7 @@ Vanha lompakkovälimuistitiedosto nimetään uudelleen ja voidaan palauttaa myö
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="368"/>
         <source>Tails: </source>
-        <translation>Hännät: </translation>
+        <translation>Tails: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="376"/>
