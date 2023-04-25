@@ -32,7 +32,7 @@
     <message>
         <location filename="../pages/Account.qml" line="174"/>
         <source>Accounts</source>
-        <translation>Акаунти</translation>
+        <translation>Рахунки</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="346"/>
@@ -52,7 +52,7 @@
     <message>
         <location filename="../pages/Account.qml" line="181"/>
         <source>Create new account</source>
-        <translation>Створити новий аккаунт</translation>
+        <translation>Створити новий рахунок</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="184"/>
