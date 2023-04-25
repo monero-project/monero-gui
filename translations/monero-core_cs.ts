@@ -784,7 +784,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="217"/>
         <source>Syncing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronizuji...</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="406"/>
@@ -948,17 +948,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="532"/>
         <source>Enable sales tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit sledovaní prodejů</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="544"/>
         <source>Leave this page</source>
-        <translation type="unfinished"></translation>
+        <translation>Opustit stránku</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="574"/>
         <source>The merchant page requires a larger window</source>
-        <translation type="unfinished"></translation>
+        <translation>Stránka obchodníka vyžaduje větší okno</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="596"/>
@@ -1030,7 +1030,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Mining.qml" line="88"/>
         <source>Mining may reduce the performance of other running applications and processes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Těžba může snížit výkon ostatních aplikací a procesů.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="202"/>
