@@ -1075,17 +1075,17 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool-Mining ist eine dezentralisierte Art des Pool-Minings, die im Vergleich zum Solo-Mining regelmäßige Auszahlungen ermöglicht und zugleich das Netzwerk stärkt.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="100"/>
         <source>Solo</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="111"/>
         <source>Mining mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mining-Modus</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="198"/>
@@ -1110,7 +1110,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="304"/>
         <source>P2Pool installation</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool-Installation</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="305"/>
@@ -1120,12 +1120,12 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="307"/>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="308"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="383"/>
@@ -1160,12 +1160,12 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="499"/>
         <source>(optional)</source>
-        <translation type="unfinished">(optional)</translation>
+        <translation>(optional)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="516"/>
         <source>Starting P2Pool</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="519"/>
@@ -1180,7 +1180,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="622"/>
         <source>P2Pool Installation Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool-Installation fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
@@ -1200,7 +1200,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="632"/>
         <source>P2Pool has successfully installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool wurde erfolgreich installiert.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="328"/>
@@ -2635,7 +2635,7 @@ Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="118"/>
         <source>Lock this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperre diese Wallet</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="159"/>
