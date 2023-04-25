@@ -42,7 +42,7 @@
     <message>
         <location filename="../pages/Account.qml" line="361"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia indirizzo negli appunti</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="366"/>
@@ -91,12 +91,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizza transazioni</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="279"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia indirizzo negli appunti</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="284"/>
@@ -148,7 +148,7 @@
         <location filename="../pages/AddressBook.qml" line="261"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Edit entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica ingresso</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="351"/>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="51"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
@@ -254,7 +254,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona Tutto</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Clean</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="254"/>
@@ -524,7 +524,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../pages/History.qml" line="1024"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Genera prova di pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
@@ -534,7 +534,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../pages/History.qml" line="1725"/>
         <source>Generating payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Generazione prova di pagamento</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1733"/>
@@ -774,7 +774,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
         <location filename="../LeftPanel.qml" line="473"/>
         <location filename="../LeftPanel.qml" line="494"/>
         <source>Ctrl+</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="178"/>
@@ -833,7 +833,7 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../components/LineEdit.qml" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Incolla</translation>
     </message>
 </context>
 <context>
@@ -864,12 +864,12 @@ Si raccomanda inserire la passphrase su un portafoglio hardware per una maggior 
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
         <source>Close Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi Portafoglio</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="42"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizza</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
