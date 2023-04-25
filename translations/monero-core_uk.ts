@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати мітку рахунку</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Переглянути транзакції</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="279"/>
@@ -148,7 +148,7 @@
         <location filename="../pages/AddressBook.qml" line="261"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Edit entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати запис</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="351"/>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="51"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Вирізати</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
@@ -1108,7 +1108,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="304"/>
         <source>P2Pool installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановлення P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="305"/>
@@ -1118,7 +1118,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="307"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="308"/>
@@ -1158,12 +1158,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="499"/>
         <source>(optional)</source>
-        <translation type="unfinished">(опційно)</translation>
+        <translation>(необов&apos;язково)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="516"/>
         <source>Starting P2Pool</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="519"/>
@@ -2136,7 +2136,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="56"/>
         <source>Lock this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокувати цей гаманець</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="57"/>
@@ -2604,22 +2604,22 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="119"/>
         <source>Transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID транзакції:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="130"/>
         <source>Transaction file location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Розташування файлу транзакції:</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>View progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Переглянути прогрес</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити папку</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="170"/>
@@ -2854,19 +2854,19 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="928"/>
         <source>Key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Образи ключів</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="903"/>
         <location filename="../pages/Transfer.qml" line="929"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорт</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="909"/>
         <location filename="../pages/Transfer.qml" line="935"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпорт</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="946"/>
@@ -2881,12 +2881,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="950"/>
         <source>1. Using cold wallet, export the key images into a file</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Використовуючи холодний гаманець, експортуйте образи ключів в файл</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="951"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Використовуючи гаманець тільки для перегляду, імпортуйте файл з образами ключів</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="958"/>
@@ -2896,27 +2896,27 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="959"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="968"/>
         <source>Sign (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Підписати (офлайн)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="974"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>Надіслати</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="985"/>
         <source>Spend XMR from a cold (offline) wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Витратити XMR з холодного (офлайн) гаманця</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="983"/>
         <source>* To create a transaction file, please enter address and amount above</source>
-        <translation type="unfinished"></translation>
+        <translation>* Щоб створити файл транзакції, будь ласка введіть адресу та суму вище</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="279"/>
@@ -2926,12 +2926,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканувати QR-код</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="311"/>
         <source>Import from address book</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортувати з адресної книги</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="342"/>
@@ -2941,22 +2941,22 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="519"/>
         <source>Remove recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити одержувача</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="576"/>
         <source>Add recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати одержувача</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Всього</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="756"/>
         <source>fee</source>
-        <translation type="unfinished"></translation>
+        <translation>комісія</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
