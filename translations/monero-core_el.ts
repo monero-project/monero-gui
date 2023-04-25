@@ -3182,7 +3182,7 @@ For reserve proofs you don&apos;t need to specify tx id or address.</source>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
         <source>Amount</source>
-        <translation type="unfinished">Ποσό</translation>
+        <translation>Ποσό</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="109"/>
@@ -3589,7 +3589,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Επαναφορά πορτοφολιού</translation>
+        <translation>Επαναφορά πορτοφολιού</translation>
     </message>
 </context>
 <context>
@@ -3686,7 +3686,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished">Επαναφορά</translation>
+        <translation>Επαναφορά</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
@@ -4130,7 +4130,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="70"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Δημιουργία πορτοφολιού</translation>
+        <translation>Δημιουργία πορτοφολιού</translation>
     </message>
 </context>
 <context>

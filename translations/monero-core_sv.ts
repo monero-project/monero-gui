@@ -37,12 +37,12 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera kontoetikett</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera adress till urklipp</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="366"/>
@@ -86,12 +86,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>Skicka till denna adress</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
         <source>See transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Se transaktioner</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="279"/>
@@ -148,7 +148,7 @@
         <location filename="../pages/AddressBook.qml" line="261"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Edit entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Redigera post</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="351"/>
@@ -216,17 +216,17 @@
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Bevisa/kontrollera</translation>
+        <translation>Bevisa/kontrollera</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">Delad RingDB</translation>
+        <translation>Delad RingDB</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="68"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Signera/verifiera</translation>
+        <translation>Signera/verifiera</translation>
     </message>
 </context>
 <context>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="51"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Klipp</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
@@ -249,12 +249,12 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="69"/>
         <source>Delete</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj alla</translation>
     </message>
 </context>
 <context>
@@ -296,7 +296,8 @@
         <location filename="../components/DevicePassphraseDialog.qml" line="68"/>
         <source>Please select where you want to enter passphrase.
 It is recommended to enter passphrase on the hardware wallet for better security.</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj var du vill ange lösenordsfras.
+Det rekommenderas att ange en lösenordsfras på hårdvaruplånboken för bättre säkerhet.</translation>
     </message>
 </context>
 <context>
@@ -331,7 +332,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Clean</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="254"/>
@@ -523,7 +524,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1024"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa betalningsbevis</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
