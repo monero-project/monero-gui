@@ -1115,7 +1115,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="305"/>
         <source>P2Pool will be installed at %1. Proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool wird bei %1 installiert. Fortfahren?</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="307"/>
@@ -1145,7 +1145,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="401"/>
         <source>Use the mini chain if you have a low hashrate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwenden Sie die Minikette, wenn Sie eine niedrige Hashrate haben.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="441"/>
@@ -1185,7 +1185,7 @@ Mining gibt dir auch eine kleine Chance, etwas Monero zu verdienen. Dein Compute
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>P2Pool installation failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die P2Pool-Installation ist fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
@@ -2182,7 +2182,7 @@ Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="134"/>
         <source>Scan transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Transaktion scannen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="137"/>
