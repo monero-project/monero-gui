@@ -1917,7 +1917,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="168"/>
         <source>Enable displaying balance in other currencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera visning av saldo i andra valutor</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="189"/>
@@ -1927,7 +1927,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="204"/>
         <source>Currency</source>
-        <translation type="unfinished"></translation>
+        <translation>Valuta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="228"/>
