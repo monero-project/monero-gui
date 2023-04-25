@@ -86,7 +86,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>‎Odeslat na tuto adresu‎</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
