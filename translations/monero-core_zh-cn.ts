@@ -216,12 +216,12 @@
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">证明/检验</translation>
+        <translation>证明/检验</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">共享的环签名数据库</translation>
+        <translation>共享的环签名数据库</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="68"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
         <source>Copy</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="63"/>
@@ -249,7 +249,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="69"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
@@ -491,7 +491,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="786"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>来自</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="674"/>
@@ -508,7 +508,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <location filename="../pages/History.qml" line="819"/>
         <location filename="../pages/History.qml" line="821"/>
         <source>Address</source>
-        <translation type="unfinished">地址</translation>
+        <translation>地址</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="825"/>
@@ -524,12 +524,12 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1024"/>
         <source>Generate payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>生成付款证明</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Payment proof</source>
-        <translation type="unfinished">付款证明</translation>
+        <translation>付款证明</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1725"/>
@@ -833,7 +833,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/LineEdit.qml" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished">粘贴</translation>
+        <translation>粘贴</translation>
     </message>
 </context>
 <context>
@@ -859,22 +859,22 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../components/MenuBar.qml" line="34"/>
         <source>File</source>
-        <translation type="unfinished">文件</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
         <source>Close Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭钱包</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="42"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>查看</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>亮色模式</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="44"/>
@@ -908,7 +908,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="159"/>
         <source>This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</source>
-        <translation type="unfinished"></translation>
+        <translation>此界面会自动扫描区块链和交易池中对应收款二维码的转账。</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="160"/>
@@ -1068,7 +1068,9 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>用你的电脑挖矿能够增强门罗币网络。挖矿的人越多，网络就越难被攻击，众志成城！
+
+挖矿也有小概率让你得到一些门罗币。你的电脑将会进行哈希运算，以寻找符合难度的区块。如果你真的找到了一个有效的区块，你将会获得对应的奖励，祝你好运！</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -1088,12 +1090,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="198"/>
         <source>Use half (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用一半的线程（推荐）</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="240"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="269"/>
@@ -4471,7 +4473,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="2131"/>
         <source>Checking local node status...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在检查本地节点状态...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
