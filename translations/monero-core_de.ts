@@ -2139,7 +2139,7 @@ Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="56"/>
         <source>Lock this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperre dieses Wallet</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="57"/>
