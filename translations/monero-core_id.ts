@@ -11,7 +11,7 @@
     <message>
         <location filename="../pages/Account.qml" line="89"/>
         <source>Balance All</source>
-        <translation>Seimbangkan Semua</translation>
+        <translation>Total Saldo</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="96"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini memudahkan untuk mengirim atau menerima Monero dan mengurangi kesalahan saat mengetik alamat secara manual.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="102"/>
