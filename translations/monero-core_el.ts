@@ -1185,7 +1185,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>P2Pool installation failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η εγκατάσταση P2Pool απέτυχε.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
