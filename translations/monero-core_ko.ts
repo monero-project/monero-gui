@@ -583,7 +583,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/History.qml" line="1758"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더를 선택해 주세요</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1768"/>
