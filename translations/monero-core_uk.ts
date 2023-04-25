@@ -47,7 +47,7 @@
     <message>
         <location filename="../pages/Account.qml" line="366"/>
         <source>Address copied to clipboard</source>
-        <translation>Адрес скопійовано в буфер обміну</translation>
+        <translation>Адресу скопійовано в буфер обміну</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="181"/>
@@ -101,7 +101,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="284"/>
         <source>Address copied to clipboard</source>
-        <translation>Адрес скопійовано в буфер обміну</translation>
+        <translation>Адресу скопійовано в буфер обміну</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="125"/>
@@ -116,17 +116,17 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="401"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Не знайдено дійсного адресу на цьому OpenAlias</translation>
+        <translation>Не знайдено дійсної адреси на цьому OpenAlias</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="406"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Адрес знайдений, але підписи DNSSEC не можуть бути перевірені, тому цей адрес може бути підробленим</translation>
+        <translation>Адреса знайдена, але підписи DNSSEC не можуть бути перевірені, тому ця адреса може бути підробленою</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="408"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>На цьому OpenAlias не знайдено дійсного адресу, підписи DNSSEC не можуть бути перевірені, тому цей адрес може бути підробленим</translation>
+        <translation>На цьому OpenAlias не знайдено дійсної адреси, підписи DNSSEC не можуть бути перевірені, тому ця адреса може бути підробленою</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="411"/>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="417"/>
         <source>No address found</source>
-        <translation>Адрес не знайдено</translation>
+        <translation>Адресу не знайдено</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="323"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="478"/>
         <source>Invalid address</source>
-        <translation>Невірний адрес</translation>
+        <translation>Невірна адреса</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="482"/>
@@ -2799,7 +2799,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="76"/>
         <source>Enter an amount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть суму.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="169"/>
@@ -3144,13 +3144,13 @@ Please upgrade or connect to another daemon</source>
         <location filename="../pages/TxKey.qml" line="93"/>
         <location filename="../pages/TxKey.qml" line="198"/>
         <source>Address</source>
-        <translation>Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="96"/>
         <location filename="../pages/TxKey.qml" line="201"/>
         <source>Recipient&apos;s wallet address</source>
-        <translation>Адрес гаманця отримувача</translation>
+        <translation>Адреса гаманця отримувача</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="80"/>
@@ -3224,7 +3224,7 @@ For reserve proofs you don&apos;t need to specify tx id or address.</source>
         <location filename="../pages/TxKey.qml" line="173"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation>Переконайтеся у відправці коштів на адрес, вказавши ID транзакції, адрес отримувача, повідомлення, яке використовується для підпису, і сам підпис.
+        <translation>Переконайтеся у відправленні коштів на адресу, вказавши ID транзакції, адресу отримувача, повідомлення, яке використовується для підпису, і сам підпис.
 У випадку з Spend Proof (доказом надсилання) вам не потрібно вказувати адрес отримувача.</translation>
     </message>
     <message>
@@ -3410,17 +3410,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardAskPassword.qml" line="54"/>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Low</source>
-        <translation>Низька</translation>
+        <translation>Низький</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="76"/>
         <source>Medium</source>
-        <translation>Середня</translation>
+        <translation>Середній</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="79"/>
         <source>High</source>
-        <translation>Висока</translation>
+        <translation>Надійний</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="89"/>
@@ -3557,7 +3557,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
         <source>Restore height</source>
-        <translation>Висота блока відновлення</translation>
+        <translation>Висота блоку відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="209"/>
@@ -3632,7 +3632,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation>Для швидшого відновлення свого гаманця в майбутньому, вкажіть номер цього блоку перед скануванням.</translation>
+        <translation>Якщо ви в майбутньому будете відновлювати свій гаманець, вказавши номер цього блоку, ви швидше відновите свій гаманець.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
@@ -4065,17 +4065,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="238"/>
         <source>Account address (public)</source>
-        <translation>Адрес гаманця (публічний)</translation>
+        <translation>Адреса гаманця (публічна)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="250"/>
         <source>View key (private)</source>
-        <translation>Ключ для перегляду (приватний)</translation>
+        <translation>Ключ перегляду (приватний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
         <source>Spend key (private)</source>
-        <translation>Ключ для витрати (приватний)</translation>
+        <translation>Ключ витрати (приватний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="262"/>
@@ -4090,7 +4090,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="276"/>
         <source>Restore height</source>
-        <translation>Висота блока відновлення</translation>
+        <translation>Висота блоку відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="297"/>
@@ -4153,12 +4153,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
         <source>Restore height</source>
-        <translation>Висота блока відновлення</translation>
+        <translation>Висота блоку відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="70"/>
         <source>Daemon address</source>
-        <translation>Адрес демона</translation>
+        <translation>Адреса демону</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="77"/>
@@ -4261,7 +4261,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="749"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Будь ласка, перевірте логи гаманця і демона на наявність помилок. Ви також можете спробувати запустити %1 вручну.</translation>
+        <translation>Будь ласка, перевірте логи гаманця і демону на наявність помилок. Ви також можете спробувати запустити %1 вручну.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="765"/>
@@ -4277,7 +4277,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../main.qml" line="826"/>
         <location filename="../main.qml" line="917"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Немає незмішуваних виходів для розгортки</translation>
+        <translation>Немає незмішуваних виходів для очищення</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1070"/>
@@ -4292,7 +4292,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1782"/>
         <source>Primary account</source>
-        <translation type="unfinished"></translation>
+        <translation>Основний акаунт</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1974"/>
@@ -4307,22 +4307,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="2092"/>
         <source>Local node is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальна нода запущена</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2093"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете зупинити локальну ноду чи залишити її активною в фоновому режимі?</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2095"/>
         <source>Force stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусове завершення</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2096"/>
         <source>Keep it running</source>
-        <translation type="unfinished"></translation>
+        <translation>Залиши запущеною</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2116"/>
@@ -4338,7 +4338,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="714"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Очікування зупинки демона...</translation>
+        <translation>Очікування зупинки демону...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="309"/>
@@ -4404,7 +4404,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../main.qml" line="1066"/>
         <location filename="../main.qml" line="1072"/>
         <source>Bad signature</source>
-        <translation>Підпис неперевірено</translation>
+        <translation>Неправильний підпис</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1055"/>
@@ -4471,7 +4471,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="1647"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Попередження: На пристрої є тільки %1 GB вільного простору. Для зберігання блокчейну потрібно як мінімум ~%2 GB.</translation>
+        <translation>Примітка: На пристрої є тільки %1 GB вільного простору. Для зберігання блокчейну потрібно як мінімум ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1649"/>
