@@ -1026,7 +1026,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../pages/Mining.qml" line="64"/>
         <source>Mining is only available on local daemons.</source>
-        <translation>Майнинг доступен только на локальных демонах.</translation>
+        <translation>Майнинг доступен только на локальных узлах.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="88"/>
@@ -1185,12 +1185,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>P2Pool installation failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>В процессе установки P2Pool возникла ошибка.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>Try starting the program with administrator privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Попробуйте запустить программу с правами администратора (Run as administrator).</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="631"/>
@@ -1915,7 +1915,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="161"/>
         <source>Ask to stop local node during program exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Задавать вопрос об остановке локального узла при выходе из программы</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="168"/>
@@ -2176,27 +2176,27 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="133"/>
         <source>Use this feature if a transaction is missing in your wallet history. This will expose the transaction ID to the remote node, which can harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте эту функцию только в том случае, если транзакция отсутствует в истории вашего кошелька. Стоит отметить, что это откроет идентификатор транзакции удаленному узлу, что может потенциально нанести ущерб вашей конфиденциальности.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="134"/>
         <source>Scan transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканировать транзакцию</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="137"/>
         <source>Enter a transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите идентификатор транзакции (transaction ID):</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="141"/>
         <source>Transaction successfully scanned</source>
-        <translation type="unfinished"></translation>
+        <translation>Транзакция успешно отсканирована</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Failed to scan transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось отсканировать транзакцию</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="154"/>
@@ -3016,7 +3016,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="1001"/>
         <source>Sweep</source>
-        <translation>Подмести</translation>
+        <translation>Смешать</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1007"/>
