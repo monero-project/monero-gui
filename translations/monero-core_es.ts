@@ -6,17 +6,17 @@
     <message>
         <location filename="../pages/Account.qml" line="57"/>
         <source>Set the label of the selected account:</source>
-        <translation>Defina la etiqueta de la cuenta seleccionada:</translation>
+        <translation>Establezca la etiqueta de la cuenta seleccionada:</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="89"/>
         <source>Balance All</source>
-        <translation>Balance Total</translation>
+        <translation>Todos los balances</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="96"/>
         <source>Total balance: </source>
-        <translation>Balance Total: </translation>
+        <translation>Balance total: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../pages/Account.qml" line="131"/>
         <source>Total unlocked balance: </source>
-        <translation>Total del balance desbloqueado: </translation>
+        <translation>Balance desbloqueado total: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="174"/>
@@ -76,7 +76,7 @@
         <location filename="../pages/AddressBook.qml" line="102"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Add an address</source>
-        <translation>Agrega una dirección</translation>
+        <translation>Agregar una dirección</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="117"/>
@@ -4516,7 +4516,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1742"/>
         <source>Please wait...</source>
-        <translation>Espere...</translation>
+        <translation>Por favor, espere...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2116"/>
