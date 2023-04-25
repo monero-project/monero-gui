@@ -211,7 +211,7 @@
     <message>
         <location filename="../pages/Advanced.qml" line="53"/>
         <source>Mining</source>
-        <translation type="unfinished">Mine</translation>
+        <translation>Minage</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
