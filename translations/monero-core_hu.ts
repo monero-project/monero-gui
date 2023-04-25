@@ -37,12 +37,12 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiók cimkéjének szerkesztése</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Cím másolása vágólapra</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="366"/>
@@ -132,7 +132,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>Küldés erre a címre</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
@@ -234,7 +234,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="51"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Vágás</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
