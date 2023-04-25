@@ -28,7 +28,7 @@
     <message>
         <location filename="../pages/Account.qml" line="131"/>
         <source>Total unlocked balance: </source>
-        <translation>Saldo total desbloqueado:</translation>
+        <translation>Saldo total desbloqueado: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="174"/>
