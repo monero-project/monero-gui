@@ -16,6 +16,10 @@ p2pool_files = [{
                     "filename": "linux-x64.tar.gz"
                 },
                 {
+                    "os": "MACOS_AARCH64",
+                    "filename": "macos-aarch64.tar.gz",
+                },
+                {
                     "os": "MACOS",
                     "filename": "macos-x64.tar.gz",
                 }]
