@@ -209,22 +209,22 @@
 <context>
     <name>Advanced</name>
     <message>
-        <location filename="../pages/Advanced.qml" line="53"/>
+        <location filename="../pages/Advanced.qml" line="54"/>
         <source>Mining</source>
         <translation>Pertambangan</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="58"/>
+        <location filename="../pages/Advanced.qml" line="60"/>
         <source>Prove/check</source>
         <translation>Buktikan/periksa</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="63"/>
+        <location filename="../pages/Advanced.qml" line="65"/>
         <source>Shared RingDB</source>
         <translation>RingDB berbagi</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="68"/>
+        <location filename="../pages/Advanced.qml" line="70"/>
         <source>Sign/verify</source>
         <translation>Menandatangani/memverifikasi</translation>
     </message>
@@ -602,12 +602,17 @@ Disarankan untuk memasukkan frasa sandi di dompet hardware untuk keamanan yang l
         <translation>Tip: Gunakan program spreadsheet favoritmu untuk mengurutkan berdasarkan tinggi blok.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1774"/>
+        <location filename="../pages/History.qml" line="1773"/>
+        <source>Open folder</source>
+        <translation type="unfinished">Buka folder</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1780"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1775"/>
+        <location filename="../pages/History.qml" line="1781"/>
         <source>Error exporting transaction data.</source>
         <translation>Eror mengekspor data transaksi.</translation>
     </message>
@@ -821,17 +826,17 @@ Disarankan untuk memasukkan frasa sandi di dompet hardware untuk keamanan yang l
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="190"/>
+        <location filename="../components/LineEdit.qml" line="194"/>
         <source>Copy</source>
         <translation>Salin</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="195"/>
+        <location filename="../components/LineEdit.qml" line="199"/>
         <source>Copied to clipboard</source>
         <translation>Berhasil disalin</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="207"/>
+        <location filename="../components/LineEdit.qml" line="211"/>
         <source>Paste</source>
         <translation>Tempel</translation>
     </message>
@@ -1014,57 +1019,57 @@ Disarankan untuk memasukkan frasa sandi di dompet hardware untuk keamanan yang l
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="70"/>
+        <location filename="../pages/Mining.qml" line="71"/>
         <source>Your daemon must be synchronized before you can start mining</source>
         <translation>Daemon Anda harus disinkronkan sebelum Anda dapat mulai menambang</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="142"/>
+        <location filename="../pages/Mining.qml" line="143"/>
         <source>CPU threads</source>
         <translation>Thread CPU</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="64"/>
+        <location filename="../pages/Mining.qml" line="65"/>
         <source>Mining is only available on local daemons.</source>
         <translation>Menambang hanya tersedia di daemon lokal.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="88"/>
+        <location filename="../pages/Mining.qml" line="89"/>
         <source>Mining may reduce the performance of other running applications and processes.</source>
         <translation>Menambang Monero dapat menurunkan perfoma dari aplikasi dan program lainnya yang sedang berjalan.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="202"/>
+        <location filename="../pages/Mining.qml" line="203"/>
         <source>Set to use recommended # of threads</source>
         <translation>Atur untuk menggunakan # thread yang direkomendasikan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="210"/>
+        <location filename="../pages/Mining.qml" line="211"/>
         <source>Use all threads</source>
         <translation>Gunakan semua thread CPU</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="214"/>
+        <location filename="../pages/Mining.qml" line="215"/>
         <source>Set to use all threads</source>
         <translation>Atur untuk menggunakan semua thread</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="258"/>
+        <location filename="../pages/Mining.qml" line="259"/>
         <source>Background mining (experimental)</source>
         <translation>Pertambangan latar belakang</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="227"/>
+        <location filename="../pages/Mining.qml" line="228"/>
         <source>Enable mining when running on battery</source>
         <translation>Mengizinkan pertambangan dengan daya baterai</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="58"/>
+        <location filename="../pages/Mining.qml" line="59"/>
         <source>Mining</source>
         <translation>Pertambangan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
@@ -1073,171 +1078,171 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
 Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Komputer Anda akan membuat hash untuk mencari solusi blok. Jika menemukan blok, Anda akan mendapatkan rewardnya. Semoga beruntung!</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
         <translation>P2Pool adalah cara terdesentralisasi untuk menambang bersama di pool, yang membayar lebih sering dibandingkan dengan menambang tunggal, sekaligus juga mensupport jaringan.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="100"/>
+        <location filename="../pages/Mining.qml" line="101"/>
         <source>Solo</source>
         <translation>Tunggal</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="111"/>
+        <location filename="../pages/Mining.qml" line="112"/>
         <source>Mining mode</source>
         <translation>Mode Menambang</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="198"/>
+        <location filename="../pages/Mining.qml" line="199"/>
         <source>Use half (recommended)</source>
         <translation>Pakai separuh (disarankan)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="240"/>
+        <location filename="../pages/Mining.qml" line="241"/>
         <source>Options</source>
         <translation>Pilihan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="269"/>
+        <location filename="../pages/Mining.qml" line="270"/>
         <source>Manage miner</source>
         <translation>Mengelola penambang</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="286"/>
+        <location filename="../pages/Mining.qml" line="287"/>
         <source>Start mining</source>
         <translation>Mulai pertambangan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="304"/>
+        <location filename="../pages/Mining.qml" line="306"/>
         <source>P2Pool installation</source>
         <translation>Instalasi P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="305"/>
+        <location filename="../pages/Mining.qml" line="307"/>
         <source>P2Pool will be installed at %1. Proceed?</source>
         <translation>P2Pool akan diinstal di %1. Proses?</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="307"/>
+        <location filename="../pages/Mining.qml" line="309"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="308"/>
+        <location filename="../pages/Mining.qml" line="310"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="383"/>
+        <location filename="../pages/Mining.qml" line="385"/>
         <source>Mini</source>
         <translation>Mini (kecil)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="384"/>
+        <location filename="../pages/Mining.qml" line="386"/>
         <source>Main</source>
         <translation>Utama</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="395"/>
+        <location filename="../pages/Mining.qml" line="397"/>
         <source>Chain</source>
         <translation>Chain</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="401"/>
+        <location filename="../pages/Mining.qml" line="403"/>
         <source>Use the mini chain if you have a low hashrate.</source>
         <translation>Pakai mini chain jika Anda memiliki hashrate rendah.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="441"/>
+        <location filename="../pages/Mining.qml" line="443"/>
         <source>Flags</source>
         <translation>Flag</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="498"/>
+        <location filename="../pages/Mining.qml" line="500"/>
         <source>P2Pool startup flags</source>
         <translation>Flag startup P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="499"/>
+        <location filename="../pages/Mining.qml" line="501"/>
         <source>(optional)</source>
         <translation>(opsional)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="516"/>
+        <location filename="../pages/Mining.qml" line="518"/>
         <source>Starting P2Pool</source>
         <translation>Memulai P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="519"/>
+        <location filename="../pages/Mining.qml" line="521"/>
         <source>Mining with P2Pool, at %1 H/s</source>
         <translation>Menambang dengan P2Pool, di %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="566"/>
+        <location filename="../pages/Mining.qml" line="568"/>
         <source>Error starting mining</source>
         <translation>Kesalahan mulai pertambangan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="622"/>
+        <location filename="../pages/Mining.qml" line="647"/>
         <source>P2Pool Installation Failed</source>
         <translation>Instalasi P2Pool Gagal</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="648"/>
         <source>P2Pool installation failed.</source>
         <translation>Instalasi P2Pool gagal.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="648"/>
         <source>Try starting the program with administrator privileges.</source>
         <translation>Mencoba memulai program dengan hak administrator.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="631"/>
+        <location filename="../pages/Mining.qml" line="656"/>
         <source>P2Pool Installation Succeeded</source>
         <translation>Instalasi P2Pool Sukses</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="632"/>
+        <location filename="../pages/Mining.qml" line="657"/>
         <source>P2Pool has successfully installed.</source>
         <translation>P2Pool berhasil diinstal.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="328"/>
-        <location filename="../pages/Mining.qml" line="333"/>
-        <location filename="../pages/Mining.qml" line="599"/>
-        <location filename="../pages/Mining.qml" line="616"/>
+        <location filename="../pages/Mining.qml" line="330"/>
+        <location filename="../pages/Mining.qml" line="335"/>
+        <location filename="../pages/Mining.qml" line="624"/>
+        <location filename="../pages/Mining.qml" line="641"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Tidak dapat mulai pertambangan.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="569"/>
+        <location filename="../pages/Mining.qml" line="571"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Pertambangan hanya tersedia pada daemon lokal. Jalankan daemon lokal agar dapat menambang.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="343"/>
+        <location filename="../pages/Mining.qml" line="345"/>
         <source>Stop mining</source>
         <translation>Berhenti pertambangan</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="360"/>
+        <location filename="../pages/Mining.qml" line="362"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="525"/>
+        <location filename="../pages/Mining.qml" line="527"/>
         <source>Mining temporarily suspended.</source>
         <translation>Penambangan sementara dihentikan.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="534"/>
+        <location filename="../pages/Mining.qml" line="536"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
         <translation>Menambang di %1 H/s. Memberi Anda 1 dalam %2 kesempatan harian untuk menemukan sebuah blok.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="372"/>
-        <location filename="../pages/Mining.qml" line="539"/>
+        <location filename="../pages/Mining.qml" line="374"/>
+        <location filename="../pages/Mining.qml" line="541"/>
         <source>Not mining</source>
         <translation>Tidak pertambangan</translation>
     </message>
@@ -1322,7 +1327,7 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
         <translation>Gagal pindah ke node publik lain</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="207"/>
+        <location filename="../components/NetworkStatusItem.qml" line="208"/>
         <source>Switching to another public node</source>
         <translation>Sedang berpindah ke node publik lain</translation>
     </message>
@@ -1432,7 +1437,7 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
         <translation>Tampilkan di perangkat</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="751"/>
+        <location filename="../pages/Receive.qml" line="752"/>
         <source>Please choose a name</source>
         <translation>Mohon pilih sebuah nama</translation>
     </message>
@@ -1525,25 +1530,25 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="439"/>
-        <location filename="../pages/Receive.qml" line="722"/>
+        <location filename="../pages/Receive.qml" line="723"/>
         <source>no label</source>
         <translation>tanpa label</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="446"/>
-        <location filename="../pages/Receive.qml" line="683"/>
+        <location filename="../pages/Receive.qml" line="684"/>
         <source>Edit address label</source>
         <translation>Ubah label alamat</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="475"/>
-        <location filename="../pages/Receive.qml" line="700"/>
+        <location filename="../pages/Receive.qml" line="701"/>
         <source>Copy address to clipboard</source>
         <translation>Salin alamat ke clipboard</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="485"/>
-        <location filename="../pages/Receive.qml" line="705"/>
+        <location filename="../pages/Receive.qml" line="706"/>
         <source>Address copied to clipboard</source>
         <translation>Alamat berhasil disalin</translation>
     </message>
@@ -1553,27 +1558,27 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
         <translation>Buat alamat baru</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="667"/>
+        <location filename="../pages/Receive.qml" line="668"/>
         <source>See transactions</source>
         <translation>Lihat transaksi</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="718"/>
+        <location filename="../pages/Receive.qml" line="719"/>
         <source>Primary address</source>
         <translation>Alamat utama</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="758"/>
+        <location filename="../pages/Receive.qml" line="759"/>
         <source>Save QrCode</source>
         <translation>Menyimpan Kode QR</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="759"/>
+        <location filename="../pages/Receive.qml" line="760"/>
         <source>Failed to save QrCode to </source>
         <translation>Tidak dapat menyimpan Kode QR di </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="763"/>
+        <location filename="../pages/Receive.qml" line="764"/>
         <source>QR code saved to </source>
         <translation>Kode QR disimpan ke </translation>
     </message>
@@ -1673,6 +1678,30 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
     </message>
 </context>
 <context>
+    <name>SeedListItem</name>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="22"/>
+        <source>Please enter the word number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="23"/>
+        <location filename="../wizard/SeedListItem.qml" line="27"/>
+        <source>Green check mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="24"/>
+        <source>Red exclamation mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="28"/>
+        <source>This word is spelled </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Settings</name>
     <message>
         <location filename="../pages/settings/Settings.qml" line="59"/>
@@ -1695,7 +1724,7 @@ Menambang juga memberi Anda peluang kecil untuk menghasilkan sejumlah Monero. Ko
         <translation>Log</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="80"/>
+        <location filename="../pages/settings/Settings.qml" line="81"/>
         <source>Info</source>
         <translation>Informasi</translation>
     </message>
@@ -1999,77 +2028,77 @@ Cache dompet lama akan diganti namanya dan dapat dipulihkan nanti.
 <context>
     <name>SettingsNode</name>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="115"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="116"/>
         <source>Local node</source>
         <translation>Simpul lokal</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="131"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
         <translation>Blockchain diunduh ke komputer Anda. Menyediakan keamanan yang lebih tinggi dan membutuhkan lebih banyak penyimpanan lokal.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="208"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="209"/>
         <source>Remote node</source>
         <translation>Simpul jarak jauh</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="224"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="225"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
         <translation>Menggunakan server pihak ketiga untuk terhubung ke jaringan Monero. Kurang begitu aman, tetapi lebih mudah di komputer Anda.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="253"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="254"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation>Untuk menemukan node remot, ketik &apos;Monero remote node&apos; di mesin pencari favorit Anda. Pastikan node tersebut dijalankan oleh pihak ketiga yang terpercaya.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="318"/>
         <source>(optional)</source>
         <translation>(opsional)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Start daemon</source>
         <translation>Mulai daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Stop daemon</source>
         <translation>Hentikan daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Blockchain location</source>
         <translation>Lokasi blockchain</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Change</source>
         <translation>Ubah</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="294"/>
         <source>(default)</source>
         <translation>(default)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="316"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon startup flags</source>
         <translation>Flag startup daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="340"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
         <source>Bootstrap Address</source>
         <translation>Alamat Bootstrap</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="342"/>
         <source>Bootstrap Port</source>
         <translation>Port Bootstrap</translation>
     </message>
@@ -2227,152 +2256,82 @@ Anda dapat mengubah kata sandi di pengaturan dompet.</translation>
 <context>
     <name>SharedRingDB</name>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="99"/>
+        <location filename="../pages/SharedRingDB.qml" line="90"/>
         <source>Shared RingDB</source>
         <translation>RingDB berbagi</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="103"/>
+        <location filename="../pages/SharedRingDB.qml" line="94"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
         <translation>Halaman ini memungkinkan Anda untuk berinteraksi dengan basis data ring bersama. Basis data ini dimaksudkan untuk digunakan baik oleh dompet Monero maupun tiruannya yang menggunakan ulang kunci Monero.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="134"/>
-        <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Ini menentukan output mana yang sudah diketahui telah digunakan, dan dengan demikian tidak digunakan sebagai penampung privasi dalam ring signature. </translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="135"/>
-        <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation>Anda seharusnya hanya memuat berkas ketika Anda ingin me-refresh daftar. Penambahan/penghapusan manual dimungkinkan jika diperlukan.</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="161"/>
-        <source>Path to file</source>
-        <translation>Alur ke berkas</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Browse</source>
-        <translation>Jelajahi</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="184"/>
-        <source>Load</source>
-        <translation>Memuat</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="201"/>
-        <source>Or manually mark a single output as spent/unspent:</source>
-        <translation>Atau secara manual menandai output tunggal sebagai spent/unspent:</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="203"/>
-        <source>Paste output amount</source>
-        <translation>Tempelkan jumlah keluaran</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="215"/>
-        <source>Paste output offset</source>
-        <translation>Tempelkan offset keluaran</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="115"/>
-        <source>Outputs marked as spent</source>
-        <translation>Output ditandai sebagai spent</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="116"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Untuk mengaburkan input mana dalam sebuah transaksi Monero telah digunakan, maka pihak ketiga tidak boleh mengetahui input mana dalam sebuah ring yang sudah diketahui dipakai (spent). Mampu melakukannya akan melemahkan perlindungan yang diberikan oleh ring signature. Jika semua kecuali satu input diketahui telah digunakan, maka input yang benar-benar digunakan menjadi jelas, sehingga meniadakan efek ring signature, salah satu dari tiga lapisan utama perlindungan privasi yang Monero gunakan.&lt;br&gt;Untuk membantu transaksi terhindar dari input tersebut, daftar penggunaan yang sudah diketahui dapat dipakai untuk menghindari pemakaian dalam transaksi baru. Daftar tersebut dikelola oleh proyek Monero dan tersedia di situs web getmonero.org, dan Anda dapat mengimpor daftar ini di sini.&lt;br&gt;Atau, Anda dapat memindai sendiri blockchain (dan blockchain dari tiruan Monero yang menggunakan kunci pakai ulang) menggunakan tool monero-blockchain-mark-spent-outputs untuk membuat daftar output yang diketahui telah digunakan.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="147"/>
-        <source>Please choose a file from which to load outputs to mark as spent</source>
-        <translation>Silahkan pilih berkas yang daripadanya dimuat output untuk ditandai sebagai spent</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="163"/>
-        <source>Filename with outputs to mark as spent</source>
-        <translation>Nama berkas dengan output akan ditandai sebagai spent</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="227"/>
-        <source>Mark as spent</source>
-        <translation>Tandai sebagai spent</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="235"/>
-        <source>Mark as unspent</source>
-        <translation>Tandai sebagai unspent</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="246"/>
+        <location filename="../pages/SharedRingDB.qml" line="107"/>
         <source>Rings</source>
         <translation>Ring (cincin)</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="247"/>
+        <location filename="../pages/SharedRingDB.qml" line="108"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation>Untuk menghindari peniadaan perlindungan yang diberikan oleh ring signature Monero, output tidak boleh di-spent dengan ring yang berbeda pada blockchain yang berbeda. Meskipun hal ini biasanya bukan masalah, ini bisa menjadi masalah ketika tiruan Monero yang menggunakan kembali kunci memungkinkan Anda menggunakan output yang ada. Dalam hal ini, Anda perlu memastikan keluaran yang ada ini menggunakan cincin yang sama di kedua rantai.&lt;br&gt;Hal ini akan dilakukan secara otomatis oleh Monero, dan perangkat lunak apapun yang menggunakan kembali kunci yang tidak mencoba secara aktif melucuti privasi Anda.&lt;br&gt; Jika Anda juga menggunakan tiruan Monero yang menggunakan kembali kunci, dan tiruan ini tidak menyertakan perlindungan ini, Anda masih dapat memastikan transaksi Anda terlindungi dengan spend di tiruan terlebih dahulu, lalu menambahkan cincin secara manual di halaman ini, yang memungkinkan Anda untuk kemudian spend Monero dengan aman.&lt;br&gt;Jika Anda tidak menggunakan tiruan Monero yang menggunakan ulang kunci tanpa fitur keamanan ini, maka Anda tidak perlu melakukan apa pun karena semuanya otomatis.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="266"/>
+        <location filename="../pages/SharedRingDB.qml" line="127"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation>Catatan ring ini dipakai oleh output yang dipakai (spent) di Monero pada rantai kunci pakai ulang, sehingga ring yang sama dapat digunakan kembali untuk menghindari masalah privasi.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="277"/>
+        <location filename="../pages/SharedRingDB.qml" line="138"/>
         <source>Key image</source>
         <translation>Image kunci</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="279"/>
+        <location filename="../pages/SharedRingDB.qml" line="140"/>
         <source>Paste key image</source>
         <translation>Tempel kunci image</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="296"/>
+        <location filename="../pages/SharedRingDB.qml" line="157"/>
         <source>Get ring</source>
         <translation>Mendapatkan ring</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="308"/>
+        <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Get Ring</source>
         <translation>Mendapatkan Ring</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="314"/>
+        <location filename="../pages/SharedRingDB.qml" line="175"/>
         <source>No ring found</source>
         <translation>Tidak ada ring ditemukan</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="332"/>
+        <location filename="../pages/SharedRingDB.qml" line="193"/>
         <source>Set ring</source>
         <translation>Atur ring</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="344"/>
+        <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Set Ring</source>
         <translation>Atur Ring</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="363"/>
+        <location filename="../pages/SharedRingDB.qml" line="224"/>
         <source>I intend to spend on key-reusing fork(s)</source>
         <translation>Saya berniat untuk spend pada fork yang menggunakan ulang kunci</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="375"/>
+        <location filename="../pages/SharedRingDB.qml" line="236"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>Saya mungkin ingin spend pada fork yang menggunakan ulang kunci</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="387"/>
+        <location filename="../pages/SharedRingDB.qml" line="248"/>
         <source>Relative</source>
         <translation>Relatif</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="405"/>
+        <location filename="../pages/SharedRingDB.qml" line="266"/>
         <source>Set segregation height:</source>
         <translation>Atur tinggi segregasi:</translation>
     </message>
@@ -3473,27 +3432,27 @@ Untuk kasus dengan Bukti Spend, Anda tidak perlu memberikan rincian alamat pener
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="305"/>
+        <location filename="../wizard/WizardController.qml" line="319"/>
         <source>Please choose a file</source>
         <translation>Mohon pilih berkas</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="351"/>
+        <location filename="../wizard/WizardController.qml" line="367"/>
         <source>Failed to store the wallet</source>
         <translation>Gagal untuk menyimpan dompet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="434"/>
+        <location filename="../wizard/WizardController.qml" line="454"/>
         <source>Please proceed to the device...</source>
         <translation>Silahkan lanjutkan ke piranti...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="438"/>
+        <location filename="../wizard/WizardController.qml" line="458"/>
         <source>Creating wallet from device...</source>
         <translation>Membuat dompet dari perangkat...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="439"/>
+        <location filename="../wizard/WizardController.qml" line="459"/>
         <source>
 
 Please check your hardware wallet –
@@ -3512,78 +3471,78 @@ input dari Anda mungkin diperlukan.</translation>
         <translation>Pilih dompet hardware Anda</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>Create a new wallet</source>
         <translation>Membuat dompet baru</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>stagenet</source>
         <translation>jaringan stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="81"/>
         <source>testnet</source>
         <translation>jaringan testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="83"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="84"/>
         <source>Using a hardware device.</source>
         <translation>Menggunakan perangkat hardware.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="107"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="108"/>
         <source>Hardware wallet model</source>
         <translation>Model dompet hardware</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="121"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="122"/>
         <source>Create a new wallet from device.</source>
         <translation>Buat dompet baru dari perangkat.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="135"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
         <translation>Pulihkan dompet dari perangkat hardware. Gunakan opsi ini jika Anda memakai dompet hardware sebelumnya.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="196"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>Tanggal pembuatan dompet sebagai `YYYY-MM-DD` atau pulihkan ketinggian blok</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="199"/>
         <source>Restore height</source>
         <translation>Mengembalikan tinggi ke nilai asal</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="209"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="210"/>
         <source>Advanced options</source>
         <translation>Opsi lanjutan</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="217"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Perkiraan subalamat (opsional)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="226"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="287"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="227"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="288"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Eror menulis dompet dari perangkat hardware. Periksa log aplikasi.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="243"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Back to menu</source>
         <translation>Kembali ke menu</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="245"/>
         <source>Create wallet</source>
         <translation>Membuat dompet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="245"/>
         <source>Restore wallet</source>
         <translation>Memulihkan dompet</translation>
     </message>
@@ -3591,80 +3550,201 @@ input dari Anda mungkin diperlukan.</translation>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>Create a new wallet</source>
         <translation>Membuat dompet baru</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>stagenet</source>
         <translation>jaringan stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="66"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
         <source>testnet</source>
         <translation>jaringan testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="72"/>
         <source>Creates a new wallet on this computer.</source>
         <translation>Buat dompet baru di komputer ini.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="97"/>
-        <source>Mnemonic seed</source>
-        <translation>Seed mnemonik</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
-        <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Seed ini &lt;b&gt;SANGAT PENTING&lt;/b&gt; untuk dituliskan dan dijaga kerahasiaannya. Ini semua adalah yang Anda butuhkan untuk mencadangkan dan memulihkan dompet.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
-        <source>Wallet restore height</source>
-        <translation>Tinggi blok untuk pemulihan dompet</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
-        <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation>Seandainya suatu waktu Anda harus memulihkan dompet, memasukkan nomor blok ini akan mempercepat pemulihan.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="93"/>
         <source>Back to menu</source>
         <translation>Kembali ke menu</translation>
     </message>
 </context>
 <context>
-    <name>WizardCreateWallet3</name>
+    <name>WizardCreateWallet2</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="59"/>
-        <source>Daemon settings</source>
-        <translation>Pengaturan daemon</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="59"/>
+        <source>Verify your recovery phrase</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Untuk dapat berkomunikasi dengan jaringan Monero, dompet Anda perlu terhubung ke sebuah node Monero. Untuk privasi terbaik disarankan menjalankan node pribadi Anda sendiri.</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="61"/>
+        <source>Please confirm that you have written down your recover phrase by filling in the five blank fields with the correct words. If you have not written down your recovery phrase on a piece of paper, click on the Previous button and write it down right now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="87"/>
+        <source>Print this paper, fill it out, and keep it in a safe location. Never share your recovery phrase with anybody, especially with strangers offering technical support.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="88"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="234"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="239"/>
+        <source>Recovery phrase (mnemonic seed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="89"/>
+        <source>These words are are a backup of your wallet. They are the only thing needed to access your funds and restore your Monero wallet, so keep this paper in a safe place and do not disclose it to anybody! It is strongly not recommended to store your recovery phrase digitally (in an email, online service, screenshot, photo, or any other type of computer file).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="90"/>
+        <source>Wallet creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="91"/>
+        <source>Wallet restore height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="92"/>
+        <source>For instructions on how to restore this wallet, visit www.getmonero.org and go to Resources &gt; User Guides &gt; &quot;How to restore a wallet from mnemonic seed&quot;. Use only Monero wallets that are trusted and recommended by the Monero community (see a list of them in www.getmonero.org/downloads).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="117"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="119"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="202"/>
+        <source>Write down your recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="136"/>
+        <source>A pencil writing on a piece of paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="204"/>
+        <source>These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="177"/>
+        <source>Display recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>These words encode your private spend key in a human readable format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>It is expected that some words may be repeated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="269"/>
+        <source>New seed generated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="281"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="290"/>
+        <source>Create new seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="302"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="308"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="305"/>
+        <source>Recovery phrase copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="319"/>
+        <source>Print a template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="320"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="325"/>
+        <source>Print a template to write down your seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="350"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="353"/>
+        <source>Creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="384"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="389"/>
+        <source>Restore height</source>
+        <translation type="unfinished">Mengembalikan tinggi ke nilai asal</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="385"/>
+        <source>Enter this number when restoring the wallet to make your initial wallet synchronization faster.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WizardCreateWallet4</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="61"/>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
+        <source>Daemon settings</source>
+        <translation type="unfinished">Pengaturan daemon</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="60"/>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation type="unfinished">Untuk dapat berkomunikasi dengan jaringan Monero, dompet Anda perlu terhubung ke sebuah node Monero. Untuk privasi terbaik disarankan menjalankan node pribadi Anda sendiri.</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet5</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="61"/>
         <source>You&apos;re all set up!</source>
-        <translation>Anda sudah siap!</translation>
+        <translation type="unfinished">Anda sudah siap!</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="62"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="62"/>
         <source>New wallet details:</source>
-        <translation>Rincian dompet baru:</translation>
+        <translation type="unfinished">Rincian dompet baru:</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="70"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="70"/>
         <source>Create wallet</source>
-        <translation>Membuat dompet</translation>
+        <translation type="unfinished">Membuat dompet</translation>
     </message>
 </context>
 <context>
@@ -3729,13 +3809,13 @@ input dari Anda mungkin diperlukan.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>stagenet</source>
         <translation>jaringan stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="79"/>
-        <location filename="../wizard/WizardHome.qml" line="105"/>
+        <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>testnet</source>
         <translation>jaringan testnet</translation>
     </message>
@@ -3745,52 +3825,52 @@ input dari Anda mungkin diperlukan.</translation>
         <translation>Pilih opsi ini jika ini adalah kali pertama Anda menggunakan Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>Create a new wallet from hardware</source>
         <translation>Buat dompet baru dari perangkat hardware</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="108"/>
+        <location filename="../wizard/WizardHome.qml" line="109"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
         <translation>Hubungkan dompet hardware anda untuk membuat dompet baru Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="127"/>
+        <location filename="../wizard/WizardHome.qml" line="128"/>
         <source>Open a wallet from file</source>
         <translation>Buka dompet dari berkas</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="128"/>
+        <location filename="../wizard/WizardHome.qml" line="129"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>Impor berkas dompet .keys yang sudah ada dari komputer Anda.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="147"/>
+        <location filename="../wizard/WizardHome.qml" line="148"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>Memulihkan dompet dari kunci atau seed mnemonik</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="148"/>
+        <location filename="../wizard/WizardHome.qml" line="149"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
         <translation>Masukkan kunci privat anda atau 25-kata seed mnemonik untuk memulihkan dompet Anda.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="164"/>
+        <location filename="../wizard/WizardHome.qml" line="165"/>
         <source>Change wallet mode</source>
         <translation>Ubah mode dompet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="179"/>
+        <location filename="../wizard/WizardHome.qml" line="180"/>
         <source>Advanced options</source>
         <translation>Opsi lanjutan</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="202"/>
+        <location filename="../wizard/WizardHome.qml" line="203"/>
         <source>Network</source>
         <translation>Jaringan</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="224"/>
+        <location filename="../wizard/WizardHome.qml" line="225"/>
         <source>Number of KDF rounds:</source>
         <translation>Jumlah putaran KDF:</translation>
     </message>
@@ -3943,17 +4023,17 @@ input dari Anda mungkin diperlukan.</translation>
 <context>
     <name>WizardNav</name>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="46"/>
+        <location filename="../wizard/WizardNav.qml" line="47"/>
         <source>Previous</source>
         <translation>Sebelumnya</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="47"/>
+        <location filename="../wizard/WizardNav.qml" line="48"/>
         <source>Next</source>
         <translation>Selanjutnya</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="118"/>
+        <location filename="../wizard/WizardNav.qml" line="121"/>
         <source>Step (%1) of (%2)</source>
         <translation>Langkah (%1) dari (%2)</translation>
     </message>
@@ -3961,57 +4041,62 @@ input dari Anda mungkin diperlukan.</translation>
 <context>
     <name>WizardOpenWallet1</name>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="75"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
         <source>Open a wallet from file</source>
         <translation>Buka dompet dari berkas</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="77"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>Impor berkas dompet .keys yang sudah ada dari komputer Anda.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="95"/>
         <source>Recently opened</source>
         <translation>Baru saja dibuka</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="166"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
         <source>Mainnet</source>
         <translation>Mainnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
         <source>Testnet</source>
         <translation>Testnet (jaringan uji)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="169"/>
         <source>Stagenet</source>
         <translation>Stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Mainnet wallet</source>
         <translation>Dompet Mainnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Testnet wallet</source>
         <translation>Dompet Testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="180"/>
         <source>Stagenet wallet</source>
         <translation>Dompet Stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
         <source>Browse filesystem</source>
         <translation>Jelajahi sistem file</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="332"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
+        <source>Browse</source>
+        <translation type="unfinished">Jelajahi</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
         <source>Back to menu</source>
         <translation>Kembali ke menu</translation>
     </message>
@@ -4170,42 +4255,43 @@ Jika Anda tidak memiliki opsi untuk menjalankan node sendiri, ada opsi untuk ter
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="70"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="78"/>
         <source>Wallet name is empty</source>
         <translation>Nama dompet kosong</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="74"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="82"/>
         <source>Wallet name is invalid</source>
         <translation>Nama dompet tidak valid</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
         <source>Wallet already exists</source>
         <translation>Dompet sudah ada</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="96"/>
         <source>Wallet name</source>
         <translation>Nama dompet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="154"/>
         <source>Wallet location is empty</source>
         <translation>Lokasi dompet kosong</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="113"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="161"/>
         <source>Wallet location</source>
         <translation>Lokasi dompet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="131"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="186"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="194"/>
         <source>Browse</source>
         <translation>Jelajahi</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="145"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="236"/>
         <source>Please choose a directory</source>
         <translation>Silahkan pilih direktori</translation>
     </message>
@@ -4213,9 +4299,9 @@ Jika Anda tidak memiliki opsi untuk menjalankan node sendiri, ada opsi untuk ter
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="953"/>
-        <location filename="../main.qml" line="1075"/>
-        <location filename="../main.qml" line="1690"/>
+        <location filename="../main.qml" line="967"/>
+        <location filename="../main.qml" line="1089"/>
+        <location filename="../main.qml" line="1712"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
@@ -4225,19 +4311,19 @@ Jika Anda tidak memiliki opsi untuk menjalankan node sendiri, ada opsi untuk ter
         <translation>Tidak bisa membuka dompet: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="817"/>
+        <location filename="../main.qml" line="831"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Tidak bisa membuat transaksi: Versi daemon salah: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="819"/>
-        <location filename="../main.qml" line="911"/>
+        <location filename="../main.qml" line="833"/>
+        <location filename="../main.qml" line="925"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Tidak bisa membuat transaksi: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="826"/>
-        <location filename="../main.qml" line="917"/>
+        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="931"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Tidak ada keluaran yang tidak dapat dicampur</translation>
     </message>
@@ -4258,82 +4344,82 @@ Jika Anda tidak memiliki opsi untuk menjalankan node sendiri, ada opsi untuk ter
         <translation>Memperbaiki cache dompet yang tidak kompatibel. Menyinkronkan ulang dompet.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="714"/>
+        <location filename="../main.qml" line="722"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Menunggu daemon berhenti...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="748"/>
+        <location filename="../main.qml" line="756"/>
         <source>Daemon failed to start</source>
         <translation>Daemon gagal start</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="749"/>
+        <location filename="../main.qml" line="757"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Silahkan periksa log dompet dan daemon Anda untuk mencari penyebab eror. Anda juga dapat mencoba memulai %1 secara manual.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="954"/>
+        <location filename="../main.qml" line="968"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Tidak bisa mengirim uang monero: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1686"/>
+        <location filename="../main.qml" line="1708"/>
         <source>Information</source>
         <translation>Informasi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1052"/>
+        <location filename="../main.qml" line="1066"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Alamat ini menerima %1 monero, tetapi transaksinya belum termasuk dalam blok</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1055"/>
+        <location filename="../main.qml" line="1069"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Alamat ini menerima %1 monero, dengan %2 konfirmasi.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1782"/>
+        <location filename="../main.qml" line="1804"/>
         <source>Primary account</source>
         <translation>Akun utama</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1974"/>
+        <location filename="../main.qml" line="1996"/>
         <source>Autosaved the wallet</source>
         <translation>Simpan dompet otomatis</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1976"/>
+        <location filename="../main.qml" line="1998"/>
         <source>Failed to autosave the wallet</source>
         <translation>Gagal menyimpan dompet otomatis</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2092"/>
+        <location filename="../main.qml" line="2114"/>
         <source>Local node is running</source>
         <translation>Node lokal sedang berjalan</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2093"/>
+        <location filename="../main.qml" line="2115"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation>Apakah Anda ingin menghentikan node lokal atau membiarkannya tetap berjalan di latar belakang?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2095"/>
+        <location filename="../main.qml" line="2117"/>
         <source>Force stop</source>
         <translation>Paksa berhenti</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2096"/>
+        <location filename="../main.qml" line="2118"/>
         <source>Keep it running</source>
         <translation>Tetap jalankan</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2116"/>
+        <location filename="../main.qml" line="2138"/>
         <source>Tap again to close...</source>
         <translation>Tap sekali lagi untuk menutup...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1073"/>
         <source>This address received nothing</source>
         <translation>Alamat ini tidak menerima apa-apa</translation>
     </message>
@@ -4353,164 +4439,171 @@ Jika Anda tidak memiliki opsi untuk menjalankan node sendiri, ada opsi untuk ter
         <translation>Menandatangani transaksi di perangkat...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="661"/>
+        <location filename="../main.qml" line="668"/>
         <source>Waiting for daemon to sync</source>
         <translation>Menunggu daemon untuk tersinkron</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="663"/>
+        <location filename="../main.qml" line="670"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Daemon tersinkron (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="665"/>
+        <location filename="../main.qml" line="672"/>
         <source>Wallet is synchronized</source>
         <translation>Dompet telah tersinkron</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="765"/>
+        <location filename="../main.qml" line="779"/>
         <source>Daemon is synchronized</source>
         <translation>Daemon telah tersinkron</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
+        <location filename="../main.qml" line="880"/>
         <source>Creating transaction...</source>
         <translation>Membuat transaksi…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="945"/>
+        <location filename="../main.qml" line="959"/>
         <source>Sending transaction ...</source>
         <translation>Mengirim transaksi…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Save as file</source>
         <translation>Simpan sebagai berkas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
         <translation>Konfirmasi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="973"/>
+        <location filename="../main.qml" line="987"/>
         <source>Failed to store the wallet</source>
         <translation>Gagal untuk menyimpan dompet</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1011"/>
+        <location filename="../main.qml" line="1025"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Tidak dapat membuat bukti karena alasan berikut: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1045"/>
-        <location filename="../main.qml" line="1064"/>
+        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1078"/>
         <source>Payment proof check</source>
         <translation>Cek bukti pembayaran</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1048"/>
-        <location filename="../main.qml" line="1066"/>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1062"/>
+        <location filename="../main.qml" line="1080"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Bad signature</source>
         <translation>Tandatangan yang buruk</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1066"/>
+        <location filename="../main.qml" line="1080"/>
         <source>Good signature</source>
         <translation>Tandatangan yang bagus</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1344"/>
+        <location filename="../main.qml" line="1359"/>
         <source>Desktop entry</source>
         <translation>Entri desktop</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1345"/>
+        <location filename="../main.qml" line="1360"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
         <translation>Apakah Anda ingin mendaftarkan entri Desktop GUI Monero?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1347"/>
+        <location filename="../main.qml" line="1362"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1348"/>
+        <location filename="../main.qml" line="1363"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
         <location filename="../main.qml" line="141"/>
-        <location filename="../main.qml" line="1573"/>
-        <location filename="../main.qml" line="2243"/>
+        <location filename="../main.qml" line="1595"/>
+        <location filename="../main.qml" line="2265"/>
         <source>Wrong password</source>
         <translation>Kata sandi salah</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1070"/>
+        <location filename="../main.qml" line="762"/>
+        <source>
+
+Exiting p2pool. Please check that port 18083 is available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1084"/>
         <source>Reserve proof check</source>
         <translation>Cek bukti simpanan</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Good signature on %1 total and %2 spent.</source>
         <translation>Tandatangan yang baik pada total %1 dan %2 spent.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Save transaction file</source>
         <translation>Simpan berkas transaksi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Send transaction</source>
         <translation>Kirim transaksi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1640"/>
+        <location filename="../main.qml" line="1662"/>
         <source>Warning</source>
         <translation>Peringatan</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1643"/>
+        <location filename="../main.qml" line="1665"/>
         <source>Error: Filesystem is read only</source>
         <translation>Kesalahan: Filesystem hanya bisa dibaca</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1645"/>
+        <location filename="../main.qml" line="1667"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Peringatan: Hanya %1 GB yang tersedia di perangkat. Blockchain membutuhkan data sebesar ~%2 GB.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1647"/>
+        <location filename="../main.qml" line="1669"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Catatan: Hanya %1 GB yang tersedia di perangkat. Blockchain membutuhkan data sebesar ~%2 GB.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1649"/>
+        <location filename="../main.qml" line="1671"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Catatan: folder lmdb tidak ditemukan. Folder yang baru akan dibuat.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1687"/>
+        <location filename="../main.qml" line="1709"/>
         <source>Password changed successfully</source>
         <translation>Kata sandi berhasil diubah</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1691"/>
+        <location filename="../main.qml" line="1713"/>
         <source>Error: </source>
         <translation>Kesalahan: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1742"/>
+        <location filename="../main.qml" line="1764"/>
         <source>Please wait...</source>
         <translation>Mohon tunggu...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2131"/>
+        <location filename="../main.qml" line="2153"/>
         <source>Checking local node status...</source>
         <translation>Sedang memerika status node lokal...</translation>
     </message>

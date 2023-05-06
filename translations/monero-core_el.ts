@@ -209,22 +209,22 @@
 <context>
     <name>Advanced</name>
     <message>
-        <location filename="../pages/Advanced.qml" line="53"/>
+        <location filename="../pages/Advanced.qml" line="54"/>
         <source>Mining</source>
         <translation>Εξόρυξη</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="58"/>
+        <location filename="../pages/Advanced.qml" line="60"/>
         <source>Prove/check</source>
         <translation>Απόδειξη/έλεγχος</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="63"/>
+        <location filename="../pages/Advanced.qml" line="65"/>
         <source>Shared RingDB</source>
         <translation>Κοινόχρηστο RingDB</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="68"/>
+        <location filename="../pages/Advanced.qml" line="70"/>
         <source>Sign/verify</source>
         <translation>Υπογραφή/επαλήθευση</translation>
     </message>
@@ -597,12 +597,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <translation>Συμβουλή: Χρησιμοποιήστε το αγαπημένο σας λογισμικό υπολογιστικών φύλλων για να ταξινομήσετε κατά ύψος block.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1774"/>
+        <location filename="../pages/History.qml" line="1773"/>
+        <source>Open folder</source>
+        <translation type="unfinished">Άνοιγμα φακέλου</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1780"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1775"/>
+        <location filename="../pages/History.qml" line="1781"/>
         <source>Error exporting transaction data.</source>
         <translation>Σφάλμα εξαγωγής δεδομένων συναλλαγής.</translation>
     </message>
@@ -821,17 +826,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="190"/>
+        <location filename="../components/LineEdit.qml" line="194"/>
         <source>Copy</source>
         <translation>Αντιγραφή</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="195"/>
+        <location filename="../components/LineEdit.qml" line="199"/>
         <source>Copied to clipboard</source>
         <translation>Αντιγράφηκε στο πρόχειρο</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="207"/>
+        <location filename="../components/LineEdit.qml" line="211"/>
         <source>Paste</source>
         <translation>Επικόλληση</translation>
     </message>
@@ -1014,57 +1019,57 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="70"/>
+        <location filename="../pages/Mining.qml" line="71"/>
         <source>Your daemon must be synchronized before you can start mining</source>
         <translation>Το daemon σας πρέπει να συγχρονιστεί για να μπορέσετε να ξεκινήσετε την εξόρυξη</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="142"/>
+        <location filename="../pages/Mining.qml" line="143"/>
         <source>CPU threads</source>
         <translation>Νήματα CPU</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="64"/>
+        <location filename="../pages/Mining.qml" line="65"/>
         <source>Mining is only available on local daemons.</source>
         <translation>Η εξόρυξη είναι διαθέσιμη μόνο σε τοπικούς daemons.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="88"/>
+        <location filename="../pages/Mining.qml" line="89"/>
         <source>Mining may reduce the performance of other running applications and processes.</source>
         <translation>Η εξόρυξη μπορεί να μειώσει την απόδοση άλλων εφαρμογών και διαδικασιών που τρέχουν.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="202"/>
+        <location filename="../pages/Mining.qml" line="203"/>
         <source>Set to use recommended # of threads</source>
         <translation>Ρύθμιση για χρήση των προτεινόμενων # νημάτων</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="210"/>
+        <location filename="../pages/Mining.qml" line="211"/>
         <source>Use all threads</source>
         <translation>Χρήση όλων των νημάτων</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="214"/>
+        <location filename="../pages/Mining.qml" line="215"/>
         <source>Set to use all threads</source>
         <translation>Ρύθμιση για χρήση όλων των νημάτων</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="258"/>
+        <location filename="../pages/Mining.qml" line="259"/>
         <source>Background mining (experimental)</source>
         <translation>Εξόρυξη στο παρασκήνιο (πειραματικό)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="227"/>
+        <location filename="../pages/Mining.qml" line="228"/>
         <source>Enable mining when running on battery</source>
         <translation>Ενεργοποίηση εξόρυξης κατά την χρήση λειτουργίας με μπαταρία</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="58"/>
+        <location filename="../pages/Mining.qml" line="59"/>
         <source>Mining</source>
         <translation>Εξόρυξη</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
@@ -1073,171 +1078,171 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
 Η εξόρυξη σάς δίνει επίσης μια μικρή ευκαιρία να κερδίσετε μερικά Monero. Ο υπολογιστής σας θα δημιουργήσει hashes αναζητώντας λύσεις των block. Εάν βρείτε ένα block, θα λάβετε τη σχετική ανταμοιβή. Καλή τύχη!</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
         <translation>Η εξόρυξη P2Pool ειναι ένας αποκεντρωμένος τρόπος ομαδικής εξόρυξης που πληρώνει πιο συχνά σε σύγκριση με τη solo εξόρυξη, ενώ παράλληλα υποστηρίζει το δίκτυο.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="100"/>
+        <location filename="../pages/Mining.qml" line="101"/>
         <source>Solo</source>
         <translation>Solo</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="111"/>
+        <location filename="../pages/Mining.qml" line="112"/>
         <source>Mining mode</source>
         <translation>Λειτουργία εξόρυξης</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="198"/>
+        <location filename="../pages/Mining.qml" line="199"/>
         <source>Use half (recommended)</source>
         <translation>Τα μισά (συνίσταται)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="240"/>
+        <location filename="../pages/Mining.qml" line="241"/>
         <source>Options</source>
         <translation>Επιλογές</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="269"/>
+        <location filename="../pages/Mining.qml" line="270"/>
         <source>Manage miner</source>
         <translation>Διαχείριση εξορυκτή</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="286"/>
+        <location filename="../pages/Mining.qml" line="287"/>
         <source>Start mining</source>
         <translation>Ξεκινήστε την εξόρυξη</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="304"/>
+        <location filename="../pages/Mining.qml" line="306"/>
         <source>P2Pool installation</source>
         <translation>εγκατάσταση P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="305"/>
+        <location filename="../pages/Mining.qml" line="307"/>
         <source>P2Pool will be installed at %1. Proceed?</source>
         <translation>Το P2Pool θα εγκατασταθεί στο %1. Συνέχεια;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="307"/>
+        <location filename="../pages/Mining.qml" line="309"/>
         <source>No</source>
         <translation>Όχι</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="308"/>
+        <location filename="../pages/Mining.qml" line="310"/>
         <source>Yes</source>
         <translation>Ναι</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="383"/>
+        <location filename="../pages/Mining.qml" line="385"/>
         <source>Mini</source>
         <translation>Mini</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="384"/>
+        <location filename="../pages/Mining.qml" line="386"/>
         <source>Main</source>
         <translation>Κυρίως</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="395"/>
+        <location filename="../pages/Mining.qml" line="397"/>
         <source>Chain</source>
         <translation>Αλυσίδα</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="401"/>
+        <location filename="../pages/Mining.qml" line="403"/>
         <source>Use the mini chain if you have a low hashrate.</source>
         <translation>χρησιμοποιήστε τη mini αλυσίδα εαν έχετε χαμηλό hashrate.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="441"/>
+        <location filename="../pages/Mining.qml" line="443"/>
         <source>Flags</source>
         <translation>Σημαίες</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="498"/>
+        <location filename="../pages/Mining.qml" line="500"/>
         <source>P2Pool startup flags</source>
         <translation>Σημαίες εκκίνησης P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="499"/>
+        <location filename="../pages/Mining.qml" line="501"/>
         <source>(optional)</source>
         <translation>(προαιρετικά)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="516"/>
+        <location filename="../pages/Mining.qml" line="518"/>
         <source>Starting P2Pool</source>
         <translation>Εκκίνηση του P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="519"/>
+        <location filename="../pages/Mining.qml" line="521"/>
         <source>Mining with P2Pool, at %1 H/s</source>
         <translation>Εξόρυξη με P2Pool, στα %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="566"/>
+        <location filename="../pages/Mining.qml" line="568"/>
         <source>Error starting mining</source>
         <translation>Σφάλμα έναρξης εξόρυξης</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="622"/>
+        <location filename="../pages/Mining.qml" line="647"/>
         <source>P2Pool Installation Failed</source>
         <translation>Η εγκατάσταση P2Pool απέτυχε</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="648"/>
         <source>P2Pool installation failed.</source>
         <translation>Η εγκατάσταση P2Pool απέτυχε.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="648"/>
         <source>Try starting the program with administrator privileges.</source>
         <translation>Δοκιμάστε την εκκίνηση του προγράμματος με δικαιώματα διαχειριστή.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="631"/>
+        <location filename="../pages/Mining.qml" line="656"/>
         <source>P2Pool Installation Succeeded</source>
         <translation>Επιτυχίες η εγκατάσταση P2Pool</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="632"/>
+        <location filename="../pages/Mining.qml" line="657"/>
         <source>P2Pool has successfully installed.</source>
         <translation>P2Pool εγκαταστάθηκε επιτυχώς.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="328"/>
-        <location filename="../pages/Mining.qml" line="333"/>
-        <location filename="../pages/Mining.qml" line="599"/>
-        <location filename="../pages/Mining.qml" line="616"/>
+        <location filename="../pages/Mining.qml" line="330"/>
+        <location filename="../pages/Mining.qml" line="335"/>
+        <location filename="../pages/Mining.qml" line="624"/>
+        <location filename="../pages/Mining.qml" line="641"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Δεν ήταν δυνατή η έναρξη της εξόρυξης. &lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="569"/>
+        <location filename="../pages/Mining.qml" line="571"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Η εξόρυξη είναι διαθέσιμη μόνο σε τοπικούς daemons. Τρέξτε έναν τοπικό daemon για να μπορέσετε να ξεκινήσετε την εξόρυξη. &lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="343"/>
+        <location filename="../pages/Mining.qml" line="345"/>
         <source>Stop mining</source>
         <translation>Σταματήστε την εξόρυξη</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="360"/>
+        <location filename="../pages/Mining.qml" line="362"/>
         <source>Status</source>
         <translation>Κατάσταση</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="525"/>
+        <location filename="../pages/Mining.qml" line="527"/>
         <source>Mining temporarily suspended.</source>
         <translation>Η εξόρυξη έχει ανασταλεί προσωρινά.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="534"/>
+        <location filename="../pages/Mining.qml" line="536"/>
         <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
         <translation>Εξόρυξη στα %1 H/s. Σας δίνει 1 σε %2 ημερήσια πιθανότητα εύρεσης block.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="372"/>
-        <location filename="../pages/Mining.qml" line="539"/>
+        <location filename="../pages/Mining.qml" line="374"/>
+        <location filename="../pages/Mining.qml" line="541"/>
         <source>Not mining</source>
         <translation>Δεν πραγματοποιείται εξόρυξη</translation>
     </message>
@@ -1322,7 +1327,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Αποτυχία μετάβασης δημόσιου κόμβου</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="207"/>
+        <location filename="../components/NetworkStatusItem.qml" line="208"/>
         <source>Switching to another public node</source>
         <translation>Μετάβαση σε άλλο δημόσιο κόμβο</translation>
     </message>
@@ -1432,7 +1437,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Εμφάνιση στη συσκευή</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="751"/>
+        <location filename="../pages/Receive.qml" line="752"/>
         <source>Please choose a name</source>
         <translation>Παρακαλώ, επιλέξτε ένα όνομα</translation>
     </message>
@@ -1525,25 +1530,25 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="439"/>
-        <location filename="../pages/Receive.qml" line="722"/>
+        <location filename="../pages/Receive.qml" line="723"/>
         <source>no label</source>
         <translation>χωρίς τίτλο</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="446"/>
-        <location filename="../pages/Receive.qml" line="683"/>
+        <location filename="../pages/Receive.qml" line="684"/>
         <source>Edit address label</source>
         <translation>Επεξεργασία ετικέτας διεύθυνσης</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="475"/>
-        <location filename="../pages/Receive.qml" line="700"/>
+        <location filename="../pages/Receive.qml" line="701"/>
         <source>Copy address to clipboard</source>
         <translation>Αντιγραφή διεύθυνσης στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="485"/>
-        <location filename="../pages/Receive.qml" line="705"/>
+        <location filename="../pages/Receive.qml" line="706"/>
         <source>Address copied to clipboard</source>
         <translation>Η διεύθυνση αντιγράφηκε στο πρόχειρο</translation>
     </message>
@@ -1553,27 +1558,27 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Δημιουργήστε νέα διεύθυνση</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="667"/>
+        <location filename="../pages/Receive.qml" line="668"/>
         <source>See transactions</source>
         <translation>Δείτε συναλλαγές</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="718"/>
+        <location filename="../pages/Receive.qml" line="719"/>
         <source>Primary address</source>
         <translation>Κύρια διεύθυνση</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="758"/>
+        <location filename="../pages/Receive.qml" line="759"/>
         <source>Save QrCode</source>
         <translation>Αποθήκευση QrCode</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="759"/>
+        <location filename="../pages/Receive.qml" line="760"/>
         <source>Failed to save QrCode to </source>
         <translation>Αποτυχία αποθήκευσης του QrCode στο </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="763"/>
+        <location filename="../pages/Receive.qml" line="764"/>
         <source>QR code saved to </source>
         <translation>Κωδικός QR αποθηκευτηκε στό </translation>
     </message>
@@ -1673,6 +1678,30 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
 </context>
 <context>
+    <name>SeedListItem</name>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="22"/>
+        <source>Please enter the word number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="23"/>
+        <location filename="../wizard/SeedListItem.qml" line="27"/>
+        <source>Green check mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="24"/>
+        <source>Red exclamation mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="28"/>
+        <source>This word is spelled </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Settings</name>
     <message>
         <location filename="../pages/settings/Settings.qml" line="59"/>
@@ -1695,7 +1724,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Αρχείο</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="80"/>
+        <location filename="../pages/settings/Settings.qml" line="81"/>
         <source>Info</source>
         <translation>Πληροφορίες</translation>
     </message>
@@ -1999,77 +2028,77 @@ The old wallet cache file will be renamed and can be restored later.
 <context>
     <name>SettingsNode</name>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="115"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="116"/>
         <source>Local node</source>
         <translation>Τοπικός κόμβος</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="131"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
         <translation>Το blockchain έχει μεταφορτωθεί στον υπολογιστή σας. Παρέχει μεγαλύτερη ασφάλεια και απαιτεί περισσότερη τοπική χωρητικότητα.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="208"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="209"/>
         <source>Remote node</source>
         <translation>Απομακρυσμένος κόμβος</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="224"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="225"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
         <translation>Χρησιμοποιεί διακομιστή από τρίτο πάροχο για τη σύνδεση στο δίκτυο του Monero. Λιγότερο ασφαλές, αλλά ελαφρύτερο για τον υπολογιστή σας.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="253"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="254"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation>Για την εύρεση απομακρυσμένου κόμβου, πληκτρολογήστε &apos;Monero remote node&apos; στην αγαπημένη σας μηχανή αναζήτησης. Παρακαλώ διαβεβαιώστε πως ο κόμβος λειτουργεί μέσω αξιόπιστου τρίτου παρόχου.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="318"/>
         <source>(optional)</source>
         <translation>(προαιρετικά)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Start daemon</source>
         <translation>Έναρξη daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Stop daemon</source>
         <translation>Διακοπή daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Blockchain location</source>
         <translation>Τοποθεσία blockchain</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Change</source>
         <translation>Αλλαγή</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Reset</source>
         <translation>Επαναφορά</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="294"/>
         <source>(default)</source>
         <translation>(προκαθορισμένο)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="316"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon startup flags</source>
         <translation>Επισημάνσεις έναρξης daemon</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="340"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
         <source>Bootstrap Address</source>
         <translation>Αρχική Διεύθυνση</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="342"/>
         <source>Bootstrap Port</source>
         <translation>Αρχική Θύρα</translation>
     </message>
@@ -2227,152 +2256,82 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>SharedRingDB</name>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="99"/>
+        <location filename="../pages/SharedRingDB.qml" line="90"/>
         <source>Shared RingDB</source>
         <translation>Κοινόχρηστο RingDB</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="103"/>
+        <location filename="../pages/SharedRingDB.qml" line="94"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
         <translation>Αυτή η σελίδα σας επιτρέπει την αλληλεπίδραση με την κοινόχρηστη βάση δεδομένων δαχτυλιδιού. Αυτή η βάση δεδομένων προορίζεται για χρήση στα πορτοφόλια του Monero, όπως και κλώνους του, οι οποίοι επαναχρησιμοποιούν τα κλειδιά του Μonero.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="115"/>
-        <source>Outputs marked as spent</source>
-        <translation>Έξοδοι που έχουν επισημανθεί ως δαπάνες</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="116"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Για να αποκρύψετε ποιες είσοδοι ξοδεύονται σε μια συναλλαγή Monero, ένας τρίτος δεν πρέπει να είναι σε θέση να ξεχωρίσει το ποιες είσοδοι είναι ήδη γνωστό ότι δαπανώνται σε έναν δακτύλιο. Το να μπορεί να γίνει αυτό θα εξασθενίσει την προστασία που παρέχεται από τις υπογραφές του δακτυλίου. Εάν είναι γνωστό ότι έχουν ήδη δαπανηθεί όλες εκτός από μία από τις εισόδους, τότε η είσοδος που ξοδεύεται στην πραγματικότητα γίνεται εμφανής, ακυρώνοντας έτσι την επίδραση των υπογραφών του δακτυλίου, ένα από τα τρία βασικά επίπεδα προστασίας της ιδιωτικότητας που χρησιμοποιεί το Monero. &lt;br&gt;Για να βοηθήσετε τις συναλλαγές να αποφύγουν αυτές τις εισροές, μια λίστα γνωστών δαπανών μπορεί να χρησιμοποιηθεί για να αποφευχθεί η χρήση τους σε νέες συναλλαγές. Μια τέτοια λίστα διατηρείται από το Monero και είναι διαθέσιμη στον ιστότοπο getmonero.org και μπορείτε να εισάγετε αυτήν τη λίστα εδώ. &lt;br&gt;Εναλλακτικά, μπορείτε να σαρώσετε μόνοι σας το blockchain (και τα blockchain των κλώνων Monero που επαναχρησιμοποιούν κλειδιά) με το εργαλείο monero-blockchain-mark-spent-outputs για τη δημιουργία μιας λίστας γνωστών εξαγόμενων δαπανών.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="134"/>
-        <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Αυτό ορίζει το ποιες έξοδοι είναι γνωστές δαπάνες και έτσι δεν θα χρησιμοποιηθούν ως αντικαταστάτες ιδιωτικότητας στις υπογραφές δακτυλίου. </translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="135"/>
-        <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation>Θα πρέπει να φορτώσετε ένα αρχείο μόνο όταν θέλετε να ανανεώσετε τη λίστα. Η χειροκίνητη προσθήκη/αφαίρεση είναι δυνατή αν χρειαστεί.</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="147"/>
-        <source>Please choose a file from which to load outputs to mark as spent</source>
-        <translation>Παρακαλώ επιλέξτε ένα αρχείο από το οποίο θα φορτώσετε τις εξόδους προς επισήμανση ως δαπάνες</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="161"/>
-        <source>Path to file</source>
-        <translation>Διαδρομή αρχείου</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="163"/>
-        <source>Filename with outputs to mark as spent</source>
-        <translation>Όνομα αρχείου με εξόδους για επισήμανση ως δαπάνες</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Browse</source>
-        <translation>Περιήγηση</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="184"/>
-        <source>Load</source>
-        <translation>Φόρτωση</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="201"/>
-        <source>Or manually mark a single output as spent/unspent:</source>
-        <translation>Εναλλακτικά, επισημάνετε χειροκίνητα μια έξοδο ως δαπανημένη/μη δαπανημένη:</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="203"/>
-        <source>Paste output amount</source>
-        <translation>Επικόλληση ποσού εξόδου</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="215"/>
-        <source>Paste output offset</source>
-        <translation>Επικόλληση αντιστάθμισης εξόδου</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="227"/>
-        <source>Mark as spent</source>
-        <translation>Επισήμανση ως δαπάνη</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="235"/>
-        <source>Mark as unspent</source>
-        <translation>Επισήμανση ως διαθέσιμο</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="246"/>
+        <location filename="../pages/SharedRingDB.qml" line="107"/>
         <source>Rings</source>
         <translation>Δακτύλιοι</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="247"/>
+        <location filename="../pages/SharedRingDB.qml" line="108"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation>Προκειμένου να αποφευχθεί η ακύρωση της προστασίας που παρέχεται από τις υπογραφές δακτυλίων του Monero, μια έξοδος δεν πρέπει να δαπανάται με διαφορετικούς δακτυλίους σε διαφορετικά blockchain. Αν και αυτό συνήθως δεν προκαλεί ανησυχία, μπορεί να προκαλέσει όταν ο κλώνος Monero που επαναχρησιμοποιεί τα κλειδιά, σας επιτρέπει να ξοδέψετε υπάρχουσες εξόδους. Σε αυτήν την περίπτωση, πρέπει να διασφαλίσετε ότι η υπάρχουσα έξοδος χρησιμοποιεί τον ίδιο δακτύλιο και στις δύο αλυσίδες. &lt;br&gt;Αυτό θα γίνει αυτόματα από το Monero και από οποιοδήποτε λογισμικό επαναχρησιμοποίησης κλειδιών που δεν προσπαθεί να αφαιρέσει ενεργά το απόρρητό σας. &lt;br&gt;Εάν χρησιμοποιείτε και έναν κλώνο Monero που επαναχρησιμοποιεί κλειδιά και αυτός ο κλώνος δεν περιλαμβάνει αυτήν την προστασία, μπορείτε ακόμα να διασφαλίσετε ότι οι συναλλαγές σας προστατεύονται δαπανώντας πρώτα στον κλώνο και, στη συνέχεια, προσθέτοντας χειροκίνητα τον δακτύλιο σε αυτήν τη σελίδα, όπου σας επιτρέπει να ξοδέψετε το Monero σας με ασφάλεια. &lt;br&gt;Εάν δεν χρησιμοποιείτε κλώνο Monero που επαναχρησιμοποιεί κλειδιά χωρίς αυτά τα χαρακτηριστικά ασφαλείας, τότε δεν χρειάζεται να κάνετε τίποτα, καθώς όλα είναι αυτοματοποιημένα.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="266"/>
+        <location filename="../pages/SharedRingDB.qml" line="127"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation>Αυτό καταγράφει δακτυλίους που χρησιμοποιούνται από εξόδους που δαπανήθηκαν στο Monero σε μια αλυσίδα επαναχρησιμοποίησης κλειδιών, έτσι ώστε ο ίδιος δακτύλιος να μπορεί να επαναχρησιμοποιηθεί για να αποφευχθούν ζητήματα απορρήτου.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="277"/>
+        <location filename="../pages/SharedRingDB.qml" line="138"/>
         <source>Key image</source>
         <translation>Εικόνα κλειδί</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="279"/>
+        <location filename="../pages/SharedRingDB.qml" line="140"/>
         <source>Paste key image</source>
         <translation>Επικόλληση εικόνας κλειδιού</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="296"/>
+        <location filename="../pages/SharedRingDB.qml" line="157"/>
         <source>Get ring</source>
         <translation>Λάβετε τον δακτύλιο</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="308"/>
+        <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Get Ring</source>
         <translation>Λάβετε τον Δακτύλιο</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="314"/>
+        <location filename="../pages/SharedRingDB.qml" line="175"/>
         <source>No ring found</source>
         <translation>Δεν βρέθηκε δακτύλιος</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="332"/>
+        <location filename="../pages/SharedRingDB.qml" line="193"/>
         <source>Set ring</source>
         <translation>Ορίστε δακτύλιο</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="344"/>
+        <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Set Ring</source>
         <translation>Ορίστε Δακτύλιο</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="363"/>
+        <location filename="../pages/SharedRingDB.qml" line="224"/>
         <source>I intend to spend on key-reusing fork(s)</source>
         <translation>Επιθυμώ να ξοδέψω σε διακλάδωση(-σεις) επαναχρησιμοποίησης κλειδιών</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="375"/>
+        <location filename="../pages/SharedRingDB.qml" line="236"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>Μπορεί να θέλω να ξοδέψω σε διακλάδωση(-σεις) επαναχρησιμοποίησης κλειδιών</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="387"/>
+        <location filename="../pages/SharedRingDB.qml" line="248"/>
         <source>Relative</source>
         <translation>Σχετικό</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="405"/>
+        <location filename="../pages/SharedRingDB.qml" line="266"/>
         <source>Set segregation height:</source>
         <translation>Ορίστε το ύψος διαχωρισμού:</translation>
     </message>
@@ -3477,27 +3436,27 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="305"/>
+        <location filename="../wizard/WizardController.qml" line="319"/>
         <source>Please choose a file</source>
         <translation>Παρακαλώ επιλέξτε ένα αρχείο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="351"/>
+        <location filename="../wizard/WizardController.qml" line="367"/>
         <source>Failed to store the wallet</source>
         <translation>Αποτυχία αποθήκευσης του πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="434"/>
+        <location filename="../wizard/WizardController.qml" line="454"/>
         <source>Please proceed to the device...</source>
         <translation>Παρακαλώ προβείτε στην συσκευή...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="438"/>
+        <location filename="../wizard/WizardController.qml" line="458"/>
         <source>Creating wallet from device...</source>
         <translation>Δημιουργία πορτοφολιού από την συσκευή...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="439"/>
+        <location filename="../wizard/WizardController.qml" line="459"/>
         <source>
 
 Please check your hardware wallet –
@@ -3516,78 +3475,78 @@ your input may be required.</source>
         <translation>Επιλέξτε το υλικό πορτοφόλι σας</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>Create a new wallet</source>
         <translation>Δημιουργία νέου πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>stagenet</source>
         <translation>stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="81"/>
         <source>testnet</source>
         <translation>testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="83"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="84"/>
         <source>Using a hardware device.</source>
         <translation>Χρήση υλικού πορτοφολιού.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="107"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="108"/>
         <source>Hardware wallet model</source>
         <translation>Μοντέλο υλικού πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="121"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="122"/>
         <source>Create a new wallet from device.</source>
         <translation>Δημιουργία νέου πορτοφολιού από την συσκευή.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="135"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
         <translation>Επαναφέρετε ένα πορτοφόλι από τη συσκευή. Επιλέξτε αυτό εάν έχετε χρησιμοποιήσει το υλικό πορτοφόλι σας προηγουμένως.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="196"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>Ημερομηνία δημιουργίας πορτοφολιού ως `ΕΕΕΕ-ΜΜ-ΗΗ` ή ύψος επαναφοράς</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="199"/>
         <source>Restore height</source>
         <translation>Ύψος επαναφοράς</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="209"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="210"/>
         <source>Advanced options</source>
         <translation>Επιλογές για προχωρημένους</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="217"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Lookahead υποδιεύθυνσης (προαιρετικό)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="226"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="287"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="227"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="288"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Σφάλμα εγγραφής πορτοφολιού από υλική συσκευή. Ελέγξτε τα αρχεία καταγραφής της εφαρμογής.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="243"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Back to menu</source>
         <translation>Πίσω στο μενού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="245"/>
         <source>Create wallet</source>
         <translation>Δημιουργία πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="245"/>
         <source>Restore wallet</source>
         <translation>Επαναφορά πορτοφολιού</translation>
     </message>
@@ -3595,80 +3554,201 @@ your input may be required.</source>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>Create a new wallet</source>
         <translation>Δημιουργία νέου πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>stagenet</source>
         <translation>stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="66"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
         <source>testnet</source>
         <translation>testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="72"/>
         <source>Creates a new wallet on this computer.</source>
         <translation>Δημιουργεί ένα νέο πορτοφόλι σε αυτόν τον υπολογιστή.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="97"/>
-        <source>Mnemonic seed</source>
-        <translation>Μνημονική φράση</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
-        <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Είναι &lt;b&gt;πολύ&lt;/b&gt; σημαντικό να γράψετε αυτήν την φράση και να την κρατήσετε μυστική. Είναι το μόνο που χρειάζεστε για αντίγραφο ασφαλείας και για επαναφορά του πορτοφολιού σας.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
-        <source>Wallet restore height</source>
-        <translation>Ύψος επαναφοράς πορτοφολιού</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
-        <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation>Εάν κάνετε επαναφορά του πορτοφολιού σας στο μέλλον, ο καθορισμός αυτού του block θα επιταχύνει την διαδικασία.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="93"/>
         <source>Back to menu</source>
         <translation>Πίσω στο μενού</translation>
     </message>
 </context>
 <context>
-    <name>WizardCreateWallet3</name>
+    <name>WizardCreateWallet2</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="59"/>
-        <source>Daemon settings</source>
-        <translation>Ρυθμίσεις daemon</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="59"/>
+        <source>Verify your recovery phrase</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Για να μπορείτε να επικοινωνείτε με το δίκτυο Monero, το πορτοφόλι σας πρέπει να είναι συνδεδεμένο σε κόμβο Monero. Για καλύτερο απόρρητο, συνιστάται να τρέξετε τον δικό σας κόμβο.</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="61"/>
+        <source>Please confirm that you have written down your recover phrase by filling in the five blank fields with the correct words. If you have not written down your recovery phrase on a piece of paper, click on the Previous button and write it down right now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="87"/>
+        <source>Print this paper, fill it out, and keep it in a safe location. Never share your recovery phrase with anybody, especially with strangers offering technical support.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="88"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="234"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="239"/>
+        <source>Recovery phrase (mnemonic seed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="89"/>
+        <source>These words are are a backup of your wallet. They are the only thing needed to access your funds and restore your Monero wallet, so keep this paper in a safe place and do not disclose it to anybody! It is strongly not recommended to store your recovery phrase digitally (in an email, online service, screenshot, photo, or any other type of computer file).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="90"/>
+        <source>Wallet creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="91"/>
+        <source>Wallet restore height</source>
+        <translation type="unfinished">Ύψος επαναφοράς πορτοφολιού</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="92"/>
+        <source>For instructions on how to restore this wallet, visit www.getmonero.org and go to Resources &gt; User Guides &gt; &quot;How to restore a wallet from mnemonic seed&quot;. Use only Monero wallets that are trusted and recommended by the Monero community (see a list of them in www.getmonero.org/downloads).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="117"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="119"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="202"/>
+        <source>Write down your recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="136"/>
+        <source>A pencil writing on a piece of paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="204"/>
+        <source>These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="177"/>
+        <source>Display recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>These words encode your private spend key in a human readable format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>It is expected that some words may be repeated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="269"/>
+        <source>New seed generated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="281"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="290"/>
+        <source>Create new seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="302"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="308"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Αντιγραφή στο πρόχειρο</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="305"/>
+        <source>Recovery phrase copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="319"/>
+        <source>Print a template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="320"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="325"/>
+        <source>Print a template to write down your seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="350"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="353"/>
+        <source>Creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="384"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="389"/>
+        <source>Restore height</source>
+        <translation type="unfinished">Ύψος επαναφοράς</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="385"/>
+        <source>Enter this number when restoring the wallet to make your initial wallet synchronization faster.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WizardCreateWallet4</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="61"/>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
+        <source>Daemon settings</source>
+        <translation type="unfinished">Ρυθμίσεις daemon</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="60"/>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation type="unfinished">Για να μπορείτε να επικοινωνείτε με το δίκτυο Monero, το πορτοφόλι σας πρέπει να είναι συνδεδεμένο σε κόμβο Monero. Για καλύτερο απόρρητο, συνιστάται να τρέξετε τον δικό σας κόμβο.</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet5</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="61"/>
         <source>You&apos;re all set up!</source>
-        <translation>Είστε έτοιμοι!</translation>
+        <translation type="unfinished">Είστε έτοιμοι!</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="62"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="62"/>
         <source>New wallet details:</source>
-        <translation>Λεπτομέρειες νέου πορτοφολιού:</translation>
+        <translation type="unfinished">Λεπτομέρειες νέου πορτοφολιού:</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="70"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="70"/>
         <source>Create wallet</source>
-        <translation>Δημιουργία πορτοφολιού</translation>
+        <translation type="unfinished">Δημιουργία πορτοφολιού</translation>
     </message>
 </context>
 <context>
@@ -3733,13 +3813,13 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>stagenet</source>
         <translation>stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="79"/>
-        <location filename="../wizard/WizardHome.qml" line="105"/>
+        <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>testnet</source>
         <translation>testnet</translation>
     </message>
@@ -3749,52 +3829,52 @@ your input may be required.</source>
         <translation>Κάντε αυτή την επιλογή εάν είναι η πρώτη φορά που χρησιμοποιείτε το Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>Create a new wallet from hardware</source>
         <translation>Δημιουργία νέου πορτοφολιού από υλικό</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="108"/>
+        <location filename="../wizard/WizardHome.qml" line="109"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
         <translation>Συνδέστε το υλικό πορτοφόλι σας για την δημιουργία ενός νέου πορτοφολιού Monero.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="127"/>
+        <location filename="../wizard/WizardHome.qml" line="128"/>
         <source>Open a wallet from file</source>
         <translation>Ανοίξτε ένα πορτοφόλι από το αρχείο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="128"/>
+        <location filename="../wizard/WizardHome.qml" line="129"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>Εισάγετε ένα υπάρχον αρχείο πορτοφολιού .keys από τον υπολογιστή σας.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="147"/>
+        <location filename="../wizard/WizardHome.qml" line="148"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>Επαναφορά πορτοφολιού από κλειδιά ή μνημονική φράση</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="148"/>
+        <location filename="../wizard/WizardHome.qml" line="149"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
         <translation>Εισάγετε τα ιδιωτικά σας κλειδιά ή την μνημονική φράση 25 λέξεων για να επαναφέρετε το πορτοφόλι σας.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="164"/>
+        <location filename="../wizard/WizardHome.qml" line="165"/>
         <source>Change wallet mode</source>
         <translation>Αλλαγή λειτουργίας πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="179"/>
+        <location filename="../wizard/WizardHome.qml" line="180"/>
         <source>Advanced options</source>
         <translation>Επιλογές για προχωρημένους</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="202"/>
+        <location filename="../wizard/WizardHome.qml" line="203"/>
         <source>Network</source>
         <translation>Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="224"/>
+        <location filename="../wizard/WizardHome.qml" line="225"/>
         <source>Number of KDF rounds:</source>
         <translation>Αριθμός γύρων KDF:</translation>
     </message>
@@ -3947,17 +4027,17 @@ your input may be required.</source>
 <context>
     <name>WizardNav</name>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="46"/>
+        <location filename="../wizard/WizardNav.qml" line="47"/>
         <source>Previous</source>
         <translation>Προηγούμενο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="47"/>
+        <location filename="../wizard/WizardNav.qml" line="48"/>
         <source>Next</source>
         <translation>Επόμενο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="118"/>
+        <location filename="../wizard/WizardNav.qml" line="121"/>
         <source>Step (%1) of (%2)</source>
         <translation>Βήμα (%1) από (%2)</translation>
     </message>
@@ -3965,57 +4045,62 @@ your input may be required.</source>
 <context>
     <name>WizardOpenWallet1</name>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="75"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
         <source>Open a wallet from file</source>
         <translation>Άνοιγμα πορτοφολιού από αρχείο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="77"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>Εισάγετε ένα υπάρχον αρχείο πορτοφολιού .keys από τον υπολογιστή σας.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="95"/>
         <source>Recently opened</source>
         <translation>Ανοίχτηκαν πρόσφατα</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="166"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
         <source>Mainnet</source>
         <translation>Κύριο Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
         <source>Testnet</source>
         <translation>Δοκιμαστικό Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="169"/>
         <source>Stagenet</source>
         <translation>Δοκιμαστικό Δίκτυο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Mainnet wallet</source>
         <translation>Πορτοφόλι Mainnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Testnet wallet</source>
         <translation>Πορτοφόλι Testnet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="180"/>
         <source>Stagenet wallet</source>
         <translation>Πορτοφόλι Stagenet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
         <source>Browse filesystem</source>
         <translation>Περιήγηση στο σύστημα αρχείων</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="332"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
+        <source>Browse</source>
+        <translation type="unfinished">Περιήγηση</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
         <source>Back to menu</source>
         <translation>Πίσω στο μενού</translation>
     </message>
@@ -4174,42 +4259,43 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="70"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="78"/>
         <source>Wallet name is empty</source>
         <translation>Το όνομα του πορτοφολιού είναι κενό</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="74"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="82"/>
         <source>Wallet name is invalid</source>
         <translation>Το όνομα του πορτοφολιού δεν είναι έγκυρο</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
         <source>Wallet already exists</source>
         <translation>Το πορτοφόλι υπάρχει ήδη</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="96"/>
         <source>Wallet name</source>
         <translation>Όνομα πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="154"/>
         <source>Wallet location is empty</source>
         <translation>Η τοποθεσία του πορτοφολιού είναι κενή</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="113"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="161"/>
         <source>Wallet location</source>
         <translation>Τοποθεσία πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="131"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="186"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="194"/>
         <source>Browse</source>
         <translation>Περιήγηση</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="145"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="236"/>
         <source>Please choose a directory</source>
         <translation>Παρακαλώ επιλέξτε έναν κατάλογο</translation>
     </message>
@@ -4217,9 +4303,9 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="953"/>
-        <location filename="../main.qml" line="1075"/>
-        <location filename="../main.qml" line="1690"/>
+        <location filename="../main.qml" line="967"/>
+        <location filename="../main.qml" line="1089"/>
+        <location filename="../main.qml" line="1712"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
@@ -4229,39 +4315,39 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>Δεν ήταν δυνατό το άνοιγμα του πορτοφολιού: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="714"/>
+        <location filename="../main.qml" line="722"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Περιμένοντας να σταματήσει το daemon...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="748"/>
+        <location filename="../main.qml" line="756"/>
         <source>Daemon failed to start</source>
         <translation>Το daemon απέτυχε να ξεκινήσει</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="749"/>
+        <location filename="../main.qml" line="757"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Παρακαλώ ελέγξτε το αρχείο καταγραφής του πορτοφολιού και του daemon για σφάλματα. Μπορείτε επίσης να προσπαθήσετε να ξεκινήσετε %1 χειροκίνητα.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="817"/>
+        <location filename="../main.qml" line="831"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Δεν είναι δυνατή η δημιουργία συναλλαγής: Λάθος έκδοση daemon: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="819"/>
-        <location filename="../main.qml" line="911"/>
+        <location filename="../main.qml" line="833"/>
+        <location filename="../main.qml" line="925"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Δεν είναι δυνατή η δημιουργία συναλλαγής: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="826"/>
-        <location filename="../main.qml" line="917"/>
+        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="931"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Δεν υπάρχουν μη αναμίξιμοι εξόδοι για σάρωση</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="661"/>
+        <location filename="../main.qml" line="668"/>
         <source>Waiting for daemon to sync</source>
         <translation>Αναμονή για συγχρονισμό του daemon</translation>
     </message>
@@ -4297,224 +4383,231 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>Επιδιόρθωση ασύμβατης προσωρινής μνήμης πορτοφολιού. Επανασυγχρονισμός πορτοφολιού.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="663"/>
+        <location filename="../main.qml" line="670"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Το daemon είναι συγχρονισμένο (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="665"/>
+        <location filename="../main.qml" line="672"/>
         <source>Wallet is synchronized</source>
         <translation>Το πορτοφόλι είναι συγχρονισμένο</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="765"/>
+        <location filename="../main.qml" line="762"/>
+        <source>
+
+Exiting p2pool. Please check that port 18083 is available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="779"/>
         <source>Daemon is synchronized</source>
         <translation>Το daemon είναι συγχρονισμένο</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
+        <location filename="../main.qml" line="880"/>
         <source>Creating transaction...</source>
         <translation>Δημιουργία συναλλαγής...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="945"/>
+        <location filename="../main.qml" line="959"/>
         <source>Sending transaction ...</source>
         <translation>Αποστολή συναλλαγής ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="973"/>
+        <location filename="../main.qml" line="987"/>
         <source>Failed to store the wallet</source>
         <translation>Αποτυχία αποθήκευσης του πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1011"/>
+        <location filename="../main.qml" line="1025"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Δεν ήταν δυνατή η δημιουργία μιας απόδειξης για τον ακόλουθο λόγο: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1045"/>
-        <location filename="../main.qml" line="1064"/>
+        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1078"/>
         <source>Payment proof check</source>
         <translation>Έλεγχος απόδειξης πληρωμής</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1048"/>
-        <location filename="../main.qml" line="1066"/>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1062"/>
+        <location filename="../main.qml" line="1080"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Bad signature</source>
         <translation>Κακή υπογραφή</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1055"/>
+        <location filename="../main.qml" line="1069"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Αυτή η διεύθυνση έλαβε %1 monero, με %2 επιβεβαιώση(-σεις).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1066"/>
+        <location filename="../main.qml" line="1080"/>
         <source>Good signature</source>
         <translation>Καλή υπογραφή</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1070"/>
+        <location filename="../main.qml" line="1084"/>
         <source>Reserve proof check</source>
         <translation>Έλεγχος αποδεικτικού δέσμευσης</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Good signature on %1 total and %2 spent.</source>
         <translation>Καλή υπογραφή στο %1 σύνολο και %2 δαπάνης.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1344"/>
+        <location filename="../main.qml" line="1359"/>
         <source>Desktop entry</source>
         <translation>Καταχώρηση στην επιφάνεια εργασίας</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1345"/>
+        <location filename="../main.qml" line="1360"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
         <translation>Θα θέλατε να εγγραφείτε στην καταχώρηση Γραφικού Περιβάλλοντος Χρήστη του Monero Desktop;</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1347"/>
+        <location filename="../main.qml" line="1362"/>
         <source>No</source>
         <translation>Όχι</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1348"/>
+        <location filename="../main.qml" line="1363"/>
         <source>Yes</source>
         <translation>Ναι</translation>
     </message>
     <message>
         <location filename="../main.qml" line="141"/>
-        <location filename="../main.qml" line="1573"/>
-        <location filename="../main.qml" line="2243"/>
+        <location filename="../main.qml" line="1595"/>
+        <location filename="../main.qml" line="2265"/>
         <source>Wrong password</source>
         <translation>Λάθος κωδικός πρόσβασης</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Save transaction file</source>
         <translation>Αποθήκευση αρχείου συναλλαγής</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Send transaction</source>
         <translation>Αποστολή συναλλαγής</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1640"/>
+        <location filename="../main.qml" line="1662"/>
         <source>Warning</source>
         <translation>Προειδοποίηση</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1643"/>
+        <location filename="../main.qml" line="1665"/>
         <source>Error: Filesystem is read only</source>
         <translation>Σφάλμα: Το σύστημα αρχείων είναι μόνο για ανάγνωση</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1645"/>
+        <location filename="../main.qml" line="1667"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Προειδοποίηση: Διατίθεται μόνο %1 GB στη συσκευή. Το Blockchain απαιτεί ~%2 GB δεδομένων.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1647"/>
+        <location filename="../main.qml" line="1669"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Σημείωση: Υπάρχει%1 GB διαθέσιμο στη συσκευή. Το Blockchain απαιτεί ~%2 GB δεδομένων.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1649"/>
+        <location filename="../main.qml" line="1671"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Σημείωση: Ο φάκελος lmdb δεν βρέθηκε. Θα δημιουργηθεί ένας νέος φάκελος.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1687"/>
+        <location filename="../main.qml" line="1709"/>
         <source>Password changed successfully</source>
         <translation>Ο κωδικός πρόσβασης άλλαξε επιτυχώς</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1691"/>
+        <location filename="../main.qml" line="1713"/>
         <source>Error: </source>
         <translation>Σφάλμα: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1782"/>
+        <location filename="../main.qml" line="1804"/>
         <source>Primary account</source>
         <translation>Κύριος λογαριασμός</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1974"/>
+        <location filename="../main.qml" line="1996"/>
         <source>Autosaved the wallet</source>
         <translation>Το πορτοφόλι αποθηκεύτηκε αυτόματα</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1976"/>
+        <location filename="../main.qml" line="1998"/>
         <source>Failed to autosave the wallet</source>
         <translation>Αποτυχία αυτόματης αποθήκευσης του πορτοφολιού</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2092"/>
+        <location filename="../main.qml" line="2114"/>
         <source>Local node is running</source>
         <translation>Ο τοπικός κόμβος τρέχει</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2093"/>
+        <location filename="../main.qml" line="2115"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation>Θέλετε να σταματήσετε τον τοπικό κόμβο ή να συνεχίσει να τρέχει στο παρασκήνιο;</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2095"/>
+        <location filename="../main.qml" line="2117"/>
         <source>Force stop</source>
         <translation>Αναγκαστική διακοπή</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2096"/>
+        <location filename="../main.qml" line="2118"/>
         <source>Keep it running</source>
         <translation>Συνέχεια λειτουργίας</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2116"/>
+        <location filename="../main.qml" line="2138"/>
         <source>Tap again to close...</source>
         <translation>Πατήστε ξανά για να κλείσετε...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2131"/>
+        <location filename="../main.qml" line="2153"/>
         <source>Checking local node status...</source>
         <translation>Έλεγχος κατάστασης τοπικού κόμβου...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Save as file</source>
         <translation>Αποθήκευση ως αρχείο</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
         <translation>Επιβεβαίωση</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="954"/>
+        <location filename="../main.qml" line="968"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Δεν ήταν δυνατή η αποστολή των χρημάτων: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1686"/>
+        <location filename="../main.qml" line="1708"/>
         <source>Information</source>
         <translation>Πληροφορίες</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1052"/>
+        <location filename="../main.qml" line="1066"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Αυτή η διεύθυνση έλαβε %1 monero, αλλά η συναλλαγή δεν έχει εξορυχθεί ακόμα</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1073"/>
         <source>This address received nothing</source>
         <translation>Αυτή η διεύθυνση δεν έλαβε τίποτα</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1742"/>
+        <location filename="../main.qml" line="1764"/>
         <source>Please wait...</source>
         <translation>Παρακαλώ περιμένετε...</translation>
     </message>
