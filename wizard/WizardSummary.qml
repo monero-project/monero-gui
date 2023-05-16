@@ -54,7 +54,8 @@ ColumnLayout {
     WizardSummaryItem {
         Layout.fillWidth: true
         header: qsTr("Mnemonic seed language") + translationManager.emptyString
-        value: persistentSettings.language
+        value: persistentSettings.language_wallet
+        visible: wizardStateView.state === "wizardCreateWallet5" && !wizardController.walletOptionsIsRecoveringFromDevice
     }
 
     WizardSummaryItem {
