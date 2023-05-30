@@ -58,7 +58,6 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libglib-2.0-0.dll
             libfreetype-6.dll
             libbz2-1.dll
-            libssp-0.dll
             libpcre2-16-0.dll
             libhidapi-0.dll
             libdouble-conversion.dll
