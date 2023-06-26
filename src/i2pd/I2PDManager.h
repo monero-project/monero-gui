@@ -30,6 +30,7 @@
 #define I2PDMANAGER_H
 
 #include <QObject>
+#include "../../external/i2pd/libi2pd/Timestamp.h"
 
 class I2PDManager : public QObject
 {
@@ -45,7 +46,10 @@ public:
     Q_INVOKABLE bool isRunning() const;
 
 private:
+    void init(int argc, char* argv[]);
     QString m_i2pdDataDir;
+    std::unique_ptr<i2p::util::NTPTimeSync> m_NTPSync;
+    bool m_isRunning;
 };
 
 #endif // I2PDMANAGER_H

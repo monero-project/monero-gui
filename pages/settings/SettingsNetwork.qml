@@ -116,6 +116,7 @@ Rectangle {
 
     function startI2PD()
     {
+        /*
         var noSync = false;
         //these args will be deleted because DaemonManager::start will re-add them later.
         //removing '--tx-proxy=i2p,...' lets us blindly add '--tx-proxy i2p,...' later without risking duplication.
@@ -147,8 +148,9 @@ Rectangle {
         }
         var success = daemonManager.start(allArgs.join(" "), persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain)
         if (success) {
-            i2pdManager.start();
-        }       
+            */
+        i2pdManager.start();
+        //}       
     }
 
     function stopI2PD()
