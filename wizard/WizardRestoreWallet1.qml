@@ -112,7 +112,7 @@ Rectangle {
 
             RowLayout {
                 Layout.topMargin: -10
-                spacing: 30
+                spacing: 200
                 Layout.fillWidth: true
 
                 MoneroComponents.RadioButton {
