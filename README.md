@@ -86,7 +86,7 @@ Status of the translations:
 ## Installing the Monero GUI from a package
 
 Packages are available for
-* Arch Linux: [monero-gui](https://www.archlinux.org/packages/community/x86_64/monero-gui/)
+* Arch Linux: [monero-gui](https://archlinux.org/packages/extra/x86_64/monero-gui/)
 * Void Linux: `xbps-install -S monero-gui`
 * Flatpak: [Monero GUI](https://flathub.org/apps/details/org.getmonero.Monero)
 * GuixSD: `guix package -i monero-gui`
