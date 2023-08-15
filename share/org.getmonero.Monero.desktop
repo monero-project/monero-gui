@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Monero GUI
+GenericName=Monero-GUI
+Comment=Monero GUI
+Exec=monero-wallet-gui
+Type=Application
+Terminal=false
+Categories=Network;Qt;Finance;Office;
+Icon=org.getmonero.Monero
+StartupNotify=true
