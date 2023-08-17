@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>org.getmonero.Monero</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>BSD-3-Clause</project_license>
+    <content_rating type="oars-1.1"/>
+    <developer_name>The Monero Project</developer_name>
+    <categories>
+        <category>Network</category>
+        <category>Qt</category>
+        <category>Finance</category>
+        <category>Office</category>
+    </categories>
+    <name>Monero GUI</name>
+    <summary>Monero: the secure, private, untraceable cryptocurrency</summary>
+    
+    <description>
+        <p>Monero is a private, secure, untraceable, decentralised digital currency. You
+            are your bank, you control your funds, and nobody can trace your transfers
+            unless you allow them to do so.</p>
+
+        <p>Privacy: Monero uses a cryptographically sound system to allow you to send
+            and receive funds without your transactions being easily revealed on the
+            blockchain (the ledger of transactions that everyone has). This ensures that
+            your purchases, receipts, and all transfers remain absolutely private by
+            default.</p>
+
+        <p>Security: Using the power of a distributed peer-to-peer consensus network,
+            every transaction on the network is cryptographically secured. Individual
+            wallets have a 25 word mnemonic seed that is only displayed once, and can be
+            written down to backup the wallet. Wallet files are encrypted with a passphrase
+            to ensure they are useless if stolen.</p>
+
+        <p>Untraceability: By taking advantage of ring signatures, a special property of
+            a certain type of cryptography, Monero is able to ensure that transactions are
+            not only untraceable, but have an optional measure of ambiguity that ensures
+            that transactions cannot easily be tied back to an individual user or computer.</p>
+    </description>
+
+    <launchable type="desktop-id">org.getmonero.Monero.desktop</launchable>
+
+    <screenshots>
+        <screenshot type="default">
+            <caption>A screenshot of the Monero GUI wallet</caption>
+            <image>https://raw.githubusercontent.com/monero-project/monero-site/master/img/downloads/gui.png</image>
+        </screenshot>
+    </screenshots>
+
+    <url type="homepage">https://getmonero.org</url>
+    <url type="bugtracker">https://github.com/monero-project/monero-gui/issues</url>
+    <url type="donation">https://getmonero.org/get-started/contributing</url>
+    <url type="faq">https://getmonero.org/get-started/faq</url>
+    <url type="help">https://getmonero.org/resources/user-guides</url>
+    <url type="translate">https://translate.getmonero.org</url>
+    <url type="contact">https://getmonero.org/community/hangouts</url>
+    <url type="contribute">https://getmonero.org/get-started/contributing</url>
+
+    <releases>
+        <release version="<version>" date="<date>"/>
+    </releases>
+
+    <custom>
+      <value key="flathub::manifest">https://github.com/monero-project/monero-gui/tree/master/share/org.getmonero.Monero.yaml</value>
+    </custom>
+</component>
