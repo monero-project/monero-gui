@@ -641,10 +641,25 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
         }
     }
 
-    function p2poolDownloadFailed() {
+    function p2poolDownloadFailed(errorCode) {
         statusMessage.visible = false
         errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
-        errorPopup.text = qsTr("P2Pool installation failed.") + isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : ""
+        switch (errorCode) {
+            case P2PoolManager.HashVerificationFailed:
+                errorPopup.text = qsTr("Hash verification failed.") + translationManager.emptyString;
+                break;
+            case P2PoolManager.BinaryNotAvailable:
+                errorPopup.text = qsTr("P2Pool download is not available.") + translationManager.emptyString;
+                break;
+            case P2PoolManager.ConnectionIssue:
+                errorPopup.text = qsTr("P2Pool download failed due to a connection issue.") + translationManager.emptyString;
+                break;
+            case P2PoolManager.InstallationFailed:
+                errorPopup.text = qsTr("P2Pool installation failed.") + (isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : "")
+                break;
+            default:
+                errorPopup.text = qsTr("Unknown error.") + translationManager.emptyString;
+        }
         errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()

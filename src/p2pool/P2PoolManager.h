@@ -51,13 +51,22 @@ public:
     Q_INVOKABLE bool isInstalled();
     Q_INVOKABLE void getStatus();
     Q_INVOKABLE void download();
+
+    enum DownloadError {
+        BinaryNotAvailable,
+        ConnectionIssue,
+        HashVerificationFailed,
+        InstallationFailed,
+    };
+    Q_ENUM(DownloadError)
+
 private:
 
     bool running(NetworkType::Type nettype) const;
 signals:
     void p2poolStartFailure() const;
     void p2poolStatus(bool isMining, int hashrate) const;
-    void p2poolDownloadFailure() const;
+    void p2poolDownloadFailure(int errorCode) const;
     void p2poolDownloadSuccess() const;
 
 private:
