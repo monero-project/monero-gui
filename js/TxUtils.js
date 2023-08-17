@@ -76,3 +76,34 @@ function isValidOpenAliasAddress(address) {
     // make sure it is not some kind of floating number
     return address.length > 2 && isNaN(parseFloat(address)) && address.indexOf('.') >= 0
 }
+
+function handleOpenAliasResolution(address, descriptionText) {
+    const result = walletManager.resolveOpenAlias(address);
+    if (!result) {
+        return { message: qsTr("No address found") };
+    }
+
+    const [isDnssecValid, resolvedAddress] = result.split("|");
+    const isAddressValid = walletManager.addressValid(resolvedAddress, appWindow.persistentSettings.nettype);
+    let updatedDescriptionText = descriptionText;
+
+    if (isDnssecValid === "true") {
+        if (isAddressValid) {
+            updatedDescriptionText = descriptionText ? `${address} ${descriptionText}` : address;
+            return { address: resolvedAddress, description: updatedDescriptionText };
+        } else {
+            return { message: qsTr("No valid address found at this OpenAlias address") };
+        }
+    } else if (isDnssecValid === "false") {
+        if (isAddressValid) {
+            return {
+                address: resolvedAddress,
+                message: qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"),
+            };
+        } else {
+            return { message: qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed") };
+        }
+    } else {
+        return { message: qsTr("Internal error") };
+    }
+}
