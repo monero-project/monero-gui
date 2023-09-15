@@ -113,9 +113,9 @@ RUN git clone -b xkbcommon-0.5.0 --depth 1 https://github.com/xkbcommon/libxkbco
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v1.2.11 --depth 1 https://github.com/madler/zlib && \
+RUN git clone -b v1.3 --depth 1 https://github.com/madler/zlib && \
     cd zlib && \
-    git reset --hard cacf7f1d4e3d44d871b605da3b647f07d718623f && \
+    git reset --hard 09155eaa2f9270dc4ed1fa13e2b4b2613e6e4851 && \
     ./configure --static && \
     make -j$THREADS && \
     make -j$THREADS install && \
