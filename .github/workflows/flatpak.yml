@@ -6,6 +6,7 @@ on:
 jobs:
   part1:
     name: Part 1/3
+    if: github.repository == 'monero-project/monero-gui'
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:kde-5.15-22.08
@@ -48,6 +49,7 @@ jobs:
 
   part2:
     name: Part 2/3
+    if: github.repository == 'monero-project/monero-gui'
     needs: part1
     runs-on: ubuntu-latest
     container:
@@ -97,6 +99,7 @@ jobs:
 
   part3:
     name: Part 3/3
+    if: github.repository == 'monero-project/monero-gui'
     needs: [part1, part2]
     runs-on: ubuntu-latest
     container:
