@@ -156,6 +156,7 @@ bool isLinux = false;
 bool isTails = false;
 bool isDesktop = false;
 bool isOpenGL = true;
+bool isARM = false;
 
 int main(int argc, char *argv[])
 {
@@ -176,6 +177,9 @@ int main(int argc, char *argv[])
     bool isTails = TailsOS::detect();
 #elif defined(Q_OS_MAC)
     bool isMac = true;
+#endif
+#if defined(__aarch64__)
+    bool isARM = true;
 #endif
 
     // detect low graphics mode (start-low-graphics-mode.bat)
@@ -483,6 +487,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
     engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
     engine.rootContext()->setContextProperty("isTails", isTails);
+    engine.rootContext()->setContextProperty("isARM", isARM);
 
     engine.rootContext()->setContextProperty("screenAvailableWidth", screenAvailableSize.width());
     engine.rootContext()->setContextProperty("screenAvailableHeight", screenAvailableSize.height());
