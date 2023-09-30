@@ -1,7 +1,8 @@
 name: Flatpak
 
 on:
-  push
+  release:
+    types: released
 
 jobs:
   part1:
