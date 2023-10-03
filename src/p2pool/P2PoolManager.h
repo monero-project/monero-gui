@@ -50,6 +50,7 @@ public:
     Q_INVOKABLE void exit();
     Q_INVOKABLE bool isInstalled();
     Q_INVOKABLE void getStatus();
+    Q_INVOKABLE void getStats();
     Q_INVOKABLE void download();
 
     enum DownloadError {
@@ -68,6 +69,7 @@ signals:
     void p2poolStatus(bool isMining, int hashrate) const;
     void p2poolDownloadFailure(int errorCode) const;
     void p2poolDownloadSuccess() const;
+    void p2poolStats(QVariantMap statsMap) const;
 
 private:
     std::unique_ptr<QProcess> m_p2poold;
