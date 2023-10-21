@@ -89,7 +89,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libdouble-conversion.dll
             libgcrypt-20.dll
             libgpg-error-0.dll
-            libsodium-23.dll
+            libsodium-26.dll
             libzmq.dll
             #platform files
             libgcc_s_seh-1.dll
