@@ -2,6 +2,10 @@ name: ci/gh-actions/gui
 
 on: [push, pull_request]
 
+env:
+  FREE_DISKSPACE: |
+    sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
+
 jobs:
   build-macos:
     runs-on: macOS-latest
@@ -107,6 +111,8 @@ jobs:
           docker-linux-static-
     - name: install dependencies
       run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxcb-shape0 libxkbcommon-x11-0
+    - name: free up diskspace
+      run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
       run: docker build --tag monero:build-env-linux --build-arg THREADS=3 --file Dockerfile.linux .
     - name: build
@@ -135,6 +141,8 @@ jobs:
         key: docker-windows-static-{hash}
         restore-keys: |
           docker-windows-static-
+    - name: free up diskspace
+      run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
       run: docker build --tag monero:build-env-windows --build-arg THREADS=3 --file Dockerfile.windows .
     - name: build
@@ -161,6 +169,8 @@ jobs:
         key: docker-android-static-{hash}
         restore-keys: |
           docker-android-static-
+    - name: free up diskspace
+      run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
       run: docker build --tag monero:build-env-android --build-arg THREADS=3 --file Dockerfile.android .
     - name: build
