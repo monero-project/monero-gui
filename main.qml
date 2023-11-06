@@ -586,6 +586,9 @@ ApplicationWindow {
     }
 
     function onWalletUpdate() {
+        if (!currentWallet)
+            return;
+
         console.log(">>> wallet updated")
         updateBalance();
         // Update history if new block found since last update
