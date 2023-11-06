@@ -117,17 +117,8 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
-#if defined(Q_OS_MAC) && defined(__aarch64__)
-    // RandomX crashes with JIT enabled when started as a detached process, disable it for now
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("MONERO_RANDOMX_UMASK", "8");
-    m_daemon->setProcessEnvironment(env);
-#endif
-
-    m_daemon->setProgram(m_monerod);
-    m_daemon->setArguments(arguments);
-    bool started = m_daemon->startDetached();
-
+    // Start monerod
+    bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
     connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
