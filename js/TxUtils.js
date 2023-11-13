@@ -70,11 +70,14 @@ function checkSignature(signature) {
 }
 
 function isValidOpenAliasAddress(address) {
-    address = address.trim()
-    // we can get an awful lot of valid domains, including non ASCII chars... accept anything
-    // there should be something after the .
-    // make sure it is not some kind of floating number
-    return address.length > 2 && isNaN(parseFloat(address)) && address.indexOf('.') >= 0
+    var regex = /^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/; // Basic domain structure
+
+    if (!regex.test(address)) {
+        return false;
+    }
+
+    const lastPart = address.substring(address.lastIndexOf('.') + 1);
+    return isNaN(parseInt(lastPart)) || lastPart !== parseInt(lastPart).toString();
 }
 
 function handleOpenAliasResolution(address, descriptionText) {
