@@ -96,24 +96,13 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             #openssl files
             libssl-3-x64.dll
             libcrypto-3-x64.dll
+            #icu
+            libicudt74.dll
+            libicuin74.dll
+            libicuio74.dll
+            libicutu74.dll
+            libicuuc74.dll
         )
-        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-            list(APPEND WIN_DEPLOY_DLLS
-                libicudtd73.dll
-                libicuind73.dll
-                libicuiod73.dll
-                libicutud73.dll
-                libicuucd73.dll
-            )
-        else() # assume release
-            list(APPEND WIN_DEPLOY_DLLS
-                libicudt73.dll
-                libicuin73.dll
-                libicuio73.dll
-                libicutu73.dll
-                libicuuc73.dll
-            )
-        endif()
         list(TRANSFORM WIN_DEPLOY_DLLS PREPEND "$ENV{MSYSTEM_PREFIX}/bin/")
         add_custom_command(TARGET deploy
                            POST_BUILD
