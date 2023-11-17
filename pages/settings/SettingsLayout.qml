@@ -31,6 +31,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
+import moneroComponents.Wallet 1.0
+
 import "../../js/Utils.js" as Utils
 import "../../js/Windows.js" as Windows
 import "../../components" as MoneroComponents
@@ -153,6 +155,28 @@ Rectangle {
                 return qsTr("After ") + value + " " + minutes + translationManager.emptyString;
             }
             onMoved: persistentSettings.lockOnUserInActivityInterval = value
+        }
+
+        MoneroComponents.CheckBox {
+            id: backgroundSyncCheckbox
+            visible: !!currentWallet && !currentWallet.isHwBacked() && !appWindow.viewOnly
+            checked: appWindow.backgroundSyncType != Wallet.BackgroundSync_Off
+            text: qsTr("Sync in the background when locked") + translationManager.emptyString
+            toggleOnClick: false
+            onClicked: {
+                if (currentWallet && appWindow) {
+                    appWindow.showProcessingSplash(qsTr("Updating settings..."))
+
+                    // TODO: add support for custom background password option
+                    var newBackgroundSyncType = Wallet.BackgroundSync_Off
+                    if (currentWallet.getBackgroundSyncType() === Wallet.BackgroundSync_Off)
+                        newBackgroundSyncType = Wallet.BackgroundSync_ReusePassword
+
+                    // TODO: don't keep the wallet password in memory on the appWindow
+                    // https://github.com/monero-project/monero-gui/issues/1537#issuecomment-410055329
+                    currentWallet.setupBackgroundSync(newBackgroundSyncType, appWindow.walletPassword)
+                }
+            }
         }
 
         MoneroComponents.CheckBox {
