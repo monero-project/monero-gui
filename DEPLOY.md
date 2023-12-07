@@ -10,7 +10,7 @@ Use macOS 10.12 - 10.13 for better backwards compability.
 
 4. Compile `monero-wallet-gui.app`
 
-```
+```bash
 mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 ..
 make
@@ -69,5 +69,7 @@ cd ../../../../qttools/src/macdeployqt/macdeployqt/
 make
 make install
 ```
+
+For compilation with Xcode 15 the following patch has to be applied: https://raw.githubusercontent.com/Homebrew/formula-patches/086e8cf/qt5/qt5-qmake-xcode15.patch
 
 The `CMAKE_PREFIX_PATH` has to be set to `/path/to/qt-build-dir/` during monero-gui compilation.
