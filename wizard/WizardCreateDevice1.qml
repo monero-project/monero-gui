@@ -46,6 +46,7 @@ Rectangle {
 
     property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
     property var ledgerType: deviceName == "Ledger" ? deviceNameModel.get(deviceNameDropdown.currentIndex).column1 : null
+    property var trezorType: deviceName == "Trezor" ? deviceNameModel.get(deviceNameDropdown.currentIndex).column1 : null
     property var hardwareWalletType: wizardCreateDevice1.deviceName;
 
     ListModel {
@@ -56,6 +57,7 @@ Rectangle {
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
         ListElement { column1: "Ledger Stax"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
+        ListElement { column1: "Trezor Safe 3"; column2: "Trezor";}
     }
 
     ColumnLayout {
@@ -163,7 +165,11 @@ Rectangle {
                              Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                              source: {
                                 if (hardwareWalletType == "Trezor") {
-                                    return "qrc:///images/trezor.png";
+                                    if (trezorType == "Trezor Model T") {
+                                        return "qrc:///images/trezorT.png";
+                                    } else if (trezorType == "Trezor Safe 3") {
+                                        return "qrc:///images/trezor3.png";
+                                    }
                                 } else if (hardwareWalletType == "Ledger") {
                                     if (ledgerType == "Ledger Nano S") {
                                         return "qrc:///images/ledgerNanoS.png";
