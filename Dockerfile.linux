@@ -170,7 +170,7 @@ RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
     tar -xzf openssl-1.1.1u.tar.gz && \
     rm openssl-1.1.1u.tar.gz && \
     cd openssl-1.1.1u && \
-    ./config no-asm no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
+    ./config no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)

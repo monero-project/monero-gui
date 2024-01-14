@@ -125,7 +125,7 @@ RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
     && rm openssl-${OPENSSL_VERSION}.tar.gz \
     && cd openssl-${OPENSSL_VERSION} \
     && ANDROID_NDK_HOME=${ANDROID_NDK_ROOT} ./Configure CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} \
-    android-arm64 no-asm no-shared --static \
+    android-arm64 no-shared --static \
     --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib \
     --prefix=${PREFIX} --openssldir=${PREFIX} \
     && sed -i 's/CNF_EX_LIBS=-ldl -pthread//g;s/BIN_CFLAGS=-pie $(CNF_CFLAGS) $(CFLAGS)//g' Makefile \
