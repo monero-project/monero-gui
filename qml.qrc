@@ -282,8 +282,9 @@
         <file>images/ledgerNanoSPlus.png</file>
         <file>images/ledgerNanoX.png</file>
         <file>images/ledgerStax.png</file>
-        <file>images/trezor.png</file>
-        <file>images/trezor@2x.png</file>
+        <file>images/trezor3.png</file>
+        <file>images/trezorT.png</file>
+        <file>images/trezorT@2x.png</file>
         <file>qtquickcontrols2.conf</file>
         <file>images/write-down.png</file>
         <file>images/write-down-white.png</file>
