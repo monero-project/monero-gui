@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2018, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -91,7 +91,7 @@ Rectangle {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
             }
         }
-        
+
         MoneroComponents.CheckBox {
             checked: persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
@@ -190,9 +190,21 @@ Rectangle {
                 labelFontSize: 14
                 dataModel: fiatPriceProvidersModel
                 onChanged: {
-                    var obj = dataModel.get(currentIndex);
-                    persistentSettings.fiatPriceProvider = obj.data;
-
+                    var newProvider = dataModel.get(currentIndex).data;
+                    var providerCurrencies = appWindow.fiatPriceAPIs[newProvider];
+                    // ONLY when the user changes the provider should the currency list also update
+                    // This way, since Kraken is the default, users can see ALL supported currencies
+                    fiatPriceCurrencyModel.clear();
+                    appWindow.fiatCurrencies.forEach(el => {
+                        if (`xmr${el}` in providerCurrencies) fiatPriceCurrencyModel.append({ data: `xmr${el}`, column1: el.toUpperCase()})
+                    });
+                    // if fiatPriceCurrency is not supported by the new provider, use first available currency
+                    if (!(persistentSettings.fiatPriceCurrency in providerCurrencies)) {
+                        persistentSettings.fiatPriceCurrency = Object.keys(providerCurrencies)[0];
+                        fiatPriceCurrencyDropdown.currentIndex = 0;
+                    }
+                    persistentSettings.fiatPriceProvider = newProvider;
+                    // refresh price after validating that the fiat currency is provided by the provider
                     if(persistentSettings.fiatPriceEnabled)
                         appWindow.fiatApiRefresh();
                 }
@@ -203,12 +215,18 @@ Rectangle {
                 Layout.maximumWidth: 100
                 labelText: qsTr("Currency") + translationManager.emptyString
                 labelFontSize: 14
-                currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
+                currentIndex: appWindow.fiatCurrencies.indexOf(persistentSettings.fiatPriceCurrency.substring(3))
                 dataModel: fiatPriceCurrencyModel
                 onChanged: {
-                    var obj = dataModel.get(currentIndex);
-                    persistentSettings.fiatPriceCurrency = obj.data;
-
+                    var newCurrency = dataModel.get(currentIndex).data;
+                    if (!(newCurrency in appWindow.fiatPriceAPIs[persistentSettings.fiatPriceProvider])) {
+                        // this occurs if a fiat currency other than EUR/USD is selected and provider is Kraken
+                        // so use appWindow.fiatPriceBackupProvider instead
+                        let backupIdx = Object.keys(appWindow.fiatPriceAPIs).indexOf(appWindow.fiatPriceBackupProvider);
+                        fiatPriceProviderDropDown.currentIndex = backupIdx;
+                        persistentSettings.fiatPriceProvider = appWindow.fiatPriceBackupProvider;
+                    }
+                    persistentSettings.fiatPriceCurrency = newCurrency;
                     if(persistentSettings.fiatPriceEnabled)
                         appWindow.fiatApiRefresh();
                 }
@@ -290,29 +308,26 @@ Rectangle {
 
     ListModel {
         id: fiatPriceCurrencyModel
-        ListElement {
-            data: "xmrusd"
-            column1: "USD"
-        }
-        ListElement {
-            data: "xmreur"
-            column1: "EUR"
+        Component.onCompleted: {
+            // populate with fiat currencies
+            appWindow.fiatCurrencies.forEach(el => {
+                fiatPriceCurrencyModel.append({ data: `xmr${el}`, column1: el.toUpperCase()});
+            });
         }
     }
 
     Component.onCompleted: {
-        // Dynamically fill fiatPrice dropdown based on `appWindow.fiatPriceAPIs`
+        // Dynamically fill fiatPrice dropdowns based on `appWindow.fiatPriceAPIs`
         var apis = appWindow.fiatPriceAPIs;
         fiatPriceProvidersModel.clear();
-
         var i = 0;
-        for (var api in apis){
-            if (!apis.hasOwnProperty(api))
+        for (var apiProvider in apis){
+            if (!apis.hasOwnProperty(apiProvider))
                continue;
 
-            fiatPriceProvidersModel.append({"column1": Utils.capitalize(api), "data": api});
+            fiatPriceProvidersModel.append({data: apiProvider, column1: Utils.capitalize(apiProvider)});
 
-            if(api === persistentSettings.fiatPriceProvider)
+            if(apiProvider === persistentSettings.fiatPriceProvider)
                 fiatPriceProviderDropDown.currentIndex = i;
             i += 1;
         }
@@ -320,4 +335,3 @@ Rectangle {
         console.log('SettingsLayout loaded');
     }
 }
-
