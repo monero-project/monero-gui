@@ -11,9 +11,9 @@ AppName=Monero GUI Wallet
 
 AppVersion={#GuiVersion}
 VersionInfoVersion={#GuiVersion}
-DefaultDirName={commonpf}\Monero GUI Wallet
-DefaultGroupName=Monero GUI Wallet
-UninstallDisplayIcon={app}\monero-wallet-gui.exe
+DefaultDirName={commonpf}\Crown GUI Wallet
+DefaultGroupName=Crown GUI Wallet
+UninstallDisplayIcon={app}\crown-wallet-gui.exe
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x64 arm64
@@ -21,8 +21,8 @@ WizardSmallImageFile=WizardSmallImage.bmp
 WizardImageFile=WelcomeImage.bmp
 DisableWelcomePage=no
 LicenseFile=LICENSE
-AppPublisher=The Monero Developer Community
-AppPublisherURL=https://getmonero.org
+AppPublisher=The Crown Developer Community
+AppPublisherURL=https://crowncard.com
 TimeStampsInUTC=yes
 CompressionThreads=1
 
@@ -76,34 +76,34 @@ Source: "FinishImage.bmp"; Flags: dontcopy
 Source: "LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero GUI wallet exe and guide
-Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-gui-wallet-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\crown-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\crown-gui-wallet-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero CLI wallet
-Source: "bin\extras\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero wallet RPC interface implementation
-Source: "bin\extras\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon
-Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\crownd.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon wrapped in a batch file that stops before the text window closes, to see any error messages
-Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
+Source: "crown-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
 ; Monero blockchain utilities
-Source: "bin\extras\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-prune.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-stats.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-gen-ssl-cert.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-prune.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-blockchain-stats.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\crown-gen-ssl-cert.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
@@ -182,7 +182,7 @@ Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Add
 Filename: "{app}\ReadMe.htm"; Description: "Show ReadMe"; Flags: postinstall shellexec skipifsilent
 
 ; DON'T offer to run the wallet right away, let the people read about initial blockchain download first in the ReadMe
-; Filename: "{app}\monero-wallet-gui.exe"; Description: "Run GUI Wallet now"; Flags: postinstall nowait skipifsilent
+; Filename: "{app}\crown-wallet-gui.exe"; Description: "Run GUI Wallet now"; Flags: postinstall nowait skipifsilent
 
 
 [Code]
@@ -272,7 +272,7 @@ end;
 function DaemonLog(Param: String) : String;
 // Full filename of the log of the daemon
 begin
-  Result := BlockChainDir('') + '\bitmonero.log';
+  Result := BlockChainDir('') + '\crown.log';
   // No quotes for filename with blanks as this is never used as part of a command line
 end;
 
@@ -299,12 +299,12 @@ procedure CurStepChanged(CurStep: TSetupStep);
 var s: TArrayOfString;
 begin
   if CurStep = ssPostInstall then begin
-    // Re-build "monero-daemon.bat" according to actual install and blockchain directory used
+    // Re-build "crown-daemon.bat" according to actual install and blockchain directory used
     SetArrayLength(s, 3);
     s[0] := 'REM Execute the Monero daemon and then stay with window open after it exits';
-    s[1] := '"' + ExpandConstant('{app}\monerod.exe') + '" ' + DaemonFlags('');
+    s[1] := '"' + ExpandConstant('{app}\crownd.exe') + '" ' + DaemonFlags('');
     s[2] := 'PAUSE';
-    SaveStringsToFile(ExpandConstant('{app}\monero-daemon.bat'), s, false); 
+    SaveStringsToFile(ExpandConstant('{app}\crown-daemon.bat'), s, false); 
   end;
 end;
 
@@ -322,19 +322,19 @@ end;
 [Icons]
 ; Icons in the "Monero GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
-Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe";
-Name: "{group}\GUI Wallet Guide"; Filename: "{app}\monero-gui-wallet-guide.pdf"; IconFilename: "{app}\monero-wallet-gui.exe"
+Name: "{group}\GUI Wallet"; Filename: "{app}\crown-wallet-gui.exe";
+Name: "{group}\GUI Wallet Guide"; Filename: "{app}\crown-gui-wallet-guide.pdf"; IconFilename: "{app}\monero-wallet-gui.exe"
 Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 
 ; Sub-folder "Utilities";
 ; Note that Windows 10, unlike Windows 7, ignores such sub-folders completely
 ; and insists on displaying ALL icons on one single level
-Name: "{group}\Utilities\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}
+Name: "{group}\Utilities\Crown Daemon"; Filename: "{app}\crownd.exe"; Parameters: {code:DaemonFlags}
 Name: "{group}\Utilities\Read Me"; Filename: "{app}\ReadMe.htm"
 
 ; CLI wallet: Needs a working directory ("Start in:") set in the icon, because with no such directory set
 ; it tries to create new wallets without a path given in the probably non-writable program folder and will abort with an error
-Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"; WorkingDir: "{userdocs}\Monero\wallets"
+Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\crown-wallet-cli.exe"; WorkingDir: "{userdocs}\Monero\wallets"
 
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
@@ -342,13 +342,13 @@ Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-c
 Name: "{group}\Utilities\x (Check Default Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
 Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
 Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: """{userdocs}\Monero\wallets"""
-Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: """{userappdata}\monero-wallet-gui\monero-wallet-gui.log"""
-Name: "{group}\Utilities\x (Try Daemon, Exit Confirm)"; Filename: "{app}\monero-daemon.bat"
+Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: """{userappdata}\crown-wallet-gui\monero-wallet-gui.log"""
+Name: "{group}\Utilities\x (Try Daemon, Exit Confirm)"; Filename: "{app}\crown-daemon.bat"
 Name: "{group}\Utilities\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}\start-low-graphics-mode.bat"
-Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM monerod.exe /T /F"
+Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM crownd.exe /T /F"
 
 ; Desktop icons, optional with the help of the "Task" section
-Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Tasks: desktopicon
+Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\crown-wallet-gui.exe"; Tasks: desktopicon
 
 
 [Registry]
@@ -363,12 +363,12 @@ Root: HKCU; Subkey: "Software\monero-project\monero-core"; ValueType: string; Va
 ; Used to easily start payments; example URI: "monero://<address>?tx_amount=5.0"
 Root: HKCR; Subkey: "monero"; ValueType: "string"; ValueData: "URL:Monero Payment Protocol"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "monero"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
-Root: HKCR; Subkey: "monero\DefaultIcon"; ValueType: "string"; ValueData: "{app}\monero-wallet-gui.exe,0"
-Root: HKCR; Subkey: "monero\shell\open\command"; ValueType: "string"; ValueData: """{app}\monero-wallet-gui.exe"" ""%1"""
+Root: HKCR; Subkey: "monero\DefaultIcon"; ValueType: "string"; ValueData: "{app}\crown-wallet-gui.exe,0"
+Root: HKCR; Subkey: "monero\shell\open\command"; ValueType: "string"; ValueData: """{app}\crown-wallet-gui.exe"" ""%1"""
 
 ; Configure a custom URI scheme: Links starting with "moneroseed:" will start the GUI wallet exe with the URI as command-line parameter
 ; Used to easily hand over custom seed node info to the wallet, with an URI of the form "moneroseed://a.b.c.d:port"
 Root: HKCR; Subkey: "moneroseed"; ValueType: "string"; ValueData: "URL:Monero Seed Node Protocol"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "moneroseed"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
-Root: HKCR; Subkey: "moneroseed\DefaultIcon"; ValueType: "string"; ValueData: "{app}\monero-wallet-gui.exe,0"
-Root: HKCR; Subkey: "moneroseed\shell\open\command"; ValueType: "string"; ValueData: """{app}\monero-wallet-gui.exe"" ""%1"""
+Root: HKCR; Subkey: "moneroseed\DefaultIcon"; ValueType: "string"; ValueData: "{app}\crown-wallet-gui.exe,0"
+Root: HKCR; Subkey: "moneroseed\shell\open\command"; ValueType: "string"; ValueData: """{app}\crown-wallet-gui.exe"" ""%1"""
