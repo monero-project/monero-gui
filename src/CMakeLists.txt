@@ -154,7 +154,7 @@ if(WITH_SCANNER)
     endif()
 endif()
 
-add_custom_command(TARGET crown-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
+add_custom_command(TARGET crown-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:crown-wallet-gui>)
 
 include(Deploy)
 
