@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Monero GUI
-GenericName=Monero-GUI
-Comment=Monero GUI
-Exec=monero-wallet-gui
+Name=Crown GUI
+GenericName=Crown-GUI
+Comment=Crown GUI
+Exec=crown-wallet-gui
 Type=Application
 Terminal=false
 Categories=Network;Qt;Finance;Office;
