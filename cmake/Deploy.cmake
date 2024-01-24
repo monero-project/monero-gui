@@ -7,7 +7,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
         add_custom_command(TARGET deploy
                            POST_BUILD
-                           COMMAND "${MACDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE_DIR:monero-wallet-gui>/../.." -always-overwrite -qmldir="${CMAKE_SOURCE_DIR}"
+                           COMMAND "${MACDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE_DIR:crown-wallet-gui>/../.." -always-overwrite -qmldir="${CMAKE_SOURCE_DIR}"
                            COMMENT "Running macdeployqt..."
         )
 
@@ -16,11 +16,11 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         if(_qt_svg_dylib)
             add_custom_command(TARGET deploy
                                POST_BUILD
-                               COMMAND ${CMAKE_COMMAND} -E copy ${_qt_svg_dylib} $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtGui.framework/Versions/5/QtGui" "@executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtWidgets.framework/Versions/5/QtWidgets" "@executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtSvg.framework/Versions/5/QtSvg" "@executable_path/../Frameworks/QtSvg.framework/Versions/5/QtSvg" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtCore.framework/Versions/5/QtCore" "@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
+                               COMMAND ${CMAKE_COMMAND} -E copy ${_qt_svg_dylib} $<TARGET_FILE_DIR:crown-wallet-gui>/../PlugIns/imageformats/
+                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtGui.framework/Versions/5/QtGui" "@executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui" $<TARGET_FILE_DIR:crown-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
+                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtWidgets.framework/Versions/5/QtWidgets" "@executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets" $<TARGET_FILE_DIR:crown-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
+                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtSvg.framework/Versions/5/QtSvg" "@executable_path/../Frameworks/QtSvg.framework/Versions/5/QtSvg" $<TARGET_FILE_DIR:crown-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
+                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtCore.framework/Versions/5/QtCore" "@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore" $<TARGET_FILE_DIR:crown-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
                                COMMENT "Copying libqsvg.dylib, running install_name_tool"
 
             )
@@ -32,7 +32,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         if(EXISTS ${BOOST_ATOMIC_LIB_PATH})
             add_custom_command(TARGET deploy
                                POST_BUILD
-                               COMMAND ${CMAKE_COMMAND} -E copy "${BOOST_ATOMIC_LIB_PATH}" "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
+                               COMMAND ${CMAKE_COMMAND} -E copy "${BOOST_ATOMIC_LIB_PATH}" "$<TARGET_FILE_DIR:crown-wallet-gui>/../Frameworks/"
                                COMMENT "Copying libboost_atomic-mt.dylib"
             )
         endif()
@@ -42,15 +42,15 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         if(CODESIGN_EXECUTABLE)
             add_custom_command(TARGET deploy
                             POST_BUILD
-                            COMMAND "${CODESIGN_EXECUTABLE}" --force --deep --sign - "$<TARGET_FILE_DIR:monero-wallet-gui>/../.."
+                            COMMAND "${CODESIGN_EXECUTABLE}" --force --deep --sign - "$<TARGET_FILE_DIR:crown-wallet-gui>/../.."
                             COMMENT "Running codesign..."
             )
         endif()
 
     elseif(WIN32)
         find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
-        add_custom_command(TARGET monero-wallet-gui POST_BUILD
-                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
+        add_custom_command(TARGET crown-wallet-gui POST_BUILD
+                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:crown-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
                            COMMENT "Running windeployqt..."
         )
         set(WIN_DEPLOY_DLLS
@@ -106,7 +106,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         list(TRANSFORM WIN_DEPLOY_DLLS PREPEND "$ENV{MSYSTEM_PREFIX}/bin/")
         add_custom_command(TARGET deploy
                            POST_BUILD
-                           COMMAND ${CMAKE_COMMAND} -E copy ${WIN_DEPLOY_DLLS} "$<TARGET_FILE_DIR:monero-wallet-gui>"
+                           COMMAND ${CMAKE_COMMAND} -E copy ${WIN_DEPLOY_DLLS} "$<TARGET_FILE_DIR:crown-wallet-gui>"
                            COMMENT "Copying DLLs to target folder"
         )
     endif()
