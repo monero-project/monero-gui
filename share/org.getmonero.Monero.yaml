@@ -20,7 +20,7 @@ cleanup:
   - '*.a'
   - '*.la'
 
-command: monero-wallet-gui
+command: crown-wallet-gui
 modules:
   - name: protobuf
     buildsystem: cmake-ninja
