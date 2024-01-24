@@ -18,16 +18,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>monero-wallet-gui</string>
+  <string>crown-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Monero GUI</string>
+  <string>Crown GUI</string>
 
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright © 2014-2020 The Monero Project</string>
+  <string>Copyright © 2014-2020 The Crown Card Project</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.monero-project.monero-wallet-gui</string>
+  <string>org.crown-project.crown-wallet-gui</string>
 
   <key>CFBundleVersion</key>
   <string>@VERSION_LONG@</string>
