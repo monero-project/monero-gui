@@ -1,10 +1,10 @@
 ; Monero Fluorine Fermi GUI Wallet Installer for Windows
 ; Copyright (c) 2017-2020, The Monero Project
 ; See LICENSE
-#define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
+#define GuiVersion GetFileVersion("bin\crown-wallet-gui.exe")
 
 [Setup]
-AppName=Monero GUI Wallet
+AppName=Crown GUI Wallet
 ; For InnoSetup this is the property that uniquely identifies the application as such
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
