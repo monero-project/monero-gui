@@ -230,7 +230,7 @@ Rectangle {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return appWindow.fiatApiCurrencySymbol();
                         } else {
-                            return "XMR"
+                            return "CRN"
                         }
                     }
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
