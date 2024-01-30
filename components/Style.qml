@@ -100,7 +100,7 @@ QtObject {
     property string _b_inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.40)
 
     property string _b_buttonBackgroundColor: "#c4942e"
-    property string _b_buttonBackgroundColorHover: "#E65E00"
+    property string _b_buttonBackgroundColorHover: "#c4942e"
     property string _b_buttonBackgroundColorDisabled: "#707070"
     property string _b_buttonBackgroundColorDisabledHover: "#808080"
     property string _b_buttonInlineBackgroundColor: "#707070"
@@ -162,7 +162,7 @@ QtObject {
     property string _w_inputBorderColorInvalid: Qt.rgba(255, 0, 0, 0.50)
 
     property string _w_buttonBackgroundColor: "#c4942e"
-    property string _w_buttonBackgroundColorHover: "#E65E00"
+    property string _w_buttonBackgroundColorHover: "#c4942e"
     property string _w_buttonBackgroundColorDisabled: "#bbbbbb"
     property string _w_buttonBackgroundColorDisabledHover: "#D1D1D1"
     property string _w_buttonInlineBackgroundColor: "#d9d9d9"
