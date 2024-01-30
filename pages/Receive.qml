@@ -329,7 +329,7 @@ Rectangle {
                 MoneroComponents.Label {
                     Layout.bottomMargin: 3
                     fontSize: 14
-                    text: "XMR"
+                    text: "CRN"
                 }
 
                 MoneroComponents.Label {
