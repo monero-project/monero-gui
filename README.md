@@ -87,7 +87,7 @@ Status of the translations:
 
 Packages are available for
 * Arch Linux: [monero-gui](https://archlinux.org/packages/extra/x86_64/monero-gui/)
-* Void Linux: `xbps-install -S monero-gui`
+* NixOS: `nix-shell -p monero-gui`
 * Flatpak: [Monero GUI](https://flathub.org/apps/details/org.getmonero.Monero)
 * GuixSD: `guix package -i monero-gui`
 * macOS (homebrew): `brew install --cask monero-wallet`
