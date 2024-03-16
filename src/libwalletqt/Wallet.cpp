@@ -529,6 +529,64 @@ bool Wallet::scanTransactions(const QVector<QString> &txids)
     return m_walletImpl->scanTransactions(c);
 }
 
+void Wallet::setupBackgroundSync(const Wallet::BackgroundSyncType background_sync_type, const QString &wallet_password)
+{
+    qDebug() << "Setting up background sync";
+    bool refreshEnabled = m_refreshEnabled;
+    pauseRefresh();
+
+    // run inside scheduler because of lag when stopping/starting refresh
+    m_scheduler.run([this, refreshEnabled, background_sync_type, &wallet_password] {
+        m_walletImpl->setupBackgroundSync(
+            static_cast<Monero::Wallet::BackgroundSyncType>(background_sync_type),
+            wallet_password.toStdString(),
+            Monero::optional<std::string>());
+        if (refreshEnabled)
+            startRefresh();
+        emit backgroundSyncSetup();
+    });
+}
+
+Wallet::BackgroundSyncType Wallet::getBackgroundSyncType() const
+{
+    return static_cast<BackgroundSyncType>(m_walletImpl->getBackgroundSyncType());
+}
+
+bool Wallet::isBackgroundWallet() const
+{
+    return m_walletImpl->isBackgroundWallet();
+}
+
+void Wallet::startBackgroundSync()
+{
+    qDebug() << "Starting background sync";
+    bool refreshEnabled = m_refreshEnabled;
+    pauseRefresh();
+
+    // run inside scheduler because of lag when stopping/starting refresh
+    m_scheduler.run([this, refreshEnabled] {
+        m_walletImpl->startBackgroundSync();
+        if (refreshEnabled)
+            startRefresh();
+        emit backgroundSyncStarted();
+    });
+}
+
+void Wallet::stopBackgroundSync(const QString &password)
+{
+    qDebug() << "Stopping background sync";
+    bool refreshEnabled = m_refreshEnabled;
+    pauseRefresh();
+
+    // run inside scheduler because of lag when stopping/starting refresh
+    m_scheduler.run([this, password, refreshEnabled] {
+        m_walletImpl->stopBackgroundSync(password.toStdString());
+        if (refreshEnabled)
+            startRefresh();
+        emit backgroundSyncStopped();
+    });
+}
+
 bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 {
     refreshingSet(true);

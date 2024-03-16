@@ -112,6 +112,14 @@ public:
 
     Q_ENUM(ConnectionStatus)
 
+    enum BackgroundSyncType {
+        BackgroundSync_Off            = Monero::Wallet::BackgroundSync_Off,
+        BackgroundSync_ReusePassword  = Monero::Wallet::BackgroundSync_ReusePassword,
+        BackgroundSync_CustomPassword = Monero::Wallet::BackgroundSync_CustomPassword
+    };
+
+    Q_ENUM(BackgroundSyncType)
+
     //! returns mnemonic seed
     QString getSeed() const;
 
@@ -214,6 +222,16 @@ public:
 
     //! scan transactions
     Q_INVOKABLE bool scanTransactions(const QVector<QString> &txids);
+
+    Q_INVOKABLE void setupBackgroundSync(const BackgroundSyncType background_sync_type, const QString &wallet_password);
+    Q_INVOKABLE BackgroundSyncType getBackgroundSyncType() const;
+    Q_INVOKABLE bool isBackgroundWallet() const;
+
+    //! scan in the background with just the view key (wipe the spend key)
+    Q_INVOKABLE void startBackgroundSync();
+
+    //! bring the spend key back and process background synced txs
+    Q_INVOKABLE void stopBackgroundSync(const QString &password);
 
     //! refreshes the wallet
     Q_INVOKABLE bool refresh(bool historyAndSubaddresses = true);
@@ -369,6 +387,9 @@ signals:
     void moneyReceived(const QString &txId, quint64 amount);
     void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height, quint64 targetHeight);
+    void backgroundSyncSetup() const;
+    void backgroundSyncStarted() const;
+    void backgroundSyncStopped() const;
     void addressBookChanged() const;
     void historyModelChanged() const;
     void walletCreationHeightChanged();
