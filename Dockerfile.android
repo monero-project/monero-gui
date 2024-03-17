@@ -119,7 +119,7 @@ RUN wget -q https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION_D
 
 ARG OPENSSL_VERSION=1.1.1u
 ARG OPENSSL_HASH=e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6
-RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
+RUN wget -q https://www.openssl.org/source/old/1.1.1/openssl-${OPENSSL_VERSION}.tar.gz \
     && echo "${OPENSSL_HASH}  openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf openssl-${OPENSSL_VERSION}.tar.gz \
     && rm openssl-${OPENSSL_VERSION}.tar.gz \
