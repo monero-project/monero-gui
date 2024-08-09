@@ -68,41 +68,6 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     return true;
 }
 
-QPixmap MacOSHelper::screenshot()
-{
-    std::unordered_set<uintptr_t> appWindowIds;
-    for (NSWindow *window in [NSApp windows])
-    {
-        appWindowIds.insert((uintptr_t)[window windowNumber]);
-    }
-
-    CFArrayRef onScreenWindows = CGWindowListCreate(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
-    const auto onScreenWindowsClenaup = sg::make_scope_guard([&onScreenWindows]() {
-        CFRelease(onScreenWindows);
-    });
-
-    CFMutableArrayRef foreignWindows = CFArrayCreateMutable(NULL, CFArrayGetCount(onScreenWindows), NULL);
-    const auto foreignWindowsClenaup = sg::make_scope_guard([&foreignWindows]() {
-        CFRelease(foreignWindows);
-    });
-
-    for (CFIndex index = 0, count = CFArrayGetCount(onScreenWindows); index < count; ++index)
-    {
-        const uintptr_t windowId = reinterpret_cast<const uintptr_t>(CFArrayGetValueAtIndex(onScreenWindows, index));
-        if (appWindowIds.find(windowId) == appWindowIds.end())
-        {
-            CFArrayAppendValue(foreignWindows, reinterpret_cast<const void *>(windowId));
-        }
-    }
-
-    CGImageRef image = CGWindowListCreateImageFromArray(CGRectInfinite, foreignWindows, kCGWindowListOptionAll);
-    const auto imageClenaup = sg::make_scope_guard([&image]() {
-        CFRelease(image);
-    });
-
-    return QtMac::fromCGImageRef(image);
-}
-
 QString MacOSHelper::bundlePath()
 {
     NSBundle *main = [NSBundle mainBundle];

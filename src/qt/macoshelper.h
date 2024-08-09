@@ -38,7 +38,6 @@ class MacOSHelper
 public:
     static bool isCapsLock();
     static bool openFolderAndSelectItem(const QUrl &path);
-    static QPixmap screenshot();
     static QString bundlePath();
     static void disableWindowTabbing();
 };

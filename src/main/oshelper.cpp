@@ -70,9 +70,6 @@ namespace
 
 QPixmap screenshot()
 {
-#ifdef Q_OS_MAC
-    return MacOSHelper::screenshot();
-#else
     std::unordered_set<QWindow *> hidden;
     const QWindowList windows = QGuiApplication::allWindows();
     for (QWindow *window : windows)
@@ -91,7 +88,6 @@ QPixmap screenshot()
     });
 
     return QGuiApplication::primaryScreen()->grabWindow(0);
-#endif
 }
 
 } // namespace
