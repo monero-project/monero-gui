@@ -96,7 +96,7 @@ QString xdgMime(){
         "X-GNOME-FullName=Monero-GUI\n"
         "Comment=Monero GUI\n"
         "Keywords=Monero;\n"
-        "Exec=%1 %u\n"
+        "Exec=\"%1\" %u\n"
         "Terminal=false\n"
         "Type=Application\n"
         "Icon=monero\n"
