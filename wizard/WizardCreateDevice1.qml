@@ -58,6 +58,7 @@ Rectangle {
         ListElement { column1: "Ledger Stax"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
         ListElement { column1: "Trezor Safe 3"; column2: "Trezor";}
+        ListElement { column1: "Trezor Safe 5"; column2: "Trezor";}
     }
 
     ColumnLayout {
@@ -169,6 +170,8 @@ Rectangle {
                                         return "qrc:///images/trezorT.png";
                                     } else if (trezorType == "Trezor Safe 3") {
                                         return "qrc:///images/trezor3.png";
+                                    } else if (trezorType == "Trezor Safe 5") {
+                                        return "qrc:///images/trezor5.png";
                                     }
                                 } else if (hardwareWalletType == "Ledger") {
                                     if (ledgerType == "Ledger Nano S") {
