@@ -136,6 +136,6 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        i2pdManager.i2pdStatus.connect(onI2PDStatus);
+        //i2pdManager.i2pdStatus.connect(onI2PDStatus); // figure out a way to keep up to date on the status
     }
 }
