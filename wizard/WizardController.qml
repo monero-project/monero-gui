@@ -149,6 +149,7 @@ Rectangle {
         property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
+        property WizardProtectConnection1 wizardProtectConnection1View: WizardProtectConnection1 { }
         property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
         anchors.fill: parent
 
@@ -241,6 +242,10 @@ Rectangle {
                 name: "wizardModeRemoteNodeWarning"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeRemoteNodeWarningView }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeRemoteNodeWarningView.pageHeight + 80 }
+            }, State {
+                name: "wizardProtectConnection1"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardProtectConnection1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardProtectConnection1View.pageHeight + 80 }
             }, State {
                 name: "wizardModeBootstrap"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }

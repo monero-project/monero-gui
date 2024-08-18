@@ -714,6 +714,39 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
+        if (persistentSettings.protectConnectionMode > 0) {
+            var defaultArgs = ["--detach","--data-dir","--bootstrap-daemon-address","--prune-blockchain","--no-sync","--check-updates","--non-interactive","--max-concurrency","--tx-proxy=i2p,127.0.0.1:4447"]
+            var customDaemonArgsArray = flags.split(' ');
+            var flag = "";
+            var allArgs = [];
+            var i2pdArgs = ["--tx-proxy i2p,127.0.0.1:4447"];
+            //create an array (allArgs) of ['--arg value','--arg2','--arg3']
+            for (let i = 0; i < customDaemonArgsArray.length; i++) {
+                if(!customDaemonArgsArray[i].startsWith("--")) {
+                    flag += " " + customDaemonArgsArray[i]
+                } else {
+                    if(flag){
+                        allArgs.push(flag)
+                    }
+                    flag = customDaemonArgsArray[i]
+                }
+            }
+            allArgs.push(flag)
+            //pop from allArgs if value is inside the deleteme array (defaultArgs)
+            allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
+            //append required i2pd flags
+            for (let i = 0; i < i2pdArgs.length; i++) {
+                if(!allArgs.includes(i2pdArgs[i])) {
+                    allArgs.push(i2pdArgs[i])
+                    continue
+                }
+            }
+
+            flags = allArgs.join(" ");
+
+            i2pdManager.start();
+        }
+
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
@@ -729,6 +762,9 @@ ApplicationWindow {
             daemonStartStopInProgress = 0;
             if (splash) {
                 hideProcessingSplash();
+            }
+            if (persistentSettings.protectConnectionMode > 0) {
+                i2pdManager.stop();
             }
             callback(result);
         });
@@ -1450,6 +1486,8 @@ ApplicationWindow {
 
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
+
+        property int protectConnectionMode: 0
         function getProxyAddress() {
             if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
                 return "";
@@ -2176,6 +2214,7 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
+        i2pdManager.exit();
         closeWallet(Qt.quit);
     }
 
