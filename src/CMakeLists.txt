@@ -159,5 +159,5 @@ add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} 
 include(Deploy)
 
 install(TARGETS monero-wallet-gui
-    DESTINATION bin
+    DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
