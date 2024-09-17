@@ -91,7 +91,7 @@ jobs:
     - name: create .tar
       run: tar -cf monero-wallet-gui.tar monero-wallet-gui.app
       working-directory: build/bin
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
         path: build/bin/monero-wallet-gui.tar
@@ -121,7 +121,7 @@ jobs:
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui
     - name: test qml
       run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui --test-qml
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
         path: |
@@ -149,7 +149,7 @@ jobs:
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j3'
     - name: sha256sum
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monero-wallet-gui.exe
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
         path: |
@@ -177,7 +177,7 @@ jobs:
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -e THREADS=3 monero:build-env-android
     - name: Remove obsolete docker layers
       run: docker images -a | grep none | awk '{ print $3; }' | xargs docker rmi || true
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
@@ -195,7 +195,7 @@ jobs:
         export OUTPUT="$VERSION.tar"
         echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
         /home/runner/.local/bin/git-archive-all --prefix "$VERSION/" --force-submodules "$OUTPUT"
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ env.OUTPUT }}
         path: /home/runner/work/monero-gui/monero-gui/${{ env.OUTPUT }}
