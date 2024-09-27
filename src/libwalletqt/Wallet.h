@@ -205,10 +205,14 @@ public:
     Q_INVOKABLE void refreshHeightAsync();
 
     //! export/import key images
+    Q_INVOKABLE QByteArray exportKeyImagesAsString(bool all = false);
+    Q_INVOKABLE bool importKeyImagesFromString(const QByteArray &data);
     Q_INVOKABLE bool exportKeyImages(const QString& path, bool all = false);
     Q_INVOKABLE bool importKeyImages(const QString& path);
 
     //! export/import outputs
+    Q_INVOKABLE QByteArray exportOutputsAsString(bool all = false) const;
+    Q_INVOKABLE bool importOutputsFromString(const QByteArray& data);
     Q_INVOKABLE bool exportOutputs(const QString& path, bool all = false);
     Q_INVOKABLE bool importOutputs(const QString& path);
 
@@ -245,13 +249,18 @@ public:
     Q_INVOKABLE void createSweepUnmixableTransactionAsync();
 
     //! Sign a transfer from file
+    Q_INVOKABLE UnsignedTransaction * loadTxString(const QByteArray &data);
     Q_INVOKABLE UnsignedTransaction * loadTxFile(const QString &fileName);
 
     //! Submit a transfer from file
+    Q_INVOKABLE bool submitTxString(const QByteArray &data) const;
     Q_INVOKABLE bool submitTxFile(const QString &fileName) const;
 
     //! asynchronous transaction commit
     Q_INVOKABLE void commitTransactionAsync(PendingTransaction * t);
+
+    //! asynchronous transaction commit for export
+    Q_INVOKABLE void commitTransactionForExportAsync(PendingTransaction * t);
 
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
@@ -376,6 +385,7 @@ signals:
     void deviceButtonPressed();
     void walletPassphraseNeeded(bool onDevice);
     void transactionCommitted(bool status, PendingTransaction *t, const QStringList& txid);
+    void transactionCommittedForExport(const QByteArray &txAsString, PendingTransaction *t, const QStringList& txid);
     void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
     void deviceShowAddressShowed();
 

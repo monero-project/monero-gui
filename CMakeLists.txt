@@ -12,6 +12,7 @@ option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
+option(WITH_OTS_UR "Enable offline transaction signing via UR" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
@@ -80,8 +81,11 @@ include(VersionGui)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
-if(WITH_SCANNER)
+if(WITH_SCANNER AND NOT WITH_OTS_UR)
     add_definitions(-DWITH_SCANNER)
+endif()
+if(WITH_OTS_UR)
+    add_definitions(-DWITH_OTS_UR)
 endif()
 
 if(WITH_DESKTOP_ENTRY)
@@ -122,7 +126,7 @@ set(QT5_LIBRARIES
   Qt5Xml
 )
 
-if(WITH_SCANNER)
+if(WITH_SCANNER OR OTS_UR_WITH_QTQUICK)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
 
@@ -241,7 +245,7 @@ if(STATIC)
     modelsplugin
   )
 
-  if(WITH_SCANNER)
+  if(WITH_SCANNER OR OTS_UR_WITH_QTQUICK)
     list(APPEND QT5_EXTRA_LIBRARIES_LIST
       declarative_multimedia
       Qt5MultimediaQuick

@@ -65,6 +65,7 @@ public:
     QString confirmationMessage() const;
     quint64 minMixinCount() const;
     Q_INVOKABLE bool sign(const QString &fileName) const;
+    Q_INVOKABLE QByteArray signAsString() const;
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:

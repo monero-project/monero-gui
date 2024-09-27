@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtMultimedia 5.4
 import QtQuick.Dialogs 1.2
+import "../components" as MoneroComponents
 import moneroComponents.QRCodeScanner 1.0
 
 Rectangle {
@@ -51,7 +52,7 @@ Rectangle {
             name: "Capture"
             StateChangeScript {
                 script: {
-		    root.visible = true
+                    root.visible = true
                     camera.captureMode = Camera.CaptureStillImage
                     camera.cameraState = Camera.ActiveState
                     camera.start()
@@ -64,7 +65,7 @@ Rectangle {
             StateChangeScript {
                 script: {
                     camera.stop()
-		    root.visible = false
+                    root.visible = false
                     finder.enabled = false
                     camera.cameraState = Camera.UnloadedState
                 }
@@ -133,6 +134,17 @@ Rectangle {
                 root.state = "Stopped"
             }
         }
+    }
+
+    MoneroComponents.StandardButton {
+        id: btnClose
+        text: qsTr("Cancel")
+        z: viewfinder.z + 1
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        anchors.topMargin: 20
+        onClicked: root.state = "Stopped"
     }
 
     MessageDialog {
