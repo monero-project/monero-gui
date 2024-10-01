@@ -67,6 +67,15 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: useUrCheckBox
+            visible: builtWithOtsUr
+            enabled: builtWithOtsUr
+            checked: persistentSettings.useURCode && builtWithOtsUr
+            onClicked: persistentSettings.useURCode = !persistentSettings.useURCode
+            text: qsTr("Use UR Code instead of files for cold wallet") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             checked: persistentSettings.displayWalletNameInTitleBar
             onClicked: persistentSettings.displayWalletNameInTitleBar = !persistentSettings.displayWalletNameInTitleBar
             text: qsTr("Display wallet name in title bar") + translationManager.emptyString

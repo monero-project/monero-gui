@@ -152,8 +152,9 @@ Rectangle {
                         seedRadioButton.checked = false;
                         keysRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'qr';
-                        cameraUi.state = "Capture";
-                        cameraUi.qrcode_decoded.connect(Wizard.updateFromQrCode);
+                        urScannerUi.wallet.connect(wizardRestoreWallet1.onWallet);
+                        urScannerUi.canceled.connect(wizardRestoreWallet1.onScanCancel);
+                        urScannerUi.scanWallet()
                     }
                 }
             }
@@ -326,6 +327,46 @@ Rectangle {
         }
     }
 
+    function disconnectScanner() {
+        urScannerUi.wallet.disconnect(onWallet)
+        urScannerUi.canceled.disconnect(onScanCancel)
+    }
+
+    function onScanCancel() {
+	disconnectScanner()
+    }
+
+    function onWallet(walletData) {
+        disconnectScanner()
+        reset()
+        console.warn(walletData)
+        if(!walletData || !walletData.isValid) {
+            keysRadioButton.clicked()
+            return
+        }
+        if(walletData.isSeed) {
+            seedRadioButton.clicked()
+            seedInput.text = walletData.mnemonicSeed
+            restoreHeight.text = walletData.height
+            return
+        }
+        keysRadioButton.clicked()
+        addressLine.text = walletData.address
+        viewKeyLine.text = walletData.viewKey
+        spendKeyLine.text = walletData.spendKey
+        restoreHeight.text = walletData.height
+    }
+
+    function reset() {
+        seedInput.text = "";
+        seedOffsetCheckbox.checked = false;
+        seedOffset.text = "";
+        addressLine.text = "";
+        spendKeyLine.text = "";
+        viewKeyLine.text = "";
+        restoreHeight.text = "";
+    }
+
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
             // cleanup
@@ -333,13 +374,7 @@ Rectangle {
             seedRadioButton.checked = true;
             keysRadioButton.checked = false;
             qrRadioButton.checked = false;
-            seedInput.text = "";
-            seedOffsetCheckbox.checked = false;
-            seedOffset.text = "";
-            addressLine.text = "";
-            spendKeyLine.text = "";
-            viewKeyLine.text = "";
-            restoreHeight.text = "";
+            reset()
         }
     }
 }

@@ -506,13 +506,31 @@ bool Wallet::exportKeyImages(const QString& path, bool all)
     return m_walletImpl->exportKeyImages(path.toStdString(), all);
 }
 
+QByteArray Wallet::exportKeyImagesAsString(bool all)
+{
+    return QByteArray::fromStdString(m_walletImpl->exportKeyImagesAsString(all));
+}
+
 bool Wallet::importKeyImages(const QString& path)
 {
     return m_walletImpl->importKeyImages(path.toStdString());
 }
 
+bool Wallet::importKeyImagesFromString(const QByteArray& data)
+{
+    return m_walletImpl->importKeyImagesFromString(data.toStdString());
+}
+
+QByteArray Wallet::exportOutputsAsString(bool all) const {
+    return QByteArray::fromStdString(m_walletImpl->exportOutputsAsString(all));
+}
+
 bool Wallet::exportOutputs(const QString& path, bool all) {
     return m_walletImpl->exportOutputs(path.toStdString(), all);
+}
+
+bool Wallet::importOutputsFromString(const QByteArray& data) {
+    return m_walletImpl->importOutputsFromString(data.toStdString());
 }
 
 bool Wallet::importOutputs(const QString& path) {
@@ -650,6 +668,14 @@ UnsignedTransaction * Wallet::loadTxFile(const QString &fileName)
     return result;
 }
 
+UnsignedTransaction * Wallet::loadTxString(const QByteArray &data)
+{
+    qDebug() << "Trying to sign";
+    Monero::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTxFromString(data.toStdString());
+    UnsignedTransaction * result = new UnsignedTransaction(ptImpl, m_walletImpl, this);
+    return result;
+}
+
 bool Wallet::submitTxFile(const QString &fileName) const
 {
     qDebug() << "Trying to submit " << fileName;
@@ -659,11 +685,25 @@ bool Wallet::submitTxFile(const QString &fileName) const
     return m_walletImpl->importKeyImages(fileName.toStdString() + "_keyImages");
 }
 
+bool Wallet::submitTxString(const QByteArray &data) const
+{
+    qDebug() << "Trying to submit";
+    return m_walletImpl->submitTransactionFromString(data.toStdString()); // TODO: Why importing key images? This had should be done before... (remove this comment after clarification)
+}
+
 void Wallet::commitTransactionAsync(PendingTransaction *t)
 {
     m_scheduler.run([this, t] {
         auto txIdList = t->txid();  // retrieve before commit
         emit transactionCommitted(t->commit(), t, txIdList);
+    });
+}
+
+void Wallet::commitTransactionForExportAsync(PendingTransaction *t)
+{
+    m_scheduler.run([this, t] {
+        auto txIdList = t->txid();  // retrieve before commit
+        emit transactionCommittedForExport(t->commitAsString(), t, txIdList);
     });
 }
 

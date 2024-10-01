@@ -229,6 +229,8 @@
         <file>images/world-flags-globe.png</file>
         <file>images/restore-wallet-from-hardware@2x.png</file>
         <file>images/restore-wallet-from-hardware.png</file>
+        <file>images/restore-wallet-from-qr@2x.png</file>
+        <file>images/restore-wallet-from-qr.png</file>
         <file>images/open-wallet-from-file@2x.png</file>
         <file>images/open-wallet-from-file.png</file>
         <file>images/open-wallet-from-file-mainnet@2x.png</file>
@@ -298,5 +300,7 @@
         <file>wizard/SeedListItem.qml</file>
         <file>wizard/SeedListGrid.qml</file>
         <file>wizard/template.pdf</file>
+        <file>components/UrCode.qml</file>
+        <file>components/UrCodeScanner.qml</file>
     </qresource>
 </RCC>

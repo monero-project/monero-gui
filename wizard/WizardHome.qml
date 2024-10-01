@@ -155,6 +155,26 @@ Rectangle {
                 }
             }
 
+            Rectangle {
+                Layout.preferredHeight: 1
+                Layout.topMargin: 3
+                Layout.bottomMargin: 3
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            WizardMenuItem {
+                headerText: qsTr("Restore a view wallet scannig a QR code") + translationManager.emptyString
+                bodyText: qsTr("Import an existing wallet from a monero URI or json representation of a wallet.") + translationManager.emptyString
+                imageIcon: "qrc:///images/restore-wallet-from-qr.png"
+
+                onMenuClicked: {
+                    urScannerUi.wallet.connect(wizardHome.onViewWalletFromQr)
+                    urScannerUi.scanWallet()
+                }
+            }
+
             RowLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 16
@@ -250,6 +270,25 @@ Rectangle {
             duration: 200;
             easing.type: Easing.InCubic;
         }
+    }
+
+    function onViewWalletFromQr(walletData) {
+        disconnectScanner();
+        console.warn("walletData: " + walletData)
+        if(!walletData || !walletData.isViewOnly)
+            return // handle only view only wallets here
+        wizardController.restart();
+        wizardStateView.state = "wizardRestoreWallet1"
+        wizardStateView.wizardRestoreWallet1View.onWallet(walletData)
+    }
+
+    function onViewWalletScanAbort() {
+        disconnectScanner();
+    }
+
+    function disconnectScanner() {
+        urScannerUi.wallet.disconnect(wizardHome.onViewWalletFromQr)
+        urScannerUi.canceled.disconnect(wizardHome.onViewWalletScanAbort)
     }
 
     function onPageCompleted(){
