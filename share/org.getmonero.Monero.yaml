@@ -1,11 +1,11 @@
 app-id: org.getmonero.Monero
 runtime: org.kde.Platform
-runtime-version: 5.15-22.08
+runtime-version: 5.15-23.08
 sdk: org.kde.Sdk
 finish-args:
   - --share=network
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=wayland
   - --device=all
   - --filesystem=~/Monero:create
@@ -23,14 +23,10 @@ cleanup:
 command: monero-wallet-gui
 modules:
   - name: protobuf
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
     sources:
-      - type: git
-        url: https://github.com/protocolbuffers/protobuf
-        tag: v22.4
-        commit: 40e1daca18708c21c7edf07c489a688355bd297b
+      - type: archive
+        url: https://github.com/protocolbuffers/protobuf/releases/download/v21.3/protobuf-cpp-3.21.3.tar.gz
+        sha256: c98a4f17ed57e9e4dafc4a52e76ee012f9a6a13750488b20b4c370a3eb1561fc
 
   - name: boost
     buildsystem: simple
@@ -40,28 +36,28 @@ modules:
       - ./b2 -j$FLATPAK_BUILDER_N_JOBS install variant=release --layout=system
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.gz
-        sha256: 66a469b6e608a51f8347236f4912e27dc5c60c60d7d53ae9bfe4683316c6f04c
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.84.0/source/boost_1_84_0.tar.gz
+        sha256: a5800f405508f5df8114558ca9855d2640a2de8f0445f051fa1c7c3383045724
 
   - name: libunbound
     config-opts:
       - --with-libunbound-only
     sources:
       - type: archive
-        url: https://nlnetlabs.nl/downloads/unbound/unbound-1.17.1.tar.gz
-        sha256: ee4085cecce12584e600f3d814a28fa822dfaacec1f94c84bfd67f8a5571a5f4
+        url: https://nlnetlabs.nl/downloads/unbound/unbound-1.20.0.tar.gz
+        sha256: 56b4ceed33639522000fd96775576ddf8782bb3617610715d7f1e777c5ec1dbf
 
   - name: libsodium
     sources:
       - type: archive
-        url: https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz
-        sha256: 6f504490b342a4f8a4c4a02fc9b866cbef8622d5df4e5452b46be121e46636c1
+        url: https://github.com/jedisct1/libsodium/releases/download/1.0.20-RELEASE/libsodium-1.0.20.tar.gz
+        sha256: ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19
 
   - name: libusb
     sources:
       - type: archive
-        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
-        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+        url: https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2
+        sha256: ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
 
   - name: hidapi
     buildsystem: cmake-ninja
@@ -69,8 +65,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: https://github.com/libusb/hidapi/archive/hidapi-0.13.1.tar.gz
-        sha256: 476a2c9a4dc7d1fc97dd223b84338dbea3809a84caea2dcd887d9778725490e3
+        url: https://github.com/libusb/hidapi/archive/hidapi-0.14.0.tar.gz
+        sha256: a5714234abe6e1f53647dd8cba7d69f65f71c558b7896ed218864ffcf405bcbd
 
   - name: libzmq
     config-opts:
@@ -78,8 +74,8 @@ modules:
       - --disable-Werror
     sources:
       - type: archive
-        url: https://github.com/zeromq/libzmq/releases/download/v4.3.4/zeromq-4.3.4.tar.gz
-        sha256: c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5
+        url: https://github.com/zeromq/libzmq/releases/download/v4.3.5/zeromq-4.3.5.tar.gz
+        sha256: 6653ef5910f17954861fe72332e68b03ca6e4d9c7160eb3a8de5a5a913bfab43
 
   - name: libgss
     sources:
@@ -93,8 +89,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: https://github.com/libuv/libuv/archive/v1.44.2.tar.gz
-        sha256: e6e2ba8b4c349a4182a33370bb9be5e23c51b32efb9b9e209d0e8556b73a48da
+        url: https://github.com/libuv/libuv/archive/v1.47.0.tar.gz
+        sha256: d50af7e6d72526db137e66fad812421c8a1cae09d146b0ec2bb9a22c5f23ba93
 
   - name: p2pool
     buildsystem: cmake-ninja
@@ -104,8 +100,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SChernykh/p2pool
-        tag: v3.2
-        commit: 92827035e07ff15da6b7645a332f3e59aa0ab1c4
+        tag: v4.0
+        commit: 17de2ff4bc65898b64a72498418df5cf2760ce72
     post-install:
       - install -Dm755 p2pool $FLATPAK_DEST/bin/p2pool
 
@@ -130,4 +126,5 @@ modules:
     post-install:
       - install -Dpm644 share/org.getmonero.Monero.desktop $FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop
       - install -Dpm644 share/org.getmonero.Monero.metainfo.xml $FLATPAK_DEST/share/metainfo/$FLATPAK_ID.metainfo.xml
-      - for x in 16 24 32 48 64 96 128 256; do install -Dpm644 images/appicons/${x}x${x}.png $FLATPAK_DEST/share/icons/hicolor/${x}x${x}/apps/$FLATPAK_ID.png; done
+      - for x in 16 24 32 48 64 96 128 256; do install -Dpm644 images/appicons/${x}x${x}.png
+        $FLATPAK_DEST/share/icons/hicolor/${x}x${x}/apps/$FLATPAK_ID.png; done

@@ -9,28 +9,34 @@ jobs:
     name: Part 1/3
     if: github.repository == 'monero-project/monero-gui'
     runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-22.08
-      options: --privileged
     strategy:
       matrix:
         arch: [x86_64, aarch64]
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-5.15-23.08
+      options: --privileged
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
-    - name: Install deps
-      run: dnf -y install docker
+    - name: Install Docker
+      if: ${{ matrix.arch != 'x86_64' }}
+      run: |
+        curl https://download.docker.com/linux/static/stable/x86_64/docker-27.0.3.tgz --output ./docker.tgz
+        tar xzvf docker.tgz
+        mv docker/* /usr/bin
 
     - name: Setup QEMU
-      uses: docker/setup-qemu-action@v2
-      with:
-        platforms: arm64
+      if: ${{ matrix.arch != 'x86_64' }}
+      uses: docker/setup-qemu-action@v3
+
+    - name: Validate Flatpak manifest
+      run: flatpak-builder-lint manifest share/org.getmonero.Monero.yaml
 
     - name: Build flatpak
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      uses: flathub-infra/flatpak-github-actions/flatpak-builder@b6c92176b7f578aedd80cac74cd8f0336f618e89
       env:
         FLATPAK_BUILDER_N_JOBS: 3
       with:
@@ -38,12 +44,13 @@ jobs:
         arch: ${{ matrix.arch }}
         cache: false
         stop-at-module: boost
+        branch: stable
 
     - name: Tar flatpak-builder
       run: tar -cvf flatpak-builder.tar .flatpak-builder
 
     - name: Save flatpak-builder
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: flatpak-builder-${{ matrix.arch }}
         path: flatpak-builder.tar
@@ -53,26 +60,29 @@ jobs:
     if: github.repository == 'monero-project/monero-gui'
     needs: part1
     runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-22.08
-      options: --privileged
     strategy:
       matrix:
         arch: [x86_64, aarch64]
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-5.15-23.08
+      options: --privileged
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Install deps
-      run: dnf -y install docker
+    - name: Install Docker
+      if: ${{ matrix.arch != 'x86_64' }}
+      run: |
+        curl https://download.docker.com/linux/static/stable/x86_64/docker-27.0.3.tgz --output ./docker.tgz
+        tar xzvf docker.tgz
+        mv docker/* /usr/bin
 
     - name: Setup QEMU
-      uses: docker/setup-qemu-action@v2
-      with:
-        platforms: arm64
+      if: ${{ matrix.arch != 'x86_64' }}
+      uses: docker/setup-qemu-action@v3
 
     - name: Restore flatpak-builder
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: flatpak-builder-${{ matrix.arch }}
 
@@ -80,7 +90,7 @@ jobs:
       run: tar -xvf flatpak-builder.tar
 
     - name: Build flatpak
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      uses: flathub-infra/flatpak-github-actions/flatpak-builder@b6c92176b7f578aedd80cac74cd8f0336f618e89
       env:
         FLATPAK_BUILDER_N_JOBS: 3
       with:
@@ -88,71 +98,88 @@ jobs:
         arch: ${{ matrix.arch }}
         cache: false
         stop-at-module: monero-gui
+        branch: stable
 
     - name: Tar flatpak-builder
       run: tar -cvf flatpak-builder.tar .flatpak-builder
 
     - name: Save flatpak-builder
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: flatpak-builder-${{ matrix.arch }}
         path: flatpak-builder.tar
+        overwrite: true
 
   part3:
     name: Part 3/3
     if: github.repository == 'monero-project/monero-gui'
     needs: [part1, part2]
     runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-22.08
-      options: --privileged
     strategy:
       matrix:
         arch: [x86_64, aarch64]
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-5.15-23.08
+      options: --privileged
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
+
+    - name: Install Docker
+      if: ${{ matrix.arch != 'x86_64' }}
+      run: |
+        curl https://download.docker.com/linux/static/stable/x86_64/docker-27.0.3.tgz --output ./docker.tgz
+        tar xzvf docker.tgz
+        mv docker/* /usr/bin
+
+    - name: Setup QEMU
+      if: ${{ matrix.arch != 'x86_64' }}
+      uses: docker/setup-qemu-action@v3
 
     - name: Add version and date
       run: |
         sed -i 's/<version>/${{ github.event.release.tag_name }}/g' $GITHUB_WORKSPACE/share/org.getmonero.Monero.metainfo.xml
         sed -i 's/<date>/'"$(date '+%F')"'/g' $GITHUB_WORKSPACE/share/org.getmonero.Monero.metainfo.xml
 
-    - name: Install deps
-      run: dnf -y install docker
-
-    - name: Setup QEMU
-      uses: docker/setup-qemu-action@v2
-      with:
-        platforms: arm64
-
     - name: Restore flatpak-builder
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: flatpak-builder-${{ matrix.arch }}
 
     - name: Untar flatpak-builder
       run: tar -xvf flatpak-builder.tar
 
+    - name: Delete flatpak-builder
+      uses: geekyeggo/delete-artifact@v5
+      with:
+        name: flatpak-builder-${{ matrix.arch }}
+
     - name: Build flatpak
-      uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      uses: flathub-infra/flatpak-github-actions/flatpak-builder@b6c92176b7f578aedd80cac74cd8f0336f618e89
       env:
         FLATPAK_BUILDER_N_JOBS: 3
       with:
         manifest-path: share/org.getmonero.Monero.yaml
         arch: ${{ matrix.arch }}
         cache: false
+        branch: stable
+        mirror-screenshots-url: https://dl.flathub.org/media
 
-    - name: Validate AppData
-      working-directory: flatpak_app/files/share/appdata
-      run: appstream-util validate org.getmonero.Monero.appdata.xml
+    - name: Validate AppStream
+      run: flatpak-builder-lint appstream flatpak_app/files/share/metainfo/org.getmonero.Monero.metainfo.xml
 
-    - name: Delete flatpak-builder
-      uses: geekyeggo/delete-artifact@v2
-      with:
-        name: flatpak-builder-${{ matrix.arch }}
+    - name: Verify Icon and Metadata in app-info
+      run: |
+        test -f flatpak_app/files/share/app-info/icons/flatpak/128x128/org.getmonero.Monero.png || { echo "::error::Missing 128x128 icon in app-info"; exit 1; }
+        test -f flatpak_app/files/share/app-info/xmls/org.getmonero.Monero.xml.gz || { echo "::error::Missing org.getmonero.Monero.xml.gz in app-info"; exit 1; }
+
+    - name: Validate build directory
+      run: flatpak-builder-lint builddir flatpak_app
+
+    - name: Validate repository
+      run: flatpak-builder-lint repo repo
 
     - name: Print hashes
       working-directory: flatpak_app/files/bin
@@ -166,9 +193,10 @@ jobs:
         echo "$ flatpak run --command=sha256sum org.getmonero.Monero /app/bin/monero-wallet-gui" >> $GITHUB_STEP_SUMMARY
         echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
-    - name: Publish to Flathub Beta
-      uses: flatpak/flatpak-github-actions/flat-manager@v6
+    - name: Publish to Flathub
+      uses: flathub-infra/flatpak-github-actions/flat-manager@6d0dd363260c9917f0bca469ec21370bb45a5b9f
       with:
         flat-manager-url: https://hub.flathub.org
-        repository: beta
-        token: ${{ secrets.FLATHUB_ }}
+        repository: stable
+        build-log-url: https://github.com/monero-project/monero-gui/actions/runs/${{ github.run_id }}
+        token: ${{ secrets.FLATHUB_TOKEN }}
