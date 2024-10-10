@@ -82,11 +82,13 @@ Rectangle {
                     btnNext.enabled = false;
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwField = "";
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwConfirmField = "";
-                    wizardController.recoveryWallet();
-                    wizardController.writeWallet(function() {
-                        wizardController.useMoneroClicked();
-                        btnNext.enabled = true;
-                    });
+                    var recoveryResult = wizardController.recoveryWallet();
+                    if (recoveryResult) {
+                        wizardController.writeWallet(function () {
+                            wizardController.useMoneroClicked();
+                        });
+                    }
+                    btnNext.enabled = true;
                 }
             }
         }
