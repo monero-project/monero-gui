@@ -21,7 +21,7 @@ jobs:
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
   build-ubuntu:
-    runs-on: ubuntu-latest
+    runs-on: mash-linux
     steps:
     - uses: actions/checkout@v1
       with:
@@ -45,7 +45,7 @@ jobs:
       run: xvfb-run -a build/release/bin/monero-wallet-gui --test-qml
 
   build-windows:
-    runs-on: windows-latest
+    runs-on: mash-windows
     defaults:
       run:
         shell: msys2 {0}
@@ -97,7 +97,7 @@ jobs:
         path: build/bin/monero-wallet-gui.tar
 
   docker-linux-static:
-    runs-on: ubuntu-20.04
+    runs-on: mash-linux
     steps:
     - uses: actions/checkout@v1
       with:
@@ -129,7 +129,7 @@ jobs:
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monerod
 
   docker-windows-static:
-    runs-on: ubuntu-20.04
+    runs-on: mash-linux
     steps:
     - uses: actions/checkout@v1
       with:

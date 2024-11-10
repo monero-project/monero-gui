@@ -115,7 +115,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j4'
+   docker run --rm -it -v D:/DevTools/monero-gui:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j4'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* `4` - number of CPU threads to use
