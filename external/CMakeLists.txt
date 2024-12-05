@@ -6,3 +6,6 @@ add_library(quirc STATIC
 )
 set_target_properties(quirc PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_include_directories(quirc PUBLIC quirc/lib)
+
+option(WITH_BINARY "" OFF)
+add_subdirectory(i2pd/build)

@@ -1,4 +1,5 @@
 add_subdirectory(QR-Code-scanner)
+add_subdirectory(i2pd)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
@@ -100,6 +101,7 @@ target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
     ${CMAKE_CURRENT_SOURCE_DIR}/p2pool
+    ${CMAKE_CURRENT_SOURCE_DIR}/i2pd
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
@@ -132,6 +134,7 @@ target_link_libraries(monero-wallet-gui
     easylogging
     ${QT5_LIBRARIES}
     ${EXTRA_LIBRARIES}
+    i2p
     openpgp
     qrdecoder
     translations
