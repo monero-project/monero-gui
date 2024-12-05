@@ -70,7 +70,7 @@ function checkSignature(signature) {
 }
 
 function isValidOpenAliasAddress(address) {
-    var regex = /^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/; // Basic domain structure
+    var regex = /^[A-Za-z0-9-@]+(\.[A-Za-z0-9-]+)+$/; // Basic domain structure, allow email-like address
 
     if (!regex.test(address)) {
         return false;

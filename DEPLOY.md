@@ -2,7 +2,7 @@
 
 Use macOS 10.12 - 10.13 for better backwards compability.
 
-1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm miniupnpc libsodium expat libunwind-headers protobuf libgcrypt hidapi`
+1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm miniupnpc libsodium expat libunwind-headers protobuf@21 libgcrypt hidapi libusb cmake pkg-config && brew link protobuf@21`
 
 2. Get the latest LTS from here: https://www.qt.io/offline-installers and install
 
@@ -12,7 +12,7 @@ Use macOS 10.12 - 10.13 for better backwards compability.
 
 ```bash
 mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 ..
+cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/path/to/Qt5.12.8/5.12.8/clang_64 ..
 make
 make deploy
 ```

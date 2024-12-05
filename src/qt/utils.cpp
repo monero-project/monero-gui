@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2014-2024, The Monero Project
 //
 // All rights reserved.
 //
@@ -96,7 +96,7 @@ QString xdgMime(){
         "X-GNOME-FullName=Monero-GUI\n"
         "Comment=Monero GUI\n"
         "Keywords=Monero;\n"
-        "Exec=%1 %u\n"
+        "Exec=\"%1\" %u\n"
         "Terminal=false\n"
         "Type=Application\n"
         "Icon=monero\n"

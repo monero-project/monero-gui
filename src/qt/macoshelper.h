@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2014-2024, The Monero Project
 //
 // All rights reserved.
 //
@@ -38,7 +38,6 @@ class MacOSHelper
 public:
     static bool isCapsLock();
     static bool openFolderAndSelectItem(const QUrl &path);
-    static QPixmap screenshot();
     static QString bundlePath();
     static void disableWindowTabbing();
 };

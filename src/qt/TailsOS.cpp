@@ -14,7 +14,7 @@ bool TailsOS::detect()
         return false;
 
     QByteArray data = fileOpen("/etc/os-release");
-    QRegularExpression re("TAILS_PRODUCT_NAME=\"Tails\"");
+    QRegularExpression re("NAME=\"Tails\"");
     QRegularExpressionMatch os_match = re.match(data);
     bool matched = os_match.hasMatch();
 

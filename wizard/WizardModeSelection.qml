@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2014-2024, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -149,7 +149,7 @@ Rectangle {
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
-                    appWindow.persistentSettings.pruneBlockchain = false; // can be toggled on next page
+                    appWindow.persistentSettings.pruneBlockchain = true;
                     applyWalletMode(2, 'wizardHome');
                 }
             }

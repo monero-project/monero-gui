@@ -43,9 +43,9 @@ RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "
 ENV HOST_PATH=${PATH}
 ENV PATH=${TOOLCHAIN_DIR}/aarch64-linux-android/bin:${TOOLCHAIN_DIR}/bin:${PATH}
 
-ARG ZLIB_VERSION=1.3
-ARG ZLIB_HASH=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
-RUN wget -q https://zlib.net/zlib-${ZLIB_VERSION}.tar.gz \
+ARG ZLIB_VERSION=1.3.1
+ARG ZLIB_HASH=9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23
+RUN wget -q https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz \
     && echo "${ZLIB_HASH}  zlib-${ZLIB_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf zlib-${ZLIB_VERSION}.tar.gz \
     && rm zlib-${ZLIB_VERSION}.tar.gz \
