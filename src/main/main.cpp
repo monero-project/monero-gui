@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
     MacOSHelper::disableWindowTabbing();
 #endif
     // disable "QApplication: invalid style override passed" warning
-    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
+    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "Fusion");
 #ifdef Q_OS_LINUX
     // platform xcb by default
     if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "xcb");
