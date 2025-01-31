@@ -73,14 +73,14 @@ Rectangle {
                 width: 60
                 height: 60
                 anchors.centerIn: parent
-                source: "qrc:///images/monero-vector.svg"
+                source: "qrc:///images/moneroLogo_white.png"
                 mipmap: true
             }
 
             BusyIndicator {
                 running: parent.visible
                 anchors.centerIn: imgLogo
-                style: BusyIndicatorStyle {
+                /*style: BusyIndicatorStyle {
                     indicator: Image {
                         visible: control.running
                         source: "qrc:///images/busy-indicator.png"
@@ -92,7 +92,7 @@ Rectangle {
                             to: 360
                         }
                     }
-                }
+                }*/
             }
         }
 

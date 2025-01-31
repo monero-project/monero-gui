@@ -1360,7 +1360,7 @@ ApplicationWindow {
             } else if (isLinux) {
                 confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
                 confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
-                confirmationDialog.icon = StandardIcon.Question;
+                // confirmationDialog.icon = QMessageBox::Question;
                 confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                 confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = function() {

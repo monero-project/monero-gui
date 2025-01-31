@@ -203,8 +203,8 @@ Rectangle {
                 anchors.fill:parent
                 clip: true // otherwise animation will affect left panel
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
+                /*delegate: StackViewDelegate {
+                    /*pushTransition: StackViewTransition {
                         PropertyAnimation {
                             target: enterItem
                             property: "x"
@@ -222,7 +222,7 @@ Rectangle {
                             easing.type: Easing.OutCubic
                         }
                     }
-                }
+                }*/
             }
 
         }// flickable
