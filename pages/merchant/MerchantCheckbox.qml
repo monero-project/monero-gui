@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 
 import "../../components" as MoneroComponents
 

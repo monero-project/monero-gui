@@ -28,7 +28,7 @@
 
 import FontAwesome 1.0
 import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
