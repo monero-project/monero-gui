@@ -141,7 +141,7 @@ ColumnLayout {
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
-            delegate: StackViewDelegate {
+            /*delegate: StackViewDelegate {
                 pushTransition: StackViewTransition {
                     PropertyAnimation {
                         target: enterItem
@@ -160,7 +160,7 @@ ColumnLayout {
                         easing.type: Easing.OutCubic
                     }
                 }
-            }
+            }*/
         }
     }
 

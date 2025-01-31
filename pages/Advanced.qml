@@ -126,24 +126,22 @@ ColumnLayout {
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
-            delegate: StackViewDelegate {
-                pushTransition: StackViewTransition {
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * - target.width
-                        to: 0
-                        duration: 300
-                        easing.type: Easing.OutCubic
-                    }
-                    PropertyAnimation {
-                        target: exitItem
-                        property: "x"
-                        from: 0
-                        to: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * target.width
-                        duration: 300
-                        easing.type: Easing.OutCubic
-                    }
+            pushEnter: Transition {
+                PropertyAnimation {
+                    target: enterItem
+                    property: "x"
+                    from: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * - target.width
+                    to: 0
+                    duration: 300
+                    easing.type: Easing.OutCubic
+                }
+                PropertyAnimation {
+                    target: exitItem
+                    property: "x"
+                    from: 0
+                    to: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * target.width
+                    duration: 300
+                    easing.type: Easing.OutCubic
                 }
             }
         }

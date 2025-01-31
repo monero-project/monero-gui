@@ -288,7 +288,7 @@ Rectangle {
                 anchors.fill: parent
                 clip: true
 
-                delegate: StackViewDelegate {
+                /*delegate: StackViewDelegate {
                     pushTransition: StackViewTransition {
                          PropertyAnimation {
                              target: enterItem
@@ -307,7 +307,7 @@ Rectangle {
                              easing.type: Easing.OutCubic
                          }
                     }
-                }
+                }*/
             }
         }
 	}
@@ -318,7 +318,7 @@ Rectangle {
         title: qsTr("Please choose a file") + translationManager.emptyString
         currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
-        sidebarVisible: false
+        //sidebarVisible: false
 
         onAccepted: {
             var keysPath = walletManager.urlToLocalPath(fileDialog.selectedFile)

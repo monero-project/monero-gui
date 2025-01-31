@@ -288,7 +288,7 @@ Item {
                 height: 1
             }
 
-            Calendar {
+            MonthGrid {
                 id: calendar
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -296,9 +296,9 @@ Item {
                 anchors.margins: 1
                 anchors.bottomMargin: 10
                 height: 220
-                frameVisible: false
+                //frameVisible: false
 
-                style: CalendarStyle {
+                /*style: CalendarStyle {
                     gridVisible: false
                     background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
                     dayDelegate: Item {
@@ -456,7 +456,7 @@ Item {
                             }
                         }
                     }
-                }
+                }*/
             }
         }
     }
