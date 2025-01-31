@@ -37,11 +37,25 @@ using epee::net_utils::http::fields_list;
 using epee::net_utils::http::http_response_info;
 using epee::net_utils::http::abstract_http_client;
 
+bool _HttpClient::on_header(const epee::net_utils::http::http_response_info &headers)
+{
+    if(not m_parent->on_header(headers))
+        return false;
+    return net::http::client::on_header(headers);
+}
+bool _HttpClient::handle_target_data(std::string &piece_of_transfer)
+{
+    if(not m_parent->handle_target_data(piece_of_transfer))
+        return false;
+    return net::http::client::handle_target_data(piece_of_transfer);
+}
+
 HttpClient::HttpClient(QObject *parent /* = nullptr */)
     : QObject(parent)
     , m_cancel(false)
     , m_contentLength(0)
     , m_received(0)
+    , m_impl(new _HttpClient(this))
 {
 }
 
@@ -78,7 +92,7 @@ bool HttpClient::on_header(const http_response_info &headers)
     m_received = 0;
     emit receivedChanged();
 
-    return net::http::client::on_header(headers);
+    return true;
 }
 
 bool HttpClient::handle_target_data(std::string &piece_of_transfer)
@@ -91,7 +105,7 @@ bool HttpClient::handle_target_data(std::string &piece_of_transfer)
     m_received += piece_of_transfer.size();
     emit receivedChanged();
 
-    return net::http::client::handle_target_data(piece_of_transfer);
+    return true;
 }
 
 Network::Network(QObject *parent)
