@@ -48,7 +48,7 @@ Rectangle {
         // dynamically change onclose handler
         property var onCloseCallback
         id: signatureVerificationMessage
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
         onAccepted:  {
             if (onCloseCallback) {
                 onCloseCallback()

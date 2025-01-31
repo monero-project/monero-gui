@@ -675,7 +675,7 @@ Item {
 
     MessageDialog {
         id: merchantPageDialog
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
     }
 
     FileDialog {
