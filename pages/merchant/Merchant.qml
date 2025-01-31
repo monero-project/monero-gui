@@ -485,8 +485,8 @@ Item {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
                             }
-                            validator: RegExpValidator {
-                                regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
                             }
                         }
                     }

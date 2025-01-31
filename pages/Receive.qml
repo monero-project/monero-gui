@@ -261,8 +261,8 @@ Rectangle {
                             amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
                     }
                 }
 
@@ -321,8 +321,8 @@ Rectangle {
                             amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                     }
                 }
 
