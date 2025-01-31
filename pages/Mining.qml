@@ -28,8 +28,8 @@
 
 import QtQml.Models 2.2
 import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 import moneroComponents.P2PoolManager 1.0

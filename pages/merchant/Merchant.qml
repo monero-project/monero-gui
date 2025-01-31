@@ -1,9 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtCore
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0

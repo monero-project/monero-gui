@@ -29,11 +29,10 @@
 import QtQml 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.2
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import moneroComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard
