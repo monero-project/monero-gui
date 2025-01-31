@@ -750,18 +750,18 @@ Rectangle {
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
-            selectExisting: false
+            currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+            fileMode: FileDialog.SaveFile
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
-                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(selectedFile))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                     receivePageDialog.icon = StandardIcon.Error
                     receivePageDialog.open()
                 } else {
-                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString, 3);
+                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString, 3);
                 }
             }
         }

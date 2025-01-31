@@ -989,11 +989,11 @@ Rectangle {
     FileDialog {
         id: signTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Unsigned transfers (*)"]
 
         onAccepted: {
-            var path = walletManager.urlToLocalPath(fileUrl);
+            var path = walletManager.urlToLocalPath(selectedFile);
             // Load the unsigned tx from file
             var transaction = currentWallet.loadTxFile(path);
 
@@ -1033,11 +1033,11 @@ Rectangle {
     FileDialog {
         id: submitTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {
-            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))){
+            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(selectedFile))){
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
                 informationPopup.icon  = StandardIcon.Critical
@@ -1059,11 +1059,10 @@ Rectangle {
     
     FileDialog {
         id: exportOutputsDialog
-        selectMultiple: false
-        selectExisting: false
+        fileMode: FileDialog.SaveFile
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl))
-            if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl), true)) {
+            console.log(walletManager.urlToLocalPath(exportOutputsDialog.selectedFile))
+            if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.selectedFile), true)) {
                 appWindow.showStatusMessage(qsTr("Outputs successfully exported to file") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1076,12 +1075,11 @@ Rectangle {
 
     FileDialog {
         id: importOutputsDialog
-        selectMultiple: false
-        selectExisting: true
+        fileMode: FileDialog.OpenFile
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))
-            if (currentWallet.importOutputs(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))) {
+            console.log(walletManager.urlToLocalPath(importOutputsDialog.selectedFile))
+            if (currentWallet.importOutputs(walletManager.urlToLocalPath(importOutputsDialog.selectedFile))) {
                 appWindow.showStatusMessage(qsTr("Outputs successfully imported to wallet") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1095,11 +1093,10 @@ Rectangle {
     //ExportKeyImagesDialog
     FileDialog {
         id: exportKeyImagesDialog
-        selectMultiple: false
-        selectExisting: false
+        fileMode: FileDialog.SaveFile
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl))
-            if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true)) {
+            console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.selectedFile))
+            if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.selectedFile), true)) {
                 appWindow.showStatusMessage(qsTr("Key images successfully exported to file") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1113,12 +1110,11 @@ Rectangle {
     //ImportKeyImagesDialog
     FileDialog {
         id: importKeyImagesDialog
-        selectMultiple: false
-        selectExisting: true
+        fileMode: FileDialog.OpenFile
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))
-            if (currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))) {
+            console.log(walletManager.urlToLocalPath(importKeyImagesDialog.selectedFile))
+            if (currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.selectedFile))) {
                 appWindow.showStatusMessage(qsTr("Key images successfully imported to wallet") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);

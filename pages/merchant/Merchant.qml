@@ -681,14 +681,14 @@ Item {
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
-        selectExisting: false
+        currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+        fileMode: FileDialog.SaveFile
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {
-                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(selectedFile))) {
+                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                 receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                 receivePageDialog.icon = StandardIcon.Error
                 receivePageDialog.open()
             }

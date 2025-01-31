@@ -903,8 +903,8 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" + appWindow.accountsDir
-        selectExisting: false;
+        currentFolder: "file://" + appWindow.accountsDir
+        fileMode: FileDialog.SaveFile;
 
         onAccepted: {
             handleTransactionConfirmed()
@@ -948,12 +948,12 @@ ApplicationWindow {
         // View only wallet - we save the tx
         if(viewOnly){
             // No file specified - abort
-            if(!saveTxDialog.fileUrl) {
+            if(!saveTxDialog.selectedFile) {
                 currentWallet.disposeTransaction(transaction)
                 return;
             }
 
-            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            var path = walletManager.urlToLocalPath(saveTxDialog.selectedFile)
 
             // Store to file
             transaction.setFilename(path);
@@ -1645,18 +1645,17 @@ ApplicationWindow {
     }
 
     // Choose blockchain folder
-    FileDialog {
+    FolderDialog {
         id: blockchainFileDialog
         property string directory: ""
         signal changed();
 
         title: "Please choose a folder"
-        selectFolder: true
-        folder: "file://" + persistentSettings.blockchainDataDir
+        currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.folder)
             var validator = daemonManager.validateDataDir(dataDir);
             if(validator.valid) {
                 persistentSettings.blockchainDataDir = dataDir;
@@ -1684,7 +1683,7 @@ ApplicationWindow {
                 confirmationDialog.open()
             }
 
-            blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
+            blockchainFileDialog.directory = blockchainFileDialog.folder;
             delete validator;
         }
     }

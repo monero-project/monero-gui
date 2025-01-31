@@ -316,12 +316,12 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 
         onAccepted: {
-            var keysPath = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            var keysPath = walletManager.urlToLocalPath(fileDialog.selectedFile)
             persistentSettings.nettype = oshelper.getNetworkTypeFromFile(keysPath);
             wizardController.openWalletFile(keysPath);
         }

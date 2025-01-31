@@ -400,22 +400,22 @@ Rectangle {
         FileDialog {
             id: signFileDialog
             title: qsTr("Please choose a file to sign") + translationManager.emptyString;
-            folder: "file://"
+            currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {
-                signFileLine.text = walletManager.urlToLocalPath(signFileDialog.fileUrl)
+                signFileLine.text = walletManager.urlToLocalPath(signFileDialog.selectedFile)
             }
         }
 
         FileDialog {
             id: verifyFileDialog
             title: qsTr("Please choose a file to verify") + translationManager.emptyString;
-            folder: "file://"
+            currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {
-                verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.fileUrl)
+                verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.selectedFile)
             }
         }
     }

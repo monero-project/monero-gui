@@ -229,10 +229,8 @@ GridLayout {
         }
     }
 
-    FileDialog {
+    FolderDialog {
         id: fileWalletDialog
-        selectMultiple: false
-        selectFolder: true
         title: qsTr("Please choose a directory")  + translationManager.emptyString
         onAccepted: {
             walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.folder);
