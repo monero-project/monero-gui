@@ -750,7 +750,7 @@ Rectangle {
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
+            folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
             selectExisting: false
             nameFilters: ["Image (*.png)"]
             onAccepted: {

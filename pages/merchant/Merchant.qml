@@ -681,7 +681,7 @@ Item {
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: shortcuts.pictures
+        folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         selectExisting: false
         nameFilters: ["Image (*.png)"]
         onAccepted: {
