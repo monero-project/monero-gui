@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0

@@ -28,10 +28,10 @@
 
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
-import QtQuick.XmlListModel 2.0
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQml.XmlListModel
+import QtQuick.Layouts
+import QtQuick.Controls
 
 
 Drawer {
