@@ -40,11 +40,27 @@
 
 #include "FutureScheduler.h"
 
-class HttpClient : public QObject, public net::http::client
+class HttpClient;
+
+
+// QObject doesn't mix well with net::http::client
+class _HttpClient : public net::http::client
+{
+public:
+    _HttpClient(HttpClient* parent):m_parent(parent){}
+    bool on_header(const epee::net_utils::http::http_response_info &headers) final;
+    bool handle_target_data(std::string &piece_of_transfer) final;
+
+private:
+    HttpClient* m_parent;
+};
+
+class HttpClient : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(quint64 contentLength READ contentLength NOTIFY contentLengthChanged);
     Q_PROPERTY(quint64 received READ received NOTIFY receivedChanged);
+
 
 public:
     HttpClient(QObject *parent = nullptr);
@@ -52,19 +68,29 @@ public:
     void cancel();
     quint64 contentLength() const;
     quint64 received() const;
+    std::shared_ptr<epee::net_utils::http::abstract_http_client> impl()
+    {
+        return m_impl;
+    }
+    bool set_proxy(const std::string &address)
+    {
+        return m_impl->set_proxy(address);
+    }
 
 signals:
     void contentLengthChanged() const;
     void receivedChanged() const;
 
 protected:
-    bool on_header(const epee::net_utils::http::http_response_info &headers) final;
-    bool handle_target_data(std::string &piece_of_transfer) final;
+    friend class _HttpClient;
+    bool on_header(const epee::net_utils::http::http_response_info &headers);
+    bool handle_target_data(std::string &piece_of_transfer);
 
 private:
     std::atomic<bool> m_cancel;
     std::atomic<size_t> m_contentLength;
     std::atomic<size_t> m_received;
+    std::shared_ptr<_HttpClient> m_impl;
 };
 
 class Network : public QObject
