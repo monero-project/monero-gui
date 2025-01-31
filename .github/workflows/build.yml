@@ -38,7 +38,7 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
+      run: sudo apt -y install qt6-base-dev qt6-declarative-dev qml6-module-qtqml-models qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtqml-xmllistmodel qml6-module-qt-labs-settings qml6-module-qt-labs-platform qml6-module-qt-labs-folderlistmodel qt6-tools-dev-tools qt6-tools-dev qml6-module-qtquick-templates libqt6svg6-dev libgcrypt20-dev xvfb qml6-module-qt5compat-graphicaleffects qml6-module-qtqml-workerscript qml6-module-qtquick-layouts qml6-module-qtcore
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
