@@ -1753,15 +1753,14 @@ Rectangle {
             + translationManager.emptyString;
     }
 
-    FileDialog {
+    FolderDialog {
         id: writeCSVFileDialog
         title: qsTr("Please choose a folder") + translationManager.emptyString
-        selectFolder: true
         onRejected: {
             console.log("csv write canceled")
         }
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
+            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.folder);
             var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
 
             if(written !== ""){
@@ -1792,7 +1791,7 @@ Rectangle {
             }
             catch(err) {}
             finally {
-                writeCSVFileDialog.folder = _folder;
+                writeCSVFileDialog.currentFolder = _folder;
             }
         }
     }
