@@ -1,6 +1,6 @@
 if(APPLE OR (WIN32 AND NOT STATIC))
     add_custom_target(deploy)
-    get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
+    get_target_property(_qmake_executable Qt6::qmake IMPORTED_LOCATION)
     get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 
     if(APPLE AND NOT IOS)

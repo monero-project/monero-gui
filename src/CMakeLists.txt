@@ -2,7 +2,7 @@ add_subdirectory(QR-Code-scanner)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
-qt5_add_resources(RESOURCES ../qml.qrc)
+qt6_add_resources(RESOURCES ../qml.qrc)
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
@@ -55,8 +55,8 @@ if(MINGW)
     set(ICON_RC ${CMAKE_CURRENT_BINARY_DIR}/icon.rc)
     set(ICON_RES ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
     file(WRITE ${ICON_RC} "IDI_ICON1 ICON DISCARDABLE \"${ICON}\"")
-    find_program(Qt5_WINDRES_EXECUTABLE NAMES windres x86_64-w64-mingw32-windres REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
-    add_custom_command(OUTPUT ${ICON_RES} COMMAND ${Qt5_WINDRES_EXECUTABLE} ${ICON_RC} ${ICON_RES} MAIN_DEPENDENCY ${ICON_RC})
+    find_program(Qt6_WINDRES_EXECUTABLE NAMES windres x86_64-w64-mingw32-windres REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
+    add_custom_command(OUTPUT ${ICON_RES} COMMAND ${Qt6_WINDRES_EXECUTABLE} ${ICON_RC} ${ICON_RES} MAIN_DEPENDENCY ${ICON_RC})
     list(APPEND RESOURCES ${ICON_RES})
 endif()
 
@@ -89,7 +89,7 @@ target_include_directories(monero-wallet-gui PUBLIC ${OPENGL_INCLUDE_DIR})
 message(STATUS "OpenGL: include dir at ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL: libraries at ${OPENGL_LIBRARIES}")
 
-target_include_directories(monero-wallet-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
+target_include_directories(monero-wallet-gui PUBLIC ${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 
 target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_SOURCE_DIR}/monero/include
@@ -109,8 +109,8 @@ target_include_directories(monero-wallet-gui PUBLIC
 
 target_compile_definitions(monero-wallet-gui
 	PUBLIC
-	${Qt5Widgets_DEFINITIONS}
-    ${Qt5Qml_DEFINITIONS}
+	${Qt6Widgets_DEFINITIONS}
+    ${Qt6Qml_DEFINITIONS}
 )
 
 if(APPLE)
@@ -121,7 +121,7 @@ if(APPLE)
     target_link_directories(monero-wallet-gui PRIVATE ${ICU_ROOT}/lib)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt6Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 target_link_libraries(monero-wallet-gui
     epee
@@ -130,7 +130,7 @@ target_link_libraries(monero-wallet-gui
     wallet_api
     qrcodegen
     easylogging
-    ${QT5_LIBRARIES}
+    ${QT6_LIBRARIES}
     ${EXTRA_LIBRARIES}
     openpgp
     qrdecoder

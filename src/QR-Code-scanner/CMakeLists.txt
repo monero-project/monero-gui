@@ -3,7 +3,7 @@ add_library(qrdecoder STATIC
 )
 target_link_libraries(qrdecoder
     PUBLIC
-        Qt5::Gui
+        Qt6::Gui
     PRIVATE
         quirc
 )
@@ -15,7 +15,7 @@ if(WITH_SCANNER)
     )
     target_link_libraries(qrscanner
         PUBLIC
-            Qt5::Multimedia
+            Qt6::Multimedia
             qrdecoder
     )
 endif()
