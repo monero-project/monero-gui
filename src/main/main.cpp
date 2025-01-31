@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QObject>
-#include <QDesktopWidget>
 #include <QScreen>
 #include <QThread>
 
