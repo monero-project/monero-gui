@@ -125,8 +125,8 @@ Rectangle {
                         }
                         error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
                     }
-                    validator: RegExpValidator {
-                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                 }
             }
 
