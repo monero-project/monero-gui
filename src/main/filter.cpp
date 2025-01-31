@@ -77,7 +77,7 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             sks = "Ctrl";
 #endif
         } else {
-            QKeySequence ks(ke->modifiers() + ke->key());
+            QKeySequence ks(ke->modifiers(), ke->key());
             sks = ks.toString();
         }
 #ifndef Q_OS_MAC
@@ -111,7 +111,7 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             sks = "Ctrl";
 #endif
         } else {
-            QKeySequence ks(ke->modifiers() + ke->key());
+            QKeySequence ks(ke->modifiers(), ke->key());
             sks = ks.toString();
         }
 #ifndef Q_OS_MAC
