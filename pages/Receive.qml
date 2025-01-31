@@ -744,7 +744,7 @@ Rectangle {
 
         MessageDialog {
             id: receivePageDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
         FileDialog {

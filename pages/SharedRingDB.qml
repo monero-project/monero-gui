@@ -80,7 +80,7 @@ Rectangle {
 
         MessageDialog {
             id: sharedRingDBDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
         MoneroComponents.Label {
