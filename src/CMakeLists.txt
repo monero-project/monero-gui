@@ -123,7 +123,7 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt6Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-target_link_libraries(monero-wallet-gui
+target_link_libraries(monero-wallet-gui PRIVATE
     epee
     common
     net
@@ -139,19 +139,29 @@ target_link_libraries(monero-wallet-gui
 )
 
 if(X11_FOUND)
-    target_link_libraries(monero-wallet-gui ${X11_LIBRARIES})
+    target_link_libraries(monero-wallet-gui PRIVATE ${X11_LIBRARIES})
 endif()
 
 if(WITH_SCANNER)
-    target_link_libraries(monero-wallet-gui qrscanner)
+    target_link_libraries(monero-wallet-gui PRIVATE qrscanner)
     if(LINUX AND NOT ANDROID)
-        target_link_libraries(monero-wallet-gui
+        target_link_libraries(monero-wallet-gui PRIVATE
             jpeg
             v4l2
             v4lconvert
             rt
         )
     endif()
+endif()
+
+if(STATIC)
+    # Allows to bundle quick control styles
+    qt6_add_qml_module(monero-wallet-gui
+        URI org.monero-project.monero-wallet-gui
+        QML_FILES
+            ../main.qml
+    )
+    qt6_import_qml_plugins(monero-wallet-gui)
 endif()
 
 add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)

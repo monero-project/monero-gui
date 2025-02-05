@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.21.1)
 project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
@@ -203,38 +203,60 @@ list(APPEND QT6_LIBRARIES
 )
 
 if(STATIC)
-  set(QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/Qt/labs/folderlistmodel)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/Qt/labs/settings)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/Qt/labs/platform)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtGraphicalEffects)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtGraphicalEffects/private)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtMultimedia)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQml)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQml/Models.2)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick.2)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Controls)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Controls.2)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Dialogs)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Dialogs/Private)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Layouts)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/PrivateWidgets)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Templates.2)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/Window.2)
-  list(APPEND QT6_EXTRA_PATHS ${QT6_PKG_CONFIG_Qt6Qml_PREFIX}/qml/QtQuick/XmlListModel)
+  set(QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/folderlistmodel)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/settings)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/platform)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt5Compat/GraphicalEffects)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt5Compat/GraphicalEffects/private)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtMultimedia)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml/Models)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Fusion)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Fusion/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Basic)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Basic/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Dialogs)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Layouts)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/PrivateWidgets)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Templates)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Window)
+  #list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/tooling)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml/XmlListModel)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtCore)
 
   set(QT6_EXTRA_LIBRARIES_LIST
+    qtquickdialogsplugin
+    Qt6QuickDialogs2
+    Qt6QuickDialogs2Utils
+    Qt6QuickDialogs2QuickImpl
     qtquicktemplates2plugin
     Qt6QuickTemplates2
     qtquickcontrols2plugin
     Qt6QuickControls2
-    dialogplugin
-    dialogsprivateplugin
+    Qt6QuickControls2Impl
+    qtquickcontrols2fusionstyleplugin
+    qtquickcontrols2fusionstyleimplplugin
+    Qt6QuickControls2Fusion
+    Qt6QuickControls2FusionStyleImpl
+    qtquickcontrols2basicstyleplugin
+    qtquickcontrols2basicstyleimplplugin
+    Qt6QuickControls2Basic
     qmlfolderlistmodelplugin
+    Qt6LabsFolderListModel
     qmlsettingsplugin
-    qtlabsplatformplugin
+    Qt6LabsSettings
+    labsplatformplugin
+    Qt6LabsPlatform
     qmlxmllistmodelplugin
+    Qt6QmlXmlListModel
     qquicklayoutsplugin
+    Qt6QuickLayouts
     modelsplugin
+    #Qt6QmlModels
+    #Qt6Core5Compat
   )
 
   if(WITH_SCANNER)
@@ -246,16 +268,15 @@ if(STATIC)
 
   list(APPEND QT6_EXTRA_LIBRARIES_LIST
     qtgraphicaleffectsplugin
-    qtgraphicaleffectsprivate
+    qtgraphicaleffectsprivateplugin
     qtquick2plugin
-    qtquickcontrolsplugin
-    widgetsplugin
-    windowplugin
+    quickwindowplugin
+    #quicktoolingplugin
+    #qtquickcontrols2implplugin
+    qmlplugin
+    qtqmlcoreplugin
+    Qt6QmlCore
   )
-
-  if(NOT ${Qt6Core_VERSION} VERSION_LESS 5.14)
-     list(APPEND QT6_EXTRA_LIBRARIES_LIST qmlplugin)
-  endif()
 
   set(QT6_EXTRA_LIBRARIES)
   foreach(LIBRARY ${QT6_EXTRA_LIBRARIES_LIST})
@@ -274,18 +295,18 @@ if(STATIC)
     ${QT6_LIBRARIES}
   )
 
-  set(QT6_INTEGRATION_LIBRARIES_LIST
-    Qt6EventDispatcherSupport
-    Qt6PacketProtocol
-    Qt6ThemeSupport
-    Qt6FontDatabaseSupport
-  )
+  #set(QT6_INTEGRATION_LIBRARIES_LIST
+  #  Qt6EventDispatcherSupport
+  #  Qt6PacketProtocol
+  #  Qt6ThemeSupport
+  #  Qt6FontDatabaseSupport
+  #)
 
   if(UNIX AND NOT APPLE)
     list(APPEND QT6_INTEGRATION_LIBRARIES_LIST
       Qt6XcbQpa
-      Qt6ServiceSupport
-      Qt6GlxSupport
+    #  Qt6ServiceSupport
+    #  Qt6GlxSupport
     )
   elseif(MINGW)
     list(APPEND QT6_INTEGRATION_LIBRARIES_LIST qtfreetype)
@@ -299,8 +320,8 @@ if(STATIC)
   if(UNIX AND NOT APPLE)
     pkg_check_modules(X11XCB_XCBGLX REQUIRED x11-xcb xcb-glx)
     list(APPEND QT6_LIBRARIES ${X11XCB_XCBGLX_LIBRARIES})
-    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
-    list(APPEND QT6_LIBRARIES ${FONTCONFIG_STATIC_LIBRARIES})
+    #pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+    #list(APPEND QT6_LIBRARIES ${FONTCONFIG_STATIC_LIBRARIES})
   endif()
 endif()
 
