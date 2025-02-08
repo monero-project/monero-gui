@@ -78,12 +78,12 @@ jobs:
         pyenv install 3.12.0
         pip install defusedxml
     - name: download qt
-      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
+      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 6.8.2 clang_64 eb909ac47aee46d9d6bec3bb840d593b9f0903ce86f2c07c5f77cd4cba63eee8
       working-directory: ../
     - name: build
       run: |
         mkdir build && cd build
-        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/5.15.2/clang_64 ..
+        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/6.8.2/lib/cmake/Qt6 ..
         make
     - name: deploy
       run: make deploy
