@@ -30,7 +30,6 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QtMac>
 #include "macoshelper.h"
 
 #import <Foundation/Foundation.h>
