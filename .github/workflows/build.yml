@@ -81,20 +81,12 @@ jobs:
       run: git clone -b "${QT_TAG}" --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
     - name: build qt from source
       run: |
-        cd qt5
-        mkdir build && cd build
-        ../configure -prefix "${QT_PREFIX}" -opensource -confirm-license -release -nomake examples -nomake tests -no-rpath -skip qtwebengine -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtnetworkauth -skip qtpurchasing -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
-        cd ../qttools/src/linguist/lrelease
-        ../../../../build/qtbase/bin/qmake
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
-        cd ../../../../qttools/src/macdeployqt/macdeployqt/
-        ../../../../build/qtbase/bin/qmake
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
-    - name: build monero-gui
+        pyenv install 3.12.0
+        pip install defusedxml
+    - name: download qt
+      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 6.8.2 clang_64 eb909ac47aee46d9d6bec3bb840d593b9f0903ce86f2c07c5f77cd4cba63eee8
+      working-directory: ../
+    - name: build
       run: |
         mkdir build && cd build
         cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH="${QT_PREFIX}" ..
