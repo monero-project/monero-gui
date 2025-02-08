@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   FREE_DISKSPACE: |
-    sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
+    sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda /usr/local/lib/android /opt/hostedtoolcache
 
 jobs:
   build-macos:
