@@ -303,7 +303,7 @@ std::pair<quint8, QString> OSHelper::getNetworkTypeAndAddressFromFile(const QStr
             address = _address;
             if(address.startsWith("5") || address.startsWith("7")){
                 networkType = NetworkType::STAGENET;
-            } else if(address.startsWith("9") || address.startsWith("B")){
+            } else if(address.startsWith("9") || address.startsWith("A")){
                 networkType = NetworkType::TESTNET;
             }
         }
