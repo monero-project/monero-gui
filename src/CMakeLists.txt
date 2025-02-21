@@ -74,7 +74,7 @@ set(monero_wallet_gui_sources
 if(NOT ANDROID)
     add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} ${monero_wallet_gui_sources})
 else()
-    add_library(monero-wallet-gui SHARED ${monero_wallet_gui_sources})
+    qt_add_executable(monero-wallet-gui ${monero_wallet_gui_sources})
     set_target_properties(monero-wallet-gui PROPERTIES COMPILE_DEFINITIONS "ANDROID")
 endif()
 
@@ -154,7 +154,7 @@ if(WITH_SCANNER)
     endif()
 endif()
 
-if(STATIC)
+if(STATIC OR ANDROID)
     # Allows to bundle quick control styles
     qt6_add_qml_module(monero-wallet-gui
         URI org.monero-project.monero-wallet-gui

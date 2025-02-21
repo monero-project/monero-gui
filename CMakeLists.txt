@@ -329,7 +329,6 @@ if(ANDROID)
     jnigraphics
     android
     EGL
-    Qt6VirtualKeyboard_${CMAKE_ANDROID_ARCH_ABI}
     c++_shared
   )
   foreach(LIBRARY ${QT6_EXTRA_LIBRARIES_LIST})
