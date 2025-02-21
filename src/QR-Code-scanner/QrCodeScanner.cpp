@@ -27,8 +27,9 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "QrCodeScanner.h"
-#include <QVideoProbe>
+#include <QMediaCaptureSession>
 #include <QCamera>
+#include <QVideoSink>
 
 QrCodeScanner::QrCodeScanner(QObject *parent)
     : QObject(parent)
@@ -36,18 +37,18 @@ QrCodeScanner::QrCodeScanner(QObject *parent)
     , m_processInterval(750)
     , m_enabled(true)
 {
-    m_probe = new QVideoProbe(this);
+    m_probe = new QMediaCaptureSession(this);
     m_thread = new QrScanThread(this);
     m_thread->start();
     QObject::connect(m_thread, SIGNAL(decoded(QString)), this, SIGNAL(decoded(QString)));
     QObject::connect(m_thread, SIGNAL(notifyError(const QString &, bool)), this, SIGNAL(notifyError(const QString &, bool)));
-    connect(m_probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));
+    connect(m_probe->videoSink(), SIGNAL(videoFrameChanged(const QVideoFrame&)), this, SLOT(processFrame(const QVideoFrame&)));
 }
 void QrCodeScanner::setSource(QCamera *camera)
 {
-    m_probe->setSource(camera);
+    m_probe->setCamera(camera);
 }
-void QrCodeScanner::processFrame(QVideoFrame frame)
+void QrCodeScanner::processFrame(const QVideoFrame &frame)
 {
     if(frame.isValid()){
         m_curFrame = frame;

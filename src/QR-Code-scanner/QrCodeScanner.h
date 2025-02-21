@@ -33,7 +33,7 @@
 #include <QVideoFrame>
 #include "QrScanThread.h"
 
-class QVideoProbe;
+class QMediaCaptureSession;
 class QCamera;
 
 class QrCodeScanner : public QObject
@@ -51,7 +51,7 @@ public:
     void setEnabled(bool enabled);
 
 public Q_SLOTS:
-    void processFrame(QVideoFrame);
+    void processFrame(const QVideoFrame&);
 
 Q_SIGNALS:
     void enabledChanged();
@@ -66,7 +66,7 @@ protected:
     int m_processInterval;
     int m_enabled;
     QVideoFrame m_curFrame;
-    QVideoProbe *m_probe;
+    QMediaCaptureSession *m_probe;
 };
 
 #endif
