@@ -225,13 +225,12 @@ void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */
     const auto future = m_scheduler.run(
         [this, path] {
             QMutexLocker locker(&m_asyncMutex);
-
-            return QJSValueList({m_walletImpl->store(path.toStdString())});
+            return QJSValueList() << m_walletImpl->store(path.toStdString());
         },
         callback);
     if (!future.first)
     {
-        QJSValue(callback).call(QJSValueList({false}));
+        QJSValue(callback).call(QJSValueList() << false);
     }
 }
 
