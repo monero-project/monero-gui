@@ -13,6 +13,7 @@ if(WITH_SCANNER)
         QrCodeScanner.cpp
         QrScanThread.cpp
     )
+    find_package(Qt6 REQUIRED COMPONENTS Multimedia)
     target_link_libraries(qrscanner
         PUBLIC
             Qt6::Multimedia
