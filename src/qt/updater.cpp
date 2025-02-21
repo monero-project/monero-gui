@@ -28,6 +28,7 @@
 
 #if defined(_WIN32) && !defined(MONERO_GUI_STATIC)
     #include <Winsock2.h>
+    #undef interface
 #endif
 
 #include "updater.h"
