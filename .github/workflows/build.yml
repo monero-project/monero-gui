@@ -182,7 +182,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
-        path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
+        path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-wallet-gui.apk
 
   source-archive:
     runs-on: ubuntu-20.04
