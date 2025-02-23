@@ -31,7 +31,11 @@ def fetch_links_to_archives(os, target, major, minor, patch, toolchain):
     name = pkg.find('.//Name')
     if name == None:
       continue
-    if name.text != f'qt.qt{major}.{major}{minor}{patch}.{toolchain}':
+    if name.text not in [
+        f'qt.qt{major}.{major}{minor}{patch}.{toolchain}',
+        f"qt.qt{major}.{major}{minor}{patch}.addons.qt5compat.{toolchain}",
+        f"qt.qt{major}.{major}{minor}{patch}.addons.qtshadertools.{toolchain}"
+      ]:
       continue
     version = pkg.find('.//Version')
     if version == None:

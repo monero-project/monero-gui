@@ -78,7 +78,7 @@ jobs:
         pyenv install 3.12.0
         pip install defusedxml
     - name: download qt
-      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 6.8.2 clang_64 eb909ac47aee46d9d6bec3bb840d593b9f0903ce86f2c07c5f77cd4cba63eee8
+      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 6.8.2 clang_64 bb304d352a6bd6c88c9d109ab458064bbe0b729f2f09d00d8a9c1b6f7f996f23
       working-directory: ../
     - name: build
       run: |
