@@ -121,8 +121,8 @@ RUN git clone -b v1.3 --depth 1 https://github.com/madler/zlib && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b VER-2-10-2 --depth 1 https://git.savannah.gnu.org/git/freetype/freetype2.git && \
-    cd freetype2 && \
+RUN git clone -b VER-2-10-2 --depth 1 https://gitlab.freedesktop.org/freetype/freetype.git && \
+    cd freetype && \
     git reset --hard 132f19b779828b194b3fede187cee719785db4d8 && \
     ./autogen.sh && \
     ./configure --disable-shared --enable-static --with-zlib=no && \
