@@ -1,16 +1,16 @@
 FROM debian:buster
 
 ARG THREADS=1
-ARG ANDROID_NDK_REVISION=21e
-ARG ANDROID_NDK_HASH=c3ebc83c96a4d7f539bd72c241b2be9dcd29bda9
+ARG ANDROID_NDK_REVISION=23c
+ARG ANDROID_NDK_HASH=e5053c126a47e84726d9f7173a04686a71f9a67a
 ARG ANDROID_SDK_REVISION=7302050_latest
 ARG ANDROID_SDK_HASH=7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
-ARG QT_VERSION=v5.15.7-lts-lgpl
+ARG QT_VERSION=v5.15.16-lts-lgpl
 
 WORKDIR /opt/android
 ENV WORKDIR=/opt/android
 
-ENV ANDROID_NATIVE_API_LEVEL=30
+ENV ANDROID_NATIVE_API_LEVEL=31
 ENV ANDROID_API=android-${ANDROID_NATIVE_API_LEVEL}
 ENV ANDROID_CLANG=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang
 ENV ANDROID_CLANGPP=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang++
@@ -32,7 +32,7 @@ RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
     && unzip -q ${PACKAGE_NAME} \
     && rm -f ${PACKAGE_NAME}
 
-RUN PACKAGE_NAME=android-ndk-r${ANDROID_NDK_REVISION}-linux-x86_64.zip \
+RUN PACKAGE_NAME=android-ndk-r${ANDROID_NDK_REVISION}-linux.zip \
     && wget -q https://dl.google.com/android/repository/${PACKAGE_NAME} \
     && echo "${ANDROID_NDK_HASH}  ${PACKAGE_NAME}" | sha1sum -c \
     && unzip -q ${PACKAGE_NAME} \
@@ -98,27 +98,25 @@ RUN wget -q http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz
     && make -j${THREADS} \
     && make -j${THREADS} install
 
-ARG BOOST_VERSION=1_74_0
-ARG BOOST_VERSION_DOT=1.74.0
-ARG BOOST_HASH=83bfc1507731a0906e387fc28b7ef5417d591429e51e788417fe9ff025e116b1
-RUN wget -q https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION_DOT}/source/boost_${BOOST_VERSION}.tar.bz2 \
+ARG BOOST_VERSION=1_85_0
+ARG BOOST_VERSION_DOT=1.85.0
+ARG BOOST_HASH=7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
+RUN wget -q https://archives.boost.io/release/${BOOST_VERSION_DOT}/source/boost_${BOOST_VERSION}.tar.bz2 \
     && echo "${BOOST_HASH}  boost_${BOOST_VERSION}.tar.bz2" | sha256sum -c \
     && tar -xf boost_${BOOST_VERSION}.tar.bz2 \
     && rm -f boost_${BOOST_VERSION}.tar.bz2 \
     && cd boost_${BOOST_VERSION} \
     && PATH=${HOST_PATH} ./bootstrap.sh --prefix=${PREFIX} \
+    && printf "using clang : arm : ${ANDROID_CLANGPP} :\n<cxxflags>\"-fPIC\"\n<cflags>\"-fPIC\" ;" > user.jam \
     && PATH=${TOOLCHAIN_DIR}/bin:${HOST_PATH} ./b2 --build-type=minimal link=static runtime-link=static \
     --with-chrono --with-date_time --with-filesystem --with-program_options --with-regex --with-serialization \
-    --with-system --with-thread --with-locale --build-dir=android --stagedir=android toolset=clang threading=multi \
-    threadapi=pthread target-os=android -sICONV_PATH=${PREFIX} \
-    cflags='--target=aarch64-linux-android' \
-    cxxflags='--target=aarch64-linux-android' \
-    linkflags='--target=aarch64-linux-android --sysroot=${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm64 ${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_shared.so -nostdlib++' \
+    --with-system --with-thread --with-locale --build-dir=android --stagedir=android toolset=clang-arm threading=multi \
+    threadapi=pthread target-os=android -sICONV_PATH=${PREFIX} --user-config=user.jam architecture=arm address-model=64 \
     install -j${THREADS} \
     && rm -rf $(pwd)
 
-ARG OPENSSL_VERSION=1.1.1u
-ARG OPENSSL_HASH=e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6
+ARG OPENSSL_VERSION=1.1.1w
+ARG OPENSSL_HASH=cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8
 RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
     && echo "${OPENSSL_HASH}  openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf openssl-${OPENSSL_VERSION}.tar.gz \
@@ -133,9 +131,9 @@ RUN wget -q https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-ARG EXPAT_VERSION=2.4.1
-ARG EXPAT_HASH=2f9b6a580b94577b150a7d5617ad4643a4301a6616ff459307df3e225bcfbf40
-RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-${EXPAT_VERSION}.tar.bz2 && \
+ARG EXPAT_VERSION=2.6.4
+ARG EXPAT_HASH=8dc480b796163d4436e6f1352e71800a774f73dbae213f1860b60607d2a83ada
+RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_6_4/expat-${EXPAT_VERSION}.tar.bz2 && \
     echo "${EXPAT_HASH}  expat-${EXPAT_VERSION}.tar.bz2" | sha256sum -c && \
     tar -xf expat-${EXPAT_VERSION}.tar.bz2 && \
     rm expat-${EXPAT_VERSION}.tar.bz2 && \
@@ -145,8 +143,8 @@ RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-${
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-ARG UNBOUND_VERSION=1.16.2
-ARG UNBOUND_HASH=2e32f283820c24c51ca1dd8afecfdb747c7385a137abe865c99db4b257403581
+ARG UNBOUND_VERSION=1.22.0
+ARG UNBOUND_HASH=c5dd1bdef5d5685b2cedb749158dd152c52d44f65529a34ac15cd88d4b1b3d43
 RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-${UNBOUND_VERSION}.tar.gz && \
     echo "${UNBOUND_HASH}  unbound-${UNBOUND_VERSION}.tar.gz" | sha256sum -c && \
     tar -xzf unbound-${UNBOUND_VERSION}.tar.gz && \
@@ -157,8 +155,8 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-${UNBOUND_VERSION}.t
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-ARG ZMQ_VERSION=v4.3.4
-ARG ZMQ_HASH=4097855ddaaa65ed7b5e8cb86d143842a594eebd
+ARG ZMQ_VERSION=v4.3.5
+ARG ZMQ_HASH=622fc6dde99ee172ebaa9c8628d85a7a1995a21d
 RUN git clone https://github.com/zeromq/libzmq.git -b ${ZMQ_VERSION} --depth 1 \
     && cd libzmq \
     && git checkout ${ZMQ_HASH} \
@@ -169,8 +167,8 @@ RUN git clone https://github.com/zeromq/libzmq.git -b ${ZMQ_VERSION} --depth 1 \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-ARG SODIUM_VERSION=1.0.18
-ARG SODIUM_HASH=4f5e89fa84ce1d178a6765b8b46f2b6f91216677
+ARG SODIUM_VERSION=1.0.20-RELEASE
+ARG SODIUM_HASH=9511c982fb1d046470a8b42aa36556cdb7da15de
 RUN set -ex \
     && git clone https://github.com/jedisct1/libsodium.git -b ${SODIUM_VERSION} --depth 1 \
     && cd libsodium \
@@ -198,23 +196,20 @@ RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b v3.24.2 --depth 1 https://github.com/Kitware/CMake \
+RUN git clone -b v3.31.4 --depth 1 https://github.com/Kitware/CMake \
     && cd CMake \
-    && git reset --hard 31f835410efeea50acd43512eb9e5646a26ea177 \
+    && git reset --hard 569b821a138a4d3f7f4cc42c0cf5ae5e68d56f96 \
     && PATH=${HOST_PATH} ./bootstrap \
     && PATH=${HOST_PATH} make -j${THREADS} \
     && PATH=${HOST_PATH} make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN GRADLE_VERSION=5.6.4 \
-    && GRADLE_HASH=1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d \
-    && wget -q https\://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
-    && echo "${GRADLE_HASH}  gradle-${GRADLE_VERSION}-bin.zip" | sha256sum -c \
-    && GRADLE_LOCAL_PATH=gradle/wrapper/dists/gradle-${GRADLE_VERSION}-bin/bxirm19lnfz6nurbatndyydux \
-    && mkdir -p ${GRADLE_LOCAL_PATH} \
-    && mv gradle-${GRADLE_VERSION}-bin.zip ${GRADLE_LOCAL_PATH}
-
-ENV GRADLE_USER_HOME=${WORKDIR}/gradle
+# Workaround
+ENV NEW_SDK_ROOT=${WORKDIR}/sdk
+RUN mkdir ${NEW_SDK_ROOT} \
+    && cp -r ${ANDROID_SDK_ROOT}/licenses ${NEW_SDK_ROOT} \
+    && cp -r ${ANDROID_SDK_ROOT}/platforms ${NEW_SDK_ROOT} \
+    && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT}
 
 CMD set -ex \
     && cd /monero-gui \
@@ -232,10 +227,12 @@ CMD set -ex \
     -DBoost_USE_STATIC_RUNTIME=ON \
     -DLRELEASE_PATH="${PREFIX}/bin" \
     -DQT_ANDROID_APPLICATION_BINARY="monero-wallet-gui" \
-    -DANDROID_SDK="${ANDROID_SDK_ROOT}" \
+    -DANDROID_SDK="${NEW_SDK_ROOT}" \
     -DWITH_SCANNER=ON \
     -DWITH_DESKTOP_ENTRY=OFF \
     ../../.. \
     && PATH=${HOST_PATH} make generate_translations_header \
+    && sed -i -e "s#../monero/external/randomx/librandomx.a##" src/CMakeFiles/monero-wallet-gui.dir/link.txt \
+    && sed -i -e "s#-lm#-lm ../monero/external/randomx/librandomx.a#" src/CMakeFiles/monero-wallet-gui.dir/link.txt \
     && make -j${THREADS} -C src \
     && make -j${THREADS} apk
