@@ -156,7 +156,7 @@ RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz && \
+RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && \
     echo "4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847 boost_1_80_0.tar.gz" | sha256sum -c && \
     tar -xzf boost_1_80_0.tar.gz && \
     rm boost_1_80_0.tar.gz && \
