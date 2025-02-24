@@ -142,8 +142,9 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* `4` - number of CPU threads to use
-5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
-6. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
+5. Monero GUI Linux static binary will be placed in  `monero-gui/build/release/bin` directory
+6. (*Note*) This process is only for building `monero-wallet-gui`, `monerod` has to be built separately according to the instructions in the `monero` repository.
+7. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
    ```
    docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'shasum -a 256 /monero-gui/build/release/bin/monero-wallet-gui'
    ```
