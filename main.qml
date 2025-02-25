@@ -82,12 +82,14 @@ ApplicationWindow {
     property string walletName
     property bool viewOnly: false
     property bool foundNewBlock: false
-    property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
+    property bool qrScannerEnabled: ((typeof builtWithScanner != "undefined") && builtWithScanner) || ((typeof builtWithOtsUr != "undefined") && builtWithOtsUr)
     property int blocksToSync: 1
     property int firstBlockSeen
     property bool isMining: false
     property int walletMode: persistentSettings.walletMode
     property var cameraUi
+    property var urScannerUi
+    property var urDisplay
     property bool androidCloseTapped: false;
     property int userLastActive;  // epoch
     // Default daemon addresses
@@ -298,6 +300,7 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.disconnect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
+        currentWallet.transactionCommittedForExport.disconnect(onTransactionCommittedForExport);
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
         middlePanel.getProofClicked.disconnect(handleGetProof);
@@ -345,6 +348,7 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
+        currentWallet.transactionCommittedForExport.connect(onTransactionCommittedForExport);
         currentWallet.proxyAddress = Qt.binding(persistentSettings.getWalletProxyAddress);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
@@ -850,7 +854,7 @@ ApplicationWindow {
             // here we update txConfirmationPopup
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
+            txConfirmationPopup.confirmButton.text = viewOnly ? (persistentSettings.useURCode?qsTr("Show UR code"):qsTr("Save as file")) : qsTr("Confirm") + translationManager.emptyString;
             txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
         }
     }
@@ -923,13 +927,13 @@ ApplicationWindow {
 
         txConfirmationPopup.sweepUnmixable = true;
         transaction = currentWallet.createSweepUnmixableTransaction();
-        if (transaction.status !== PendingTransaction.Status_Ok) {
+        if (transaction.status !== PendingTransaction.Status_Ok) { // TODO: Dialog should only inform and offer only OK button IMO, informationPopup instead?
             console.error("Can't create transaction: ", transaction.errorString);
             txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
-        } else if (transaction.txCount == 0) {
+        } else if (transaction.txCount == 0) { // TODO: Dialog should only inform and offer only OK button IMO, informationPopup instead?
             console.error("No unmixable outputs to sweep");
             txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
@@ -946,8 +950,13 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
-        // View only wallet - we save the tx
-        if(viewOnly){
+        if(viewOnly && persistentSettings.useURCode) {
+            appWindow.showProcessingSplash(qsTr("Preparing transaction ..."));
+            currentWallet.commitTransactionForExportAsync(transaction);
+            return
+        }
+        // View only wallet - we save the tx to file if UR is not enabled
+        if(viewOnly && !persistentSettings.useURCode){
             // No file specified - abort
             if(!saveTxDialog.fileUrl) {
                 currentWallet.disposeTransaction(transaction)
@@ -982,6 +991,35 @@ ApplicationWindow {
             middlePanel.transferView.clearFields()
             txConfirmationPopup.clearFields()
             successfulTxPopup.open(txid)
+        }
+        currentWallet.refresh()
+        currentWallet.disposeTransaction(transaction)
+        currentWallet.storeAsync(function(success) {
+            if (!success) {
+                appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
+            }
+        });
+    }
+
+    function onTransactionCommittedForExport(txString, transaction, txid) {
+        hideProcessingSplash();
+        if (txString.length === 0) {
+            console.log("Error committing transaction: " + transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
+            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
+        } else {
+            if (txConfirmationPopup.transactionDescription.length > 0) {
+                for (var i = 0; i < txid.length; ++i)
+                    currentWallet.setUserNote(txid[i], txConfirmationPopup.transactionDescription);
+            }
+
+            // Clear tx fields
+            middlePanel.transferView.clearFields()
+            txConfirmationPopup.clearFields()
+            urDisplay.showUnsignedTx(txString)
         }
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
@@ -1330,7 +1368,7 @@ ApplicationWindow {
         // Connect app exit to qml window exit handling
         mainApp.closing.connect(appWindow.close);
 
-        if( appWindow.qrScannerEnabled ){
+        if(builtWithScanner && appWindow.qrScannerEnabled){
             console.log("qrScannerEnabled : load component QRCodeScanner");
             var component = Qt.createComponent("components/QRCodeScanner.qml");
             if (component.status == Component.Ready) {
@@ -1340,7 +1378,26 @@ ApplicationWindow {
                 console.log("component not READY !!!");
                 appWindow.qrScannerEnabled = false;
             }
-        } else console.log("qrScannerEnabled disabled");
+        }
+
+        if(builtWithOtsUr && appWindow.qrScannerEnabled){
+            var urScanComponent = Qt.createComponent("components/UrCodeScanner.qml");
+            console.warn(urScanComponent.errorString())
+            if (urScanComponent.status == Component.Ready) {
+                urScannerUi = urScanComponent.createObject(appWindow);
+            } else {
+                console.warn("UR Scanner component not READY !!!");
+            }
+        }
+
+        if(builtWithOtsUr) {
+            var urComponent = Qt.createComponent("components/UrCode.qml");
+            if (urComponent.status == Component.Ready) {
+                urDisplay = urComponent.createObject(appWindow);
+            } else {
+                console.warn("UR Display component not READY !!!");
+            }
+        }
 
         if(!walletsFound()) {
             wizard.wizardState = "wizardLanguage";
@@ -1439,6 +1496,8 @@ ApplicationWindow {
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: MoneroComponents.Style.blackTheme
         property bool checkForUpdates: true
+        property bool useURCode: false
+        property string lastUsedCamera: ""
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
@@ -1584,7 +1643,7 @@ ApplicationWindow {
         onAccepted: {
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
-                if (viewOnly) {
+                if (viewOnly && !persistentSettings.useURCode) {
                     saveTxDialog.open();
                 } else {
                     handleTransactionConfirmed()
@@ -1605,7 +1664,7 @@ ApplicationWindow {
                 passwordDialog.open(
                     "",
                     "",
-                    (appWindow.viewOnly ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString,
+                    (appWindow.viewOnly ? (persistentSettings.useURCode?qsTr("Show transaction UR code"):qsTr("Save transaction file")) : qsTr("Send transaction")) + translationManager.emptyString,
                     appWindow.viewOnly ? "" : FontAwesome.arrowCircleRight);
             }
         }
@@ -2131,9 +2190,13 @@ ApplicationWindow {
     onClosing: {
         close.accepted = false;
         console.log("blocking close event");
+        if(builtWithOtsUr) {
+            urScannerUi.cancel()
+            urDisplay.close()
+        }
         if(isAndroid) {
             console.log("blocking android exit");
-            if(qrScannerEnabled)
+            if(qrScannerEnabled && builtWithScanner)
                 cameraUi.state = "Stopped"
 
             if(!androidCloseTapped) {
@@ -2143,8 +2206,6 @@ ApplicationWindow {
                 // first close
                 return;
             }
-
-
         }
 
         // If daemon is running - prompt user before exiting
