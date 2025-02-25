@@ -56,7 +56,7 @@ jobs:
     - uses: eine/setup-msys2@v2
       with:
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
     - name: build
       run: DEV_MODE=ON make release-win64 -j2
     - name: deploy
