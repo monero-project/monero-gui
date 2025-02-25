@@ -96,11 +96,11 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libssl-3-x64.dll
             libcrypto-3-x64.dll
             #icu
-            libicudt74.dll
-            libicuin74.dll
-            libicuio74.dll
-            libicutu74.dll
-            libicuuc74.dll
+            libicudt76.dll
+            libicuin76.dll
+            libicuio76.dll
+            libicutu76.dll
+            libicuuc76.dll
         )
 
         # Boost Regex is header-only since 1.77

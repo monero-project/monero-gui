@@ -68,6 +68,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
+get_directory_property(Boost_VERSION_STRING DIRECTORY "monero" DEFINITION Boost_VERSION_STRING)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DQT_NO_DEBUG)
