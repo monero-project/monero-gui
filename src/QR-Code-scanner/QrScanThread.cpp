@@ -56,11 +56,7 @@ void QrScanThread::processQImage(const QImage &qimg)
 
 void QrScanThread::processVideoFrame(const QVideoFrame &frame)
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    processQImage( qt_imageFromVideoFrame(frame) );
-#else
-    processQImage(frame.image());
-#endif
+    processQImage(frame.toImage());
 }
 
 void QrScanThread::stop()

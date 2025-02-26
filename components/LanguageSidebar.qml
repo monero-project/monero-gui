@@ -28,10 +28,10 @@
 
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
-import QtQuick.XmlListModel 2.0
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQml.XmlListModel
+import QtQuick.Layouts
+import QtQuick.Controls
 
 
 Drawer {
@@ -176,13 +176,13 @@ Drawer {
         source: "/lang/languages.xml"
         query: "/languages/language"
 
-        XmlRole { name: "display_name"; query: "@display_name/string()" }
-        XmlRole { name: "locale"; query: "@locale/string()" }
-        XmlRole { name: "wallet_language"; query: "@wallet_language/string()" }
-        XmlRole { name: "flag"; query: "@flag/string()" }
+        XmlListModelRole { name: "display_name"; elementName: "display_name" }
+        XmlListModelRole { name: "locale"; elementName: "locale" }
+        XmlListModelRole { name: "wallet_language"; elementName: "wallet_language" }
+        XmlListModelRole { name: "flag"; elementName: "flag" }
         // TODO: XmlListModel is read only, we should store current language somewhere else
         // and set current language accordingly
-        XmlRole { name: "isCurrent"; query: "@enabled/string()" }
+        XmlListModelRole { name: "isCurrent"; elementName: "enabled" }
 
         onStatusChanged: {
             if(status === XmlListModel.Ready){

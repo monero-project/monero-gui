@@ -14,7 +14,7 @@ MAX_TRIES = 32
 def fetch_links_to_archives(os, target, major, minor, patch, toolchain):
   MAX_XML_SIZE = 1024 * 1024 * 1024
   MIRROR = 'download.qt.io'
-  base_url = f'https://{MIRROR}/online/qtsdkrepository/{os}/{target}/qt{major}_{major}{minor}{patch}'
+  base_url = f'https://{MIRROR}/online/qtsdkrepository/{os}/{target}/qt{major}_{major}{minor}{patch}/qt{major}_{major}{minor}{patch}'
   url = f'{base_url}/Updates.xml'
   for _ in range(MAX_TRIES):
     try:
@@ -31,7 +31,11 @@ def fetch_links_to_archives(os, target, major, minor, patch, toolchain):
     name = pkg.find('.//Name')
     if name == None:
       continue
-    if name.text != f'qt.qt{major}.{major}{minor}{patch}.{toolchain}':
+    if name.text not in [
+        f'qt.qt{major}.{major}{minor}{patch}.{toolchain}',
+        f"qt.qt{major}.{major}{minor}{patch}.addons.qt5compat.{toolchain}",
+        f"qt.qt{major}.{major}{minor}{patch}.addons.qtshadertools.{toolchain}"
+      ]:
       continue
     version = pkg.find('.//Version')
     if version == None:
@@ -100,7 +104,7 @@ def main():
   result = calc_hash_sum([l['name'] for l in links])
   print('result', result, 'expect', expect, flush=True)
   assert result == expect
-  assert extract_archives([l['name'] for l in links], '.', ['{}.{}.{}'.format(major, minor, patch)])
+  assert extract_archives([l['name'] for l in links], '{}.{}.{}'.format(major, minor, patch))
   [pathlib.Path(l['name']).unlink() for l in links]
 
 if __name__ == '__main__':

@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import Qt5Compat.GraphicalEffects
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
@@ -1753,15 +1753,14 @@ Rectangle {
             + translationManager.emptyString;
     }
 
-    FileDialog {
+    FolderDialog {
         id: writeCSVFileDialog
         title: qsTr("Please choose a folder") + translationManager.emptyString
-        selectFolder: true
         onRejected: {
             console.log("csv write canceled")
         }
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
+            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.folder);
             var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
 
             if(written !== ""){
@@ -1792,7 +1791,7 @@ Rectangle {
             }
             catch(err) {}
             finally {
-                writeCSVFileDialog.folder = _folder;
+                writeCSVFileDialog.currentFolder = _folder;
             }
         }
     }

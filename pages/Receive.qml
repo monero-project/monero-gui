@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import FontAwesome 1.0
 
 import "../components" as MoneroComponents
@@ -261,8 +261,8 @@ Rectangle {
                             amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
                     }
                 }
 
@@ -321,8 +321,8 @@ Rectangle {
                             amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                     }
                 }
 
@@ -744,24 +744,24 @@ Rectangle {
 
         MessageDialog {
             id: receivePageDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
-            selectExisting: false
+            currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+            fileMode: FileDialog.SaveFile
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
-                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(selectedFile))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                     receivePageDialog.icon = StandardIcon.Error
                     receivePageDialog.open()
                 } else {
-                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString, 3);
+                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString, 3);
                 }
             }
         }

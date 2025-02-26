@@ -27,9 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtQuick.Controls 1.4 as QtQuickControls1
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import FontAwesome 1.0
@@ -188,7 +187,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 71
 
-            QtQuickControls1.BusyIndicator {
+            BusyIndicator {
                 id: txAmountBusyIndicator
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -379,7 +378,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
 
-                QtQuickControls1.BusyIndicator {
+                BusyIndicator {
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5

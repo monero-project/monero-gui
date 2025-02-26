@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.21.1)
 project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
@@ -16,12 +16,7 @@ option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
-if(DEV_MODE)
-  # DEV_MODE checks out the monero submodule to master, which requires C++17.
-  set(CMAKE_CXX_STANDARD 17)
-else()
-  set(CMAKE_CXX_STANDARD 11)
-endif()
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
@@ -122,21 +117,19 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
     endif()
 endif()
 
-set(QT5_LIBRARIES
-  Qt5Core
-  Qt5Quick
-  Qt5Gui
-  Qt5Qml
-  Qt5Svg
-  Qt5Xml
+set(QT6_MODULES
+  Core
+  Gui
+  Widgets
+  Quick
+  QuickControls2
+  Qml
+  Svg
+  Xml
 )
 
 if(WITH_SCANNER)
-  list(APPEND QT5_LIBRARIES Qt5Multimedia)
-endif()
-
-if(APPLE)
-  list(APPEND QT5_LIBRARIES Qt5MacExtras)
+  list(APPEND QT6_MODULES Multimedia)
 endif()
 
 if(UNIX)
@@ -145,203 +138,212 @@ if(UNIX)
     set(CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH})
   endif()
   if(APPLE AND NOT CMAKE_PREFIX_PATH)
-    execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QT5_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-    list(APPEND CMAKE_PREFIX_PATH ${QT5_DIR})
+    execute_process(COMMAND brew --prefix qt6 OUTPUT_VARIABLE QT6_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+    list(APPEND CMAKE_PREFIX_PATH ${QT6_DIR})
   endif()
 endif()
 
 find_package(PkgConfig REQUIRED)
 
-# TODO: drop this once we switch to Qt 5.14+
-pkg_check_modules(Qt5QmlModels_PKG_CONFIG QUIET Qt5QmlModels)
-if(Qt5QmlModels_PKG_CONFIG_FOUND)
-  list(APPEND QT5_LIBRARIES Qt5QmlModels)
-endif()
-
-# TODO: drop this once we switch to Qt 5.12+
-find_package(Qt5XmlPatterns QUIET)
-if(Qt5XmlPatterns_FOUND)
-  list(APPEND QT5_LIBRARIES Qt5XmlPatterns)
-endif()
-
-foreach(QT5_MODULE ${QT5_LIBRARIES})
-  find_package(${QT5_MODULE} REQUIRED)
-  include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
+foreach(QT6_MODULE ${QT6_MODULES})
+  find_package(Qt6 REQUIRED COMPONENTS ${QT6_MODULE})
+  include_directories(${Qt6${QT6_MODULE}_INCLUDE_DIRS})
+  list(APPEND QT6_LIBRARIES Qt6::${QT6_MODULE})
 endforeach()
 
-if(NOT (CMAKE_CROSSCOMPILING AND ANDROID))
-  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
-else()
-  set(QT5_LIBRARIES_ABI)
-  foreach(QT5_MODULE ${QT5_LIBRARIES})
-    list(APPEND QT5_LIBRARIES_ABI "${QT5_MODULE}_${CMAKE_ANDROID_ARCH_ABI}")
-  endforeach()
-  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES_ABI})
-endif()
+# TODO can be safely removed ?
+#if(NOT (CMAKE_CROSSCOMPILING AND ANDROID))
+#  pkg_check_modules(QT6_PKG_CONFIG REQUIRED ${QT6_LIBRARIES})
+#else()
+#  set(QT6_LIBRARIES_ABI)
+#  foreach(QT6_MODULE ${QT6_LIBRARIES})
+#    list(APPEND QT6_LIBRARIES_ABI "${QT6_MODULE}_${CMAKE_ANDROID_ARCH_ABI}")
+#  endforeach()
+#  pkg_check_modules(QT6_PKG_CONFIG REQUIRED ${QT6_LIBRARIES_ABI})
+#endif()
 
-get_target_property(QMAKE_IMPORTED_LOCATION Qt5::qmake IMPORTED_LOCATION)
+get_target_property(QMAKE_IMPORTED_LOCATION Qt6::qmake IMPORTED_LOCATION)
 get_filename_component(QT_INSTALL_PREFIX "${QMAKE_IMPORTED_LOCATION}/../.." ABSOLUTE)
 
 if(APPLE AND NOT STATIC)
   set(CMAKE_BUILD_RPATH "${QT_INSTALL_PREFIX}/lib")
 endif()
 
-if(QT5_PKG_CONFIG_FOUND)
-  set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
+if(QT6_PKG_CONFIG_FOUND)
+  set(QT6_PKG_CONFIG "QT6_PKG_CONFIG")
   if(STATIC)
-    set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
+    set(QT6_PKG_CONFIG "${QT6_PKG_CONFIG}_STATIC")
   endif()
 
   if(UNIX AND CMAKE_PREFIX_PATH)
     if(APPLE)
-      list(JOIN ${QT5_PKG_CONFIG}_LDFLAGS_OTHER " " ${QT5_PKG_CONFIG}_LDFLAGS_OTHER)
+      list(JOIN ${QT6_PKG_CONFIG}_LDFLAGS_OTHER " " ${QT6_PKG_CONFIG}_LDFLAGS_OTHER)
     endif()
     # temporal workaround for https://bugreports.qt.io/browse/QTBUG-80922
-    STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT5_PKG_CONFIG}_LDFLAGS_OTHER "${${QT5_PKG_CONFIG}_LDFLAGS_OTHER}")
-    STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT5_PKG_CONFIG}_LIBRARIES "${${QT5_PKG_CONFIG}_LIBRARIES}")
-    STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT5_PKG_CONFIG}_INCLUDE_DIRS "${${QT5_PKG_CONFIG}_INCLUDE_DIRS}")
-    STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT5_PKG_CONFIG}_LIBRARY_DIRS "${${QT5_PKG_CONFIG}_LIBRARY_DIRS}")
+    STRING(REPLACE "${QT6_PKG_CONFIG_Qt6Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT6_PKG_CONFIG}_LDFLAGS_OTHER "${${QT6_PKG_CONFIG}_LDFLAGS_OTHER}")
+    STRING(REPLACE "${QT6_PKG_CONFIG_Qt6Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT6_PKG_CONFIG}_LIBRARIES "${${QT6_PKG_CONFIG}_LIBRARIES}")
+    STRING(REPLACE "${QT6_PKG_CONFIG_Qt6Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT6_PKG_CONFIG}_INCLUDE_DIRS "${${QT6_PKG_CONFIG}_INCLUDE_DIRS}")
+    STRING(REPLACE "${QT6_PKG_CONFIG_Qt6Core_PREFIX}" "${QT_INSTALL_PREFIX}" ${QT6_PKG_CONFIG}_LIBRARY_DIRS "${${QT6_PKG_CONFIG}_LIBRARY_DIRS}")
   endif()
 
-  set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
-  include_directories(${${QT5_PKG_CONFIG}_INCLUDE_DIRS})
-  link_directories(${${QT5_PKG_CONFIG}_LIBRARY_DIRS})
+  set(QT6_LIBRARIES ${${QT6_PKG_CONFIG}_LIBRARIES} ${${QT6_PKG_CONFIG}_LDFLAGS_OTHER})
+  include_directories(${${QT6_PKG_CONFIG}_INCLUDE_DIRS})
+  link_directories(${${QT6_PKG_CONFIG}_LIBRARY_DIRS})
 endif()
 
-list(APPEND QT5_LIBRARIES
-  ${Qt5Gui_PLUGINS}
-  ${Qt5Svg_PLUGINS}
-  ${Qt5Qml_PLUGINS}
-  ${Qt5Network_PLUGINS}
+list(APPEND QT6_LIBRARIES
+  ${Qt6Gui_PLUGINS}
+  ${Qt6Svg_PLUGINS}
+  ${Qt6Qml_PLUGINS}
+  ${Qt6Network_PLUGINS}
 )
 
 if(STATIC)
-  set(QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/folderlistmodel)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/settings)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/platform)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects/private)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtMultimedia)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQml)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQml/Models.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs/Private)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Layouts)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/PrivateWidgets)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Templates.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Window.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/XmlListModel)
+  set(QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/folderlistmodel)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/settings)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt/labs/platform)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt5Compat/GraphicalEffects)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/Qt5Compat/GraphicalEffects/private)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtMultimedia)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml/Models)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Fusion)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Fusion/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Basic)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Controls/Basic/impl)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Dialogs)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Layouts)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/PrivateWidgets)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Templates)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/Window)
+  #list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQuick/tooling)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtQml/XmlListModel)
+  list(APPEND QT6_EXTRA_PATHS ${QT6_INSTALL_PREFIX}/qml/QtCore)
 
-  set(QT5_EXTRA_LIBRARIES_LIST
+  set(QT6_EXTRA_LIBRARIES_LIST
+    qtquickdialogsplugin
+    Qt6QuickDialogs2
+    Qt6QuickDialogs2Utils
+    Qt6QuickDialogs2QuickImpl
     qtquicktemplates2plugin
-    Qt5QuickTemplates2
+    Qt6QuickTemplates2
     qtquickcontrols2plugin
-    Qt5QuickControls2
-    dialogplugin
-    dialogsprivateplugin
+    Qt6QuickControls2
+    Qt6QuickControls2Impl
+    qtquickcontrols2fusionstyleplugin
+    qtquickcontrols2fusionstyleimplplugin
+    Qt6QuickControls2Fusion
+    Qt6QuickControls2FusionStyleImpl
+    qtquickcontrols2basicstyleplugin
+    qtquickcontrols2basicstyleimplplugin
+    Qt6QuickControls2Basic
     qmlfolderlistmodelplugin
+    Qt6LabsFolderListModel
     qmlsettingsplugin
-    qtlabsplatformplugin
+    Qt6LabsSettings
+    labsplatformplugin
+    Qt6LabsPlatform
     qmlxmllistmodelplugin
+    Qt6QmlXmlListModel
     qquicklayoutsplugin
+    Qt6QuickLayouts
     modelsplugin
+    #Qt6QmlModels
+    #Qt6Core5Compat
   )
 
   if(WITH_SCANNER)
-    list(APPEND QT5_EXTRA_LIBRARIES_LIST
+    list(APPEND QT6_EXTRA_LIBRARIES_LIST
       declarative_multimedia
-      Qt5MultimediaQuick
+      Qt6MultimediaQuick
     )
   endif()
 
-  list(APPEND QT5_EXTRA_LIBRARIES_LIST
+  list(APPEND QT6_EXTRA_LIBRARIES_LIST
     qtgraphicaleffectsplugin
-    qtgraphicaleffectsprivate
+    qtgraphicaleffectsprivateplugin
     qtquick2plugin
-    qtquickcontrolsplugin
-    widgetsplugin
-    windowplugin
+    quickwindowplugin
+    #quicktoolingplugin
+    #qtquickcontrols2implplugin
+    qmlplugin
+    qtqmlcoreplugin
+    Qt6QmlCore
   )
 
-  if(NOT ${Qt5Core_VERSION} VERSION_LESS 5.14)
-     list(APPEND QT5_EXTRA_LIBRARIES_LIST qmlplugin)
-  endif()
-
-  set(QT5_EXTRA_LIBRARIES)
-  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
-    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
-    list(APPEND QT5_EXTRA_LIBRARIES ${${LIBRARY}_LIBRARY})
+  set(QT6_EXTRA_LIBRARIES)
+  foreach(LIBRARY ${QT6_EXTRA_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT6_EXTRA_PATHS} REQUIRED)
+    list(APPEND QT6_EXTRA_LIBRARIES ${${LIBRARY}_LIBRARY})
   endforeach()
 
   if(MINGW)
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      list(APPEND QT5_EXTRA_LIBRARIES D3D11 Dwrite D2d1)
+      list(APPEND QT6_EXTRA_LIBRARIES D3D11 Dwrite D2d1)
     endif()
   endif()
 
-  set(QT5_LIBRARIES
-    ${QT5_EXTRA_LIBRARIES}
-    ${QT5_LIBRARIES}
+  set(QT6_LIBRARIES
+    ${QT6_EXTRA_LIBRARIES}
+    ${QT6_LIBRARIES}
   )
 
-  set(QT5_INTEGRATION_LIBRARIES_LIST
-    Qt5EventDispatcherSupport
-    Qt5PacketProtocol
-    Qt5ThemeSupport
-    Qt5FontDatabaseSupport
-  )
+  #set(QT6_INTEGRATION_LIBRARIES_LIST
+  #  Qt6EventDispatcherSupport
+  #  Qt6PacketProtocol
+  #  Qt6ThemeSupport
+  #  Qt6FontDatabaseSupport
+  #)
 
   if(UNIX AND NOT APPLE)
-    list(APPEND QT5_INTEGRATION_LIBRARIES_LIST
-      Qt5XcbQpa
-      Qt5ServiceSupport
-      Qt5GlxSupport
+    list(APPEND QT6_INTEGRATION_LIBRARIES_LIST
+      Qt6XcbQpa
+    #  Qt6ServiceSupport
+    #  Qt6GlxSupport
     )
   elseif(MINGW)
-    list(APPEND QT5_INTEGRATION_LIBRARIES_LIST qtfreetype)
+    list(APPEND QT6_INTEGRATION_LIBRARIES_LIST Qt6BundledFreetype)
   endif()
 
-  foreach(LIBRARY ${QT5_INTEGRATION_LIBRARIES_LIST})
-    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
-    list(APPEND QT5_LIBRARIES ${${LIBRARY}_LIBRARY})
+  foreach(LIBRARY ${QT6_INTEGRATION_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT6_EXTRA_PATHS} REQUIRED)
+    list(APPEND QT6_LIBRARIES ${${LIBRARY}_LIBRARY})
   endforeach()
 
   if(UNIX AND NOT APPLE)
     pkg_check_modules(X11XCB_XCBGLX REQUIRED x11-xcb xcb-glx)
-    list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_LIBRARIES})
-    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
-    list(APPEND QT5_LIBRARIES ${FONTCONFIG_STATIC_LIBRARIES})
+    list(APPEND QT6_LIBRARIES ${X11XCB_XCBGLX_LIBRARIES})
+    #pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+    #list(APPEND QT6_LIBRARIES ${FONTCONFIG_STATIC_LIBRARIES})
   endif()
 endif()
 
 if(ANDROID)
-  set(QT5_EXTRA_LIBRARIES_LIST
+  set(QT6_EXTRA_LIBRARIES_LIST
     GLESv2
     log
     z
     jnigraphics
     android
     EGL
-    Qt5VirtualKeyboard_${CMAKE_ANDROID_ARCH_ABI}
     c++_shared
   )
-  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
+  foreach(LIBRARY ${QT6_EXTRA_LIBRARIES_LIST})
     find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS "${ANDROID_TOOLCHAIN_ROOT}/sysroot/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/${ANDROID_PLATFORM_LEVEL}" REQUIRED)
-    list(APPEND QT5_LIBRARIES ${${LIBRARY}_LIBRARY})
+    list(APPEND QT6_LIBRARIES ${${LIBRARY}_LIBRARY})
   endforeach()
 endif()
 
 if(MINGW)
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wa,-mbig-obj")
   set(EXTRA_LIBRARIES mswsock;ws2_32;iphlpapi;crypt32;bcrypt)
-  if(DEPENDS)
-    set(ICU_LIBRARIES icuio icui18n icuuc icudata icutu iconv)
-  else()
-    set(ICU_LIBRARIES icuio icuin icuuc icudt icutu iconv)
-  endif()
+  # Find mingw libversion (to avoid confusion with monero's libversion)
+  set(CMAKE_FIND_DEBUG_MODE TRUE)
+  find_library(VERSION_LIBRARY version REQUIRED)
+  list(APPEND EXTRA_LIBRARIES ${VERSION_LIBRARY})
 elseif(APPLE)
   set(EXTRA_LIBRARIES "-framework AppKit")
 elseif(OPENBSD OR ANDROID)
@@ -450,7 +452,7 @@ message(STATUS "Using C security hardening flags: ${C_SECURITY_FLAGS}")
 message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")
 message(STATUS "Using linker security hardening flags: ${LD_SECURITY_FLAGS}")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 ${C_SECURITY_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_SECURITY_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_SECURITY_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS} ${STATIC_FLAGS}")
 

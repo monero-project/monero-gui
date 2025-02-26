@@ -1,9 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.2
+import QtCore
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
+import QtQuick.Dialogs
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0
@@ -485,8 +485,8 @@ Item {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
                             }
-                            validator: RegExpValidator {
-                                regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
                             }
                         }
                     }
@@ -675,20 +675,20 @@ Item {
 
     MessageDialog {
         id: merchantPageDialog
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
     }
 
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: shortcuts.pictures
-        selectExisting: false
+        currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+        fileMode: FileDialog.SaveFile
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {
-                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(selectedFile))) {
+                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                 receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                 receivePageDialog.icon = StandardIcon.Error
                 receivePageDialog.open()
             }

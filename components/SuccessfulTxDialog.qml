@@ -128,7 +128,7 @@ Rectangle {
             readOnly: true
             wrapMode: Text.Wrap
             labelText: qsTr("Transaction file location:") + translationManager.emptyString
-            text: walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            text: walletManager.urlToLocalPath(saveTxDialog.selectedFile)
             fontSize: 16
         }
 
@@ -161,7 +161,7 @@ Rectangle {
                 width: 200
                 KeyNavigation.tab: doneButton
                 onClicked: {
-                    oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.fileUrl))
+                    oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.selectedFile))
                 }
             }
 

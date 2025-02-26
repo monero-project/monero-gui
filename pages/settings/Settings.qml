@@ -26,11 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "../../js/Windows.js" as Windows
 import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
@@ -142,7 +141,7 @@ ColumnLayout {
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
-            delegate: StackViewDelegate {
+            /*delegate: StackViewDelegate {
                 pushTransition: StackViewTransition {
                     PropertyAnimation {
                         target: enterItem
@@ -161,7 +160,7 @@ ColumnLayout {
                         easing.type: Easing.OutCubic
                     }
                 }
-            }
+            }*/
         }
     }
 

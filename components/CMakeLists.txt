@@ -9,8 +9,8 @@
 file(GLOB_RECURSE UI_FILES *.ui)
 file(GLOB_RECURSE CODE_FILES *.cpp)
 
-qt5_wrap_ui(UI_HEADERS ${UI_FILES})
-#qt5_add_resources(RESOURCE_FILES ../resources/resources.qrc)
+qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+#qt6_add_resources(RESOURCE_FILES ../resources/resources.qrc)
 
 # Windows application icon
 if (WIN32)
@@ -35,7 +35,7 @@ add_executable(${CMAKE_PROJECT_NAME} WIN32
   ${WINDOWS_RES_FILE}
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
-  Qt5::Widgets
+  Qt6::Widgets
 )
 
 if (UNIX)
