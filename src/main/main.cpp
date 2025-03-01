@@ -454,6 +454,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
     engine.addImportPath(":/fonts");
+#if defined(_WIN32) && !defined(MONERO_GUI_STATIC)
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
+#endif
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
 
