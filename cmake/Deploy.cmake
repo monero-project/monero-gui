@@ -1,6 +1,6 @@
 if(APPLE OR (WIN32 AND NOT STATIC))
     add_custom_target(deploy)
-    get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
+    get_target_property(_qmake_executable Qt6::qmake IMPORTED_LOCATION)
     get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 
     if(APPLE AND NOT IOS)
@@ -37,6 +37,17 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             )
         endif()
 
+        # libbost_chrono-mt.dylib has a dependency on libboost_system-mt.dylib, maydeployqt does not copy it by itself
+        find_package(Boost COMPONENTS system)
+        get_target_property(BOOST_SYSTEM_LIB_PATH Boost::system LOCATION)
+        if(EXISTS ${BOOST_SYSTEM_LIB_PATH})
+            add_custom_command(TARGET deploy
+                               POST_BUILD
+                               COMMAND ${CMAKE_COMMAND} -E copy "${BOOST_SYSTEM_LIB_PATH}" "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
+                               COMMENT "Copying libboost_system-mt.dylib"
+            )
+        endif()
+
         # Apple Silicon requires all binaries to be codesigned
         find_program(CODESIGN_EXECUTABLE NAMES codesign)
         if(CODESIGN_EXECUTABLE)
@@ -49,8 +60,11 @@ if(APPLE OR (WIN32 AND NOT STATIC))
 
     elseif(WIN32)
         find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
+        get_target_property(_qmlimportscanner_executable Qt6::qmlimportscanner IMPORTED_LOCATION)
+        get_filename_component(_qml_bin_dir "${_qmlimportscanner_executable}" DIRECTORY)
+
         add_custom_command(TARGET monero-wallet-gui POST_BUILD
-                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
+                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qml_bin_dir}\;${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
                            COMMENT "Running windeployqt..."
         )
         set(WIN_DEPLOY_DLLS

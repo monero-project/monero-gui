@@ -41,10 +41,6 @@
 #include "Subaddress.h"
 #include "SubaddressAccount.h"
 #include "model/TransactionHistoryModel.h"
-#include "model/TransactionHistorySortFilterModel.h"
-#include "model/AddressBookModel.h"
-#include "model/SubaddressModel.h"
-#include "model/SubaddressAccountModel.h"
 #include "wallet/api/wallet2_api.h"
 
 #include <QFile>
@@ -229,13 +225,12 @@ void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */
     const auto future = m_scheduler.run(
         [this, path] {
             QMutexLocker locker(&m_asyncMutex);
-
-            return QJSValueList({m_walletImpl->store(path.toStdString())});
+            return QJSValueList() << m_walletImpl->store(path.toStdString());
         },
         callback);
     if (!future.first)
     {
-        QJSValue(callback).call(QJSValueList({false}));
+        QJSValue(callback).call(QJSValueList() << false);
     }
 }
 

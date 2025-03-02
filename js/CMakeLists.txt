@@ -1,1 +1,1 @@
-qt5_add_resources(RESOURCE_FILES *.js)
+qt6_add_resources(RESOURCE_FILES *.js)

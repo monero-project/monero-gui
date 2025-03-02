@@ -26,13 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
+import QtQml.Models
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Dialogs
 
 import FontAwesome 1.0
 
@@ -904,8 +903,8 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" + appWindow.accountsDir
-        selectExisting: false;
+        currentFolder: "file://" + appWindow.accountsDir
+        fileMode: FileDialog.SaveFile;
 
         onAccepted: {
             handleTransactionConfirmed()
@@ -949,12 +948,12 @@ ApplicationWindow {
         // View only wallet - we save the tx
         if(viewOnly){
             // No file specified - abort
-            if(!saveTxDialog.fileUrl) {
+            if(!saveTxDialog.selectedFile) {
                 currentWallet.disposeTransaction(transaction)
                 return;
             }
 
-            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            var path = walletManager.urlToLocalPath(saveTxDialog.selectedFile)
 
             // Store to file
             transaction.setFilename(path);
@@ -1361,7 +1360,7 @@ ApplicationWindow {
             } else if (isLinux) {
                 confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
                 confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
-                confirmationDialog.icon = StandardIcon.Question;
+                // confirmationDialog.icon = QMessageBox::Question;
                 confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                 confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = function() {
@@ -1646,18 +1645,17 @@ ApplicationWindow {
     }
 
     // Choose blockchain folder
-    FileDialog {
+    FolderDialog {
         id: blockchainFileDialog
         property string directory: ""
         signal changed();
 
         title: "Please choose a folder"
-        selectFolder: true
-        folder: "file://" + persistentSettings.blockchainDataDir
+        currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.folder)
             var validator = daemonManager.validateDataDir(dataDir);
             if(validator.valid) {
                 persistentSettings.blockchainDataDir = dataDir;
@@ -1685,7 +1683,7 @@ ApplicationWindow {
                 confirmationDialog.open()
             }
 
-            blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
+            blockchainFileDialog.directory = blockchainFileDialog.folder;
             delete validator;
         }
     }
