@@ -46,7 +46,6 @@ Rectangle {
             return false;
         }
 
-        var valid = false;
         if(wizardController.walletRestoreMode === "keys") {
             return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
         } else if(wizardController.walletRestoreMode === "seed") {

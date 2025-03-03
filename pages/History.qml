@@ -1447,7 +1447,6 @@ Rectangle {
         var txs = [];
         for (var i = 0; i < root.txData.length; i++){
             var item = root.txData[i];
-            var matched = "";
 
             // daterange filtering
             if(item.timestamp < fromDate || item.timestamp > toDate){
