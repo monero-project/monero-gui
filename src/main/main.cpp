@@ -68,6 +68,7 @@
 #include "qt/updater.h"
 #include "qt/utils.h"
 #include "qt/TailsOS.h"
+#include "qt/WhonixOS.h"
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
@@ -175,6 +176,7 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_LINUX)
     bool isLinux = true;
     bool isTails = TailsOS::detect();
+    bool isWhonix = WhonixOS::detect();
 #elif defined(Q_OS_MAC)
     bool isMac = true;
 #endif
@@ -185,6 +187,12 @@ int main(int argc, char *argv[])
     // detect low graphics mode (start-low-graphics-mode.bat)
     if(qgetenv("QMLSCENE_DEVICE") == "softwarecontext")
         isOpenGL = false;
+
+    // overwrite QMLSCENE_DEVICE to opengl if whonix is detected
+    if (!isOpenGL && isWhonix) {
+        qputenv("QMLSCENE_DEVICE", "opengl");
+        isOpenGL = true;
+    }
 
 #ifdef Q_OS_MAC
     // macOS window tabbing is not supported
