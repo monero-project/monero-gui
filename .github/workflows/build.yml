@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   FREE_DISKSPACE: |
-    sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
+    sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda /usr/local/lib/android /opt/hostedtoolcache
 
 jobs:
   build-macos:
@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt6 pkg-config
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -38,7 +38,7 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
+      run: sudo apt -y install qt6-base-dev qt6-declarative-dev qml6-module-qtqml-models qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtqml-xmllistmodel qml6-module-qt-labs-settings qml6-module-qt-labs-platform qml6-module-qt-labs-folderlistmodel qt6-tools-dev-tools qt6-tools-dev qml6-module-qtquick-templates libqt6svg6-dev libgcrypt20-dev xvfb qml6-module-qt5compat-graphicaleffects qml6-module-qtqml-workerscript qml6-module-qtquick-layouts qml6-module-qtcore
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -56,7 +56,7 @@ jobs:
     - uses: eine/setup-msys2@v2
       with:
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt6 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
     - name: build
       run: DEV_MODE=ON make release-win64 -j2
     - name: deploy
@@ -78,12 +78,12 @@ jobs:
         pyenv install 3.12.0
         pip install defusedxml
     - name: download qt
-      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
+      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 6.8.2 clang_64 bb304d352a6bd6c88c9d109ab458064bbe0b729f2f09d00d8a9c1b6f7f996f23
       working-directory: ../
     - name: build
       run: |
         mkdir build && cd build
-        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/5.15.2/clang_64 ..
+        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/6.8.2/lib/cmake/Qt6 -D DEV_MODE=ON ..
         make
     - name: deploy
       run: make deploy
@@ -112,7 +112,7 @@ jobs:
         restore-keys: |
           docker-linux-static-
     - name: install dependencies
-      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxcb-shape0 libxkbcommon-x11-0
+      run: sudo apt -y install xvfb libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxcb-shape0 libxkbcommon-x11-0 libopengl0 libegl-dev
     - name: free up diskspace
       run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
@@ -148,7 +148,7 @@ jobs:
     - name: prepare build environment
       run: docker build --tag monero:build-env-windows --build-arg THREADS=3 --file Dockerfile.windows .
     - name: build
-      run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j3'
+      run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui -e THREADS=2 monero:build-env-windows
     - name: sha256sum
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monero-wallet-gui.exe
     - uses: actions/upload-artifact@v4
@@ -182,7 +182,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: ${{ github.job }}
-        path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
+        path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-wallet-gui.apk
 
   source-archive:
     runs-on: ubuntu-20.04

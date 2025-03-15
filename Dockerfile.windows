@@ -1,20 +1,21 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.16-lts-lgpl
+ARG QT_VERSION=v6.8.2
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool pkg-config \
-    python && \
+    ninja-build \
+    python3 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
     update-alternatives --set x86_64-w64-mingw32-gcc $(which x86_64-w64-mingw32-gcc-posix)
 
-RUN git clone -b v0.18.2.0 --depth 1 https://github.com/monero-project/monero && \
+RUN git clone -b v0.18.3.4 --depth 1 https://github.com/monero-project/monero && \
     cd monero && \
-    git reset --hard 99be9a044f3854f339548e2d99c539c18d7b1b01 && \
+    git reset --hard b089f9ee69924882c5d14dd1a6991deb05d9d1cd && \
     cp -a contrib/depends / && \
     cd .. && \
     rm -rf monero
@@ -25,37 +26,48 @@ RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd qt5 && \
     git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtgraphicaleffects.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qt5compat.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols2.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquickeffectmaker.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquicktimeline.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtshadertools.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtxmlpatterns.git -b ${QT_VERSION} --depth 1 && \
-    ./configure --prefix=/depends/x86_64-w64-mingw32 -xplatform win32-g++ \
+    mkdir /usr/qt_host && \
+    cd /usr/qt_host && \
+    /qt5/configure -developer-build -no-opengl -no-warnings-are-errors \
+        -skip qtquickeffectmaker -skip qtquicktimeline -skip qt5compat -skip qtmultimedia \
+        -no-feature-androiddeployqt -no-feature-printsupport --no-feature-sql  \
+        -no-feature-designer -no-feature-distancefieldgenerator \
+        -no-feature-pixeltool -no-feature-qtattributionsscanner -no-feature-qtdiag \
+        -nomake tests -nomake examples && \
+    cmake --build . --target host_tools -j${THREADS} && \
+    cd /qt5 && \
+    ./configure --prefix=/depends/x86_64-w64-mingw32 -platform linux-g++-64 -xplatform win32-g++ \
+    -qt-host-path "/usr/qt_host/qtbase" \
     -device-option CROSS_COMPILE=/usr/bin/x86_64-w64-mingw32- \
-    -I $(pwd)/qtbase/src/3rdparty/angle/include \
-    -opensource -confirm-license -release -static -static-runtime -opengl dynamic -no-angle \
+    -opensource -confirm-license -release -static -static-runtime -opengl dynamic \
     -no-avx -no-openssl -no-sql-sqlite \
-    -no-feature-qml-worker-script -no-openssl -no-sql-sqlite \
-    -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
-    -skip gamepad -skip location -skip qt3d -skip qtactiveqt -skip qtandroidextras \
+    -no-feature-qml-worker-script \
+    -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -no-dbus \
+    -skip gamepad -skip location -skip qt3d -skip qtactiveqt \
     -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc \
     -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
     -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport \
-    -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel \
-    -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras \
+    -skip qtspeech -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel \
+    -skip qtwebengine -skip qtwebsockets -skip qtwebview \
     -skip serialbus -skip webengine \
-    -nomake examples -nomake tests -nomake tools && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd qttools/src/linguist/lrelease && \
-    ../../../../qtbase/bin/qmake && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd ../../../.. && \
+    -skip qtcoap -skip qtfeedback -skip qtgraphs -skip qtgrpc -skip qthttpserver -skip qtlanguageserver -skip qtlottie -skip qtmqtt -skip qtopcua -skip qtpim -skip qtpositioning -skip qtqa \
+    -skip qtremoteobjects -skip qtrepotools -skip qtsystems -skip qtwebglplugin \
+    -nomake examples -nomake tests -skip qtquick3d -skip qtquick3dphysics -skip qttranslations -skip qtxmlpatterns \
+    -no-feature-designer -no-feature-distancefieldgenerator -no-feature-pixeltool -no-feature-qtattributionsscanner \
+    -no-feature-qtdiag -no-feature-qtplugininfo -no-feature-androiddeployqt -no-linuxfb \
+    CMAKE_TOOLCHAIN_FILE=/depends/x86_64-w64-mingw32/share/toolchain.cmake \
+    HOST=x86_64-w64-mingw32 && \
+    cmake --build . -j$THREADS && \
+    cmake --install . && \
     rm -rf $(pwd)
 
 RUN git clone -b libgpg-error-1.38 --depth 1 git://git.gnupg.org/libgpg-error.git && \
@@ -80,3 +92,18 @@ RUN git clone -b libgcrypt-1.8.5 --depth 1 git://git.gnupg.org/libgcrypt.git && 
     make -j$THREADS install && \
     cd .. && \
     rm -rf libgcrypt
+
+# Cannot cmake install qt host with partial build (target host_tools)
+# Adding paths to find 'lrelease' and 'rcc' binaries
+ENV PATH=/usr/qt_host/qtbase/bin:/usr/qt_host/qtbase/libexec:${PATH}
+
+# TODO : 
+CMD mkdir -p build/x86_64-w64-mingw32/release \
+    && cd build/x86_64-w64-mingw32/release \
+    #&& cp /usr/x86_64-w64-mingw32/lib/libversion.a /depends/x86_64-w64-mingw32/lib/ \
+    && cmake -D STATIC=ON -D BUILD_TAG=win-x64 -D CMAKE_BUILD_TYPE=Release \
+       -D CMAKE_TOOLCHAIN_FILE=/depends/x86_64-w64-mingw32/share/toolchain.cmake ../../.. \
+       -D CMAKE_PREFIX_PATH=/usr/x86_64-w64-mingw32 \
+    && sed -i -e "s#-licu#-L/depends/x86_64-w64-mingw32/lib -licu#" src/CMakeFiles/monero-wallet-gui.dir/linkLibs.rsp \
+    && sed -i '37i #include <cstdint>' ../../../monero/contrib/epee/include/net/http_base.h \
+    && make -j$THREADS

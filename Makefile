@@ -54,7 +54,10 @@ release-linux-ppc64le:
 	mkdir -p $(builddir)/release && cd $(builddir)/release && cmake -D DEV_MODE=$(or ${DEV_MODE},OFF) -DMANUAL_SUBMODULES=${MANUAL_SUBMODULES} -D ARCH="ppc64le" -D CMAKE_BUILD_TYPE=Release $(topdir) && $(MAKE)
 
 release-static:
-	mkdir -p $(builddir)/release && cd $(builddir)/release && cmake -D STATIC=ON -D DEV_MODE=$(or ${DEV_MODE},OFF) -DMANUAL_SUBMODULES=${MANUAL_SUBMODULES} -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Release $(topdir) && $(MAKE)
+	mkdir -p $(builddir)/release && cd $(builddir)/release && cmake -D STATIC=ON -D DEV_MODE=$(or ${DEV_MODE},OFF) -DMANUAL_SUBMODULES=${MANUAL_SUBMODULES} -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Release -D QT_QML_DEBUG=ON $(topdir)
+	sed -i -e "s#libfontconfig.a#libfontconfig.a /usr/lib/libexpat.a#" build/release/src/CMakeFiles/monero-wallet-gui.dir/link.txt
+	sed -i -e "s#/usr/local/lib/libfreetype.a /usr/local/lib/libfontconfig.a#/usr/local/lib/libfontconfig.a /usr/local/lib/libfreetype.a#" build/release/src/CMakeFiles/monero-wallet-gui.dir/link.txt
+	cd $(builddir)/release && $(MAKE)
 
 debug-static-win64:
 	mkdir -p $(builddir)/debug && cd $(builddir)/debug && cmake -D STATIC=ON -G "MSYS Makefiles" -D DEV_MODE=$(or ${DEV_MODE},ON) -DMANUAL_SUBMODULES=${MANUAL_SUBMODULES} -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Debug -D BUILD_TAG="win-x64" -D CMAKE_TOOLCHAIN_FILE=$(topdir)/cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=$(shell cd ${MINGW_PREFIX}/.. && pwd -W) -D MINGW=ON $(topdir) && $(MAKE)

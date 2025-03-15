@@ -94,7 +94,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling the Monero GUI from source
 
-*Note*: Qt 5.9.7 is the minimum version required to build the GUI.
+*Note*: Qt 6.TODO.TODO is the minimum version required to build the GUI.
 
 *Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
 
@@ -151,7 +151,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
 
 ### Building Android APK with Docker (any OS) *Experimental*
- - Minimum Android 9 Pie (API 28)
+ - Minimum Android 14 `Upside Down Cake` (API 34)
  - ARMv8-A 64-bit CPU
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 2. Clone the repository
@@ -177,7 +177,7 @@ Packaging for your favorite distribution would be a welcome contribution!
      - [Enable adb debugging on your device](https://developer.android.com/studio/command-line/adb.html#Enabling)
       * Connect your device with USB and install Monero GUI APK with adb:
       ```
-      adb install build/Android/release/android-build/monero-gui.apk
+      adb install build/Android/release/android-build/monero-wallet-gui.apk
       ```
       * Troubleshooting:
       ```
@@ -191,7 +191,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    * Using a web server
       ```
       mkdir /usr/tmp
-      cp build/Android/release/android-build/monero-gui.apk /usr/tmp
+      cp build/Android/release/android-build/monero-wallet-gui.apk /usr/tmp
       docker run -d -v /usr/tmp:/usr/share/nginx/html:ro -p 8080:80 nginx
       ```
       Now it should be accessible through a web browser at
@@ -219,9 +219,9 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 6.TODO.TODO or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
 
- The recommended way is to install 5.9.7 from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
+ The recommended way is to install 6.TODO.TODO from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
 The following instructions will fetch Qt from your distribution's repositories instead. Take note of what version it installs. Your mileage may vary.
 
@@ -234,17 +234,17 @@ The following instructions will fetch Qt from your distribution's repositories i
    
     The *qml* USE flag must be enabled.
 
-    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtquickcontrols:5 dev-qt/qtquickcontrols2:5 dev-qt/qtgraphicaleffects:5`
+    `sudo emerge dev-qt/qtcore:6 dev-qt/qtdeclarative:6 dev-qt/qtquickcontrols:6 dev-qt/qtgraphicaleffects:6`
 
   - Optional : To build the flag `WITH_SCANNER`
 
     - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-      `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia`
+      `sudo apt install qt6multimedia6-dev qml6-module-qtmultimedia`
 
     - For Gentoo      
 
-      `emerge dev-qt/qtmultimedia:5`
+      `emerge dev-qt/qtmultimedia:6`
 
 
 3. Clone repository

@@ -119,7 +119,7 @@ Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; Deleting them is simpler and faster than forcing a full re-install.
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\translations"
-Type: files; Name: "{app}\Qt5*.dll"
+Type: files; Name: "{app}\Qt6*.dll"
 Type: filesandordirs; Name: "{app}\Qt"
 Type: filesandordirs; Name: "{app}\audio"
 Type: filesandordirs; Name: "{app}\bearer"

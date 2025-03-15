@@ -57,6 +57,8 @@
 #undef KeyRelease
 #undef FocusIn
 #undef FocusOut
+#undef Status
+#undef Always
 // #undef those Xlib #defines that conflict with QEvent::Type enum
 #include "qt/utils.h"
 #endif

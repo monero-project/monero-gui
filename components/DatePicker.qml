@@ -26,12 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.2
-import QtQuick.Controls 2.2 as QtQuickControls2
-import QtQuick.Layouts 1.2
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -246,10 +244,10 @@ Item {
         }
     }
 
-    QtQuickControls2.Popup {
+    Popup {
         id: popup
         padding: 0
-        closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         onOpened: {
             calendar.visibleMonth = currentDate.getMonth();
             calendar.visibleYear = currentDate.getFullYear();
@@ -290,7 +288,7 @@ Item {
                 height: 1
             }
 
-            Calendar {
+            MonthGrid {
                 id: calendar
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -298,9 +296,9 @@ Item {
                 anchors.margins: 1
                 anchors.bottomMargin: 10
                 height: 220
-                frameVisible: false
+                //frameVisible: false
 
-                style: CalendarStyle {
+                /*style: CalendarStyle {
                     gridVisible: false
                     background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
                     dayDelegate: Item {
@@ -458,7 +456,7 @@ Item {
                             }
                         }
                     }
-                }
+                }*/
             }
         }
     }

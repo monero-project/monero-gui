@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
 import QtQuick.Controls 2.0
 
 import moneroComponents.Wallet 1.0
@@ -208,8 +208,8 @@ Rectangle {
                     labelFontSize: 14
                     placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "1"
                 }
@@ -229,7 +229,7 @@ Rectangle {
                     labelFontSize: 14
                     placeholderText: "<major>:<minor>"
                     placeholderFontSize: 16
-                    validator: RegExpValidator { regExp: /(\d+):(\d+)?$/ }
+                    validator: RegularExpressionValidator { regularExpression: /(\d+):(\d+)?$/ }
                 }
             }
 

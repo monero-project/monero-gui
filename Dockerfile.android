@@ -1,30 +1,30 @@
-FROM debian:buster
+FROM debian:bookworm
 
 ARG THREADS=1
-ARG ANDROID_NDK_REVISION=23c
-ARG ANDROID_NDK_HASH=e5053c126a47e84726d9f7173a04686a71f9a67a
-ARG ANDROID_SDK_REVISION=7302050_latest
-ARG ANDROID_SDK_HASH=7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
-ARG QT_VERSION=v5.15.16-lts-lgpl
+ARG ANDROID_NDK_REVISION=26d
+ARG ANDROID_NDK_HASH=fcdad75a765a46a9cf6560353f480db251d14765
+ARG ANDROID_SDK_REVISION=11076708_latest
+ARG ANDROID_SDK_HASH=2d2d50857e4eb553af5a6dc3ad507a17adf43d115264b1afc116f95c92e5e258
+ARG QT_VERSION=v6.8.2
 
 WORKDIR /opt/android
 ENV WORKDIR=/opt/android
 
-ENV ANDROID_NATIVE_API_LEVEL=31
+ENV ANDROID_NATIVE_API_LEVEL=34
 ENV ANDROID_API=android-${ANDROID_NATIVE_API_LEVEL}
 ENV ANDROID_CLANG=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang
 ENV ANDROID_CLANGPP=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang++
 ENV ANDROID_NDK_ROOT=${WORKDIR}/android-ndk-r${ANDROID_NDK_REVISION}
 ENV ANDROID_SDK_ROOT=${WORKDIR}/cmdline-tools
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH=${JAVA_HOME}/bin:${PATH}
 ENV PREFIX=${WORKDIR}/prefix
 ENV TOOLCHAIN_DIR=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64
 
 RUN apt-get update \
     && apt-get install -y ant automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
-    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-11-jdk-headless openjdk-11-jre-headless pkg-config python3 \
-    unzip wget
+    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-17-jdk-headless openjdk-17-jre-headless pkg-config python3 \
+    unzip wget ninja-build
 
 RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
     && wget -q https://dl.google.com/android/repository/${PACKAGE_NAME} \
@@ -38,7 +38,15 @@ RUN PACKAGE_NAME=android-ndk-r${ANDROID_NDK_REVISION}-linux.zip \
     && unzip -q ${PACKAGE_NAME} \
     && rm -f ${PACKAGE_NAME}
 
-RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;28.0.3" "platforms;${ANDROID_API}" "tools" > /dev/null
+RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;35.0.1" "platforms;${ANDROID_API}" "tools" > /dev/null
+
+RUN git clone -b v3.31.4 --depth 1 https://github.com/Kitware/CMake \
+    && cd CMake \
+    && git reset --hard 569b821a138a4d3f7f4cc42c0cf5ae5e68d56f96 \
+    && ./bootstrap \
+    && make -j${THREADS} \
+    && make -j${THREADS} install \
+    && rm -rf $(pwd)
 
 ENV HOST_PATH=${PATH}
 ENV PATH=${TOOLCHAIN_DIR}/aarch64-linux-android/bin:${TOOLCHAIN_DIR}/bin:${PATH}
@@ -50,45 +58,74 @@ RUN wget -q https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zl
     && tar -xzf zlib-${ZLIB_VERSION}.tar.gz \
     && rm zlib-${ZLIB_VERSION}.tar.gz \
     && cd zlib-${ZLIB_VERSION} \
-    && CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --prefix=${PREFIX} --static \
+    && CFLAGS="-fPIC" CXXFLAGS="-fPIC" CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ./configure --prefix=${PREFIX} --static \
     && make -j${THREADS} \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
-    && cd qt5 \
-    && perl init-repository --module-subset=default,-qtwebengine \
-    && PATH=${HOST_PATH} ./configure -v -developer-build -release \
+RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
+    cd qt5 && \
+    git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qt5compat.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquickeffectmaker.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquicktimeline.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtshadertools.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1
+
+RUN cd qt5 && \
+    mkdir build_host && \
+    cd build_host && \
+    ../configure -developer-build -no-opengl -no-warnings-are-errors \
+        -nomake tests -nomake examples \
+        -no-feature-assistant -no-feature-designer -no-feature-distancefieldgenerator \
+        -no-feature-pixeltool -no-feature-qtattributionsscanner -no-feature-qtdiag
+
+RUN cd qt5/build_host && \
+    cmake --build . --target host_tools -j${THREADS}
+
+#RUN cd qt5/build_host && \
+#    cmake --install .
+
+RUN cd qt5 && \
+    mkdir build_android && \
+    cd build_android && \
+    PATH=${HOST_PATH} ../configure -developer-build -release \
+    -qt-host-path /opt/android/qt5/build_host/qtbase \
     -xplatform android-clang \
     -android-ndk-platform ${ANDROID_API} \
     -android-ndk ${ANDROID_NDK_ROOT} \
     -android-sdk ${ANDROID_SDK_ROOT} \
-    -android-ndk-host linux-x86_64 \
     -no-dbus \
     -opengl es2 \
     -no-use-gold-linker \
     -no-sql-mysql \
+    -no-sql-sqlite \
     -opensource -confirm-license \
-    -android-arch arm64-v8a \
+    -android-abis arm64-v8a \
     -prefix ${PREFIX} \
     -nomake tools -nomake tests -nomake examples \
-    -skip qtwebengine \
-    -skip qtserialport \
-    -skip qtconnectivity \
-    -skip qttranslations \
-    -skip qtpurchasing \
-    -skip qtgamepad -skip qtscript -skip qtdoc \
-    -no-warnings-are-errors \
-    && PATH=${HOST_PATH} make -j${THREADS} \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && cd qttools/src/linguist/lrelease \
-    && ../../../../qtbase/bin/qmake \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && cd ../../../.. \
-    && rm -rf $(pwd)
+    -skip qt3d -skip qtactiveqt -skip qtcanvas3d -skip qtcharts -skip qtquick3d \
+    -skip qtquick3dphysics -skip qtcoap -skip qtdatavis3d \
+    -skip qt3d -skip qtactiveqt -skip qtcanvas3d -skip qtcharts -skip qtcoap -skip qtconnectivity -skip qtdatavis3d \
+    -skip qtdoc -skip qtfeedback -skip qtgamepad -skip qtgraphs -skip qtgrpc -skip qthttpserver -skip qtlanguageserver -skip qtlocation -skip qtlottie -skip qtmqtt -skip qtnetworkauth -skip qtopcua -skip qtpim -skip qtpositioning -skip qtqa \
+    -skip qtremoteobjects -skip qtrepotools -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qtsystems  \
+    -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebglplugin -skip qtwebsockets -skip qtwebview \
+    -skip gamepad -skip serialbus -skip location -skip webengine \
+    -nomake examples -nomake tests -skip qtquick3d -skip qtquick3dphysics -skip qttranslations -skip qtxmlpatterns \
+    -no-feature-designer -no-feature-distancefieldgenerator -no-feature-pixeltool -no-feature-qtattributionsscanner \
+    -no-feature-qtdiag -no-feature-qtplugininfo \
+    -no-warnings-are-errors -no-feature-qml-worker-script -no-feature-assistant
 
-ARG ICONV_VERSION=1.16
-ARG ICONV_HASH=e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04
+RUN cd qt5/build_android && PATH=${HOST_PATH} cmake --build . -j${THREADS} \
+    && PATH=${HOST_PATH} cmake --install .
+
+ARG ICONV_VERSION=1.18
+ARG ICONV_HASH=3b08f5f4f9b4eb82f151a7040bfd6fe6c6fb922efe4b1659c66ea933276965e8
 RUN wget -q http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz \
     && echo "${ICONV_HASH}  libiconv-${ICONV_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf libiconv-${ICONV_VERSION}.tar.gz \
@@ -196,27 +233,26 @@ RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b v3.31.4 --depth 1 https://github.com/Kitware/CMake \
-    && cd CMake \
-    && git reset --hard 569b821a138a4d3f7f4cc42c0cf5ae5e68d56f96 \
-    && PATH=${HOST_PATH} ./bootstrap \
-    && PATH=${HOST_PATH} make -j${THREADS} \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && rm -rf $(pwd)
+RUN cp ${WORKDIR}/qt5/build_host/qtbase/bin/lrelease /usr/bin
+RUN cp ${WORKDIR}/qt5/build_host/qtbase/libexec/rcc /usr/bin/
+
+#ENV PATH=${PATH}:/opt/android/qt5/build_host/qtbase/bin
 
 # Workaround
 ENV NEW_SDK_ROOT=${WORKDIR}/sdk
 RUN mkdir ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/licenses ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/platforms ${NEW_SDK_ROOT} \
-    && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT}
+    && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT} \
+    && rm -rf ${ANDROID_SDK_ROOT} \
+    && mv ${NEW_SDK_ROOT} ${ANDROID_SDK_ROOT}
 
 CMD set -ex \
     && cd /monero-gui \
     && mkdir -p build/Android/release \
     && cd build/Android/release \
     && cmake \
-    -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" \
+    -DCMAKE_TOOLCHAIN_FILE="${PREFIX}/lib/cmake/Qt6/qt.toolchain.cmake" \
     -DCMAKE_PREFIX_PATH="${PREFIX}" \
     -DCMAKE_FIND_ROOT_PATH="${PREFIX}" \
     -DCMAKE_BUILD_TYPE=Release \
@@ -225,11 +261,12 @@ CMD set -ex \
     -DANDROID_ABI="arm64-v8a" \
     -DANDROID_TOOLCHAIN=clang \
     -DBoost_USE_STATIC_RUNTIME=ON \
-    -DLRELEASE_PATH="${PREFIX}/bin" \
+    -DLRELEASE_PATH="/usr/bin" \
     -DQT_ANDROID_APPLICATION_BINARY="monero-wallet-gui" \
-    -DANDROID_SDK="${NEW_SDK_ROOT}" \
     -DWITH_SCANNER=ON \
     -DWITH_DESKTOP_ENTRY=OFF \
+    -DANDROID_SDK="${ANDROID_SDK_ROOT}" \
+    -DQT_ANDROID_DEPLOYMENT_TYPE="debug" \
     ../../.. \
     && PATH=${HOST_PATH} make generate_translations_header \
     && sed -i -e "s#../monero/external/randomx/librandomx.a##" src/CMakeFiles/monero-wallet-gui.dir/link.txt \

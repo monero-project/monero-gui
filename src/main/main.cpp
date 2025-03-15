@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QObject>
-#include <QDesktopWidget>
 #include <QScreen>
 #include <QThread>
 
@@ -121,7 +120,7 @@ Q_IMPORT_PLUGIN(QQmlProfilerServiceFactory)
 Q_IMPORT_PLUGIN(QQuickProfilerAdapterFactory)
 Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
 Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
-Q_IMPORT_PLUGIN(QGenericEnginePlugin)
+//Q_IMPORT_PLUGIN(QGenericEnginePlugin)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 Q_IMPORT_PLUGIN(QtQmlPlugin)
@@ -130,18 +129,18 @@ Q_IMPORT_PLUGIN(QtQmlModelsPlugin)
 Q_IMPORT_PLUGIN(QtQuick2Plugin)
 Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
 Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
-Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
-Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
-Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
-Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
+Q_IMPORT_PLUGIN(QtQuick_WindowPlugin)
+Q_IMPORT_PLUGIN(QtQuickDialogsPlugin)
 Q_IMPORT_PLUGIN(QmlFolderListModelPlugin)
 Q_IMPORT_PLUGIN(QmlSettingsPlugin)
 Q_IMPORT_PLUGIN(QtLabsPlatformPlugin)
-Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
-Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
 Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
+Q_IMPORT_PLUGIN(QtQuickControls2FusionStylePlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2FusionStyleImplPlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2BasicStylePlugin)
 Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
-Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
+Q_IMPORT_PLUGIN(QtQmlXmlListModelPlugin)
+Q_IMPORT_PLUGIN(QtQmlCorePlugin)
 #ifdef WITH_SCANNER
 Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
 #endif
@@ -191,7 +190,7 @@ int main(int argc, char *argv[])
     MacOSHelper::disableWindowTabbing();
 #endif
     // disable "QApplication: invalid style override passed" warning
-    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
+    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "Fusion");
 #ifdef Q_OS_LINUX
     // platform xcb by default
     if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "xcb");
@@ -455,6 +454,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
     engine.addImportPath(":/fonts");
+#if defined(_WIN32) && !defined(MONERO_GUI_STATIC)
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
+#endif
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
 

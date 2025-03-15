@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 
 import "../" as MoneroComponents
 import FontAwesome 1.0

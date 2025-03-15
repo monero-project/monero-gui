@@ -28,8 +28,7 @@
 
 import QtQuick 2.9
 import QtQuick.Window 2.1
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -74,14 +73,14 @@ Rectangle {
                 width: 60
                 height: 60
                 anchors.centerIn: parent
-                source: "qrc:///images/monero-vector.svg"
+                source: "qrc:///images/moneroLogo_white.png"
                 mipmap: true
             }
 
             BusyIndicator {
                 running: parent.visible
                 anchors.centerIn: imgLogo
-                style: BusyIndicatorStyle {
+                /*style: BusyIndicatorStyle {
                     indicator: Image {
                         visible: control.running
                         source: "qrc:///images/busy-indicator.png"
@@ -93,7 +92,7 @@ Rectangle {
                             to: 360
                         }
                     }
-                }
+                }*/
             }
         }
 

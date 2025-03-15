@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
@@ -274,8 +274,8 @@ Rectangle {
                     labelFontSize: 14
                     placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "0"
                 }
