@@ -163,10 +163,12 @@ Rectangle {
                 fontFamily: "Arial"
                 horizontalAlignment: Text.AlignHCenter
                 text: {
-                    if (appWindow.viewOnly) {
+                    if (appWindow.viewOnly && !persistentSettings.useURCode) {
                         return qsTr("Create transaction file") + translationManager.emptyString;
                     } else if (root.sweepUnmixable) {
                         return qsTr("Sweep unmixable outputs") + translationManager.emptyString;
+                    } else if (appWindow.viewOnly && persistentSettings.useURCode) { // intentionally behind sweepUnmixable
+                        return qsTr("Create transaction") + translationManager.emptyString;
                     } else {
                         return qsTr("Confirm send") + translationManager.emptyString;
                     }

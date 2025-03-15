@@ -300,8 +300,15 @@ Rectangle {
                             visible: appWindow.qrScannerEnabled
                             tooltip: qsTr("Scan QR code") + translationManager.emptyString
                             onClicked: {
-                                cameraUi.state = "Capture"
-                                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                                if(builtWithOtsUr) {
+                                    urScannerUi.txData.connect(root.txDataFromScanner)
+                                    urScannerUi.canceled.connect(root.scanCanceled)
+                                    urScannerUi.scanTxData()
+
+                                } else {
+                                    cameraUi.state = "Capture"
+                                    cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                                }
                             }
                         }
 
@@ -881,13 +888,24 @@ Rectangle {
             button1.enabled: appWindow.viewOnly
             button1.onClicked: {
                 console.log("Transfer: export outputs clicked")
-                exportOutputsDialog.open();
+                if(persistentSettings.useURCode) {
+                    var outputs = currentWallet.exportOutputsAsString(true);
+                    urDisplay.showOutputs(outputs)
+                } else {
+                    exportOutputsDialog.open();
+                }
             }
             button2.text: qsTr("Import") + translationManager.emptyString
             button2.enabled: !appWindow.viewOnly
             button2.onClicked: {
                 console.log("Transfer: import outputs clicked")
-                importOutputsDialog.open();
+                if(persistentSettings.useURCode) {
+                    urScannerUi.outputs.connect(root.importOutputs)
+                    urScannerUi.canceled.connect(root.scanCanceled)
+                    urScannerUi.scanOutputs()
+                } else {
+                    importOutputsDialog.open();
+                }
             }
             tooltip: {
                 var header = qsTr("Required for cold wallets to sign their corresponding key images") + translationManager.emptyString;
@@ -907,13 +925,24 @@ Rectangle {
             button1.enabled: !appWindow.viewOnly
             button1.onClicked: {
                 console.log("Transfer: export key images clicked")
-                exportKeyImagesDialog.open();
+                if(persistentSettings.useURCode) {
+                    var keyImages = currentWallet.exportKeyImagesAsString(true);
+                    urDisplay.showKeyImages(keyImages)
+                } else {
+                    exportKeyImagesDialog.open();
+                }
             }
             button2.text: qsTr("Import") + translationManager.emptyString
             button2.enabled: appWindow.viewOnly && appWindow.isTrustedDaemon()
             button2.onClicked: {
                 console.log("Transfer: import key images clicked")
-                importKeyImagesDialog.open(); 
+                if(persistentSettings.useURCode) {
+                    urScannerUi.keyImages.connect(root.importKeyImages)
+                    urScannerUi.canceled.connect(root.scanCanceled)
+                    urScannerUi.scanKeyImages()
+                } else {
+                    importKeyImagesDialog.open();
+                }
             }
             tooltip: {
                 var errorMessage = "";
@@ -946,13 +975,25 @@ Rectangle {
             button2.enabled: !appWindow.viewOnly
             button2.onClicked: {
                 console.log("Transfer: sign tx clicked")
-                signTxDialog.open();
+                if(persistentSettings.useURCode) {
+                    urScannerUi.canceled.connect(root.scanCanceled)
+                    urScannerUi.unsignedTx.connect(root.signTx)
+                    urScannerUi.scanUnsignedTx()
+                } else {
+                    signTxDialog.open();
+                }
             }
             button3.text: qsTr("Submit") + translationManager.emptyString
             button3.enabled: appWindow.viewOnly
             button3.onClicked: {
                 console.log("Transfer: submit tx clicked")
-                submitTxDialog.open();
+                if(persistentSettings.useURCode) {
+                    urScannerUi.canceled.connect(root.scanCanceled)
+                    urScannerUi.signedTx.connect(root.submitTx)
+                    urScannerUi.scanSignedTx()
+                } else {
+                    submitTxDialog.open();
+                }
             }
             tooltip: {
                 var errorMessage = "";
@@ -1029,7 +1070,7 @@ Rectangle {
         }
     }
 
-    //SignTxDialog
+    //SubmitTxDialog
     FileDialog {
         id: submitTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
@@ -1188,5 +1229,88 @@ Rectangle {
         middlePanel.state = 'Transfer';
 
         fillPaymentDetails(address, paymentId, amount, description);
+    }
+
+    function txDataFromScanner(txData) {
+        disconnectCameraUi()
+        middlePanel.state = 'Transfer';
+        fillPaymentDetails(txData.address, txData.payment_id, txData.amount, txData.description);
+    }
+
+    function signTx(tx) {
+        disconnectCameraUi()
+        transaction = currentWallet.loadTxString(tx)
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't load unsigned transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Can't load unsigned transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            transaction.destroy();
+        } else {
+            confirmationDialog.text =  qsTr("\nConfirmation message:\n ") + transaction.confirmationMessage
+            console.log(transaction.confirmationMessage);
+
+            // Show confirmation dialog
+            confirmationDialog.title = qsTr("Confirmation") + translationManager.emptyString
+            confirmationDialog.icon = StandardIcon.Question
+            confirmationDialog.onAcceptedCallback = function() {
+                var signed_tx = transaction.signAsString();
+                transaction.destroy();
+                urDisplay.showSignedTx(signed_tx)
+            };
+            confirmationDialog.onRejectedCallback = transaction.destroy;
+
+            confirmationDialog.open()
+        }
+    }
+
+    function submitTx(tx) {
+        disconnectCameraUi()
+        if(!currentWallet.submitTxString(tx)){
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+        } else {
+            informationPopup.title = qsTr("Information") + translationManager.emptyString
+            informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
+            informationPopup.icon  = StandardIcon.Information
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+        }
+    }
+
+    function importOutputs(outputs) {
+        disconnectCameraUi()
+        if (currentWallet.importOutputsFromString(outputs)) {
+            appWindow.showStatusMessage(qsTr("Outputs successfully imported to wallet") + translationManager.emptyString, 3);
+        } else {
+            appWindow.showStatusMessage(currentWallet.errorString, 5);
+        }
+    }
+
+    function importKeyImages(keyImages) {
+        disconnectCameraUi()
+        if (currentWallet.importKeyImagesFromString(keyImages)) {
+            appWindow.showStatusMessage(qsTr("Key images successfully imported to wallet") + translationManager.emptyString, 3);
+        } else {
+            appWindow.showStatusMessage(currentWallet.errorString, 5);
+        }
+    }
+
+    function scanCanceled() {
+        disconnectCameraUi()
+    }
+
+    function disconnectCameraUi() {
+        urScannerUi.outputs.disconnect(root.importOutputs)
+        urScannerUi.canceled.disconnect(root.scanCanceled)
+        urScannerUi.keyImages.disconnect(root.importKeyImages)
+        urScannerUi.unsignedTx.disconnect(root.signTx)
+        urScannerUi.signedTx.disconnect(root.submitTx)
     }
 }

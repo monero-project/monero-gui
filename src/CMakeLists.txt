@@ -103,6 +103,7 @@ target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
+	${CMAKE_CURRENT_SOURCE_DIR}/ur/qtquick
 	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${X11_INCLUDE_DIR}
 )
@@ -152,6 +153,11 @@ if(WITH_SCANNER)
             rt
         )
     endif()
+endif()
+
+if(WITH_OTS_UR)
+    add_subdirectory(otsur)
+    target_link_libraries(monero-wallet-gui otsqtquick)
 endif()
 
 add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
