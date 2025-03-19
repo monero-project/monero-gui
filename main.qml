@@ -99,6 +99,7 @@ ApplicationWindow {
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
     property bool themeTransition: false
+    property int backgroundSyncType: Wallet.BackgroundSync_Off;
 
     // fiat price conversion
     property real fiatPrice: 0
@@ -133,6 +134,12 @@ ApplicationWindow {
     }
 
     function lock() {
+        if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
+            appWindow.showProcessingSplash(qsTr("Locking..."));
+            currentWallet.startBackgroundSync()
+            return;
+        }
+
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         passwordDialog.onAcceptedCallback = function() {
             if(walletPassword === passwordDialog.password)
@@ -288,6 +295,9 @@ ApplicationWindow {
         currentWallet.heightRefreshed.disconnect(onHeightRefreshed);
         currentWallet.refreshed.disconnect(onWalletRefresh)
         currentWallet.updated.disconnect(onWalletUpdate)
+        currentWallet.backgroundSyncSetup.disconnect(onBackgroundSyncSetup)
+        currentWallet.backgroundSyncStarted.disconnect(onBackgroundSyncStarted)
+        currentWallet.backgroundSyncStopped.disconnect(onBackgroundSyncStopped)
         currentWallet.newBlock.disconnect(onWalletNewBlock)
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
         currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
@@ -324,6 +334,7 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
 
         viewOnly = currentWallet.viewOnly;
+        backgroundSyncType = currentWallet.getBackgroundSyncType();
 
         // New wallets saves the testnet flag in keys file.
         if(persistentSettings.nettype != currentWallet.nettype) {
@@ -335,6 +346,9 @@ ApplicationWindow {
         currentWallet.heightRefreshed.connect(onHeightRefreshed);
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
+        currentWallet.backgroundSyncSetup.connect(onBackgroundSyncSetup)
+        currentWallet.backgroundSyncStarted.connect(onBackgroundSyncStarted)
+        currentWallet.backgroundSyncStopped.connect(onBackgroundSyncStopped)
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
@@ -544,6 +558,15 @@ ApplicationWindow {
             }
         }
 
+        // Don't allow opening background wallets in the GUI
+        if (wallet.isBackgroundWallet()) {
+            passwordDialog.onCancel();
+            appWindow.showStatusMessage(qsTr("Can't open background wallets in the GUI"),6);
+            console.log("closing background wallet");
+            closeWallet();
+            return;
+        }
+
         // wallet opened successfully, subscribing for wallet updates
         connectWallet(wallet)
 
@@ -585,21 +608,77 @@ ApplicationWindow {
         devicePassphraseDialog.open(on_device)
     }
 
-    function onWalletUpdate() {
+    function onWalletUpdate(stoppedBackgroundSync) {
         if (!currentWallet)
             return;
 
         console.log(">>> wallet updated")
         updateBalance();
-        // Update history if new block found since last update
-        if(foundNewBlock) {
+        // Update history if new block found since last update or background sync was just stopped
+        if(foundNewBlock || stoppedBackgroundSync) {
+            if (foundNewBlock)
+                console.log("New block found - updating history")
             foundNewBlock = false;
-            console.log("New block found - updating history")
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
 
             if(middlePanel.state == "History")
                 middlePanel.historyView.update();
         }
+    }
+
+    function onBackgroundSyncSetup() {
+        console.log(">>> background sync setup");
+        hideProcessingSplash();
+        if (currentWallet.status !== Wallet.Status_Ok) {
+            console.error("Error setting up background sync: ", currentWallet.errorString);
+            appWindow.showStatusMessage(currentWallet.errorString, 5);
+            return;
+        }
+        appWindow.backgroundSyncType = currentWallet.getBackgroundSyncType();
+    }
+
+    function onBackgroundSyncStarted() {
+        console.log(">>> background sync started");
+        hideProcessingSplash();
+        var started = currentWallet.status === Wallet.Status_Ok;
+        if (!started) {
+            console.error("Error starting background sync: ", currentWallet.errorString);
+            appWindow.showStatusMessage(currentWallet.errorString, 5);
+        }
+
+        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.onAcceptedCallback = function() {
+            if(walletPassword === passwordDialog.password) {
+                if (currentWallet && started) {
+                    appWindow.showProcessingSplash(qsTr("Unlocking..."));
+                    currentWallet.stopBackgroundSync(walletPassword);
+                } else {
+                    passwordDialog.close();
+                }
+            } else {
+                passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
+            }
+        }
+        passwordDialog.open(usefulName(persistentSettings.wallet_path), "", "", "", started);
+    }
+
+    function onBackgroundSyncStopped() {
+        console.log(">>> background sync stopped");
+        var stopped = currentWallet.status === Wallet.Status_Ok;
+        if (!stopped) {
+            hideProcessingSplash();
+            console.error("Error stopping background sync: ", currentWallet.errorString);
+
+            // If there is an error stopping background sync, the spend key
+            // won't be loaded and the wallet will be in a broken state. Don't
+            // let the user continue normal wallet operations in this state.
+            passwordDialog.showError(qsTr("Error stopping background sync: ") + currentWallet.errorString);
+            return;
+        }
+
+        onWalletUpdate(stopped);
+        hideProcessingSplash();
+        passwordDialog.close();
     }
 
     function connectRemoteNode() {
@@ -2258,6 +2337,20 @@ ApplicationWindow {
         var inactivity = Utils.epoch() - appWindow.userLastActive;
         if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
 
+        if (inputDialogVisible) inputDialog.close()
+        remoteNodeDialog.close();
+        informationPopup.close()
+        txConfirmationPopup.close()
+        txConfirmationPopup.clearFields()
+        txConfirmationPopup.rejected()
+        successfulTxPopup.close();
+
+        if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
+            appWindow.showProcessingSplash(qsTr("Locking..."));
+            currentWallet.startBackgroundSync()
+            return;
+        }
+
         passwordDialog.onAcceptedCallback = function() {
             if(walletPassword === passwordDialog.password){
                 passwordDialog.close();
@@ -2270,13 +2363,6 @@ ApplicationWindow {
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
-        if (inputDialogVisible) inputDialog.close()
-        remoteNodeDialog.close();
-        informationPopup.close()
-        txConfirmationPopup.close()
-        txConfirmationPopup.clearFields()
-        txConfirmationPopup.rejected()
-        successfulTxPopup.close();
         passwordDialog.open();
     }
 
