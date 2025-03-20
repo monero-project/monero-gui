@@ -53,6 +53,7 @@ Rectangle {
     property alias transferHeight2: advancedLayout.height
     property int mixin: 15  // (ring size 16)
     property string warningContent: ""
+    property bool isSendAll: false
     property string sendButtonWarning: {
         // Currently opened wallet is not view-only
         if (appWindow.viewOnly) {
@@ -334,13 +335,17 @@ Rectangle {
                         }
 
                         MoneroComponents.InlineButton {
+                            enabled: root.warningContent == ""
                             fontFamily: FontAwesome.fontFamilySolid
                             fontStyleName: "Solid"
                             fontPixelSize: 16
                             text: FontAwesome.infinity
                             visible: recipientModel.count == 1
                             tooltip: qsTr("Send all unlocked balance of this account") + translationManager.emptyString
-                            onClicked: recipientRepeater.itemAt(0).children[1].children[2].text = "(all)";
+                            onClicked: {
+                                root.isSendAll = true;
+                                recipientRepeater.itemAt(0).children[1].children[3].text = "(all)";
+                            }
                         }
 
                         Item {
@@ -374,8 +379,8 @@ Rectangle {
                             spacing: 0
 
                             MoneroComponents.LineEditMulti {
-                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
-                                KeyNavigation.tab: parent.children[2]
+                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[3] : sendButton
+                                KeyNavigation.tab: parent.children[3]
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.topMargin: index > 0 ? 0 : 1
                                 Layout.bottomMargin: 2
@@ -437,12 +442,103 @@ Rectangle {
                                 Layout.topMargin: index > 0 ? 0 : 1
                                 Layout.bottomMargin: 1
                                 Layout.leftMargin: recipientLayout.colSpacing / 2 - width
-                                Layout.rightMargin: recipientLayout.colSpacing / 2
+                                Layout.rightMargin: amountAll.visible ? 0 : recipientLayout.colSpacing / 2
                                 color: MoneroComponents.Style.inputBorderColorInActive
                                 width: 1
                             }
 
+                            Rectangle {
+                                id: amountAll
+                                Layout.fillHeight: true
+                                Layout.minimumHeight: 40
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignVCenter
+                                Layout.topMargin: 1
+                                Layout.bottomMargin: 1
+                                Layout.rightMargin: -4
+                                Layout.preferredWidth: 139
+                                Layout.maximumWidth: 139
+                                color: MoneroComponents.Style.buttonInlineBackgroundColor
+                                visible: index == 0 && recipientModel.get(0).amount == "(all)"
+                                border.color: "transparent"
+                                border.width: 0
+                                onVisibleChanged: {
+                                    if (index == 0 && amountAll.visible) {
+                                        root.isSendAll = true;
+                                    } else if (index == 0 && !amountAll.visible) {
+                                        root.isSendAll = false;
+                                    }
+                                }
+
+                                RowLayout {
+                                    id: rowAmountAll
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.rightMargin: 4
+                                    anchors.right: parent.right
+                                    spacing: 8
+
+                                    MoneroComponents.TextPlain {
+                                        id: amountEstimate
+                                        Layout.leftMargin: 4
+                                        font.family: feeLabel.estimatedFee ? MoneroComponents.Style.fontMonoRegular.name : MoneroComponents.Style.fontRegular.name
+                                        font.pixelSize: 14
+                                        color: MoneroComponents.Style.inlineButtonTextColor
+                                        text: {
+                                            if (!feeLabel.estimatedFee) {
+                                                return qsTr("Estimating") + "..." + translationManager.emptyString;
+                                            } else {
+                                                return "~" + (leftPanel.balanceUnlockedString - feeLabel.estimatedFee).toFixed(10);
+                                            }
+                                        }
+                                        visible: index == 0 && recipientModel.get(0).amount == "(all)"
+                                        tooltip: qsTr("Estimated amount") + translationManager.emptyString;
+
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            cursorShape: Qt.IBeamCursor
+                                            hoverEnabled: true
+                                            onEntered: parent.tooltipPopup.open()
+                                            onExited: parent.tooltipPopup.close()
+                                            onClicked: {
+                                                parent.tooltipPopup.close()
+                                                amountField.text = "";
+                                                root.isSendAll = false;
+                                            }
+                                        }
+                                    }
+
+                                    MoneroComponents.TextPlain {
+                                        Layout.alignment: Qt.AlignRight
+                                        Layout.rightMargin: 6
+                                        font.family: FontAwesome.fontFamily
+                                        font.bold: true
+                                        color: MoneroComponents.Style.defaultFontColor
+                                        text: FontAwesome.times
+                                        opacity: cleanSendAllAmountMouseArea.containsMouse ? 1 : 0.85
+                                        tooltip: qsTr("Clean amount")  + translationManager.emptyString
+                                        tooltipExitAnimationDuration: 0
+
+                                        MouseArea {
+                                            id: cleanSendAllAmountMouseArea
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            hoverEnabled: true
+                                            onEntered: parent.tooltipPopup.open()
+                                            onExited: parent.tooltipPopup.close()
+                                            onClicked: {
+                                                parent.tooltipPopup.close()
+                                                amountField.text = "";
+                                                root.isSendAll = false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             MoneroComponents.LineEdit {
+                                id: amountField
+                                visible: !amountEstimate.visible
                                 KeyNavigation.backtab: parent.children[0]
                                 KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
                                 Layout.alignment: Qt.AlignVCenter
@@ -575,7 +671,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: root.isSendAll && !feeLabel.estimatedFee ? MoneroComponents.Style.fontRegular.name : MoneroComponents.Style.fontMonoRegular.name
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -605,7 +701,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: root.isSendAll && !feeLabel.estimatedFee ? MoneroComponents.Style.fontRegular.name : MoneroComponents.Style.fontMonoRegular.name
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -614,7 +710,15 @@ Rectangle {
                         inputPaddingBottom: 0
                         opacity: 0.7
                         readOnly: true
-                        text: fiatApiConvertToFiat(walletManager.displayAmount(recipientModel.getAmountTotal()))
+                        text: {
+                            if (root.isSendAll && !feeLabel.estimatedFee) {
+                                return qsTr("Estimating") + "..." + translationManager.emptyString;
+                            } else if (root.isSendAll && feeLabel.estimatedFee) {
+                                return "~" + fiatApiConvertToFiat(leftPanel.balanceUnlockedString - feeLabel.estimatedFee);
+                            } else {
+                                return fiatApiConvertToFiat(walletManager.displayAmount(recipientModel.getAmountTotal()));
+                            }
+                        }
                         visible: persistentSettings.fiatPriceEnabled
                     }
 
@@ -703,7 +807,7 @@ Rectangle {
                     property var fee: {
                         estimatedFee = null;
                         estimating = sendButton.enabled;
-                        if (!sendButton.enabled || !currentWallet) {
+                        if (!currentWallet) {
                             return;
                         }
                         var addresses = [];
@@ -725,7 +829,7 @@ Rectangle {
                             });
                     }
                     text: {
-                        if (!sendButton.enabled || estimatedFee == null) {
+                        if (estimatedFee == null) {
                             return ""
                         }
                         return "~%1 XMR%2 %3".arg(estimatedFee)
