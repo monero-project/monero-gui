@@ -79,7 +79,7 @@ void TransactionHistory::refresh(quint32 accountIndex)
         m_minutesToUnlock = 0;
 
         m_pimpl->refresh();
-        for (const auto i : m_pimpl->getAll()) {
+        for (const auto& i : m_pimpl->getAll()) {
             if (i.subaddrAccount() != accountIndex) {
                 continue;
             }
