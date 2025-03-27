@@ -80,7 +80,7 @@ void TransactionHistory::refresh(quint32 accountIndex)
 
         m_pimpl->refresh();
         for (const auto i : m_pimpl->getAll()) {
-            if (i->subaddrAccount() != accountIndex) {
+            if (i.subaddrAccount() != accountIndex) {
                 continue;
             }
 
@@ -174,7 +174,7 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
 
     QReadLocker locker(&m_lock);
     for (const auto &tx : m_pimpl->getAll()) {
-        if (tx->subaddrAccount() != accountIndex) {
+        if (tx.subaddrAccount() != accountIndex) {
             continue;
         }
 
