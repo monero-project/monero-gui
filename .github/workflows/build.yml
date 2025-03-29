@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-macos:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -66,7 +66,7 @@ jobs:
       run: build/release/bin/monero-wallet-gui --test-qml
 
   macos-bundle:
-    runs-on: macOS-latest
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v1
       with:
