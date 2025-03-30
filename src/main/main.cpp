@@ -79,6 +79,7 @@
 #ifndef Q_OS_IOS
 #include "daemon/DaemonManager.h"
 #include "p2pool/P2PoolManager.h"
+#include "i2pd/I2PDManager.h"
 #endif
 
 #if defined(Q_OS_WIN)
@@ -414,6 +415,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
                                                    "DaemonManager can't be instantiated directly");
     qmlRegisterUncreatableType<P2PoolManager>("moneroComponents.P2PoolManager", 1, 0, "P2PoolManager",
                                                    "P2PoolManager can't be instantiated directly");
+    qmlRegisterUncreatableType<I2PDManager>("moneroComponents.I2PDManager", 1, 0, "I2PDManager",
+                                                    "I2PDManager can't be instantiated directly");
 #endif
     qmlRegisterUncreatableType<AddressBookModel>("moneroComponents.AddressBookModel", 1, 0, "AddressBookModel",
                                                         "AddressBookModel can't be instantiated directly");
@@ -476,8 +479,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #ifndef Q_OS_IOS
     DaemonManager daemonManager;
     P2PoolManager p2poolManager;
+    I2PDManager i2pdManager;
     engine.rootContext()->setContextProperty("daemonManager", &daemonManager);
     engine.rootContext()->setContextProperty("p2poolManager", &p2poolManager);
+    engine.rootContext()->setContextProperty("i2pdManager", &i2pdManager);
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
