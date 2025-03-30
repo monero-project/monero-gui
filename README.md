@@ -105,7 +105,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -128,7 +128,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
