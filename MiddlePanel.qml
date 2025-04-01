@@ -106,18 +106,18 @@ Rectangle {
         }
     }
 
-    function updateStatus(){
+    function updateStatus() {
         transferView.updateStatus();
     }
 
     // send from AddressBook
-    function sendTo(address, paymentId, description){
+    function sendTo(address, paymentId, description) {
         root.state = "Transfer";
         transferView.sendTo(address, paymentId, description);
     }
 
     // open Transactions page with search term in search field
-    function searchInHistory(searchTerm){
+    function searchInHistory(searchTerm) {
         root.state = "History";
         historyView.searchInHistory(searchTerm);
     }

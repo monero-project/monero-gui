@@ -19,7 +19,7 @@ GridLayout {
     Component.onCompleted: {
         var seed = wizardController.walletOptionsSeed.split(" ");
         var component = Qt.createComponent("SeedListItem.qml");
-        for(var i = 0; i < seed.length; i++) {
+        for (var i = 0; i < seed.length; i++) {
             component.createObject(seedGrid, {wordNumber: i, word: seed[i]});
         }
     }

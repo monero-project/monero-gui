@@ -117,16 +117,16 @@ ColumnLayout {
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
         // check to remove placeholder text when there is content
-        if(item.isEmpty()){
+        if (item.isEmpty()) {
             placeholderLabel.visible = true;
         } else {
             placeholderLabel.visible = false;
         }
     }
 
-    function isEmpty(){
+    function isEmpty() {
         var val = input.text;
-        if(val === "") {
+        if (val === "") {
             return true;
         }
         else {

@@ -59,16 +59,16 @@ Rectangle {
 
     function displayVerificationResult(result) {
         if (result) {
-            signatureVerificationMessage.title = qsTr("Good signature") + translationManager.emptyString
-            signatureVerificationMessage.text  = qsTr("This is a good signature") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Information
+            signatureVerificationMessage.title = qsTr("Good signature") + translationManager.emptyString;
+            signatureVerificationMessage.text  = qsTr("This is a good signature") + translationManager.emptyString;
+            signatureVerificationMessage.icon = StandardIcon.Information;
         }
         else {
-            signatureVerificationMessage.title = qsTr("Bad signature") + translationManager.emptyString
-            signatureVerificationMessage.text  = qsTr("This signature did not verify") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Critical
+            signatureVerificationMessage.title = qsTr("Bad signature") + translationManager.emptyString;
+            signatureVerificationMessage.text  = qsTr("This signature did not verify") + translationManager.emptyString;
+            signatureVerificationMessage.icon = StandardIcon.Critical;
         }
-        signatureVerificationMessage.open()
+        signatureVerificationMessage.open();
     }
 
     // ================
@@ -422,13 +422,13 @@ Rectangle {
     }
 
     function clearFields() {
-        verifyMessageLine.text = ""
-        signMessageLine.text = ""
-        signSignatureLine.text = ""
-        verifyAddressLine.text = ""
-        verifySignatureLine.text = ""
-        signFileLine.text = ""
-        verifyFileLine.text = ""
+        verifyMessageLine.text = "";
+        signMessageLine.text = "";
+        signSignatureLine.text = "";
+        verifyAddressLine.text = "";
+        verifySignatureLine.text = "";
+        signFileLine.text = "";
+        verifyFileLine.text = "";
      }
 
     function onPageCompleted() {

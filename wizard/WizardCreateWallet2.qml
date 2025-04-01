@@ -439,8 +439,8 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(previousView){
-        wizardCreateWallet2.seedArray = wizardController.walletOptionsSeed.split(" ")
+    function onPageCompleted(previousView) {
+        wizardCreateWallet2.seedArray = wizardController.walletOptionsSeed.split(" ");
         if (!wizardCreateWallet2.seedListGrid) {
             var component = Qt.createComponent("SeedListGrid.qml");
             wizardCreateWallet2.seedListGrid = component.createObject(seedListGridColumn);

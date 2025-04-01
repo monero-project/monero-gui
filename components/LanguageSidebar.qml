@@ -185,7 +185,7 @@ Drawer {
         XmlRole { name: "isCurrent"; query: "@enabled/string()" }
 
         onStatusChanged: {
-            if(status === XmlListModel.Ready){
+            if (status === XmlListModel.Ready) {
                 console.log("languages available: ",count);
             }
         }

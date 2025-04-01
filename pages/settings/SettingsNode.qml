@@ -298,7 +298,7 @@ Rectangle{
                     addressValidation: false
                     onInputLabelLinkActivated: {
                         //mouse.accepted = false
-                        if(persistentSettings.blockchainDataDir !== ""){
+                        if (persistentSettings.blockchainDataDir !== "") {
                             blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
                         }
                         blockchainFileDialog.open();

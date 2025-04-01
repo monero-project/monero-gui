@@ -53,14 +53,14 @@ Rectangle {
     property bool selectAndSend: false
     property int currentAccountIndex
 
-    function renameSubaddressAccountLabel(_index){
+    function renameSubaddressAccountLabel(_index) {
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
-            appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText)
-            appWindow.currentWallet.subaddressAccount.refresh()
-        }
+            appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText);
+            appWindow.currentWallet.subaddressAccount.refresh();
+        };
         inputDialog.onRejectedCallback = null;
-        inputDialog.open(appWindow.currentWallet.getSubaddressLabel(_index, 0))
+        inputDialog.open(appWindow.currentWallet.getSubaddressLabel(_index, 0));
     }
 
     Clipboard { id: clipboard }
@@ -394,10 +394,10 @@ Rectangle {
         if (appWindow.currentWallet !== undefined) {
             appWindow.currentWallet.subaddressAccount.refresh();
             subaddressAccountListView.model = appWindow.currentWallet.subaddressAccountModel;
-            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount);
 
-            balanceAll.text = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR"
-            unlockedBalanceAll.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR"
+            balanceAll.text = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR";
+            unlockedBalanceAll.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR";
         }
     }
 

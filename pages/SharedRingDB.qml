@@ -43,28 +43,28 @@ Rectangle {
 
     function validHex32(s) {
         if (s.length != 64)
-            return false
+            return false;
         for (var i = 0; i < s.length; ++i)
             if ("0123456789abcdefABCDEF".indexOf(s[i]) == -1)
-                return false
-        return true
+                return false;
+        return true;
     }
 
     function validRing(str, relative) {
         var outs = str.split(" ");
         if (outs.length == 0)
-            return false
+            return false;
         for (var i = 1; i < outs.length; ++i) {
             if (relative) {
                 if (outs[i] <= 0)
-                    return false
+                    return false;
             }
             else {
                 if (outs[i] <= outs[i-1])
-                    return false
+                    return false;
             }
         }
-        return true
+        return true;
     }
 
     /* main layout */
@@ -285,9 +285,9 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("RingDB page loaded");
-        appWindow.currentWallet.segregatePreForkOutputs(persistentSettings.segregatePreForkOutputs)
-        appWindow.currentWallet.segregationHeight(persistentSettings.segregationHeight)
-        segregationHeightLine.text = persistentSettings.segregationHeight
-        appWindow.currentWallet.keyReuseMitigation2(persistentSettings.keyReuseMitigation2)
+        appWindow.currentWallet.segregatePreForkOutputs(persistentSettings.segregatePreForkOutputs);
+        appWindow.currentWallet.segregationHeight(persistentSettings.segregationHeight);
+        segregationHeightLine.text = persistentSettings.segregationHeight;
+        appWindow.currentWallet.keyReuseMitigation2(persistentSettings.keyReuseMitigation2);
     }
 }

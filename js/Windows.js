@@ -8,10 +8,10 @@ var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint |
  */
 function setCustomWindowDecorations(custom) {
     // save x,y positions, because we need to hide/show the window
-    var x = appWindow.x
-    var y = appWindow.y
-    if (x < 0) x = 0
-    if (y < 0) y = 0
+    var x = appWindow.x;
+    var y = appWindow.y;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
 
     // Update persistentSettings
     persistentSettings.customDecorations = custom;
@@ -25,8 +25,8 @@ function setCustomWindowDecorations(custom) {
     }
 
     // Reset window
-    appWindow.hide()
-    appWindow.x = x
-    appWindow.y = y
-    appWindow.show()
+    appWindow.hide();
+    appWindow.x = x;
+    appWindow.y = y;
+    appWindow.show();
 }

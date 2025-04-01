@@ -111,8 +111,8 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(previousView){
-        if(previousView.viewName == "wizardHome"){
+    function onPageCompleted(previousView) {
+        if (previousView.viewName == "wizardHome") {
             walletInput.reset();
         }
     }

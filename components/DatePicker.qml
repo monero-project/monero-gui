@@ -51,7 +51,7 @@ Item {
 
     height: 50
 
-    onExpandedChanged: if(expanded) appWindow.currentItem = datePicker
+    onExpandedChanged: if (expanded) appWindow.currentItem = datePicker
 
     Rectangle {
         id: inputLabelRect
@@ -109,17 +109,17 @@ Item {
             spacing: 0
 
             function setDate(date) {
-                var day = date.getDate()
-                var month = date.getMonth() + 1
-                dayInput.text = day < 10 ? "0" + day : day
-                monthInput.text = month < 10 ? "0" + month : month
-                yearInput.text = date.getFullYear()
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                dayInput.text = day < 10 ? "0" + day : day;
+                monthInput.text = month < 10 ? "0" + month : month;
+                yearInput.text = date.getFullYear();
             }
 
             Connections {
                 target: datePicker
                 function onCurrentDateChanged() {
-                    dateInput.setDate(datePicker.currentDate)
+                    dateInput.setDate(datePicker.currentDate);
                 }
             }
 
@@ -144,9 +144,9 @@ Item {
                     }
                 }
                 onFocusChanged: {
-                    if(focus === false) {
-                        if(text.length === 0 || text === "0" || text === "00") text = "01"
-                        else if(text.length === 1) text = "0" + text
+                    if (focus === false) {
+                        if (text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if (text.length === 1) text = "0" + text
                     }
                 }
             }
@@ -179,9 +179,9 @@ Item {
                     }
                 }
                 onFocusChanged: {
-                    if(focus === false) {
-                        if(text.length === 0 || text === "0" || text === "00") text = "01"
-                        else if(text.length === 1) text = "0" + text
+                    if (focus === false) {
+                        if (text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if (text.length === 1) text = "0" + text
                     }
                 }
             }
@@ -205,13 +205,13 @@ Item {
                 horizontalAlignment: TextInput.AlignHCenter
                 maximumLength: 4
                 validator: IntValidator{bottom: 1000; top: 9999;}
-                text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
+                text: if (datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
 
                 onFocusChanged: {
-                    if(focus === false) {
+                    if (focus === false) {
                         var d = new Date()
                         var y = d.getFullYear()
-                        if(text.length != 4 || text[0] === "0")
+                        if (text.length != 4 || text[0] === "0")
                             text = y
                     }
                 }

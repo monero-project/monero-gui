@@ -99,7 +99,7 @@ Rectangle {
             onClicked: {
                 if (persistentSettings.askPasswordBeforeSending) {
                     passwordDialog.onAcceptedCallback = function() {
-                        if (appWindow.walletPassword === passwordDialog.password){
+                        if (appWindow.walletPassword === passwordDialog.password) {
                             persistentSettings.askPasswordBeforeSending = false;
                         } else {
                             passwordDialog.showError(qsTr("Wrong password"));
@@ -193,7 +193,7 @@ Rectangle {
                     var obj = dataModel.get(currentIndex);
                     persistentSettings.fiatPriceProvider = obj.data;
 
-                    if(persistentSettings.fiatPriceEnabled)
+                    if (persistentSettings.fiatPriceEnabled)
                         appWindow.fiatApiRefresh();
                 }
             }
@@ -209,7 +209,7 @@ Rectangle {
                     var obj = dataModel.get(currentIndex);
                     persistentSettings.fiatPriceCurrency = obj.data;
 
-                    if(persistentSettings.fiatPriceEnabled)
+                    if (persistentSettings.fiatPriceEnabled)
                         appWindow.fiatApiRefresh();
                 }
             }
@@ -306,13 +306,13 @@ Rectangle {
         fiatPriceProvidersModel.clear();
 
         var i = 0;
-        for (var api in apis){
+        for (var api in apis) {
             if (!apis.hasOwnProperty(api))
                continue;
 
             fiatPriceProvidersModel.append({"column1": Utils.capitalize(api), "data": api});
 
-            if(api === persistentSettings.fiatPriceProvider)
+            if (api === persistentSettings.fiatPriceProvider)
                 fiatPriceProviderDropDown.currentIndex = i;
             i += 1;
         }

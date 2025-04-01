@@ -45,7 +45,7 @@ Window {
     signal started();
 
     function open() {
-        show()
+        show();
         countDown = 10;
         timer.start();
     }
@@ -85,7 +85,7 @@ Window {
                         root.close();
                     }
                     countDown--;
-                    if(countDown < 0){
+                    if (countDown < 0) {
                         running = false;
                         // Start daemon
                         root.close()

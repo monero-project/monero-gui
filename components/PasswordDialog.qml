@@ -64,14 +64,14 @@ Item {
         capsLockTextLabel.visible = oshelper.isCapsLock();
         passwordInput1.reset();
         passwordInput2.reset();
-        if(!appWindow.currentWallet || appWindow.active)
+        if (!appWindow.currentWallet || appWindow.active)
             passwordInput1.input.forceActiveFocus();
-        root.walletName = walletName ? walletName : ""
+        root.walletName = walletName ? walletName : "";
         errorTextLabel.text = errorText ? errorText : "";
-        leftPanel.enabled = false
-        middlePanel.enabled = false
-        wizard.enabled = false
-        titleBar.state = "essentials"
+        leftPanel.enabled = false;
+        middlePanel.enabled = false;
+        wizard.enabled = false;
+        titleBar.state = "essentials";
         root.visible = true;
         appWindow.hideBalanceForced = true;
         appWindow.updateBalance();
@@ -105,13 +105,13 @@ Item {
     }
 
     function close() {
-        leftPanel.enabled = true
-        middlePanel.enabled = true
-        wizard.enabled = true
+        leftPanel.enabled = true;
+        middlePanel.enabled = true;
+        wizard.enabled = true;
         if (rootItem.state == "wizard") {
-            titleBar.state = "essentials"
+            titleBar.state = "essentials";
         } else {
-            titleBar.state = "default"
+            titleBar.state = "default";
         }
 
         root.visible = false;
@@ -124,24 +124,24 @@ Item {
         if (!passwordDialogMode && passwordInput1.text !== passwordInput2.text) {
             return;
         }
-        root.close()
+        root.close();
         if (passwordDialogMode) {
-            root.accepted()
+            root.accepted();
         } else if (newPasswordDialogMode) {
-            root.acceptedNewPassword()
+            root.acceptedNewPassword();
         } else if (passphraseDialogMode) {
-            root.acceptedPassphrase()
+            root.acceptedPassphrase();
         }
     }
 
     function onCancel() {
-        root.close()
+        root.close();
         if (passwordDialogMode) {
-            root.rejected()
+            root.rejected();
         } else if (newPasswordDialogMode) {
-            root.rejectedNewPassword()
+            root.rejectedNewPassword();
         } else if (passphraseDialogMode) {
-            root.rejectedPassphrase()
+            root.rejectedPassphrase();
         }
     }
 

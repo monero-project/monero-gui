@@ -38,7 +38,7 @@ Item {
             appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
         }
         // prepare tracking
-        trackingCheckbox.checked = root.enableTracking
+        trackingCheckbox.checked = root.enableTracking;
         root.update();
         timer.running = true;
 
@@ -46,7 +46,7 @@ Item {
         var _addressLabel = appWindow.currentWallet.getSubaddressLabel(
             appWindow.currentWallet.currentSubaddressAccount,
             appWindow.current_subaddress_table_index);
-        if(_addressLabel === ""){
+        if (_addressLabel === "") {
             root.addressLabel = "#" + appWindow.current_subaddress_table_index;
         } else {
             root.addressLabel = _addressLabel;
@@ -55,9 +55,9 @@ Item {
 
     function onPageClosed() {
         // reset component objects
-        timer.running = false
-        root.enableTracking = false
-        trackingModel.clear()
+        timer.running = false;
+        root.enableTracking = false;
+        trackingModel.clear();
     }
 
     Image {
@@ -168,7 +168,7 @@ Item {
                             }
                         }
                         onHideAmountToggled: {
-                            if(root.hiddenAmounts.indexOf(txid) < 0){
+                            if (root.hiddenAmounts.indexOf(txid) < 0) {
                                 root.hiddenAmounts.push(txid);
                             } else {
                                 root.hiddenAmounts = root.hiddenAmounts.filter(function(_txid) { return _txid !== txid });
@@ -217,7 +217,7 @@ Item {
                         anchors.fill: parent
                         acceptedButtons: Qt.RightButton
                         onClicked: {
-                            if (mouse.button == Qt.RightButton){
+                            if (mouse.button == Qt.RightButton) {
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
                                 qrMenu.open()
@@ -589,25 +589,25 @@ Item {
         if (!appWindow.currentWallet || !root.enableTracking) {
             root.trackingError = "";
             trackingModel.clear();
-            return
+            return;
         }
 
         if (appWindow.disconnected) {
             root.trackingError = qsTr("WARNING: no connection to daemon");
             trackingModel.clear();
-            return
+            return;
         }
 
-        var model = appWindow.currentWallet.historyModel
-        var count = model.rowCount()
-        var nTransactions = 0
-        var txs = []
+        var model = appWindow.currentWallet.historyModel;
+        var count = model.rowCount();
+        var nTransactions = 0;
+        var txs = [];
 
         // Currently selected subaddress as per Receive page
         var current_subaddress_table_index = appWindow.current_subaddress_table_index;
 
         for (var i = 0; i < count && txs.length < max_tracking; ++i) {
-            var idx = model.index(i, 0)
+            var idx = model.index(i, 0);
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var timeDate = model.data(idx, TransactionHistoryModel.TransactionDateRole);
             var timeHour = model.data(idx, TransactionHistoryModel.TransactionTimeRole);
@@ -616,7 +616,7 @@ Item {
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
 
             if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == current_subaddress_table_index) {
-                nTransactions += 1
+                nTransactions += 1;
 
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
                 var blockHeight = model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
@@ -639,18 +639,18 @@ Item {
                     "time_epoch": timeEpoch,
                     "time_date": timeDate + " " + timeHour,
                     "hide_amount": root.hiddenAmounts.indexOf(txid) >= 0
-                })
+                });
             }
         }
 
         // Update tracking status label
         if (nTransactions == 0) {
-            root.trackingError = qsTr("Currently monitoring incoming transactions, none found yet.") + translationManager.emptyString
-            return
+            root.trackingError = qsTr("Currently monitoring incoming transactions, none found yet.") + translationManager.emptyString;
+            return;
         }
 
         trackingModel.clear();
-        txs.forEach(function(tx){
+        txs.forEach(function(tx) {
             trackingModel.append({
                 "amount": tx.amount,
                 "confirmations": tx.confirmations,

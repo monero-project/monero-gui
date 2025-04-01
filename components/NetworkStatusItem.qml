@@ -105,7 +105,7 @@ Rectangle {
                     visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if(!appWindow.isMining) {
+                        if (!appWindow.isMining) {
                             middlePanel.settingsView.settingsStateViewState = "Node";
                             appWindow.showPageRequest("Settings");
                         } else {
@@ -151,7 +151,7 @@ Rectangle {
                     visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if(!appWindow.isMining) {
+                        if (!appWindow.isMining) {
                             middlePanel.settingsView.settingsStateViewState = "Node";
                             appWindow.showPageRequest("Settings");
                         } else {

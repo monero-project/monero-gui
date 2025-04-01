@@ -69,7 +69,7 @@ GridLayout {
     onActiveFocusChanged: activeFocus && daemonAddr.forceActiveFocus()
 
     function isValid() {
-        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
+        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput;
     }
 
     function getAddress() {

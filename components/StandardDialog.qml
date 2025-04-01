@@ -82,17 +82,17 @@ Rectangle {
 
     function open() {
         // Center
-        root.x = parent.width/2 - root.width/2
-        root.y = 100
-        root.z = 11
+        root.x = parent.width/2 - root.width/2;
+        root.y = 100;
+        root.z = 11;
         root.visible = true;
     }
 
     function close() {
         root.visible = false;
         // reset button text
-        okButton.text = qsTr("OK")
-        cancelButton.text = qsTr("Cancel")
+        okButton.text = qsTr("OK");
+        cancelButton.text = qsTr("Cancel");
 
         closeCallback();
     }

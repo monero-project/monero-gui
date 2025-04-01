@@ -128,39 +128,39 @@ ApplicationWindow {
     property int current_subaddress_table_index: 0
 
     function showPageRequest(page) {
-        middlePanel.state = page
-        leftPanel.selectItem(page)
+        middlePanel.state = page;
+        leftPanel.selectItem(page);
     }
 
     function lock() {
-        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); };
         passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password)
+            if (walletPassword === passwordDialog.password)
                 passwordDialog.close();
             else 
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
-        }
+        };
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
     }
 
     function sequencePressed(obj, seq) {
-        if(seq === undefined || !leftPanel.enabled)
-            return
-        if(seq === "Ctrl") {
-            ctrlPressed = true
-            return
+        if (seq === undefined || !leftPanel.enabled)
+            return;
+        if (seq === "Ctrl") {
+            ctrlPressed = true;
+            return;
         }
 
         // lock wallet on demand
-        if(seq === "Ctrl+L" && !passwordDialog.visible) lock()
-        if(seq === "Ctrl+S") middlePanel.state = "Transfer"
-        else if(seq === "Ctrl+R") middlePanel.state = "Receive"
-        else if(seq === "Ctrl+H") middlePanel.state = "History"
-        else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
-        else if(seq === "Ctrl+E") middlePanel.state = "Settings"
-        else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
-        else if(seq === "Ctrl+T") middlePanel.state = "Account"
-        else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
+        if (seq === "Ctrl+L" && !passwordDialog.visible) lock();
+        if (seq === "Ctrl+S") middlePanel.state = "Transfer";
+        else if (seq === "Ctrl+R") middlePanel.state = "Receive";
+        else if (seq === "Ctrl+H") middlePanel.state = "History";
+        else if (seq === "Ctrl+B") middlePanel.state = "AddressBook";
+        else if (seq === "Ctrl+E") middlePanel.state = "Settings";
+        else if (seq === "Ctrl+D") middlePanel.state = "Advanced";
+        else if (seq === "Ctrl+T") middlePanel.state = "Account";
+        else if (seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
@@ -171,14 +171,14 @@ ApplicationWindow {
             else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Account"
-            else if(middlePanel.state === "Account") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "Advanced"
-            else if(middlePanel.state === "Advanced") middlePanel.state = "Settings"
-        } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
+            if (middlePanel.state === "Settings") middlePanel.state = "Account";
+            else if (middlePanel.state === "Account") middlePanel.state = "Transfer";
+            else if (middlePanel.state === "Transfer") middlePanel.state = "AddressBook";
+            else if (middlePanel.state === "AddressBook") middlePanel.state = "Receive";
+            else if (middlePanel.state === "Receive") middlePanel.state = "History";
+            else if (middlePanel.state === "History") middlePanel.state = "Advanced";
+            else if (middlePanel.state === "Advanced") middlePanel.state = "Settings";
+        } else if (seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Mining"
@@ -189,23 +189,23 @@ ApplicationWindow {
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Advanced"
-            else if(middlePanel.state === "Advanced") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Account"
-            else if(middlePanel.state === "Account") middlePanel.state = "Settings"
+            if (middlePanel.state === "Settings") middlePanel.state = "Advanced";
+            else if (middlePanel.state === "Advanced") middlePanel.state = "History";
+            else if (middlePanel.state === "History") middlePanel.state = "Receive";
+            else if (middlePanel.state === "Receive") middlePanel.state = "AddressBook";
+            else if (middlePanel.state === "AddressBook") middlePanel.state = "Transfer";
+            else if (middlePanel.state === "Transfer") middlePanel.state = "Account";
+            else if (middlePanel.state === "Account") middlePanel.state = "Settings";
         }
 
         if (middlePanel.state !== "Advanced") updateBalance();
 
-        leftPanel.selectItem(middlePanel.state)
+        leftPanel.selectItem(middlePanel.state);
     }
 
     function sequenceReleased(obj, seq) {
-        if(seq === "Ctrl")
-            ctrlPressed = false
+        if (seq === "Ctrl")
+            ctrlPressed = false;
     }
 
     function mousePressed(obj, mouseX, mouseY) {}
@@ -220,7 +220,7 @@ ApplicationWindow {
         passwordDialog.onAcceptedCallback = function() {
             walletPassword = passwordDialog.password;
             initialize();
-        }
+        };
         passwordDialog.onRejectedCallback = function() {
             if (prevState) {
                 appWindow.viewState = prevState;
@@ -233,25 +233,25 @@ ApplicationWindow {
     }
 
     function initialize() {
-        console.log("initializing..")
+        console.log("initializing..");
 
         // Use stored log level
         if (persistentSettings.logLevel == 5)
-          walletManager.setLogCategories(persistentSettings.logCategories)
+          walletManager.setLogCategories(persistentSettings.logCategories);
         else
-          walletManager.setLogLevel(persistentSettings.logLevel)
+          walletManager.setLogLevel(persistentSettings.logLevel);
 
         // Reload transfer page with translations enabled
         middlePanel.transferView.onPageCompleted();
 
         // If currentWallet exists, we're just switching daemon - close/reopen wallet
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
-            console.log("Daemon change - closing " + currentWallet)
+            console.log("Daemon change - closing " + currentWallet);
             closeWallet();
         } else if (!walletInitialized) {
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
-            leftPanel.selectItem(middlePanel.state)
+            leftPanel.selectItem(middlePanel.state);
         }
 
         // Local daemon settings
@@ -262,7 +262,7 @@ ApplicationWindow {
 
         // wallet already opened with wizard, we just need to initialize it
         var wallet_path = persistentSettings.wallet_path;
-        if(isIOS)
+        if (isIOS)
             wallet_path = appWindow.accountsDir + wallet_path;
         // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
         console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
@@ -286,14 +286,14 @@ ApplicationWindow {
         }
 
         currentWallet.heightRefreshed.disconnect(onHeightRefreshed);
-        currentWallet.refreshed.disconnect(onWalletRefresh)
-        currentWallet.updated.disconnect(onWalletUpdate)
-        currentWallet.newBlock.disconnect(onWalletNewBlock)
-        currentWallet.moneySpent.disconnect(onWalletMoneySent)
-        currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
-        currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
-        currentWallet.transactionCreated.disconnect(onTransactionCreated)
-        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
+        currentWallet.refreshed.disconnect(onWalletRefresh);
+        currentWallet.updated.disconnect(onWalletUpdate);
+        currentWallet.newBlock.disconnect(onWalletNewBlock);
+        currentWallet.moneySpent.disconnect(onWalletMoneySent);
+        currentWallet.moneyReceived.disconnect(onWalletMoneyReceived);
+        currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived);
+        currentWallet.transactionCreated.disconnect(onTransactionCreated);
+        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged);
         currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.disconnect(onWalletPassphraseNeededWallet);
@@ -319,28 +319,28 @@ ApplicationWindow {
     }
 
     function connectWallet(wallet) {
-        currentWallet = wallet
+        currentWallet = wallet;
 
-        walletName = usefulName(wallet.path)
+        walletName = usefulName(wallet.path);
 
         viewOnly = currentWallet.viewOnly;
 
         // New wallets saves the testnet flag in keys file.
-        if(persistentSettings.nettype != currentWallet.nettype) {
-            console.log("Using network type from keys file")
+        if (persistentSettings.nettype != currentWallet.nettype) {
+            console.log("Using network type from keys file");
             persistentSettings.nettype = currentWallet.nettype;
         }
 
         // connect handlers
         currentWallet.heightRefreshed.connect(onHeightRefreshed);
-        currentWallet.refreshed.connect(onWalletRefresh)
-        currentWallet.updated.connect(onWalletUpdate)
-        currentWallet.newBlock.connect(onWalletNewBlock)
-        currentWallet.moneySpent.connect(onWalletMoneySent)
-        currentWallet.moneyReceived.connect(onWalletMoneyReceived)
-        currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
-        currentWallet.transactionCreated.connect(onTransactionCreated)
-        currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
+        currentWallet.refreshed.connect(onWalletRefresh);
+        currentWallet.updated.connect(onWalletUpdate);
+        currentWallet.newBlock.connect(onWalletNewBlock);
+        currentWallet.moneySpent.connect(onWalletMoneySent);
+        currentWallet.moneyReceived.connect(onWalletMoneyReceived);
+        currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived);
+        currentWallet.transactionCreated.connect(onTransactionCreated);
+        currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged);
         currentWallet.deviceButtonRequest.connect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
@@ -353,8 +353,8 @@ ApplicationWindow {
 
         persistentSettings.restore_height = currentWallet.walletCreationHeight;
 
-        console.log("Recovering from seed: ", persistentSettings.is_recovering)
-        console.log("restore Height", persistentSettings.restore_height)
+        console.log("Recovering from seed: ", persistentSettings.is_recovering);
+        console.log("restore Height", persistentSettings.restore_height);
 
         if (persistentSettings.useRemoteNode) {
             const remoteNode = remoteNodesModel.currentRemoteNode();
@@ -364,7 +364,7 @@ ApplicationWindow {
             currentDaemonAddress = localDaemonAddress;
         }
 
-        console.log("initializing with daemon address: ", currentDaemonAddress)
+        console.log("initializing with daemon address: ", currentDaemonAddress);
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -385,15 +385,15 @@ ApplicationWindow {
     function usefulName(path) {
         // arbitrary "short enough" limit
         if (path.length < 32)
-            return path
-        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+            return path;
+        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '');
     }
 
     function getUnlockedBalance() {
-        if(!currentWallet){
-            return 0
+        if (!currentWallet) {
+            return 0;
         }
-        return currentWallet.unlockedBalance()
+        return currentWallet.unlockedBalance();
     }
 
     function updateBalance() {
@@ -402,7 +402,7 @@ ApplicationWindow {
 
         var balance = "?.??";
         var balanceU = "?.??";
-        if(!hideBalanceForced && !persistentSettings.hideBalance){
+        if (!hideBalanceForced && !persistentSettings.hideBalance) {
             balance = walletManager.displayAmount(currentWallet.balance());
             balanceU = walletManager.displayAmount(currentWallet.unlockedBalance());
         }
@@ -412,38 +412,38 @@ ApplicationWindow {
         }
 
         leftPanel.minutesToUnlock = (balance !== balanceU) ? currentWallet.history.minutesToUnlock : "";
-        leftPanel.balanceString = balance
-        leftPanel.balanceUnlockedString = balanceU
+        leftPanel.balanceString = balance;
+        leftPanel.balanceUnlockedString = balanceU;
         if (middlePanel.state === "Account") {
             middlePanel.accountView.balanceAllText = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR";
             middlePanel.accountView.unlockedBalanceAllText = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR";
         }
     }
 
-    function onUriHandler(uri){
-        if(uri.startsWith("monero://")){
+    function onUriHandler(uri) {
+        if (uri.startsWith("monero://")) {
             var address = uri.substring("monero://".length);
 
-            var params = {}
-            if(address.length === 0) return;
+            var params = {};
+            if (address.length === 0) return;
             var spl = address.split("?");
 
-            if(spl.length > 2) return;
-            if(spl.length >= 1) {
+            if (spl.length > 2) return;
+            if (spl.length >= 1) {
                 // parse additional params
                 address = spl[0];
 
-                if(spl.length === 2){
+                if (spl.length === 2) {
                     spl.shift();
                     var item = spl[0];
 
                     var _spl = item.split("&");
-                    for (var param in _spl){
+                    for (var param in _spl) {
                         var _item = _spl[param];
-                        if(!_item.indexOf("=") > 0) continue;
+                        if (!_item.indexOf("=") > 0) continue;
 
                         var __spl = _item.split("=");
-                        if(__spl.length !== 2) continue;
+                        if (__spl.length !== 2) continue;
 
                         params[__spl[0]] = __spl[1];
                     }
@@ -459,10 +459,10 @@ ApplicationWindow {
         }
     }
 
-    function onWalletConnectionStatusChanged(status){
-        console.log("Wallet connection status changed " + status)
+    function onWalletConnectionStatusChanged(status) {
+        console.log("Wallet connection status changed " + status);
         middlePanel.updateStatus();
-        leftPanel.networkStatus.connected = status
+        leftPanel.networkStatus.connected = status;
         if (status == Wallet.ConnectionStatus_Disconnected) {
             firstBlockSeen = 0;
         }
@@ -477,8 +477,8 @@ ApplicationWindow {
         }
         // initialize transaction history once wallet is initialized first time;
         if (!walletInitialized) {
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
-            walletInitialized = true
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+            walletInitialized = true;
 
             // check if daemon was already mining and add mining logo if true
             if (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining) {
@@ -487,9 +487,9 @@ ApplicationWindow {
         }
     }
 
-    function onDeviceButtonRequest(code){
+    function onDeviceButtonRequest(code) {
         if (txConfirmationPopup.visible) {
-            txConfirmationPopup.bottomTextAnimation.running = true
+            txConfirmationPopup.bottomTextAnimation.running = true;
             if (!txConfirmationPopup.errorText.visible) {
                 txConfirmationPopup.bottomText.text  = qsTr("Please confirm transaction on the device...") + translationManager.emptyString;
             } else {
@@ -502,12 +502,12 @@ ApplicationWindow {
         }
     }
 
-    function onDeviceButtonPressed(){
+    function onDeviceButtonPressed() {
         if (txConfirmationPopup.visible) {
             txConfirmationPopup.bottomTextAnimation.running = false;
             txConfirmationPopup.bottomText.text  = qsTr("Signing transaction in the device...") + translationManager.emptyString;
         } else {
-            if (splashDisplayedBeforeButtonRequest){
+            if (splashDisplayedBeforeButtonRequest) {
                 appWindow.showProcessingSplash(prevSplashText);
             } else {
                 hideProcessingSplash();
@@ -515,14 +515,14 @@ ApplicationWindow {
         }
     }
 
-    function onWalletOpening(){
+    function onWalletOpening() {
         appWindow.showProcessingSplash(qsTr("Opening wallet ..."));
     }
 
     function onWalletOpened(wallet) {
         hideProcessingSplash();
-        walletName = usefulName(wallet.path)
-        console.log(">>> wallet opened: " + wallet)
+        walletName = usefulName(wallet.path);
+        console.log(">>> wallet opened: " + wallet);
         if (wallet.status !== Wallet.Status_Ok) {
             // try to resolve common wallet cache errors automatically
             switch (wallet.errorString) {
@@ -538,66 +538,66 @@ ApplicationWindow {
                     // opening with password but password doesn't match
                     console.error("Error opening wallet with password: ", wallet.errorString);
                     passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
-                    console.log("closing wallet async : " + wallet.address)
+                    console.log("closing wallet async : " + wallet.address);
                     closeWallet();
                     return;
             }
         }
 
         // wallet opened successfully, subscribing for wallet updates
-        connectWallet(wallet)
+        connectWallet(wallet);
 
         // Force switch normal view
         rootItem.state = "normal";
 
         // Process queued IPC command
-        if(typeof IPC !== "undefined" && IPC.queuedCmd().length > 0){
+        if (typeof IPC !== "undefined" && IPC.queuedCmd().length > 0) {
             var queuedCmd = IPC.queuedCmd();
-            if(/^\w+:\/\/(.*)$/.test(queuedCmd)) appWindow.onUriHandler(queuedCmd); // uri
+            if (/^\w+:\/\/(.*)$/.test(queuedCmd)) appWindow.onUriHandler(queuedCmd); // uri
         }
     }
 
-    function onWalletPassphraseNeededManager(on_device){
-        onWalletPassphraseNeeded(walletManager, on_device)
+    function onWalletPassphraseNeededManager(on_device) {
+        onWalletPassphraseNeeded(walletManager, on_device);
     }
 
-    function onWalletPassphraseNeededWallet(on_device){
-        onWalletPassphraseNeeded(currentWallet, on_device)
+    function onWalletPassphraseNeededWallet(on_device) {
+        onWalletPassphraseNeeded(currentWallet, on_device);
     }
 
-    function onWalletPassphraseNeeded(handler, on_device){
+    function onWalletPassphraseNeeded(handler, on_device) {
         hideProcessingSplash();
 
-        console.log(">>> wallet passphrase needed: ")
+        console.log(">>> wallet passphrase needed: ");
         devicePassphraseDialog.onAcceptedCallback = function(passphrase) {
             handler.onPassphraseEntered(passphrase, false, false);
             appWindow.onWalletOpening();
-        }
+        };
         devicePassphraseDialog.onWalletEntryCallback = function() {
             handler.onPassphraseEntered("", true, false);
             appWindow.onWalletOpening();
-        }
+        };
         devicePassphraseDialog.onRejectedCallback = function() {
             handler.onPassphraseEntered("", false, true);
             appWindow.onWalletOpening();
-        }
+        };
 
-        devicePassphraseDialog.open(on_device)
+        devicePassphraseDialog.open(on_device);
     }
 
     function onWalletUpdate() {
         if (!currentWallet)
             return;
 
-        console.log(">>> wallet updated")
+        console.log(">>> wallet updated");
         updateBalance();
         // Update history if new block found since last update
-        if(foundNewBlock) {
+        if (foundNewBlock) {
             foundNewBlock = false;
-            console.log("New block found - updating history")
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+            console.log("New block found - updating history");
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
 
-            if(middlePanel.state == "History")
+            if (middlePanel.state == "History")
                 middlePanel.historyView.update();
         }
     }
@@ -641,7 +641,7 @@ ApplicationWindow {
         p2poolManager.getStatus();
 
         persistentSettings.useRemoteNode = false;
-        currentDaemonAddress = localDaemonAddress
+        currentDaemonAddress = localDaemonAddress;
         currentWallet.setDaemonLogin("", "");
         currentWallet.initAsync(
             currentDaemonAddress,
@@ -662,17 +662,17 @@ ApplicationWindow {
         if (firstBlockSeen == 0 && dTargetBlock != 1) {
             firstBlockSeen = dCurrentBlock;
         }
-        daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
-        walletSynced = bcHeight >= dTargetBlock
+        daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1;
+        walletSynced = bcHeight >= dTargetBlock;
 
         // Update progress bars
-        if(!daemonSynced) {
+        if (!daemonSynced) {
             leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-firstBlockSeen);
             leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
         } else {
             leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Daemon is synchronized (%1)").arg(dCurrentBlock.toFixed(0)));
-            if(walletSynced)
-                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet is synchronized"))
+            if (walletSynced)
+                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet is synchronized"));
         }
 
         // Update wallet sync progress
@@ -681,10 +681,10 @@ ApplicationWindow {
         middlePanel.updateStatus();
 
         // Refresh is succesfull if blockchain height > 1
-        if (bcHeight > 1){
+        if (bcHeight > 1) {
             // recovering from seed is finished after first refresh
-            if(persistentSettings.is_recovering) {
-                persistentSettings.is_recovering = false
+            if (persistentSettings.is_recovering) {
+                persistentSettings.is_recovering = false;
             }
             if (persistentSettings.is_recovering_from_device) {
                 persistentSettings.is_recovering_from_device = false;
@@ -692,39 +692,39 @@ ApplicationWindow {
         }
 
         // Update history on every refresh if it's empty
-        if(currentWallet.history.count == 0)
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+        if (currentWallet.history.count == 0)
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
 
         onWalletUpdate();
     }
 
     function onWalletRefresh() {
-        console.log(">>> wallet refreshed")
+        console.log(">>> wallet refreshed");
 
         // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet ? currentWallet.connected() : Wallet.ConnectionStatus_Disconnected
+        leftPanel.networkStatus.connected = currentWallet ? currentWallet.connected() : Wallet.ConnectionStatus_Disconnected;
 
         if (currentWallet)
             currentWallet.refreshHeightAsync();
     }
 
-    function startDaemon(flags){
+    function startDaemon(flags) {
         daemonStartStopInProgress = 1;
 
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
         const noSync = appWindow.walletMode === 0;
-        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
+        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress;
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
-    function stopDaemon(callback, splash){
+    function stopDaemon(callback, splash) {
         daemonStartStopInProgress = 2;
         if (splash) {
             appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
         }
-        p2poolManager.exit()
+        p2poolManager.exit();
         daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(result) {
             daemonStartStopInProgress = 0;
             if (splash) {
@@ -734,7 +734,7 @@ ApplicationWindow {
         });
     }
 
-    function onDaemonStarted(){
+    function onDaemonStarted() {
         console.log("daemon started");
         daemonStartStopInProgress = 0;
         if (currentWallet) {
@@ -745,7 +745,7 @@ ApplicationWindow {
         // resume simplemode connection timer
         appWindow.disconnectedEpoch = Utils.epoch();
     }
-    function onDaemonStopped(){
+    function onDaemonStopped() {
         if (currentWallet) {
             currentWallet.connected(true);
         }
@@ -757,22 +757,22 @@ ApplicationWindow {
         // resume refresh
         currentWallet.startRefresh();
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
-        informationPopup.text  = error + ".\n\n" + qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        informationPopup.text  = error + ".\n\n" + qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod");
         if (middlePanel.advancedView.miningView.stopMiningEnabled == true) {
-            walletManager.stopMining()
-            p2poolManager.exit()
-            middlePanel.advancedView.miningView.update()
+            walletManager.stopMining();
+            p2poolManager.exit();
+            middlePanel.advancedView.miningView.update();
             informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
         }
-        informationPopup.icon  = StandardIcon.Critical
-        informationPopup.onCloseCallback = null
+        informationPopup.icon  = StandardIcon.Critical;
+        informationPopup.onCloseCallback = null;
         informationPopup.open();
     }
 
     function onWalletNewBlock(blockHeight, targetHeight) {
         // Update progress bar
         var remaining = targetHeight - blockHeight;
-        if(blocksToSync < remaining) {
+        if (blocksToSync < remaining) {
             blocksToSync = remaining;
         }
 
@@ -786,36 +786,36 @@ ApplicationWindow {
 
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
-        console.log("Confirmed money found")
+        console.log("Confirmed money found");
         // history refresh is handled by walletUpdated
-        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
-        currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount)
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
+        currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount);
 
-        if(middlePanel.state == "History")
+        if (middlePanel.state == "History")
             middlePanel.historyView.update();
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
         // refresh history
-        console.log("unconfirmed money found")
+        console.log("unconfirmed money found");
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
 
-        if(middlePanel.state == "History")
+        if (middlePanel.state == "History")
             middlePanel.historyView.update();
     }
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
-        console.log("monero sent found")
+        console.log("monero sent found");
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
 
-        if(middlePanel.state == "History")
+        if (middlePanel.state == "History")
             middlePanel.historyView.update();
     }
 
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
-            if(isIOS)
+            if (isIOS)
                 return walletManager.walletExists(appWindow.accountsDir + persistentSettings.wallet_path);
             else
                 return walletManager.walletExists(persistentSettings.wallet_path);
@@ -831,16 +831,16 @@ ApplicationWindow {
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
             if (currentWallet.connected() == Wallet.ConnectionStatus_WrongVersion) {
-                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
+                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString;
             } else {
-                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString
+                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString;
             }
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
             console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString;
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
         } else {
@@ -851,7 +851,7 @@ ApplicationWindow {
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
-            txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
+            txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png";
         }
     }
 
@@ -865,7 +865,7 @@ ApplicationWindow {
 
     // called on "transfer"
     function handlePayment(recipients, paymentId, mixinCount, priority, description, createFile) {
-        console.log("Creating transaction: ")
+        console.log("Creating transaction: ");
         console.log("\trecipients: ", recipients,
                     ", payment_id: ", paymentId,
                     ", mixins: ", mixinCount,
@@ -919,19 +919,19 @@ ApplicationWindow {
 
 
     function handleSweepUnmixable() {
-        console.log("Creating transaction: ")
+        console.log("Creating transaction: ");
 
         txConfirmationPopup.sweepUnmixable = true;
         transaction = currentWallet.createSweepUnmixableTransaction();
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
+            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString;
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
             console.error("No unmixable outputs to sweep");
-            txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString;
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
         } else {
@@ -947,14 +947,14 @@ ApplicationWindow {
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
         // View only wallet - we save the tx
-        if(viewOnly){
+        if (viewOnly) {
             // No file specified - abort
-            if(!saveTxDialog.fileUrl) {
-                currentWallet.disposeTransaction(transaction)
+            if (!saveTxDialog.fileUrl) {
+                currentWallet.disposeTransaction(transaction);
                 return;
             }
 
-            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl);
 
             // Store to file
             transaction.setFilename(path);
@@ -967,9 +967,9 @@ ApplicationWindow {
         hideProcessingSplash();
         if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
-            informationPopup.title = qsTr("Error") + translationManager.emptyString
-            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString;
+            informationPopup.icon  = StandardIcon.Critical;
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         } else {
@@ -979,12 +979,12 @@ ApplicationWindow {
             }
 
             // Clear tx fields
-            middlePanel.transferView.clearFields()
-            txConfirmationPopup.clearFields()
-            successfulTxPopup.open(txid)
+            middlePanel.transferView.clearFields();
+            txConfirmationPopup.clearFields();
+            successfulTxPopup.open(txid);
         }
-        currentWallet.refresh()
-        currentWallet.disposeTransaction(transaction)
+        currentWallet.refresh();
+        currentWallet.disposeTransaction(transaction);
         currentWallet.storeAsync(function(success) {
             if (!success) {
                 appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
@@ -994,20 +994,20 @@ ApplicationWindow {
 
     function doSearchInHistory(searchTerm) {
         middlePanel.searchInHistory(searchTerm);
-        leftPanel.selectItem(middlePanel.state)
+        leftPanel.selectItem(middlePanel.state);
     }
 
     // called on "getProof"
     function handleGetProof(txid, address, message, amount) {
         if (amount !== null && amount.length > 0) {
-            var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message)
-            txProofComputed(null, result)
+            var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message);
+            txProofComputed(null, result);
         } else {
-            console.log("Getting payment proof: ")
+            console.log("Getting payment proof: ");
             console.log("\ttxid: ", txid,
                         ", address: ", address,
                         ", message: ", message);
-            function spendProofFallback(txid, result){
+            function spendProofFallback(txid, result) {
                 if (!result || result.indexOf("error|") === 0) {
                     currentWallet.getSpendProofAsync(txid, message, txProofComputed);
                 } else {
@@ -1019,10 +1019,10 @@ ApplicationWindow {
             else
                 spendProofFallback(txid, null);
         }
-        informationPopup.open()
+        informationPopup.open();
     }
 
-    function txProofComputed(txid, result){
+    function txProofComputed(txid, result) {
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
@@ -1035,7 +1035,7 @@ ApplicationWindow {
 
     // called on "checkProof"
     function handleCheckProof(txid, address, message, signature) {
-        console.log("Checking payment proof: ")
+        console.log("Checking payment proof: ");
         console.log("\ttxid: ", txid,
                     ", address: ", address,
                     ", message: ", message,
@@ -1060,7 +1060,7 @@ ApplicationWindow {
             var confirmations = results[4];
 
             informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Information
+            informationPopup.icon = StandardIcon.Information;
             if (!good) {
                 informationPopup.text = qsTr("Bad signature");
                 informationPopup.icon = StandardIcon.Critical;
@@ -1091,16 +1091,16 @@ ApplicationWindow {
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = currentWallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
+            informationPopup.icon = StandardIcon.Critical;
         }
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
+        informationPopup.onCloseCallback = null;
+        informationPopup.open();
     }
 
     function showProcessingSplash(message) {
-        console.log("Displaying processing splash")
+        console.log("Displaying processing splash");
         if (typeof message != 'undefined') {
-            splash.messageText = message
+            splash.messageText = message;
         }
 
         leftPanel.enabled = false;
@@ -1110,23 +1110,23 @@ ApplicationWindow {
     }
 
     function hideProcessingSplash() {
-        console.log("Hiding processing splash")
+        console.log("Hiding processing splash");
         splash.close();
 
         if (!passwordDialog.visible) {
-            leftPanel.enabled = true
-            middlePanel.enabled = true
-            titleBar.enabled = true
+            leftPanel.enabled = true;
+            middlePanel.enabled = true;
+            titleBar.enabled = true;
         }
     }
 
     // close wallet and show wizard
-    function showWizard(){
+    function showWizard() {
         walletInitialized = false;
         closeWallet(function() {
             wizard.restart();
             wizard.wizardState = "wizardHome";
-            rootItem.state = "wizard"
+            rootItem.state = "wizard";
             // reset balance, clear spendable funds message
             clearMoneroCardLabelText();
             leftPanel.minutesToUnlock = "";
@@ -1161,10 +1161,10 @@ ApplicationWindow {
         triggeredOnStart: true
     }
 
-    function fiatApiParseTicker(url, resp, currency){
+    function fiatApiParseTicker(url, resp, currency) {
         // parse & validate incoming JSON
-        if(url.startsWith("https://api.kraken.com/0/")){
-            if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
+        if (url.startsWith("https://api.kraken.com/0/")) {
+            if (resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")) {
                 appWindow.fiatApiError("Kraken API has error(s)");
                 return;
             }
@@ -1172,16 +1172,16 @@ ApplicationWindow {
             var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
             var ticker = resp.result[key]["c"][0];
             return ticker;
-        } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
+        } else if (url.startsWith("https://api.coingecko.com/api/v3/")) {
             var key = currency === "xmreur" ? "eur" : "usd";
-            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
+            if (!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)) {
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
             return resp["monero"][key];
-        } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
+        } else if (url.startsWith("https://min-api.cryptocompare.com/data/")) {
             var key = currency === "xmreur" ? "EUR" : "USD";
-            if(!resp.hasOwnProperty(key)){
+            if (!resp.hasOwnProperty(key)) {
                 appWindow.fiatApiError("cryptocompare API has error(s)");
                 return;
             }
@@ -1191,12 +1191,12 @@ ApplicationWindow {
 
     function fiatApiGetCurrency(url) {
         var apis = appWindow.fiatPriceAPIs;
-        for (var api in apis){
+        for (var api in apis) {
             if (!apis.hasOwnProperty(api))
                continue;
 
-            for (var cur in apis[api]){
-                if(!apis[api].hasOwnProperty(cur))
+            for (var cur in apis[api]) {
+                if (!apis[api].hasOwnProperty(cur))
                     continue;
 
                 if (apis[api][cur] === url) {
@@ -1221,13 +1221,13 @@ ApplicationWindow {
 
         // handle incoming JSON, set ticker
         var currency = appWindow.fiatApiGetCurrency(url);
-        if(typeof currency == "undefined"){
+        if (typeof currency == "undefined") {
             appWindow.fiatApiError("could not get currency");
             return;
         }
 
         var ticker = appWindow.fiatApiParseTicker(url, resp, currency);
-        if(ticker <= 0){
+        if (ticker <= 0) {
             appWindow.fiatApiError("could not get ticker");
             return;
         }
@@ -1237,20 +1237,20 @@ ApplicationWindow {
         appWindow.updateBalance();
     }
 
-    function fiatApiRefresh(){
+    function fiatApiRefresh() {
         // trigger API call
-        if(!persistentSettings.fiatPriceEnabled)
+        if (!persistentSettings.fiatPriceEnabled)
             return;
 
         var userProvider = persistentSettings.fiatPriceProvider;
-        if(!appWindow.fiatPriceAPIs.hasOwnProperty(userProvider)){
+        if (!appWindow.fiatPriceAPIs.hasOwnProperty(userProvider)) {
             appWindow.fiatApiError("provider \"" + userProvider + "\" not implemented");
             return;
         }
 
         var provider = appWindow.fiatPriceAPIs[userProvider];
         var userCurrency = persistentSettings.fiatPriceCurrency;
-        if(!provider.hasOwnProperty(userCurrency)){
+        if (!provider.hasOwnProperty(userCurrency)) {
             appWindow.fiatApiError("currency \"" + userCurrency + "\" not implemented");
         }
 
@@ -1272,7 +1272,7 @@ ApplicationWindow {
 
     function fiatApiConvertToFiat(amount) {
         const ticker = appWindow.fiatPrice;
-        if(ticker <= 0){
+        if (ticker <= 0) {
             fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
         }
@@ -1281,23 +1281,23 @@ ApplicationWindow {
 
     function fiatApiConvertToXMR(amount) {
         const ticker = appWindow.fiatPrice;
-        if(ticker <= 0){
+        if (ticker <= 0) {
             fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
         }
         return (amount / ticker).toFixed(12);
     }
 
-    function fiatApiUpdateBalance(balance){
+    function fiatApiUpdateBalance(balance) {
         // update balance card
-        var bFiat = "?.??"
+        var bFiat = "?.??";
         if (!hideBalanceForced && !persistentSettings.hideBalance) {
             bFiat = fiatApiConvertToFiat(balance);
         }
         leftPanel.balanceFiatString = bFiat;
     }
 
-    function fiatApiError(msg){
+    function fiatApiError(msg) {
         console.log("fiatPriceError: " + msg);
     }
 
@@ -1321,7 +1321,7 @@ ApplicationWindow {
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeededManager);
         IPC.uriHandler.connect(onUriHandler);
 
-        if(typeof daemonManager != "undefined") {
+        if (typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);
             daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
             daemonManager.daemonStopped.connect(onDaemonStopped);
@@ -1330,7 +1330,7 @@ ApplicationWindow {
         // Connect app exit to qml window exit handling
         mainApp.closing.connect(appWindow.close);
 
-        if( appWindow.qrScannerEnabled ){
+        if ( appWindow.qrScannerEnabled ) {
             console.log("qrScannerEnabled : load component QRCodeScanner");
             var component = Qt.createComponent("components/QRCodeScanner.qml");
             if (component.status == Component.Ready) {
@@ -1342,7 +1342,7 @@ ApplicationWindow {
             }
         } else console.log("qrScannerEnabled disabled");
 
-        if(!walletsFound()) {
+        if (!walletsFound()) {
             wizard.wizardState = "wizardLanguage";
             rootItem.state = "wizard"
         } else {
@@ -1592,14 +1592,14 @@ ApplicationWindow {
             }
             close();
             passwordDialog.onAcceptedCallback = function() {
-                if(walletPassword === passwordDialog.password){
+                if (walletPassword === passwordDialog.password) {
                     handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
             passwordDialog.onRejectedCallback = null;
-            if(!persistentSettings.askPasswordBeforeSending) {
+            if (!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
                 passwordDialog.open(
@@ -1981,10 +1981,10 @@ ApplicationWindow {
         }
     }
 
-    function toggleLanguageView(){
+    function toggleLanguageView() {
         languageSidebar.visible ? languageSidebar.close() : languageSidebar.open();
-        languageSidebar.selectCurrentLanguage()
-        resetLanguageFields()
+        languageSidebar.selectCurrentLanguage();
+        resetLanguageFields();
     }
 
     Timer {
@@ -2043,7 +2043,7 @@ ApplicationWindow {
         return true;
     }
 
-    function checkSimpleModeConnection(){
+    function checkSimpleModeConnection() {
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
 
@@ -2062,7 +2062,7 @@ ApplicationWindow {
         const simpleModeFlags = "--enable-dns-blocklist --out-peers 16 --no-igd";
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon(function() {
-                appWindow.startDaemon(simpleModeFlags)
+                appWindow.startDaemon(simpleModeFlags);
             });
         } else {
             appWindow.startDaemon(simpleModeFlags);
@@ -2101,15 +2101,15 @@ ApplicationWindow {
     function resetAndroidClose() {
         console.log("resetting android close");
         androidCloseTapped = false;
-        statusMessage.visible = false
+        statusMessage.visible = false;
     }
 
     function showStatusMessage(msg,timeout) {
-        console.log("showing status message")
+        console.log("showing status message");
         statusMessageTimer.interval = timeout * 1000;
-        statusMessageTimer.start()
+        statusMessageTimer.start();
         statusMessageText.text = msg;
-        statusMessage.visible = true
+        statusMessage.visible = true;
     }
 
     function showDaemonIsRunningDialog(onClose) {
@@ -2121,7 +2121,7 @@ ApplicationWindow {
         confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
         confirmationDialog.onAcceptedCallback = function() {
             onClose();
-        }
+        };
         confirmationDialog.onRejectedCallback = function() {
             stopDaemon(onClose);
         };
@@ -2171,7 +2171,7 @@ ApplicationWindow {
         }
     }
 
-    function closeAccepted(){
+    function closeAccepted() {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
@@ -2220,22 +2220,22 @@ ApplicationWindow {
 
     function releaseFocus() {
         // Workaround to release focus from textfield when scrolling (https://bugreports.qt.io/browse/QTBUG-34867)
-        if(isAndroid) {
-            console.log("releasing focus")
-            middlePanel.focus = true
-            middlePanel.focus = false
+        if (isAndroid) {
+            console.log("releasing focus");
+            middlePanel.focus = true;
+            middlePanel.focus = false;
         }
     }
 
     // reset label text. othewise potential privacy leak showing unlock time when switching wallets
-    function clearMoneroCardLabelText(){
-        leftPanel.balanceString = "?.??"
-        leftPanel.balanceFiatString = "?.??"
+    function clearMoneroCardLabelText() {
+        leftPanel.balanceString = "?.??";
+        leftPanel.balanceFiatString = "?.??";
     }
 
     // some fields need an extra nudge when changing languages
-    function resetLanguageFields(){
-        clearMoneroCardLabelText()
+    function resetLanguageFields() {
+        clearMoneroCardLabelText();
         if (currentWallet) {
             onWalletRefresh();
         }
@@ -2247,35 +2247,35 @@ ApplicationWindow {
     }
 
     function checkInUserActivity() {
-        if(rootItem.state !== "normal") return;
-        if(!persistentSettings.lockOnUserInActivity) return;
-        if(passwordDialog.visible) return;
-        var inputDialogVisible = inputDialog && inputDialog.visible
-        var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible
-        var informationPopupVisible = informationPopup && informationPopup.visible
+        if (rootItem.state !== "normal") return;
+        if (!persistentSettings.lockOnUserInActivity) return;
+        if (passwordDialog.visible) return;
+        var inputDialogVisible = inputDialog && inputDialog.visible;
+        var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible;
+        var informationPopupVisible = informationPopup && informationPopup.visible;
 
         // prompt password after X seconds of inactivity
         var inactivity = Utils.epoch() - appWindow.userLastActive;
-        if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
+        if (inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
 
         passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password){
+            if (walletPassword === passwordDialog.password) {
                 passwordDialog.close();
-                if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
-                if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
-                if (informationPopupVisible) informationPopup.open()
+                if (inputDialogVisible) inputDialog.open(inputDialog.inputText);
+                if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID);
+                if (informationPopupVisible) informationPopup.open();
             } else {
                 passwordDialog.showError(qsTr("Wrong password"));
             }
-        }
+        };
 
-        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
-        if (inputDialogVisible) inputDialog.close()
+        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); };
+        if (inputDialogVisible) inputDialog.close();
         remoteNodeDialog.close();
-        informationPopup.close()
-        txConfirmationPopup.close()
-        txConfirmationPopup.clearFields()
-        txConfirmationPopup.rejected()
+        informationPopup.close();
+        txConfirmationPopup.close();
+        txConfirmationPopup.clearFields();
+        txConfirmationPopup.rejected();
         successfulTxPopup.close();
         passwordDialog.open();
     }
@@ -2291,18 +2291,18 @@ ApplicationWindow {
         }
     }
 
-    function changeWalletMode(mode){
+    function changeWalletMode(mode) {
         appWindow.disconnectedEpoch = 0;
         persistentSettings.walletMode = mode;
         applyWalletMode(mode);
     }
 
-    function applyWalletMode(mode){
+    function applyWalletMode(mode) {
         if (mode < 2) {
             persistentSettings.useRemoteNode = false;
 
             if (middlePanel.settingsView.settingsStateViewState === "Node") {
-                middlePanel.settingsView.settingsStateViewState = "Wallet"
+                middlePanel.settingsView.settingsStateViewState = "Wallet";
             }
         }
         console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));

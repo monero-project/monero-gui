@@ -58,7 +58,7 @@ Item {
     implicitHeight: height
     implicitWidth: width
 
-    function doClick(){
+    function doClick() {
         releaseFocus();
         clicked();
     }

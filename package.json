@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "eslint": "^9.20.0",
+    "eslint-plugin-qml-linter-xd": "git+https://github.com/Justxd22/qml-linter-xd.git"
+  },
+  "type": "module"
+}

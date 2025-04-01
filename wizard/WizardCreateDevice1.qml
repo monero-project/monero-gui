@@ -261,7 +261,7 @@ Rectangle {
                     wizardController.walletOptionsName = walletInput.walletName.text;
                     wizardController.walletOptionsLocation = walletInput.walletLocation.text;
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
-                    if(lookahead.text)
+                    if (lookahead.text)
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
                     if (restoreHeight.text && wizardController.walletOptionsDeviceIsRestore) {
                         wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
@@ -278,8 +278,8 @@ Rectangle {
         errorMsg.text = "";
     }
 
-    function onPageCompleted(previousView){
-        if(previousView.viewName == "wizardHome"){
+    function onPageCompleted(previousView) {
+        if (previousView.viewName == "wizardHome") {
             walletInput.reset();
             deviceNameDropdown.currentIndex = 0;
             newDeviceWallet.checked = true;
@@ -291,9 +291,9 @@ Rectangle {
         }
     }
 
-    function onCreateWalletFromDeviceCompleted(written){
+    function onCreateWalletFromDeviceCompleted(written) {
         hideProcessingSplash();
-        if(written){
+        if (written) {
             wizardStateView.state = "wizardCreateWallet3";
         } else {
             errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;

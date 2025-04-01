@@ -1,25 +1,25 @@
-function destinationsToAmount(destinations){
+function destinationsToAmount(destinations) {
     // Gets amount from destinations line
     // input: "20.000000000000: 9tLGyK277MnYrDc7Vzi6TB1pJvstFoviziFwsqQNFbwA9rvg5RxYVYjEezFKDjvDHgAzTELJhJHVx6JAaWZKeVqSUZkXeKk"
     // returns: 20.000000000000
     return destinations.split(" ")[0].split(":")[0];
 }
 
-function destinationsToAddress(destinations){
+function destinationsToAddress(destinations) {
     var address = destinations.split(" ")[1];
-    if(address === undefined) return ""
+    if (address === undefined) return "";
     return address;
 }
 
-function addressTruncate(address, range){
-    if(typeof(address) === "undefined") return "";
-    if(typeof(range) === "undefined") range = 8;
+function addressTruncate(address, range) {
+    if (typeof(address) === "undefined") return "";
+    if (typeof(range) === "undefined") range = 8;
     return address.substring(0, range) + "..." + address.substring(address.length-range);
 }
 
-function addressTruncatePretty(address, blocks){
-    if(typeof(address) === "undefined") return "";
-    if(typeof(blocks) === "undefined") blocks = 2;
+function addressTruncatePretty(address, blocks) {
+    if (typeof(address) === "undefined") return "";
+    if (typeof(blocks) === "undefined") blocks = 2;
     blocks = blocks <= 1 ? 1 : blocks >= 23 ? 23 : blocks;
     var ret = "";
     return address.substring(0, 4 * blocks).match(/.{1,4}/g).join(' ') + " .. " + address.substring(address.length - 4 * blocks).match(/.{1,4}/g).join(' ');
@@ -41,11 +41,11 @@ function check256(str, length) {
 }
 
 function checkAddress(address, testnet) {
-  return walletManager.addressValid(address, testnet)
+  return walletManager.addressValid(address, testnet);
 }
 
 function checkTxID(txid) {
-    return check256(txid, 64)
+    return check256(txid, 64);
 }
 
 function checkSignature(signature) {

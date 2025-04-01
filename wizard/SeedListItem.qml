@@ -43,7 +43,7 @@ ColumnLayout {
                     return header.forceActiveFocus();
                 }
             } else if (wordNumber >= 5 && wordNumber < 25) {
-                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) - 1]].lineEdit.forceActiveFocus()
+                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) - 1]].lineEdit.forceActiveFocus();
             }
         } else {
             if (wordNumber == 0) {
@@ -53,7 +53,7 @@ ColumnLayout {
                     return header.forceActiveFocus();
                 }
             } else {
-                return parent.children[wordNumber - 1].forceActiveFocus()
+                return parent.children[wordNumber - 1].forceActiveFocus();
             }
         }
     }
@@ -61,19 +61,19 @@ ColumnLayout {
     function focusOnNextField() {
         if (wizardCreateWallet2.state == "verify") {
             if (wordNumber < 20) {
-                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) + 1]].lineEdit.forceActiveFocus()
+                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) + 1]].lineEdit.forceActiveFocus();
             } else {
-                return navigation.btnPrev.forceActiveFocus()
+                return navigation.btnPrev.forceActiveFocus();
             }
         } else {
             if (wordNumber == 24) {
                 if (createNewSeedButton.visible) {
-                    return createNewSeedButton.forceActiveFocus()
+                    return createNewSeedButton.forceActiveFocus();
                 } else {
-                    return printPDFTemplate.forceActiveFocus()
+                    return printPDFTemplate.forceActiveFocus();
                 }
             } else {
-                return parent.children[wordNumber + 1].forceActiveFocus()
+                return parent.children[wordNumber + 1].forceActiveFocus();
             }
         }
     }

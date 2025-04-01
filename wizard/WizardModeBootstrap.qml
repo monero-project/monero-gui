@@ -137,7 +137,7 @@ Rectangle {
         ListElement {column1: "South America"; region: "sa";}
     }
 
-    function onPageCompleted(previousView){
+    function onPageCompleted(previousView) {
         wizardModeBootstrapWarning.understood = false;
         understoodCheckbox.checked = false;
     }

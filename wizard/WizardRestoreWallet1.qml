@@ -47,9 +47,9 @@ Rectangle {
         }
 
         var valid = false;
-        if(wizardController.walletRestoreMode === "keys") {
+        if (wizardController.walletRestoreMode === "keys") {
             return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
-        } else if(wizardController.walletRestoreMode === "seed") {
+        } else if (wizardController.walletRestoreMode === "seed") {
             seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text.trim());
             return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text.trim());
         }
@@ -66,19 +66,19 @@ Rectangle {
             addressLine.text
         );
 
-        var addressLineLength = addressLine.text.length
-        var viewKeyLineLength = viewKeyLine.text.length
-        var spendKeyLineLength = spendKeyLine.text.length
+        var addressLineLength = addressLine.text.length;
+        var viewKeyLineLength = viewKeyLine.text.length;
+        var spendKeyLineLength = spendKeyLine.text.length;
 
-        addressLine.error = !result[0] && addressLineLength != 0
-        viewKeyLine.error = !result[1] && viewKeyLineLength != 0
-        spendKeyLine.error = !result[2] && spendKeyLineLength != 0
+        addressLine.error = !result[0] && addressLineLength != 0;
+        viewKeyLine.error = !result[1] && viewKeyLineLength != 0;
+        spendKeyLine.error = !result[2] && spendKeyLineLength != 0;
 
         // allow valid viewOnly
         if (spendKeyLine.text.length === 0)
-            return (result[0] && result[1])
+            return (result[0] && result[1]);
 
-        return (result[0] && result[1] && result[2])
+        return (result[0] && result[1] && result[2]);
     }
 
     function checkRestoreHeight() {
@@ -316,7 +316,7 @@ Rectangle {
                             break;
                     }
 
-                    if(restoreHeight.text){
+                    if (restoreHeight.text) {
                         wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
                     }
 
@@ -326,8 +326,8 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(previousView){
-        if(previousView.viewName == "wizardHome"){
+    function onPageCompleted(previousView) {
+        if (previousView.viewName == "wizardHome") {
             // cleanup
             wizardWalletInput.reset();
             seedRadioButton.checked = true;

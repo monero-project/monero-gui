@@ -19,7 +19,7 @@ ListView {
 
     signal hideAmountToggled(string txid)
 
-    function viewTx(txid){
+    function viewTx(txid) {
         // @TODO: implement blockexplorer-like page. Redirect to history for now
         appWindow.showPageRequest("History");
     }
@@ -40,7 +40,7 @@ ListView {
         selectionColor: MoneroComponents.Style.textSelectionColor
         selectByMouse: true
         readOnly: true
-        onFocusChanged: {if(focus === false) deselect() }
+        onFocusChanged: {if (focus === false) deselect() }
     }
 
     delegate: Item {

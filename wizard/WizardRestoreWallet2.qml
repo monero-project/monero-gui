@@ -75,7 +75,7 @@ Rectangle {
                 onNextClicked: {
                     wizardController.walletOptionsPassword = passwordFields.password;
 
-                    if(appWindow.walletMode === 0 || appWindow.walletMode === 1){
+                    if (appWindow.walletMode === 0 || appWindow.walletMode === 1) {
                         wizardStateView.state = "wizardRestoreWallet4";
                     } else {
                         wizardStateView.state = "wizardRestoreWallet3";

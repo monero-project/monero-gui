@@ -116,9 +116,9 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: _height
 
-                function calcHeight(){
+                function calcHeight() {
                     var itemsHeight = Math.ceil(wizardOpenWallet1.walletCount / 3) * itemHeight;
-                    if(itemsHeight >= (flow.itemHeight * flow.maxRows))
+                    if (itemsHeight >= (flow.itemHeight * flow.maxRows))
                         return flow.itemHeight * flow.maxRows;
                     else
                         return itemsHeight;
@@ -347,8 +347,8 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(previousView){
-        if(previousView.viewName == "wizardHome"){
+    function onPageCompleted(previousView) {
+        if (previousView.viewName == "wizardHome") {
             walletKeysFilesModel.refresh(appWindow.accountsDir);
             wizardOpenWallet1.walletCount = walletKeysFilesModel.rowCount();
             flow._height = flow.calcHeight();

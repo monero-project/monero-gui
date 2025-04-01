@@ -60,11 +60,11 @@ Item {
     Keys.onReturnPressed: Keys.onEnterPressed(event)
     Keys.onSpacePressed: Keys.onEnterPressed(event)
 
-    function toggle(){
+    function toggle() {
         if (checkBox.toggleOnClick) {
-            checkBox.checked = !checkBox.checked
+            checkBox.checked = !checkBox.checked;
         }
-        checkBox.clicked()
+        checkBox.clicked();
     }
 
     RowLayout {

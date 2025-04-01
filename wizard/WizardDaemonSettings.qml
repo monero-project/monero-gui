@@ -40,7 +40,7 @@ ColumnLayout {
     Layout.alignment: Qt.AlignHCenter
     spacing: 10
 
-    function save(){
+    function save() {
         persistentSettings.useRemoteNode = remoteNode.checked;
         if (bootstrapNodeEdit.daemonAddrText == "auto") {
             persistentSettings.bootstrapNodeAddress = "auto";
@@ -94,7 +94,7 @@ ColumnLayout {
                 small: true
                 text: qsTr("Browse") + translationManager.emptyString
                 onClicked: {
-                    if(persistentSettings.blockchainDataDir != "");
+                    if (persistentSettings.blockchainDataDir != "");
                         blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
                     blockchainFileDialog.open();
                     blockchainFolder.focus = true;

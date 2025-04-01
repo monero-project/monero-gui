@@ -85,11 +85,11 @@ Rectangle {
     Clipboard { id: clipboard }
 
     function oa_message(text) {
-      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
-      oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
-      oaPopup.onCloseCallback = null
-      oaPopup.open()
+      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString;
+      oaPopup.text = text;
+      oaPopup.icon = StandardIcon.Information;
+      oaPopup.onCloseCallback = null;
+      oaPopup.open();
     }
 
     function fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name) {
@@ -106,9 +106,9 @@ Rectangle {
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
-        console.log("updateFromQrCode")
+        console.log("updateFromQrCode");
         fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name);
-        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
     }
 
     function setDescription(value) {
@@ -124,7 +124,7 @@ Rectangle {
     function clearFields() {
         recipientModel.clear();
         fillPaymentDetails("", "", "", "", "");
-        priorityDropdown.currentIndex = 0
+        priorityDropdown.currentIndex = 0;
     }
 
     // Information dialog
@@ -470,7 +470,7 @@ Rectangle {
                                         const cursorPosition = cursorPosition;
                                         text = match[1];
                                         cursorPosition = Math.max(cursorPosition, 1) - 1;
-                                    } else if(text.indexOf('.') === 0){
+                                    } else if (text.indexOf('.') === 0) {
                                         text = '0' + text;
                                         if (text.length > 2) {
                                             cursorPosition = 1;
@@ -1037,7 +1037,7 @@ Rectangle {
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {
-            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))){
+            if (!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))) {
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
                 informationPopup.icon  = StandardIcon.Critical
@@ -1138,7 +1138,7 @@ Rectangle {
 
     // fires on every page load
     function onPageCompleted() {
-        console.log("transfer page loaded")
+        console.log("transfer page loaded");
         updateStatus();
     }
 
@@ -1147,9 +1147,9 @@ Rectangle {
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
-        if(appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
+        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
         pageRoot.enabled = true;
-        if(typeof currentWallet === "undefined") {
+        if (typeof currentWallet === "undefined") {
             root.warningContent = messageNotConnected;
             return;
         }
@@ -1162,18 +1162,18 @@ Rectangle {
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Connecting:
-            root.warningContent = qsTr("Wallet is connecting to daemon.")
-            break
+            root.warningContent = qsTr("Wallet is connecting to daemon.");
+            break;
         case Wallet.ConnectionStatus_Disconnected:
             root.warningContent = messageNotConnected;
-            break
+            break;
         case Wallet.ConnectionStatus_WrongVersion:
             root.warningContent = qsTr("Connected daemon is not compatible with GUI. \n" +
-                                   "Please upgrade or connect to another daemon")
-            break
+                                   "Please upgrade or connect to another daemon");
+            break;
         default:
-            if(!appWindow.daemonSynced){
-                root.warningContent = qsTr("Waiting on daemon synchronization to finish.")
+            if (!appWindow.daemonSynced) {
+                root.warningContent = qsTr("Waiting on daemon synchronization to finish.");
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready

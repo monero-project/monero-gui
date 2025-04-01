@@ -194,7 +194,7 @@ Rectangle {
                             _restoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(inputDialog.inputText.trim());
                         }
                         if (!isNaN(_restoreHeight)) {
-                            if(_restoreHeight >= 0) {
+                            if (_restoreHeight >= 0) {
                                 currentWallet.walletCreationHeight = _restoreHeight
                                 // Restore height is saved in .keys file. Set password to trigger rewrite.
                                 currentWallet.setPassword(appWindow.walletPassword)
@@ -390,7 +390,7 @@ Rectangle {
                     data += "\nWallet path: " + walletLocation.walletPath;
 
                     data += "\nWallet restore height: ";
-                    if(currentWallet)
+                    if (currentWallet)
                         data += currentWallet.walletCreationHeight;
 
                     data += "\nWallet log path: " + logger.logFilePath;
