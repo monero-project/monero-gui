@@ -1411,7 +1411,7 @@ Rectangle {
         }
 
         if (typeof root.model !== 'undefined' && root.model != null) {
-            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime
+            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime;
         }
 
         // extract from model, create JS array of txs
@@ -1426,8 +1426,8 @@ Rectangle {
 
         if (typeof root.model !== 'undefined' && root.model != null) {
             if (!keepDate) {
-                root.model.dateFromFilter = "2014-04-18" // genesis block
-                root.model.dateToFilter = "9999-09-09" // fix before september 9999
+                root.model.dateFromFilter = "2014-04-18"; // genesis block
+                root.model.dateToFilter = "9999-09-09"; // fix before september 9999
             }
             // negative values disable filters here;
             root.model.amountFromFilter = -1;
@@ -1545,8 +1545,8 @@ Rectangle {
         if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
 
         var _model = root.model;
-        var total = 0
-        var count = _model.rowCount()
+        var total = 0;
+        var count = _model.rowCount();
         root.txModelData = [];
 
         for (var i = 0; i < count; ++i) {
@@ -1591,9 +1591,9 @@ Rectangle {
             }
 
             if (isout)
-                total = walletManager.subi(total, amount)
+                total = walletManager.subi(total, amount);
             else
-                total = walletManager.addi(total, amount)
+                total = walletManager.addi(total, amount);
 
             root.txModelData.push({
                 "i": i,
@@ -1641,7 +1641,7 @@ Rectangle {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
             appWindow.showStatusMessage(qsTr("Updated description."),3);
             root.update(currentPage);
-        }
+        };
         inputDialog.onRejectedCallback = null;
         inputDialog.open(_tx_note);
     }
@@ -1663,7 +1663,7 @@ Rectangle {
 
     function removeFromCollapsedList(hash){
         root.txDataCollapsed = root.txDataCollapsed.filter(function(item) {
-            return item !== hash
+            return item !== hash;
         });
     }
 
@@ -1689,20 +1689,20 @@ Rectangle {
     }
 
     function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, amount, isout) {
-        var tx_note = currentWallet.getUserNote(hash)
-        var rings = currentWallet.getRings(hash)
-        var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
-        var address = currentWallet.address(subaddrAccount, subaddrIndex)
+        var tx_note = currentWallet.getUserNote(hash);
+        var rings = currentWallet.getRings(hash);
+        var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex);
+        var address = currentWallet.address(subaddrAccount, subaddrIndex);
         const hasPaymentId = parseInt(paymentId, 16);
         const integratedAddress = !isout && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
 
         if (rings)
-            rings = rings.replace(/\|/g, '\n')
+            rings = rings.replace(/\|/g, '\n');
 
         currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
             informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
             informationPopup.content = buildTxDetailsString(hash, hasPaymentId ? paymentId : null, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
-            informationPopup.onCloseCallback = null
+            informationPopup.onCloseCallback = null;
             informationPopup.open();
         });
     }
@@ -1710,7 +1710,7 @@ Rectangle {
     function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
         var address = TxUtils.destinationsToAddress(destinations);
         if(address === undefined){
-            console.log('getProof: Error fetching address')
+            console.log('getProof: Error fetching address');
             return;
         }
 
@@ -1723,8 +1723,8 @@ Rectangle {
         middlePanel.getProofClicked(hash, address, '', null);
         informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
         informationPopup.text = qsTr("Generating payment proof") + "..." + translationManager.emptyString;
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
+        informationPopup.onCloseCallback = null;
+        informationPopup.open();
     }
 
     function toClipboard(text){
@@ -1801,15 +1801,15 @@ Rectangle {
         // setup date filter scope according to real transactions
         if(appWindow.currentWallet != null){
             root.model = appWindow.currentWallet.historyModel;
-            root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
+            root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole;
             root.model.sort(0, Qt.DescendingOrder);
-            var count = root.model.rowCount()
+            var count = root.model.rowCount();
             if (count > 0) {
                 //date of the first transaction
                 fromDatePicker.currentDate = root.model.data(root.model.index((count - 1), 0), TransactionHistoryModel.TransactionDateRole);
             } else {
                 //date of monero birth (2014-04-18)
-                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+                fromDatePicker.currentDate = model.transactionHistory.firstDateTime;
             }
         }
 

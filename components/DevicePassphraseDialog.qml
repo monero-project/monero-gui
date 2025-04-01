@@ -37,29 +37,29 @@ Item {
     property var onRejectedCallback
 
     function open(canEnterOnDevice_) {
-        var canEnterOnDevice = canEnterOnDevice_ !== null ? canEnterOnDevice_ : canEnterOnDevice
+        var canEnterOnDevice = canEnterOnDevice_ !== null ? canEnterOnDevice_ : canEnterOnDevice;
         root.visible = true;
 
         if (canEnterOnDevice) {
-            entryChooserDialog.okText = qsTr("Hardware wallet")
-            entryChooserDialog.cancelText = qsTr("Computer")
-            entryChooserDialog.open()
+            entryChooserDialog.okText = qsTr("Hardware wallet");
+            entryChooserDialog.cancelText = qsTr("Computer");
+            entryChooserDialog.open();
         } else {
-            openPassphraseDialog()
+            openPassphraseDialog();
         }
     }
 
     function openPassphraseDialog() {
-        root.visible = true
-        passphraseDialog.openPassphraseDialog()
+        root.visible = true;
+        passphraseDialog.openPassphraseDialog();
     }
 
     function close() {
         root.visible = false;
         if (entryChooserDialog.visible)
-            entryChooserDialog.close()
+            entryChooserDialog.close();
         if (passphraseDialog.visible)
-            passphraseDialog.close()
+            passphraseDialog.close();
     }
 
     StandardDialog {

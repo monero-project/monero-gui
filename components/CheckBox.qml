@@ -62,9 +62,9 @@ Item {
 
     function toggle(){
         if (checkBox.toggleOnClick) {
-            checkBox.checked = !checkBox.checked
+            checkBox.checked = !checkBox.checked;
         }
-        checkBox.clicked()
+        checkBox.clicked();
     }
 
     RowLayout {

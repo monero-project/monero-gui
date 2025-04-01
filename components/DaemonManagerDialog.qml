@@ -45,7 +45,7 @@ Window {
     signal started();
 
     function open() {
-        show()
+        show();
         countDown = 10;
         timer.start();
     }

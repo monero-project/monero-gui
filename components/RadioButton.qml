@@ -45,8 +45,8 @@ Item {
     property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
 
     function toggle(){
-        radioButton.checked = !radioButton.checked
-        radioButton.clicked()
+        radioButton.checked = !radioButton.checked;
+        radioButton.clicked();
     }
 
     RowLayout {

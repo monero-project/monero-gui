@@ -48,13 +48,13 @@ Rectangle {
     }
 
     function getOffset() {
-        var offset = 0
-        var item = button
+        var offset = 0;
+        var item = button;
         while (item.under) {
-            offset += 20
-            item = item.under
+            offset += 20;
+            item = item.under;
         }
-        return offset
+        return offset;
     }
 
     color: "transparent"

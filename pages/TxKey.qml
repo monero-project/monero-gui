@@ -260,14 +260,14 @@ Rectangle {
     }
 
     function clearFields() {
-        checkProofAddressLine.text = ""
-        checkProofMessageLine.text = ""
-        checkProofSignatureLine.text = ""
-        checkProofTxIdLine.text = ""
-        getProofAddressLine.text = ""
-        getProofMessageLine.text = ""
-        getProofTxIdLine.text = ""
-        getReserveProofAmtLine.text = ""
+        checkProofAddressLine.text = "";
+        checkProofMessageLine.text = "";
+        checkProofSignatureLine.text = "";
+        checkProofTxIdLine.text = "";
+        getProofAddressLine.text = "";
+        getProofMessageLine.text = "";
+        getProofTxIdLine.text = "";
+        getReserveProofAmtLine.text = "";
     }
 
     function onPageCompleted() {

@@ -41,10 +41,10 @@ function showSeedPage() {
         } else {
             passwordDialog.showError(qsTr("Wrong password"));
         }
-    }
+    };
     passwordDialog.onRejectedCallback = function() {
         leftPanel.selectItem(middlePanel.state);
-    }
+    };
     passwordDialog.open();
     updateBalance();
 }
@@ -56,13 +56,13 @@ function ago(epoch) {
     var delta = now - epoch;
 
     if(delta < 60)
-        return qsTr("%n second(s) ago", "0", Math.floor(delta))
+        return qsTr("%n second(s) ago", "0", Math.floor(delta));
     else if (delta < 3600)
-        return qsTr("%n minute(s) ago", "0", Math.floor(delta / 60))
+        return qsTr("%n minute(s) ago", "0", Math.floor(delta / 60));
     else if (delta < 86400)
-        return qsTr("%n hour(s) ago", "0", Math.floor(delta / 3600))
+        return qsTr("%n hour(s) ago", "0", Math.floor(delta / 3600));
     else
-        return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400))
+        return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400));
 }
 
 function netTypeToString(){
@@ -76,7 +76,7 @@ function epoch(){
 }
 
 function roundDownToNearestThousand(_num){
-    return Math.floor(_num/1000.0)*1000
+    return Math.floor(_num/1000.0)*1000;
 }
 
 function qmlEach(item, properties, ignoredObjectNames, arr){
@@ -108,8 +108,8 @@ function qmlEach(item, properties, ignoredObjectNames, arr){
 }
 
 function capitalize(s){
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function removeTrailingZeros(value) {

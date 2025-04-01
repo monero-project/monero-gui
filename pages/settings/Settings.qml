@@ -167,7 +167,7 @@ ColumnLayout {
 
     function onDaemonConsoleUpdated(message){
         // Update daemon console
-        settingsStateView.settingsLogView.consoleArea.logMessage(message)
+        settingsStateView.settingsLogView.consoleArea.logMessage(message);
     }
 
     // fires on every page load

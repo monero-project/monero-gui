@@ -46,18 +46,18 @@ Item {
     signal rejected()
 
     function open(prepopulate) {
-        leftPanel.enabled = false
-        middlePanel.enabled = false
-        titleBar.state = "essentials"
+        leftPanel.enabled = false;
+        middlePanel.enabled = false;
+        titleBar.state = "essentials";
         root.visible = true;
         input.focus = true;
         input.text = prepopulate ? prepopulate : "";
     }
 
     function close() {
-        leftPanel.enabled = true
-        middlePanel.enabled = true
-        titleBar.state = "default"
+        leftPanel.enabled = true;
+        middlePanel.enabled = true;
+        titleBar.state = "default";
         root.visible = false;
     }
 

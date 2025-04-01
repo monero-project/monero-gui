@@ -46,8 +46,8 @@ RowLayout {
     height: 25
 
     function toggle(){
-        checkBox.checked = !checkBox.checked
-        checkBox.clicked()
+        checkBox.checked = !checkBox.checked;
+        checkBox.clicked();
     }
 
     RowLayout {

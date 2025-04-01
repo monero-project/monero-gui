@@ -542,14 +542,14 @@ Rectangle {
     }
 
     function onMiningStatus(isMining, hashrate) {
-        var daemonReady = appWindow.daemonSynced
+        var daemonReady = appWindow.daemonSynced;
         if (!persistentSettings.allowRemoteNodeMining) {
-            var daemonReady = !persistentSettings.useRemoteNode && daemonReady
+            var daemonReady = !persistentSettings.useRemoteNode && daemonReady;
         }
         appWindow.isMining = isMining;
-        updateStatusText(hashrate)
-        startSoloMinerButton.enabled = !appWindow.isMining && daemonReady
-        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady
+        updateStatusText(hashrate);
+        startSoloMinerButton.enabled = !appWindow.isMining && daemonReady;
+        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady;
     }
 
     function update() {
@@ -563,13 +563,13 @@ Rectangle {
     }
 
     function miningError(message) {
-        p2poolManager.exit()
+        p2poolManager.exit();
         errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-        errorPopup.text = message
+        errorPopup.text = message;
         if (persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining)
-            errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
-        errorPopup.icon = StandardIcon.Critical
-        errorPopup.open()
+            errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString;
+        errorPopup.icon = StandardIcon.Critical;
+        errorPopup.open();
     }
 
     MoneroComponents.StandardDialog {
@@ -589,7 +589,7 @@ Rectangle {
         var noSync = false;
         //these args will be deleted because DaemonManager::start will re-add them later.
         //--no-zmq must be deleted. removing '--zmq-pub=tcp...' lets us blindly add '--zmq-pub tcp...' later without risking duplication.
-        var defaultArgs = ["--detach","--data-dir","--bootstrap-daemon-address","--prune-blockchain","--no-sync","--check-updates","--non-interactive","--max-concurrency","--no-zmq","--zmq-pub=tcp://127.0.0.1:18083"]
+        var defaultArgs = ["--detach","--data-dir","--bootstrap-daemon-address","--prune-blockchain","--no-sync","--check-updates","--non-interactive","--max-concurrency","--no-zmq","--zmq-pub=tcp://127.0.0.1:18083"];
         var customDaemonArgsArray = args.split(' ');
         var flag = "";
         var allArgs = [];
@@ -597,52 +597,52 @@ Rectangle {
         //create an array (allArgs) of ['--arg value','--arg2','--arg3']
         for (let i = 0; i < customDaemonArgsArray.length; i++) {
             if(!customDaemonArgsArray[i].startsWith("--")) {
-                flag += " " + customDaemonArgsArray[i]
+                flag += " " + customDaemonArgsArray[i];
             } else {
                 if(flag){
-                    allArgs.push(flag)
+                    allArgs.push(flag);
                 }
-                flag = customDaemonArgsArray[i]
+                flag = customDaemonArgsArray[i];
             }
         }
-        allArgs.push(flag)
+        allArgs.push(flag);
         //pop from allArgs if value is inside the deleteme array (defaultArgs)
-allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
+allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) );
         //append required p2pool flags
         for (let i = 0; i < p2poolArgs.length; i++) {
             if(!allArgs.includes(p2poolArgs[i])) {
-                allArgs.push(p2poolArgs[i])
-                continue
+                allArgs.push(p2poolArgs[i]);
+                continue;
             }
         }
-        var success = daemonManager.start(allArgs.join(" "), persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain)
+        var success = daemonManager.start(allArgs.join(" "), persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
         if (success) {
-            startP2Pool()
+            startP2Pool();
         }
         else {
-            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString);
         }
     }
 
     function startP2Pool() {
         var address = currentWallet.address(0, 0);
-        var chain = "mini"
+        var chain = "mini";
         if (chainDropdown.currentIndex === 1) {
-            chain = "main"
+            chain = "main";
         }
         var p2poolArgs = persistentSettings.p2poolFlags;
         var success = p2poolManager.start(p2poolArgs, address, chain, threads);
         if (success) 
         {
-            update()
+            update();
         }
         else {
-            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString);
         }
     }
 
     function p2poolDownloadFailed(errorCode) {
-        statusMessage.visible = false
+        statusMessage.visible = false;
         errorPopup.title = qsTr("P2Pool Installation Failed") + translationManager.emptyString;
         switch (errorCode) {
             case P2PoolManager.HashVerificationFailed:
@@ -655,23 +655,23 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
                 errorPopup.text = qsTr("P2Pool download failed due to a connection issue.") + translationManager.emptyString;
                 break;
             case P2PoolManager.InstallationFailed:
-                errorPopup.text = qsTr("P2Pool installation failed.") + (isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : "")
+                errorPopup.text = qsTr("P2Pool installation failed.") + (isWindows ? (" " + qsTr("Try starting the program with administrator privileges.")) : "");
                 break;
             default:
                 errorPopup.text = qsTr("Unknown error.") + translationManager.emptyString;
         }
-        errorPopup.icon = StandardIcon.Critical
-        errorPopup.open()
-        update()
+        errorPopup.icon = StandardIcon.Critical;
+        errorPopup.open();
+        update();
     }
 
     function p2poolDownloadSucceeded() {
-        statusMessage.visible = false
+        statusMessage.visible = false;
         informationPopup.title  = qsTr("P2Pool Installation Succeeded") + translationManager.emptyString;
         informationPopup.text = qsTr("P2Pool has successfully installed.");
-        informationPopup.icon = StandardIcon.Critical
-        informationPopup.open()
-        update()
+        informationPopup.icon = StandardIcon.Critical;
+        informationPopup.open();
+        update();
     }
 
     Component.onCompleted: {

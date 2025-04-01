@@ -479,10 +479,10 @@ Rectangle {
     }
 
     function checkInformation(address, nettype) {
-        address = address.trim()
-        var address_ok = walletManager.addressValid(address, nettype)
-        addressLine.error = !address_ok
-        return address_ok
+        address = address.trim();
+        var address_ok = walletManager.addressValid(address, nettype);
+        addressLine.error = !address_ok;
+        return address_ok;
     }
 
     function clearFields() {
@@ -491,7 +491,7 @@ Rectangle {
     }
 
     function showAddressBook() {
-        addressBookEmptyLayout.visible = addressBookListView.count == 0
+        addressBookEmptyLayout.visible = addressBookListView.count == 0;
         addressBookLayout.visible = addressBookListView.count >= 1;
         addContactLayout.visible = false;
         clearFields();
@@ -499,7 +499,7 @@ Rectangle {
 
     function showAddAddress() {
         root.editEntry = false;
-        addressBookEmptyLayout.visible = false
+        addressBookEmptyLayout.visible = false;
         addressBookLayout.visible = false;
         addContactLayout.visible = true;
         addressLine.forceActiveFocus();
@@ -508,7 +508,7 @@ Rectangle {
     function showEditAddress(address, description) {
         //TODO: real contact editing, requires API change
         root.editEntry = true;
-        addressBookEmptyLayout.visible = false
+        addressBookEmptyLayout.visible = false;
         addressBookLayout.visible = false;
         addContactLayout.visible = true;
         addressLine.text = address;
@@ -518,18 +518,18 @@ Rectangle {
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
-        console.log("updateFromQrCode")
-        addressLine.text = address
-        descriptionLine.text = recipient_name
-        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+        console.log("updateFromQrCode");
+        addressLine.text = address;
+        descriptionLine.text = recipient_name;
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
     }
 
     function oa_message(text) {
-      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
-      oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
-      oaPopup.onCloseCallback = null
-      oaPopup.open()
+      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString;
+      oaPopup.text = text;
+      oaPopup.icon = StandardIcon.Information;
+      oaPopup.onCloseCallback = null;
+      oaPopup.open();
     }
 
     MoneroComponents.StandardDialog {

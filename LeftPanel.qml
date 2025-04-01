@@ -64,15 +64,15 @@ Rectangle {
     signal accountClicked()
 
     function selectItem(pos) {
-        menuColumn.previousButton.checked = false
-        if(pos === "History") menuColumn.previousButton = historyButton
-        else if(pos === "Transfer") menuColumn.previousButton = transferButton
-        else if(pos === "Receive")  menuColumn.previousButton = receiveButton
-        else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
-        else if(pos === "Settings") menuColumn.previousButton = settingsButton
-        else if(pos === "Advanced") menuColumn.previousButton = advancedButton
-        else if(pos === "Account") menuColumn.previousButton = accountButton
-        menuColumn.previousButton.checked = true
+        menuColumn.previousButton.checked = false;
+        if(pos === "History") menuColumn.previousButton = historyButton;
+        else if(pos === "Transfer") menuColumn.previousButton = transferButton;
+        else if(pos === "Receive")  menuColumn.previousButton = receiveButton;
+        else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton;
+        else if(pos === "Settings") menuColumn.previousButton = settingsButton;
+        else if(pos === "Advanced") menuColumn.previousButton = advancedButton;
+        else if(pos === "Account") menuColumn.previousButton = accountButton;
+        menuColumn.previousButton.checked = true;
     }
 
     width: 300

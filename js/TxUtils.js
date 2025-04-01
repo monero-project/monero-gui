@@ -7,7 +7,7 @@ function destinationsToAmount(destinations){
 
 function destinationsToAddress(destinations){
     var address = destinations.split(" ")[1];
-    if(address === undefined) return ""
+    if(address === undefined) return "";
     return address;
 }
 
@@ -41,11 +41,11 @@ function check256(str, length) {
 }
 
 function checkAddress(address, testnet) {
-  return walletManager.addressValid(address, testnet)
+  return walletManager.addressValid(address, testnet);
 }
 
 function checkTxID(txid) {
-    return check256(txid, 64)
+    return check256(txid, 64);
 }
 
 function checkSignature(signature) {

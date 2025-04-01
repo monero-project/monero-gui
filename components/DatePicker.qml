@@ -109,17 +109,17 @@ Item {
             spacing: 0
 
             function setDate(date) {
-                var day = date.getDate()
-                var month = date.getMonth() + 1
-                dayInput.text = day < 10 ? "0" + day : day
-                monthInput.text = month < 10 ? "0" + month : month
-                yearInput.text = date.getFullYear()
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                dayInput.text = day < 10 ? "0" + day : day;
+                monthInput.text = month < 10 ? "0" + month : month;
+                yearInput.text = date.getFullYear();
             }
 
             Connections {
                 target: datePicker
                 function onCurrentDateChanged() {
-                    dateInput.setDate(datePicker.currentDate)
+                    dateInput.setDate(datePicker.currentDate);
                 }
             }
 

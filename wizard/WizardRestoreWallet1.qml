@@ -66,19 +66,19 @@ Rectangle {
             addressLine.text
         );
 
-        var addressLineLength = addressLine.text.length
-        var viewKeyLineLength = viewKeyLine.text.length
-        var spendKeyLineLength = spendKeyLine.text.length
+        var addressLineLength = addressLine.text.length;
+        var viewKeyLineLength = viewKeyLine.text.length;
+        var spendKeyLineLength = spendKeyLine.text.length;
 
-        addressLine.error = !result[0] && addressLineLength != 0
-        viewKeyLine.error = !result[1] && viewKeyLineLength != 0
-        spendKeyLine.error = !result[2] && spendKeyLineLength != 0
+        addressLine.error = !result[0] && addressLineLength != 0;
+        viewKeyLine.error = !result[1] && viewKeyLineLength != 0;
+        spendKeyLine.error = !result[2] && spendKeyLineLength != 0;
 
         // allow valid viewOnly
         if (spendKeyLine.text.length === 0)
-            return (result[0] && result[1])
+            return (result[0] && result[1]);
 
-        return (result[0] && result[1] && result[2])
+        return (result[0] && result[1] && result[2]);
     }
 
     function checkRestoreHeight() {

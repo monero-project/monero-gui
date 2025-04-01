@@ -2,23 +2,23 @@
 
 function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
     // Switch to recover from keys
-    recoverFromSeedMode = false
-    spendKeyLine.text = ""
-    viewKeyLine.text = ""
-    restoreHeight.text = ""
+    recoverFromSeedMode = false;
+    spendKeyLine.text = "";
+    viewKeyLine.text = "";
+    restoreHeight.text = "";
 
     if(typeof extra_parameters.secret_view_key != "undefined") {
-        viewKeyLine.text = extra_parameters.secret_view_key
+        viewKeyLine.text = extra_parameters.secret_view_key;
     }
     if(typeof extra_parameters.secret_spend_key != "undefined") {
-        spendKeyLine.text = extra_parameters.secret_spend_key
+        spendKeyLine.text = extra_parameters.secret_spend_key;
     }
     if(typeof extra_parameters.restore_height != "undefined") {
-        restoreHeight.text = extra_parameters.restore_height
+        restoreHeight.text = extra_parameters.restore_height;
     }
-    addressLine.text = address
+    addressLine.text = address;
 
-    cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
 
     // Check if keys are correct
     checkNextButton();
@@ -39,20 +39,20 @@ function switchPage(next) {
     console.log("switchpage: currentPage: ", currentPage);
 
     // Update prev/next button positions for mobile/desktop
-    prevButton.anchors.verticalCenter = wizard.verticalCenter
-    nextButton.anchors.verticalCenter = wizard.verticalCenter
+    prevButton.anchors.verticalCenter = wizard.verticalCenter;
+    nextButton.anchors.verticalCenter = wizard.verticalCenter;
 
     if (currentPage > 0 || currentPage < pages.length - 1) {
-        pages[currentPage].opacity = 0
-        var step_value = next ? 1 : -1
-        currentPage += step_value
+        pages[currentPage].opacity = 0;
+        var step_value = next ? 1 : -1;
+        currentPage += step_value;
         pages[currentPage].opacity = 1;
 
-        var nextButtonVisible = currentPage > 1 && currentPage < pages.length - 1
-        nextButton.visible = nextButtonVisible
+        var nextButtonVisible = currentPage > 1 && currentPage < pages.length - 1;
+        nextButton.visible = nextButtonVisible;
 
         if (typeof pages[currentPage].onPageOpened !== 'undefined') {
-            pages[currentPage].onPageOpened(settings,next)
+            pages[currentPage].onPageOpened(settings,next);
         }
     }
 }
@@ -62,7 +62,7 @@ function createWalletPath(isIOS, folder_path,account_name){
     if(isIOS)
         folder_path = "";
 
-    return folder_path + "/" + account_name + "/" + account_name
+    return folder_path + "/" + account_name + "/" + account_name;
 }
 
 function walletPathExists(accountsDir, directory, filename, isIOS, walletManager) {
@@ -70,7 +70,7 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
     if(!directory || directory === "") return false;
 
     if (!directory.endsWith("/") && !directory.endsWith("\\"))
-        directory += "/"
+        directory += "/";
 
     if(isIOS)
         var path = accountsDir + filename;
@@ -102,20 +102,20 @@ function isAscii(str){
 }
 
 function tr(text) {
-    return qsTr(text) + translationManager.emptyString
+    return qsTr(text) + translationManager.emptyString;
 }
 
 function usefulName(path) {
     // arbitrary "short enough" limit
     if (path.length < 32)
-        return path
-    return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+        return path;
+    return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '');
 }
 
 function checkSeed(seed) {
-    console.log("Checking seed")
+    console.log("Checking seed");
     var wordsArray = seed.split(/\s+/);
-    return wordsArray.length === 25 || wordsArray.length === 24
+    return wordsArray.length === 25 || wordsArray.length === 24;
 }
 
 function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline){
@@ -168,7 +168,7 @@ function getApproximateBlockchainHeight(_date, _nettype){
         // testnet got some huge rollbacks, so the estimation is way off
         var approximateTestnetRolledBackBlocks = _nettype == "Testnet" ? 342100 : _nettype == "Stagenet" ? 60000 : 30000;
         if(approxBlockchainHeight > approximateTestnetRolledBackBlocks)
-            approxBlockchainHeight -= approximateTestnetRolledBackBlocks
+            approxBlockchainHeight -= approximateTestnetRolledBackBlocks;
     }
 
     var blocksPerMonth = 60*60*24*30/secondsPerBlock;

@@ -56,9 +56,9 @@ Rectangle {
         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, _index, inputDialog.inputText);
-        }
+        };
         inputDialog.onRejectedCallback = null;
-        inputDialog.open(appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index))
+        inputDialog.open(appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index));
     }
 
     function generateQRCodeString() {
@@ -773,8 +773,8 @@ Rectangle {
         subaddressListView.model = appWindow.currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
-            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
-            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0);
+            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount);
             if (subaddressListView.currentIndex == -1) {
                 subaddressListView.currentIndex = 0;
             }
