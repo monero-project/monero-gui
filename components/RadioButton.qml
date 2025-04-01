@@ -44,7 +44,7 @@ Item {
     property var checkedColor: MoneroComponents.Style.blackTheme ? "white" : "#666666"
     property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
 
-    function toggle(){
+    function toggle() {
         radioButton.checked = !radioButton.checked;
         radioButton.clicked();
     }

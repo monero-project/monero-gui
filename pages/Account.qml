@@ -53,7 +53,7 @@ Rectangle {
     property bool selectAndSend: false
     property int currentAccountIndex
 
-    function renameSubaddressAccountLabel(_index){
+    function renameSubaddressAccountLabel(_index) {
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText);

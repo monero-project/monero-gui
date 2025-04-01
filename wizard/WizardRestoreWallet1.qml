@@ -47,9 +47,9 @@ Rectangle {
         }
 
         var valid = false;
-        if(wizardController.walletRestoreMode === "keys") {
+        if (wizardController.walletRestoreMode === "keys") {
             return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
-        } else if(wizardController.walletRestoreMode === "seed") {
+        } else if (wizardController.walletRestoreMode === "seed") {
             seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text.trim());
             return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text.trim());
         }
@@ -316,7 +316,7 @@ Rectangle {
                             break;
                     }
 
-                    if(restoreHeight.text){
+                    if (restoreHeight.text) {
                         wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
                     }
 
@@ -326,8 +326,8 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(previousView){
-        if(previousView.viewName == "wizardHome"){
+    function onPageCompleted(previousView) {
+        if (previousView.viewName == "wizardHome") {
             // cleanup
             wizardWalletInput.reset();
             seedRadioButton.checked = true;

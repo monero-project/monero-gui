@@ -51,7 +51,7 @@ Item {
 
     height: 50
 
-    onExpandedChanged: if(expanded) appWindow.currentItem = datePicker
+    onExpandedChanged: if (expanded) appWindow.currentItem = datePicker
 
     Rectangle {
         id: inputLabelRect
@@ -144,9 +144,9 @@ Item {
                     }
                 }
                 onFocusChanged: {
-                    if(focus === false) {
-                        if(text.length === 0 || text === "0" || text === "00") text = "01"
-                        else if(text.length === 1) text = "0" + text
+                    if (focus === false) {
+                        if (text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if (text.length === 1) text = "0" + text
                     }
                 }
             }
@@ -179,9 +179,9 @@ Item {
                     }
                 }
                 onFocusChanged: {
-                    if(focus === false) {
-                        if(text.length === 0 || text === "0" || text === "00") text = "01"
-                        else if(text.length === 1) text = "0" + text
+                    if (focus === false) {
+                        if (text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if (text.length === 1) text = "0" + text
                     }
                 }
             }
@@ -205,13 +205,13 @@ Item {
                 horizontalAlignment: TextInput.AlignHCenter
                 maximumLength: 4
                 validator: IntValidator{bottom: 1000; top: 9999;}
-                text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
+                text: if (datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
 
                 onFocusChanged: {
-                    if(focus === false) {
+                    if (focus === false) {
                         var d = new Date()
                         var y = d.getFullYear()
-                        if(text.length != 4 || text[0] === "0")
+                        if (text.length != 4 || text[0] === "0")
                             text = y
                     }
                 }

@@ -116,7 +116,7 @@ Rectangle {
                 fontSize: 14
                 enabled: logLevelDropdown.currentIndex === 5
                 onEditingFinished: {
-                    if(enabled) {
+                    if (enabled) {
                         console.log("log categories changed: ", text);
                         walletManager.setLogCategories(text);
                         appWindow.persistentSettings.logCategories = text;
@@ -252,7 +252,7 @@ Rectangle {
                 }
             }
             onAccepted: {
-                if(text.length > 0) {
+                if (text.length > 0) {
                     consoleArea.logCommand(">>> " + text)
                     daemonManager.sendCommandAsync(text.split(" "), currentWallet.nettype, persistentSettings.blockchainDataDir, function(result) {
                         if (!result) {
@@ -268,7 +268,7 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        if(typeof daemonManager != "undefined")
+        if (typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
     }
 }

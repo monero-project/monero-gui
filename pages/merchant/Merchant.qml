@@ -46,7 +46,7 @@ Item {
         var _addressLabel = appWindow.currentWallet.getSubaddressLabel(
             appWindow.currentWallet.currentSubaddressAccount,
             appWindow.current_subaddress_table_index);
-        if(_addressLabel === ""){
+        if (_addressLabel === "") {
             root.addressLabel = "#" + appWindow.current_subaddress_table_index;
         } else {
             root.addressLabel = _addressLabel;
@@ -168,7 +168,7 @@ Item {
                             }
                         }
                         onHideAmountToggled: {
-                            if(root.hiddenAmounts.indexOf(txid) < 0){
+                            if (root.hiddenAmounts.indexOf(txid) < 0) {
                                 root.hiddenAmounts.push(txid);
                             } else {
                                 root.hiddenAmounts = root.hiddenAmounts.filter(function(_txid) { return _txid !== txid });
@@ -217,7 +217,7 @@ Item {
                         anchors.fill: parent
                         acceptedButtons: Qt.RightButton
                         onClicked: {
-                            if (mouse.button == Qt.RightButton){
+                            if (mouse.button == Qt.RightButton) {
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
                                 qrMenu.open()
@@ -650,7 +650,7 @@ Item {
         }
 
         trackingModel.clear();
-        txs.forEach(function(tx){
+        txs.forEach(function(tx) {
             trackingModel.append({
                 "amount": tx.amount,
                 "confirmations": tx.confirmations,

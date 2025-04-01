@@ -9,17 +9,19 @@ export default [
       sourceType: "module",
     },
     rules: {
-      //"no-unused-vars": "warn",
-      // This is in a separate MR
-
       //"eqeqeq": ["error", "always"], // Require === and !== instead of == and !=
       // This cannot be enabled safely
+
+      //"no-unused-vars": "warn",
+      // 
 
       "semi": ["error", "always"],
       // Enforce semicolons
 
-      //"keyword-spacing": "error",
-      //"space-before-blocks": "error",
+      "keyword-spacing": "error",
+      "space-before-blocks": "error",
+      // Enforce 
+      
       //"no-nested-ternary": "error",
       // Next
     },

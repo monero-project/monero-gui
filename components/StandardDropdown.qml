@@ -66,7 +66,7 @@ ColumnLayout {
 
     signal changed();
 
-    onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
+    onExpandedChanged: if (expanded) appWindow.currentItem = dropdown
 
     spacing: 0
     Rectangle {

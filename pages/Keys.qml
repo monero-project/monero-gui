@@ -280,11 +280,11 @@ Rectangle {
 
         seedText.text = currentWallet.seed === "" ? qsTr("Mnemonic seed protected by hardware device.") + translationManager.emptyString : currentWallet.seed;
 
-        if(typeof currentWallet != "undefined") {
+        if (typeof currentWallet != "undefined") {
             viewOnlyQRCode.source = "image://qrcode/monero_wallet:" + currentWallet.address(0, 0) + "?view_key="+currentWallet.secretViewKey+"&height="+currentWallet.walletCreationHeight;
             fullWalletQRCode.source = viewOnlyQRCode.source +"&spend_key="+currentWallet.secretSpendKey;
 
-            if(currentWallet.viewOnly) {
+            if (currentWallet.viewOnly) {
                 viewOnlyQRCode.visible = true;
                 showFullQr.visible = false;
                 showViewOnlyQr.visible = false;
@@ -292,7 +292,7 @@ Rectangle {
                 secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString;
             }
             // hardware device wallet
-            if(appWindow.currentWallet.isHwBacked() === true) {
+            if (appWindow.currentWallet.isHwBacked() === true) {
                 showFullQr.visible = false;
                 viewOnlyQRCode.visible = true;
                 showViewOnlyQr.visible = false;

@@ -72,7 +72,7 @@ Rectangle {
                 progress: appWindow.walletMode <= 1 ? 3 : 4
 
                 onPrevClicked: {
-                    if (appWindow.walletMode <= 1){
+                    if (appWindow.walletMode <= 1) {
                         wizardStateView.state = "wizardCreateWallet1";
                     } else {
                         wizardStateView.state = "wizardCreateWallet4";

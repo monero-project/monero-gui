@@ -54,7 +54,7 @@ Rectangle {
         // Clear up any state, including `m_wallet`, which
         // is the temp. wallet object whilst creating new wallets.
         // This function is called automatically by navigating to `wizardHome`.
-        if(!generatingNewSeed) {
+        if (!generatingNewSeed) {
             wizardController.walletOptionsName = defaultAccountName;
             wizardController.walletOptionsLocation = '';
         }
@@ -75,7 +75,7 @@ Rectangle {
         wizardController.walletOptionsSubaddressLookahead = '';
         disconnect();
 
-        if (typeof wizardController.m_wallet !== 'undefined'){
+        if (typeof wizardController.m_wallet !== 'undefined') {
             walletManager.closeWallet();
             wizardController.m_wallet = undefined;
         }
@@ -162,7 +162,7 @@ Rectangle {
                }
             }
 
-            if(previousView !== null && currentView.viewName === "wizardHome")
+            if (previousView !== null && currentView.viewName === "wizardHome")
                 wizardController.restart();
 
             if (currentView) {
@@ -176,7 +176,7 @@ Rectangle {
             previousView = currentView;
 
             // reset push direction
-            if(wizardController.wizardState == "wizardHome")
+            if (wizardController.wizardState == "wizardHome")
                 wizardController.wizardStackView.backTransition = false;
         }
 
@@ -416,7 +416,7 @@ Rectangle {
         }
         var wallet = '';
         // From seed or keys
-        if(wizardController.walletRestoreMode === 'seed')
+        if (wizardController.walletRestoreMode === 'seed')
             wallet = walletManager.recoveryWallet(tmp_wallet_filename, wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
         else
             wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, persistentSettings.language_wallet, nettype,
@@ -436,25 +436,25 @@ Rectangle {
         return success;
     }
 
-    function disconnect(){
+    function disconnect() {
         walletManager.walletCreated.disconnect(onWalletCreated);
         walletManager.walletPassphraseNeeded.disconnect(onWalletPassphraseNeeded);
         walletManager.deviceButtonRequest.disconnect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.disconnect(onDeviceButtonPressed);
     }
 
-    function connect(){
+    function connect() {
         walletManager.walletCreated.connect(onWalletCreated);
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
     }
 
-    function deviceAttentionSplash(){
+    function deviceAttentionSplash() {
         appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
     }
 
-    function creatingWalletDeviceSplash(){
+    function creatingWalletDeviceSplash() {
         var splashMsg = qsTr("Creating wallet from device...");
         splashMsg += wizardController.walletOptionsDeviceName === "Ledger" ? qsTr("\n\nPlease check your hardware wallet –\nyour input may be required.") : "";
         appWindow.showProcessingSplash(splashMsg);
@@ -505,7 +505,7 @@ Rectangle {
         walletCreatedFromDevice(success);
     }
 
-    function onWalletPassphraseNeeded(on_device){
+    function onWalletPassphraseNeeded(on_device) {
         splash.close();
 
         console.log(">>> wallet passphrase needed: ");
@@ -525,15 +525,15 @@ Rectangle {
         devicePassphraseDialog.open(on_device);
     }
 
-    function onDeviceButtonRequest(code){
+    function onDeviceButtonRequest(code) {
         deviceAttentionSplash();
     }
 
-    function onDeviceButtonPressed(){
+    function onDeviceButtonPressed() {
         creatingWalletDeviceSplash();
     }
 
-    function openWallet(){
+    function openWallet() {
         if (typeof wizardController.m_wallet !== 'undefined' && wizardController.m_wallet != null) {
             walletManager.closeWallet();
         }
@@ -549,12 +549,12 @@ Rectangle {
         appWindow.restoreHeight = 0;
         appWindow.walletPassword = "";
 
-        if(typeof fn == 'object')
+        if (typeof fn == 'object')
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fn);
         else
             persistentSettings.wallet_path = fn;
 
-        if(isIOS)
+        if (isIOS)
             persistentSettings.wallet_path = persistentSettings.wallet_path.replace(appWindow.accountsDir, "");
 
         appWindow.openWallet();

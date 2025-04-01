@@ -52,7 +52,7 @@ Rectangle {
     property alias receiveHeight: mainLayout.height
     property var state: "Address"
 
-    function renameSubaddressLabel(_index){
+    function renameSubaddressLabel(_index) {
         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, _index, inputDialog.inputText);
@@ -136,10 +136,10 @@ Rectangle {
                         onEntered: qrCodeTooltip.tooltipPopup.open()
                         onExited: qrCodeTooltip.tooltipPopup.close()
                         onClicked: {
-                            if (mouse.button == Qt.LeftButton){
+                            if (mouse.button == Qt.LeftButton) {
                                 walletManager.saveQrCodeToClipboard(generateQRCodeString());
                                 appWindow.showStatusMessage(qsTr("QR code copied to clipboard") + translationManager.emptyString, 3);
-                            } else if (mouse.button == Qt.RightButton){
+                            } else if (mouse.button == Qt.RightButton) {
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
                                 qrMenu.open()
@@ -249,7 +249,7 @@ Rectangle {
                             const cursorPosition = cursorPosition;
                             text = match[1];
                             cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0){
+                        } else if (text.indexOf('.') === 0) {
                             text = '0' + text;
                             if (text.length > 2) {
                                 cursorPosition = 1;
@@ -309,7 +309,7 @@ Rectangle {
                             const cursorPosition = cursorPosition;
                             text = match[1];
                             cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0){
+                        } else if (text.indexOf('.') === 0) {
                             text = '0' + text;
                             if (text.length > 2) {
                                 cursorPosition = 1;
@@ -754,7 +754,7 @@ Rectangle {
             selectExisting: false
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
+                if (!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
                     console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                     receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;

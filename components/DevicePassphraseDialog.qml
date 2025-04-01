@@ -68,7 +68,7 @@ Item {
         text: qsTr("Please select where you want to enter passphrase.\nIt is recommended to enter passphrase on the hardware wallet for better security.") + translationManager.emptyString
 
         onAccepted: {
-            if (onWalletEntryCallback){
+            if (onWalletEntryCallback) {
                 onWalletEntryCallback()
             }
         }

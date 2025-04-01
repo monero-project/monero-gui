@@ -7,13 +7,13 @@ function updateFromQrCode(address, payment_id, amount, tx_description, recipient
     viewKeyLine.text = "";
     restoreHeight.text = "";
 
-    if(typeof extra_parameters.secret_view_key != "undefined") {
+    if (typeof extra_parameters.secret_view_key != "undefined") {
         viewKeyLine.text = extra_parameters.secret_view_key;
     }
-    if(typeof extra_parameters.secret_spend_key != "undefined") {
+    if (typeof extra_parameters.secret_spend_key != "undefined") {
         spendKeyLine.text = extra_parameters.secret_spend_key;
     }
-    if(typeof extra_parameters.restore_height != "undefined") {
+    if (typeof extra_parameters.restore_height != "undefined") {
         restoreHeight.text = extra_parameters.restore_height;
     }
     addressLine.text = address;
@@ -57,22 +57,22 @@ function switchPage(next) {
     }
 }
 
-function createWalletPath(isIOS, folder_path,account_name){
+function createWalletPath(isIOS, folder_path,account_name) {
     // Store releative path on ios.
-    if(isIOS)
+    if (isIOS)
         folder_path = "";
 
     return folder_path + "/" + account_name + "/" + account_name;
 }
 
 function walletPathExists(accountsDir, directory, filename, isIOS, walletManager) {
-    if(!filename || filename === "") return false;
-    if(!directory || directory === "") return false;
+    if (!filename || filename === "") return false;
+    if (!directory || directory === "") return false;
 
     if (!directory.endsWith("/") && !directory.endsWith("\\"))
         directory += "/";
 
-    if(isIOS)
+    if (isIOS)
         var path = accountsDir + filename;
     else
         var path = directory + filename + "/" + filename;
@@ -93,7 +93,7 @@ function unusedWalletName(directory, filename, walletManager) {
     return filename;
 }
 
-function isAscii(str){
+function isAscii(str) {
     for (var i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) > 127)
             return false;
@@ -118,7 +118,7 @@ function checkSeed(seed) {
     return wordsArray.length === 25 || wordsArray.length === 24;
 }
 
-function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline){
+function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline) {
     var results = [];
     // addressOK
     results[0] = walletmanager.addressValid(addressline, nettype);
@@ -131,7 +131,7 @@ function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spe
 
 //usage: getApproximateBlockchainHeight("March 18 2016") or getApproximateBlockchainHeight("2016-11-11")
 //returns estimated block height with 1 month buffer prior to requested date.
-function getApproximateBlockchainHeight(_date, _nettype){
+function getApproximateBlockchainHeight(_date, _nettype) {
     // time of monero birth 2014-04-18 10:49:53 (1397818193)
     var moneroBirthTime = _nettype == "Mainnet" ? 1397818193 : _nettype == "Testnet" ? 1410295020 : 1518932025;
     // avg seconds per block in v1
@@ -147,35 +147,35 @@ function getApproximateBlockchainHeight(_date, _nettype){
     var approxBlockchainHeight;
     var secondsPerBlock;
     // before monero's birth
-    if (requestedTime < moneroBirthTime){
+    if (requestedTime < moneroBirthTime) {
         console.log("Calculated blockchain height: 0, requestedTime < moneroBirthTime " );
         return 0;
     }
     // time between during v1
-    if (requestedTime > moneroBirthTime && requestedTime < forkTime){
+    if (requestedTime > moneroBirthTime && requestedTime < forkTime) {
         approxBlockchainHeight = Math.floor((requestedTime - moneroBirthTime)/secondsPerBlockV1);
         console.log("Calculated blockchain height: " + approxBlockchainHeight );
         secondsPerBlock = secondsPerBlockV1;
     }
     // time is during V2
-    else{
+    else {
         approxBlockchainHeight =  Math.floor(forkBlock + (requestedTime - forkTime)/secondsPerBlockV2);
         console.log("Calculated blockchain height: " + approxBlockchainHeight );
         secondsPerBlock = secondsPerBlockV2;
     }
 
-    if(_nettype == "Testnet" || _nettype == "Stagenet"){
+    if (_nettype == "Testnet" || _nettype == "Stagenet") {
         // testnet got some huge rollbacks, so the estimation is way off
         var approximateTestnetRolledBackBlocks = _nettype == "Testnet" ? 342100 : _nettype == "Stagenet" ? 60000 : 30000;
-        if(approxBlockchainHeight > approximateTestnetRolledBackBlocks)
+        if (approxBlockchainHeight > approximateTestnetRolledBackBlocks)
             approxBlockchainHeight -= approximateTestnetRolledBackBlocks;
     }
 
     var blocksPerMonth = 60*60*24*30/secondsPerBlock;
-    if(approxBlockchainHeight - blocksPerMonth > 0){
+    if (approxBlockchainHeight - blocksPerMonth > 0) {
         return approxBlockchainHeight - blocksPerMonth;
     }
-    else{
+    else {
         return 0;
     }
 }

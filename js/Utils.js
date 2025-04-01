@@ -31,8 +31,8 @@ function isNumeric(n) {
 function showSeedPage() {
     // Shows `Settings->Seed & keys`. Prompts a password dialog.
     passwordDialog.onAcceptedCallback = function() {
-        if(walletPassword === passwordDialog.password){
-            if(currentWallet.seedLanguage == "") {
+        if (walletPassword === passwordDialog.password) {
+            if (currentWallet.seedLanguage == "") {
                 console.log("No seed language set. Using English as default");
                 currentWallet.setSeedLanguage("English");
             }
@@ -55,7 +55,7 @@ function ago(epoch) {
     var now = new Date().getTime() / 1000;
     var delta = now - epoch;
 
-    if(delta < 60)
+    if (delta < 60)
         return qsTr("%n second(s) ago", "0", Math.floor(delta));
     else if (delta < 3600)
         return qsTr("%n minute(s) ago", "0", Math.floor(delta / 60));
@@ -65,49 +65,49 @@ function ago(epoch) {
         return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400));
 }
 
-function netTypeToString(){
+function netTypeToString() {
     // 0: mainnet, 1: testnet, 2: stagenet
     var nettype = appWindow.persistentSettings.nettype;
     return nettype == 1 ? qsTr("Testnet") : nettype == 2 ? qsTr("Stagenet") : qsTr("Mainnet");
 }
 
-function epoch(){
+function epoch() {
     return Math.floor((new Date).getTime()/1000);
 }
 
-function roundDownToNearestThousand(_num){
+function roundDownToNearestThousand(_num) {
     return Math.floor(_num/1000.0)*1000;
 }
 
-function qmlEach(item, properties, ignoredObjectNames, arr){
+function qmlEach(item, properties, ignoredObjectNames, arr) {
     // Traverse QML object tree and return components that match
     // via property names. Similar to jQuery("myclass").each(...
     // item: root QML object
     // properties: list of strings
     // ignoredObjectNames: list of strings
-    if(typeof(arr) == 'undefined') arr = [];
-    if(item.hasOwnProperty('data') && item['data'].length > 0){
-        for(var i = 0; i < item['data'].length; i += 1){
+    if (typeof(arr) == 'undefined') arr = [];
+    if (item.hasOwnProperty('data') && item['data'].length > 0) {
+        for (var i = 0; i < item['data'].length; i += 1) {
             arr = qmlEach(item['data'][i], properties, ignoredObjectNames, arr);
         }
     }
 
     // ignore QML objects on .objectName
-    for(var a = 0; a < ignoredObjectNames.length; a += 1){
-        if(item.objectName === ignoredObjectNames[a]){
+    for (var a = 0; a < ignoredObjectNames.length; a += 1) {
+        if (item.objectName === ignoredObjectNames[a]) {
             return arr;
         }
     }
 
-    for(var u = 0; u < properties.length; u += 1){
-        if(item.hasOwnProperty(properties[u])) arr.push(item);
+    for (var u = 0; u < properties.length; u += 1) {
+        if (item.hasOwnProperty(properties[u])) arr.push(item);
         else break;
     }
 
     return arr;
 }
 
-function capitalize(s){
+function capitalize(s) {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
 }

@@ -205,11 +205,11 @@ Rectangle {
 
                     onChanged: {
                         var item = dataModel.get(currentIndex).nettype.toLowerCase();
-                        if(item === "mainnet") {
+                        if (item === "mainnet") {
                             persistentSettings.nettype = NetworkType.MAINNET
-                        } else if(item === "stagenet"){
+                        } else if (item === "stagenet") {
                             persistentSettings.nettype = NetworkType.STAGENET
-                        } else if(item === "testnet"){
+                        } else if (item === "testnet") {
                             persistentSettings.nettype = NetworkType.TESTNET
                         }
                         appWindow.disconnectRemoteNode()
@@ -252,7 +252,7 @@ Rectangle {
         }
     }
 
-    function onPageCompleted(){
+    function onPageCompleted() {
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         if (networkTypeDropdown.currentIndex != 0) {
             showAdvancedCheckbox.checked = true;

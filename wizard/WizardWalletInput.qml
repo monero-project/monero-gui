@@ -73,7 +73,7 @@ GridLayout {
             id: walletName
             Layout.preferredWidth: grid.width/5
 
-            function verify(){
+            function verify() {
                 if (walletName.text === "") {
                     errorMessageWalletName.text = qsTr("Wallet name is empty") + translationManager.emptyString;
                     return false;

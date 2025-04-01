@@ -470,7 +470,7 @@ Rectangle {
                                         const cursorPosition = cursorPosition;
                                         text = match[1];
                                         cursorPosition = Math.max(cursorPosition, 1) - 1;
-                                    } else if(text.indexOf('.') === 0){
+                                    } else if (text.indexOf('.') === 0) {
                                         text = '0' + text;
                                         if (text.length > 2) {
                                             cursorPosition = 1;
@@ -1037,7 +1037,7 @@ Rectangle {
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {
-            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))){
+            if (!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))) {
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
                 informationPopup.icon  = StandardIcon.Critical
@@ -1147,9 +1147,9 @@ Rectangle {
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
-        if(appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
+        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
         pageRoot.enabled = true;
-        if(typeof currentWallet === "undefined") {
+        if (typeof currentWallet === "undefined") {
             root.warningContent = messageNotConnected;
             return;
         }
@@ -1172,7 +1172,7 @@ Rectangle {
                                    "Please upgrade or connect to another daemon");
             break;
         default:
-            if(!appWindow.daemonSynced){
+            if (!appWindow.daemonSynced) {
                 root.warningContent = qsTr("Waiting on daemon synchronization to finish.");
             } else {
                 // everything OK, enable transfer page

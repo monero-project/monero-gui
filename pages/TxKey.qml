@@ -117,7 +117,7 @@ Rectangle {
                         const cursorPosition = cursorPosition;
                         text = match[1];
                         cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0) {
+                        } else if (text.indexOf('.') === 0) {
                             text = '0' + text;
                             if (text.length > 2) {
                                 cursorPosition = 1;

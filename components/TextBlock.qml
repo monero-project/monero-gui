@@ -11,7 +11,7 @@ TextEdit {
     selectByMouse: true
     // Workaround for https://bugreports.qt.io/browse/QTBUG-50587
     onFocusChanged: {
-        if(focus === false)
+        if (focus === false)
             deselect()
     }
 }

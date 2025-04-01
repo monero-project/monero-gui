@@ -73,7 +73,7 @@ Rectangle {
 
                 onPrevClicked: {
                     btnNext.enabled = true;
-                    if (appWindow.walletMode <= 1){
+                    if (appWindow.walletMode <= 1) {
                         wizardStateView.state = "wizardRestoreWallet1";
                     } else {
                         wizardStateView.state = "wizardRestoreWallet3";

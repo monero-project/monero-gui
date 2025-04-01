@@ -596,10 +596,10 @@ Rectangle {
         var p2poolArgs = ["--zmq-pub tcp://127.0.0.1:18083"];
         //create an array (allArgs) of ['--arg value','--arg2','--arg3']
         for (let i = 0; i < customDaemonArgsArray.length; i++) {
-            if(!customDaemonArgsArray[i].startsWith("--")) {
+            if (!customDaemonArgsArray[i].startsWith("--")) {
                 flag += " " + customDaemonArgsArray[i];
             } else {
-                if(flag){
+                if (flag) {
                     allArgs.push(flag);
                 }
                 flag = customDaemonArgsArray[i];
@@ -610,7 +610,7 @@ Rectangle {
 allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) );
         //append required p2pool flags
         for (let i = 0; i < p2poolArgs.length; i++) {
-            if(!allArgs.includes(p2poolArgs[i])) {
+            if (!allArgs.includes(p2poolArgs[i])) {
                 allArgs.push(p2poolArgs[i]);
                 continue;
             }

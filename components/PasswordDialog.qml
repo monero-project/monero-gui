@@ -64,7 +64,7 @@ Item {
         capsLockTextLabel.visible = oshelper.isCapsLock();
         passwordInput1.reset();
         passwordInput2.reset();
-        if(!appWindow.currentWallet || appWindow.active)
+        if (!appWindow.currentWallet || appWindow.active)
             passwordInput1.input.forceActiveFocus();
         root.walletName = walletName ? walletName : "";
         errorTextLabel.text = errorText ? errorText : "";

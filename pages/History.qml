@@ -163,7 +163,7 @@ Rectangle {
                     if (!sortAndFilter.collapsed) {
                         sortAndFilter.collapsed = true;
                     }
-                    if(searchInput.text != null && searchInput.text.length >= 3){
+                    if (searchInput.text != null && searchInput.text.length >= 3) {
                         root.sortSearchString = searchInput.text;
                         root.reset();
                         root.updateFilter();
@@ -213,7 +213,7 @@ Rectangle {
                 inputLabel.text: qsTr("Date from") + translationManager.emptyString
                 inputLabel.font.pixelSize: 14
                 onCurrentDateChanged: {
-                    if(root.initialized){
+                    if (root.initialized) {
                         root.reset();
                         root.updateFilter();
                     }
@@ -227,7 +227,7 @@ Rectangle {
                 inputLabel.text: qsTr("Date to") + translationManager.emptyString
 
                 onCurrentDateChanged: {
-                    if(root.initialized){
+                    if (root.initialized) {
                         root.reset();
                         root.updateFilter();
                     }
@@ -305,7 +305,7 @@ Rectangle {
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
-                        if(root.sortBy !== "blockheight") {
+                        if (root.sortBy !== "blockheight") {
                             root.sortDirection = true;
                         } else {
                             root.sortDirection = !root.sortDirection
@@ -364,7 +364,7 @@ Rectangle {
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
-                        if(root.sortBy !== "timestamp") {
+                        if (root.sortBy !== "timestamp") {
                             root.sortDirection = true;
                         } else {
                             root.sortDirection = !root.sortDirection
@@ -423,7 +423,7 @@ Rectangle {
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
-                        if(root.sortBy !== "amount") {
+                        if (root.sortBy !== "amount") {
                             root.sortDirection = true;
                         } else {
                             root.sortDirection = !root.sortDirection
@@ -1405,8 +1405,8 @@ Rectangle {
         }
     }
 
-    function refresh(){
-        if(appWindow.currentWallet != null && typeof appWindow.currentWallet.history !== "undefined" ) {
+    function refresh() {
+        if (appWindow.currentWallet != null && typeof appWindow.currentWallet.history !== "undefined" ) {
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
         }
 
@@ -1436,7 +1436,7 @@ Rectangle {
         }
     }
 
-    function updateFilter(currentPage){
+    function updateFilter(currentPage) {
         // applying filters
         root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
 
@@ -1445,37 +1445,37 @@ Rectangle {
         var toDate = (Math.floor(toDatePicker.currentDate.getTime() / 86400000) + 1) * 86400 + timezoneOffset;
 
         var txs = [];
-        for (var i = 0; i < root.txData.length; i++){
+        for (var i = 0; i < root.txData.length; i++) {
             var item = root.txData[i];
             var matched = "";
 
             // daterange filtering
-            if(item.timestamp < fromDate || item.timestamp > toDate){
+            if (item.timestamp < fromDate || item.timestamp > toDate) {
                 continue;
             }
 
             // search string filtering
-            if(root.sortSearchString == null || root.sortSearchString === ""){
+            if (root.sortSearchString == null || root.sortSearchString === "") {
                 txs.push(root.txData[i]);
                 continue;
             }
 
-            if(root.sortSearchString.length >= 1){
-                if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
+            if (root.sortSearchString.length >= 1) {
+                if (item.amount && item.amount.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
-                } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                } else if (item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())) {
                     txs.push(item);
-                } else if(item.receivingAddress !== "" && item.receivingAddress.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                } else if (item.receivingAddress !== "" && item.receivingAddress.toLowerCase().startsWith(root.sortSearchString.toLowerCase())) {
                     txs.push(item);
-                } else if(item.receivingAddressLabel !== "" && item.receivingAddressLabel.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                } else if (item.receivingAddressLabel !== "" && item.receivingAddressLabel.toLowerCase().startsWith(root.sortSearchString.toLowerCase())) {
                     txs.push(item);
-                } else if(item.addressBookName !== "" && item.addressBookName.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                } else if (item.addressBookName !== "" && item.addressBookName.toLowerCase().startsWith(root.sortSearchString.toLowerCase())) {
                     txs.push(item);
-                } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
+                } else if (typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
-                } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
+                } else if (item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
                     txs.push(item);
-                } else if (item.hash.startsWith(root.sortSearchString)){
+                } else if (item.hash.startsWith(root.sortSearchString)) {
                     txs.push(item);
                 }
             }
@@ -1491,14 +1491,14 @@ Rectangle {
         }
     }
 
-    function updateSort(){
+    function updateSort() {
         // applying sorts
         root.txOffset = 0;
         root.txData.sort(function(a, b) {
             return a[root.sortBy] - b[root.sortBy];
         });
 
-        if(root.sortDirection)
+        if (root.sortDirection)
             root.txData.reverse();
 
         root.updateDisplay(root.txOffset, root.txMax);
@@ -1511,11 +1511,11 @@ Rectangle {
         var txs = root.txData.slice(tx_offset, tx_offset + tx_max);
 
         // collapse tx if there is a single result
-        if(root.txPage === 1 && txs.length === 1)
+        if (root.txPage === 1 && txs.length === 1)
             root.txDataCollapsed.push(txs[0]['hash']);
 
         // populate listview
-        for (var i = 0; i < txs.length; i++){
+        for (var i = 0; i < txs.length; i++) {
             txListViewModel.append(txs[i]);
         }
 
@@ -1523,18 +1523,18 @@ Rectangle {
 
         // determine pagination button states
         var count = txData.length;
-        if(count <= root.txMax) {
+        if (count <= root.txMax) {
             paginationPrev.enabled = false;
             paginationNext.enabled = false;
             return;
         }
 
-        if(root.txOffset < root.txMax)
+        if (root.txOffset < root.txMax)
             paginationPrev.enabled = false;
         else
             paginationPrev.enabled = true;
 
-        if((root.txOffset + root.txMax) >= count)
+        if ((root.txOffset + root.txMax) >= count)
             paginationNext.enabled = false;
         else
             paginationNext.enabled = true;
@@ -1542,7 +1542,7 @@ Rectangle {
 
     function updateTransactionsFromModel() {
         // This function copies the items of `appWindow.currentWallet.historyModel` to `root.txModelData`, as a list of javascript objects
-        if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+        if (currentWallet == null || typeof currentWallet.history === "undefined" ) return;
 
         var _model = root.model;
         var total = 0;
@@ -1635,7 +1635,7 @@ Rectangle {
         root.updateFilter(currentPage);
     }
 
-    function editDescription(_hash, _tx_note, currentPage){
+    function editDescription(_hash, _tx_note, currentPage) {
         inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
@@ -1646,39 +1646,39 @@ Rectangle {
         inputDialog.open(_tx_note);
     }
 
-    function paginationPrevClicked(){
+    function paginationPrevClicked() {
         root.txOffset -= root.txMax;
         updateDisplay(root.txOffset, root.txMax);
     }
 
-    function paginationNextClicked(){
+    function paginationNextClicked() {
         root.txOffset += root.txMax;
         updateDisplay(root.txOffset, root.txMax);
     }
 
-    function paginationJump(pageNumber){
+    function paginationJump(pageNumber) {
         root.txOffset = root.txMax * Math.ceil(pageNumber - 1 || 0);
         updateDisplay(root.txOffset, root.txMax);
     }
 
-    function removeFromCollapsedList(hash){
+    function removeFromCollapsedList(hash) {
         root.txDataCollapsed = root.txDataCollapsed.filter(function(item) {
             return item !== hash;
         });
     }
 
-    function updateHistoryStatusMessage(){
-        if(root.txModelData.length <= 0){
+    function updateHistoryStatusMessage() {
+        if (root.txModelData.length <= 0) {
             root.historyStatusMessage = qsTr("No transaction history yet.") + translationManager.emptyString;
-        } else if (root.txData.length <= 0){
+        } else if (root.txData.length <= 0) {
             root.historyStatusMessage = qsTr("No results.") + translationManager.emptyString;
         } else {
             root.historyStatusMessage = qsTr("%1 transactions total, showing %2.").arg(root.txData.length).arg(txListViewModel.count) + translationManager.emptyString;
         }
     }
 
-    function getTxKey(hash, elem){
-        if (elem.parent.state != 'ready'){
+    function getTxKey(hash, elem) {
+        if (elem.parent.state != 'ready') {
             currentWallet.getTxKeyAsync(hash, function(hash, txKey) {
                 elem.parent.text = txKey ? txKey : '-';
                 elem.parent.state = 'ready';
@@ -1707,15 +1707,15 @@ Rectangle {
         });
     }
 
-    function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
+    function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex) {
         var address = TxUtils.destinationsToAddress(destinations);
-        if(address === undefined){
+        if (address === undefined) {
             console.log('getProof: Error fetching address');
             return;
         }
 
         var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.nettype));
-        if(!checked){
+        if (!checked) {
             console.log('getProof: Error checking TxId and/or address');
         }
 
@@ -1727,7 +1727,7 @@ Rectangle {
         informationPopup.open();
     }
 
-    function toClipboard(text){
+    function toClipboard(text) {
         console.log("Copied to clipboard");
         clipboard.setText(text);
         appWindow.showStatusMessage(qsTr("Copied to clipboard"),3);
@@ -1764,7 +1764,7 @@ Rectangle {
             var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
             var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
 
-            if(written !== ""){
+            if (written !== "") {
                 confirmationDialog.title = qsTr("Success") + translationManager.emptyString;
                 var text = qsTr("CSV file written to: %1").arg(written) + "\n\n"
                 text += qsTr("Tip: Use your favorite spreadsheet software to sort on blockheight.") + "\n\n" + translationManager.emptyString;
@@ -1790,7 +1790,7 @@ Rectangle {
             try {
                 _folder = 'file://' + desktopFolder;
             }
-            catch(err) {}
+            catch (err) {}
             finally {
                 writeCSVFileDialog.folder = _folder;
             }
@@ -1799,7 +1799,7 @@ Rectangle {
 
     function onPageCompleted() {
         // setup date filter scope according to real transactions
-        if(appWindow.currentWallet != null){
+        if (appWindow.currentWallet != null) {
             root.model = appWindow.currentWallet.historyModel;
             root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole;
             root.model.sort(0, Qt.DescendingOrder);
@@ -1819,13 +1819,13 @@ Rectangle {
         root.updateFilter();
     }
 
-    function onPageClosed(){
+    function onPageClosed() {
         root.initialized = false;
         root.reset(true);
         root.clearFields();
     }
 
-    function searchInHistory(searchTerm){
+    function searchInHistory(searchTerm) {
         searchInput.text = searchTerm;
         searchInput.forceActiveFocus();
         searchInput.cursorPosition = searchInput.text.length;

@@ -45,7 +45,7 @@ RowLayout {
     signal clicked()
     height: 25
 
-    function toggle(){
+    function toggle() {
         checkBox.checked = !checkBox.checked;
         checkBox.clicked();
     }

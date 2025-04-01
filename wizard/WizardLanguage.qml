@@ -161,7 +161,7 @@ Rectangle {
 
                 onClicked: {
                     wizardController.wizardStackView.backTransition = false;
-                    if(wizardController.skipModeSelection){
+                    if (wizardController.skipModeSelection) {
                         wizardStateView.state = "wizardHome"
                     } else {
                         wizardStateView.state = "wizardModeSelection"

@@ -98,7 +98,7 @@ Rectangle {
             }
         }
         onNotifyError : {
-            if( warning )
+            if ( warning )
                 messageDialog.icon = StandardIcon.Critical
             else {
                 messageDialog.icon = StandardIcon.Warning
@@ -144,7 +144,7 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        if( QtMultimedia.availableCameras.length == 0) {
+        if ( QtMultimedia.availableCameras.length == 0) {
             console.log("No camera available. Disable qrScannerEnabled");
             appWindow.qrScannerEnabled = false;
         }

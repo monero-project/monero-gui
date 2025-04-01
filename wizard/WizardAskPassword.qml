@@ -42,14 +42,14 @@ ColumnLayout {
     property int passwordFill: 0
     property string passwordStrengthText: qsTr("Strength: ") + translationManager.emptyString
 
-    function calcStrengthAndVerify(){
+    function calcStrengthAndVerify() {
         calcPasswordStrength();
         return passwordInput.text === passwordInputConfirm.text;
     }
 
     function calcPasswordStrength(inp) {
-        if(!progressLayout.visible) return;
-        if(passwordInput.text.length <= 1){
+        if (!progressLayout.visible) return;
+        if (passwordInput.text.length <= 1) {
             root.passwordFill = 0;
             progressText.text = passwordStrengthText + qsTr("Low") + translationManager.emptyString;
         }
@@ -69,10 +69,10 @@ ColumnLayout {
         root.passwordFill = strength;
 
         var strengthString;
-        if(strength <= 33){
+        if (strength <= 33) {
             strengthString = qsTr("Low");
             fillRect.color = "#FF0000";
-        } else if(strength <= 66){
+        } else if (strength <= 66) {
             strengthString = qsTr("Medium");
             fillRect.color = (MoneroComponents.Style.blackTheme ? "#FFFF00" : "#FFCC00");
         } else {
