@@ -557,6 +557,11 @@ bool Wallet::isBackgroundWallet() const
     return m_walletImpl->isBackgroundWallet();
 }
 
+bool Wallet::isBackgroundSyncing() const
+{
+    return m_walletImpl->isBackgroundSyncing();
+}
+
 void Wallet::startBackgroundSync()
 {
     qDebug() << "Starting background sync";

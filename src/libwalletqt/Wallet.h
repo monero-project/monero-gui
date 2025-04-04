@@ -226,6 +226,7 @@ public:
     Q_INVOKABLE void setupBackgroundSync(const BackgroundSyncType background_sync_type, const QString &wallet_password);
     Q_INVOKABLE BackgroundSyncType getBackgroundSyncType() const;
     Q_INVOKABLE bool isBackgroundWallet() const;
+    Q_INVOKABLE bool isBackgroundSyncing() const;
 
     //! scan in the background with just the view key (wipe the spend key)
     Q_INVOKABLE void startBackgroundSync();
