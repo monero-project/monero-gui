@@ -47,7 +47,7 @@ ColumnLayout {
         return passwordInput.text === passwordInputConfirm.text;
     }
 
-    function calcPasswordStrength(inp) {
+    function calcPasswordStrength() {
         if(!progressLayout.visible) return;
         if(passwordInput.text.length <= 1){
             root.passwordFill = 0;
