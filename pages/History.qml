@@ -1542,6 +1542,7 @@ Rectangle {
     function updateTransactionsFromModel() {
         // This function copies the items of `appWindow.currentWallet.historyModel` to `root.txModelData`, as a list of javascript objects
         if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+        if(currentWallet.isBackgroundSyncing()) return;
 
         var _model = root.model;
         var total = 0
