@@ -204,7 +204,7 @@ Item {
                 font.family: MoneroComponents.Style.fontLight.name
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
-                text: qsTr("CAPSLOCKS IS ON.") + translationManager.emptyString;
+                text: qsTr("CAPS LOCK IS ON.") + translationManager.emptyString;
             }
 
             MoneroComponents.LineEdit {
