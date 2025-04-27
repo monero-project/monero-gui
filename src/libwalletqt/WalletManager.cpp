@@ -29,6 +29,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "wallet/api/wallet2_api.h"
+#include "wipeable_string.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
 #include <QClipboard>
@@ -57,6 +58,9 @@ public:
   virtual void newBlock(uint64_t height) override { (void) height; };
   virtual void updated() override {};
   virtual void refreshed() override {};
+  void onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached) override
+  { (void) height; (void) blocks_detached; (void) transfers_detached; }
+  void onPoolTxRemoved(const std::string &txid) override { (void) txid; }
 
   virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override
   {
@@ -80,6 +84,12 @@ public:
   {
       qDebug() << __FUNCTION__;
       emit m_mgr->deviceButtonPressed();
+  }
+
+  Monero::optional<std::string> onGetPassword(const char *reason) override
+  {
+      qDebug() << __FUNCTION__;
+      return Monero::optional<std::string>();
   }
 
 private:

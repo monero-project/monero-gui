@@ -225,6 +225,7 @@ Item {
                 Keys.onEnterPressed: root.onOk()
                 Keys.onReturnPressed: root.onOk()
                 Keys.onEscapePressed: root.onCancel()
+                isSecret: true
             }
 
             // padding
@@ -261,6 +262,7 @@ Item {
                 Keys.onEnterPressed: root.onOk()
                 Keys.onReturnPressed: root.onOk()
                 Keys.onEscapePressed: root.onCancel()
+                isSecret: true
             }
 
             // padding
