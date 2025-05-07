@@ -1,0 +1,93 @@
+MoneroSettings::MoneroSettings(QObject *parent)
+    : QObject(parent)
+    , m_lockOnUserInactivityInterval(1)
+    , m_hideBalance(false)
+    , m_askPasswordBeforeSending(true)
+    , m_useI2P(false)
+    , m_useBuiltInI2P(true)
+    , m_i2pAddress("127.0.0.1")
+    , m_i2pPort("7656")
+    , m_i2pMixedMode(false)
+    , m_i2pTunnelLength(3)
+{ }
+
+MoneroSettings::~MoneroSettings() = default;
+
+bool MoneroSettings::shareTransactionHistoryFile() const
+{
+    QSettings settings;
+    return settings.value("shareTransactionHistoryFile", false).toBool();
+}
+
+// I2P methods
+void MoneroSettings::setUseI2P(bool useI2P)
+{
+    if (m_useI2P != useI2P) 
+    {
+        m_useI2P = useI2P;
+        QSettings settings;
+        settings.setValue("useI2P", useI2P);
+        emit useI2PChanged();
+    }
+}
+
+void MoneroSettings::setUseBuiltInI2P(bool useBuiltInI2P)
+{
+    if (m_useBuiltInI2P != useBuiltInI2P) 
+    {
+        m_useBuiltInI2P = useBuiltInI2P;
+        QSettings settings;
+        settings.setValue("useBuiltInI2P", useBuiltInI2P);
+        emit useBuiltInI2PChanged();
+    }
+}
+
+void MoneroSettings::setI2PAddress(const QString &i2pAddress)
+{
+    if (m_i2pAddress != i2pAddress) 
+    {
+        m_i2pAddress = i2pAddress;
+        QSettings settings;
+        settings.setValue("i2pAddress", i2pAddress);
+        emit i2pAddressChanged();
+    }
+}
+
+void MoneroSettings::setI2PPort(const QString &i2pPort)
+{
+    if (m_i2pPort != i2pPort) 
+    {
+        m_i2pPort = i2pPort;
+        QSettings settings;
+        settings.setValue("i2pPort", i2pPort);
+        emit i2pPortChanged();
+    }
+}
+
+void MoneroSettings::setI2PMixedMode(bool i2pMixedMode)
+{
+    if (m_i2pMixedMode != i2pMixedMode) 
+    {
+        m_i2pMixedMode = i2pMixedMode;
+        QSettings settings;
+        settings.setValue("i2pMixedMode", i2pMixedMode);
+        emit i2pMixedModeChanged();
+    }
+}
+
+void MoneroSettings::setI2PTunnelLength(int i2pTunnelLength)
+{
+    if (m_i2pTunnelLength != i2pTunnelLength && i2pTunnelLength >= 1 && i2pTunnelLength <= 7) 
+    {
+        m_i2pTunnelLength = i2pTunnelLength;
+        QSettings settings;
+        settings.setValue("i2pTunnelLength", i2pTunnelLength);
+        
+        // Update tunnel length in I2PDaemonManager
+        if (m_useBuiltInI2P && m_useI2P) {
+            I2PDaemonManager::instance().setTunnelLength(i2pTunnelLength);
+        }
+        
+        emit i2pTunnelLengthChanged();
+    }
+} 

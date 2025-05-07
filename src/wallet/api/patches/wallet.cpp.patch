@@ -1,0 +1,47 @@
+--- a/src/wallet/api/wallet.cpp
++++ b/src/wallet/api/wallet.cpp
+@@ -1550,6 +1550,40 @@
+     return m_wallet->save();
+ }
+ 
++/**
++ * @brief Get if I2P is enabled in the wallet
++ * @return true if I2P is enabled
++ */
++bool WalletImpl::isI2PEnabled() const
++{
++    return m_wallet->i2p_enabled();
++}
++
++/**
++ * @brief Enable or disable I2P in the wallet
++ * @param enabled true to enable, false to disable
++ */
++void WalletImpl::setI2PEnabled(bool enabled)
++{
++    m_wallet->set_i2p_enabled(enabled);
++}
++
++/**
++ * @brief Get the current I2P connection options
++ * @return I2P options string
++ */
++std::string WalletImpl::getI2POptions() const
++{
++    return m_wallet->get_i2p_options();
++}
++
++/**
++ * @brief Set I2P connection options
++ * @param options string in format: address=127.0.0.1,port=7656
++ * @return true if options parsed successfully
++ */
++bool WalletImpl::setI2POptions(const std::string& options)
++{
++    return m_wallet->set_i2p_options(options);
++}
++
+ //----------------------------------------------------------------------------------------------------
+ bool WalletImpl::setDaemonLogin(const std::string &daemon_login_str, const std::string &password)
+ {
+ } 

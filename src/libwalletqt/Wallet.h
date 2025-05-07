@@ -91,6 +91,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
     Q_PROPERTY(QString proxyAddress READ getProxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
     Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
+    Q_PROPERTY(bool i2pEnabled READ i2pEnabled NOTIFY i2pEnabledChanged)
 
 public:
 
@@ -355,7 +356,11 @@ public:
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
 
-    // TODO: setListenter() when it implemented in API
+    // I2P related methods
+    Q_INVOKABLE bool i2pEnabled() const;
+    Q_INVOKABLE void refreshI2PSettings();
+    Q_INVOKABLE bool setI2PEnabled(bool enabled);
+
 signals:
     // emitted on every event happened with wallet
     // (money sent/received, new block)
@@ -391,6 +396,7 @@ signals:
     void disconnectedChanged() const;
     void proxyAddressChanged() const;
     void refreshingChanged() const;
+    void i2pEnabledChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);

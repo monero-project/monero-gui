@@ -288,3 +288,103 @@ MoneroSettings::MoneroSettings(QObject *parent) :
     QObject(parent)
 {
 }
+
+bool MoneroSettings::useI2P() const
+{
+    return m_useI2P;
+}
+
+void MoneroSettings::setUseI2P(bool useI2P)
+{
+    if (m_useI2P != useI2P) {
+        m_useI2P = useI2P;
+        if (!useI2P) {
+            // Reset I2P settings when disabled
+            setUseBuiltInI2P(true);
+            setI2PAddress("127.0.0.1");
+            setI2PPort(7656);
+            setI2PInboundQuantity("3");
+            setI2POutboundQuantity("3");
+            setI2PMixedMode(false);
+        }
+        emit useI2PChanged();
+    }
+}
+
+bool MoneroSettings::useBuiltInI2P() const
+{
+    return m_useBuiltInI2P;
+}
+
+void MoneroSettings::setUseBuiltInI2P(bool useBuiltInI2P)
+{
+    if (m_useBuiltInI2P != useBuiltInI2P) {
+        m_useBuiltInI2P = useBuiltInI2P;
+        emit useBuiltInI2PChanged();
+    }
+}
+
+QString MoneroSettings::i2pAddress() const
+{
+    return m_i2pAddress;
+}
+
+void MoneroSettings::setI2PAddress(const QString &address)
+{
+    if (m_i2pAddress != address) {
+        m_i2pAddress = address;
+        emit i2pAddressChanged();
+    }
+}
+
+int MoneroSettings::i2pPort() const
+{
+    return m_i2pPort;
+}
+
+void MoneroSettings::setI2PPort(int port)
+{
+    if (m_i2pPort != port) {
+        m_i2pPort = port;
+        emit i2pPortChanged();
+    }
+}
+
+QString MoneroSettings::i2pInboundQuantity() const
+{
+    return m_i2pInboundQuantity;
+}
+
+void MoneroSettings::setI2PInboundQuantity(const QString &quantity)
+{
+    if (m_i2pInboundQuantity != quantity) {
+        m_i2pInboundQuantity = quantity;
+        emit i2pInboundQuantityChanged();
+    }
+}
+
+QString MoneroSettings::i2pOutboundQuantity() const
+{
+    return m_i2pOutboundQuantity;
+}
+
+void MoneroSettings::setI2POutboundQuantity(const QString &quantity)
+{
+    if (m_i2pOutboundQuantity != quantity) {
+        m_i2pOutboundQuantity = quantity;
+        emit i2pOutboundQuantityChanged();
+    }
+}
+
+bool MoneroSettings::i2pMixedMode() const
+{
+    return m_i2pMixedMode;
+}
+
+void MoneroSettings::setI2PMixedMode(bool mixedMode)
+{
+    if (m_i2pMixedMode != mixedMode) {
+        m_i2pMixedMode = mixedMode;
+        emit i2pMixedModeChanged();
+    }
+}

@@ -1,0 +1,16 @@
+diff --git a/src/wallet/wallet2.cpp b/src/wallet/wallet2.cpp
+--- a/src/wallet/wallet2.cpp
++++ b/src/wallet/wallet2.cpp
+@@ -1736,6 +1736,11 @@ void wallet2::set_i2p_options(const std::string &options)
+   m_i2p_options = options;
+ } 
+ //----------------------------------------------------------------------------------------------------
++std::string wallet2::get_i2p_options() const
++{
++  return m_i2p_options;
++} 
++//----------------------------------------------------------------------------------------------------
+ bool wallet2::parse_i2p_options(const std::string &options, std::string &address, int &port)
+ {
+   // Parse the I2P options string
+ } 

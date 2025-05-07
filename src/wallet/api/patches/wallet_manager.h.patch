@@ -1,0 +1,29 @@
+--- a/src/wallet/api/wallet_manager.h
++++ b/src/wallet/api/wallet_manager.h
+@@ -66,6 +66,13 @@
+     virtual void setDaemonAddress(const std::string &address) = 0;
+     virtual std::string getDaemonAddress() const = 0;
+     
++    /*!
++     * \brief I2P network-related methods
++     */
++    virtual bool isI2PEnabled() const = 0;
++    virtual void setI2PEnabled(bool enabled) = 0;
++    virtual std::string getI2POptions() const = 0;
++    virtual bool setI2POptions(const std::string& options) = 0;
+ 
+     /*!
+      * \brief creates new wallet
+@@ -126,6 +133,12 @@
+     void setDaemonAddress(const std::string &address);
+     std::string getDaemonAddress() const;
+     
++    // I2P network methods
++    bool isI2PEnabled() const;
++    void setI2PEnabled(bool enabled);
++    std::string getI2POptions() const;
++    bool setI2POptions(const std::string& options);
++    
+     Wallet * createWallet(const std::string &path, const std::string &password,
+                           const std::string &language, NetworkType nettype, uint64_t kdf_rounds = 1);
+     Wallet * openWallet(const std::string &path, const std::string &password, NetworkType nettype, uint64_t kdf_rounds = 1, WalletListener * listener = nullptr); 

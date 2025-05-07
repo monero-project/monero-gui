@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-macos:
-    runs-on: macos-latest
+    runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -56,7 +56,7 @@ jobs:
     - uses: eine/setup-msys2@v2
       with:
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
     - name: build
       run: DEV_MODE=ON make release-win64 -j2
     - name: deploy
@@ -66,19 +66,17 @@ jobs:
       run: build/release/bin/monero-wallet-gui --test-qml
 
   macos-bundle:
-    runs-on: macos-13
+    runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config pyenv p7zip aria2
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config python3 p7zip aria2
     - name: install dependencies
-      run: |
-        pyenv install 3.12.0
-        pip install defusedxml
+      run: pip3 install defusedxml
     - name: download qt
-      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
+      run: python3 monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
       working-directory: ../
     - name: build
       run: |
@@ -99,7 +97,7 @@ jobs:
         path: build/bin/monero-wallet-gui.tar
 
   docker-linux-static:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -131,7 +129,7 @@ jobs:
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monerod
 
   docker-windows-static:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -159,7 +157,7 @@ jobs:
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monerod.exe
 
   docker-android:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -185,7 +183,7 @@ jobs:
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
 
   source-archive:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:

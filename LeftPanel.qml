@@ -506,6 +506,22 @@ Rectangle {
                 anchors.leftMargin: 20
             }
 
+            // Add I2P menu item after the Settings menu button
+            MoneroComponents.MenuButton {
+                id: i2pButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("I2P") + translationManager.emptyString
+                symbol: qsTr("I") + translationManager.emptyString
+                dotColor: "#45C3FF"
+                visible: appWindow.walletMode >= 2
+                under: settingsButton
+                onClicked: {
+                    appWindow.showPageRequest("Settings");
+                    settingsStateView.state = "I2P";
+                }
+            }
+
         } // Column
 
         } // Flickable
@@ -551,6 +567,57 @@ Rectangle {
             anchors.bottomMargin: 5
             connected: Wallet.ConnectionStatus_Disconnected
             height: 48
+        }
+    }
+
+    // Add I2P status indicator
+    Rectangle {
+        id: i2pStatusRect
+        property bool i2pConnected: persistentSettings.useI2P && i2pDaemonManager.ready
+        visible: persistentSettings.useI2P
+        Layout.fillWidth: true
+        Layout.preferredHeight: 38
+        Layout.topMargin: 4
+        color: "transparent"
+
+        Rectangle {
+            id: i2pStatusCircle
+            anchors.left: parent.left
+            anchors.leftMargin: 14
+            anchors.verticalCenter: parent.verticalCenter
+            width: 12
+            height: 12
+            radius: 6
+            color: parent.i2pConnected ? "#36B25C" : "#FF0000"
+        }
+
+        MoneroComponents.TextPlain {
+            id: i2pStatusText
+            anchors.left: i2pStatusCircle.right
+            anchors.leftMargin: 8
+            anchors.verticalCenter: parent.verticalCenter
+            color: parent.i2pConnected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.errorColor
+            font.bold: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+            text: parent.i2pConnected ? qsTr("I2P Connected") : qsTr("I2P Disconnected")
+            themeTransition: false
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+                    if (i2pDaemonManager.ready) {
+                        i2pDaemonManager.stop();
+                    } else {
+                        i2pDaemonManager.start();
+                    }
+                } else {
+                    i2pSettingsDialog.open();
+                }
+            }
         }
     }
 }

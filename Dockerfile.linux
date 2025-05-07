@@ -1,7 +1,7 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.16-lts-lgpl
+ARG QT_VERSION=v5.15.14-lts-lgpl
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
@@ -10,7 +10,7 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
-    libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
+    libpng12-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
@@ -121,8 +121,8 @@ RUN git clone -b v1.3 --depth 1 https://github.com/madler/zlib && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b VER-2-10-2 --depth 1 https://gitlab.freedesktop.org/freetype/freetype.git && \
-    cd freetype && \
+RUN git clone -b VER-2-10-2 --depth 1 https://git.savannah.gnu.org/git/freetype/freetype2.git && \
+    cd freetype2 && \
     git reset --hard 132f19b779828b194b3fede187cee719785db4d8 && \
     ./autogen.sh && \
     ./configure --disable-shared --enable-static --with-zlib=no && \
@@ -156,7 +156,7 @@ RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && \
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz && \
     echo "4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847 boost_1_80_0.tar.gz" | sha256sum -c && \
     tar -xzf boost_1_80_0.tar.gz && \
     rm boost_1_80_0.tar.gz && \
@@ -165,7 +165,7 @@ RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && 
     ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static cflags="${CFLAGS}" cxxflags="${CXXFLAGS}" install -a --prefix=/usr && \
     rm -rf $(pwd)
 
-RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
+RUN wget https://www.openssl.org/source/old/1.1.1/openssl-1.1.1u.tar.gz && \
     echo "e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6 openssl-1.1.1u.tar.gz" | sha256sum -c && \
     tar -xzf openssl-1.1.1u.tar.gz && \
     rm openssl-1.1.1u.tar.gz && \

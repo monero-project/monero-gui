@@ -1,0 +1,63 @@
+Item {
+    id: statusBar
+    width: parent.width
+    height: 40
+
+    // I2P status indicator
+    Rectangle {
+        id: i2pStatusIcon
+        visible: appWindow.currentWallet ? appWindow.walletManager.isI2PEnabled(appWindow.currentWallet) : false
+        color: "transparent"
+        height: 24
+        width: 24
+        anchors.right: networkStatusIcon.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
+        
+        Image {
+            anchors.fill: parent
+            source: "../images/i2p.svg"
+            fillMode: Image.PreserveAspectFit
+        }
+        
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                tooltip.text = qsTr("I2P routing active") + translationManager.emptyString
+                tooltip.tooltipPopup.open()
+            }
+        }
+    }
+
+    // network status
+    Row {
+        id: networkStatusRow
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 10
+
+        Rectangle {
+            id: networkStatusIcon
+            width: 24
+            height: 24
+            color: "transparent"
+            anchors.verticalCenter: parent.verticalCenter
+
+            Image {
+                anchors.fill: parent
+                source: "../images/network.svg"
+                fillMode: Image.PreserveAspectFit
+            }
+        }
+
+        Text {
+            id: networkStatusText
+            text: qsTr("Connecting...")
+            color: "white"
+            font.pixelSize: 14
+        }
+    }
+} 

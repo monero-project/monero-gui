@@ -1,0 +1,31 @@
+--- a/src/wallet/api/wallet.h
++++ b/src/wallet/api/wallet.h
+@@ -140,6 +140,14 @@
+     virtual bool setDaemonLogin(const std::string &username = "", const std::string &password = "") = 0;
+     virtual void setUseSSL(bool ssl) = 0;
+     virtual void setTrustedDaemon(bool arg) = 0;
++    
++    /*!
++     * \brief I2P network-related methods
++     */
++    virtual bool isI2PEnabled() const = 0;
++    virtual void setI2PEnabled(bool enabled) = 0;
++    virtual std::string getI2POptions() const = 0;
++    virtual bool setI2POptions(const std::string& options) = 0;
+ 
+     /*!
+      * \brief connected - checks if there's a connection with the daemon
+@@ -424,6 +432,11 @@
+     bool setDaemonLogin(const std::string &daemon_login_str = "", const std::string &password = "");
+     void setTrustedDaemon(bool arg);
+     void setUseSSL(bool ssl);
++    
++    // I2P network methods
++    bool isI2PEnabled() const;
++    void setI2PEnabled(bool enabled);
++    std::string getI2POptions() const;
++    bool setI2POptions(const std::string& options);
+ 
+     bool connected(uint32_t *version = NULL);
+     uint64_t blockChainHeight();
+ } 

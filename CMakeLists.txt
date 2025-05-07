@@ -4,8 +4,8 @@ project(monero-gui)
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
 set(VERSION_MAJOR "18")
-set(VERSION_MINOR "4")
-set(VERSION_REVISION "0")
+set(VERSION_MINOR "3")
+set(VERSION_REVISION "4")
 set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
@@ -14,20 +14,19 @@ option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
+option(WITH_I2P "Enable I2P network support" OFF)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
-
-if(DEV_MODE)
-  # DEV_MODE checks out the monero submodule to master, which requires C++17.
-  set(CMAKE_CXX_STANDARD 17)
-else()
-  set(CMAKE_CXX_STANDARD 11)
-endif()
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
+
+# Download i2pd binary if I2P support is enabled
+if(WITH_I2P)
+    add_definitions(-DWITH_I2P)
+    include(DownloadI2PD)
+endif()
 
 set(BUILD_GUI_DEPS ON)
 set(BUILD_64 ON CACHE BOOL "Build 64-bit binaries")
@@ -68,7 +67,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
-get_directory_property(Boost_VERSION_STRING DIRECTORY "monero" DEFINITION Boost_VERSION_STRING)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DQT_NO_DEBUG)
@@ -365,7 +363,7 @@ if(APPLE)
 endif()
 
 if (APPLE AND NOT IOS)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default -std=c++11")
 endif()
 
 if(APPLE)
@@ -451,8 +449,157 @@ message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")
 message(STATUS "Using linker security hardening flags: ${LD_SECURITY_FLAGS}")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 ${C_SECURITY_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_SECURITY_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ${CXX_SECURITY_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS} ${STATIC_FLAGS}")
 
 add_subdirectory(translations)
 add_subdirectory(src)
+
+set(MONERO_GUI_SOURCES
+    main.cpp
+    filter.cpp
+    clipboardAdapter.cpp
+    oscursor.cpp
+    oshelper.cpp
+    WalletAdapter.cpp
+    Wallet.cpp
+    QRCodeImageProvider.cpp
+    QrCodeScanner.cpp
+    PendingTransaction.cpp
+    UnsignedTransaction.cpp
+    TransactionHistory.cpp
+    TransactionInfo.cpp
+    TransactionDescription.cpp
+    TransactionKey.cpp
+    TransactionStatus.cpp
+    libwalletqt/WalletManager.cpp
+    model/TransactionHistoryModel.cpp
+    model/TransactionHistorySortFilterModel.cpp
+    model/MessageModel.cpp
+    AddressBook.cpp
+    model/AddressBookModel.cpp
+    Subaddress.cpp
+    model/SubaddressModel.cpp
+    SubaddressAccount.cpp
+    model/SubaddressAccountModel.cpp
+    wallet/wallet.cpp
+    wallet/api/wallet.cpp
+    wallet/api/wallet_manager.cpp
+    wallet/api/transaction_history.cpp
+    wallet/api/transaction_info.cpp
+    wallet/api/unsigned_transaction.cpp
+    wallet/api/pending_transaction.cpp
+    wallet/api/transaction_key.cpp
+    Settings.cpp
+    DNSLookup.cpp
+    Network.cpp
+    notifications/NotificationsManager.cpp
+    src/i2p/i2pdaemonmanager.cpp
+    src/model/MoneroSettings.cpp
+)
+
+set(MONERO_GUI_HEADERS
+    filter.h
+    clipboardAdapter.h
+    oscursor.h
+    oshelper.h
+    WalletAdapter.h
+    Wallet.h
+    QRCodeImageProvider.h
+    QrCodeScanner.h
+    PendingTransaction.h
+    UnsignedTransaction.h
+    TransactionHistory.h
+    TransactionInfo.h
+    TransactionDescription.h
+    TransactionKey.h
+    TransactionStatus.h
+    libwalletqt/WalletManager.h
+    model/TransactionHistoryModel.h
+    model/TransactionHistorySortFilterModel.h
+    model/MessageModel.h
+    AddressBook.h
+    model/AddressBookModel.h
+    Subaddress.h
+    model/SubaddressModel.h
+    SubaddressAccount.h
+    model/SubaddressAccountModel.h
+    wallet/wallet.h
+    Settings.h
+    DNSLookup.h
+    Network.h
+    notifications/NotificationsManager.h
+    src/i2p/i2pdaemonmanager.h
+    src/model/MoneroSettings.h
+)
+
+set(QRCODE_SOURCES
+    QR-Code-generator/cpp/BitBuffer.cpp
+    QR-Code-generator/cpp/QrCode.cpp
+    QR-Code-generator/cpp/QrSegment.cpp
+)
+
+set(QML_SOURCES
+    main.qml
+    LeftPanel.qml
+    components/StandardDropdown.qml
+    components/NewPasswordDialog.qml
+    components/StandardButton.qml
+    components/PasswordDialog.qml
+    components/StandardDialog.qml
+    components/StatusBar.qml
+    components/RemoteNodeList.qml
+    components/Navbar.qml
+    components/RemoteNodeEdit.qml
+    components/LineEditMulti.qml
+    components/MenuButton.qml
+    components/DaemonManagerDialog.qml
+    components/MobileHeader.qml
+    components/TitleBar.qml
+    components/InlineButton.qml
+    components/SuccessfulTxDialog.qml
+    components/FailedTxDialog.qml
+    components/CheckBox.qml
+    components/RadioButton.qml
+    components/TableHeader.qml
+    components/TableDropdown.qml
+    components/NetworkStatusItem.qml
+    components/MenuButtonDivider.qml
+    components/SearchInput.qml
+    components/TxConfirmationDialog.qml
+    components/TxKey.qml
+    components/LineEdit.qml
+    components/ExpertCheckbox.qml
+    components/TipItem.qml
+    components/Notification.qml
+    components/WarningBox.qml
+    components/SequentialLayout.qml
+    components/ImageButton.qml
+    components/CopyButton.qml
+    components/TextBlock.qml
+    components/TextPlain.qml
+    components/AnimatedImage.qml
+    pages/settings/SettingsI2P.qml
+    // ... other QML files ...
+)
+
+set(RESOURCE_FILES
+    images/arrow-right.png
+    images/arrow-right-white.png
+    // ... other images ...
+    images/i2p.svg
+)
+
+# Add this block after source group for Zephyr files
+if(WITH_I2P)
+    add_definitions(-DWITH_I2P)
+    set(I2P_SOURCES
+        src/i2p/i2pdaemonmanager.cpp
+    )
+    set(I2P_HEADERS
+        src/i2p/i2pdaemonmanager.h
+    )
+    source_group("I2P" FILES ${I2P_SOURCES} ${I2P_HEADERS})
+    list(APPEND SOURCES ${I2P_SOURCES})
+    list(APPEND HEADERS ${I2P_HEADERS})
+endif()

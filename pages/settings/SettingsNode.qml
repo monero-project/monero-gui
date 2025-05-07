@@ -249,6 +249,102 @@ Rectangle{
             }
         }
 
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 90
+            color: "transparent"
+
+            Rectangle {
+                id: i2pNodeDivider
+                Layout.fillWidth: true
+                anchors.topMargin: 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 1
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                visible: persistentSettings.useI2P
+                Layout.fillHeight: true
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                color: "darkgrey"
+                width: 2
+            }
+
+            Rectangle {
+                width: parent.width
+                height: i2pNodeHeader.height + i2pNodeArea.contentHeight
+                color: "transparent";
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+
+                Rectangle {
+                    id: i2pNodeIcon
+                    color: "transparent"
+                    height: 32
+                    width: 32
+                    anchors.left: parent.left
+                    anchors.leftMargin: 16
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    MoneroComponents.Label {
+                        fontSize: 28
+                        text: FontAwesome.mask
+                        fontFamily: FontAwesome.fontFamilySolid
+                        styleName: "Solid"
+                        anchors.centerIn: parent
+                        fontColor: MoneroComponents.Style.defaultFontColor
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    id: i2pNodeHeader
+                    anchors.left: i2pNodeIcon.right
+                    anchors.leftMargin: 14
+                    anchors.top: parent.top
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    font.bold: true
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 16
+                    text: qsTr("I2P Network") + translationManager.emptyString
+                }
+
+                Text {
+                    id: i2pNodeArea
+                    anchors.top: i2pNodeHeader.bottom
+                    anchors.topMargin: 4
+                    anchors.left: i2pNodeIcon.right
+                    anchors.leftMargin: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 15
+                    horizontalAlignment: TextInput.AlignLeft
+                    wrapMode: Text.WordWrap;
+                    leftPadding: 0
+                    topPadding: 0
+                    text: qsTr("Route Monero traffic through the I2P network for enhanced privacy. Requires a running I2P router.") + translationManager.emptyString
+                    width: parent.width - (i2pNodeIcon.width + i2pNodeIcon.anchors.leftMargin + anchors.leftMargin)
+                }
+            }
+
+            MouseArea {
+                cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
+                enabled: !persistentSettings.useI2P
+                onClicked: {
+                    if (!appWindow.currentWallet) {
+                        appWindow.showStatusMessage(qsTr("A wallet must be open to use I2P"), 3);
+                        return;
+                    }
+                    i2pSettingsDialog.open();
+                }
+            }
+        }
+
         MoneroComponents.WarningBox {
             Layout.topMargin: 46
             text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString

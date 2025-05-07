@@ -58,6 +58,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libboost_filesystem-mt.dll
             libboost_locale-mt.dll
             libboost_program_options-mt.dll
+            libboost_regex-mt.dll
             libboost_serialization-mt.dll
             libboost_thread-mt.dll
             libprotobuf.dll
@@ -96,18 +97,12 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libssl-3-x64.dll
             libcrypto-3-x64.dll
             #icu
-            libicudt77.dll
-            libicuin77.dll
-            libicuio77.dll
-            libicutu77.dll
-            libicuuc77.dll
+            libicudt74.dll
+            libicuin74.dll
+            libicuio74.dll
+            libicutu74.dll
+            libicuuc74.dll
         )
-
-        # Boost Regex is header-only since 1.77
-        if (Boost_VERSION_STRING VERSION_LESS 1.77.0)
-            list(APPEND WIN_DEPLOY_DLLS libboost_regex-mt.dll)
-        endif()
-
         list(TRANSFORM WIN_DEPLOY_DLLS PREPEND "$ENV{MSYSTEM_PREFIX}/bin/")
         add_custom_command(TARGET deploy
                            POST_BUILD

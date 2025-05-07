@@ -1,0 +1,21 @@
+@@ -240,6 +240,19 @@
+                     onClicked: { appWindow.showPageRequest("Settings"); }
+                 }
+ 
++                // I2P settings menu
++                MoneroComponents.MenuButton {
++                    id: i2pButton
++                    anchors.left: parent.left
++                    anchors.right: parent.right
++                    text: qsTr("I2P") + translationManager.emptyString
++                    symbol: qsTr("I2P") + translationManager.emptyString
++                    dotColor: "#FFD781"
++                    under: settingsButton
++                    onClicked: {
++                        rightPanel.showSubViewFromSource("settings/SettingsI2P.qml")
++                    }
++                }
++
+                 MoneroComponents.MenuButton {
+                     id: keysButton
+                     anchors.left: parent.left

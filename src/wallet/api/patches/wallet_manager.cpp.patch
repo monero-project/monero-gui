@@ -1,0 +1,76 @@
+--- a/src/wallet/api/wallet_manager.cpp
++++ b/src/wallet/api/wallet_manager.cpp
+@@ -59,6 +59,10 @@
+ 
+     // default daemon address
+     m_daemonAddress = "";
++    
++    // default I2P settings
++    m_i2pEnabled = false;
++    m_i2pOptions = "address=127.0.0.1,port=7656";
+ 
+     // Log level is global for wallet api
+     m_logLevel = WalletManagerFactory::getLogLevel();
+@@ -70,6 +74,36 @@
+ }
+ 
+ //----------------------------------------------------------------------------------------------------
++bool WalletManagerImpl::isI2PEnabled() const
++{
++    return m_i2pEnabled;
++}
++
++//----------------------------------------------------------------------------------------------------
++void WalletManagerImpl::setI2PEnabled(bool enabled)
++{
++    m_i2pEnabled = enabled;
++}
++
++//----------------------------------------------------------------------------------------------------
++std::string WalletManagerImpl::getI2POptions() const
++{
++    return m_i2pOptions;
++}
++
++//----------------------------------------------------------------------------------------------------
++bool WalletManagerImpl::setI2POptions(const std::string& options)
++{
++    // basic validation - make sure the format is correct
++    if (tools::wallet2::parse_i2p_options(options)) {
++        m_i2pOptions = options;
++        return true;
++    }
++    
++    return false;
++}
++
++
++//----------------------------------------------------------------------------------------------------
+ Wallet* WalletManagerImpl::createWallet(const std::string &path, const std::string &password,
+                                     const std::string &language, NetworkType nettype, uint64_t kdf_rounds)
+ {
+@@ -213,6 +247,12 @@
+         walletImpl->setDaemonAddress(m_daemonAddress);
+         walletImpl->setTrustedDaemon(m_trustedDaemon);
+         
++        // Apply I2P settings if enabled
++        if (m_i2pEnabled) {
++            walletImpl->setI2PEnabled(true);
++            walletImpl->setI2POptions(m_i2pOptions);
++        }
++        
+     } catch (const std::exception& e) {
+         MERROR("Error creating wallet: " << e.what());
+         return nullptr;
+@@ -224,6 +264,11 @@
+     
+ private:
+     std::string m_daemonAddress;
++    
++    // I2P settings
++    bool m_i2pEnabled;
++    std::string m_i2pOptions;
++    
+     bool m_trustedDaemon;
+     WalletListener * m_coreListener;
+     mutable std::mutex m_lock 

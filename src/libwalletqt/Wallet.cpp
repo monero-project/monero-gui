@@ -1186,3 +1186,36 @@ void Wallet::startRefreshThread()
         throw std::runtime_error("failed to start auto refresh thread");
     }
 }
+
+bool Wallet::i2pEnabled() const
+{
+    return m_walletImpl->i2pEnabled();
+}
+
+void Wallet::refreshI2PSettings()
+{
+    bool useI2P = MoneroSettings::instance()->useI2P();
+    if (useI2P) {
+        QString i2pAddress = MoneroSettings::instance()->i2pAddress();
+        int i2pPort = MoneroSettings::instance()->i2pPort();
+        QString i2pOptions = QString("--tx-proxy i2p,%1,%2").arg(i2pAddress).arg(i2pPort);
+        
+        if (MoneroSettings::instance()->i2pMixedMode()) {
+            i2pOptions += " --allow-mismatched-daemon-version";
+        }
+        
+        m_walletImpl->setI2POptions(i2pOptions.toStdString());
+        setI2PEnabled(true);
+    } else {
+        setI2PEnabled(false);
+    }
+}
+
+bool Wallet::setI2PEnabled(bool enabled)
+{
+    bool result = m_walletImpl->setI2PEnabled(enabled);
+    if (result) {
+        emit i2pEnabledChanged();
+    }
+    return result;
+}

@@ -1,0 +1,81 @@
+@@ -55,6 +55,12 @@ public:
+     // How to buy Monero dialog
+     Q_PROPERTY(QString fiatApiCurrencyQuery READ fiatApiCurrencyQuery)
+     Q_PROPERTY(QString fiatApiAltCurrencyQuery READ fiatApiAltCurrencyQuery)
++    
++    // I2P settings
++    Q_PROPERTY(bool useI2P READ useI2P WRITE setUseI2P NOTIFY useI2PChanged)
++    Q_PROPERTY(bool useBuiltInI2P READ useBuiltInI2P WRITE setUseBuiltInI2P NOTIFY useBuiltInI2PChanged)
++    Q_PROPERTY(QString i2pAddress READ i2pAddress WRITE setI2PAddress NOTIFY i2pAddressChanged)
++    Q_PROPERTY(QString i2pPort READ i2pPort WRITE setI2PPort NOTIFY i2pPortChanged)
++    Q_PROPERTY(bool i2pMixedMode READ i2pMixedMode WRITE setI2PMixedMode NOTIFY i2pMixedModeChanged)
++    Q_PROPERTY(int i2pTunnelLength READ i2pTunnelLength WRITE setI2PTunnelLength NOTIFY i2pTunnelLengthChanged)
+ 
+ private:
+     QString m_portRange;
+@@ -72,6 +78,14 @@ private:
+     int m_lockOnUserInactivityInterval;
+     bool m_hideBalance;
+     bool m_askPasswordBeforeSending;
++    
++    // I2P settings
++    bool m_useI2P;
++    bool m_useBuiltInI2P;
++    QString m_i2pAddress;
++    QString m_i2pPort;
++    bool m_i2pMixedMode;
++    int m_i2pTunnelLength;
+ 
+ signals:
+     void portRangeChanged() const;
+@@ -87,6 +101,13 @@ signals:
+     void hideBalanceChanged() const;
+     void askPasswordBeforeSendingChanged() const;
+     void shareTransactionHistoryFileChanged() const;
++    
++    // I2P signals
++    void useI2PChanged() const;
++    void useBuiltInI2PChanged() const;
++    void i2pAddressChanged() const;
++    void i2pPortChanged() const;
++    void i2pMixedModeChanged() const;
++    void i2pTunnelLengthChanged() const;
+ 
+ public:
+     MoneroSettings(QObject *parent = nullptr);
+@@ -134,4 +155,30 @@ public:
+     void setAskPasswordBeforeSending(bool askPasswordBeforeSending);
+     bool askPasswordBeforeSending() const;
+     Q_INVOKABLE void setShareTransactionHistoryFile(bool shareTransactionHistoryFile);
++    
++    // I2P methods
++    bool useI2P() const {
++        return m_useI2P;
++    }
++    void setUseI2P(bool useI2P);
++    
++    bool useBuiltInI2P() const {
++        return m_useBuiltInI2P;
++    }
++    void setUseBuiltInI2P(bool useBuiltInI2P);
++    
++    QString i2pAddress() const {
++        return m_i2pAddress;
++    }
++    void setI2PAddress(const QString &i2pAddress);
++    
++    QString i2pPort() const {
++        return m_i2pPort;
++    }
++    void setI2PPort(const QString &i2pPort);
++    
++    bool i2pMixedMode() const {
++        return m_i2pMixedMode;
++    }
++    void setI2PMixedMode(bool i2pMixedMode);
++    
++    int i2pTunnelLength() const {
++        return m_i2pTunnelLength;
++    }
++    void setI2PTunnelLength(int i2pTunnelLength);
+ }; 

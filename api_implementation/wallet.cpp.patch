@@ -1,0 +1,29 @@
+@@ -2010,6 +2010,26 @@ std::string WalletImpl::secretViewKey() const
+     return getSecretViewKey();
+ }
+ 
++// I2P support
++bool WalletImpl::isI2PEnabled() const
++{
++    return m_wallet->i2p_enabled();
++}
++
++bool WalletImpl::setI2PEnabled(bool enabled)
++{
++    return m_wallet->set_i2p_enabled(enabled);
++}
++
++void WalletImpl::setI2POptions(const std::string &options)
++{
++    m_wallet->set_i2p_options(options);
++}
++
++std::string WalletImpl::getI2POptions() const
++{
++    return m_wallet->get_i2p_options();
++}
++
+ void WalletImpl::hardForkInfo(uint8_t &version, uint64_t &earliest_height) const
+ {
+     m_wallet->get_hard_fork_info(version, earliest_height);
+ } 

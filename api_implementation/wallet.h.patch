@@ -1,0 +1,26 @@
+@@ -152,6 +152,12 @@ struct Wallet
+     virtual std::string getSecretViewKey() const = 0;
+     virtual std::string publicViewKey() const = 0;
+     virtual std::string secretViewKey() const = 0;
++    
++    // I2P support
++    virtual bool isI2PEnabled() const = 0;
++    virtual bool setI2PEnabled(bool enabled) = 0;
++    virtual void setI2POptions(const std::string &options) = 0;
++    virtual std::string getI2POptions() const = 0;
+ 
+     // @brief returns current hard fork version
+     virtual void hardForkInfo(uint8_t &version, uint64_t &earliest_height) const = 0;
+@@ -462,6 +468,12 @@ struct WalletImpl : public Wallet
+     std::string getSecretViewKey() const override;
+     std::string publicViewKey() const override;
+     std::string secretViewKey() const override;
++    
++    // I2P support
++    bool isI2PEnabled() const override;
++    bool setI2PEnabled(bool enabled) override;
++    void setI2POptions(const std::string &options) override;
++    std::string getI2POptions() const override;
+ 
+     void hardForkInfo(uint8_t &version, uint64_t &earliest_height) const override;
+     bool useForkRules(uint8_t version, int64_t early_blocks) const override; 

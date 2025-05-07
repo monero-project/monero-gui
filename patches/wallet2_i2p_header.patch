@@ -1,0 +1,29 @@
+diff --git a/src/wallet/wallet2.h b/src/wallet/wallet2.h
+--- a/src/wallet/wallet2.h
++++ b/src/wallet/wallet2.h
+@@ -1041,6 +1041,13 @@ namespace tools
+     bool load_keys_buf(const std::string& keys_buf, const epee::wipeable_string& password);
+     bool decrypt_keys_file(const std::string& buf, const epee::wipeable_string& password, std::string& keys_buf);
+ 
++    // I2P support
++    bool i2p_enabled() const { return m_i2p_enabled; }
++    bool set_i2p_enabled(bool enabled);
++    void set_i2p_options(const std::string &options) { m_i2p_options = options; }
++    std::string get_i2p_options() const { return m_i2p_options; }
++    bool parse_i2p_options(const std::string &options, std::string &address, int &port);
++    bool init_i2p_connection();
++
+     /*!
+      * \brief verify password for default wallet keys file.
+      * \param password       Password to verify
+@@ -2611,6 +2618,10 @@ namespace tools
+     std::atomic<bool> m_has_ever_refreshed_from_node;
+     bool m_allow_mismatched_daemon_version;
+ 
++    // I2P support
++    bool m_i2p_enabled;
++    std::string m_i2p_options;
++
+     // Aux transaction data from device
+     std::unordered_map<crypto::hash, std::string> m_tx_device;
+``` 

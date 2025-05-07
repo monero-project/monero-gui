@@ -1,0 +1,80 @@
+Determining if the -Wl,--no-undefined linker flag is supported failed with the following output:
+Change Dir: 'C:/Users/Root/Documents/GitHub/monero-gui/build_new/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_aa736.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+MSBuild version 17.13.19+0d9f5a35a for .NET Framework
+Build started 5/7/2025 4:17:57 AM.
+
+Project "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_aa736.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_aa736.dir\Debug\".
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+  Creating directory "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_aa736.dir\Debug\cmTC_aa736.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_aa736.dir\Debug\cmTC_aa736.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "cmTC_aa736.dir\Debug\cmTC_aa736.tlog\unsuccessfulbuild".
+VcpkgTripletSelection:
+  Using triplet "x64-windows" from "C:\vcpkg\installed\x64-windows\"
+  Using normalized configuration "Debug"
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe /c /I"C:\vcpkg\installed\x64-windows\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D "CMAKE_INTDIR=\"Debug\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_aa736.dir\Debug\\" /Fd"cmTC_aa736.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Wl,--no-undefined -Wl,--no-undefined "C:\Users\Root\Documents\GitHub\monero-gui\cmake\CheckLinkerFlag.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34810 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /I"C:\vcpkg\installed\x64-windows\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D "CMAKE_INTDIR=\"Debug\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_aa736.dir\Debug\\" /Fd"cmTC_aa736.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Wl,--no-undefined -Wl,--no-undefined "C:\Users\Root\Documents\GitHub\monero-gui\cmake\CheckLinkerFlag.c"
+cl : command line  error D8021: invalid numeric argument '/Wl,--no-undefined' [C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_aa736.vcxproj]
+Done Building Project "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_aa736.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_aa736.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  cl : command line  error D8021: invalid numeric argument '/Wl,--no-undefined' [C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_aa736.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.83
+
+
+
+Determining if the -Wl,-undefined,error linker flag is supported failed with the following output:
+Change Dir: 'C:/Users/Root/Documents/GitHub/monero-gui/build_new/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_59ecd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+MSBuild version 17.13.19+0d9f5a35a for .NET Framework
+Build started 5/7/2025 4:17:58 AM.
+
+Project "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_59ecd.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTC_59ecd.dir\Debug\".
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+  Creating directory "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_59ecd.dir\Debug\cmTC_59ecd.tlog\".
+InitializeBuildStatus:
+  Creating "cmTC_59ecd.dir\Debug\cmTC_59ecd.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "cmTC_59ecd.dir\Debug\cmTC_59ecd.tlog\unsuccessfulbuild".
+VcpkgTripletSelection:
+  Using triplet "x64-windows" from "C:\vcpkg\installed\x64-windows\"
+  Using normalized configuration "Debug"
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe /c /I"C:\vcpkg\installed\x64-windows\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D "CMAKE_INTDIR=\"Debug\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_59ecd.dir\Debug\\" /Fd"cmTC_59ecd.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Wl,-undefined,error -Wl,-undefined,error "C:\Users\Root\Documents\GitHub\monero-gui\cmake\CheckLinkerFlag.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34810 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /I"C:\vcpkg\installed\x64-windows\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D "CMAKE_INTDIR=\"Debug\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c11 /Fo"cmTC_59ecd.dir\Debug\\" /Fd"cmTC_59ecd.dir\Debug\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Wl,-undefined,error -Wl,-undefined,error "C:\Users\Root\Documents\GitHub\monero-gui\cmake\CheckLinkerFlag.c"
+cl : command line  error D8021: invalid numeric argument '/Wl,-undefined,error' [C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_59ecd.vcxproj]
+Done Building Project "C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_59ecd.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_59ecd.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  cl : command line  error D8021: invalid numeric argument '/Wl,-undefined,error' [C:\Users\Root\Documents\GitHub\monero-gui\build_new\CMakeFiles\CMakeTmp\cmTC_59ecd.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.83
+
+
+

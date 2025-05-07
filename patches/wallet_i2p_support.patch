@@ -1,0 +1,86 @@
+diff --git a/src/wallet/api/wallet2_api.h b/src/wallet/api/wallet2_api.h
+--- a/src/wallet/api/wallet2_api.h
++++ b/src/wallet/api/wallet2_api.h
+@@ -1047,6 +1047,14 @@ struct Wallet
+     virtual bool exportOutputs(const std::string &filename, bool all = false) = 0;
+     virtual bool importOutputs(const std::string &filename) = 0;
+ 
++    /**
++     * @brief I2P-related functions
++     */
++    virtual bool i2pEnabled() const = 0;
++    virtual bool setI2PEnabled(bool enabled) = 0;
++    virtual void setI2POptions(const std::string &options) = 0;
++    virtual std::string getI2POptions() const = 0;
++
+     /*!
+      * \brief scanTransactions - scan a list of transaction ids for payments to the wallet
+      * \param txids - a list of transaction ids
+diff --git a/src/wallet/api/wallet.h b/src/wallet/api/wallet.h
+--- a/src/wallet/api/wallet.h
++++ b/src/wallet/api/wallet.h
+@@ -180,6 +180,11 @@ class WalletImpl : public Wallet
+     virtual bool exportOutputs(const std::string &filename, bool all = false) override;
+     virtual bool importOutputs(const std::string &filename) override;
+     virtual bool scanTransactions(const std::vector<std::string> &txids) override;
++    
++    // I2P support
++    virtual bool i2pEnabled() const override;
++    virtual bool setI2PEnabled(bool enabled) override;
++    virtual void setI2POptions(const std::string &options) override;
++    virtual std::string getI2POptions() const override;
+ 
+     virtual bool setupBackgroundSync(const BackgroundSyncType background_sync_type, const std::string &wallet_password, const optional<std::string> &background_cache_password = optional<std::string>()) override;
+     virtual BackgroundSyncType getBackgroundSyncType() const override;
+@@ -271,6 +276,7 @@ private:
+     std::atomic<bool>   m_rebuildWalletCache;
+     // cache connection status to avoid unnecessary RPC calls
+     mutable std::atomic<bool>   m_is_connected;
++    mutable std::atomic<bool>   m_i2p_enabled;
+     boost::optional<epee::net_utils::http::login> m_daemon_login{};
+ };
+ 
+diff --git a/src/wallet/api/wallet.cpp b/src/wallet/api/wallet.cpp
+--- a/src/wallet/api/wallet.cpp
++++ b/src/wallet/api/wallet.cpp
+@@ -104,6 +104,7 @@ WalletImpl::WalletImpl(NetworkType nettype, uint64_t kdf_rounds)
+     , m_recoveringFromDevice(false)
+     , m_synchronized(false)
+     , m_rebuildWalletCache(false)
++    , m_i2p_enabled(false)
+     , m_is_connected(false)
+ {
+     m_wallet.reset(new tools::wallet2(static_cast<cryptonote::network_type>(nettype), kdf_rounds, true));
+@@ -2418,6 +2419,31 @@ bool WalletImpl::scanTransactions(const std::vector<std::string> &txids)
+     return true;
+ }
+ 
++bool WalletImpl::i2pEnabled() const
++{
++    return m_i2p_enabled;
++}
++
++bool WalletImpl::setI2PEnabled(bool enabled)
++{
++    m_i2p_enabled = enabled;
++    // TODO: Implement actual I2P connection handling in wallet2
++    return true;
++}
++
++void WalletImpl::setI2POptions(const std::string &options)
++{
++    // TODO: Parse and apply I2P options to wallet2
++    // For now, just store them in the wallet cache
++    m_wallet->set_attribute("i2p_options", options);
++}
++
++std::string WalletImpl::getI2POptions() const
++{
++    std::string result;
++    m_wallet->get_attribute("i2p_options", result);
++    return result;
++}
++
+ //----------------------------------------------------------------------------------------------------
+ // TransactionHistory
+ //---------------------------------------------------------------------------------------------------- 

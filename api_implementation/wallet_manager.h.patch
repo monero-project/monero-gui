@@ -1,0 +1,26 @@
+@@ -84,6 +84,12 @@ struct WalletManager
+     virtual bool closeWallet() = 0;
+     virtual void closeWallet(Wallet* wallet) = 0;
+ 
++    // I2P support
++    virtual bool isI2PEnabled(Wallet * wallet) const = 0;
++    virtual bool setI2PEnabled(Wallet * wallet, bool enabled) = 0;
++    virtual void setI2POptions(Wallet * wallet, const std::string &options) = 0;
++    virtual std::string getI2POptions(Wallet * wallet) const = 0;
++    
+     //! checks if wallet status (daemon connection, mining etc)
+     virtual bool tryToOpenWalletAsync(const std::string &path, const std::string &password, WalletListener * listener) = 0;
+     virtual Wallet * createWalletFromKeysAsync(const std::string &path,
+@@ -186,6 +192,12 @@ struct WalletManagerImpl : public WalletManager
+     bool closeWallet() override;
+     void closeWallet(Wallet* wallet) override;
+ 
++    // I2P support
++    bool isI2PEnabled(Wallet * wallet) const override;
++    bool setI2PEnabled(Wallet * wallet, bool enabled) override;
++    void setI2POptions(Wallet * wallet, const std::string &options) override;
++    std::string getI2POptions(Wallet * wallet) const override;
++    
+     // checks if wallet status (daemon connection, mining etc)
+     virtual bool tryToOpenWalletAsync(const std::string &path, const std::string &password, WalletListener * listener) override;
+ } 

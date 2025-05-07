@@ -96,7 +96,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
-*Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
+*Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/master/contrib/gitian/README.md).
 
 ### Building Reproducible Windows static binaries with Docker (any OS)
 
@@ -105,7 +105,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -128,7 +128,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -142,9 +142,8 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* `4` - number of CPU threads to use
-5. Monero GUI Linux static binary will be placed in  `monero-gui/build/release/bin` directory
-6. (*Note*) This process is only for building `monero-wallet-gui`, `monerod` has to be built separately according to the instructions in the `monero` repository.
-7. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
+5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
+6. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
    ```
    docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'shasum -a 256 /monero-gui/build/release/bin/monero-wallet-gui'
    ```
@@ -309,7 +308,7 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 3. Install MSYS2 packages for Monero dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-unbound mingw-w64-x86_64-pcre mingw-w64-x86_64-angleproject
+    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-unbound mingw-w64-x86_64-pcre
     ```
 
     You find more details about those dependencies in the [Monero documentation](https://github.com/monero-project/monero). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
@@ -345,3 +344,86 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
     \* `4` - number of CPU threads to use
 
 The executable can be found in the `.\bin` directory.
+
+# Monero GUI Wallet I2P Integration
+
+This repository contains the implementation of I2P network support for the Monero GUI wallet. The integration allows Monero transactions to be routed through the I2P network for enhanced privacy and anonymity.
+
+## Features
+
+- Route Monero transactions through the I2P network
+- Built-in I2P daemon management
+- User-friendly configuration interface
+- I2P status indicator in the wallet UI
+- Support for custom I2P router configuration
+- Compatible with all platforms supported by Monero GUI
+
+## Implementation Structure
+
+The I2P integration consists of several components:
+
+1. **Backend Implementation**
+   - Core wallet2 I2P methods in `monero/src/wallet/wallet2.cpp`
+   - I2P daemon management subsystem in `src/i2p/`
+
+2. **GUI Components**
+   - I2P settings page in `pages/settings/SettingsI2P.qml`
+   - Status bar indicator in `components/StatusBar.qml`
+   - Left panel menu item in `LeftPanel.qml`
+
+3. **Build Integration**
+   - CMake configuration for I2P support
+   - PowerShell build scripts
+
+4. **Documentation**
+   - Implementation summary in `I2P_IMPLEMENTATION_SUMMARY.md`
+   - Installation guide in `I2P_INSTALLATION_GUIDE.md`
+   - Testing script in `i2p_implementation/i2p_testing_script.ps1`
+
+## Getting Started
+
+To build Monero GUI with I2P support, use the following commands:
+
+```
+git clone https://github.com/monero-project/monero-gui.git
+cd monero-gui
+cmake -DWITH_I2P=ON ..
+make
+```
+
+For detailed installation instructions, please refer to the [I2P Installation Guide](I2P_INSTALLATION_GUIDE.md).
+
+## Testing
+
+A comprehensive testing script is included to verify the I2P integration:
+
+```
+./i2p_implementation/i2p_testing_script.ps1
+```
+
+This script checks for the presence of all required components, verifies the implementation of core methods, and tests the functionality of the I2P daemon manager.
+
+## Configuration Options
+
+The I2P integration provides the following configuration options:
+
+- **Enable I2P**: Toggle I2P routing on/off
+- **Use Built-in I2P Daemon**: Choose between the bundled I2P daemon or an external router
+- **I2P Address**: Set the address of the I2P router (default: 127.0.0.1)
+- **I2P Port**: Set the port of the I2P router (default: 7656)
+- **Mixed Mode**: Allow connections to both I2P and non-I2P nodes
+- **Tunnel Length**: Set the number of hops in the I2P tunnel (affects anonymity vs. speed)
+
+## Implementation Status
+
+The implementation is near completion, with all core components implemented and integrated. Remaining tasks include comprehensive testing, performance optimization, and security auditing.
+
+For a detailed overview of the implementation status, see the [Implementation Summary](I2P_IMPLEMENTATION_SUMMARY.md).
+
+## Contributing
+
+Contributions to the I2P integration are welcome. Please follow the standard Monero contribution guidelines when submitting pull requests.
+
+## License
+
+The I2P integration is released under the same license as the Monero GUI wallet.

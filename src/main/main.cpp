@@ -444,6 +444,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
 #endif
 
+    qmlRegisterType<I2PDaemonManager>("moneroComponents.I2PDaemonManager", 1, 0, "I2PDaemonManager");
+
     QQmlApplicationEngine engine;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)

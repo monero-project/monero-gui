@@ -1373,6 +1373,9 @@ ApplicationWindow {
         }
 
         remoteNodesModel.initialize();
+
+        // Initialize I2P if enabled
+        initializeI2P();
     }
 
     MoneroSettings {
@@ -2169,6 +2172,11 @@ ApplicationWindow {
                 daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, handler);
             }
         }
+        
+        // Shutdown I2P if running
+        if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P && i2pDaemonManager.running) {
+            i2pDaemonManager.stop();
+        }
     }
 
     function closeAccepted(){
@@ -2400,7 +2408,7 @@ ApplicationWindow {
         onClosed: { if (previousActiveFocusItem) previousActiveFocusItem.forceActiveFocus() }
     }
 
-    MoneroComponents.MenuBar { }
+    MoneroComponents.MenuBar { }
 
     Network {
         id: network
@@ -2410,5 +2418,74 @@ ApplicationWindow {
     WalletManager {
         id: walletManager
         proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    // Add I2P daemon manager instance
+    I2PDaemonManager {
+        id: i2pDaemonManager
+        onError: {
+            console.log("I2P daemon error: " + message)
+            if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+                appWindow.showStatusMessage(qsTr("I2P daemon error: ") + message, 3);
+            }
+        }
+        onStatusChanged: {
+            if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+                appWindow.showStatusMessage(qsTr("I2P: ") + status, 3);
+            }
+        }
+    }
+
+    // Add I2P settings dialog
+    I2PSettingsDialog {
+        id: i2pSettingsDialog
+        onAccepted: {
+            if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+                i2pDaemonManager.start();
+            }
+        }
+    }
+
+    // Add I2P initialization
+    function initializeI2P() {
+        if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+            i2pDaemonManager.start();
+        }
+    }
+
+    // Initialize I2P settings when the wallet is created or opened
+    function initializeI2PSettings() {
+        if (!currentWallet) {
+            return;
+        }
+        
+        // Apply I2P settings from persistent settings
+        if (persistentSettings.useI2P) {
+            // Construct I2P options
+            var options = "--tx-proxy i2p," + 
+                         persistentSettings.i2pAddress + "," + 
+                         persistentSettings.i2pPort;
+            
+            // Add mixed mode option if enabled
+            if (persistentSettings.i2pMixedMode) {
+                options += " --allow-mismatched-daemon-version";
+            }
+            
+            // Apply settings to wallet
+            walletManager.setI2POptions(currentWallet, options);
+            walletManager.setI2PEnabled(currentWallet, true);
+            
+            // Start I2P daemon if using built-in
+            if (persistentSettings.useBuiltInI2P) {
+                I2PDaemonManager.instance().start();
+            }
+        }
+    }
+
+    // Hook into wallet open/create events to initialize I2P settings
+    onCurrentWalletChanged: {
+        if (currentWallet) {
+            initializeI2PSettings();
+        }
     }
 }

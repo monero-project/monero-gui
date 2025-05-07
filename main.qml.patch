@@ -1,0 +1,56 @@
+ApplicationWindow {
+    progressBar.visible = false;
+
+    // Initialize I2P settings when the wallet is created or opened
+    function initializeI2PSettings() {
+        if (typeof currentWallet === "undefined" || currentWallet === null) {
+            return
+        }
+        
+        // Apply I2P settings from persistent settings
+        if (persistentSettings.useI2P) {
+            // Build I2P options string
+            var i2pOptions = "address=" + persistentSettings.i2pAddress + 
+                            ",port=" + persistentSettings.i2pPort
+
+            // Allow mismatched daemon versions if mixed mode is enabled
+            if (persistentSettings.i2pMixedMode) {
+                i2pOptions += ",mixed_mode=1"
+            }
+
+            // Set tunnel length if specified in settings
+            if (persistentSettings.i2pTunnelLength > 0) {
+                i2pOptions += ",tunnel_length=" + persistentSettings.i2pTunnelLength
+            }
+
+            // Apply settings to wallet
+            walletManager.setI2POptions(i2pOptions)
+            walletManager.setI2PEnabled(true)
+
+            // Start I2P daemon if built-in I2P is enabled
+            if (persistentSettings.useBuiltInI2P) {
+                I2PDaemonManager.instance().setTunnelLength(persistentSettings.i2pTunnelLength)
+                I2PDaemonManager.instance().start()
+            }
+            console.log("I2P routing enabled with options: " + i2pOptions)
+        }
+    }
+
+    // close wallet and terminate the daemon
+    function closeWallet() {
+        // Close wallet
+        if (walletManager.closeWallet()) {
+            // de-intialize all walletManager listeners for wallet
+            walletManager.walletClosed();
+            return true;
+        } 
+        
+        // Stop I2P daemon if it's running
+        if (persistentSettings.useI2P && persistentSettings.useBuiltInI2P) {
+            I2PDaemonManager.instance().stop();
+        }
+        else {
+            return false;
+        }
+    }
+} 

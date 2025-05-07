@@ -1,0 +1,154 @@
+diff --git a/src/wallet/wallet2.cpp b/src/wallet/wallet2.cpp
+--- a/src/wallet/wallet2.cpp
++++ b/src/wallet/wallet2.cpp
+@@ -1187,6 +1187,8 @@ wallet2::wallet2(network_type nettype, uint64_t kdf_rounds, bool unattended, std
+   m_pool_info_query_time(0),
+   m_has_ever_refreshed_from_node(false),
+   m_allow_mismatched_daemon_version(false)
++  m_i2p_enabled(false),
++  m_i2p_options("")
+ {
+   set_rpc_client_secret_key(rct::rct2sk(rct::skGen()));
+ }
+@@ -1386,6 +1388,91 @@ bool wallet2::set_proxy(const std::string &address)
+   return m_http_client->set_proxy(address);
+ }
+ 
++// Implementation of I2P methods
++bool wallet2::set_i2p_enabled(bool enabled)
++{
++  bool old_value = m_i2p_enabled;
++  m_i2p_enabled = enabled;
++  
++  if (old_value != enabled && enabled)
++  {
++    // If we're enabling I2P, try to initialize the connection
++    return init_i2p_connection();
++  }
++  
++  return true;
++}
++
++bool wallet2::parse_i2p_options(const std::string &options, std::string &address, int &port)
++{
++  // Parse the I2P options string
++  // Expected format: --tx-proxy i2p,<address>,<port> [--allow-mismatched-daemon-version]
++  
++  // Default values
++  address = "127.0.0.1";
++  port = 7656;
++  
++  if (options.empty())
++    return true;
++    
++  std::vector<std::string> args;
++  boost::split(args, options, boost::is_any_of(" "));
++  
++  for (size_t i = 0; i < args.size(); ++i)
++  {
++    if (args[i] == "--tx-proxy" && i + 1 < args.size())
++    {
++      std::vector<std::string> proxy_parts;
++      boost::split(proxy_parts, args[i+1], boost::is_any_of(","));
++      
++      if (proxy_parts.size() >= 3 && proxy_parts[0] == "i2p")
++      {
++        address = proxy_parts[1];
++        try {
++          port = std::stoi(proxy_parts[2]);
++        }
++        catch (const std::exception &e) {
++          LOG_ERROR("Failed to parse I2P port: " << e.what());
++          return false;
++        }
++        return true;
++      }
++    }
++  }
++  
++  LOG_ERROR("Failed to parse I2P options: " << options);
++  return false;
++}
++
++bool wallet2::init_i2p_connection()
++{
++  if (!m_i2p_enabled || m_i2p_options.empty())
++    return true;
++    
++  std::string i2p_address;
++  int i2p_port;
++  
++  if (!parse_i2p_options(m_i2p_options, i2p_address, i2p_port))
++  {
++    LOG_ERROR("Failed to parse I2P options");
++    return false;
++  }
++  
++  // Format the proxy address for the HTTP client
++  std::string proxy_address = "socks5://" + i2p_address + ":" + std::to_string(i2p_port);
++  
++  // Set the proxy in the HTTP client
++  if (!m_http_client->set_proxy(proxy_address))
++  {
++    LOG_ERROR("Failed to set I2P proxy: " << proxy_address);
++    return false;
++  }
++  
++  LOG_PRINT_L1("I2P proxy set to: " << proxy_address);
++  
++  // Invalidate the RPC proxy to force reconnection through I2P
++  m_node_rpc_proxy.invalidate();
++  
++  return true;
++}
++
++void wallet2::discover_i2p_peers()
++{
++  if (!m_i2p_enabled || m_i2p_options.empty())
++    return;
++
++  LOG_PRINT_L1("Starting I2P peer discovery");
++  
++  // Get known I2P addresses from the daemon
++  cryptonote::COMMAND_RPC_GET_PEER_LIST::request req;
++  cryptonote::COMMAND_RPC_GET_PEER_LIST::response res;
++  
++  req.include_blocked = false;
++  
++  bool r = epee::net_utils::invoke_http_json("/get_peer_list", req, res, *m_http_client, rpc_timeout);
++  if (!r)
++  {
++    LOG_ERROR("Failed to request peer list from daemon");
++    return;
++  }
++  
++  // Filter for I2P addresses (ending with .i2p or .b32.i2p)
++  std::vector<std::string> i2p_peers;
++  
++  for (const auto& peer : res.white_list)
++  {
++    std::string address = peer.host;
++    if (address.size() > 4 && 
++        (address.substr(address.size() - 4) == ".i2p" || 
++         address.find(".b32.i2p") != std::string::npos))
++    {
++      i2p_peers.push_back(address);
++      LOG_PRINT_L2("Found I2P peer: " << address);
++    }
++  }
++  
++  // Store I2P peers for future use
++  if (!i2p_peers.empty())
++  {
++    LOG_PRINT_L1("Discovered " << i2p_peers.size() << " I2P peers");
++    
++    // Store the I2P peers in the wallet cache for future use
++    std::string peers_str = boost::algorithm::join(i2p_peers, ",");
++    m_attributes["i2p_peers"] = peers_str;
++  }
++}
++
+ bool wallet2::init(std::string daemon_address, boost::optional<epee::net_utils::http::login> daemon_login, const std::string &proxy_address, uint64_t upper_transaction_weight_limit, bool trusted_daemon, epee::net_utils::ssl_options_t ssl_options)
+ {
+   m_proxy = proxy_address;
+ } 

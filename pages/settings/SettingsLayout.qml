@@ -282,6 +282,72 @@ Rectangle {
                 appWindow.toggleLanguageView();
             }
         }
+
+        // I2P tab
+        Rectangle {
+            id: i2pTabButton
+            property bool i2pHovered: false
+            Layout.preferredHeight: 60
+            Layout.preferredWidth: parent.width
+            color: "transparent"
+
+            Rectangle {
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                width: 2
+                color: i2pIcon.opacity === 1.0 ? "#FFFFFF" : "transparent"
+            }
+
+            Image {
+                id: i2pIcon
+                width: 24
+                height: 24
+                opacity: 0.4
+                source: "qrc:///images/i2p.svg"
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            MoneroComponents.TextPlain {
+                id: i2pText
+                anchors.left: i2pIcon.right
+                anchors.leftMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: i2pIcon.opacity === 1.0 ? "#FFFFFF" : MoneroComponents.Style.defaultFontColor
+                text: qsTr("I2P") + translationManager.emptyString
+                opacity: 0.4
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+
+                onEntered: {
+                    parent.i2pHovered = true
+                }
+
+                onExited: {
+                    parent.i2pHovered = false
+                }
+
+                onClicked: {
+                    settingsStateView.state = "I2P"
+                }
+            }
+        }
+
+        SettingsI2P {
+            id: settingsI2P
+            visible: false
+            Layout.fillWidth: true
+            Layout.preferredHeight: 1400
+            viewOnly: settingsPage.viewOnly
+        }
     }
 
     ListModel {

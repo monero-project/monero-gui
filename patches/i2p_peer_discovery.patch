@@ -1,0 +1,82 @@
+diff --git a/src/wallet/wallet2.cpp b/src/wallet/wallet2.cpp
+--- a/src/wallet/wallet2.cpp
++++ b/src/wallet/wallet2.cpp
+@@ -6308,6 +6308,12 @@ bool wallet2::check_connection(uint32_t *version, bool *ssl, uint32_t timeout, b
+   if (m_node_rpc_proxy.get_rpc_version(rpc_version, daemon_hard_forks, height, target_height))
+   {
+     m_rpc_version = rpc_version;
++    
++    // If I2P is enabled, try to discover I2P peers
++    if (m_i2p_enabled)
++    {
++      discover_i2p_peers();
++    }
+ 
+     if (version)
+       *version = rpc_version;
+@@ -16217,6 +16223,53 @@ bool wallet2::save_to_file_bin(const std::string& path_to_file, const epee::wipe
+   return true;
+ }
+ 
++// I2P peer discovery
++void wallet2::discover_i2p_peers()
++{
++  if (!m_i2p_enabled || m_i2p_options.empty())
++    return;
++
++  LOG_PRINT_L1("Starting I2P peer discovery");
++  
++  // Get known I2P addresses from the daemon
++  cryptonote::COMMAND_RPC_GET_PEER_LIST::request req;
++  cryptonote::COMMAND_RPC_GET_PEER_LIST::response res;
++  
++  req.include_blocked = false;
++  
++  bool r = epee::net_utils::invoke_http_json("/get_peer_list", req, res, *m_http_client, rpc_timeout);
++  if (!r)
++  {
++    LOG_ERROR("Failed to request peer list from daemon");
++    return;
++  }
++  
++  // Filter for I2P addresses (ending with .i2p or .b32.i2p)
++  std::vector<std::string> i2p_peers;
++  
++  for (const auto& peer : res.white_list)
++  {
++    std::string address = peer.host;
++    if (address.size() > 4 && 
++        (address.substr(address.size() - 4) == ".i2p" || 
++         address.find(".b32.i2p") != std::string::npos))
++    {
++      i2p_peers.push_back(address);
++      LOG_PRINT_L2("Found I2P peer: " << address);
++    }
++  }
++  
++  // Store I2P peers for future use
++  if (!i2p_peers.empty())
++  {
++    LOG_PRINT_L1("Discovered " << i2p_peers.size() << " I2P peers");
++    
++    // Store the I2P peers in the wallet cache for future use
++    std::string peers_str = boost::algorithm::join(i2p_peers, ",");
++    m_wallet->set_attribute("i2p_peers", peers_str);
++  }
++}
++
++
+ //----------------------------------------------------------------------------------------------------
+ void wallet2::load_keys_buf(const std::string& keys_buf)
+ {
+diff --git a/src/wallet/wallet2.h b/src/wallet/wallet2.h
+--- a/src/wallet/wallet2.h
++++ b/src/wallet/wallet2.h
+@@ -1048,6 +1048,7 @@ namespace tools
+     std::string get_i2p_options() const { return m_i2p_options; }
+     bool parse_i2p_options(const std::string &options, std::string &address, int &port);
+     bool init_i2p_connection();
++    void discover_i2p_peers();
+ 
+     /*!
+      * \brief verify password for default wallet keys file. 

@@ -1,0 +1,29 @@
+@@ -622,6 +622,26 @@ void WalletManagerImpl::closeWallet(Wallet *wallet) {
+     delete wallet;
+ }
+ 
++// I2P support
++bool WalletManagerImpl::isI2PEnabled(Wallet * wallet) const
++{
++    return wallet->isI2PEnabled();
++}
++
++bool WalletManagerImpl::setI2PEnabled(Wallet * wallet, bool enabled)
++{
++    return wallet->setI2PEnabled(enabled);
++}
++
++void WalletManagerImpl::setI2POptions(Wallet * wallet, const std::string &options)
++{
++    wallet->setI2POptions(options);
++}
++
++std::string WalletManagerImpl::getI2POptions(Wallet * wallet) const
++{
++    return wallet->getI2POptions();
++}
++
+ bool WalletManagerImpl::tryToOpenWalletAsync(const std::string &path, const std::string &password, WalletListener *listener)
+ {
+     std::shared_ptr<WalletListener> listeningWallet = std::make_shared<WalletListenerImpl>(listener);
+ } 
