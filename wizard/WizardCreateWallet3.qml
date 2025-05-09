@@ -75,6 +75,7 @@ Rectangle {
                 }
                 onNextClicked: {
                     wizardController.walletOptionsPassword = passwordFields.password;
+                    memwipe.wipeQString(passwordFields.passwordConfirm);
 
                     if (appWindow.walletMode < 2) {
                         wizardStateView.state = "wizardCreateWallet5";
