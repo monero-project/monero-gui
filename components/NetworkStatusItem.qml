@@ -39,6 +39,22 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
+        switch(appWindow.i2pStartStopInProgress) {
+            case 1:
+                return qsTr("Starting I2P");
+            case 2:
+                return qsTr("Stopping I2P");
+            default:
+                break;
+        }
+        switch(appWindow.torStartStopInProgress) {
+            case 1:
+                return qsTr("Starting Tor");
+            case 2:
+                return qsTr("Stopping Tor");
+            default:
+                break;
+        }
         switch (appWindow.daemonStartStopInProgress)
         {
             case 1:

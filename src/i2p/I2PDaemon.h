@@ -26,25 +26,31 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef _I2PDAEMON_H_
+#define _I2PDAEMON_H_
 
-#include <QtCore>
-#include <QRegularExpression>
-#include <QApplication>
+#include <QObject>
+#include <vector>
+#include <string>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-void mkDir(QString path, bool setPermissions = false);
-void rmDir(QString path);
-#ifdef Q_OS_LINUX
-QString xdgMime();
-void registerXdgMime();
+class I2PDaemon : QObject {
+    Q_OBJECT
+
+public:
+    explicit I2PDaemon(QObject *parent = 0) : QObject(parent) { };
+
+    static std::string getAddress(const std::string& path);
+    static std::string getVersion();
+
+    bool init(const std::vector<std::string>& flags, const std::string& dataDir);
+    bool init(bool outproxyEnabled, const std::string& outproxy, int outproxyPort);
+    bool start();
+    bool stop();
+
+    bool isRunning();
+
+private:
+    bool initialized = false;
+};
+
 #endif
-const static QRegularExpression reURI = QRegularExpression("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
-
-#endif // UTILS_H

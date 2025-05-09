@@ -75,9 +75,15 @@ ApplicationWindow {
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
+    property string daemonFlags
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
+    property int i2pStartStopInProgress: 0
+    property int torStartStopInProgress: 0
+    property bool i2pRunning: false
+    property bool torRunning: false
+    property string torVersion: "Not installed"
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
@@ -357,6 +363,13 @@ ApplicationWindow {
         console.log("restore Height", persistentSettings.restore_height)
 
         if (persistentSettings.useRemoteNode) {
+            if (persistentSettings.torEnabled && !torRunning && i2pStartStopInProgress == 0) {
+                startTorDaemon();
+            }
+            if (persistentSettings.i2pEnabled && !i2pRunning && i2pStartStopInProgress == 0) {
+                startI2PDaemon();
+            }
+            
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
@@ -610,6 +623,36 @@ ApplicationWindow {
 
         const callback = function() {
             persistentSettings.useRemoteNode = true;
+            if (persistentSettings.torEnabled && !torRunning) {
+                if (!startTorDaemon()) {
+                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text  = qsTr("Could not start Tor") + currentWallet.errorString;
+                    informationPopup.icon  = StandardIcon.Critical;
+                    informationPopup.onCloseCallback = null;
+                    informationPopup.open();
+                    return;
+                }
+            }
+
+            if (persistentSettings.i2pEnabled && !i2pRunning) {
+                if (!startI2PDaemon()) {
+                    if (persistentSettings.torEnabled) {
+                        stopTorDaemon();
+                    }
+
+                    i2pStartStopInProgress = 0;
+
+                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text  = qsTr("Could not start I2P") + currentWallet.errorString;
+                    informationPopup.icon  = StandardIcon.Critical;
+                    informationPopup.onCloseCallback = null;
+                    informationPopup.open();
+                    return;
+                }
+            }
+
+            i2pStartStopInProgress = 0;
+
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
@@ -639,6 +682,13 @@ ApplicationWindow {
 
         p2poolManager.exit();
         p2poolManager.getStatus();
+
+        if (i2pRunning) {
+            stopI2PDaemon();
+        }
+        if (torRunning) {
+            stopTorDaemon();
+        }
 
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
@@ -708,15 +758,109 @@ ApplicationWindow {
             currentWallet.refreshHeightAsync();
     }
 
+    function startI2PDaemon(){
+        i2pStartStopInProgress = 1;
+        try {
+            if (persistentSettings.i2pTorAsOutproxy && persistentSettings.torEnabled) {
+                return i2pManager.start(persistentSettings.useRemoteNode ? false : persistentSettings.i2pAllowIncomingConnections, persistentSettings.i2pOutproxyEnabled, torManager.getHost(), torManager.getPort());
+            }
+
+            return i2pManager.start(persistentSettings.useRemoteNode ? false : persistentSettings.i2pAllowIncomingConnections, persistentSettings.i2pOutproxyEnabled, persistentSettings.i2pOutproxy, persistentSettings.i2pOutproxyPort);
+        }
+        catch (error) {
+            i2pStartStopInProgress = 0;
+            console.error(error);
+            return false;
+        }
+    }
+
+    function stopI2PDaemon(){
+        if (!i2pRunning) return false;
+
+        i2pStartStopInProgress = 2;
+        i2pManager.exit();
+        i2pRunning = false;
+        return true;
+    }
+
+    function startTorDaemon(){
+        torStartStopInProgress = 1;
+
+        try {
+            const result = torManager.start(persistentSettings.useRemoteNode ? false : persistentSettings.torAllowIncomingConnections);
+            return result;
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    function stopTorDaemon(){
+        if (!torRunning) return false;
+
+        torStartStopInProgress = 2;
+        torManager.exit();
+        torRunning = false;
+        return true;
+    }
+
+    function startMoneroDaemon() {
+        if (persistentSettings.i2pEnabled) {
+            daemonFlags += ' --tx-proxy i2p,127.0.0.1:4447,disable_noise';
+        
+            if (persistentSettings.i2pAllowIncomingConnections) {
+                var i2pAddress = i2pManager.getAddress();
+                var i2pPort = i2pManager.getP2PPort();
+                daemonFlags += ' --anonymous-inbound ' + i2pAddress + ":" + i2pPort + ",127.0.0.1:" + i2pPort;
+            }
+
+            if (persistentSettings.proxyEnabled && persistentSettings.proxyType === "I2P") {
+                daemonFlags += " --proxy 127.0.0.1:4447";
+            }
+        }
+
+        if (persistentSettings.torEnabled) {
+            daemonFlags += ' --tx-proxy tor,127.0.0.1:20561,disable_noise';
+
+            if (persistentSettings.torAllowIncomingConnections) {
+                var torAddress = torManager.getAddress();
+                var torP2PPort = torManager.getP2PPort();
+                daemonFlags += ' --anonymous-inbound ' + torAddress + ":" + torP2PPort + ",127.0.0.1:" + torP2PPort;
+            }
+            
+            if (persistentSettings.proxyEnabled && persistentSettings.proxyType === "TOR") {
+                daemonFlags += " --proxy 127.0.0.1:20561";
+            }
+        }
+        
+        if (persistentSettings.i2pEnabled || persistentSettings.torEnabled) {
+            daemonFlags += " --pad-transactions";
+            daemonFlags += " --rpc-restricted-bind-ip 127.0.0.1";
+            daemonFlags += " --rpc-restricted-bind-port 18089";
+        }
+        
+        const noSync = appWindow.walletMode === 0;
+        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
+        daemonManager.start(daemonFlags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+    }
+
     function startDaemon(flags){
         daemonStartStopInProgress = 1;
-
+        daemonFlags = flags;
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        const noSync = appWindow.walletMode === 0;
-        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+        if (persistentSettings.torEnabled) {
+            startTorDaemon();
+        }
+        else if (persistentSettings.i2pEnabled) {
+            startI2PDaemon();
+        }
+        else {
+            startMoneroDaemon();
+        }
+
     }
 
     function stopDaemon(callback, splash){
@@ -726,12 +870,33 @@ ApplicationWindow {
         }
         p2poolManager.exit()
         daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.blockchainDataDir, function(result) {
+            stopI2PDaemon();
+            stopTorDaemon();
             daemonStartStopInProgress = 0;
             if (splash) {
                 hideProcessingSplash();
             }
             callback(result);
         });
+    }
+
+    function onTorStarted(){
+        console.log("TOR started");
+        torStartStopInProgress = 0;
+        torRunning = true;
+        if (persistentSettings.i2pEnabled && !persistentSettings.useRemoteNode) {
+            startI2PDaemon();
+        }
+        else if (!persistentSettings.useRemoteNode) {
+            startMoneroDaemon();
+        }
+    }
+
+    function onI2PStarted(){
+        console.log("I2P started");
+        i2pStartStopInProgress = 0;
+        i2pRunning = true;
+        if (!persistentSettings.useRemoteNode) startMoneroDaemon();
     }
 
     function onDaemonStarted(){
@@ -750,7 +915,14 @@ ApplicationWindow {
             currentWallet.connected(true);
         }
     }
-
+    function onI2PStopped(){
+        i2pRunning = false;
+        i2pStartStopInProgress = 0;
+    }
+    function onTorStopped(){
+        torRunning = false;
+        torStartStopInProgress = 0;
+    }
     function onDaemonStartFailure(error) {
         console.log("daemon start failed");
         daemonStartStopInProgress = 0;
@@ -764,6 +936,36 @@ ApplicationWindow {
             middlePanel.advancedView.miningView.update()
             informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
         }
+        if (persistentSettings.i2pEnabled) {
+            i2pManager.exit();
+        }
+        if (persistentSettings.torEnabled) {
+            torManager.exit();
+        }
+        informationPopup.icon  = StandardIcon.Critical
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
+    }
+
+    function onI2PStartFailure(error) {
+        console.log("i2pd start failed");
+        i2pStartStopInProgress = 0;
+        informationPopup.title = qsTr("I2P failed to start") + translationManager.emptyString;
+        informationPopup.text  = error + ".\n\n" + qsTr("Could not start i2p daemon.")
+        informationPopup.icon  = StandardIcon.Critical
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
+
+        if (persistentSettings.torEnabled) {
+            stopTorDaemon();
+        }
+    }
+
+    function onTorStartFailure(error) {
+        console.log("tor start failed");
+        torStartStopInProgress = 0;
+        informationPopup.title = qsTr("Tor failed to start") + translationManager.emptyString;
+        informationPopup.text  = error + ".\n\n" + qsTr("Could not start tor daemon.")
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -1327,6 +1529,17 @@ ApplicationWindow {
             daemonManager.daemonStopped.connect(onDaemonStopped);
         }
 
+        if(typeof i2pManager != "undefined") {
+            i2pManager.i2pStartSuccess.connect(onI2PStarted);
+            i2pManager.i2pStopped.connect(onI2PStopped);
+            i2pManager.i2pStartFailure.connect(onI2PStartFailure);
+        }
+        if(typeof torManager != "undefined") {
+            torManager.torStartSuccess.connect(onTorStarted);
+            torManager.torStopped.connect(onTorStopped);
+            torManager.torStartFailure.connect(onTorStartFailure);
+            appWindow.torVersion = torManager.getVersion();
+        }
         // Connect app exit to qml window exit handling
         mainApp.closing.connect(appWindow.close);
 
@@ -1414,6 +1627,18 @@ ApplicationWindow {
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: isAndroid
+        property string proxyType: "custom"
+        property bool showProxySettings: true
+        property bool showTorSettings: false
+        property bool showI2pSettings: false
+        property bool i2pEnabled: false
+        property bool i2pAllowIncomingConnections: true
+        property bool i2pOutproxyEnabled: false
+        property bool i2pTorAsOutproxy: false
+        property string i2pOutproxy: "127.0.0.1"
+        property int i2pOutproxyPort: 9050
+        property bool torEnabled: false
+        property bool torAllowIncomingConnections: true
         property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
         property string remoteNodesSerialized: JSON.stringify({
                 selected: 0,
@@ -1449,11 +1674,23 @@ ApplicationWindow {
         property string fiatPriceCurrency: "xmrusd"
 
         property string proxyAddress: "127.0.0.1:9050"
+        property string i2pProxyAddress: "127.0.0.1:4447"
+        property string torProxyAddress: "127.0.0.1:20561"
         property bool proxyEnabled: isTails
         function getProxyAddress() {
-            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
+            if (!proxyEnabled) {
                 return "";
             }
+            if (proxyType == "custom") {
+                if (socksProxyFlagSet && socksProxyFlag == "") return "";
+            }
+            else if (i2pEnabled && proxyType == "I2P") {
+                return i2pProxyAddress;
+            }
+            else if (torEnabled && proxyType == "TOR") {
+                return torProxyAddress;
+            }
+
             var proxyAddressSetOrForced = socksProxyFlagSet ? socksProxyFlag : proxyAddress;
             if (proxyAddressSetOrForced == "") {
                 return "127.0.0.1:0";
@@ -2176,6 +2413,8 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
+        i2pManager.exit();
+        torManager.exit();
         closeWallet(Qt.quit);
     }
 

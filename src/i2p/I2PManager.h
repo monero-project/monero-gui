@@ -26,25 +26,55 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef I2PManager_H
+#define I2PManager_H
 
-#include <QtCore>
-#include <QRegularExpression>
-#include <QApplication>
+#include <memory>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-void mkDir(QString path, bool setPermissions = false);
-void rmDir(QString path);
-#ifdef Q_OS_LINUX
-QString xdgMime();
-void registerXdgMime();
-#endif
-const static QRegularExpression reURI = QRegularExpression("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+#include <QMutex>
+#include <QObject>
+#include <QUrl>
+#include <QProcess>
+#include "qt/utils.h"
+#include "I2PDaemon.h"
 
-#endif // UTILS_H
+class I2PManager : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit I2PManager(QObject *parent = 0);
+    ~I2PManager();
+
+    Q_INVOKABLE bool start(bool allowIncomingConnections, bool outproxyEnabled, QString outproxy, int outproxyPort);
+    Q_INVOKABLE void exit();
+    Q_INVOKABLE bool running() const { return started; };
+    Q_INVOKABLE static QString getVersion();
+    Q_INVOKABLE QString getAddress() const;
+    Q_INVOKABLE QString getProxyAddress() const;
+    Q_INVOKABLE int getP2PPort() const { return m_port_p2p; };
+
+signals:
+    void i2pStartFailure(const QString &error) const;
+    void i2pStartSuccess() const;
+    void i2pStopped() const;
+
+private:
+    QString m_i2p_path;
+    QString m_conf;
+    QString m_tunnelsconf;
+    QString m_tunnelsdir;
+    QString m_loglevel;
+    QString m_datadir;
+    QString m_certsdir;
+    QString m_keys;
+    int m_port_p2p = 18085;
+    int m_port_rpc = 18089;
+    QString m_socks_host = QString("127.0.0.1");
+    int m_socks_port = 4447;
+    bool initialized = false;
+    bool started = false;
+    I2PDaemon m_i2pd;
+};
+
+#endif // I2PManager_H

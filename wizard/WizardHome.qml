@@ -242,6 +242,73 @@ Rectangle {
                     Layout.fillWidth: true
                 }
             }
+
+            GridLayout {
+                visible: showAdvancedCheckbox.checked && appWindow.walletMode >= 2
+                columns: 4
+                columnSpacing: 20
+                Layout.fillWidth: true
+                Layout.topMargin: 10
+
+                MoneroComponents.CheckBox {
+                    id: torCheckbox
+                    Layout.topMargin: 6
+                    checked: persistentSettings.torEnabled
+                    enabled: torStartStopInProgress == 0
+                    text: qsTr("Enable TOR") + translationManager.emptyString
+
+                    onClicked: {
+                        persistentSettings.torEnabled = !persistentSettings.torEnabled;
+
+                        if (!torManager.isInstalled()) {
+                            confirmationDialog.title = qsTr("Tor installation") + translationManager.emptyString;
+                            confirmationDialog.text  = qsTr("Tor will be installed at %1. Proceed?").arg(applicationDirectory) + translationManager.emptyString;
+                            confirmationDialog.icon = StandardIcon.Question;
+                            confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
+                            confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
+                            confirmationDialog.onAcceptedCallback = function() {
+                                torManager.download();
+                                torStartStopInProgress = 3;
+                                statusMessageText.text = "Downloading Tor...";
+                                statusMessage.visible = true
+                            }
+                            confirmationDialog.onRejectedCallback = function() {
+                                persistentSettings.torEnabled = false;
+                                torCheckbox.checked = false;
+                            }
+                            confirmationDialog.open();
+                        }
+                        else if (persistentSettings.useRemoteNode) {
+                            if (persistentSettings.torEnabled) {
+                                startTorDaemon();
+                            }
+                            else {
+                                stopTorDaemon();
+                            }
+                        }
+                    }
+                }
+
+                MoneroComponents.CheckBox {
+                    id: i2pCheckbox
+                    Layout.topMargin: 6
+                    checked: persistentSettings.i2pEnabled
+                    text: qsTr("Enable I2P") + translationManager.emptyString
+
+                    onClicked: {
+                        persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
+
+                        if (persistentSettings.useRemoteNode) {
+                            if (persistentSettings.i2pEnabled) {
+                                startI2PDaemon();
+                            }
+                            else {
+                                stopI2PDaemon();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -254,6 +321,8 @@ Rectangle {
 
     function onPageCompleted(){
         wizardController.walletOptionsIsRecoveringFromDevice = false;
+        i2pCheckbox.checked = persistentSettings.i2pEnabled;
+        torCheckbox.checked = persistentSettings.torEnabled;
         if (networkTypeDropdown.currentIndex != 0) {
             showAdvancedCheckbox.checked = true;
         }

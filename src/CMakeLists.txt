@@ -1,4 +1,5 @@
 add_subdirectory(QR-Code-scanner)
+add_subdirectory(i2p)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
@@ -36,6 +37,10 @@ file(GLOB SOURCE_FILES
     "libwalletqt/UnsignedTransaction.h"
     "daemon/*.h"
     "daemon/*.cpp"
+    "tor/*.h"
+    "tor/*.cpp"
+    "i2p/I2PManager.h"
+    "i2p/I2PManager.cpp"
     "p2pool/*.h"
     "p2pool/*.cpp"
     "model/*.h"
@@ -100,6 +105,7 @@ target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
     ${CMAKE_CURRENT_SOURCE_DIR}/p2pool
+    ${CMAKE_CURRENT_SOURCE_DIR}/i2p
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
@@ -123,6 +129,12 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
+set(i2pd_include_dirs ${CMAKE_CURRENT_SOURCE_DIR}/external/i2pd/daemon ${CMAKE_CURRENT_SOURCE_DIR}/external/i2pd/i18n ${CMAKE_CURRENT_SOURCE_DIR}/external/i2pd/libi2pd ${CMAKE_CURRENT_SOURCE_DIR}/external/i2pd/libi2pd_client)
+
+target_include_directories(monero-wallet-gui PUBLIC
+    i2pd_include_dirs
+)
+
 target_link_libraries(monero-wallet-gui
     epee
     common
@@ -132,6 +144,9 @@ target_link_libraries(monero-wallet-gui
     easylogging
     ${QT5_LIBRARIES}
     ${EXTRA_LIBRARIES}
+    ${i2pd_src}
+    ${i2pd_daemon_src}
+    i2pmanager
     openpgp
     qrdecoder
     translations
