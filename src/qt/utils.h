@@ -38,6 +38,8 @@ QByteArray fileGetContents(QString path);
 QByteArray fileOpen(QString path);
 bool fileWrite(QString path, QString data);
 QString getAccountName();
+void mkDir(QString path, bool setPermissions = false);
+void rmDir(QString path);
 #ifdef Q_OS_LINUX
 QString xdgMime();
 void registerXdgMime();
