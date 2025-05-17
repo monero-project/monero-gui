@@ -6,3 +6,18 @@ add_library(quirc STATIC
 )
 set_target_properties(quirc PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_include_directories(quirc PUBLIC quirc/lib)
+
+set(CMAKE_CXX_STANDARD 17)
+add_subdirectory(i2pd/build)
+
+if(WIN32)
+    set(I2PD_BINARY ${CMAKE_BINARY_DIR}/external/i2pd/build/i2pd.exe)
+else()
+    set(I2PD_BINARY ${CMAKE_BINARY_DIR}/external/i2pd/build/i2pd)
+endif()
+
+add_custom_target(copy_i2pd_binary ALL
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${I2PD_BINARY}
+            ${CMAKE_BINARY_DIR}/bin/
+)
