@@ -15,9 +15,3 @@ if(WIN32)
 else()
     set(I2PD_BINARY ${CMAKE_BINARY_DIR}/external/i2pd/build/i2pd)
 endif()
-
-add_custom_target(copy_i2pd_binary ALL
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${I2PD_BINARY}
-            ${CMAKE_BINARY_DIR}/bin/
-)
