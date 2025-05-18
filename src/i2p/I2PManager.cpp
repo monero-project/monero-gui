@@ -136,7 +136,7 @@ QString buildI2pdTunnelsConf(bool allowIncomingConnections) {
         "type = server\n"
         "host = 127.0.0.1\n"
         "# Anonymous inbound port\n"
-        "port = 1885\n"
+        "port = 18085\n"
         "inport = 0\n"
         "keys = monero-mainnet.dat\n"
         "\n"

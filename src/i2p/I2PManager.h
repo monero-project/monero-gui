@@ -89,7 +89,7 @@ private:
     QString m_i2pd_p2p_dat;
     QString m_i2pd_rpc_dat;
 
-    int m_p2p_port = 18084;
+    int m_p2p_port = 18085;
     int m_rpc_port = 18089;
     bool started = false;
     bool starting = false;
