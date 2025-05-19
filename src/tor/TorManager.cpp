@@ -164,8 +164,7 @@ bool TorManager::start(bool allowIncomingConnections)
         auto state = m_tord->state();
 
         if (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting) {
-            qWarning() << "Tor is already running";
-            emit torStartFailure();
+            emit torStartFailure("Tor is already running");
             return false;
         }
 
@@ -174,8 +173,7 @@ bool TorManager::start(bool allowIncomingConnections)
     }
 
     if (isAlreadyRunning()) {
-        qWarning() << QString("Unable to start Tor on %1:%2. Port already in use.").arg(host, QString::number(port));
-        emit torStartFailure();
+        emit torStartFailure(QString("Unable to start Tor on %1:%2. Port already in use.").arg(host, QString::number(port)));
         return false;
     }
 
@@ -237,18 +235,19 @@ void TorManager::handleProcessOutput() {
 
 void TorManager::handleProcessError(QProcess::ProcessError error) {
     bool failed = false;
-    
+    QString message = "Unknown error";
+
     if (error == QProcess::ProcessError::Crashed) {
-        qWarning() << "Tor crashed or killed";
+        message = "Tor crashed or killed";
         failed = true;
     }
     else if (error == QProcess::ProcessError::FailedToStart) {
-        qWarning() <<  "Tor binary failed to start";
+        message = "Tor binary failed to start";
         failed = true;
     }
 
     if (failed && starting) {
-        emit torStartFailure(); 
+        emit torStartFailure(message); 
     }
     else if (failed) {
         emit torStopped();

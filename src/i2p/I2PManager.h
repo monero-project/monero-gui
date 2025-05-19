@@ -65,7 +65,7 @@ private:
     bool running() const;
 signals:
     void i2pStartSuccess() const;
-    void i2pStartFailure() const;
+    void i2pStartFailure(const QString &message) const;
     void i2pStopped() const;
 
 public slots:

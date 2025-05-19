@@ -75,7 +75,7 @@ private:
     bool running() const;
 signals:
     void torStartSuccess() const;
-    void torStartFailure() const;
+    void torStartFailure(const QString &message) const;
     void torStopped() const;
     void torDownloadFailure(int errorCode) const;
     void torDownloadSuccess() const;
