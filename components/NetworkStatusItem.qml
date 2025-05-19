@@ -39,6 +39,22 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
+        switch(appWindow.i2pStartStopInProgress) {
+            case 1:
+                return qsTr("Starting I2P");
+            case 2:
+                return qsTr("Stopping I2P");
+            default:
+                break;
+        }
+        switch(appWindow.torStartStopInProgress) {
+            case 1:
+                return qsTr("Starting Tor");
+            case 2:
+                return qsTr("Stopping Tor");
+            default:
+                break;
+        }
         switch (appWindow.daemonStartStopInProgress)
         {
             case 1:
@@ -188,6 +204,7 @@ Rectangle {
                     onEntered: parent.tooltipPopup.open()
                     onExited: parent.tooltipPopup.close()
                     onClicked: {
+                        const i2pOnly = persistentSettings.proxyEnabled && persistentSettings.proxyType === "I2P";
                         const callback = function(result) {
                             refreshMouseArea.visible = true;
                             if (result) {
@@ -198,11 +215,16 @@ Rectangle {
                             }
                         };
 
-                        daemonManager.sendCommandAsync(
-                            ["set_bootstrap_daemon", "auto"],
-                            appWindow.currentWallet.nettype,
-                            persistentSettings.blockchainDataDir,
-                            callback);
+                        if (i2pOnly) {
+                            appWindow.searchI2PBootstrapNode(callback);
+                        }
+                        else {
+                            daemonManager.sendCommandAsync(
+                                ["set_bootstrap_daemon", "auto"],
+                                appWindow.currentWallet.nettype,
+                                persistentSettings.blockchainDataDir,
+                                callback);
+                        }
 
                         refreshMouseArea.visible = false;
                         appWindow.showStatusMessage(qsTr("Switching to another public node"), 3);
