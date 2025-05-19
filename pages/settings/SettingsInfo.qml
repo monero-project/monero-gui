@@ -126,6 +126,68 @@ Rectangle {
                 opacity: MoneroComponents.Style.dividerOpacity
             }
 
+            
+            MoneroComponents.TextBlock {
+                id: i2pEmbeddedVersion
+                font.pixelSize: 14
+                text: qsTr("Embedded I2P version: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                font.pixelSize: 14
+                color: MoneroComponents.Style.dimmedFontColor
+                text: appWindow.i2pVersion
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+            
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            
+            MoneroComponents.TextBlock {
+                id: torEmbeddedVersion
+                font.pixelSize: 14
+                text: qsTr("Tor version: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                font.pixelSize: 14
+                color: MoneroComponents.Style.dimmedFontColor
+                text: appWindow.torVersion
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+            
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 font.pixelSize: 14
@@ -387,6 +449,8 @@ Rectangle {
                     var data = "";
                     data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
                     data += "\nEmbedded Monero version: " + moneroVersion;
+                    data += "\nEmbedded I2P version: " + i2pVersion;
+                    data += "\nTor version: " + torVersion;
                     data += "\nWallet path: " + walletLocation.walletPath;
 
                     data += "\nWallet restore height: ";
