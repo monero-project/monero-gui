@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ARG THREADS=1
 ARG QT_VERSION=v5.15.16-lts-lgpl
@@ -10,7 +10,7 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
-    libpng12-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
+    libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \

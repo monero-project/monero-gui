@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-macos:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -66,7 +66,7 @@ jobs:
       run: build/release/bin/monero-wallet-gui --test-qml
 
   macos-bundle:
-    runs-on: macOS-latest
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v1
       with:
@@ -99,7 +99,7 @@ jobs:
         path: build/bin/monero-wallet-gui.tar
 
   docker-linux-static:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -131,7 +131,7 @@ jobs:
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monerod
 
   docker-windows-static:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -159,7 +159,7 @@ jobs:
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monerod.exe
 
   docker-android:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -185,7 +185,7 @@ jobs:
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
 
   source-archive:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:

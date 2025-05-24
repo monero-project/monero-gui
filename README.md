@@ -96,7 +96,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
-*Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/master/contrib/gitian/README.md).
+*Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
 
 ### Building Reproducible Windows static binaries with Docker (any OS)
 
@@ -105,7 +105,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -128,7 +128,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.18.3.4`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.18.4.0`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
