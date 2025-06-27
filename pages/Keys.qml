@@ -41,10 +41,53 @@ Rectangle {
     id: page
     property bool viewOnly: false
     property int keysHeight: mainLayout.height + 100 // Ensure sufficient height for QR code, even in minimum width window case.
+    property var seed: ""
+    property var walletCreationHeight: ""
+    property var currentWalletAddress: ""
+    property var secretViewKey: ""
+    property var publicViewKey: ""
+    property var secretSpendKey: ""
+    property var publicSpendKey: ""
 
     color: "transparent"
 
     Clipboard { id: clipboard }
+
+    state: "default"
+    states: [
+        State {
+            // normal spend wallet
+            name: "default";
+            when: typeof currentWallet != "undefined" && !page.viewOnly && !currentWallet.isHwBacked()
+            PropertyChanges { target: seedWarningBox; visible: true}
+            PropertyChanges { target: seedText; text: page.seed}
+            PropertyChanges { target: seedText; copyButton: true}
+            PropertyChanges { target: secretSpendKey; text: page.secretSpendKey}
+            PropertyChanges { target: secretSpendKey; copyButton: true}
+            PropertyChanges { target: exportWalletAsQRCodeColumn; visible: false }
+        }, State {
+            // view-only wallet
+            name: "viewonly";
+            when: typeof currentWallet != "undefined" && page.viewOnly
+            PropertyChanges { target: seedWarningBox; visible: false}
+            PropertyChanges { target: seedText; text: qsTr("(View-only wallet - No mnemonic seed available)") + translationManager.emptyString }
+            PropertyChanges { target: seedText; copyButton: false}
+            PropertyChanges { target: secretSpendKey; text: qsTr("(View-only wallet - No secret spend key available)") + translationManager.emptyString }
+            PropertyChanges { target: secretSpendKey; copyButton: false}
+            PropertyChanges { target: exportWalletAsQRCodeColumn; visible: false }
+        }, State {
+            // hardware wallet
+            name: "hardwarewallet";
+            when: typeof currentWallet != "undefined" && currentWallet.isHwBacked()
+            PropertyChanges { target: seedWarningBox; visible: false}
+            PropertyChanges { target: seedText; text: qsTr("Mnemonic seed protected by hardware device.") + translationManager.emptyString }
+            PropertyChanges { target: seedText; copyButton: false}
+            PropertyChanges { target: secretSpendKey; text: qsTr("(Hardware device wallet - No secret spend key available)") + translationManager.emptyString }
+            PropertyChanges { target: secretSpendKey; copyButton: false}
+            PropertyChanges { target: exportWalletAsQRCodeColumn; visible: false }
+        }
+    ]
+
     ColumnLayout {
         id: mainLayout
 
@@ -82,6 +125,7 @@ Rectangle {
             }
 
             MoneroComponents.WarningBox {
+                id: seedWarningBox
                 text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
             }
 
@@ -93,6 +137,7 @@ Rectangle {
                 readOnly: true
                 wrapMode: Text.WordWrap
                 fontColor: MoneroComponents.Style.defaultFontColor
+                text: page.seed
             }
         }
 
@@ -121,6 +166,7 @@ Rectangle {
                 copyButton: true
                 labelText: qsTr("Block #") + translationManager.emptyString
                 fontSize: 16
+                text: page.walletCreationHeight
             }
         }
 
@@ -148,7 +194,8 @@ Rectangle {
                 wrapMode: Text.Wrap
                 labelText: qsTr("Primary address") + translationManager.emptyString
                 fontSize: 16
-            }           
+                text: page.currentWalletAddress
+            }
             MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25
@@ -157,6 +204,7 @@ Rectangle {
                 copyButton: true
                 labelText: qsTr("Secret view key") + translationManager.emptyString
                 fontSize: 16
+                text: page.secretViewKey
             }
             MoneroComponents.LineEdit {
                 Layout.fillWidth: true
@@ -166,6 +214,7 @@ Rectangle {
                 copyButton: true
                 labelText: qsTr("Public view key") + translationManager.emptyString
                 fontSize: 16
+                text: page.publicViewKey
             }
             MoneroComponents.LineEdit {
                 Layout.fillWidth: true
@@ -175,6 +224,7 @@ Rectangle {
                 copyButton: true
                 labelText: qsTr("Secret spend key") + translationManager.emptyString
                 fontSize: 16
+                text: page.secretSpendKey
             }
             MoneroComponents.LineEdit {
                 Layout.fillWidth: true
@@ -184,10 +234,12 @@ Rectangle {
                 copyButton: true
                 labelText: qsTr("Public spend key") + translationManager.emptyString
                 fontSize: 16
+                text: page.publicSpendKey
             }
         }
 
         ColumnLayout {
+            id: exportWalletAsQRCodeColumn
             Layout.fillWidth: true
 
             MoneroComponents.Label {
@@ -205,46 +257,48 @@ Rectangle {
             }
 
             ColumnLayout {
+                id: walletTypeRadioButtons
+                Layout.bottomMargin: 30
+
                 MoneroComponents.RadioButton {
                     id: showFullQr
+                    checked: true
                     enabled: !this.checked
-                    checked: fullWalletQRCode.visible
                     text: qsTr("Spendable Wallet") + translationManager.emptyString
                     onClicked: {
-                        viewOnlyQRCode.visible = false
                         showViewOnlyQr.checked = false
                     }
                 }
                 MoneroComponents.RadioButton {
-                    enabled: !this.checked
                     id: showViewOnlyQr
-                    checked: viewOnlyQRCode.visible
+                    checked: false
+                    enabled: !this.checked
                     text: qsTr("View Only Wallet") + translationManager.emptyString
                     onClicked: {
-                        viewOnlyQRCode.visible = true
                         showFullQr.checked = false
                     }
                 }
-                Layout.bottomMargin: 30
             }
 
             Image {
-                visible: !viewOnlyQRCode.visible
                 id: fullWalletQRCode
+                visible: showFullQr.checked
                 Layout.fillWidth: true
                 Layout.minimumHeight: 180
                 smooth: false
                 fillMode: Image.PreserveAspectFit
+                source: viewOnlyQRCode.source +"&spend_key="+page.secretSpendKey
             }
 
             Image {
-                visible: false
                 id: viewOnlyQRCode
+                visible: showViewOnlyQr.checked
                 Layout.fillWidth: true
                 Layout.minimumHeight: 180
                 smooth: false
                 fillMode: Image.PreserveAspectFit
-            }
+                source: "image://qrcode/monero_wallet:" + page.currentWalletAddress + "?view_key="+page.secretViewKey+"&height="+page.walletCreationHeight
+                }
 
             MoneroComponents.TextPlain {
                 Layout.fillWidth: true
@@ -254,15 +308,15 @@ Rectangle {
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }
-            
-            MoneroComponents.StandardButton {
-                small: true
-                text: qsTr("Done") + translationManager.emptyString
-                onClicked: {
-                    loadPage("Settings")
-                }
-                Layout.alignment: Qt.AlignCenter
-                width: 135
+        }
+
+        MoneroComponents.StandardButton {
+            Layout.alignment: Qt.AlignCenter
+            width: 135
+            small: true
+            text: qsTr("Done") + translationManager.emptyString
+            onClicked: {
+                loadPage("Settings")
             }
         }
     }
@@ -270,34 +324,15 @@ Rectangle {
     // fires on every page load
     function onPageCompleted() {
         console.log("keys page loaded");
-
-        primaryAddress.text = currentWallet.address(0, 0)
-        walletCreationHeight.text = currentWallet.walletCreationHeight
-        secretViewKey.text = currentWallet.secretViewKey
-        publicViewKey.text = currentWallet.publicViewKey
-        secretSpendKey.text = (!currentWallet.viewOnly) ? currentWallet.secretSpendKey : ""
-        publicSpendKey.text = currentWallet.publicSpendKey
-
-        seedText.text = currentWallet.seed === "" ? qsTr("Mnemonic seed protected by hardware device.") + translationManager.emptyString : currentWallet.seed
-
-        if(typeof currentWallet != "undefined") {
-            viewOnlyQRCode.source = "image://qrcode/monero_wallet:" + currentWallet.address(0, 0) + "?view_key="+currentWallet.secretViewKey+"&height="+currentWallet.walletCreationHeight
-            fullWalletQRCode.source = viewOnlyQRCode.source +"&spend_key="+currentWallet.secretSpendKey
-
-            if(currentWallet.viewOnly) {
-                viewOnlyQRCode.visible = true
-                showFullQr.visible = false
-                showViewOnlyQr.visible = false
-                seedText.text = qsTr("(View Only Wallet - No mnemonic seed available)") + translationManager.emptyString
-                secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString
-            }
-            // hardware device wallet
-            if(appWindow.currentWallet.isHwBacked() === true) {
-                showFullQr.visible = false
-                viewOnlyQRCode.visible = true
-                showViewOnlyQr.visible = false
-                secretSpendKey.text = qsTr("(Hardware Device Wallet - No secret spend key available)") + translationManager.emptyString
-            }
+        if (appWindow.currentWallet) {
+            page.viewOnly = currentWallet.viewOnly;
+            page.seed = currentWallet.seed;
+            page.secretSpendKey = currentWallet.secretSpendKey;
+            page.publicSpendKey = currentWallet.publicSpendKey;
+            page.secretViewKey = currentWallet.secretViewKey;
+            page.publicViewKey = currentWallet.publicViewKey;
+            page.walletCreationHeight = currentWallet.walletCreationHeight;
+            page.currentWalletAddress = currentWallet.address(0, 0)
         }
     }
 
