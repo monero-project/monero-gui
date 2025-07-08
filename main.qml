@@ -43,6 +43,7 @@ import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Settings 1.0
 import moneroComponents.P2PoolManager 1.0
+import moneroComponents.Memwipe 1.0
 
 import "components"
 import "components" as MoneroComponents
@@ -71,7 +72,6 @@ ApplicationWindow {
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
-    property var walletPassword
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
@@ -133,9 +133,12 @@ ApplicationWindow {
     }
 
     function lock() {
-        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.onRejectedCallback = function() {
+            memwipe.wipeQString(passwordDialog.password);
+            appWindow.showWizard();
+        }
         passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password)
+            if (currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds))
                 passwordDialog.close();
             else 
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
@@ -218,15 +221,18 @@ ApplicationWindow {
 
     function openWallet(prevState) {
         passwordDialog.onAcceptedCallback = function() {
-            walletPassword = passwordDialog.password;
             initialize();
         }
         passwordDialog.onRejectedCallback = function() {
+            memwipe.wipeQString(passwordDialog.password);
             if (prevState) {
                 appWindow.viewState = prevState;
             }
             if (wizard.wizardState == "wizardOpenWallet1") {
                 wizard.wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
+            }
+            else if (wizard.wizardState == "wizardCreateWallet5") {
+                showWizard()
             }
         };
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
@@ -264,13 +270,12 @@ ApplicationWindow {
         var wallet_path = persistentSettings.wallet_path;
         if(isIOS)
             wallet_path = appWindow.accountsDir + wallet_path;
-        // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
         console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
 
         this.onWalletOpening();
         walletManager.openWalletAsync(
             wallet_path,
-            walletPassword,
+            passwordDialog.password,
             persistentSettings.nettype,
             persistentSettings.kdfRounds);
     }
@@ -375,7 +380,9 @@ ApplicationWindow {
             persistentSettings.getWalletProxyAddress());
 
         // save wallet keys in case wallet settings have been changed in the init
-        currentWallet.setPassword(walletPassword);
+        currentWallet.setPassword(passwordDialog.password, passwordDialog.password);
+        memwipe.wipeQString(passwordDialog.password);
+        currentWallet.storeAsync(function(){});
     }
 
     function isTrustedDaemon() {
@@ -529,7 +536,6 @@ ApplicationWindow {
                 case "basic_string::_M_replace_aux":
                 case "std::bad_alloc":
                     walletManager.clearWalletCache(wallet.path);
-                    walletPassword = passwordDialog.password;
                     appWindow.initialize();
                     console.error("Repairing wallet cache with error: ", wallet.errorString);
                     appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
@@ -1592,13 +1598,13 @@ ApplicationWindow {
             }
             close();
             passwordDialog.onAcceptedCallback = function() {
-                if(walletPassword === passwordDialog.password){
+                if (currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds)) {
                     handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
-            passwordDialog.onRejectedCallback = null;
+            passwordDialog.onRejectedCallback = function() { memwipe.wipeQString(passwordDialog.password); }
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
@@ -1706,8 +1712,7 @@ ApplicationWindow {
                 onRejectedCallback();
         }
         onAcceptedNewPassword: {
-            if (currentWallet.setPassword(passwordDialog.password)) {
-                appWindow.walletPassword = passwordDialog.password;
+            if (currentWallet.setPassword(/* old_password */ "", passwordDialog.password)) {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
                 informationPopup.icon  = StandardIcon.Information;
@@ -1718,6 +1723,8 @@ ApplicationWindow {
             }
             informationPopup.onCloseCallback = null;
             informationPopup.open();
+            memwipe.wipeQString(passwordDialog.password);
+            memwipe.wipeQString(passwordDialog.passwordConfirm);
         }
         onRejectedNewPassword: {}
         Keys.enabled: !passwordDialog.visible && informationPopup.visible
@@ -2259,7 +2266,7 @@ ApplicationWindow {
         if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
 
         passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password){
+            if (currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds)) {
                 passwordDialog.close();
                 if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
                 if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
@@ -2269,7 +2276,10 @@ ApplicationWindow {
             }
         }
 
-        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        passwordDialog.onRejectedCallback = function() {
+            memwipe.wipeQString(passwordDialog.password);
+            appWindow.showWizard();
+        }
         if (inputDialogVisible) inputDialog.close()
         remoteNodeDialog.close();
         informationPopup.close()
@@ -2410,5 +2420,9 @@ ApplicationWindow {
     WalletManager {
         id: walletManager
         proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    Memwipe {
+        id: memwipe
     }
 }

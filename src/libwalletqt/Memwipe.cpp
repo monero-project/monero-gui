@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2025, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,49 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef MONERO_GUI_WALLETLISTENERIMPL_H
-#define MONERO_GUI_WALLETLISTENERIMPL_H
+#include "Memwipe.h"
+#include "memwipe.h"
 
-#include "wallet/api/wallet2_api.h"
-#include "PassphraseHelper.h"
-
-class Wallet;
-
-class WalletListenerImpl : public Monero::WalletListener, public PassphraseReceiver
+void Memwipe::wipeQString(const QString &q_str)
 {
-public:
-    WalletListenerImpl(Wallet * w);
-
-    virtual void moneySpent(const std::string &txId, uint64_t amount) override;
-
-    virtual void moneyReceived(const std::string &txId, uint64_t amount) override;
-
-    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override;
-
-    virtual void newBlock(uint64_t height) override;
-
-    virtual void updated() override;
-
-    // called when wallet refreshed by background thread or explicitly
-    virtual void refreshed() override;
-
-    virtual void onDeviceButtonRequest(uint64_t code) override;
-
-    virtual void onDeviceButtonPressed() override;
-
-    virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override;
-
-    virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override;
-
-    void onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached) override;
-
-    Monero::optional<std::string> onGetPassword(const char *reason) override;
-
-    void onPoolTxRemoved(const std::string &txid) override;
-
-private:
-    Wallet * m_wallet;
-    PassphraseHelper m_phelper;
-};
-
-#endif //MONERO_GUI_WALLETLISTENERIMPL_H
+    memwipe(const_cast<QChar*>(q_str.constData()), q_str.length()*2);
+}
