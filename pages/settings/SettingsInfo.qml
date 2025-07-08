@@ -195,10 +195,6 @@ Rectangle {
                         }
                         if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {
-                                currentWallet.walletCreationHeight = _restoreHeight
-                                // Restore height is saved in .keys file. Set password to trigger rewrite.
-                                currentWallet.setPassword(appWindow.walletPassword)
-
                                 // Show confirmation dialog
                                 confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
                                 confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
@@ -210,13 +206,30 @@ Rectangle {
                                                                 );
                                 confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.onAcceptedCallback = function() {
-                                    appWindow.closeWallet(function() {
-                                        walletManager.clearWalletCache(persistentSettings.wallet_path);
-                                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                                        persistentSettings.nettype, persistentSettings.kdfRounds);
-                                    });
-                                }
+                                    passwordDialog.onAcceptedCallback = function() {
+                                        if(currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds, /* do_wipe */ false)){
+                                            currentWallet.walletCreationHeight = _restoreHeight
+                                            // Restore height is saved in .keys file. Set password to trigger rewrite.
+                                            currentWallet.setPassword(passwordDialog.password, passwordDialog.password);
 
+                                            appWindow.closeWallet(function() {
+                                                walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                                walletManager.openWalletAsync(persistentSettings.wallet_path, passwordDialog.password,
+                                                                                persistentSettings.nettype, persistentSettings.kdfRounds);
+                                            });
+
+                                            passwordDialog.close();
+                                        } else {
+                                            memwipe.wipeQString(passwordDialog.password);
+                                            passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
+                                        }
+                                    }
+                                    passwordDialog.onRejectedCallback = function() {
+                                        memwipe.wipeQString(passwordDialog.password);
+                                    };
+                                    passwordDialog.open(usefulName(persistentSettings.wallet_path));
+
+                                }
                                 confirmationDialog.onRejectedCallback = null;
                                 confirmationDialog.open()
                                 return;

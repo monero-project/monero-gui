@@ -60,6 +60,7 @@
 #include "model/SubaddressModel.h"
 #include "SubaddressAccount.h"
 #include "model/SubaddressAccountModel.h"
+#include "Memwipe.h"
 #include "Logger.h"
 #include "MainApp.h"
 #include "qt/downloader.h"
@@ -382,6 +383,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<Network>("moneroComponents.Network", 1, 0, "Network");
     qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
     qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
+    qmlRegisterType<Memwipe>("moneroComponents.Memwipe", 1, 0, "Memwipe");
 
     // Temporary Qt.labs.settings replacement
     qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");

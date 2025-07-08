@@ -95,3 +95,19 @@ Monero::optional<std::string> WalletListenerImpl::onDevicePassphraseRequest(bool
     qDebug() << __FUNCTION__;
     return m_phelper.onDevicePassphraseRequest(on_device);
 }
+
+void WalletListenerImpl::onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached)
+{
+    qDebug() << __FUNCTION__;
+}
+
+Monero::optional<std::string> WalletListenerImpl::onGetPassword(const char *reason)
+{
+    qDebug() << __FUNCTION__;
+    return Monero::optional<std::string>();
+}
+
+void WalletListenerImpl::onPoolTxRemoved(const std::string &txid)
+{
+    qDebug() << __FUNCTION__;
+}
