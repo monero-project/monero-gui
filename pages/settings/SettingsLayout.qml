@@ -101,13 +101,13 @@ Rectangle {
             onClicked: {
                 if (persistentSettings.askPasswordBeforeSending) {
                     passwordDialog.onAcceptedCallback = function() {
-                        if (appWindow.walletPassword === passwordDialog.password){
+                        if (currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds)) {
                             persistentSettings.askPasswordBeforeSending = false;
                         } else {
                             passwordDialog.showError(qsTr("Wrong password"));
                         }
                     }
-                    passwordDialog.onRejectedCallback = null;
+                    passwordDialog.onRejectedCallback = function() { memwipe.wipeQString(passwordDialog.password); }
                     passwordDialog.open()
                 } else {
                     persistentSettings.askPasswordBeforeSending = true;

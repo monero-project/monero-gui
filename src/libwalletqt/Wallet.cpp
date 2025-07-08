@@ -57,7 +57,10 @@
 #include <QVector>
 #include <QMutexLocker>
 
+#include "memwipe.h"
 #include "qt/ScopeGuard.h"
+#include "qt/utils.h"
+#include "wipeable_string.h"
 
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
@@ -209,9 +212,12 @@ QString Wallet::errorString() const
     return QString::fromStdString(m_walletImpl->errorString());
 }
 
-bool Wallet::setPassword(const QString &password)
+bool Wallet::setPassword(const QString &old_password, const QString &new_password)
 {
-    return m_walletImpl->setPassword(password.toStdString());
+    return m_walletImpl->setPassword(old_password.toLocal8Bit().constData(),
+                                     old_password.length(),
+                                     new_password.toLocal8Bit().constData(),
+                                     new_password.length());
 }
 
 QString Wallet::address(quint32 accountIndex, quint32 addressIndex) const
@@ -224,13 +230,18 @@ QString Wallet::path() const
     return QDir::toNativeSeparators(QString::fromStdString(m_walletImpl->path()));
 }
 
-void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */)
+void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */, const bool is_new /* = false */)
 {
     const auto future = m_scheduler.run(
-        [this, path] {
+        [this, path, is_new] {
             QMutexLocker locker(&m_asyncMutex);
 
-            return QJSValueList({m_walletImpl->store(path.toStdString())});
+            // Empty password is provided for creating/restoring a wallet where the password is not set yet
+            // and password will be ignored, if empty `path` is given
+            std::string empty_password_str = "";
+            Monero::optional<std::pair<const char *, const std::size_t>> empty_password = std::make_pair(&empty_password_str[0], empty_password_str.size());
+            Monero::optional<std::pair<const char *, const std::size_t>> empty_optional = Monero::optional<std::pair<const char *, const std::size_t>>();
+            return QJSValueList({m_walletImpl->store(path.toStdString(), is_new ? empty_password : empty_optional)});
         },
         callback);
     if (!future.first)
@@ -1148,6 +1159,14 @@ void Wallet::keyReuseMitigation2(bool mitigation)
 void Wallet::onWalletPassphraseNeeded(bool on_device)
 {
     emit this->walletPassphraseNeeded(on_device);
+}
+
+bool Wallet::verifyPassword(const QString &password, quint64 kdf_rounds, bool do_wipe /* = true */)
+{
+    bool r = m_walletImpl->verifyPassword(password.toLocal8Bit().constData(), password.length(), kdf_rounds);
+    if (do_wipe)
+        memwipe(const_cast<QChar*>(password.constData()), password.length()*2);
+    return r;
 }
 
 void Wallet::onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort)

@@ -106,6 +106,7 @@ ColumnLayout {
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
     property int inputHeight: 39
+    property bool isSecret: false
 
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
@@ -226,6 +227,31 @@ ColumnLayout {
             item.tabPressed();
             if (item.KeyNavigation.tab) {
                 item.KeyNavigation.tab.forceActiveFocus()
+            }
+        }
+        Keys.onPressed: {
+            if (isSecret) {
+                if (event.key === Qt.Key_Left || event.key === Qt.Key_Home) {
+                    event.accepted = true;
+                }
+                if (event.key === Qt.Key_Backspace || event.key === Qt.Key_Delete) {
+                    memwipe.wipeQString(item.text);
+                    clear();
+                    event.accepted = true;
+                }
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: item.isSecret ? Qt.ArrowCursor : Qt.IBeamCursor
+            onClicked: {
+                if (item.isSecret) {
+                    memwipe.wipeQString(item.text);
+                    item.input.clear();
+                }
+                else {
+                    item.forceActiveFocus();
+                }
             }
         }
         Layout.fillWidth: true

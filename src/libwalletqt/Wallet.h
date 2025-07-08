@@ -147,7 +147,7 @@ public:
     QString errorString() const;
 
     //! changes the password using existing parameters (path, seed, seed lang)
-    Q_INVOKABLE bool setPassword(const QString &password);
+    Q_INVOKABLE bool setPassword(const QString &old_password, const QString &new_password);
 
     //! returns wallet's public address
     Q_INVOKABLE QString address(quint32 accountIndex, quint32 addressIndex) const;
@@ -157,7 +157,7 @@ public:
 
     //! saves wallet to the file by given path
     //! empty path stores in current location
-    Q_INVOKABLE void storeAsync(const QJSValue &callback, const QString &path = "");
+    Q_INVOKABLE void storeAsync(const QJSValue &callback, const QString &path = "", const bool is_new = false);
 
     //! initializes wallet asynchronously
     Q_INVOKABLE void initAsync(
@@ -373,6 +373,8 @@ public:
     // Passphrase entry for hardware wallets
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
+
+    Q_INVOKABLE bool verifyPassword(const QString &password, quint64 kdf_rounds, bool do_wipe = true);
 
     // TODO: setListenter() when it implemented in API
 signals:
