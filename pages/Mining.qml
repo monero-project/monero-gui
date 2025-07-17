@@ -256,7 +256,7 @@ Rectangle {
                         enabled: startSoloMinerButton.enabled && !persistentSettings.allow_p2pool_mining
                         checked: persistentSettings.allow_background_mining
                         onClicked: persistentSettings.allow_background_mining = checked
-                        text: qsTr("Background mining (experimental)") + translationManager.emptyString
+                        text: qsTr("Pause when active (experimental)") + translationManager.emptyString
                     }
                 }
             }
