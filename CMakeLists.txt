@@ -20,7 +20,7 @@ if(DEV_MODE)
   # DEV_MODE checks out the monero submodule to master, which requires C++17.
   set(CMAKE_CXX_STANDARD 17)
 else()
-  set(CMAKE_CXX_STANDARD 11)
+  set(CMAKE_CXX_STANDARD 14)
 endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
