@@ -185,6 +185,7 @@
         <file>pages/settings/SettingsLog.qml</file>
         <file>pages/settings/SettingsLayout.qml</file>
         <file>pages/settings/SettingsInfo.qml</file>
+        <file>pages/settings/SettingsNetwork.qml</file>
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
@@ -223,6 +224,7 @@
         <file>wizard/WizardModeSelection.qml</file>
         <file>wizard/WizardModeRemoteNodeWarning.qml</file>
         <file>wizard/WizardModeBootstrap.qml</file>
+        <file>wizard/WizardNetwork.qml</file>
         <file>wizard/WizardMenuItem.qml</file>
         <file>js/Wizard.js</file>
         <file>components/LanguageSidebar.qml</file>
