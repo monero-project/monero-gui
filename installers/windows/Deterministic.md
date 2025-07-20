@@ -23,7 +23,7 @@ You would think timestamp preservation is no problem when unpacking the zip arch
 
 In any case, after unpacking, check the file dates in the `bin` directory where the installer script looks for them with the dates of the files in the zip file: They must be identical.
 
-Note that the the following line in `Monero.iss` is also important regarding file timestamps:
+Note that the following line in `Monero.iss` is also important regarding file timestamps:
 
     TimeStampsInUTC=yes
 
