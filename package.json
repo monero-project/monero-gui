@@ -1,0 +1,12 @@
+{
+  "name": "contact-form",
+  "version": "1.0.0",
+  "description": "A simple contact form",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
