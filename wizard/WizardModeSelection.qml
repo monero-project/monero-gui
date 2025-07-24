@@ -150,7 +150,7 @@ Rectangle {
 
                 onMenuClicked: {
                     appWindow.persistentSettings.pruneBlockchain = true;
-                    applyWalletMode(2, 'wizardHome');
+                    applyWalletMode(2, 'wizardNetwork');
                 }
             }
 

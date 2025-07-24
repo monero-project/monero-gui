@@ -73,4 +73,7 @@ Object {
     property string shieldAlt : "\uf3ed"
     property string signOutAlt : "\uf2f5"
     property string times : "\uf00d"
+    property string bullseye : "\uf140"
+    property string wifi : "\uf1eb"
+    property string mehBlank : "\uf5a4"
 }

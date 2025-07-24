@@ -29,17 +29,19 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
+import QtQuick.Dialogs 1.2
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
 Rectangle {
-    id: wizardModeRemoteNodeWarning
+    id: wizardNetwork
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
-    property string viewName: "wizardModeRemoteNodeWarning"
-    property bool understood: false
+    property string viewName: "wizardNetwork"
+    property string previousView: ""
 
     ColumnLayout {
         id: pageRoot
@@ -58,7 +60,7 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
-                title: qsTr("About the simple mode") + translationManager.emptyString
+                title: qsTr("Protect your internet connection") + translationManager.emptyString
                 subtitle: ""
             }
 
@@ -69,12 +71,11 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.") + translationManager.emptyString
-                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
+                    text: qsTr("Monero can optionally connect to the network using anonymizing software to better protect your identity.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
                     Layout.fillWidth: true
+                    textFormat: Text.RichText
 
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
@@ -82,9 +83,7 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("Remote nodes are useful if you are not able/don't want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
-                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
+                    text: qsTr("The usage of these networks is still considered experimental, there are a few pessimistic cases where privacy is leaked. The design is intended to maximize privacy of the source of a transaction by broadcasting it over an anonymity network, while relying on IPv4 for the remainder of messages to make surrounding node attacks (via sybil) more difficult.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
                     Layout.fillWidth: true
@@ -94,34 +93,67 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                MoneroComponents.WarningBox {
+                MoneroComponents.WarningBox{
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
-                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
+                    text: qsTr("Some countries and ISPs may prohibit or censor use of these networks. <b>Please check your local laws and internet policies before using them.</b>") + translationManager.emptyString
                 }
 
                 MoneroComponents.CheckBox {
-                    id: understoodCheckbox
-                    Layout.topMargin: 20
-                    fontSize: 16
-                    text: qsTr("I understand the privacy implications of using a third-party server.") + translationManager.emptyString
+                    id: torCheckbox
+                    Layout.topMargin: 6
+                    checked: persistentSettings.torEnabled
+                    enabled: torStartStopInProgress == 0
+                    text: qsTr("Enable TOR") + translationManager.emptyString
+
                     onClicked: {
-                        wizardModeRemoteNodeWarning.understood = !wizardModeRemoteNodeWarning.understood
+                        persistentSettings.torEnabled = !persistentSettings.torEnabled;
+
+                        if (persistentSettings.torEnabled && !torManager.isInstalled()) {
+                            confirmationDialog.title = qsTr("Tor installation") + translationManager.emptyString;
+                            confirmationDialog.text  = qsTr("Tor will be installed at %1. Proceed?").arg(applicationDirectory) + translationManager.emptyString;
+                            confirmationDialog.icon = StandardIcon.Question;
+                            confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
+                            confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
+                            confirmationDialog.onAcceptedCallback = function() {
+                                torManager.download();
+                                torStartStopInProgress = 3;
+                                statusMessageText.text = "Downloading Tor...";
+                                statusMessage.visible = true
+                            }
+                            confirmationDialog.onRejectedCallback = function() {
+                                persistentSettings.torEnabled = false;
+                                torCheckbox.checked = false;
+                            }
+                            confirmationDialog.open();
+                        }
+                    }
+                }
+
+                MoneroComponents.CheckBox {
+                    id: i2pCheckbox
+                    Layout.topMargin: 6
+                    checked: persistentSettings.i2pEnabled
+                    text: qsTr("Enable I2P") + translationManager.emptyString
+
+                    onClicked: {
+                        persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
                     }
                 }
 
                 WizardNav {
                     Layout.topMargin: 4
-                    btnNext.enabled: wizardModeRemoteNodeWarning.understood
                     progressSteps: 0
 
                     onPrevClicked: {
-                        wizardController.wizardState = 'wizardModeSelection';
+                        if (previousView.includes("wizardModeSelection")) {
+                            wizardController.wizardState = "wizardModeSelection";
+                        }
+                        else wizardController.wizardState = previousView;
                     }
 
                     onNextClicked: {
-                        appWindow.changeWalletMode(0);
-                        wizardController.wizardState = 'wizardNetwork';
+                        wizardController.wizardState = 'wizardHome';
                     }
                 }
             }
@@ -141,7 +173,9 @@ Rectangle {
     }
 
     function onPageCompleted(previousView){
-        wizardModeRemoteNodeWarning.understood = false;
-        understoodCheckbox.checked = false;
+        persistentSettings.torEnabled = persistentSettings.torEnabled && torManager.isInstalled();
+        i2pCheckbox.checked = persistentSettings.i2pEnabled;
+        torCheckbox.checked = persistentSettings.torEnabled;
+        wizardNetwork.previousView = previousView.viewName;
     }
 }
