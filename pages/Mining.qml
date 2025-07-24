@@ -384,6 +384,7 @@ Rectangle {
 
                 ListElement { column1: qsTr("Mini") ; column2: ""; priority: 0}
                 ListElement { column1: qsTr("Main") ; column2: ""; priority: 1}
+                ListElement { column1: qsTr("Nano") ; column2: ""; priority: 2}
             }
 
             ColumnLayout {
@@ -400,7 +401,7 @@ Rectangle {
 
                 MoneroComponents.Tooltip {
                     id: chainsHelpTooltip
-                    text: qsTr("Use the mini chain if you have a low hashrate.") + translationManager.emptyString
+                    text: qsTr("Use the mini or nano chains if you have a low hashrate.") + translationManager.emptyString
                 }
 
                 MouseArea {
@@ -448,26 +449,43 @@ Rectangle {
                     id: flagsHelpTooltip
                     text: "
                     Usage:<br>
-                        --wallet             Wallet address to mine to. Subaddresses and integrated addresses are not supported!<br>
-                        --host               IP address of your Monero node, default is 127.0.0.1<br>
-                        --rpc-port           monerod RPC API port number, default is 18081<br>
-                        --zmq-port           monerod ZMQ pub port number, default is 18083 (same port as in monerod\'s \"--zmq-pub\" command line parameter)<br>
-                        --stratum            Comma-separated list of IP:port for stratum server to listen on<br>
-                        --p2p                Comma-separated list of IP:port for p2p server to listen on<br>
-                        --addpeers           Comma-separated list of IP:port of other p2pool nodes to connect to<br>
-                        --light-mode         Don't allocate RandomX dataset, saves 2GB of RAM<br>
-                        --loglevel           Verbosity of the log, integer number between 0 and 6<br>
-                        --config             Name of the p2pool config file<br>
-                        --data-api           Path to the p2pool JSON data (use it in tandem with an external web-server)<br>
-                        --local-api          Enable /local/ path in api path for Stratum Server and built-in miner statistics<br>
-                        --stratum-api        An alias for --local-api<br>
-                        --no-cache           Disable p2pool.cache<br>
-                        --no-color           Disable colors in console output<br>
-                        --no-randomx         Disable internal RandomX hasher: p2pool will use RPC calls to monerod to check PoW hashes<br>
-                        --out-peers N        Maximum number of outgoing connections for p2p server (any value between 10 and 1000)<br>
-                        --in-peers N         Maximum number of incoming connections for p2p server (any value between 10 and 1000)<br>
-                        --start-mining N     Start built-in miner using N threads (any value between 1 and 64)<br>
-                        --help               Show this help message
+                        --wallet              Wallet address to mine to. Subaddresses and integrated addresses are not supported!<br>
+                        --host                IP address of your Monero node, default is 127.0.0.1<br>
+                        --rpc-port            monerod RPC API port number, default is 18081<br>
+                        --zmq-port            monerod ZMQ pub port number, default is 18083 (same port as in monerod\'s \"--zmq-pub\" command line parameter)<br>
+                        --stratum             Comma-separated list of IP:port for stratum server to listen on<br>
+                        --p2p                 Comma-separated list of IP:port for p2p server to listen on<br>
+                        --addpeers            Comma-separated list of IP:port of other p2pool nodes to connect to<br>
+                        --stratum-ban-time N  Number of seconds to ban misbehaving stratum client, default is 600<br>
+                        --light-mode          Don't allocate RandomX dataset, saves 2GB of RAM<br>
+                        --loglevel            Verbosity of the log, integer number between 0 and 6<br>
+                        --data-dir            Path to store general p2pool files (log, cache, peer data, etc.), default is current directory<br>
+                        --sidechain-config    Name of the p2pool sidechain parameters file (only use it if you run your own sidechain)<br>
+                        --data-api            Path to the p2pool JSON data (use it in tandem with an external web-server)<br>
+                        --local-api           Enable /local/ path in api path for Stratum Server and built-in miner statistics<br>
+                        --stratum-api         An alias for --local-api<br>
+                        --no-cache            Disable p2pool.cache<br>
+                        --no-color            Disable colors in console output<br>
+                        --no-randomx          Disable internal RandomX hasher: p2pool will use RPC calls to monerod to check PoW hashes<br>
+                        --out-peers N         Maximum number of outgoing connections for p2p server (any value between 10 and 1000)<br>
+                        --in-peers N          Maximum number of incoming connections for p2p server (any value between 10 and 1000)<br>
+                        --start-mining N      Start built-in miner using N threads (any value between 1 and 64)<br>
+                        --no-autodiff         Disable automatic difficulty adjustment for miners connected to stratum (WARNING: incompatible with Nicehash and MRR)<br>
+                        --rpc-login           Specify username[:password] required for Monero RPC server<br>
+                        --socks5              Specify IP:port of a SOCKS5 proxy to use for outgoing connections<br>
+                        --no-dns              Disable DNS queries, use only IP addresses to connect to peers (seed node DNS will be unavailable too)<br>
+                        --p2p-external-port   Port number that your router uses for mapping to your local p2p port. Use it if you are behind a NAT and still want to accept incoming connections<br>
+                        --no-upnp             Disable UPnP port forwarding<br>
+                        --no-igd              An alias for --no-upnp<br>
+                        --upnp-stratum        Port forward Stratum port (it's not forwarded by default)<br>
+                        --merge-mine          IP:port and wallet address for another blockchain to merge mine with<br>
+                        --version             Print p2pool's version and build details<br>
+                        --tls-cert file       Load TLS certificate chain from \"file\" in the PEM format<br>
+                        --tls-cert-key file   Load TLS certificate private key from \"file\" in the PEM format<br>
+                        --rpc-ssl             Enable SSL on RPC connections to the Monero node<br>
+                        --rpc-ssl-fingerprint base64-encoded fingerprint of the Monero node's certificate (optional, use it for certificate pinning)<br>
+                        --no-stratum-http     Disable HTTP on Stratum ports<br>
+                        --help                Show this help message
                     "
                 }
 
@@ -629,6 +647,9 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
         var chain = "mini"
         if (chainDropdown.currentIndex === 1) {
             chain = "main"
+        }
+        if (chainDropdown.currentIndex === 2) {
+            chain = "nano"
         }
         var p2poolArgs = persistentSettings.p2poolFlags;
         var success = p2poolManager.start(p2poolArgs, address, chain, threads);
