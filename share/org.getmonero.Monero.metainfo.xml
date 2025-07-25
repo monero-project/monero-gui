@@ -4,7 +4,9 @@
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>BSD-3-Clause</project_license>
     <content_rating type="oars-1.1"/>
-    <developer_name>The Monero Project</developer_name>
+    <developer id="org.getmonero">
+      <name>The Monero Project</name>
+    </developer>
     <categories>
         <category>Network</category>
         <category>Qt</category>
@@ -51,7 +53,6 @@
     <url type="donation">https://getmonero.org/get-started/contributing</url>
     <url type="faq">https://getmonero.org/get-started/faq</url>
     <url type="help">https://getmonero.org/resources/user-guides</url>
-    <url type="translate">https://translate.getmonero.org</url>
     <url type="contact">https://getmonero.org/community/hangouts</url>
     <url type="contribute">https://getmonero.org/get-started/contributing</url>
 
