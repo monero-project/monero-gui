@@ -86,7 +86,7 @@ Rectangle {
         visible: false
         text: qsTr("Print this paper, fill it out, and keep it in a safe location. Never share your recovery phrase with anybody, especially with strangers offering technical support.") +
               qsTr("Recovery phrase (mnemonic seed)") +
-              qsTr("These words are are a backup of your wallet. They are the only thing needed to access your funds and restore your Monero wallet, so keep this paper in a safe place and do not disclose it to anybody! It is strongly not recommended to store your recovery phrase digitally (in an email, online service, screenshot, photo, or any other type of computer file).") +
+              qsTr("These words are a backup of your wallet. They are the only thing needed to access your funds and restore your Monero wallet, so keep this paper in a safe place and do not disclose it to anybody! It is strongly not recommended to store your recovery phrase digitally (in an email, online service, screenshot, photo, or any other type of computer file).") +
               qsTr("Wallet creation date") +
               qsTr("Wallet restore height") +
               qsTr("For instructions on how to restore this wallet, visit www.getmonero.org and go to Resources > User Guides > \"How to restore a wallet from mnemonic seed\". Use only Monero wallets that are trusted and recommended by the Monero community (see a list of them in www.getmonero.org/downloads).") + translationManager.emptyString
