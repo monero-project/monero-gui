@@ -182,6 +182,10 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
         arguments << "--start-mining" << threads;
     }
 
+    if (chain == "nano") {
+        arguments << "--nano";
+    }
+
     if (chain == "mini") {
         arguments << "--mini";
     }
