@@ -50,6 +50,7 @@ Item {
     property bool passwordDialogMode
     property bool passphraseDialogMode
     property bool newPasswordDialogMode
+    property bool backgroundSyncing
 
     // same signals as Dialog has
     signal accepted()
@@ -77,10 +78,11 @@ Item {
         appWindow.updateBalance();
     }
 
-    function open(walletName, errorText, okButtonText, okButtonIcon) {
+    function open(walletName, errorText, okButtonText, okButtonIcon, backgroundSyncOn) {
         passwordDialogMode = true;
         passphraseDialogMode = false;
         newPasswordDialogMode = false;
+        backgroundSyncing = backgroundSyncOn || false;
         root.okButtonText = okButtonText;
         root.okButtonIcon = okButtonIcon ? okButtonIcon : "";
         _openInit(walletName, errorText);
@@ -90,6 +92,7 @@ Item {
         passwordDialogMode = false;
         passphraseDialogMode = true;
         newPasswordDialogMode = false;
+        backgroundSyncing = false;
         _openInit("", "");
     }
 
@@ -97,6 +100,7 @@ Item {
         passwordDialogMode = false;
         passphraseDialogMode = false;
         newPasswordDialogMode = true;
+        backgroundSyncing = false;
         _openInit("", "");
     }
 
@@ -299,6 +303,18 @@ Item {
                     enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: onOk()
                 }
+            }
+
+            Label {
+                visible: backgroundSyncing
+                text: qsTr("Syncing in the background...") + translationManager.emptyString;
+                Layout.fillWidth: true
+
+                font.pixelSize: 14
+                font.family: MoneroComponents.Style.fontLight.name
+                font.italic: true
+
+                color: MoneroComponents.Style.defaultFontColor
             }
         }
     }
