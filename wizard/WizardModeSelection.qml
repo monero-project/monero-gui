@@ -73,7 +73,7 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Mode selection") + translationManager.emptyString
-                subtitle: qsTr("Please select the statement that best matches you.") + translationManager.emptyString
+                subtitle: qsTr("Please select the statement that best matches you.") + qsTr("\nReminder: Avoid using advance mode if you are using hdd, because synchronization is going to take several days.") + translationManager.emptyString
             }
 
             WizardMenuItem {
