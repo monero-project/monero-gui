@@ -73,7 +73,7 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Mode selection") + translationManager.emptyString
-                subtitle: qsTr("Please select the statement that best matches you.") + qsTr("\nReminder: Avoid using advance mode if you are using hdd, because synchronization is going to take several days.") + translationManager.emptyString
+                subtitle: qsTr("Please select the statement that best matches you.") + qsTr("\nReminder: Using the first simple mode if your computer is running on hdd, simple mode(bootstrap) and advance mode by default will download the entire blockchain, which is very time consuming.") + translationManager.emptyString
             }
 
             WizardMenuItem {
