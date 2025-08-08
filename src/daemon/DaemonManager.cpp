@@ -291,6 +291,18 @@ void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type n
     }, callback);
 }
 
+void DaemonManager::getPeerListAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const {
+    QStringList cmd;
+    cmd << "print_pl";
+    cmd << "white";
+
+    m_scheduler.run([this, cmd, nettype, dataDir] {
+        QString message;
+        sendCommand(cmd, nettype, dataDir, message);
+        return QJSValueList({message});
+    }, callback);
+}
+
 void DaemonManager::exit()
 {
     qDebug("DaemonManager: exit()");
