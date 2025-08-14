@@ -185,10 +185,7 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
-    rm /usr/lib/x86_64-linux-gnu/libXext.a && \
-    rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
-    git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
+RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd qt5 && \
     git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
@@ -206,7 +203,7 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
     sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
-    ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
+    ./configure --prefix=/usr -opensource -confirm-license -release -static -no-avx \
     -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
     -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
