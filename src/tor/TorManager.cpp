@@ -43,6 +43,7 @@
 #include <QMap>
 #include <QTcpSocket>
 #include <QCryptographicHash>
+#include <thread>
 
 #if defined(Q_OS_MACOS) && defined(__aarch64__) && !defined(Q_OS_MACOS_AARCH64)
 #define Q_OS_MACOS_AARCH64
