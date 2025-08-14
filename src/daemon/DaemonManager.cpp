@@ -28,6 +28,7 @@
 
 #include "DaemonManager.h"
 #include "common/util.h"
+#include "qt/utils.h"
 #include <QElapsedTimer>
 #include <QFile>
 #include <QMutexLocker>
@@ -288,6 +289,44 @@ void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type n
     m_scheduler.run([this, cmd, nettype, dataDir] {
         QString message;
         return QJSValueList({sendCommand(cmd, nettype, dataDir, message)});
+    }, callback);
+}
+
+void DaemonManager::setBootstrapNodeAsync(NetworkType::Type nettype, const QString &proxyType, const QString &dataDir, const QJSValue& callback)
+{
+    qDebug() << "setBootstrapNodeAsync()";
+
+    m_scheduler.run([this, proxyType, nettype, dataDir] {
+        RpcNodeType nodeType = RpcNodeType::CLEARNET;
+        QStringList cmd;
+        cmd << "set_bootstrap_daemon";
+
+        if (proxyType.toLower() == "tor") {
+            nodeType = RpcNodeType::TOR;
+        } else if (proxyType.toLower() == "i2p") {
+            nodeType = RpcNodeType::I2P;
+        }
+
+        QString uri;
+
+        if (proxyType == "custom") {
+            cmd << "auto";
+        } else {
+            auto node = bootstrapNodes.pickRandom(nettype, nodeType);  
+            cmd << node->getServer();
+        }
+
+        if (proxyType == "tor") {
+            cmd << TOR_PROXY_ADDRESS;
+        } else if (proxyType == "i2p") {
+            cmd << I2P_PROXY_ADDRESS;
+        }
+
+        QString message;
+        auto result = sendCommand(cmd, nettype, dataDir, message);
+        qDebug() << "setBootstrapNodeAsync() " << message;
+        result = result && message.contains("Successfully set bootstrap daemon address to");
+        return QJSValueList({result});
     }, callback);
 }
 
