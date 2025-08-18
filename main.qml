@@ -1881,7 +1881,13 @@ ApplicationWindow {
                 currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
                 currentAccountLabel: {
                     if (currentWallet) {
-                        return currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+                        var accountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+                        if (accountLabel === "Primary account" && currentWallet.currentSubaddressAccount == 0) {
+                            //add translation
+                            return qsTr("Primary account") + translationManager.emptyString;
+                        } else {
+                            return accountLabel;
+                        }
                     }
                     return qsTr("Primary account") + translationManager.emptyString;
                 }
