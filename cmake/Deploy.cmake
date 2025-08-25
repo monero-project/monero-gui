@@ -26,16 +26,19 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             )
         endif()
 
-        # libbost_filesyste-mt.dylib has a dependency on libboost_atomic-mt.dylib, maydeployqt does not copy it by itself
-        find_package(Boost COMPONENTS atomic)
-        get_target_property(BOOST_ATOMIC_LIB_PATH Boost::atomic LOCATION)
-        if(EXISTS ${BOOST_ATOMIC_LIB_PATH})
-            add_custom_command(TARGET deploy
-                               POST_BUILD
-                               COMMAND ${CMAKE_COMMAND} -E copy "${BOOST_ATOMIC_LIB_PATH}" "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
-                               COMMENT "Copying libboost_atomic-mt.dylib"
-            )
-        endif()
+        # Copy Boost dylibs that macdeployqt doesn't pick up
+        find_package(Boost QUIET COMPONENTS atomic container date_time)
+        set(_boost_extras Boost::atomic Boost::container Boost::date_time)
+        foreach(_tgt IN LISTS _boost_extras)
+            if(TARGET ${_tgt})
+                add_custom_command(TARGET deploy POST_BUILD
+                                   COMMAND ${CMAKE_COMMAND} -E copy
+                                   "$<TARGET_FILE:${_tgt}>"
+                                   "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
+                                   COMMENT "Copying $<TARGET_FILE_NAME:${_tgt}>"
+                )
+            endif()
+        endforeach()
 
         # Apple Silicon requires all binaries to be codesigned
         find_program(CODESIGN_EXECUTABLE NAMES codesign)
