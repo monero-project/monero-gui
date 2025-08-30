@@ -52,6 +52,7 @@ Rectangle {
     ListModel {
         id: deviceNameModel
         ListElement { column1: qsTr("Choose your hardware wallet"); column2: "";}
+        ListElement { column1: "Ledger Flex"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano S Plus"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
@@ -182,6 +183,8 @@ Rectangle {
                                         return "qrc:///images/ledgerNanoX.png";
                                     } else if (ledgerType == "Ledger Stax") {
                                         return "qrc:///images/ledgerStax.png";
+                                    } else if (ledgerType == "Ledger Flex") {
+                                        return "qrc:///images/ledgerFlex.png";
                                     }
                                 }
                                 return "";
