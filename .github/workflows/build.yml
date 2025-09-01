@@ -5,6 +5,8 @@ on: [push, pull_request]
 env:
   FREE_DISKSPACE: |
     sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
+  QT_TAG: v5.15.17-lts-lgpl
+  QT_PREFIX: ${{ github.workspace }}/qt-install
 
 jobs:
   build-macos:
@@ -66,25 +68,35 @@ jobs:
       run: build/release/bin/monero-wallet-gui --test-qml
 
   macos-bundle:
-    runs-on: macos-13
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config pyenv p7zip aria2
-    - name: install dependencies
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config
+    - name: clone qt repo
+      run: git clone -b "${QT_TAG}" --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
+    - name: build qt from source
       run: |
-        pyenv install 3.12.0
-        pip install defusedxml
-    - name: download qt
-      run: python monero-gui/.github/qt_helper.py mac_x64 desktop 5.15.2 clang_64 c384008156fe63cc183bade0316828c598ff3e5074397c0c9ccc588d6cdc5aca
-      working-directory: ../
-    - name: build
+        cd qt5
+        mkdir build && cd build
+        ../configure -prefix "${QT_PREFIX}" -opensource -confirm-license -release -nomake examples -nomake tests -no-rpath -skip qtwebengine -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtnetworkauth -skip qtpurchasing -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine
+        make -j"$(sysctl -n hw.ncpu)"
+        make install
+        cd ../qttools/src/linguist/lrelease
+        ../../../../build/qtbase/bin/qmake
+        make -j"$(sysctl -n hw.ncpu)"
+        make install
+        cd ../../../../qttools/src/macdeployqt/macdeployqt/
+        ../../../../build/qtbase/bin/qmake
+        make -j"$(sysctl -n hw.ncpu)"
+        make install
+    - name: build monero-gui
       run: |
         mkdir build && cd build
-        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/5.15.2/clang_64 ..
-        make
+        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH="${QT_PREFIX}" ..
+        make -j"$(sysctl -n hw.ncpu)"
     - name: deploy
       run: make deploy
       working-directory: build
