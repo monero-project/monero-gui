@@ -38,6 +38,27 @@ bool fileExists(QString path) {
     return check_file.exists() && check_file.isFile();
 }
 
+void rmDir(QString dirName) {
+    QDir dir;
+    QDir statsDir(dirName);
+  
+    if (dir.exists(dirName)) {
+        statsDir.removeRecursively();
+    }
+}
+  
+void mkDir(QString dirName, bool setPermissions) {
+    QDir dir;
+
+    if (dir.exists(dirName) || !dir.mkdir(dirName) || !setPermissions) return;
+
+    if (QFile::setPermissions(dirName, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner)) {
+        qDebug() << "Directory created successfully with 700 permissions.";
+    } else {
+        qDebug() << "Failed to set permissions.";
+    }
+}
+
 QByteArray fileGetContents(QString path)
 {
     QFile file(path);
@@ -60,6 +81,18 @@ QByteArray fileOpen(QString path) {
     QFile file(path);
     if(!file.open(QFile::ReadOnly | QFile::Text))
         return QByteArray();
+
+    QByteArray data = file.readAll();
+    file.close();
+    return data;
+}
+
+QByteArray fileOpenQRC(const QString &path) {
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "error: " << file.errorString();
+        return {};
+    }
 
     QByteArray data = file.readAll();
     file.close();
