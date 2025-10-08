@@ -33,28 +33,39 @@
 #include <wallet/api/wallet2_api.h>
 
 SubaddressModel::SubaddressModel(QObject *parent, Subaddress *subaddress)
-    : QAbstractListModel(parent), m_subaddress(subaddress)
+    : QAbstractListModel(parent), m_subaddress(subaddress), m_loadedCount(0), m_pageSize(100), m_fetchingMore(false)
 {
     connect(m_subaddress,SIGNAL(refreshStarted()),this,SLOT(startReset()));
     connect(m_subaddress,SIGNAL(refreshFinished()),this,SLOT(endReset()));
-
 }
 
 void SubaddressModel::startReset(){
     beginResetModel();
+    m_fetchingMore = false;
 }
 void SubaddressModel::endReset(){
+    int actualRows = static_cast<int>(m_subaddress->count());
+    int totalCount = static_cast<int>(m_subaddress->getTotalCount());
+    
+    if (m_loadedCount == 0) {
+        m_loadedCount = qMin(m_pageSize, actualRows);
+    } else {
+        m_loadedCount = qMin(m_loadedCount, actualRows);
+    }
+    
     endResetModel();
+    emit loadedCountChanged();
+    emit totalCountChanged();
 }
 
 int SubaddressModel::rowCount(const QModelIndex &) const
 {
-    return m_subaddress->count();
+    return m_loadedCount;
 }
 
 QVariant SubaddressModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() < 0 || static_cast<quint64>(index.row()) >= m_subaddress->count())
+    if (!index.isValid() || index.row() < 0 || index.row() >= m_loadedCount)
         return {};
 
     QVariant result;
@@ -88,4 +99,58 @@ QHash<int, QByteArray> SubaddressModel::roleNames() const
         roleNames.insert(SubaddressLabelRole, "label");
     }
     return roleNames;
+}
+
+bool SubaddressModel::canFetchMore(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent)
+    
+    if (m_fetchingMore) {
+        return false;
+    }
+        
+    return m_loadedCount < m_subaddress->getTotalCount();
+}
+
+void SubaddressModel::fetchMore(const QModelIndex &parent)
+{
+    Q_UNUSED(parent)
+    
+    if (m_fetchingMore) {
+        return;
+    }
+        
+    m_fetchingMore = true;
+    
+    quint64 totalCount = m_subaddress->getTotalCount();
+    int itemsToFetch = qMin(m_pageSize, static_cast<int>(totalCount - m_loadedCount));
+    
+    if (itemsToFetch <= 0) {
+        m_fetchingMore = false;
+        return;
+    }
+    
+    m_subaddress->getPageSilent(m_loadedCount, itemsToFetch);
+    
+    int oldLoadedCount = m_loadedCount;
+    m_loadedCount += itemsToFetch;
+    emit loadedCountChanged();
+    
+    beginInsertRows(QModelIndex(), oldLoadedCount, m_loadedCount - 1);
+    endInsertRows();
+    
+    m_fetchingMore = false;
+}
+
+bool SubaddressModel::shouldPreload(int firstVisible, int lastVisible) const
+{
+    int preloadThreshold = static_cast<int>(m_loadedCount * 0.8);
+    bool shouldPreload = lastVisible >= preloadThreshold && canFetchMore(QModelIndex());
+    
+    return shouldPreload;
+}
+
+int SubaddressModel::getTotalCount() const
+{
+    return static_cast<int>(m_subaddress->getTotalCount());
 }
