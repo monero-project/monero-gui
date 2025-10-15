@@ -1,5 +1,5 @@
 ; Monero Fluorine Fermi GUI Wallet Installer for Windows
-; Copyright (c) 2017-2024, The Monero Project
+; Copyright (c) 2017-2025, The Monero Project
 ; See LICENSE
 #define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
 
