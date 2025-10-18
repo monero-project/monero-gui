@@ -339,6 +339,89 @@ Rectangle {
             }
         }
 
+        // Update Check Section
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 10
+            visible: enableI2PCheckbox.checked && i2pManager.installed
+
+            MoneroComponents.Label {
+                fontSize: 16
+                text: qsTr("Check for Updates") + translationManager.emptyString
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
+
+                MoneroComponents.Label {
+                    text: qsTr("Latest version:") + translationManager.emptyString
+                    fontSize: 13
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                MoneroComponents.Label {
+                    text: i2pManager.getLatestVersion() !== "" ? i2pManager.getLatestVersion() : qsTr("Unknown")
+                    fontSize: 13
+                    color: MoneroComponents.Style.defaultFontColor
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                text: qsTr("Check for Updates") + translationManager.emptyString
+                onClicked: {
+                    i2pManager.checkForUpdates()
+                }
+            }
+
+            // Update available notification
+            MoneroComponents.WarningBox {
+                Layout.fillWidth: true
+                text: qsTr("A new version of i2pd is available. Download and install it to get the latest features and security updates.") + translationManager.emptyString
+                visible: i2pManager.getLatestVersion() !== "" && i2pManager.getLatestVersion() !== i2pManager.version
+            }
+
+            // Update pending section
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 10
+                visible: i2pManager.isUpdatePending()
+
+                MoneroComponents.Label {
+                    text: qsTr("Update Ready to Install") + translationManager.emptyString
+                    fontSize: 14
+                    color: "#FFC107"
+                }
+
+                MoneroComponents.TextPlain {
+                    Layout.fillWidth: true
+                    text: qsTr("i2pd update has been downloaded and is ready to install. The router will be stopped, updated, and restarted automatically.") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 12
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 10
+
+                    MoneroComponents.StandardButton {
+                        text: qsTr("Install Update") + translationManager.emptyString
+                        onClicked: {
+                            i2pManager.applyPendingUpdate()
+                        }
+                    }
+
+                    MoneroComponents.StandardButton {
+                        text: qsTr("Cancel") + translationManager.emptyString
+                        onClicked: {
+                            i2pManager.cancelUpdate()
+                        }
+                    }
+                }
+            }
+        }
+
         // Control Buttons
         RowLayout {
             Layout.fillWidth: true

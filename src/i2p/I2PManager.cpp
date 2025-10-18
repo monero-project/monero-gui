@@ -70,6 +70,7 @@ I2PManager::I2PManager(QObject *parent)
     , m_inboundPeers(0)
     , m_outboundPeers(0)
     , m_activeTunnels(0)
+    , m_updatePending(false)
 {
     // Determine i2pd installation path
     // Store in application data directory like p2pool does
@@ -832,3 +833,198 @@ QStringList I2PManager::getKnownNodes() const
 {
     return KNOWN_I2P_NODES;
 }
+
+void I2PManager::checkForUpdates()
+{
+    qDebug() << "I2PManager: Checking for i2pd updates...";
+    emit checkingForUpdates(true);
+
+    // Run update check asynchronously
+    m_scheduler.run([this] {
+        performUpdateCheck();
+    });
+}
+
+void I2PManager::performUpdateCheck()
+{
+    // Fetch latest release info from GitHub API
+    // https://api.github.com/repos/PurpleI2P/i2pd/releases/latest
+
+    try {
+        epee::http::http_simple_client client;
+        const std::string host = "api.github.com";
+        uint16_t port = 443;
+
+        if (!client.connect(host, port, std::chrono::milliseconds(15000), true)) {
+            qDebug() << "I2PManager: Failed to connect to GitHub API";
+            emit checkingForUpdates(false);
+            return;
+        }
+
+        epee::http::http_response_info response;
+        std::string request = "/repos/PurpleI2P/i2pd/releases/latest";
+        
+        std::map<std::string, std::string> headers;
+        headers["User-Agent"] = "monero-gui";
+
+        if (!client.invoke(request, "GET", "", response, headers)) {
+            qDebug() << "I2PManager: Failed to fetch latest release info";
+            emit checkingForUpdates(false);
+            return;
+        }
+
+        // Parse JSON response to extract version and download URLs
+        // For now, we'll extract version from the response
+        std::string responseBody = response.m_body;
+        
+        // Simple version extraction: look for "tag_name":"v2.xx.x"
+        size_t tagPos = responseBody.find("\"tag_name\":\"");
+        if (tagPos != std::string::npos) {
+            size_t start = tagPos + 12;  // Length of "tag_name":"
+            size_t end = responseBody.find("\"", start);
+            if (end != std::string::npos) {
+                std::string versionTag = responseBody.substr(start, end - start);
+                // Remove 'v' prefix if present
+                if (!versionTag.empty() && versionTag[0] == 'v') {
+                    versionTag = versionTag.substr(1);
+                }
+
+                QString latestVersion = QString::fromStdString(versionTag);
+                QString currentVersion = m_version;
+
+                qDebug() << "I2PManager: Latest version:" << latestVersion << "Current:" << currentVersion;
+
+                if (latestVersion != currentVersion) {
+                    m_latestVersion = latestVersion;
+                    emit updateAvailable(latestVersion);
+                    qDebug() << "I2PManager: Update available:" << latestVersion;
+                } else {
+                    qDebug() << "I2PManager: Already running latest version";
+                }
+            }
+        }
+    } catch (const std::exception &e) {
+        qDebug() << "I2PManager: Exception during update check:" << e.what();
+    }
+
+    emit checkingForUpdates(false);
+}
+
+QString I2PManager::getLatestVersion() const
+{
+    return m_latestVersion;
+}
+
+bool I2PManager::isUpdatePending() const
+{
+    return m_updatePending && QFileInfo(m_updateFilePath).exists();
+}
+
+bool I2PManager::applyPendingUpdate()
+{
+    if (!isUpdatePending()) {
+        qDebug() << "I2PManager: No update pending";
+        emit updateFinished(false, "No update available");
+        return false;
+    }
+
+    // Stop i2pd if running
+    bool wasRunning = isRunning();
+    if (wasRunning) {
+        stop();
+        // Wait for process to stop
+        QThread::msleep(2000);
+    }
+
+    // Create backup of current binary
+    if (QFileInfo(m_i2pdBinary).exists()) {
+        m_backupBinaryPath = m_i2pdBinary + ".backup." + 
+                           QDateTime::currentDateTime().toString("yyyy-MM-dd-hhmmss");
+        
+        if (!QFile::copy(m_i2pdBinary, m_backupBinaryPath)) {
+            qDebug() << "I2PManager: Failed to create backup of current binary";
+            emit updateFinished(false, "Failed to backup current binary");
+            return false;
+        }
+        qDebug() << "I2PManager: Backup created at:" << m_backupBinaryPath;
+    }
+
+    // Install the update
+    emit updateProgress(50);
+    
+    if (!installUpdate(m_updateFilePath)) {
+        qDebug() << "I2PManager: Failed to install update";
+        
+        // Restore from backup
+        if (!m_backupBinaryPath.isEmpty() && QFileInfo(m_backupBinaryPath).exists()) {
+            if (QFile::remove(m_i2pdBinary)) {
+                QFile::copy(m_backupBinaryPath, m_i2pdBinary);
+                qDebug() << "I2PManager: Restored from backup";
+            }
+        }
+        
+        emit updateFinished(false, "Failed to install update");
+        return false;
+    }
+
+    emit updateProgress(100);
+    
+    // Clean up
+    QFile::remove(m_updateFilePath);
+    m_updatePending = false;
+    m_updateFilePath.clear();
+    emit updateStatusChanged(false);
+
+    // Restart if was running
+    if (wasRunning) {
+        start(m_defaultSocksProxy);
+    }
+
+    emit updateFinished(true, QString("Successfully updated to %1").arg(m_latestVersion));
+    return true;
+}
+
+void I2PManager::cancelUpdate()
+{
+    if (isUpdatePending()) {
+        QFile::remove(m_updateFilePath);
+        m_updatePending = false;
+        m_updateFilePath.clear();
+        emit updateStatusChanged(false);
+        qDebug() << "I2PManager: Update cancelled";
+    }
+}
+
+bool I2PManager::installUpdate(const QString &updateFilePath)
+{
+    // Determine file type and extract/install accordingly
+    if (updateFilePath.endsWith(".zip", Qt::CaseInsensitive)) {
+#ifdef Q_OS_WIN
+        // Use native Windows extraction
+        // Could use QProcess to call 7-Zip or native expand.exe
+        QString extractCmd = QString("cd /d \"%1\" && expand -R \"%2\" -F:* .").arg(m_i2pdPath, updateFilePath);
+        int result = system(extractCmd.toStdString().c_str());
+        return result == 0;
+#endif
+    } else if (updateFilePath.endsWith(".tar.gz", Qt::CaseInsensitive) ||
+               updateFilePath.endsWith(".tgz", Qt::CaseInsensitive)) {
+#ifdef Q_OS_UNIX
+        // Use tar to extract
+        QString extractCmd = QString("cd '%1' && tar -xzf '%2'").arg(m_i2pdPath, updateFilePath);
+        int result = system(extractCmd.toStdString().c_str());
+        return result == 0;
+#endif
+    } else if (updateFilePath.endsWith(".dmg", Qt::CaseInsensitive)) {
+#ifdef Q_OS_MACOS
+        // macOS universal binary handling
+        // Would need to mount DMG and copy binary
+        // This is complex and would be platform-specific
+        qDebug() << "I2PManager: DMG installation not yet implemented";
+        return false;
+#endif
+    }
+
+    qDebug() << "I2PManager: Unknown update file format:" << updateFilePath;
+    return false;
+}
+

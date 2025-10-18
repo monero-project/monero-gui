@@ -154,6 +154,37 @@ public:
      */
     Q_INVOKABLE QString getProxyAddress() const;
 
+    /**
+     * @brief Check if an update is available for i2pd
+     * @return true if newer version is available on GitHub
+     */
+    Q_INVOKABLE void checkForUpdates();
+
+    /**
+     * @brief Get the latest available i2pd version from GitHub
+     * @return Version string (e.g., "2.55.0")
+     */
+    Q_INVOKABLE QString getLatestVersion() const;
+
+    /**
+     * @brief Check if an update is pending after download
+     * @return true if update has been downloaded but not installed
+     */
+    Q_INVOKABLE bool isUpdatePending() const;
+
+    /**
+     * @brief Install a pending update and restart i2pd
+     * Backs up current binary before installing new version
+     * @return true if update succeeds, false otherwise
+     */
+    Q_INVOKABLE bool applyPendingUpdate();
+
+    /**
+     * @brief Cancel a pending update
+     * Removes downloaded update and restores previous state
+     */
+    Q_INVOKABLE void cancelUpdate();
+
     // Property getters
     bool isRunning() const;
     QString getStatus() const;
@@ -245,6 +276,37 @@ signals:
      */
     void i2pRouterReady() const;
 
+    /**
+     * @brief Emitted when checking for updates
+     * @param isChecking true when starting check, false when complete
+     */
+    void checkingForUpdates(bool isChecking) const;
+
+    /**
+     * @brief Emitted when a new version is available
+     * @param version New version string
+     */
+    void updateAvailable(const QString &version) const;
+
+    /**
+     * @brief Emitted when update status changes
+     * @param isPending true if update is downloaded and ready to install
+     */
+    void updateStatusChanged(bool isPending) const;
+
+    /**
+     * @brief Emitted during update installation
+     * @param percent Progress percentage (0-100)
+     */
+    void updateProgress(int percent) const;
+
+    /**
+     * @brief Emitted when update installation completes
+     * @param success true if update succeeded
+     * @param message Status message
+     */
+    void updateFinished(bool success, const QString &message) const;
+
     // Property change signals
     void installedChanged() const;
     void runningChanged() const;
@@ -324,6 +386,25 @@ private:
      * @param logLine Log line to parse
      */
     void updateStatsFromLog(const QString &logLine);
+
+    // Update management
+    QString m_latestVersion;           ///< Latest available version from GitHub
+    bool m_updatePending;              ///< True if update downloaded but not installed
+    QString m_updateFilePath;          ///< Path to downloaded update file
+    QString m_backupBinaryPath;        ///< Path to backup of current binary
+
+    /**
+     * @brief Download latest i2pd release from GitHub
+     * Internal method called by checkForUpdates()
+     */
+    void performUpdateCheck();
+
+    /**
+     * @brief Extract and install downloaded update file
+     * @param updateFilePath Path to downloaded archive
+     * @return true if installation succeeds
+     */
+    bool installUpdate(const QString &updateFilePath);
 
     // Async operations
     mutable FutureScheduler m_scheduler;
