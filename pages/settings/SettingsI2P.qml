@@ -151,6 +151,118 @@ Rectangle {
                 }
             }
 
+            // Network Statistics
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 10
+                visible: i2pManager.running
+
+                MoneroComponents.Label {
+                    fontSize: 15
+                    text: qsTr("Network Statistics") + translationManager.emptyString
+                    color: MoneroComponents.Style.accentColor
+                }
+
+                // Health Status
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 15
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 3
+
+                        MoneroComponents.Label {
+                            text: qsTr("Network Health:") + translationManager.emptyString
+                            fontSize: 13
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        RowLayout {
+                            spacing: 10
+
+                            Rectangle {
+                                width: 12
+                                height: 12
+                                radius: 6
+                                color: {
+                                    switch(i2pManager.networkHealth) {
+                                        case "Good": return "#4CAF50"
+                                        case "Fair": return "#FFC107"
+                                        case "Poor": return "#FF5722"
+                                        default: return "#9E9E9E"
+                                    }
+                                }
+                            }
+
+                            MoneroComponents.Label {
+                                text: i2pManager.networkHealth
+                                fontSize: 13
+                                color: {
+                                    switch(i2pManager.networkHealth) {
+                                        case "Good": return "#4CAF50"
+                                        case "Fair": return "#FFC107"
+                                        case "Poor": return "#FF5722"
+                                        default: return MoneroComponents.Style.dimmedFontColor
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 3
+
+                        MoneroComponents.Label {
+                            text: qsTr("Inbound Peers:") + translationManager.emptyString
+                            fontSize: 13
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        MoneroComponents.Label {
+                            text: i2pManager.inboundPeers.toString()
+                            fontSize: 13
+                            color: MoneroComponents.Style.defaultFontColor
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 3
+
+                        MoneroComponents.Label {
+                            text: qsTr("Outbound Peers:") + translationManager.emptyString
+                            fontSize: 13
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        MoneroComponents.Label {
+                            text: i2pManager.outboundPeers.toString()
+                            fontSize: 13
+                            color: MoneroComponents.Style.defaultFontColor
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 3
+
+                        MoneroComponents.Label {
+                            text: qsTr("Active Tunnels:") + translationManager.emptyString
+                            fontSize: 13
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        MoneroComponents.Label {
+                            text: i2pManager.activeTunnels.toString()
+                            fontSize: 13
+                            color: MoneroComponents.Style.defaultFontColor
+                        }
+                    }
+                }
+            }
+
             // I2P Address
             RowLayout {
                 Layout.fillWidth: true
@@ -306,22 +418,82 @@ Rectangle {
 
             MoneroComponents.Label {
                 fontSize: 16
-                text: qsTr("Advanced") + translationManager.emptyString
+                text: qsTr("Advanced Settings") + translationManager.emptyString
             }
 
-            MoneroComponents.CheckBox {
-                id: autoStartI2PCheckbox
+            // Auto-start option with explanation
+            ColumnLayout {
                 Layout.fillWidth: true
-                checked: persistentSettings.autoStartI2P
-                text: qsTr("Auto-start I2P router when wallet opens") + translationManager.emptyString
-                onClicked: {
-                    persistentSettings.autoStartI2P = checked
+                spacing: 5
+
+                MoneroComponents.CheckBox {
+                    id: autoStartI2PCheckbox
+                    Layout.fillWidth: true
+                    checked: i2pManager.isAutoStartEnabled()
+                    text: qsTr("Auto-start I2P router when wallet opens") + translationManager.emptyString
+                    onClicked: {
+                        i2pManager.setAutoStart(checked)
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    Layout.fillWidth: true
+                    visible: autoStartI2PCheckbox.checked
+                    text: qsTr("i2pd will automatically start when the wallet launches if this is enabled.") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 12
+                    color: MoneroComponents.Style.dimmedFontColor
                 }
             }
 
-            RowLayout {
+            // Log level setting
+            ColumnLayout {
                 Layout.fillWidth: true
-                spacing: 10
+                spacing: 5
+
+                MoneroComponents.Label {
+                    text: qsTr("Log Level:") + translationManager.emptyString
+                    fontSize: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                MoneroComponents.StandardDropdown {
+                    id: logLevelDropdown
+                    Layout.fillWidth: true
+                    currentIndex: 1 // Default to "Info"
+                    model: [
+                        qsTr("Debug") + translationManager.emptyString,
+                        qsTr("Info") + translationManager.emptyString,
+                        qsTr("Warning") + translationManager.emptyString,
+                        qsTr("Error") + translationManager.emptyString
+                    ]
+                    onCurrentIndexChanged: {
+                        // TODO: Apply log level to i2pd.conf
+                    }
+                }
+            }
+
+            // Port configuration
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 5
+
+                MoneroComponents.Label {
+                    text: qsTr("SOCKS Proxy Port:") + translationManager.emptyString
+                    fontSize: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                MoneroComponents.LineEdit {
+                    id: socksPortEdit
+                    Layout.fillWidth: true
+                    text: "4447"
+                    placeholderText: "4447"
+                    validator: IntValidator { bottom: 1024; top: 65535 }
+                    onEditingFinished: {
+                        // TODO: Apply port to i2pd.conf
+                    }
+                }
 
                 MoneroComponents.Label {
                     text: qsTr("SAM Bridge Port:") + translationManager.emptyString
@@ -332,11 +504,88 @@ Rectangle {
                 MoneroComponents.Label {
                     text: "7656"
                     fontSize: 14
+                    color: MoneroComponents.Style.dimmedFontColor
                 }
+            }
+
+            // Data directory
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 5
 
                 MoneroComponents.Label {
-                    text: qsTr("(used by monerod)") + translationManager.emptyString
-                    fontSize: 12
+                    text: qsTr("Data Directory:") + translationManager.emptyString
+                    fontSize: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                MoneroComponents.TextPlain {
+                    Layout.fillWidth: true
+                    text: i2pManager.dataDir
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: 12
+                    color: MoneroComponents.Style.dimmedFontColor
+                    selectByMouse: true
+                }
+            }
+
+            // Bandwidth limits
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 5
+
+                MoneroComponents.Label {
+                    text: qsTr("Bandwidth Limits (KB/s):") + translationManager.emptyString
+                    fontSize: 14
+                    color: MoneroComponents.Style.dimmedFontColor
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 10
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+
+                        MoneroComponents.Label {
+                            text: qsTr("Inbound:") + translationManager.emptyString
+                            fontSize: 12
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        MoneroComponents.LineEdit {
+                            id: inboundBandwidth
+                            Layout.fillWidth: true
+                            text: "128"
+                            placeholderText: "128"
+                            validator: IntValidator { bottom: 0; top: 999999 }
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+
+                        MoneroComponents.Label {
+                            text: qsTr("Outbound:") + translationManager.emptyString
+                            fontSize: 12
+                            color: MoneroComponents.Style.dimmedFontColor
+                        }
+
+                        MoneroComponents.LineEdit {
+                            id: outboundBandwidth
+                            Layout.fillWidth: true
+                            text: "128"
+                            placeholderText: "128"
+                            validator: IntValidator { bottom: 0; top: 999999 }
+                        }
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    Layout.fillWidth: true
+                    text: qsTr("Leave at 0 for unlimited bandwidth. Values are in kilobytes per second.") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 11
                     color: MoneroComponents.Style.dimmedFontColor
                 }
             }
