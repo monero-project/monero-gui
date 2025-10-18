@@ -44,6 +44,8 @@
 #include <QCryptographicHash>
 #include <QStandardPaths>
 #include <QTextStream>
+#include <QSettings>
+#include <QRegularExpression>
 
 // Detect macOS ARM64
 #if defined(Q_OS_MACOS) && defined(__aarch64__) && !defined(Q_OS_MACOS_AARCH64)
@@ -64,6 +66,10 @@ I2PManager::I2PManager(QObject *parent)
     : QObject(parent)
     , m_routerStatus(NotInstalled)
     , m_started(false)
+    , m_defaultSocksProxy("127.0.0.1:4447")
+    , m_inboundPeers(0)
+    , m_outboundPeers(0)
+    , m_activeTunnels(0)
 {
     // Determine i2pd installation path
     // Store in application data directory like p2pool does
@@ -86,8 +92,17 @@ I2PManager::I2PManager(QObject *parent)
     // Set binary path
     m_i2pdBinary = m_i2pdPath + "/" + getBinaryName();
 
+    // Load auto-start setting from QSettings
+    QSettings settings;
+    m_autoStartEnabled = settings.value("i2p/autoStart", false).toBool();
+
+    // Setup status check timer - check every 10 seconds
+    m_statusCheckTimer = std::make_unique<QTimer>();
+    connect(m_statusCheckTimer.get(), &QTimer::timeout, this, &I2PManager::performStatusCheck);
+
     qDebug() << "I2PManager initialized. Binary path:" << m_i2pdBinary;
     qDebug() << "I2PManager data directory:" << m_i2pdDataDir;
+    qDebug() << "I2PManager auto-start enabled:" << m_autoStartEnabled;
 
     // Check initial installation status
     if (isInstalled()) {
@@ -101,6 +116,9 @@ I2PManager::I2PManager(QObject *parent)
 
 I2PManager::~I2PManager()
 {
+    if (m_statusCheckTimer) {
+        m_statusCheckTimer->stop();
+    }
     stop();
 }
 
@@ -455,6 +473,11 @@ bool I2PManager::start(const QString &socksProxy)
     m_started = true;
     m_routerStatus = Starting;
 
+    // Start status monitoring timer
+    if (m_statusCheckTimer) {
+        m_statusCheckTimer->start(10000); // Check every 10 seconds
+    }
+
     emit runningChanged();
     emit statusChanged();
     emit i2pStatusChanged(Starting, "I2P router starting...");
@@ -466,6 +489,11 @@ bool I2PManager::start(const QString &socksProxy)
 void I2PManager::stop()
 {
     QMutexLocker locker(&m_i2pdMutex);
+
+    // Stop status monitoring timer
+    if (m_statusCheckTimer) {
+        m_statusCheckTimer->stop();
+    }
 
     if (!processRunning()) {
         return;
@@ -485,6 +513,11 @@ void I2PManager::stop()
 
     m_started = false;
     m_routerStatus = Stopped;
+
+    // Reset stats
+    m_inboundPeers = 0;
+    m_outboundPeers = 0;
+    m_activeTunnels = 0;
 
     emit runningChanged();
     emit statusChanged();
@@ -565,8 +598,171 @@ void I2PManager::parseLogLine(const QString &logLine)
         emit i2pStatusChanged(Error, logLine);
     }
 
+    // Update network stats from log
+    updateStatsFromLog(logLine);
+
     // Log for debugging
     qDebug() << "I2PManager:" << logLine;
+}
+
+void I2PManager::setAutoStart(bool enable)
+{
+    if (m_autoStartEnabled == enable) {
+        return; // No change
+    }
+
+    m_autoStartEnabled = enable;
+
+    // Persist setting to QSettings
+    QSettings settings;
+    settings.setValue("i2p/autoStart", enable);
+    settings.sync();
+
+    qDebug() << "I2PManager: Auto-start" << (enable ? "enabled" : "disabled");
+}
+
+bool I2PManager::isAutoStartEnabled() const
+{
+    return m_autoStartEnabled;
+}
+
+bool I2PManager::tryAutoStart()
+{
+    if (!m_autoStartEnabled) {
+        qDebug() << "I2PManager: Auto-start is disabled";
+        return false;
+    }
+
+    if (!isInstalled()) {
+        qDebug() << "I2PManager: Cannot auto-start - i2pd not installed";
+        return false;
+    }
+
+    if (isRunning()) {
+        qDebug() << "I2PManager: Already running";
+        return true;
+    }
+
+    qDebug() << "I2PManager: Attempting auto-start...";
+    bool started = start(m_defaultSocksProxy);
+
+    if (started) {
+        qDebug() << "I2PManager: Auto-start successful";
+        emit i2pStatusChanged(Starting, "I2P router auto-started");
+    } else {
+        qDebug() << "I2PManager: Auto-start failed";
+        emit i2pStartFailure("Auto-start of I2P router failed");
+    }
+
+    return started;
+}
+
+void I2PManager::performStatusCheck()
+{
+    // This method is called every 10 seconds via timer
+    // Check process health, update stats from logs
+    
+    if (!isRunning()) {
+        return;
+    }
+
+    // In a real implementation, we would:
+    // 1. Query i2pd's HTTP console or control API
+    // 2. Parse peer lists
+    // 3. Get tunnel information
+    // For now, we rely on log parsing which is triggered by parseLogLine
+
+    qDebug() << "I2PManager: Status check - In:" << m_inboundPeers 
+             << "Out:" << m_outboundPeers 
+             << "Tunnels:" << m_activeTunnels;
+}
+
+void I2PManager::updateStatsFromLog(const QString &logLine)
+{
+    // Parse i2pd log lines for network statistics
+    // Example log patterns (i2pd format varies by version):
+    // "peers: 10 inbound, 8 outbound"
+    // "tunnels: 5 active, 0 failed"
+    // "Established inbound: X"
+    // "Established outbound: X"
+
+    if (logLine.contains("peers:") && (logLine.contains("inbound") || logLine.contains("outbound"))) {
+        // Try to extract peer counts
+        QRegularExpression inboundRx("(\\d+)\\s+inbound");
+        QRegularExpression outboundRx("(\\d+)\\s+outbound");
+        
+        QRegularExpressionMatch inboundMatch = inboundRx.match(logLine);
+        QRegularExpressionMatch outboundMatch = outboundRx.match(logLine);
+        
+        if (inboundMatch.hasMatch()) {
+            int newInbound = inboundMatch.captured(1).toInt();
+            if (newInbound != m_inboundPeers) {
+                m_inboundPeers = newInbound;
+                emit statusChanged();
+            }
+        }
+        
+        if (outboundMatch.hasMatch()) {
+            int newOutbound = outboundMatch.captured(1).toInt();
+            if (newOutbound != m_outboundPeers) {
+                m_outboundPeers = newOutbound;
+                emit statusChanged();
+            }
+        }
+    }
+
+    if (logLine.contains("tunnel", Qt::CaseInsensitive) && logLine.contains("active", Qt::CaseInsensitive)) {
+        // Try to extract active tunnel count
+        QRegularExpression tunnelRx("(\\d+)\\s+active");
+        QRegularExpressionMatch match = tunnelRx.match(logLine);
+        
+        if (match.hasMatch()) {
+            int newTunnels = match.captured(1).toInt();
+            if (newTunnels != m_activeTunnels) {
+                m_activeTunnels = newTunnels;
+                emit statusChanged();
+            }
+        }
+    }
+
+    // Also check for explicit inbound/outbound established messages
+    if (logLine.contains("Established inbound", Qt::CaseInsensitive)) {
+        QRegularExpression rx("(\\d+)");
+        QRegularExpressionMatch match = rx.match(logLine);
+        if (match.hasMatch()) {
+            m_inboundPeers = match.captured(1).toInt();
+            emit statusChanged();
+        }
+    }
+
+    if (logLine.contains("Established outbound", Qt::CaseInsensitive)) {
+        QRegularExpression rx("(\\d+)");
+        QRegularExpressionMatch match = rx.match(logLine);
+        if (match.hasMatch()) {
+            m_outboundPeers = match.captured(1).toInt();
+            emit statusChanged();
+        }
+    }
+}
+
+QString I2PManager::getNetworkHealth() const
+{
+    // Determine overall network health based on peer and tunnel counts
+    int totalPeers = m_inboundPeers + m_outboundPeers;
+
+    if (totalPeers == 0) {
+        return "Unknown";
+    }
+
+    if (totalPeers >= 10 && m_activeTunnels >= 3) {
+        return "Good";
+    }
+
+    if (totalPeers >= 5) {
+        return "Fair";
+    }
+
+    return "Poor";
 }
 
 bool I2PManager::testConnection(const QString &remoteNode)

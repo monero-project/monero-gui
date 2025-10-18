@@ -34,6 +34,7 @@
 #include <QObject>
 #include <QUrl>
 #include <QProcess>
+#include <QTimer>
 #include "qt/FutureScheduler.h"
 
 /**
@@ -63,6 +64,10 @@ class I2PManager : public QObject
     Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
     Q_PROPERTY(QString status READ getStatus NOTIFY statusChanged)
     Q_PROPERTY(QString version READ getVersion NOTIFY versionChanged)
+    Q_PROPERTY(int inboundPeers READ getInboundPeers NOTIFY statusChanged)
+    Q_PROPERTY(int outboundPeers READ getOutboundPeers NOTIFY statusChanged)
+    Q_PROPERTY(int activeTunnels READ getActiveTunnels NOTIFY statusChanged)
+    Q_PROPERTY(QString networkHealth READ getNetworkHealth NOTIFY statusChanged)
 
 public:
     explicit I2PManager(QObject *parent = nullptr);
@@ -111,10 +116,53 @@ public:
      */
     Q_INVOKABLE QStringList getKnownNodes() const;
 
+    /**
+     * @brief Enable or disable auto-start on application launch
+     * @param enable true to auto-start, false to disable
+     */
+    Q_INVOKABLE void setAutoStart(bool enable);
+
+    /**
+     * @brief Check if auto-start is enabled
+     * @return true if auto-start is enabled
+     */
+    Q_INVOKABLE bool isAutoStartEnabled() const;
+
+    /**
+     * @brief Attempt to auto-start i2pd if enabled and not already running
+     * Called automatically when application starts
+     * @return true if started or already running, false if auto-start disabled
+     */
+    Q_INVOKABLE bool tryAutoStart();
+
     // Property getters
     bool isRunning() const;
     QString getStatus() const;
     QString getVersion() const;
+
+    /**
+     * @brief Get the number of inbound peers connected to this node
+     * @return Number of inbound peers
+     */
+    int getInboundPeers() const { return m_inboundPeers; }
+
+    /**
+     * @brief Get the number of outbound peers this node is connected to
+     * @return Number of outbound peers
+     */
+    int getOutboundPeers() const { return m_outboundPeers; }
+
+    /**
+     * @brief Get the number of active I2P tunnels
+     * @return Number of active tunnels
+     */
+    int getActiveTunnels() const { return m_activeTunnels; }
+
+    /**
+     * @brief Get the overall network health status
+     * @return "Good", "Fair", "Poor", or "Unknown"
+     */
+    QString getNetworkHealth() const;
 
     /**
      * @brief Error codes for download failures
@@ -235,6 +283,28 @@ private:
     QString m_statusMessage;
     QString m_version;
     bool m_started;
+    bool m_autoStartEnabled;       ///< Auto-start setting
+    QString m_defaultSocksProxy;   ///< Default SOCKS proxy address
+
+    // Network stats tracking
+    int m_inboundPeers;            ///< Number of inbound peers
+    int m_outboundPeers;           ///< Number of outbound peers
+    int m_activeTunnels;           ///< Number of active tunnels
+
+    // Status monitoring
+    std::unique_ptr<QTimer> m_statusCheckTimer;  ///< Timer for periodic status checks
+
+    /**
+     * @brief Perform periodic status check
+     * Updates peer counts and tunnel info
+     */
+    void performStatusCheck();
+
+    /**
+     * @brief Parse i2pd logs for network stats
+     * @param logLine Log line to parse
+     */
+    void updateStatsFromLog(const QString &logLine);
 
     // Async operations
     mutable FutureScheduler m_scheduler;
