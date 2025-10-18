@@ -793,9 +793,19 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
+        // Inject I2P proxy flag if I2P is enabled and running
+        var daemonFlags = flags;
+        if (persistentSettings.useI2P && i2pManager.running) {
+            const i2pProxyFlag = " --tx-proxy 127.0.0.1:7656";
+            if (daemonFlags.indexOf("--tx-proxy") === -1) {
+                daemonFlags += i2pProxyFlag;
+                console.log("I2P proxy enabled for monerod: 127.0.0.1:7656");
+            }
+        }
+
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+        daemonManager.start(daemonFlags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -845,6 +855,39 @@ ApplicationWindow {
         }
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
+        informationPopup.open();
+    }
+
+    function onI2PStarted() {
+        console.log("I2P started successfully");
+        
+        // If daemon is running and I2P is enabled, restart daemon with I2P proxy
+        if (persistentSettings.useI2P && daemonManager.running(persistentSettings.nettype)) {
+            console.log("Restarting daemon with I2P proxy enabled");
+            stopDaemon(function() {
+                startDaemon(persistentSettings.daemonFlags);
+            });
+        }
+    }
+
+    function onI2PStopped() {
+        console.log("I2P stopped");
+        
+        // If daemon is running with I2P enabled, restart without I2P proxy
+        if (persistentSettings.useI2P && daemonManager.running(persistentSettings.nettype)) {
+            console.log("Restarting daemon without I2P proxy");
+            stopDaemon(function() {
+                startDaemon(persistentSettings.daemonFlags);
+            });
+        }
+    }
+
+    function onI2PError(message) {
+        console.log("I2P error: " + message);
+        informationPopup.title = qsTr("I2P Error") + translationManager.emptyString;
+        informationPopup.text = message;
+        informationPopup.icon = StandardIcon.Warning;
+        informationPopup.onCloseCallback = null;
         informationPopup.open();
     }
 
@@ -1404,6 +1447,19 @@ ApplicationWindow {
             daemonManager.daemonStarted.connect(onDaemonStarted);
             daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
             daemonManager.daemonStopped.connect(onDaemonStopped);
+        }
+
+        // Connect I2P manager signals
+        if(typeof i2pManager != "undefined") {
+            i2pManager.started.connect(onI2PStarted);
+            i2pManager.stopped.connect(onI2PStopped);
+            i2pManager.errorOccurred.connect(onI2PError);
+            
+            // Auto-start I2P if enabled
+            if (persistentSettings.autoStartI2P && persistentSettings.useI2P && !i2pManager.running) {
+                console.log("Auto-starting I2P on application launch");
+                i2pManager.start();
+            }
         }
 
         // Connect app exit to qml window exit handling
