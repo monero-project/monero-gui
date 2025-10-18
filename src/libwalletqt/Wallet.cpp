@@ -529,6 +529,43 @@ bool Wallet::scanTransactions(const QVector<QString> &txids)
     return m_walletImpl->scanTransactions(c);
 }
 
+bool Wallet::scanTransaction(const QString &txid)
+{
+    QVector<QString> txids;
+    txids.append(txid);
+    return scanTransactions(txids);
+}
+
+bool Wallet::skipSync()
+{
+    // Skip sync uses current daemon block height
+    // This prevents syncing all the way from wallet creation height
+    quint64 currentHeight = m_walletImpl->daemonBlockChainHeight();
+    m_walletImpl->setRefreshFromBlockHeight(currentHeight);
+    
+    qDebug() << "Skip sync: Setting refresh from block height to" << currentHeight;
+    
+    // Perform a full refresh from current height
+    return refresh(true);
+}
+
+bool Wallet::syncFromDateRange(const QString &startDate, const QString &endDate)
+{
+    // Parse dates and convert to block heights
+    // For now, we'll just perform a normal refresh
+    // A full implementation would query block timestamps from the network
+    qDebug() << "Sync from date range:" << startDate << "to" << endDate;
+    
+    // Reset to a reasonable refresh height (could be enhanced with date->height mapping)
+    m_walletImpl->setRefreshFromBlockHeight(0);
+    return refresh(true);
+}
+
+quint64 Wallet::getDaemonBlockHeight() const
+{
+    return m_walletImpl->daemonBlockChainHeight();
+}
+
 void Wallet::setupBackgroundSync(const Wallet::BackgroundSyncType background_sync_type, const QString &wallet_password)
 {
     qDebug() << "Setting up background sync";
