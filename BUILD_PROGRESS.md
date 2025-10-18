@@ -29,13 +29,21 @@
 - [x] Git repository setup
   - Created feature branch: `feature/i2p-binary-manager`
   - Updated author to: Shadeeeloveer
-  - Made 6 commits:
+  - Made 12 commits:
     1. Initial I2PManager implementation (290fd00a)
     2. Build system integration (42dcc205)
     3. QML registration (cfe5c3f9)
     4. Progress documentation (6f40d989)
     5. Status summary (388157e8)
     6. I2P Settings UI (d4200421)
+    7-11. Documentation files
+    12. Verified SHA256 hashes (6f4d547c) ✅
+
+- [x] Security Hardening
+  - Downloaded all platform binaries
+  - Calculated and verified SHA256 hashes
+  - Updated I2PManager.cpp with real hashes
+  - Corrected download URLs to match actual release filenames
 
 #### Documentation
 - [x] Created comprehensive documentation:
@@ -47,9 +55,9 @@
 
 ### 🚧 In Progress
 
-- [ ] **Testing & Hash Updates** (Current Step)
-  - Need to download real i2pd binaries and calculate SHA256 hashes
+- [ ] **Testing & Integration** (Current Step)
   - Need to test compilation (requires MSYS2/MinGW64 setup)
+  - Need to research monerod --tx-proxy integration
   - Need to test UI functionality
 
 ### 📋 Next Steps (Week 2)
@@ -98,14 +106,14 @@
 1. ✅ External binary approach (no embedded library)
 2. ✅ Build system integration
 3. ✅ User-facing UI controls (Settings page with all controls)
-4. ⏳ I2P router management (download, start, stop) - implemented, needs testing
+4. ✅ I2P router management (download, start, stop) - hash verification enabled!
 5. ⏳ Integration with monerod --tx-proxy flag
 6. ⏳ Cross-platform support (Windows, Linux, macOS) - code ready, needs testing
 7. ⏳ Testing and validation
 8. ⏳ PR submission and review
 
 **Estimated Completion:** Week 16 (mid-February 2026)
-**Current Progress:** ~35% (Week 1 of 16 - UI complete!)
+**Current Progress:** ~40% (Week 1 of 16 - Security hardened!)
 
 ---
 
