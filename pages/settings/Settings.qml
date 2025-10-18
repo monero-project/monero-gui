@@ -81,6 +81,11 @@ ColumnLayout {
             text: qsTr("Info") + translationManager.emptyString
             onSelected: settingsStateView.state = "Info"
         }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "SkipSync"
+            text: qsTr("Skip Sync") + translationManager.emptyString
+            onSelected: settingsStateView.state = "SkipSync"
+        }
     }
 
     Rectangle{
@@ -92,6 +97,7 @@ ColumnLayout {
         property SettingsNode settingsNodeView: SettingsNode { }
         property SettingsLog settingsLogView: SettingsLog { }
         property SettingsInfo settingsInfoView: SettingsInfo { }
+        property SettingsSkipSync settingsSkipSyncView: SettingsSkipSync { }
         Layout.fillWidth: true
         Layout.preferredHeight: settingsHeight
         color: "transparent"
@@ -133,6 +139,10 @@ ColumnLayout {
                 name: "Info"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsInfoView }
                 PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsInfoView.infoHeight + 140 }
+            }, State {
+                name: "SkipSync"
+                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsSkipSyncView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsSkipSyncView.skipSyncHeight + 140 }
             }
         ]
 

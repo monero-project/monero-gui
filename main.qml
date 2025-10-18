@@ -1522,6 +1522,11 @@ ApplicationWindow {
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
 
+        // Skip Sync feature properties
+        property bool skipSyncEnabled: false
+        property string skipSyncStartDate: ""
+        property string skipSyncEndDate: ""
+
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
         property string fiatPriceProvider: "kraken"

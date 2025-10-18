@@ -222,6 +222,18 @@ public:
 
     //! scan transactions
     Q_INVOKABLE bool scanTransactions(const QVector<QString> &txids);
+    
+    //! scan a single transaction by hash
+    Q_INVOKABLE bool scanTransaction(const QString &txid);
+
+    //! skip sync - refresh from current daemon height
+    Q_INVOKABLE bool skipSync();
+    
+    //! sync from specific date range
+    Q_INVOKABLE bool syncFromDateRange(const QString &startDate, const QString &endDate);
+    
+    //! get current daemon height
+    Q_INVOKABLE quint64 getDaemonBlockHeight() const;
 
     Q_INVOKABLE void setupBackgroundSync(const BackgroundSyncType background_sync_type, const QString &wallet_password);
     Q_INVOKABLE BackgroundSyncType getBackgroundSyncType() const;
