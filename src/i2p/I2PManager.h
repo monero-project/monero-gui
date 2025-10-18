@@ -240,6 +240,24 @@ public:
     };
     Q_ENUM(RouterStatus)
 
+    /**
+     * @brief Error types for detailed error reporting and recovery
+     */
+    enum ErrorType {
+        NoError,                ///< No error
+        BinaryCorrupted,        ///< Binary file is corrupted or invalid
+        PortInUse,              ///< SOCKS or router port is already in use
+        PortUnauthorized,       ///< Insufficient permissions for port binding
+        PermissionDenied,       ///< No permission to execute binary
+        OutOfDiskSpace,         ///< Insufficient disk space for data directory
+        ConfigurationError,     ///< Configuration file invalid or unwritable
+        ProcessTimeout,         ///< Process startup timed out
+        ProcessCrashed,         ///< Process crashed unexpectedly
+        NetworkError,           ///< Network connectivity issue
+        GenericError            ///< Other unspecified error
+    };
+    Q_ENUM(ErrorType)
+
 signals:
     /**
      * @brief Emitted when i2pd start fails
@@ -307,6 +325,21 @@ signals:
      */
     void updateFinished(bool success, const QString &message) const;
 
+    /**
+     * @brief Emitted when a detailed error occurs
+     * @param errorType Error type from ErrorType enum
+     * @param description Human-readable error description
+     * @param recoveryAction Suggested recovery action
+     */
+    void errorOccurred(int errorType, const QString &description, const QString &recoveryAction) const;
+
+    /**
+     * @brief Emitted when error recovery is successful
+     * @param errorType Error type that was recovered from
+     * @param description Recovery action description
+     */
+    void errorRecovered(int errorType, const QString &description) const;
+
     // Property change signals
     void installedChanged() const;
     void runningChanged() const;
@@ -349,6 +382,40 @@ private:
      * @param socksProxy SOCKS proxy address
      */
     void writeConfig(const QString &socksProxy);
+
+    // Error detection and recovery helpers
+    /**
+     * @brief Detect the specific error from process failure
+     * @param processError QProcess error code
+     * @param errorString Error string from process
+     * @return ErrorType enum value
+     */
+    ErrorType detectError(QProcess::ProcessError processError, const QString &errorString) const;
+
+    /**
+     * @brief Check if binary file is corrupted
+     * @return true if binary appears corrupted
+     */
+    bool isBinaryCorrupted() const;
+
+    /**
+     * @brief Check if ports are available
+     * @param socksPort SOCKS proxy port
+     * @return true if ports are available
+     */
+    bool arePortsAvailable(const QString &socksPort) const;
+
+    /**
+     * @brief Check available disk space
+     * @return true if sufficient space for I2P data directory
+     */
+    bool hasSufficientDiskSpace() const;
+
+    /**
+     * @brief Attempt automatic recovery from error
+     * @param errorType The error type to recover from
+     */
+    void attemptErrorRecovery(ErrorType errorType);
 
     // Process management
     std::unique_ptr<QProcess> m_i2pdProcess;

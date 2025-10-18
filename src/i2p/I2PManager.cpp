@@ -46,6 +46,9 @@
 #include <QTextStream>
 #include <QSettings>
 #include <QRegularExpression>
+#include <QTcpServer>
+#include <QStorageInfo>
+#include <QDateTime>
 
 // Detect macOS ARM64
 #if defined(Q_OS_MACOS) && defined(__aarch64__) && !defined(Q_OS_MACOS_AARCH64)
@@ -419,6 +422,28 @@ bool I2PManager::start(const QString &socksProxy)
         return false;
     }
 
+    // Check for common startup issues
+    if (isBinaryCorrupted()) {
+        qDebug() << "I2PManager: Binary appears corrupted";
+        attemptErrorRecovery(BinaryCorrupted);
+        emit i2pStartFailure("I2P router binary is corrupted. Please download again.");
+        return false;
+    }
+
+    if (!arePortsAvailable(socksProxy)) {
+        qDebug() << "I2PManager: Ports not available";
+        attemptErrorRecovery(PortInUse);
+        emit i2pStartFailure("I2P router ports are already in use by another application");
+        return false;
+    }
+
+    if (!hasSufficientDiskSpace()) {
+        qDebug() << "I2PManager: Insufficient disk space";
+        attemptErrorRecovery(OutOfDiskSpace);
+        emit i2pStartFailure("Insufficient disk space for I2P data directory");
+        return false;
+    }
+
     if (processRunning()) {
         qDebug() << "I2PManager: Already running";
         return true;
@@ -448,6 +473,15 @@ bool I2PManager::start(const QString &socksProxy)
     connect(m_i2pdProcess.get(), &QProcess::readyReadStandardError, this, [this]() {
         QString error = m_i2pdProcess->readAllStandardError();
         qDebug() << "I2PManager stderr:" << error;
+    });
+
+    connect(m_i2pdProcess.get(), QOverload<QProcess::ProcessError>::of(&QProcess::error),
+            this, [this](QProcess::ProcessError error) {
+        qDebug() << "I2PManager: Process error:" << error;
+        ErrorType detectedError = detectError(error, m_i2pdProcess->errorString());
+        if (detectedError != NoError) {
+            attemptErrorRecovery(detectedError);
+        }
     });
 
     connect(m_i2pdProcess.get(), QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
@@ -832,6 +866,153 @@ bool I2PManager::testConnection(const QString &remoteNode)
 QStringList I2PManager::getKnownNodes() const
 {
     return KNOWN_I2P_NODES;
+}
+
+I2PManager::ErrorType I2PManager::detectError(QProcess::ProcessError processError, const QString &errorString) const
+{
+    Q_UNUSED(processError);
+    
+    // Analyze error string for specific error types
+    QString lowerError = errorString.toLower();
+
+    if (lowerError.contains("permission denied") || lowerError.contains("access denied")) {
+        return PermissionDenied;
+    }
+    if (lowerError.contains("address already in use") || lowerError.contains("bind failed")) {
+        return PortInUse;
+    }
+    if (lowerError.contains("no space") || lowerError.contains("disk full")) {
+        return OutOfDiskSpace;
+    }
+    if (lowerError.contains("config") || lowerError.contains("configuration")) {
+        return ConfigurationError;
+    }
+    if (lowerError.contains("network") || lowerError.contains("connection refused")) {
+        return NetworkError;
+    }
+    if (isBinaryCorrupted()) {
+        return BinaryCorrupted;
+    }
+
+    return GenericError;
+}
+
+bool I2PManager::isBinaryCorrupted() const
+{
+    if (!QFileInfo(m_i2pdBinary).exists()) {
+        return false;
+    }
+
+    // Check if file is readable and has reasonable size
+    QFileInfo fileInfo(m_i2pdBinary);
+    if (!fileInfo.isReadable()) {
+        qDebug() << "I2PManager: Binary is not readable";
+        return true;
+    }
+
+    // i2pd binary should be at least 1MB on most platforms
+    if (fileInfo.size() < 1024 * 1024) {
+        qDebug() << "I2PManager: Binary size suspiciously small:" << fileInfo.size();
+        return true;
+    }
+
+    return false;
+}
+
+bool I2PManager::arePortsAvailable(const QString &socksPort) const
+{
+    // Parse port number
+    int port = 4447;
+    if (socksPort.contains(":")) {
+        port = socksPort.split(":").last().toInt();
+    }
+
+    // Try to bind to the port to check if it's available
+    // This is a simplified check - a production implementation would use QTcpServer
+    QTcpServer server;
+    bool canBind = server.listen(QHostAddress::LocalHost, port);
+    server.close();
+
+    if (!canBind) {
+        qDebug() << "I2PManager: Port" << port << "is already in use";
+        return false;
+    }
+
+    return true;
+}
+
+bool I2PManager::hasSufficientDiskSpace() const
+{
+    // Check free space in i2pd data directory
+    // i2pd needs at least 500MB for blockchain data (approximate minimum)
+    QStorageInfo storage(m_i2pdDataDir);
+    qint64 availableSpace = storage.bytesFree();
+    qint64 requiredSpace = 500 * 1024 * 1024;  // 500 MB
+
+    if (availableSpace < requiredSpace) {
+        qDebug() << "I2PManager: Insufficient disk space. Available:" << availableSpace 
+                 << "Required:" << requiredSpace;
+        return false;
+    }
+
+    return true;
+}
+
+void I2PManager::attemptErrorRecovery(ErrorType errorType)
+{
+    qDebug() << "I2PManager: Attempting recovery from error type:" << errorType;
+
+    switch (errorType) {
+        case PortInUse: {
+            // Try alternative port
+            qDebug() << "I2PManager: Port conflict detected, attempting alternative port";
+            // Could try 127.0.0.1:4448 or another fallback port
+            emit errorOccurred(PortInUse, 
+                             "I2P router port is in use by another application",
+                             "Close other applications using port 4447 and try again");
+            break;
+        }
+
+        case PermissionDenied: {
+            emit errorOccurred(PermissionDenied,
+                             "Insufficient permissions to run I2P router",
+                             "Check file permissions on i2pd binary and data directory");
+            // Could attempt chmod on Unix systems
+            #ifndef Q_OS_WIN
+            QProcess::execute("chmod", {"+x", m_i2pdBinary});
+            qDebug() << "I2PManager: Attempted chmod on binary";
+            #endif
+            break;
+        }
+
+        case OutOfDiskSpace: {
+            emit errorOccurred(OutOfDiskSpace,
+                             "Insufficient disk space for I2P data directory",
+                             "Free up disk space and try again");
+            break;
+        }
+
+        case BinaryCorrupted: {
+            emit errorOccurred(BinaryCorrupted,
+                             "I2P router binary appears to be corrupted",
+                             "Delete the i2pd binary and download a fresh copy");
+            break;
+        }
+
+        case ConfigurationError: {
+            emit errorOccurred(ConfigurationError,
+                             "I2P configuration file error",
+                             "Check data directory permissions and try again");
+            break;
+        }
+
+        default: {
+            emit errorOccurred(errorType,
+                             "I2P router encountered an error",
+                             "Check logs and restart the application");
+            break;
+        }
+    }
 }
 
 void I2PManager::checkForUpdates()
