@@ -239,9 +239,7 @@ void I2PManager::download()
         QByteArray hashData = QCryptographicHash::hash(data, QCryptographicHash::Sha256);
         QString hash = hashData.toHex();
 
-        // TODO: Re-enable hash verification once we have correct hashes
-        // For development, we'll skip this check
-        /*
+        // Verify hash matches expected value (security critical!)
         if (hash != expectedHash) {
             qDebug() << "I2PManager: Hash verification failed";
             qDebug() << "Expected:" << expectedHash;
@@ -249,7 +247,8 @@ void I2PManager::download()
             emit i2pDownloadFailure(HashVerificationFailed);
             return;
         }
-        */
+        
+        qDebug() << "I2PManager: Hash verification passed";
 
         // Save archive
         QFile file(fileName);
