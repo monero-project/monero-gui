@@ -38,6 +38,11 @@ Rectangle {
     color: "transparent"
     Layout.fillWidth: true
     property alias skipSyncHeight: skipSyncContainer.height
+    
+    // Add null-safe property references
+    property var currentWallet: null
+    property var persistentSettings: null
+    property var informationPopup: null
 
     ColumnLayout {
         id: skipSyncContainer
@@ -62,9 +67,11 @@ Rectangle {
 
             MoneroComponents.CheckBox {
                 id: dataSavingCheckbox
-                checked: persistentSettings.skipSyncEnabled
+                checked: persistentSettings ? persistentSettings.skipSyncEnabled : false
                 onCheckedChanged: {
-                    persistentSettings.skipSyncEnabled = checked
+                    if (persistentSettings) {
+                        persistentSettings.skipSyncEnabled = checked
+                    }
                 }
             }
         }
@@ -95,6 +102,13 @@ Rectangle {
                     fontSize: 14
                     fontBold: true
                     text: "Synchronization Options"
+                }
+
+                // Transaction import checkbox (define early for binding)
+                MoneroComponents.CheckBox {
+                    id: txImportCheckbox
+                    checked: false
+                    text: "Show transaction import"
                 }
 
                 // Skip Sync Button
@@ -168,8 +182,12 @@ Rectangle {
                             id: startDateInput
                             placeholderText: "YYYY-MM-DD"
                             Layout.minimumWidth: 150
-                            text: persistentSettings.skipSyncStartDate || ""
-                            onTextChanged: persistentSettings.skipSyncStartDate = text
+                            text: persistentSettings ? (persistentSettings.skipSyncStartDate || "") : ""
+                            onTextChanged: {
+                                if (persistentSettings) {
+                                    persistentSettings.skipSyncStartDate = text
+                                }
+                            }
                         }
                     }
 
@@ -185,8 +203,12 @@ Rectangle {
                             id: endDateInput
                             placeholderText: "YYYY-MM-DD"
                             Layout.minimumWidth: 150
-                            text: persistentSettings.skipSyncEndDate || ""
-                            onTextChanged: persistentSettings.skipSyncEndDate = text
+                            text: persistentSettings ? (persistentSettings.skipSyncEndDate || "") : ""
+                            onTextChanged: {
+                                if (persistentSettings) {
+                                    persistentSettings.skipSyncEndDate = text
+                                }
+                            }
                         }
                     }
 
@@ -199,9 +221,13 @@ Rectangle {
                                     currentWallet.syncFromDateRange(startDateInput.text, endDateInput.text)
                                 }
                             } else {
-                                informationPopup.title = "Invalid Date Range"
-                                informationPopup.text = "Please enter both start and end dates in YYYY-MM-DD format"
-                                informationPopup.open()
+                                if (informationPopup) {
+                                    informationPopup.title = "Invalid Date Range"
+                                    informationPopup.text = "Please enter both start and end dates in YYYY-MM-DD format"
+                                    informationPopup.open()
+                                } else {
+                                    console.warn("Cannot show popup: informationPopup is not defined")
+                                }
                             }
                         }
                     }
@@ -249,21 +275,21 @@ Rectangle {
                         onClicked: {
                             if (txHashInput.text.length === 64) {
                                 console.log("Importing transaction: " + txHashInput.text)
-                                currentWallet.scanTransaction(txHashInput.text)
-                                txHashInput.text = ""
+                                if (currentWallet) {
+                                    currentWallet.scanTransaction(txHashInput.text)
+                                    txHashInput.text = ""
+                                }
                             } else {
-                                informationPopup.title = "Invalid Hash"
-                                informationPopup.text = "Transaction hash must be 64 hexadecimal characters"
-                                informationPopup.open()
+                                if (informationPopup) {
+                                    informationPopup.title = "Invalid Hash"
+                                    informationPopup.text = "Transaction hash must be 64 hexadecimal characters"
+                                    informationPopup.open()
+                                } else {
+                                    console.warn("Cannot show popup: informationPopup is not defined")
+                                }
                             }
                         }
                     }
-                }
-
-                MoneroComponents.CheckBox {
-                    id: txImportCheckbox
-                    checked: false
-                    text: "Show transaction import"
                 }
             }
         }
