@@ -5,6 +5,7 @@
 ### ✅ Completed Tasks
 
 #### Day 1 - Core Implementation
+
 - [x] Created I2PManager class (C++ implementation)
   - Header file: `src/i2p/I2PManager.h` (240 lines)
   - Implementation: `src/i2p/I2PManager.cpp` (800+ lines)
@@ -18,14 +19,23 @@
   - Added include: `#include "i2p/I2PManager.h"` in `src/main/main.cpp`
   - Registered type: `qmlRegisterUncreatableType<I2PManager>(...)`
   - Created instance and exposed to QML: `engine.rootContext()->setContextProperty("i2pManager", &i2pManager)`
+
+- [x] Created Settings UI
+  - Created `pages/settings/SettingsI2P.qml` (370 lines)
+  - Added I2P tab to Settings navigation
+  - Integrated with persistentSettings (main.qml)
+  - Features: Enable/disable I2P, status display, download button, start/stop controls, node address configuration, auto-start option
   
 - [x] Git repository setup
   - Created feature branch: `feature/i2p-binary-manager`
   - Updated author to: Shadeeeloveer
-  - Made 3 commits:
+  - Made 6 commits:
     1. Initial I2PManager implementation (290fd00a)
     2. Build system integration (42dcc205)
     3. QML registration (cfe5c3f9)
+    4. Progress documentation (6f40d989)
+    5. Status summary (388157e8)
+    6. I2P Settings UI (d4200421)
 
 #### Documentation
 - [x] Created comprehensive documentation:
@@ -37,14 +47,15 @@
 
 ### 🚧 In Progress
 
-- [ ] **Building/Testing** (Current Step)
-  - Initializing git submodules (monero core + dependencies)
-  - Will attempt compilation test next
+- [ ] **Testing & Hash Updates** (Current Step)
+  - Need to download real i2pd binaries and calculate SHA256 hashes
+  - Need to test compilation (requires MSYS2/MinGW64 setup)
+  - Need to test UI functionality
 
-### 📋 Next Steps (Week 1-2)
+### 📋 Next Steps (Week 2)
 
 1. **Complete Build Testing**
-   - [ ] Finish submodule initialization
+   - [ ] Set up MSYS2/MinGW64 environment (if testing on Windows)
    - [ ] Run `make release-win64` to test compilation
    - [ ] Fix any compilation errors
    - [ ] Verify I2PManager compiles cleanly
@@ -58,25 +69,26 @@
    - [ ] Calculate SHA256 hashes for each
    - [ ] Update hash verification in I2PManager.cpp
 
-3. **Create Settings UI**
-   - [ ] Create `pages/settings/SettingsI2P.qml`
-   - [ ] Add checkbox to enable/disable I2P
-   - [ ] Add status display (installed, running, version)
-   - [ ] Add node address input field
-   - [ ] Add download/start/stop buttons
-   - [ ] Wire up to i2pManager context property
+3. **Test UI Functionality**
+   - [ ] Test Settings → I2P tab navigation
+   - [ ] Verify all controls work correctly
+   - [ ] Test download functionality
+   - [ ] Test start/stop buttons
+   - [ ] Verify status updates
 
-4. **Integrate with Settings Page**
-   - [ ] Add I2P section to Settings navigation
-   - [ ] Connect SettingsI2P.qml to main settings flow
+4. **monerod Integration**
+   - [ ] Pass I2P node address to monerod via `--tx-proxy` flag
+   - [ ] Handle monerod restart when I2P settings change
+   - [ ] Test transaction routing through I2P
 
 ### 🎯 Week 1 Goals
+
 - Complete I2PManager core implementation ✅
 - Build system integration ✅
 - QML registration ✅
-- **Test compilation** ⏳
-- Update hash values
-- Create basic UI
+- Create basic UI ✅
+- Update hash values ⏳
+- Test compilation ⏳
 
 ### 🏆 Bounty Progress
 
@@ -84,16 +96,16 @@
 
 **Requirements:**
 1. ✅ External binary approach (no embedded library)
-2. 🚧 Build system integration (in progress)
-3. ⏳ User-facing UI controls
-4. ⏳ I2P router management (download, start, stop)
+2. ✅ Build system integration
+3. ✅ User-facing UI controls (Settings page with all controls)
+4. ⏳ I2P router management (download, start, stop) - implemented, needs testing
 5. ⏳ Integration with monerod --tx-proxy flag
-6. ⏳ Cross-platform support (Windows, Linux, macOS)
+6. ⏳ Cross-platform support (Windows, Linux, macOS) - code ready, needs testing
 7. ⏳ Testing and validation
 8. ⏳ PR submission and review
 
 **Estimated Completion:** Week 16 (mid-February 2026)
-**Current Progress:** ~15% (Week 1 of 16)
+**Current Progress:** ~35% (Week 1 of 16 - UI complete!)
 
 ---
 
