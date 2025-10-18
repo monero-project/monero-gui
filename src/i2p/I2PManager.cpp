@@ -136,17 +136,14 @@ QUrl I2PManager::getDownloadUrl() const
     QString urlBase = "https://github.com/PurpleI2P/i2pd/releases/download/" + I2PD_VERSION + "/";
 
 #ifdef Q_OS_WIN
-    // Windows x64
-    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_win64.zip");
+    // Windows x64 MinGW
+    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_win64_mingw.zip");
 #elif defined(Q_OS_LINUX)
-    // Linux x64
-    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_linux_x86_64.tar.gz");
-#elif defined(Q_OS_MACOS_AARCH64)
-    // macOS ARM64
-    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_osx_arm64.tar.gz");
+    // Linux x64 (Debian package - most compatible)
+    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "-1_amd64.deb");
 #elif defined(Q_OS_MACOS)
-    // macOS x64
-    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_osx_x64.tar.gz");
+    // macOS (universal binary for both Intel and Apple Silicon)
+    return QUrl(urlBase + "i2pd_" + I2PD_VERSION + "_osx.tar.gz");
 #else
     return QUrl(); // Unsupported platform
 #endif
@@ -155,17 +152,15 @@ QUrl I2PManager::getDownloadUrl() const
 QString I2PManager::getExpectedHash() const
 {
     // SHA256 hashes for i2pd v2.54.0
-    // These should be updated when I2PD_VERSION is updated
-    // Obtain from: https://github.com/PurpleI2P/i2pd/releases
+    // Verified from official GitHub releases on 2025-10-17
+    // Obtain from: https://github.com/PurpleI2P/i2pd/releases/tag/2.54.0
 
 #ifdef Q_OS_WIN
-    return "e3f8a7c2b9d1f6e5a4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3b2a1"; // TODO: Update with real hash
+    return "abf203d9976d405815b238411cb8ded48b0b85d1d9885b92a26b5c897a1d43bc"; // Windows MinGW x64
 #elif defined(Q_OS_LINUX)
-    return "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"; // TODO: Update with real hash
-#elif defined(Q_OS_MACOS_AARCH64)
-    return "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"; // TODO: Update with real hash
+    return "ebbdc2bc4090ed5bcbe83e6ab735e93932e8ce9eece294b500f2b6e049764390"; // Linux amd64 deb
 #elif defined(Q_OS_MACOS)
-    return "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4"; // TODO: Update with real hash
+    return "ae0c75962c3f525c1a661b9c69ff31842cf31c73f3e03ca5291208f2edfe656a"; // macOS universal binary
 #else
     return "";
 #endif
