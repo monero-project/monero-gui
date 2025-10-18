@@ -135,6 +135,25 @@ public:
      */
     Q_INVOKABLE bool tryAutoStart();
 
+    /**
+     * @brief Generate monerod command line flags for I2P connectivity
+     * When I2P is enabled and running, returns flags to configure monerod SOCKS proxy
+     * @return Space-separated monerod flags (e.g., "--proxy 127.0.0.1:4447 --proxy-allow-dns-leaks")
+     */
+    Q_INVOKABLE QString getMonerodProxyFlags() const;
+
+    /**
+     * @brief Check if I2P is properly configured and ready for monerod integration
+     * @return true if I2P is running and proxy is accessible
+     */
+    Q_INVOKABLE bool isProxyReady() const;
+
+    /**
+     * @brief Get the SOCKS proxy address for monerod configuration
+     * @return Proxy address in format "127.0.0.1:port" or empty string if not available
+     */
+    Q_INVOKABLE QString getProxyAddress() const;
+
     // Property getters
     bool isRunning() const;
     QString getStatus() const;

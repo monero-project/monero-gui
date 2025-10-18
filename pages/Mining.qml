@@ -612,6 +612,15 @@ Rectangle {
         var flag = "";
         var allArgs = [];
         var p2poolArgs = ["--zmq-pub tcp://127.0.0.1:18083"];
+        
+        // Add I2P proxy flags if I2P is enabled and ready
+        if (persistentSettings.useI2P && i2pManager.isProxyReady()) {
+            var i2pProxyFlags = i2pManager.getMonerodProxyFlags();
+            if (i2pProxyFlags !== "") {
+                p2poolArgs = p2poolArgs.concat(i2pProxyFlags.split(" "));
+            }
+        }
+        
         //create an array (allArgs) of ['--arg value','--arg2','--arg3']
         for (let i = 0; i < customDaemonArgsArray.length; i++) {
             if(!customDaemonArgsArray[i].startsWith("--")) {

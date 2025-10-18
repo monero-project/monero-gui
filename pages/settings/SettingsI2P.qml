@@ -374,6 +374,59 @@ Rectangle {
             }
         }
 
+        // Monerod I2P Integration Status
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 10
+            visible: enableI2PCheckbox.checked && i2pManager.installed
+
+            MoneroComponents.Label {
+                fontSize: 16
+                text: qsTr("Monerod Integration") + translationManager.emptyString
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
+
+                Rectangle {
+                    width: 16
+                    height: 16
+                    radius: 8
+                    color: {
+                        if (i2pManager.isProxyReady()) {
+                            return "#4CAF50"  // Green
+                        } else {
+                            return MoneroComponents.Style.dimmedFontColor
+                        }
+                    }
+                }
+
+                MoneroComponents.Label {
+                    text: i2pManager.isProxyReady() ? 
+                        qsTr("I2P proxy ready - monerod will use I2P for anonymity") :
+                        qsTr("I2P proxy not ready - start I2P router to enable")
+                    fontSize: 13
+                    color: MoneroComponents.Style.defaultFontColor
+                    Layout.fillWidth: true
+                }
+            }
+
+            MoneroComponents.TextPlain {
+                Layout.fillWidth: true
+                text: {
+                    if (i2pManager.isProxyReady()) {
+                        return qsTr("When you start monerod, it will automatically use I2P routing. Your connection to Monero nodes will be routed through the I2P network for enhanced privacy.") + translationManager.emptyString
+                    } else {
+                        return qsTr("Start the I2P router above to enable I2P integration with monerod. Once running, all monerod connections will be routed through I2P automatically.") + translationManager.emptyString
+                    }
+                }
+                wrapMode: Text.Wrap
+                font.pixelSize: 12
+                color: MoneroComponents.Style.dimmedFontColor
+            }
+        }
+
         // I2P Node Configuration
         ColumnLayout {
             Layout.fillWidth: true

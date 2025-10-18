@@ -657,6 +657,61 @@ bool I2PManager::tryAutoStart()
     return started;
 }
 
+QString I2PManager::getMonerodProxyFlags() const
+{
+    if (!isRunning() || !isProxyReady()) {
+        qDebug() << "I2PManager: I2P proxy not ready for monerod integration";
+        return "";
+    }
+
+    // Build monerod-compatible I2P proxy flags
+    // These flags configure monerod to route all traffic through i2pd's SOCKS proxy
+    QString proxyAddr = getProxyAddress();
+    if (proxyAddr.isEmpty()) {
+        return "";
+    }
+
+    // Monerod I2P configuration flags:
+    // --proxy <ip:port>: SOCKS5 proxy for I2P connections
+    // --proxy-allow-dns-leaks: Allow DNS queries to fall back to clearnet (optional, for hybrid mode)
+    // --anonymous-inbound: For I2P incoming connections
+    QStringList flags;
+    flags << "--proxy" << proxyAddr;
+    flags << "--proxy-allow-dns-leaks";  // Allow DNS fallback for better user experience
+    
+    qDebug() << "I2PManager: Generated monerod proxy flags:" << flags.join(" ");
+    return flags.join(" ");
+}
+
+bool I2PManager::isProxyReady() const
+{
+    // Check if i2pd is running and SOCKS proxy is accessible
+    if (!isRunning()) {
+        return false;
+    }
+
+    // Verify we have a valid proxy address configured
+    if (m_defaultSocksProxy.isEmpty() || m_defaultSocksProxy == "127.0.0.1:0") {
+        return false;
+    }
+
+    // The proxy is considered ready if the process is running
+    // We don't do an actual connection test here to avoid blocking
+    // A full implementation would test connectivity to the SOCKS port
+    return true;
+}
+
+QString I2PManager::getProxyAddress() const
+{
+    if (!isRunning()) {
+        return "";
+    }
+
+    // Return the configured SOCKS proxy address
+    // Default is 127.0.0.1:4447
+    return m_defaultSocksProxy;
+}
+
 void I2PManager::performStatusCheck()
 {
     // This method is called every 10 seconds via timer
