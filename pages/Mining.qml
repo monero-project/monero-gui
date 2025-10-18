@@ -349,6 +349,18 @@ Rectangle {
                             update()
                         }
                     }
+
+                    MoneroComponents.StandardButton {
+                        visible: persistentSettings.allow_p2pool_mining
+                        id: p2poolStatsButton
+                        small: true
+                        primary: false
+                        text: qsTr("View P2Pool Stats") + translationManager.emptyString
+                        enabled: appWindow.isMining
+                        onClicked: {
+                            stateView.state = "P2PoolStats"
+                        }
+                    }
                 }
             }
 
