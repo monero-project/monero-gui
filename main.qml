@@ -1483,6 +1483,9 @@ ApplicationWindow {
         property bool   customDecorations : true
         property string daemonFlags
         property string p2poolFlags
+        property bool   useI2P: false
+        property bool   autoStartI2P: false
+        property string i2pNodeAddress: ""
         property int logLevel: 0
         property string logCategories: ""
         property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
