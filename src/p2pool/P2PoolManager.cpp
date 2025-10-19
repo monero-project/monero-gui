@@ -151,6 +151,70 @@ void P2PoolManager::getStatus() {
     return;
 }
 
+void P2PoolManager::getStats() {
+    QVariantMap statsMap;
+    QString statsPath = m_p2poolPath + "/stats/local";
+    
+    if (!started) {
+        emit p2poolStats(statsMap);
+        return;
+    }
+    
+    // Read pool stats
+    QString poolStatsPath = statsPath + "/pool";
+    if (QFileInfo(poolStatsPath).isFile()) {
+        QFile poolFile(poolStatsPath);
+        if (poolFile.open(QIODevice::ReadOnly)) {
+            QByteArray poolData = poolFile.readAll();
+            poolFile.close();
+            QJsonDocument poolJson = QJsonDocument::fromJson(poolData);
+            QJsonObject poolObj = poolJson.object();
+            statsMap.insert("pool_stats", poolObj.toVariantMap());
+        }
+    }
+    
+    // Read miner stats
+    QString minerStatsPath = statsPath + "/miner";
+    if (QFileInfo(minerStatsPath).isFile()) {
+        QFile minerFile(minerStatsPath);
+        if (minerFile.open(QIODevice::ReadOnly)) {
+            QByteArray minerData = minerFile.readAll();
+            minerFile.close();
+            QJsonDocument minerJson = QJsonDocument::fromJson(minerData);
+            QJsonObject minerObj = minerJson.object();
+            statsMap.insert("miner_stats", minerObj.toVariantMap());
+        }
+    }
+    
+    // Read stratum stats
+    QString stratumStatsPath = statsPath + "/stratum";
+    if (QFileInfo(stratumStatsPath).isFile()) {
+        QFile stratumFile(stratumStatsPath);
+        if (stratumFile.open(QIODevice::ReadOnly)) {
+            QByteArray stratumData = stratumFile.readAll();
+            stratumFile.close();
+            QJsonDocument stratumJson = QJsonDocument::fromJson(stratumData);
+            QJsonObject stratumObj = stratumJson.object();
+            statsMap.insert("stratum_stats", stratumObj.toVariantMap());
+        }
+    }
+    
+    // Read network stats
+    QString networkStatsPath = statsPath + "/network";
+    if (QFileInfo(networkStatsPath).isFile()) {
+        QFile networkFile(networkStatsPath);
+        if (networkFile.open(QIODevice::ReadOnly)) {
+            QByteArray networkData = networkFile.readAll();
+            networkFile.close();
+            QJsonDocument networkJson = QJsonDocument::fromJson(networkData);
+            QJsonObject networkObj = networkJson.object();
+            statsMap.insert("network_stats", networkObj.toVariantMap());
+        }
+    }
+    
+    emit p2poolStats(statsMap);
+}
+
 bool P2PoolManager::start(const QString &flags, const QString &address, const QString &chain, const QString &threads)
 {
     // prepare command line arguments and pass to p2pool
