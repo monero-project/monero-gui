@@ -215,8 +215,8 @@ bool I2PManager::start(bool allowIncomingConnections)
     arguments << "--datadir" << m_i2pd_datadir;
     arguments << "--certsdir" << m_i2pd_certsdir;
     
-    qDebug() << "starting i2p " + m_i2pd_binary;
-    qDebug() << "With command line arguments " << arguments;
+    qWarning() << "starting i2p " + m_i2pd_binary;
+    qWarning() << "With command line arguments " << arguments;
 
     starting = true;
 
@@ -233,18 +233,18 @@ bool I2PManager::start(bool allowIncomingConnections)
         connect(m_i2pd.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
         started = true;
         auto state = m_i2pd->state();
-        if (state == QProcess::ProcessState::Running) {
-            emit i2pStartSuccess();
-        }
-        else if (state == QProcess::ProcessState::Starting) {
+        if (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting) {
+            // wait for i2pd to catch up
+            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
             emit i2pStartSuccess();
         }
         else if (state == QProcess::ProcessState::NotRunning) {
             emit i2pStartFailure("I2P start failed");
         }
     }
-    catch (...) {
-        qDebug() << "Error while starting i2p";
+    catch (const std::exception& ex) {
+        qWarning() << "Error while starting i2p: " << ex.what();
+        emit i2pStartFailure("I2P start failed");
         started = false;
     }
 
@@ -293,7 +293,7 @@ void I2PManager::exit()
     qDebug("I2PManager: exit()");
     if (started && m_i2pd.get() != nullptr) {
         m_i2pd->kill();
-        
+        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
         starting = started = false;
         emit i2pStopped();
     }

@@ -81,6 +81,7 @@ ApplicationWindow {
     property int daemonStartStopInProgress: 0
     property int i2pStartStopInProgress: 0
     property int torStartStopInProgress: 0
+    property int bootstrapNodeStatus: 0
     property bool i2pRunning: false
     property bool torRunning: false
     property string torVersion: "Not installed"
@@ -958,6 +959,7 @@ ApplicationWindow {
     function onDaemonStarted(){
         console.log("daemon started");
         daemonStartStopInProgress = 0;
+        bootstrapNodeStatus = 0;
         if (currentWallet) {
             currentWallet.connected(true);
             // resume refresh
@@ -970,8 +972,10 @@ ApplicationWindow {
 
         if (bootstrapNodeAddress === "auto" && anonNetworkEnabled) {
             const callback = function(result) {
+                bootstrapNodeStatus = 0;
                 if (result) {
                     appWindow.showStatusMessage(qsTr("Successfully switched to public node"), 3);
+                    bootstrapNodeStatus = 2;
                     appWindow.currentWallet.refreshHeightAsync();
                 } else {
                     appWindow.showStatusMessage(qsTr("Failed to switch public node"), 3);
@@ -982,6 +986,7 @@ ApplicationWindow {
                 persistentSettings.proxyType,
                 persistentSettings.blockchainDataDir,
                 callback);
+            bootstrapNodeStatus = 1;
         }
 
         // resume simplemode connection timer
@@ -1742,17 +1747,14 @@ ApplicationWindow {
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
         function getProxyAddress() {
-            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
-                return "";
-            }
-            if (proxyType == "custom") {
-                if (socksProxyFlagSet && socksProxyFlag == "") return "";
-            }
             if (proxyType == "I2P") {
                 return "127.0.0.1:4447";
             }
             if (proxyType == "TOR") {
                 return "127.0.0.1:20561";
+            }
+            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
+                return "";
             }
 
             var proxyAddressSetOrForced = socksProxyFlagSet ? socksProxyFlag : proxyAddress;
