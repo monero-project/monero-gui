@@ -121,7 +121,7 @@ Rectangle {
 
                     onNextClicked: {
                         appWindow.changeWalletMode(0);
-                        wizardController.wizardState = 'wizardHome';
+                        wizardController.wizardState = 'wizardNetwork';
                     }
                 }
             }

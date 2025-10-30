@@ -134,6 +134,7 @@ jobs:
         path: |
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monerod
+          /home/runner/work/monero-gui/monero-gui/build/release/bin/i2pd
 
   docker-windows-static:
     runs-on: ubuntu-22.04
@@ -155,6 +156,7 @@ jobs:
         path: |
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monero-wallet-gui.exe
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monerod.exe
+          /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/i2pd.exe
 
   docker-android:
     runs-on: ubuntu-22.04

@@ -150,6 +150,7 @@ Rectangle {
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
         property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
+        property WizardNetwork wizardNetworkView: WizardNetwork {}
         anchors.fill: parent
 
         color: "transparent"
@@ -245,6 +246,10 @@ Rectangle {
                 name: "wizardModeBootstrap"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.pageHeight + 80 }
+            }, State {
+                name: "wizardNetwork"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardNetworkView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardNetworkView.pageHeight + 80 }
             }
         ]
 

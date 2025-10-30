@@ -39,6 +39,22 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
+        switch(appWindow.i2pStartStopInProgress) {
+            case 1:
+                return qsTr("Starting I2P");
+            case 2:
+                return qsTr("Stopping I2P");
+            default:
+                break;
+        }
+        switch(appWindow.torStartStopInProgress) {
+            case 1:
+                return qsTr("Starting Tor");
+            case 2:
+                return qsTr("Stopping Tor");
+            default:
+                break;
+        }
         switch (appWindow.daemonStartStopInProgress)
         {
             case 1:
@@ -95,8 +111,12 @@ Rectangle {
                     if(appWindow.isMining) {
                        return "qrc:///images/miningxmr.png"
                     } else if(item.connected == Wallet.ConnectionStatus_Connected || !MoneroComponents.Style.blackTheme) {
+                        if (persistentSettings.proxyType === "TOR") return "qrc:///images/tor.png"
+                        else if (persistentSettings.proxyType === "I2P") return "qrc:///images/i2p.png"
                         return "qrc:///images/lightning.png"
                     } else {
+                        if (persistentSettings.proxyType === "TOR") return "qrc:///images/tor-white.png"
+                        else if (persistentSettings.proxyType === "I2P") return "qrc:///images/i2p-white.png"
                         return "qrc:///images/lightning-white.png"
                     }
                 }
@@ -198,9 +218,9 @@ Rectangle {
                             }
                         };
 
-                        daemonManager.sendCommandAsync(
-                            ["set_bootstrap_daemon", "auto"],
+                        daemonManager.setBootstrapNodeAsync(
                             appWindow.currentWallet.nettype,
+                            persistentSettings.proxyType,
                             persistentSettings.blockchainDataDir,
                             callback);
 

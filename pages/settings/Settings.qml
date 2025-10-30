@@ -81,6 +81,12 @@ ColumnLayout {
             text: qsTr("Info") + translationManager.emptyString
             onSelected: settingsStateView.state = "Info"
         }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "Network"
+            text: qsTr("Network") + translationManager.emptyString
+            visible: appWindow.walletMode >= 2
+            onSelected: settingsStateView.state = "Network"
+        }
     }
 
     Rectangle{
@@ -92,6 +98,7 @@ ColumnLayout {
         property SettingsNode settingsNodeView: SettingsNode { }
         property SettingsLog settingsLogView: SettingsLog { }
         property SettingsInfo settingsInfoView: SettingsInfo { }
+        property SettingsNetwork settingsNetworkView: SettingsNetwork { }
         Layout.fillWidth: true
         Layout.preferredHeight: settingsHeight
         color: "transparent"
@@ -133,6 +140,10 @@ ColumnLayout {
                 name: "Info"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsInfoView }
                 PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsInfoView.infoHeight + 140 }
+            }, State {
+                name: "Network"
+                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsNetworkView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsNetworkView.networkHeight + 140 }
             }
         ]
 
