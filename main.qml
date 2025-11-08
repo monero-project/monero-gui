@@ -837,7 +837,8 @@ ApplicationWindow {
     function startI2PDaemon() {
         i2pStartStopInProgress = 1;
         try {
-            return i2pManager.start(!persistentSettings.useRemoteNode);
+            i2pManager.start(!persistentSettings.useRemoteNode);
+            return true;
         }
         catch (error) {
             i2pStartStopInProgress = 0;
@@ -878,8 +879,7 @@ ApplicationWindow {
     function startMoneroDaemon() {
         let anonNetworkEnabled = false;
         if (persistentSettings.proxyType === "I2P") {
-            daemonFlags += ' --tx-proxy i2p,127.0.0.1:4447,disable_noise';
-            daemonFlags += " --proxy 127.0.0.1:4447";
+            daemonFlags += ' --tx-proxy i2p,127.0.0.1:4447,disable_noise';            
             var i2pAddress = i2pManager.getP2PAddress();
             var i2pPort = i2pManager.getP2PPort();
             daemonFlags += ' --anonymous-inbound ' + i2pAddress + ",127.0.0.1:" + i2pPort;

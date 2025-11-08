@@ -171,84 +171,84 @@ QString I2PManager::getRPCAddress() const {
     return QString::fromStdString(decodeAddress(m_i2pd_rpc_dat.toStdString()));
 }
 
-bool I2PManager::start(bool allowIncomingConnections)
+void I2PManager::start(bool allowIncomingConnections)
 {
-    if (m_i2pd) {
-        auto state = m_i2pd->state();
+    m_scheduler.run([this, allowIncomingConnections] {
+        if (m_i2pd) {
+            auto state = m_i2pd->state();
 
-        if (started && (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting)) {
-            emit i2pStartFailure("I2P is already running");
-            return false;
+            if (started && (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting)) {
+                emit i2pStartFailure("I2P is already running");
+                return;
+            }
+
+            disconnect(m_i2pd.get(), &QProcess::readyReadStandardOutput, this, &I2PManager::handleProcessOutput);
+            disconnect(m_i2pd.get(), &QProcess::errorOccurred, this, &I2PManager::handleProcessError);
         }
 
-        disconnect(m_i2pd.get(), &QProcess::readyReadStandardOutput, this, &I2PManager::handleProcessOutput);
-        disconnect(m_i2pd.get(), &QProcess::errorOccurred, this, &I2PManager::handleProcessError);
-    }
-
-    if (!QFileInfo(m_i2pd_binary).isFile())
-    {
-        emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_binary) + "\" " + tr("executable is missing"));
-        return false;
-    }
-
-    if (isAlreadyRunning()) {
-        emit i2pStartFailure(QString("Unable to start I2P on %1:%2. Port already in use.").arg(host, QString::number(port)));
-        return false;
-    }
-
-    if (!writeI2pdTunnelsConf(m_i2pd_tunnels_conf, allowIncomingConnections)) {
-        emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_tunnels_conf) + "\" " + tr("could not write i2pd tunnels config file"));
-        return false;
-    }
-
-    if (!writeI2pdConf(m_i2pd_conf)) {
-        emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_conf) + "\" " + tr("could not write i2pd config file"));
-        return false;
-    }
-
-    QStringList arguments;
-
-    arguments << "--conf=" + m_i2pd_conf;
-    arguments << "--tunconf=" + m_i2pd_tunnels_conf;
-    arguments << "--tunnelsdir" << m_i2pd_tunnels_dir;
-    arguments << "--loglevel" << m_i2pd_loglevel;
-    arguments << "--datadir" << m_i2pd_datadir;
-    arguments << "--certsdir" << m_i2pd_certsdir;
-    
-    qWarning() << "starting i2p " + m_i2pd_binary;
-    qWarning() << "With command line arguments " << arguments;
-
-    starting = true;
-
-    QMutexLocker locker(&m_i2pdMutex);
-
-    m_i2pd.reset(new QProcess(this));
-
-    m_i2pd->setProcessChannelMode(QProcess::MergedChannels);
-    connect(m_i2pd.get(), &QProcess::readyReadStandardOutput, this, &I2PManager::handleProcessOutput);
-    connect(m_i2pd.get(), &QProcess::errorOccurred, this, &I2PManager::handleProcessError);
-    // Start i2p
-    try {
-        m_i2pd->start(m_i2pd_binary, arguments);
-        connect(m_i2pd.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
-        started = true;
-        auto state = m_i2pd->state();
-        if (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting) {
-            // wait for i2pd to catch up
-            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-            emit i2pStartSuccess();
+        if (!QFileInfo(m_i2pd_binary).isFile())
+        {
+            emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_binary) + "\" " + tr("executable is missing"));
+            return;
         }
-        else if (state == QProcess::ProcessState::NotRunning) {
+
+        if (isAlreadyRunning()) {
+            emit i2pStartFailure(QString("Unable to start I2P on %1:%2. Port already in use.").arg(host, QString::number(port)));
+            return;
+        }
+
+        if (!writeI2pdTunnelsConf(m_i2pd_tunnels_conf, allowIncomingConnections)) {
+            emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_tunnels_conf) + "\" " + tr("could not write i2pd tunnels config file"));
+            return;
+        }
+
+        if (!writeI2pdConf(m_i2pd_conf)) {
+            emit i2pStartFailure("\"" + QDir::toNativeSeparators(m_i2pd_conf) + "\" " + tr("could not write i2pd config file"));
+            return;
+        }
+
+        QStringList arguments;
+
+        arguments << "--conf=" + m_i2pd_conf;
+        arguments << "--tunconf=" + m_i2pd_tunnels_conf;
+        arguments << "--tunnelsdir" << m_i2pd_tunnels_dir;
+        arguments << "--loglevel" << m_i2pd_loglevel;
+        arguments << "--datadir" << m_i2pd_datadir;
+        arguments << "--certsdir" << m_i2pd_certsdir;
+        
+        qWarning() << "starting i2p " + m_i2pd_binary;
+        qWarning() << "With command line arguments " << arguments;
+
+        starting = true;
+
+        QMutexLocker locker(&m_i2pdMutex);
+
+        m_i2pd.reset(new QProcess(this));
+
+        m_i2pd->setProcessChannelMode(QProcess::MergedChannels);
+        connect(m_i2pd.get(), &QProcess::readyReadStandardOutput, this, &I2PManager::handleProcessOutput);
+        connect(m_i2pd.get(), &QProcess::errorOccurred, this, &I2PManager::handleProcessError);
+        // Start i2p
+        try {
+            m_i2pd->start(m_i2pd_binary, arguments);
+            connect(m_i2pd.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
+            started = true;
+            auto state = m_i2pd->state();
+            if (state == QProcess::ProcessState::Running || state == QProcess::ProcessState::Starting) {
+                // wait for i2pd to catch up
+                std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+                emit i2pStartSuccess();
+            }
+            else if (state == QProcess::ProcessState::NotRunning) {
+                emit i2pStartFailure("I2P start failed");
+            }
+        }
+        catch (const std::exception& ex) {
+            qWarning() << "Error while starting i2p: " << ex.what();
             emit i2pStartFailure("I2P start failed");
+            started = false;
         }
-    }
-    catch (const std::exception& ex) {
-        qWarning() << "Error while starting i2p: " << ex.what();
-        emit i2pStartFailure("I2P start failed");
-        started = false;
-    }
-
-    return started;
+    });
 }
 
 void I2PManager::handleProcessOutput() {
@@ -343,7 +343,8 @@ QString I2PManager::getProxyAddress() const {
 }
 
 I2PManager::I2PManager(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_scheduler(this)
 {
     started = false;
     // Platform dependent path to i2p
@@ -383,5 +384,5 @@ I2PManager::I2PManager(QObject *parent)
 }
 
 I2PManager::~I2PManager() {
-
+    m_scheduler.shutdownWaitForFinished();
 }

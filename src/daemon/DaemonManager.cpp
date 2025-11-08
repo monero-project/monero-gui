@@ -294,37 +294,36 @@ void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type n
 
 void DaemonManager::setBootstrapNodeAsync(NetworkType::Type nettype, const QString &proxyType, const QString &dataDir, const QJSValue& callback)
 {
-    qDebug() << "setBootstrapNodeAsync()";
-
     m_scheduler.run([this, proxyType, nettype, dataDir] {
         RpcNodeType nodeType = RpcNodeType::CLEARNET;
         QStringList cmd;
         cmd << "set_bootstrap_daemon";
-
-        if (proxyType.toLower() == "tor") {
+        QString proxy = proxyType.toLower();
+        if (proxy == "tor") {
             nodeType = RpcNodeType::TOR;
-        } else if (proxyType.toLower() == "i2p") {
+        } else if (proxy == "i2p") {
             nodeType = RpcNodeType::I2P;
         }
 
         QString uri;
 
-        if (proxyType == "custom") {
+        if (proxy == "custom") {
             cmd << "auto";
         } else {
             auto node = bootstrapNodes.pickRandom(nettype, nodeType);  
             cmd << node->getServer();
         }
 
-        if (proxyType == "tor") {
+        if (proxy == "tor") {
             cmd << TOR_PROXY_ADDRESS;
-        } else if (proxyType == "i2p") {
+        } else if (proxy == "i2p") {
             cmd << I2P_PROXY_ADDRESS;
         }
 
         QString message;
+        qWarning() << "setBootstrapNodeAsync(): " << cmd;
         auto result = sendCommand(cmd, nettype, dataDir, message);
-        qDebug() << "setBootstrapNodeAsync() " << message;
+        qWarning() << "setBootstrapNodeAsync(): " << message;
         result = result && message.contains("Successfully set bootstrap daemon address to");
         return QJSValueList({result});
     }, callback);

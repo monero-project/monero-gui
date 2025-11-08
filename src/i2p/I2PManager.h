@@ -48,7 +48,7 @@ public:
     QString host = "127.0.0.1";
     int port = 4447;
 
-    Q_INVOKABLE bool start(bool allowIncomingConnections);
+    Q_INVOKABLE void start(bool allowIncomingConnections);
     Q_INVOKABLE void exit();
     Q_INVOKABLE bool isAlreadyRunning() const;
     Q_INVOKABLE QString getP2PAddress() const;
@@ -94,6 +94,7 @@ private:
     bool started = false;
     bool starting = false;
 
+    mutable FutureScheduler m_scheduler;
 };
 
 #endif // I2PMANAGER_H

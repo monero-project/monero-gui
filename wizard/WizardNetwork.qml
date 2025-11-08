@@ -94,10 +94,17 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                MoneroComponents.WarningBox{
+                MoneroComponents.WarningBox {
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
                     text: qsTr("Some countries and ISPs may prohibit or censor use of these networks. <b>Please check your local laws and internet policies before using them.</b>") + translationManager.emptyString
+                }
+
+                MoneroComponents.WarningBox {
+                    Layout.topMargin: 14
+                    Layout.bottomMargin: 6
+                    visible: persistentSettings.proxyType === "I2P" && appWindow.walletMode === 1
+                    text: qsTr("When choosing I2P, transactions will be pushed over anonymity network and only I2P bootstrap nodes will be picked, but local node blockchain synchronization will still happen via clearnet.</b>") + translationManager.emptyString
                 }
 
                 ListModel {
