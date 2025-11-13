@@ -39,6 +39,28 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
+        let proxyType = persistentSettings.proxyType;
+        proxyType = proxyType === "TOR" ? "Tor" : proxyType;
+        let i2pEnabled = proxyType == "I2P";
+        let torEnabled = proxyType == "TOR";
+        let anonNetworkEnabled = i2pEnabled || torEnabled;
+
+        switch(appWindow.i2pStartStopInProgress) {
+            case 1:
+                return qsTr("Connecting to I2P");
+            case 2:
+                return qsTr("Stopping I2P");
+            default:
+                break;
+        }
+        switch(appWindow.torStartStopInProgress) {
+            case 1:
+                return qsTr("Connecting to Tor");
+            case 2:
+                return qsTr("Stopping Tor");
+            default:
+                break;
+        }
         switch (appWindow.daemonStartStopInProgress)
         {
             case 1:
@@ -50,21 +72,64 @@ Rectangle {
         }
         switch (status) {
             case Wallet.ConnectionStatus_Connected:
-                if (!appWindow.daemonSynced)
+                if (!appWindow.daemonSynced) {
+                    if (appWindow.walletMode <= 1) {
+                        if (appWindow.bootstrapNodeStatus == 1) {
+                            if (anonNetworkEnabled)
+                                return qsTr("Searching " + proxyType + " node");
+                            
+                            return qsTr("Searching node");
+                        }
+
+                        if (anonNetworkEnabled) {
+                            if (appWindow.bootstrapNodeStatus == 0)
+                                return qsTr("No " + proxyType + " nodes found")
+                        }
+                    }
+
+                    if (torEnabled)
+                        return qsTr("Synchronizing (Tor)") + translationManager.emptyString;
+                    if (i2pEnabled)
+                        return qsTr("Synchronizing (I2P)") + translationManager.emptyString;
+
                     return qsTr("Synchronizing");
+                }
+
+                let remoteNodeLabel = "Remote node";
+                if (torEnabled)
+                    remoteNodeLabel = "Remote Tor node";
+                if (i2pEnabled)
+                    remoteNodeLabel = "Remote I2P node";
+
                 if (persistentSettings.useRemoteNode && persistentSettings.allowRemoteNodeMining && appWindow.isMining)
-                    return qsTr("Remote node") + " + " + qsTr("Mining");
+                    return qsTr(remoteNodeLabel) + " + " + qsTr("Mining");
                 if (persistentSettings.useRemoteNode)
-                    return qsTr("Remote node");
-                return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
+                    return qsTr(remoteNodeLabel);
+                let connectedLabel = "Connected";
+
+                if (torEnabled)
+                    connectedLabel = "Connected (Tor)";
+                if (i2pEnabled)
+                    connectedLabel = "Connected (I2P)";
+
+                return appWindow.isMining ? qsTr(connectedLabel) + " + " + qsTr("Mining"): qsTr(connectedLabel);
             case Wallet.ConnectionStatus_WrongVersion:
                 return qsTr("Wrong version");
             case Wallet.ConnectionStatus_Disconnected:
                 if (appWindow.walletMode <= 1) {
-                    return qsTr("Searching node") + translationManager.emptyString;
+                    if (torEnabled)
+                        return qsTr("Connecting to Tor") + translationManager.emptyString;
+                    if (i2pEnabled)
+                        return qsTr("Connecting to I2P") + translationManager.emptyString;
+
+                    return qsTr("Starting the node") + translationManager.emptyString;
                 }
                 return qsTr("Disconnected");
             case Wallet.ConnectionStatus_Connecting:
+                    if (torEnabled)
+                        return qsTr("Connecting with Tor") + translationManager.emptyString;
+                    if (i2pEnabled)
+                        return qsTr("Connecting with I2P") + translationManager.emptyString;
                 return qsTr("Connecting");
             default:
                 return qsTr("Invalid connection status");
@@ -95,8 +160,12 @@ Rectangle {
                     if(appWindow.isMining) {
                        return "qrc:///images/miningxmr.png"
                     } else if(item.connected == Wallet.ConnectionStatus_Connected || !MoneroComponents.Style.blackTheme) {
+                        if (persistentSettings.proxyType === "TOR") return "qrc:///images/tor.png"
+                        else if (persistentSettings.proxyType === "I2P") return "qrc:///images/i2p.png"
                         return "qrc:///images/lightning.png"
                     } else {
+                        if (persistentSettings.proxyType === "TOR") return "qrc:///images/tor-white.png"
+                        else if (persistentSettings.proxyType === "I2P") return "qrc:///images/i2p-white.png"
                         return "qrc:///images/lightning-white.png"
                     }
                 }
@@ -190,20 +259,24 @@ Rectangle {
                     onClicked: {
                         const callback = function(result) {
                             refreshMouseArea.visible = true;
+                            appWindow.bootstrapNodeStatus = 0;
+
                             if (result) {
                                 appWindow.showStatusMessage(qsTr("Successfully switched to another public node"), 3);
+                                appWindow.bootstrapNodeStatus = 2;
                                 appWindow.currentWallet.refreshHeightAsync();
                             } else {
                                 appWindow.showStatusMessage(qsTr("Failed to switch public node"), 3);
                             }
                         };
 
-                        daemonManager.sendCommandAsync(
-                            ["set_bootstrap_daemon", "auto"],
+                        daemonManager.setBootstrapNodeAsync(
                             appWindow.currentWallet.nettype,
+                            persistentSettings.proxyType,
                             persistentSettings.blockchainDataDir,
                             callback);
-
+                    
+                        appWindow.bootstrapNodeStatus = 1;
                         refreshMouseArea.visible = false;
                         appWindow.showStatusMessage(qsTr("Switching to another public node"), 3);
                     }

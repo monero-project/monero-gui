@@ -16,7 +16,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost@1.85 hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -134,6 +134,7 @@ jobs:
         path: |
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui
           /home/runner/work/monero-gui/monero-gui/build/release/bin/monerod
+          /home/runner/work/monero-gui/monero-gui/build/release/bin/i2pd
 
   docker-windows-static:
     runs-on: ubuntu-22.04
@@ -155,6 +156,7 @@ jobs:
         path: |
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monero-wallet-gui.exe
           /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monerod.exe
+          /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/i2pd.exe
 
   docker-android:
     runs-on: ubuntu-22.04

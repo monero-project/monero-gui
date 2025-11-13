@@ -155,12 +155,20 @@
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
         <file>images/lightning@2x.png</file>
+        <file>images/tor.png</file>
+        <file>images/tor@2x.png</file>
+        <file>images/i2p.png</file>
+        <file>images/i2p@2x.png</file>
         <file>images/logout.png</file>
         <file>images/logout@2x.png</file>
         <file>images/moneroIcon-28x28.png</file>
         <file>images/moneroIcon-28x28@2x.png</file>
         <file>images/lightning-white.png</file>
         <file>images/lightning-white@2x.png</file>
+        <file>images/tor-white.png</file>
+        <file>images/tor-white@2x.png</file>
+        <file>images/i2p-white.png</file>
+        <file>images/i2p-white@2x.png</file>
         <file>components/InputMulti.qml</file>
         <file>components/LineEditMulti.qml</file>
         <file>components/LabelButton.qml</file>
@@ -178,6 +186,7 @@
         <file>images/warning@2x.png</file>
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
+        <file>js/nodes.json</file>
         <file>components/RadioButton.qml</file>
         <file>pages/settings/Settings.qml</file>
         <file>pages/settings/SettingsWallet.qml</file>
@@ -185,6 +194,7 @@
         <file>pages/settings/SettingsLog.qml</file>
         <file>pages/settings/SettingsLayout.qml</file>
         <file>pages/settings/SettingsInfo.qml</file>
+        <file>pages/settings/SettingsNetwork.qml</file>
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
@@ -223,6 +233,7 @@
         <file>wizard/WizardModeSelection.qml</file>
         <file>wizard/WizardModeRemoteNodeWarning.qml</file>
         <file>wizard/WizardModeBootstrap.qml</file>
+        <file>wizard/WizardNetwork.qml</file>
         <file>wizard/WizardMenuItem.qml</file>
         <file>js/Wizard.js</file>
         <file>components/LanguageSidebar.qml</file>
