@@ -53,7 +53,7 @@ function ago(epoch) {
     // Returns '<delta> [seconds|minutes|hours|days] ago' string given an epoch
 
     var now = new Date().getTime() / 1000;
-    var delta = now - epoch;
+    var delta = Math.max(now - epoch, 0);
 
     if(delta < 60)
         return qsTr("%n second(s) ago", "0", Math.floor(delta))
