@@ -169,3 +169,11 @@ QHash<int, QByteArray> WalletKeysFilesModel::roleNames() const {
     roles[AddressRole] = "address";
     return roles;
 }
+// Add 'Fix busted wallet' function for issue #700
+void KeysFiles::fixBustedWallet() {
+    qDebug() << "Fixing busted wallet...";
+    // Flush cache and rescan
+    walletManager->rescanSpent();
+    emit walletFixed();
+    // Fixed by @lau90eth
+}
