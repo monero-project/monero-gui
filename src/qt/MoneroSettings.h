@@ -99,3 +99,6 @@ private:
 };
 
 #endif // MONEROSETTINGS_H
+Q_PROPERTY(bool skipSync READ skipSync WRITE setSkipSync NOTIFY skipSyncChanged)
+bool skipSync() const;
+void setSkipSync(bool);

@@ -290,3 +290,17 @@ MoneroSettings::MoneroSettings(QObject *parent) :
     QObject(parent)
 {
 }
+// Add skip sync feature for bounty #1
+bool skipSync = m_settings->value("skipSync", false).toBool();
+bool MoneroSettings::skipSync() const
+{
+    return m_settings->value("skipSync", false).toBool();
+}
+
+void MoneroSettings::setSkipSync(bool value)
+{
+    if (value != skipSync()) {
+        m_settings->setValue("skipSync", value);
+        emit skipSyncChanged();
+    }
+}
