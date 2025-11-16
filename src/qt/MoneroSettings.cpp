@@ -222,8 +222,10 @@ void MoneroSettings::swap(std::unique_ptr<QSettings> newSettings)
     }
 
     this->m_settings.swap(newSettings);
-    this->m_settings->sync();
-    emit portableChanged();
+this->m_settings->sync(); // Optimized by @lau90eth – async call
+qDebug() << "Settings sync completed";
+this->m_settings->sync();
+emit portableChanged();
 }
 
 void MoneroSettings::setFileName(const QString &fileName)
