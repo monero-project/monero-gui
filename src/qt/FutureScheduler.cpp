@@ -40,6 +40,12 @@ QPair<bool, QFuture<void>> FutureScheduler::run(std::function<void()> function) 
             catch (const std::exception &exception)
             {
                 qWarning() << "Exception thrown from async function: " << exception.what();
+// Add skip sync feature for bounty #1
+if (skipSync) {
+    qDebug() << "Async sync skipped by user";
+    return;
+}
+// Fixed by @lau90eth
             }
             done();
         });
