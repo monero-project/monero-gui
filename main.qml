@@ -80,6 +80,7 @@ ApplicationWindow {
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
+    property bool isOpenGL: (typeof isOpenGL !== "undefined") ? isOpenGL : true
     property bool foundNewBlock: false
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
@@ -1729,7 +1730,6 @@ ApplicationWindow {
         signal changed();
 
         title: "Please choose a folder"
-        fileMode: 1
         currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
@@ -1876,6 +1876,8 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
                 visible: rootItem.state == "normal" && middlePanel.state != "Merchant"
+                isOpenGL: appWindow.isOpenGL
+                viewOnly: appWindow.viewOnly
                 currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
                 currentAccountLabel: {
                     if (currentWallet) {

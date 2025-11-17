@@ -53,6 +53,8 @@ Rectangle {
 
     property int titleBarHeight: 50
     property string copyValue: ""
+    property bool isOpenGL: true
+    property bool viewOnly: false
     Clipboard { id: clipboard }
 
     signal historyClicked()
@@ -95,7 +97,7 @@ Rectangle {
     }
 
     // card with monero logo
-    Column {
+    Item {
         visible: true
         z: 2
         id: column1
@@ -106,217 +108,215 @@ Rectangle {
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
         Item {
-            Item {
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.topMargin: 20
-                anchors.leftMargin: 20
-                height: 490
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 20
+            anchors.leftMargin: 20
+            height: 490
+            width: 260
+
+            Image {
+                id: card
+                visible: true  // Always show the card image
                 width: 260
+                height: 135
+                fillMode: Image.PreserveAspectFit
+                source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
+            }
 
-                Image {
-                    id: card
-                    visible: !isOpenGL || MoneroComponents.Style.blackTheme
-                    width: 260
-                    height: 135
-                    fillMode: Image.PreserveAspectFit
-                    source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
-                }
+            DropShadow {
+                visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                anchors.fill: card
+                horizontalOffset: 3
+                verticalOffset: 3
+                radius: 10.0
+                samples: 15
+                color: "#3B000000"
+                source: card
+                cached: true
+            }
 
-                DropShadow {
-                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
-                    anchors.fill: card
-                    horizontalOffset: 3
-                    verticalOffset: 3
-                    radius: 10.0
-                    samples: 15
-                    color: "#3B000000"
-                    source: card
-                    cached: true
-                }
+            MoneroComponents.TextPlain {
+                id: testnetLabel
+                visible: persistentSettings.nettype != NetworkType.MAINNET
+                text: (persistentSettings.nettype == NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                anchors.left: parent.left
+                anchors.leftMargin: 192
+                font.bold: true
+                font.pixelSize: 12
+                color: "#f33434"
+                themeTransition: false
+            }
 
-                MoneroComponents.TextPlain {
-                    id: testnetLabel
-                    visible: persistentSettings.nettype != NetworkType.MAINNET
-                    text: (persistentSettings.nettype == NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
-                    anchors.top: parent.top
-                    anchors.topMargin: 8
-                    anchors.left: parent.left
-                    anchors.leftMargin: 192
-                    font.bold: true
-                    font.pixelSize: 12
-                    color: "#f33434"
-                    themeTransition: false
-                }
+            MoneroComponents.TextPlain {
+                id: viewOnlyLabel
+                visible: viewOnly
+                text: qsTr("View Only") + translationManager.emptyString
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                anchors.right: testnetLabel.visible ? testnetLabel.left : parent.right
+                anchors.rightMargin: 8
+                font.pixelSize: 12
+                font.bold: true
+                color: "#ff9323"
+                themeTransition: false
+            }
+        }
 
-                MoneroComponents.TextPlain {
-                    id: viewOnlyLabel
-                    visible: viewOnly
-                    text: qsTr("View Only") + translationManager.emptyString
-                    anchors.top: parent.top
-                    anchors.topMargin: 8
-                    anchors.right: testnetLabel.visible ? testnetLabel.left : parent.right
-                    anchors.rightMargin: 8
-                    font.pixelSize: 12
-                    font.bold: true
-                    color: "#ff9323"
-                    themeTransition: false
+        Item {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 20
+            anchors.leftMargin: 20
+            height: 490
+            width: 50
+
+            MoneroComponents.Label {
+                fontSize: 12
+                id: accountIndex
+                text: qsTr("Account") + translationManager.emptyString + " #" + currentAccountIndex
+                color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                anchors.left: parent.left
+                anchors.leftMargin: 60
+                anchors.top: parent.top
+                anchors.topMargin: 23
+                themeTransition: false
+
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: appWindow.showPageRequest("Account")
                 }
             }
 
-            Item {
+            MoneroComponents.Label {
+                fontSize: 16
+                id: accountLabel
+                textWidth: 170
+                color: MoneroComponents.Style.blackTheme ? "white" : "black"
                 anchors.left: parent.left
+                anchors.leftMargin: 60
                 anchors.top: parent.top
-                anchors.topMargin: 20
+                anchors.topMargin: 36
+                themeTransition: false
+                elide: Text.ElideRight
+
+                MouseArea {
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: appWindow.showPageRequest("Account")
+                }
+            }
+
+            MoneroComponents.Label {
+                fontSize: 16
+                visible: isSyncing
+                text: qsTr("Syncing...") + translationManager.emptyString
+                color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                anchors.left: parent.left
                 anchors.leftMargin: 20
-                height: 490
-                width: 50
+                anchors.bottom: currencyLabel.top
+                anchors.bottomMargin: 15
+                themeTransition: false
+            }
 
-                MoneroComponents.Label {
-                    fontSize: 12
-                    id: accountIndex
-                    text: qsTr("Account") + translationManager.emptyString + " #" + currentAccountIndex
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 60
-                    anchors.top: parent.top
-                    anchors.topMargin: 23
-                    themeTransition: false
-
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: appWindow.showPageRequest("Account")
+            MoneroComponents.TextPlain {
+                id: currencyLabel
+                font.pixelSize: 16
+                text: {
+                    if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                        return appWindow.fiatApiCurrencySymbol();
+                    } else {
+                        return "XMR"
                     }
                 }
+                color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                anchors.top: parent.top
+                anchors.topMargin: 100
+                themeTransition: false
 
-                MoneroComponents.Label {
-                    fontSize: 16
-                    id: accountLabel
-                    textWidth: 170
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 60
-                    anchors.top: parent.top
-                    anchors.topMargin: 36
-                    themeTransition: false
-                    elide: Text.ElideRight
+                MouseArea {
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    visible: persistentSettings.fiatPriceEnabled
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: persistentSettings.fiatPriceToggle = !persistentSettings.fiatPriceToggle
+                }
+            }
 
-                    MouseArea {
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: appWindow.showPageRequest("Account")
+            MoneroComponents.TextPlain {
+                id: balancePart1
+                themeTransition: false
+                anchors.left: parent.left
+                anchors.leftMargin: 58
+                anchors.baseline: currencyLabel.baseline
+                color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                Binding on color {
+                    when: balancePart1MouseArea.containsMouse || balancePart2MouseArea.containsMouse
+                    value: MoneroComponents.Style.orange
+                }
+                text: {
+                    if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                        return balanceFiatString.split('.')[0] + "."
+                    } else {
+                        return balanceString.split('.')[0] + "."
                     }
                 }
-
-                MoneroComponents.Label {
-                    fontSize: 16
-                    visible: isSyncing
-                    text: qsTr("Syncing...") + translationManager.emptyString
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
-                    anchors.bottom: currencyLabel.top
-                    anchors.bottomMargin: 15
-                    themeTransition: false
-                }
-
-                MoneroComponents.TextPlain {
-                    id: currencyLabel
-                    font.pixelSize: 16
-                    text: {
-                        if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
-                            return appWindow.fiatApiCurrencySymbol();
-                        } else {
-                            return "XMR"
-                        }
-                    }
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
-                    anchors.top: parent.top
-                    anchors.topMargin: 100
-                    themeTransition: false
-
-                    MouseArea {
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        visible: persistentSettings.fiatPriceEnabled
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: persistentSettings.fiatPriceToggle = !persistentSettings.fiatPriceToggle
+                font.pixelSize: {
+                    var defaultSize = 29;
+                    var digits = (balancePart1.text.length - 1)
+                    if (digits > 2 && !(persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle)) {
+                        return defaultSize - 1.1 * digits
+                    } else {
+                        return defaultSize
                     }
                 }
+                MouseArea {
+                    id: balancePart1MouseArea
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                            console.log("Copied to clipboard");
+                            clipboard.setText(balancePart1.text + balancePart2.text);
+                            appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                    }
+                }
+            }
+            MoneroComponents.TextPlain {
+                id: balancePart2
+                themeTransition: false
+                anchors.left: balancePart1.right
+                anchors.leftMargin: 2
+                anchors.baseline: currencyLabel.baseline
+                color: balancePart1.color
+                text: {
+                    if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                        return balanceFiatString.split('.')[1]
+                    } else {
+                        return balanceString.split('.')[1]
+                    }
+                }
+                font.pixelSize: 16
+                MouseArea {
+                    id: balancePart2MouseArea
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: balancePart1MouseArea.clicked(mouse)
+                }
+            }
 
-                MoneroComponents.TextPlain {
-                    id: balancePart1
-                    themeTransition: false
-                    anchors.left: parent.left
-                    anchors.leftMargin: 58
-                    anchors.baseline: currencyLabel.baseline
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    Binding on color {
-                        when: balancePart1MouseArea.containsMouse || balancePart2MouseArea.containsMouse
-                        value: MoneroComponents.Style.orange
-                    }
-                    text: {
-                        if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
-                            return balanceFiatString.split('.')[0] + "."
-                        } else {
-                            return balanceString.split('.')[0] + "."
-                        }
-                    }
-                    font.pixelSize: {
-                        var defaultSize = 29;
-                        var digits = (balancePart1.text.length - 1)
-                        if (digits > 2 && !(persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle)) {
-                            return defaultSize - 1.1 * digits
-                        } else {
-                            return defaultSize
-                        }
-                    }
-                    MouseArea {
-                        id: balancePart1MouseArea
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                                console.log("Copied to clipboard");
-                                clipboard.setText(balancePart1.text + balancePart2.text);
-                                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
-                        }
-                    }
-                }
-                MoneroComponents.TextPlain {
-                    id: balancePart2
-                    themeTransition: false
-                    anchors.left: balancePart1.right
-                    anchors.leftMargin: 2
-                    anchors.baseline: currencyLabel.baseline
-                    color: balancePart1.color
-                    text: {
-                        if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
-                            return balanceFiatString.split('.')[1]
-                        } else {
-                            return balanceString.split('.')[1]
-                        }
-                    }
-                    font.pixelSize: 16
-                    MouseArea {
-                        id: balancePart2MouseArea
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: balancePart1MouseArea.clicked(mouse)
-                    }
-                }
-
-                Item { //separator
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    height: 1
-                }
+            Item { //separator
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 1
             }
         }
     }

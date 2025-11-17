@@ -389,7 +389,7 @@ Item {
                     
                     // Add empty cells for days before the first day of month
                     Repeater {
-                        model: getFirstDayOfMonth()
+                        model: calendarContainer.getFirstDayOfMonth()
                         Item {
                             width: calendarContainer.width / 7
                             height: (calendarContainer.height - 20) / 6
@@ -398,15 +398,15 @@ Item {
                     
                     // Days of the month
                     Repeater {
-                        model: getDaysInMonth()
-                        property int day: index + 1
+                        model: calendarContainer.getDaysInMonth()
                         
                         Item {
                             width: calendarContainer.width / 7
                             height: (calendarContainer.height - 20) / 6
                             
-                            property bool isCurrentDay: isToday(visibleYear, visibleMonth, day)
-                            property bool isSelectedDay: isSelected(visibleYear, visibleMonth, day)
+                            property int day: index + 1
+                            property bool isCurrentDay: calendarContainer.isToday(calendarContainer.visibleYear, calendarContainer.visibleMonth, day)
+                            property bool isSelectedDay: calendarContainer.isSelected(calendarContainer.visibleYear, calendarContainer.visibleMonth, day)
                             
                             Rectangle {
                                 id: dayRect
@@ -451,7 +451,7 @@ Item {
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: {
-                                    var date = new Date(visibleYear, visibleMonth, day)
+                                    var date = new Date(calendarContainer.visibleYear, calendarContainer.visibleMonth, day)
                                     currentDate = date
                                     popup.close()
                                     datePicker.dateChanged()
@@ -463,8 +463,8 @@ Item {
                     // Add empty cells for days after the last day of month
                     Repeater {
                         model: {
-                            var firstDay = getFirstDayOfMonth()
-                            var daysInMonth = getDaysInMonth()
+                            var firstDay = calendarContainer.getFirstDayOfMonth()
+                            var daysInMonth = calendarContainer.getDaysInMonth()
                             var totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7
                             return Math.max(0, totalCells - firstDay - daysInMonth)
                         }

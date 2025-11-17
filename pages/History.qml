@@ -1756,7 +1756,6 @@ Rectangle {
     FileDialog {
         id: writeCSVFileDialog
         title: qsTr("Please choose a folder") + translationManager.emptyString
-        fileMode: 1
         onRejected: {
             console.log("csv write canceled")
         }
