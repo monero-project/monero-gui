@@ -161,7 +161,8 @@ TransactionInfo::TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *
     , m_description(QString::fromStdString(pimpl->description()))
     , m_pending(pimpl->isPending())
     , m_subaddrAccount(pimpl->subaddrAccount())
-    , m_timestamp(QDateTime::fromTime_t(pimpl->timestamp()))
+    // Qt6: fromTime_t() removed, use fromSecsSinceEpoch() instead
+    , m_timestamp(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(pimpl->timestamp())))
     , m_unlockTime(pimpl->unlockTime())
 {
     for (auto const &t: pimpl->transfers())

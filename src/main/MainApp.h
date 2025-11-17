@@ -28,13 +28,14 @@
 
 #ifndef MAINAPP_H
 #define MAINAPP_H
-#include <QApplication>
+// Qt6: QML apps use QGuiApplication, not QApplication (which requires QtWidgets)
+#include <QGuiApplication>
 
-class MainApp : public QApplication
+class MainApp : public QGuiApplication
 {
     Q_OBJECT
 public:
-    MainApp(int &argc, char** argv) : QApplication(argc, argv) {};
+    MainApp(int &argc, char** argv) : QGuiApplication(argc, argv) {};
 private:
     bool event(QEvent *e);
 signals:

@@ -129,6 +129,7 @@ set(QT6_LIBRARIES
   Qt6::Qml
   Qt6::Svg
   Qt6::Xml
+  Qt6::Widgets  # Required for QFileDialog in oshelper.cpp (TODO: migrate to QML FileDialog)
 )
 
 if(WITH_SCANNER)
@@ -151,7 +152,7 @@ if(UNIX)
 endif()
 
 # Find Qt6 components
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml Gui Svg Xml Network)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml Gui Svg Xml Network Widgets)
 
 if(WITH_SCANNER)
   find_package(Qt6 REQUIRED COMPONENTS Multimedia)

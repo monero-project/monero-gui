@@ -50,16 +50,17 @@ namespace Monero {
 struct Wallet; // forward declaration
 }
 
-
+// Qt6: Forward declarations not sufficient for Q_PROPERTY with pointer types
+// Need full definitions for meta type system
 class TransactionHistory;
 class TransactionHistoryModel;
-class TransactionHistorySortFilterModel;
+#include "model/TransactionHistorySortFilterModel.h"
 class AddressBook;
-class AddressBookModel;
+#include "model/AddressBookModel.h"
 class Subaddress;
-class SubaddressModel;
+#include "model/SubaddressModel.h"
 class SubaddressAccount;
-class SubaddressAccountModel;
+#include "model/SubaddressAccountModel.h"
 
 class Wallet : public QObject, public PassprasePrompter
 {

@@ -28,6 +28,7 @@
 
 #include "filter.h"
 #include <QKeyEvent>
+#include <QKeySequence>
 #include <QDebug>
 
 filter::filter(QObject *parent) :
@@ -72,7 +73,8 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             sks = "Ctrl";
 #endif
         } else {
-            QKeySequence ks(ke->modifiers() + ke->key());
+            // Qt6: operator+ deleted for QKeySequence, use QKeyCombination constructor
+            QKeySequence ks(QKeyCombination(ke->modifiers(), Qt::Key(ke->key())));
             sks = ks.toString();
         }
 #ifndef Q_OS_MAC
@@ -106,7 +108,8 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             sks = "Ctrl";
 #endif
         } else {
-            QKeySequence ks(ke->modifiers() + ke->key());
+            // Qt6: operator+ deleted for QKeySequence, use QKeyCombination constructor
+            QKeySequence ks(QKeyCombination(ke->modifiers(), Qt::Key(ke->key())));
             sks = ks.toString();
         }
 #ifndef Q_OS_MAC

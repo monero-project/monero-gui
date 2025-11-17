@@ -26,7 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <QApplication>
+// Qt6: QML apps use QGuiApplication
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QStandardPaths>
@@ -504,7 +505,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("homePath", QDir::homePath());
-    engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("applicationDirectory", QGuiApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
 #ifdef WITH_UPDATER
     engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", parser.isSet(disableCheckUpdatesOption));

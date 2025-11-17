@@ -38,7 +38,7 @@
 #include <QDebug>
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QProcess>
 #include <QMap>
 #include <QCryptographicHash>
@@ -241,13 +241,13 @@ P2PoolManager::P2PoolManager(QObject *parent)
     started = false;
     // Platform dependent path to p2pool
 #ifdef Q_OS_WIN
-    m_p2poolPath = QApplication::applicationDirPath() + "/p2pool";
+    m_p2poolPath = QGuiApplication::applicationDirPath() + "/p2pool";
     if (!QDir(m_p2poolPath).exists()) {
         QDir().mkdir(m_p2poolPath);
     }
     m_p2pool = m_p2poolPath + "/p2pool.exe";
 #elif defined(Q_OS_UNIX)
-    m_p2poolPath = QApplication::applicationDirPath();
+    m_p2poolPath = QGuiApplication::applicationDirPath();
     m_p2pool = m_p2poolPath + "/p2pool";
 #endif
     if (m_p2pool.length() == 0) {

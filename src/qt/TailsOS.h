@@ -1,7 +1,7 @@
 #ifndef TAILSOS_H
 #define TAILSOS_H
 
-#include <QApplication>
+#include <QGuiApplication>
 
 
 class TailsOS

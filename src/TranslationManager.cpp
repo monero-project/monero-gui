@@ -28,7 +28,7 @@
 
 #include "TranslationManager.h"
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QTranslator>
 #include <QDir>
 #include <QDebug>

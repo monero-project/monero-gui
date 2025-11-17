@@ -37,7 +37,7 @@
 #include <QDebug>
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QProcess>
 #include <QStorageInfo>
 #include <QVariantMap>
@@ -402,9 +402,9 @@ DaemonManager::DaemonManager(QObject *parent)
 
     // Platform depetent path to monerod
 #ifdef Q_OS_WIN
-    m_monerod = QApplication::applicationDirPath() + "/monerod.exe";
+    m_monerod = QGuiApplication::applicationDirPath() + "/monerod.exe";
 #elif defined(Q_OS_UNIX)
-    m_monerod = QApplication::applicationDirPath() + "/monerod";
+    m_monerod = QGuiApplication::applicationDirPath() + "/monerod";
 #endif
 
     if (m_monerod.length() == 0) {

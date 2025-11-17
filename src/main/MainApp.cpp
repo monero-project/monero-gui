@@ -39,5 +39,6 @@ bool MainApp::event (QEvent *event)
     }
 
     // Pass unhandled events to base class 
-    return QApplication::event(event);
+    // Qt6: Use QGuiApplication for QML apps
+    return QGuiApplication::event(event);
 }

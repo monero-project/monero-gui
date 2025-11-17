@@ -31,7 +31,7 @@
 
 #include <QtCore>
 #include <QRegularExpression>
-#include <QApplication>
+#include <QGuiApplication>
 
 bool fileExists(QString path);
 QByteArray fileGetContents(QString path);

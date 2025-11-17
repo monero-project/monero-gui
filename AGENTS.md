@@ -1,19 +1,58 @@
-# Cursor Agents for Monero GUI Upgrade
+1. Project Goal
+We are performing a "world-class" migration of the Monero GUI to the C++23 standard  and the Qt 6.7 framework. All development MUST be conducted on this M3-native (arm64) environment. The objectives are code correctness, modernization, security, and performance.   
 
-## General Rules
-- Always use C++23 features where beneficial (e.g., std::ranges for TransactionHistoryModel, std::expected for error handling in Wallet.cpp).
-- For Qt 6.10/QML: Use QML modules like QtQuick 2.17, avoid deprecated QtQuick.Controls 1; prefer signals/slots over callbacks.
-- Docker-First: Suggest changes to CMakeLists.txt/Dockerfiles for cross-platform; never assume native builds.
-- Error-Free: Generate code with static_asserts, Q_INVOKABLE for QML exposure, and unit tests via QtTest.
-- Security: For crypto (Monero), use libsodium for all crypto ops; add const-correctness, no raw pointers.
-- Prompt Style: Be verbose, reference files (e.g., "In src/libwalletqt/Wallet.cpp"), suggest diffs.
+2. Architectural & Code Style Rules
+C++ Standard: C++23. All new code MUST use C++23 features. All refactored code MUST be modernized to C++23.   
 
-## Upgrade Agent
-- Focus: Port Qt5 -> Qt6 (e.g., replace QQuickView with QQmlApplicationEngine), C++17 -> C++23 (e.g., coroutines in network.cpp).
-- Output: Multi-file Composer edits + tests.
+Qt Standard: Qt 6.7. All Qt 5 deprecated APIs are FORBIDDEN.   
 
-## I2P Agent
-- Integrate via libi2pd (C++ wrapper); toggle in Settings.qml.
+Qt6:: namespaces MUST be used in CMake.
 
-## Security Agent
-- Add features like TOTP 2FA, hardware attestation.
+QtQuick.Controls 2 MUST be used. QtQuick.Controls 1 is removed.   
+
+var properties MUST be used instead of variant.   
+
+Modern QML layouts (GridLayout, Grid) are PREFERRED over Row, Column, and Anchors.   
+
+Error-Free Mandate: All C++ code MUST compile without warnings and pass all clang-tidy checks.   
+
+I2P Architecture: The I2P stack consists of:
+
+The i2pd router, built as a static library (via Git submodule).   
+
+The libsam3 C library  (via vcpkg) for SAM v3  communication.   
+
+A new C++/Qt SAMManager class that wraps libsam3 for RAII and signal/slot integration.
+
+The existing I2PManager , which orchestrates the i2pd library and SAMManager.   
+
+3. Build & Test Commands (M3-Native)
+**Configure (The "Ground-Truth" Command):**bash cmake -G Ninja -B build -DCMAKE_PREFIX_PATH="/opt/homebrew/opt/qt6;/opt/homebrew/opt/icu4c;/opt/homebrew/opt/abseil" -DCMAKE_CXX_FLAGS="-std=gnu++17"
+
+Build:
+
+Bash
+
+cmake --build build
+Run (The "Live View"):
+
+./build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui ```
+
+Run Tests:
+
+Bash
+
+cd build && ctest --output-on-failure
+4. Commit Message Format
+Commits MUST be "humanized," clear, and descriptive.
+
+Use the format: type(scope): subject
+
+type: feat, fix, refactor, build, style, test.
+
+scope: qml, cmake, i2p, wallet, etc.
+
+Example: refactor(qml): migrate Transfer.qml to use modern GridLayout
+
+
+---

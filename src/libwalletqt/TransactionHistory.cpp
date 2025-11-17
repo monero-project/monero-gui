@@ -203,7 +203,8 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         quint64 blockHeight = info.blockHeight();
         QDateTime timeStamp = info.timestamp();
         QString date = info.date() + " " + info.time();
-        uint epoch = timeStamp.toTime_t();
+        // Qt6: toTime_t() removed, use toSecsSinceEpoch() instead
+        uint epoch = timeStamp.toSecsSinceEpoch();
         QString displayAmount = info.displayAmount();
         QString paymentId = info.paymentId();
         if(paymentId == "0000000000000000"){
