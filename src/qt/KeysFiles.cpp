@@ -126,7 +126,9 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
         quint8 networkType = networkTypeAndAddress.first;
         QString address = networkTypeAndAddress.second;
 
-        this->addWalletKeysFile(WalletKeysFiles(wallet, networkType, std::move(address)));
+        // Convert QString wallet path to QFileInfo for constructor
+        QFileInfo walletInfo(wallet);
+        this->addWalletKeysFile(WalletKeysFiles(walletInfo, networkType, std::move(address)));
     }
 }
 

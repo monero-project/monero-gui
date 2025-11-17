@@ -33,18 +33,25 @@
 #include <expected>
 #include <string>
 
+#include "FutureScheduler.h"
+
 // TODO: wallet_merged - epee library triggers the warnings
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wreorder"
+// Qt6: Include net/http.h - the HttpClient inheritance issue is in monero submodule
+// This is a known compatibility issue that needs to be fixed in the monero submodule
 #include <net/http.h>
 #pragma GCC diagnostic pop
 
-#include "FutureScheduler.h"
-
+// Qt6: HttpClient inherits from net::http::client
+// Note: There's a known issue where Qt6's meta type system tries to use HttpClient
+// as a network_address type, causing compilation errors. This is a monero submodule issue.
 class HttpClient : public QObject, public net::http::client
 {
     Q_OBJECT
+    // Qt6: Explicitly disable copy/move - QObject already does this, but be explicit
+    Q_DISABLE_COPY_MOVE(HttpClient)
     Q_PROPERTY(quint64 contentLength READ contentLength NOTIFY contentLengthChanged);
     Q_PROPERTY(quint64 received READ received NOTIFY receivedChanged);
 
@@ -68,6 +75,9 @@ private:
     std::atomic<size_t> m_contentLength;
     std::atomic<size_t> m_received;
 };
+
+// Note: Q_DECLARE_OPAQUE_POINTER removed - no longer needed since network_address
+// template constructor is constrained via SFINAE in monero submodule
 
 class Network : public QObject
 {

@@ -30,6 +30,8 @@
 
 #include <QReadWriteLock>
 
+// Forward declare HttpClient to avoid triggering Qt6 meta type registration issues
+class HttpClient;
 #include "network.h"
 
 class Downloader : public QObject

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  monero-gui-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.linux
+    container_name: monero-gui-dev
+    volumes:
+      # Mount source directories for live reload
+      - ./components:/workspace/components:ro
+      - ./pages:/workspace/pages:ro
+      - ./wizard:/workspace/wizard:ro
+      - ./main.qml:/workspace/main.qml:ro
+      - ./LeftPanel.qml:/workspace/LeftPanel.qml:ro
+      - ./MiddlePanel.qml:/workspace/MiddlePanel.qml:ro
+      - ./src:/workspace/src:rw
+      - ./build:/workspace/build:rw
+      - ./qml.qrc:/workspace/qml.qrc:ro
+      # Mount for X11 display (Linux)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - QT_QPA_PLATFORM=xcb
+      - QML_DISABLE_DISK_CACHE=1
+      - QML_LIVE_RELOAD=1
+    network_mode: host
+    privileged: true
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+

@@ -30,7 +30,7 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QtMac>
+// Qt6: QtMac removed, QUrl::toNSURL() is now available directly from QtCore
 #include "macoshelper.h"
 
 #import <Foundation/Foundation.h>

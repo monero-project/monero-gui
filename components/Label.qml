@@ -60,6 +60,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         anchors.left: parent.left
+        // HOT RELOAD TEST: Modify font properties to test live reload
         font.family: {
             if(fontFamily){
                 return fontFamily;

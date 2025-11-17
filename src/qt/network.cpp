@@ -36,6 +36,13 @@
 
 #include "utils.h"
 
+// Include full net/http.h - already included in network.h but needed here for implementation
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wreorder"
+#include <net/http.h>
+#pragma GCC diagnostic pop
+
 using epee::net_utils::http::fields_list;
 using epee::net_utils::http::http_response_info;
 using epee::net_utils::http::abstract_http_client;
@@ -230,6 +237,10 @@ std::expected<std::string, QString> Network::getExpected(
 
     return std::string(pri->m_body);
 }
+
+// Qt6: Prevent meta type registration for HttpClient to avoid network_address template issues
+// This must be done in .cpp file after all includes
+Q_DECLARE_OPAQUE_POINTER(HttpClient*)
 
 std::expected<std::string, std::string> Network::getExpected(const QString &url, const QString &contentType /* = {} */) const
 {

@@ -37,6 +37,9 @@
 #include <QObject>
 #include <QScreen>
 #include <QThread>
+#include <QFileSystemWatcher>
+#include <QDir>
+#include <QTimer>
 
 #include <version.h>
 
@@ -537,6 +540,81 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         return 1;
     }
     QObject *rootObject = engine.rootObjects().first();
+
+    // Live reload support: Watch QML files for changes
+    bool liveReloadEnabled = qEnvironmentVariableIsSet("QML_LIVE_RELOAD") || 
+                             qgetenv("QML_LIVE_RELOAD") == "1";
+    
+    if (liveReloadEnabled) {
+        qWarning() << "QML Live Reload enabled - watching for file changes...";
+        
+        QFileSystemWatcher *watcher = new QFileSystemWatcher(&app);
+        QTimer *reloadTimer = new QTimer(&app);
+        reloadTimer->setSingleShot(true);
+        reloadTimer->setInterval(500); // Debounce: wait 500ms after last change
+        
+        // Watch QML directories
+        QString projectRoot = QDir::currentPath();
+        QStringList watchPaths;
+        
+        // Add QML directories to watch
+        watchPaths << projectRoot + "/components";
+        watchPaths << projectRoot + "/pages";
+        watchPaths << projectRoot + "/wizard";
+        watchPaths << projectRoot + "/main.qml";
+        watchPaths << projectRoot + "/LeftPanel.qml";
+        watchPaths << projectRoot + "/MiddlePanel.qml";
+        
+        // Filter to only existing paths
+        QStringList existingPaths;
+        for (const QString &path : watchPaths) {
+            QFileInfo info(path);
+            if (info.exists()) {
+                existingPaths << path;
+                watcher->addPath(path);
+            }
+        }
+        
+        if (!existingPaths.isEmpty()) {
+            qWarning() << "Watching" << existingPaths.size() << "paths for changes";
+            
+            // Connect file change signal to reload timer
+            QObject::connect(watcher, &QFileSystemWatcher::fileChanged, reloadTimer, [reloadTimer]() {
+                qWarning() << "QML file changed - reloading...";
+                reloadTimer->start(); // Restart debounce timer
+            });
+            
+            QObject::connect(watcher, &QFileSystemWatcher::directoryChanged, reloadTimer, [reloadTimer]() {
+                qWarning() << "QML directory changed - reloading...";
+                reloadTimer->start(); // Restart debounce timer
+            });
+            
+            // When timer fires, reload the QML
+            QObject::connect(reloadTimer, &QTimer::timeout, &engine, [&engine, watcher, existingPaths]() {
+                qWarning() << "Reloading QML engine...";
+                
+                // Clear the engine and reload
+                engine.clearComponentCache();
+                engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+                
+                if (engine.rootObjects().isEmpty()) {
+                    qCritical() << "Error: Failed to reload QML";
+                } else {
+                    qWarning() << "QML reloaded successfully";
+                    
+                    // Re-add paths that may have been removed
+                    for (const QString &path : existingPaths) {
+                        QFileInfo info(path);
+                        if (info.exists() && !watcher->files().contains(path) && !watcher->directories().contains(path)) {
+                            watcher->addPath(path);
+                        }
+                    }
+                }
+            });
+        } else {
+            qWarning() << "No QML paths found to watch. Live reload disabled.";
+        }
+    }
     if (!rootObject)
     {
         qCritical() << "Error: no root objects";

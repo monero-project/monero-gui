@@ -77,14 +77,16 @@ Item {
             height: checkBox.height
             width: checkBox.height
 
-            Rectangle {
-                id: backgroundRect
-                visible: checkBox.border
-                anchors.fill: parent
-                radius: 3
-                // Testing red fill override: conditional on enabled/checked state
-                color: (checkBox.enabled && checkBox.checked) ? "red" : 
-                       (checkBox.enabled ? MoneroComponents.Style.inputBoxBackground : MoneroComponents.Style.inputBoxBackgroundDisabled)
+        Rectangle {
+            id: backgroundRect
+            visible: checkBox.border
+            anchors.fill: parent
+            radius: 3
+            // Testing red fill override: conditional on enabled/checked state
+            // HOT RELOAD TEST: Change this color property to test live reload!
+            // Try: "blue", "green", "#ff00ff", etc.
+            color: (checkBox.enabled && checkBox.checked) ? "red" :
+                   (checkBox.enabled ? MoneroComponents.Style.inputBoxBackground : MoneroComponents.Style.inputBoxBackgroundDisabled)
                 border.color:
                     if (checkBox.activeFocus) {
                         return MoneroComponents.Style.inputBorderColorActive;
@@ -126,6 +128,7 @@ Item {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
             // Testing red text override: conditional on checked state
+            // HOT RELOAD TEST: This comment can be modified to test live reload
             color: checkBox.checked ? "red" : MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.NoWrap
