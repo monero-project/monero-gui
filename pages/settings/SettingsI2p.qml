@@ -78,6 +78,11 @@ Rectangle {
             initialAddress: persistentSettings.i2pAddress || "127.0.0.1:7656"
             onEditingFinished: {
                 persistentSettings.i2pAddress = i2pRouterEdit.getAddress();
+                // Update wallet proxy if i2p is enabled and wallet is connected
+                if (persistentSettings.i2pEnabled && currentWallet && currentWallet.connected()) {
+                    currentWallet.proxyAddress = persistentSettings.getI2pProxyAddress();
+                    currentWallet.connectToDaemon();
+                }
             }
         }
 

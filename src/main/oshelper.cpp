@@ -43,6 +43,8 @@
 #include <QFileInfo>
 #include <QString>
 #include <QUrl>
+#include <QTcpSocket>
+#include <QHostAddress>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -331,4 +333,42 @@ void OSHelper::openSeedTemplate() const
 {
     QFile::copy(":/wizard/template.pdf", QDir::tempPath() + "/seed_template.pdf");
     openFile(QDir::tempPath() + "/seed_template.pdf");
+}
+
+QString OSHelper::testI2pConnection(const QString &address) const
+{
+    // Parse address format: "host:port"
+    QStringList parts = address.split(":");
+    if (parts.size() != 2) {
+        return QString("ERROR: Invalid address format. Expected 'host:port'");
+    }
+
+    QString host = parts[0].trimmed();
+    bool ok;
+    quint16 port = parts[1].trimmed().toUShort(&ok);
+
+    if (!ok || port == 0) {
+        return QString("ERROR: Invalid port number");
+    }
+
+    // Attempt TCP connection to i2p router
+    QTcpSocket socket;
+    socket.connectToHost(host, port);
+
+    // Wait for connection with 5 second timeout
+    if (!socket.waitForConnected(5000)) {
+        QString errorMsg = socket.errorString();
+        if (errorMsg.isEmpty()) {
+            errorMsg = "Connection timeout";
+        }
+        return QString("ERROR: Failed to connect to %1:%2 - %3").arg(host).arg(port).arg(errorMsg);
+    }
+
+    // Connection successful
+    socket.disconnectFromHost();
+    if (socket.state() != QAbstractSocket::UnconnectedState) {
+        socket.waitForDisconnected(1000);
+    }
+
+    return QString("SUCCESS: Connected to i2p router at %1:%2").arg(host).arg(port);
 }

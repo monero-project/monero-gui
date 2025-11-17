@@ -271,6 +271,15 @@ Rectangle {
             checked: persistentSettings.i2pEnabled
             onClicked: {
                 persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
+                // Reconnect wallet with new proxy settings if wallet is open
+                if (currentWallet && currentWallet.connected()) {
+                    var proxyAddress = persistentSettings.i2pEnabled ? 
+                        persistentSettings.getI2pProxyAddress() : 
+                        persistentSettings.getWalletProxyAddress();
+                    currentWallet.proxyAddress = proxyAddress;
+                    // Trigger reconnection by calling connectToDaemon
+                    currentWallet.connectToDaemon();
+                }
             }
             text: qsTr("Enable i2p for all incoming and outgoing Monero network activities") + translationManager.emptyString
         }
