@@ -182,6 +182,17 @@ Rectangle {
         }
 
         MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.server
+            description: qsTr("Configure i2p router settings for anonymous network connections.") + translationManager.emptyString
+            title: qsTr("Configure i2p") + translationManager.emptyString
+
+            onClicked: {
+                // Navigate to i2p settings tab
+                middlePanel.settingsView.settingsStateViewState = "I2P";
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
             iconText: FontAwesome.cashRegister
             isLast: true
             description: qsTr("Receive Monero for your business, easily.") + translationManager.emptyString

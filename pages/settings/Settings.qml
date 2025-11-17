@@ -65,6 +65,11 @@ ColumnLayout {
             onSelected: settingsStateView.state = "UI"
         }
         MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "I2P"
+            text: qsTr("i2p") + translationManager.emptyString
+            onSelected: settingsStateView.state = "I2P"
+        }
+        MoneroComponents.NavbarItem {
             active: settingsStateView.state == "Node"
             text: qsTr("Node") + translationManager.emptyString
             visible: appWindow.walletMode >= 2
@@ -89,6 +94,7 @@ ColumnLayout {
         property Item previousView
         property SettingsWallet settingsWalletView: SettingsWallet { }
         property SettingsLayout settingsLayoutView: SettingsLayout { }
+        property SettingsI2p settingsI2pView: SettingsI2p { }
         property SettingsNode settingsNodeView: SettingsNode { }
         property SettingsLog settingsLogView: SettingsLog { }
         property SettingsInfo settingsInfoView: SettingsInfo { }
@@ -121,6 +127,10 @@ ColumnLayout {
                 name: "UI"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsLayoutView }
                 PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsLayoutView.layoutHeight + 140 }
+            }, State {
+                name: "I2P"
+                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsI2pView }
+                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsI2pView.i2pHeight + 140 }
             }, State {
                 name: "Node"
                 PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsNodeView }

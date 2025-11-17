@@ -1528,6 +1528,11 @@ ApplicationWindow {
 
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
+        
+        // i2p settings
+        property string i2pAddress: "127.0.0.1:7656"
+        property bool i2pEnabled: false
+        
         function getProxyAddress() {
             if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
                 return "";
@@ -1537,6 +1542,17 @@ ApplicationWindow {
                 return "127.0.0.1:0";
             }
             return proxyAddressSetOrForced;
+        }
+        
+        // Get i2p proxy address if enabled, otherwise return empty string
+        function getI2pProxyAddress() {
+            if (!i2pEnabled) {
+                return "";
+            }
+            if (i2pAddress == "") {
+                return "127.0.0.1:7656"; // Default i2p router address
+            }
+            return i2pAddress;
         }
         function getWalletProxyAddress() {
             if (!useRemoteNode) {
@@ -2181,6 +2197,42 @@ ApplicationWindow {
         console.log("resetting android close");
         androidCloseTapped = false;
         statusMessage.visible = false
+    }
+
+    function testI2pConnection(address) {
+        // Test i2p connection by attempting to connect to the router
+        // This is a placeholder - will be implemented in C++ for proper testing
+        var parts = address.split(":");
+        if (parts.length !== 2) {
+            return {success: false, message: "Invalid address format. Use address:port"};
+        }
+        
+        var host = parts[0];
+        var port = parseInt(parts[1]);
+        
+        if (isNaN(port) || port < 1 || port > 65535) {
+            return {success: false, message: "Invalid port number"};
+        }
+        
+        // For now, return a placeholder response
+        // TODO: Implement actual connection test in C++
+        // This should attempt a simple TCP connection to the i2p router
+        showStatusMessage(qsTr("Testing i2p connection..."), 2);
+        
+        // Simulate async test (will be replaced with actual C++ implementation)
+        Qt.callLater(function() {
+            // Placeholder: assume connection succeeds if address is valid
+            // In real implementation, this will test the actual connection
+            var result = {success: true, message: qsTr("Connection test not yet implemented. Please verify your i2p router is running.")};
+            
+            // Find and update the SettingsI2p page if it's loaded
+            if (middlePanel.settingsView && middlePanel.settingsView.settingsStateView && 
+                middlePanel.settingsView.settingsStateView.settingsI2pView) {
+                middlePanel.settingsView.settingsStateView.settingsI2pView.updateTestResult(result.success, result.message);
+            }
+        });
+        
+        return {success: true, message: qsTr("Testing...")};
     }
 
     function showStatusMessage(msg,timeout) {

@@ -266,6 +266,16 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: i2pCheckbox
+            Layout.topMargin: 6
+            checked: persistentSettings.i2pEnabled
+            onClicked: {
+                persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
+            }
+            text: qsTr("Enable i2p for all incoming and outgoing Monero network activities") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: proxyCheckbox
             Layout.topMargin: 6
             enabled: !socksProxyFlagSet
