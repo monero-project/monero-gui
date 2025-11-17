@@ -1729,7 +1729,7 @@ ApplicationWindow {
         signal changed();
 
         title: "Please choose a folder"
-        selectFolder: true
+        fileMode: 1
         currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")

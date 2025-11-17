@@ -299,7 +299,7 @@ Rectangle{
                     onInputLabelLinkActivated: {
                         //mouse.accepted = false
                         if(persistentSettings.blockchainDataDir !== ""){
-                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                            blockchainFileDialog.currentFolder = "file://" + persistentSettings.blockchainDataDir;
                         }
                         blockchainFileDialog.open();
                         blockchainFolder.focus = true;

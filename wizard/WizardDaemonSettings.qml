@@ -95,7 +95,7 @@ ColumnLayout {
                 text: qsTr("Browse") + translationManager.emptyString
                 onClicked: {
                     if(persistentSettings.blockchainDataDir != "");
-                        blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                        blockchainFileDialog.currentFolder = "file://" + persistentSettings.blockchainDataDir;
                     blockchainFileDialog.open();
                     blockchainFolder.focus = true;
                 }

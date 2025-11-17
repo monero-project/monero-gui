@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 6.6
-import QtQuick.Layouts 6.63
+import QtQuick.Layouts 6.6
 
 import FontAwesome 1.0
 

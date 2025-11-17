@@ -750,7 +750,7 @@ Rectangle {
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-        currentFolder: shortcuts.pictures
+        currentFolder: "file://" + oshelper.picturesLocation()
             nameFilters: ["Image (*.png)"]
             onAccepted: {
                 if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {

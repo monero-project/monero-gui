@@ -204,47 +204,41 @@ Rectangle {
                 anchors.fill:parent
                 clip: true // otherwise animation will affect left panel
 
-                // Qt6: StackViewDelegate removed, use delegate Item with getTransition function
-                delegate: Item {
-                    function getTransition(operation, target, properties) {
-                        switch (operation) {
-                            case StackView.PushTransition:
-                                return pushTransition;
-                            case StackView.PopTransition:
-                                return popTransition;
-                            case StackView.ReplaceTransition:
-                                return replaceTransition;
-                            default:
-                                return null;
-                        }
+                // Qt6: StackViewDelegate removed, use pushEnter/pushExit/popEnter/popExit directly
+                pushEnter: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: -stackView.width
+                        to: 0
+                        duration: 300
+                        easing.type: Easing.OutCubic
                     }
-
-                    property var pushTransition: Transition {
-                        PropertyAnimation {
-                            property: "x"
-                            from: -stackView.width
-                            to: 0
-                            duration: 300
-                            easing.type: Easing.OutCubic
-                        }
+                }
+                pushExit: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: 0
+                        to: stackView.width
+                        duration: 300
+                        easing.type: Easing.OutCubic
                     }
-                    property var popTransition: Transition {
-                        PropertyAnimation {
-                            property: "x"
-                            from: 0
-                            to: stackView.width
-                            duration: 300
-                            easing.type: Easing.OutCubic
-                        }
+                }
+                popEnter: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: stackView.width
+                        to: 0
+                        duration: 300
+                        easing.type: Easing.OutCubic
                     }
-                    property var replaceTransition: Transition {
-                        PropertyAnimation {
-                            property: "x"
-                            from: -stackView.width
-                            to: 0
-                            duration: 300
-                            easing.type: Easing.OutCubic
-                        }
+                }
+                popExit: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: 0
+                        to: -stackView.width
+                        duration: 300
+                        easing.type: Easing.OutCubic
                     }
                 }
             }

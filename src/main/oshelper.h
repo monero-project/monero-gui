@@ -45,6 +45,7 @@ public:
 
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
+    Q_INVOKABLE QString picturesLocation() const;
     Q_INVOKABLE QList<QString> grabQrCodesFromScreen() const;
     Q_INVOKABLE bool openFile(const QString &filePath) const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;

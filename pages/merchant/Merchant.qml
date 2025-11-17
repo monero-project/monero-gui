@@ -681,7 +681,7 @@ Item {
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        currentFolder: shortcuts.pictures
+        currentFolder: "file://" + oshelper.picturesLocation()
         nameFilters: ["Image (*.png)"]
         onAccepted: {
             if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {

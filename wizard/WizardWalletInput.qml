@@ -186,7 +186,7 @@ GridLayout {
                 tooltip: qsTr("Browse") + translationManager.emptyString
                 tooltipLeft: true
                 onClicked: {
-                    fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
+                    fileWalletDialog.currentFolder = walletManager.localPathToUrl(walletLocation.text)
                     fileWalletDialog.open()
                     walletLocation.focus = true
                 }
@@ -231,10 +231,10 @@ GridLayout {
 
     FileDialog {
         id: fileWalletDialog
-        selectFolder: true
+        fileMode: 1
         title: qsTr("Please choose a directory")  + translationManager.emptyString
         onAccepted: {
-            walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.folder);
+            walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.fileUrl);
             fileWalletDialog.visible = false;
             walletName.error = !walletName.verify();
         }

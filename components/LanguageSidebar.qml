@@ -29,7 +29,6 @@
 import "../components" as MoneroComponents
 
 import QtQuick 6.6
-import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 6.6
 import QtQuick.Controls 6.6
 
@@ -170,24 +169,25 @@ Drawer {
         }
     }
 
-    //Flags model
-    XmlListModel {
+    // Qt6: XmlListModel removed, using ListModel with hardcoded languages
+    // TODO: Create C++ model for proper XML parsing
+    ListModel {
         id: langModel
-        source: "/lang/languages.xml"
-        query: "/languages/language"
-
-        XmlRole { name: "display_name"; query: "@display_name/string()" }
-        XmlRole { name: "locale"; query: "@locale/string()" }
-        XmlRole { name: "wallet_language"; query: "@wallet_language/string()" }
-        XmlRole { name: "flag"; query: "@flag/string()" }
-        // TODO: XmlListModel is read only, we should store current language somewhere else
-        // and set current language accordingly
-        XmlRole { name: "isCurrent"; query: "@enabled/string()" }
-
-        onStatusChanged: {
-            if(status === XmlListModel.Ready){
-                console.log("languages available: ",count);
-            }
+        
+        Component.onCompleted: {
+            // Hardcoded languages from languages.xml
+            // This is a temporary solution - should be replaced with C++ model
+            langModel.append({"display_name": "English (US)", "locale": "en_US", "wallet_language": "English", "flag": "/lang/flags/us.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Nederlands", "locale": "nl", "wallet_language": "Nederlands", "flag": "/lang/flags/nl.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Français", "locale": "fr", "wallet_language": "Français", "flag": "/lang/flags/fr.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Español", "locale": "es", "wallet_language": "Español", "flag": "/lang/flags/es.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Português", "locale": "pt", "wallet_language": "Português", "flag": "/lang/flags/pt.png", "isCurrent": "false"})
+            langModel.append({"display_name": "日本語", "locale": "ja", "wallet_language": "日本語", "flag": "/lang/flags/jp.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Italiano", "locale": "it", "wallet_language": "Italiano", "flag": "/lang/flags/it.png", "isCurrent": "false"})
+            langModel.append({"display_name": "Deutsch", "locale": "de", "wallet_language": "Deutsch", "flag": "/lang/flags/de.png", "isCurrent": "false"})
+            langModel.append({"display_name": "русский язык", "locale": "ru", "wallet_language": "русский язык", "flag": "/lang/flags/ru.png", "isCurrent": "false"})
+            langModel.append({"display_name": "简体中文 (中国)", "locale": "zh_CN", "wallet_language": "简体中文 (中国)", "flag": "/lang/flags/cn.png", "isCurrent": "false"})
+            console.log("languages available: ", langModel.count)
         }
     }
 

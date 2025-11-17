@@ -136,6 +136,11 @@ QString OSHelper::downloadLocation() const
     return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
 }
 
+QString OSHelper::picturesLocation() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+}
+
 QList<QString> OSHelper::grabQrCodesFromScreen() const
 {
     QList<QString> codes;
