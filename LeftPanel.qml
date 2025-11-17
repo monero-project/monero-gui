@@ -28,7 +28,7 @@
 
 import QtQuick 6.6
 import QtQuick.Layouts 6.6
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0

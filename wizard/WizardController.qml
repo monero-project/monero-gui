@@ -30,7 +30,7 @@ import QtQml 2.0
 import QtQuick 6.6
 import QtQuick.Controls 2.0
 import QtQuick.Controls 6.64
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 // Qt6: Controls.Styles removed, use attached properties4
 import QtQuick.Layouts 6.62
 import QtQuick.Dialogs 6.6

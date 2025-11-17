@@ -132,6 +132,23 @@ set(QT6_LIBRARIES
   Qt6::Widgets  # Required for QFileDialog in oshelper.cpp (TODO: migrate to QML FileDialog)
 )
 
+# Add Qt5Compat if found (required for Qt5Compat.GraphicalEffects QML module)
+if(Qt6Qt5Compat_FOUND)
+  list(APPEND QT6_LIBRARIES Qt6::Qt5Compat)
+elseif(Qt6Core5Compat_FOUND)
+  list(APPEND QT6_LIBRARIES Qt6::Core5Compat)
+else()
+  message(WARNING "Qt5Compat not found - Qt5Compat.GraphicalEffects QML module will not be available")
+endif()
+
+# Add LabsPlatform if found (required for Qt.labs.platform QML module)
+if(Qt6LabsPlatform_FOUND)
+  list(APPEND QT6_LIBRARIES Qt6::LabsPlatform)
+  message(STATUS "Qt6::LabsPlatform found - Qt.labs.platform QML module available")
+else()
+  message(WARNING "Qt6::LabsPlatform not found - Qt.labs.platform QML module will not be available")
+endif()
+
 if(WITH_SCANNER)
   list(APPEND QT6_LIBRARIES Qt6::Multimedia)
 endif()
@@ -153,6 +170,14 @@ endif()
 
 # Find Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml Gui Svg Xml Network Widgets)
+# Qt5Compat is a separate module - try to find it, but don't fail if not found
+find_package(Qt6 QUIET COMPONENTS Qt5Compat)
+if(NOT Qt6Qt5Compat_FOUND)
+  # Try alternative name
+  find_package(Qt6 QUIET COMPONENTS Core5Compat)
+endif()
+# Qt6 LabsPlatform for Qt.labs.platform (MenuBar, etc.)
+find_package(Qt6 QUIET COMPONENTS LabsPlatform)
 
 if(WITH_SCANNER)
   find_package(Qt6 REQUIRED COMPONENTS Multimedia)

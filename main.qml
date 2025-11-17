@@ -31,7 +31,7 @@ import QtQuick 6.6
 import QtQuick.Window 6.6
 import QtQuick.Controls 6.6
 import QtQuick.Dialogs 6.6
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 
 import FontAwesome 1.0
 

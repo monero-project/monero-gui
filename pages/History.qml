@@ -29,7 +29,7 @@
 import QtQuick 6.6
 import QtQuick.Layouts 6.6
 import QtQuick.Dialogs 6.6
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0

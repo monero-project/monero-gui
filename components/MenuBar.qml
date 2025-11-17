@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import Qt.labs.platform 1.0 as PlatformLabs
+import Qt.labs.platform 6.0 as PlatformLabs
 import "." as MoneroComponents
 
 PlatformLabs.MenuBar {

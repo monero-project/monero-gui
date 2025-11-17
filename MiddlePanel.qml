@@ -32,7 +32,7 @@ import QtQuick 6.6
 import QtQuick.Controls 2.0
 import QtQuick.Controls 6.64
 import QtQuick.Layouts 6.6
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 import moneroComponents.Wallet 1.0
 
 import "./pages"

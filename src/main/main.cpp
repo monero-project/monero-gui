@@ -40,6 +40,8 @@
 #include <QFileSystemWatcher>
 #include <QDir>
 #include <QTimer>
+#include <QLibraryInfo>
+#include <QFileInfo>
 
 #include <version.h>
 
@@ -456,6 +458,43 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
     engine.addImportPath(":/fonts");
+    
+    // Qt6: Add Qt5Compat QML import path if available
+    // This allows Qt5Compat.GraphicalEffects to be found
+    QString qt5CompatPath = QLibraryInfo::path(QLibraryInfo::QmlImportsPath) + "/Qt5Compat";
+    QFileInfo qt5CompatInfo(qt5CompatPath);
+    if (qt5CompatInfo.exists()) {
+        engine.addImportPath(qt5CompatPath);
+        qWarning() << "Added Qt5Compat QML import path:" << qt5CompatPath;
+    } else {
+        // Try alternative path (for Homebrew installations)
+        QString altPath = "/opt/homebrew/opt/qt6/qml/Qt5Compat";
+        QFileInfo altInfo(altPath);
+        if (altInfo.exists()) {
+            engine.addImportPath(altPath);
+            qWarning() << "Added Qt5Compat QML import path (alt):" << altPath;
+        } else {
+            qWarning() << "Qt5Compat QML import path not found. Qt5Compat.GraphicalEffects may not work.";
+        }
+    }
+    
+    // Qt6: Add Qt.labs QML import path for Qt.labs.platform
+    QString qtLabsPath = QLibraryInfo::path(QLibraryInfo::QmlImportsPath) + "/Qt/labs";
+    QFileInfo qtLabsInfo(qtLabsPath);
+    if (qtLabsInfo.exists()) {
+        engine.addImportPath(qtLabsPath);
+        qWarning() << "Added Qt.labs QML import path:" << qtLabsPath;
+    } else {
+        // Try alternative path (for Homebrew installations)
+        QString altPath = "/opt/homebrew/share/qt/qml/Qt/labs";
+        QFileInfo altInfo(altPath);
+        if (altInfo.exists()) {
+            engine.addImportPath(altPath);
+            qWarning() << "Added Qt.labs QML import path (alt):" << altPath;
+        } else {
+            qWarning() << "Qt.labs QML import path not found. Qt.labs.platform may not work.";
+        }
+    }
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
 

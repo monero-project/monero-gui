@@ -30,7 +30,7 @@ import QtQuick 6.6
 import QtQuick.Controls 6.62
 import QtQuick.Controls 2.2 as QtQuickControls2
 import QtQuick.Layouts 6.62
-import Qt5Compat.GraphicalEffects 6.6
+import Qt5Compat.GraphicalEffects 6.0
 // Qt6: Controls.Styles removed, use attached properties2
 import FontAwesome 1.0
 
