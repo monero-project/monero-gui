@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QObject>
-#include <QDesktopWidget>
 #include <QScreen>
 #include <QThread>
 
@@ -123,14 +122,13 @@ Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
 Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
 Q_IMPORT_PLUGIN(QGenericEnginePlugin)
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+// Qt6 always has QtQmlPlugin
 Q_IMPORT_PLUGIN(QtQmlPlugin)
-#endif
 Q_IMPORT_PLUGIN(QtQmlModelsPlugin)
 Q_IMPORT_PLUGIN(QtQuick2Plugin)
 Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
-Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
-Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
+// Qt6: GraphicalEffects moved to Qt5Compat
+Q_IMPORT_PLUGIN(Qt5CompatGraphicalEffectsPlugin)
 Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
 Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
 Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
@@ -446,9 +444,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QQmlApplicationEngine engine;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    // Qt6: setNetworkAccessManagerFactory is available
     engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
-#endif
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;

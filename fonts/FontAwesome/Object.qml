@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 6.6
 
 QtObject {
     id: object

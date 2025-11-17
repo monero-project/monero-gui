@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
+import QtQuick 6.6
+import QtQuick.Dialogs 6.6
+import QtQuick.Layouts 6.62
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard

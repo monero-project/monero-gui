@@ -26,12 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick 6.6
 import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick.Dialogs 6.6
+import QtQuick.Layouts 6.6
+// Qt6: Controls.Styles removed, use attached properties4
+import QtQuick.Window 6.6
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects

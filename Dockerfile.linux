@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.17-lts-lgpl
+ARG QT_VERSION=6.6.0
 
 ENV CFLAGS="-fPIC"
 ENV CPPFLAGS="-fPIC"
@@ -188,41 +188,39 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
 RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     rm /usr/lib/x86_64-linux-gnu/libXext.a && \
     rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
-    git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
-    cd qt5 && \
-    git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtgraphicaleffects.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols2.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtx11extras.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtxmlpatterns.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qt6.git -b ${QT_VERSION} --depth 1 && \
+    cd qt6 && \
+    git clone https://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qt5compat.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
+    git clone https://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
     sed -ri s/\(Libs:.*\)/\\1\ -lexpat/ /usr/local/lib/pkgconfig/fontconfig.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
-    sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
-    ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
-    -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
-    -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
-    -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
-    -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
-    -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
-    -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools \
-    -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview \
-    -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine \
-    -nomake examples -nomake tests -nomake tools && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd qttools/src/linguist/lrelease && \
-    ../../../../qtbase/bin/qmake && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd ../../../.. && \
+    mkdir -p build && cd build && \
+    cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr \
+    -DFEATURE_static_runtime=ON -DFEATURE_openssl=OFF -DFEATURE_sql_sqlite=OFF \
+    -DFEATURE_dbus=OFF -DFEATURE_glib=ON -DFEATURE_fontconfig=ON -DFEATURE_system_freetype=ON \
+    -DFEATURE_system_harfbuzz=OFF -DFEATURE_system_jpeg=OFF -DFEATURE_system_png=OFF \
+    -DFEATURE_system_pcre2=OFF -DFEATURE_system_zlib=OFF \
+    -DQT_BUILD_EXAMPLES=OFF -DQT_BUILD_TESTS=OFF -DQT_BUILD_TOOLS=ON \
+    -DQT_FEATURE_opengl=ON -DQT_FEATURE_opengl_desktop=ON \
+    -DQT_FEATURE_xcb=ON -DQT_FEATURE_xlib=ON \
+    ../qtbase && \
+    cmake --build . --parallel $THREADS && \
+    cmake --install . && \
+    cd ../qttools && mkdir -p build && cd build && \
+    cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr \
+    -DFEATURE_linguist=ON -DFEATURE_lrelease=ON \
+    .. && \
+    cmake --build . --parallel $THREADS && \
+    cmake --install . && \
+    cd ../../.. && \
     rm -rf $(pwd)
 
 RUN git clone -b v1.0.26 --depth 1 https://github.com/libusb/libusb && \

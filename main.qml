@@ -26,13 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import QtQml.Models 6.6
+import QtQuick 6.6
+import QtQuick.Window 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Dialogs 6.6
+import Qt5Compat.GraphicalEffects 6.6
 
 import FontAwesome 1.0
 

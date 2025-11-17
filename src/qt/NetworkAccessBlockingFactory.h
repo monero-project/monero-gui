@@ -39,6 +39,11 @@
  * and assert if appropriate.
  */
 #include <QDebug>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkProxy>
+#include <QQmlNetworkAccessManagerFactory>
 
 class BlockedNetworkAccessManager : public QNetworkAccessManager
 {

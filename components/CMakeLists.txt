@@ -9,7 +9,7 @@
 file(GLOB_RECURSE UI_FILES *.ui)
 file(GLOB_RECURSE CODE_FILES *.cpp)
 
-qt5_wrap_ui(UI_HEADERS ${UI_FILES})
+qt6_wrap_ui(UI_HEADERS ${UI_FILES})
 #qt5_add_resources(RESOURCE_FILES ../resources/resources.qrc)
 
 # Windows application icon
@@ -34,9 +34,8 @@ add_executable(${CMAKE_PROJECT_NAME} WIN32
   ${RESOURCE_FILES}
   ${WINDOWS_RES_FILE}
 )
-target_link_libraries(${CMAKE_PROJECT_NAME}
-  Qt5::Widgets
-)
+# Qt6 Quick apps don't use Widgets module
+# target_link_libraries(${CMAKE_PROJECT_NAME} ...)
 
 if (UNIX)
   install(TARGETS ${CMAKE_PROJECT_NAME}

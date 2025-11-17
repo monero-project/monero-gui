@@ -1,9 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick 6.6
+import QtQuick.Layouts 6.6
 import QtQuick.Controls 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.2
+import Qt5Compat.GraphicalEffects 6.6
+// Qt6: Controls.Styles removed, use attached properties4
+import QtQuick.Dialogs 6.6
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0

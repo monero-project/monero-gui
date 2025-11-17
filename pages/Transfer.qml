@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQml.Models 6.62
+import QtQuick 6.6
+import QtQuick.Controls 6.64
+import QtQuick.Layouts 6.6
+import QtQuick.Dialogs 6.6
 import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0

@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 6.6
 import QtQuick.Controls 2.2
 
 import FontAwesome 1.0

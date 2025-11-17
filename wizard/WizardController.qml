@@ -27,13 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQml 2.0
-import QtQuick 2.9
+import QtQuick 6.6
 import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 6.64
+import Qt5Compat.GraphicalEffects 6.6
+// Qt6: Controls.Styles removed, use attached properties4
+import QtQuick.Layouts 6.62
+import QtQuick.Dialogs 6.6
 import moneroComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard

@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick 6.6
+import QtQuick.Layouts 6.6
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -82,13 +82,23 @@ Item {
                 visible: checkBox.border
                 anchors.fill: parent
                 radius: 3
-                color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
+                // Testing red fill override: conditional on enabled/checked state
+                color: (checkBox.enabled && checkBox.checked) ? "red" : 
+                       (checkBox.enabled ? MoneroComponents.Style.inputBoxBackground : MoneroComponents.Style.inputBoxBackgroundDisabled)
                 border.color:
                     if (checkBox.activeFocus) {
                         return MoneroComponents.Style.inputBorderColorActive;
                     } else {
                         return MoneroComponents.Style.inputBorderColorInActive;
                     }
+                
+                // Qt6 Behaviors for smooth fade transitions
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
 
             MoneroEffects.ImageMask {
@@ -97,7 +107,8 @@ Item {
                 anchors.centerIn: parent
                 width: checkBox.imgWidth
                 height: checkBox.imgHeight
-                color: MoneroComponents.Style.defaultFontColor
+                // Testing red icon tint: conditional on checked state (Qt6 ShaderEffect compatible)
+                color: checkBox.checked ? "red" : MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: checkBox.fontAwesomeIcons ? getIcon() : FontAwesome.plus
                 fontAwesomeFallbackSize: 14
                 image: checkBox.fontAwesomeIcons ? "" : getIcon()
@@ -114,7 +125,8 @@ Item {
             id: label
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: MoneroComponents.Style.defaultFontColor
+            // Testing red text override: conditional on checked state
+            color: checkBox.checked ? "red" : MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.NoWrap
             visible: text != ""

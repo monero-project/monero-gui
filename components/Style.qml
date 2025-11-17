@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.5
+import QtQuick 6.6
 
 QtObject {
     property bool blackTheme: true

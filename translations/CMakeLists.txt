@@ -1,8 +1,9 @@
-find_package(Qt5Core REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core LinguistTools)
 
-find_package(Qt5LinguistTools QUIET)
-if(NOT Qt5_LRELEASE_EXECUTABLE)
-  find_program(Qt5_LRELEASE_EXECUTABLE lrelease REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
+# Get lrelease from Qt6::lrelease target
+get_target_property(QT_LRELEASE_EXECUTABLE Qt6::lrelease IMPORTED_LOCATION)
+if(NOT QT_LRELEASE_EXECUTABLE)
+  find_program(QT_LRELEASE_EXECUTABLE lrelease REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
 endif()
 
 file(GLOB TS_FILES *.ts)
@@ -16,7 +17,7 @@ foreach(TS_FILE ${TS_FILES})
 
   add_custom_command(
     OUTPUT ${QM_FILE}
-    COMMAND ${Qt5_LRELEASE_EXECUTABLE} -compress -nounfinished -removeidentical ${TS_FILE} -qm ${QM_FILE}
+    COMMAND ${QT_LRELEASE_EXECUTABLE} -compress -nounfinished -removeidentical ${TS_FILE} -qm ${QM_FILE}
     DEPENDS ${TS_FILE}
   )
 
@@ -34,9 +35,10 @@ add_custom_command(
 set_source_files_properties(${TRANSLATIONS_QRC} PROPERTIES SKIP_AUTORCC ON)
 
 set(TRANSLATIONS_CPP ${CMAKE_CURRENT_BINARY_DIR}/qrc_translations.cpp)
+get_target_property(QT_RCC_EXECUTABLE Qt6::rcc IMPORTED_LOCATION)
 add_custom_command(
   OUTPUT ${TRANSLATIONS_CPP}
-  COMMAND ${Qt5Core_RCC_EXECUTABLE}
+  COMMAND ${QT_RCC_EXECUTABLE}
   ARGS --name translations --output ${TRANSLATIONS_CPP} ${TRANSLATIONS_QRC}
   MAIN_DEPENDENCY ${TRANSLATIONS_QRC}
   DEPENDS ${QM_FILES}
@@ -46,4 +48,4 @@ set_source_files_properties(${TRANSLATIONS_CPP} PROPERTIES SKIP_AUTOMOC ON)
 set_source_files_properties(${TRANSLATIONS_CPP} PROPERTIES SKIP_AUTOUIC ON)
 
 add_library(translations ${TRANSLATIONS_CPP})
-target_link_libraries(translations PUBLIC Qt5::Core)
+target_link_libraries(translations PUBLIC Qt6::Core)
