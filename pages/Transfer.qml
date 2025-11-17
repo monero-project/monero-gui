@@ -26,9 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 6.62
+import QtQml 6.6
+import QtQml.Models 6.6
 import QtQuick 6.6
-import QtQuick.Controls 6.64
+import QtQuick.Controls 6.6
 import QtQuick.Layouts 6.6
 import QtQuick.Dialogs 6.6
 import moneroComponents.Clipboard 1.0
@@ -41,8 +42,6 @@ import "../components" as MoneroComponents
 import "." 1.0
 import "../js/TxUtils.js" as TxUtils
 import "../js/Utils.js" as Utils
-
-
 Rectangle {
     id: root
     signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
@@ -480,8 +479,8 @@ Rectangle {
 
                                     amount = text;
                                 }
-                                validator: RegExpValidator {
-                                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                                validator: RegularExpressionValidator {
+                                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                                 }
                             }
 
@@ -989,7 +988,7 @@ Rectangle {
     FileDialog {
         id: signTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Unsigned transfers (*)"]
 
         onAccepted: {
@@ -1033,7 +1032,7 @@ Rectangle {
     FileDialog {
         id: submitTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {
@@ -1059,8 +1058,7 @@ Rectangle {
     
     FileDialog {
         id: exportOutputsDialog
-        selectMultiple: false
-        selectExisting: false
+        
         onAccepted: {
             console.log(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl))
             if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl), true)) {
@@ -1076,8 +1074,6 @@ Rectangle {
 
     FileDialog {
         id: importOutputsDialog
-        selectMultiple: false
-        selectExisting: true
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
             console.log(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))
@@ -1095,8 +1091,7 @@ Rectangle {
     //ExportKeyImagesDialog
     FileDialog {
         id: exportKeyImagesDialog
-        selectMultiple: false
-        selectExisting: false
+        
         onAccepted: {
             console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl))
             if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true)) {
@@ -1113,8 +1108,6 @@ Rectangle {
     //ImportKeyImagesDialog
     FileDialog {
         id: importKeyImagesDialog
-        selectMultiple: false
-        selectExisting: true
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
             console.log(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))
@@ -1128,8 +1121,6 @@ Rectangle {
             console.log("Canceled");
         }
     }
-
-
 
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus

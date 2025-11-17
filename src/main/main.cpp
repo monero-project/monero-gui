@@ -42,6 +42,8 @@
 #include <QTimer>
 #include <QLibraryInfo>
 #include <QFileInfo>
+// Qt6: QQuickStyle might not be available, use environment variable instead
+// #include <QtQuickControls2/QQuickStyle>
 
 #include <version.h>
 
@@ -221,6 +223,11 @@ int main(int argc, char *argv[])
     }
 
     MainApp app(argc, argv);
+
+    // Qt6: Set Quick Controls style to Basic to avoid "Desktop" module dependency
+    // This prevents the "module Desktop is not installed" error
+    // Use environment variable instead of QQuickStyle::setStyle() which may not be available
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Basic");
 
 #if defined(Q_OS_WIN)
     if (isOpenGL)

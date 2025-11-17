@@ -1,5 +1,5 @@
 import QtQuick 6.6
-import QtQuick.Controls 2.2
+import QtQuick.Controls 6.6
 
 import FontAwesome 1.0
 import "../components" as MoneroComponents

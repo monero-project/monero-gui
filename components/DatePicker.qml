@@ -27,11 +27,12 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 6.6
-import QtQuick.Controls 6.62
-import QtQuick.Controls 2.2 as QtQuickControls2
-import QtQuick.Layouts 6.62
+import QtQuick.Controls 6.6
+import QtQuick.Controls 6.6 as QtQuickControls2
+import QtQuick.Layouts 6.6
 import Qt5Compat.GraphicalEffects 6.0
-// Qt6: Controls.Styles removed, use attached properties2
+// Qt6: Calendar moved from QtQuick.Controls to Qt.labs.calendar
+import Qt.labs.calendar 1.0
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -300,75 +301,78 @@ Item {
                 height: 220
                 frameVisible: false
 
-                style: CalendarStyle {
-                    gridVisible: false
-                    background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
-                    dayDelegate: Item {
-                        z: parent.z + 1
-                        implicitHeight: implicitWidth
-                        implicitWidth: calendar.width / 7
+                // Qt6: CalendarStyle removed, use Calendar properties and delegate directly
+                background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
+                delegate: Item {
+                    z: parent.z + 1
+                    implicitHeight: implicitWidth
+                    implicitWidth: calendar.width / 7
 
-                        Rectangle {
-                            id: dayRect
-                            anchors.fill: parent
-                            radius: parent.implicitHeight / 2
+                    // Qt6: Calendar delegate receives model.date, model.today, model.sameMonth, model.selected
+                    property date delegateDate: model.date
+                    property bool isToday: model.today
+                    property bool sameMonth: model.sameMonth
+                    property bool isSelected: model.selected
+
+                    Rectangle {
+                        id: dayRect
+                        anchors.fill: parent
+                        radius: parent.implicitHeight / 2
+                    }
+
+                    MoneroComponents.TextPlain {
+                        id: dayText
+                        anchors.centerIn: parent
+                        font.family: MoneroComponents.Style.fontMonoRegular.name
+                        font.pixelSize: {
+                            if(!sameMonth) return 12
+                            return 14
                         }
-
-                        MoneroComponents.TextPlain {
-                            id: dayText
-                            anchors.centerIn: parent
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
-                            font.pixelSize: {
-                                if(!styleData.visibleMonth) return 12
-                                return 14
-                            }
-                            font.bold: {
-                                if(dayArea.pressed || styleData.visibleMonth) return true;
-                                return false;
-                            }
-                            text: styleData.date.getDate()
-                            themeTransition: false
-                            color: {
-                              if (currentDate.toDateString() === styleData.date.toDateString()) {
-                                  if (dayArea.containsMouse) {
-                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
-                                  } else {
-                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
-                                  }
-                              } else {
-                                  if (dayArea.containsMouse) {
-                                      dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
-                                  } else {
-                                      dayRect.color = "transparent";
-                                  }
-                              }
-                              if(!styleData.valid) return "transparent"
-                              if(styleData.date.toDateString() === (new Date()).toDateString()) return "#FFFF00"
-                              if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
-                              if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
-                              return MoneroComponents.Style.defaultFontColor
-                            }
+                        font.bold: {
+                            if(dayArea.pressed || sameMonth) return true;
+                            return false;
                         }
-
-                        MouseArea {
-                            id: dayArea
-                            anchors.fill: parent
-                            visible: styleData.valid
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                if(styleData.visibleMonth) {
-                                    currentDate = styleData.date
-                                    popup.close()
+                        text: delegateDate.getDate()
+                        themeTransition: false
+                        color: {
+                            if (currentDate.toDateString() === delegateDate.toDateString()) {
+                                if (dayArea.containsMouse) {
+                                    dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
                                 } else {
-                                    var date = styleData.date
-                                    if(date.getMonth() > calendar.visibleMonth)
-                                        calendar.showNextMonth()
-                                    else calendar.showPreviousMonth()
+                                    dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
                                 }
-
-                                datePicker.dateChanged();
+                            } else {
+                                if (dayArea.containsMouse) {
+                                    dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
+                                } else {
+                                    dayRect.color = "transparent";
+                                }
                             }
+                            if(!sameMonth) return MoneroComponents.Style.lightGreyFontColor
+                            if(isToday) return "#FFFF00"
+                            if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
+                            return MoneroComponents.Style.defaultFontColor
+                        }
+                    }
+
+                    MouseArea {
+                        id: dayArea
+                        anchors.fill: parent
+                        visible: sameMonth
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if(sameMonth) {
+                                currentDate = delegateDate
+                                popup.close()
+                            } else {
+                                var date = delegateDate
+                                if(date.getMonth() > calendar.visibleMonth)
+                                    calendar.showNextMonth()
+                                else calendar.showPreviousMonth()
+                            }
+
+                            datePicker.dateChanged();
                         }
                     }
 

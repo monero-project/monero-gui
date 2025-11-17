@@ -1,6 +1,6 @@
 import QtQuick 6.6
 import QtQuick.Layouts 6.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 6.6
 import Qt5Compat.GraphicalEffects 6.0
 // Qt6: Controls.Styles removed, use attached properties4
 import QtQuick.Dialogs 6.6
@@ -485,8 +485,8 @@ Item {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
                             }
-                            validator: RegExpValidator {
-                                regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
                             }
                         }
                     }
@@ -675,14 +675,13 @@ Item {
 
     MessageDialog {
         id: merchantPageDialog
-        standardButtons: StandardButton.Ok
+        buttons: DialogButtonBox.Ok
     }
 
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: shortcuts.pictures
-        selectExisting: false
+        currentFolder: shortcuts.pictures
         nameFilters: ["Image (*.png)"]
         onAccepted: {
             if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {

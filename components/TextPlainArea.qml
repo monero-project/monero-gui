@@ -1,5 +1,5 @@
 import QtQuick 6.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 6.6
 
 import "." as MoneroComponents
 

@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 6.6
-import QtQuick.Controls 6.64
+import QtQuick.Controls 6.6
 // Qt6: Controls.Styles removed, use attached properties4
 import QtQuick.Layouts 6.6
 import QtQuick.Dialogs 6.6
@@ -49,7 +49,7 @@ Rectangle {
         // dynamically change onclose handler
         property var onCloseCallback
         id: signatureVerificationMessage
-        standardButtons: StandardButton.Ok
+        buttons: DialogButtonBox.Ok
         onAccepted:  {
             if (onCloseCallback) {
                 onCloseCallback()
@@ -401,7 +401,7 @@ Rectangle {
         FileDialog {
             id: signFileDialog
             title: qsTr("Please choose a file to sign") + translationManager.emptyString;
-            folder: "file://"
+        currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {
@@ -412,7 +412,7 @@ Rectangle {
         FileDialog {
             id: verifyFileDialog
             title: qsTr("Please choose a file to verify") + translationManager.emptyString;
-            folder: "file://"
+        currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {

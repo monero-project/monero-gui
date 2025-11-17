@@ -28,8 +28,8 @@
 
 import QtQuick 6.6
 import QtQuick.Dialogs 6.6
-import QtQuick.Layouts 6.62
-import QtQuick.Controls 2.0
+import QtQuick.Layouts 6.6
+import QtQuick.Controls 6.6
 import Qt5Compat.GraphicalEffects 6.0
 import Qt.labs.folderlistmodel 2.1
 import moneroComponents.NetworkType 1.0

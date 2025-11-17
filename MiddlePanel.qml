@@ -29,8 +29,8 @@
 
 import QtQml 2.0
 import QtQuick 6.6
-import QtQuick.Controls 2.0
-import QtQuick.Controls 6.64
+import QtQuick.Controls 6.6
+import QtQuick.Controls 6.6
 import QtQuick.Layouts 6.6
 import Qt5Compat.GraphicalEffects 6.0
 import moneroComponents.Wallet 1.0
@@ -204,21 +204,44 @@ Rectangle {
                 anchors.fill:parent
                 clip: true // otherwise animation will affect left panel
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
+                // Qt6: StackViewDelegate removed, use delegate Item with getTransition function
+                delegate: Item {
+                    function getTransition(operation, target, properties) {
+                        switch (operation) {
+                            case StackView.PushTransition:
+                                return pushTransition;
+                            case StackView.PopTransition:
+                                return popTransition;
+                            case StackView.ReplaceTransition:
+                                return replaceTransition;
+                            default:
+                                return null;
+                        }
+                    }
+
+                    property var pushTransition: Transition {
                         PropertyAnimation {
-                            target: enterItem
                             property: "x"
-                            from: 0 - target.width
+                            from: -stackView.width
                             to: 0
                             duration: 300
                             easing.type: Easing.OutCubic
                         }
+                    }
+                    property var popTransition: Transition {
                         PropertyAnimation {
-                            target: exitItem
                             property: "x"
                             from: 0
-                            to: target.width
+                            to: stackView.width
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+                    property var replaceTransition: Transition {
+                        PropertyAnimation {
+                            property: "x"
+                            from: -stackView.width
+                            to: 0
                             duration: 300
                             easing.type: Easing.OutCubic
                         }

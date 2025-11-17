@@ -28,11 +28,11 @@
 
 import QtQml 2.0
 import QtQuick 6.6
-import QtQuick.Controls 2.0
-import QtQuick.Controls 6.64
+import QtQuick.Controls 6.6
+import QtQuick.Controls 6.6
 import Qt5Compat.GraphicalEffects 6.0
 // Qt6: Controls.Styles removed, use attached properties4
-import QtQuick.Layouts 6.62
+import QtQuick.Layouts 6.6
 import QtQuick.Dialogs 6.6
 import moneroComponents.Wallet 1.0
 
@@ -289,24 +289,47 @@ Rectangle {
                 anchors.fill: parent
                 clip: true
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
-                         PropertyAnimation {
-                             target: enterItem
-                             property: "x"
-                             from: stackView.backTransition ? -target.width : target.width
-                             to: 0
-                             duration: 300
-                             easing.type: Easing.OutCubic
-                         }
-                         PropertyAnimation {
-                             target: exitItem
-                             property: "x"
-                             from: 0
-                             to: stackView.backTransition ? target.width : -target.width
-                             duration: 300
-                             easing.type: Easing.OutCubic
-                         }
+                // Qt6: StackViewDelegate removed, use delegate Item with getTransition function
+                delegate: Item {
+                    function getTransition(operation, target, properties) {
+                        switch (operation) {
+                            case StackView.PushTransition:
+                                return pushTransition;
+                            case StackView.PopTransition:
+                                return popTransition;
+                            case StackView.ReplaceTransition:
+                                return replaceTransition;
+                            default:
+                                return null;
+                        }
+                    }
+
+                    property var pushTransition: Transition {
+                        PropertyAnimation {
+                            property: "x"
+                            from: stackView.backTransition ? -stackView.width : stackView.width
+                            to: 0
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+                    property var popTransition: Transition {
+                        PropertyAnimation {
+                            property: "x"
+                            from: 0
+                            to: stackView.backTransition ? stackView.width : -stackView.width
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+                    property var replaceTransition: Transition {
+                        PropertyAnimation {
+                            property: "x"
+                            from: stackView.backTransition ? -stackView.width : stackView.width
+                            to: 0
+                            duration: 300
+                            easing.type: Easing.OutCubic
+                        }
                     }
                 }
             }
@@ -317,7 +340,7 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 

@@ -31,8 +31,8 @@ import "../components"
 import "../components" as MoneroComponents
 
 import QtQuick 6.6
-import QtQuick.Layouts 6.62
-import QtQuick.Controls 2.0
+import QtQuick.Layouts 6.6
+import QtQuick.Controls 6.6
 
 
 ColumnLayout {

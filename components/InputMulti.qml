@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 2.0
+import QtQuick.Controls 6.6
 import QtQuick 6.6
 
 import "../js/TxUtils.js" as TxUtils
@@ -56,7 +56,7 @@ TextArea {
 
     onTextChanged: {
         if(addressValidation){
-            // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
+            // js replacement for `RegularExpressionValidator { regularExpression: /[0-9A-Fa-f]{95}/g }`
             if (textArea.text.startsWith("monero:")) {
                 error = false;
                 return;

@@ -28,8 +28,8 @@
 
 import QtQuick 6.6
 import QtQuick.Dialogs 6.6
-import QtQuick.Layouts 6.62
-import QtQuick.Controls 2.0
+import QtQuick.Layouts 6.6
+import QtQuick.Controls 6.6
 
 import moneroComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
@@ -211,8 +211,8 @@ Rectangle {
                     labelFontSize: 14
                     placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "1"
                 }
@@ -232,7 +232,7 @@ Rectangle {
                     labelFontSize: 14
                     placeholderText: "<major>:<minor>"
                     placeholderFontSize: 16
-                    validator: RegExpValidator { regExp: /(\d+):(\d+)?$/ }
+                    validator: RegularExpressionValidator { regularExpression: /(\d+):(\d+)?$/ }
                 }
             }
 

@@ -28,7 +28,7 @@
 
 import QtQuick 6.6
 import QtQuick.Window 6.6
-import QtQuick.Controls 6.64
+import QtQuick.Controls 6.6
 // Qt6: Controls.Styles removed, use attached properties4
 import QtQuick.Layouts 6.6
 
@@ -78,21 +78,18 @@ Rectangle {
                 mipmap: true
             }
 
-            BusyIndicator {
-                running: parent.visible
+            // Qt6: BusyIndicatorStyle removed, use custom Image with rotation instead
+            Image {
+                id: busyIndicator
+                visible: root.visible
                 anchors.centerIn: imgLogo
-                style: BusyIndicatorStyle {
-                    indicator: Image {
-                        visible: control.running
-                        source: "qrc:///images/busy-indicator.png"
-                        RotationAnimator on rotation {
-                            running: control.running
-                            loops: Animation.Infinite
-                            duration: 1000
-                            from: 0
-                            to: 360
-                        }
-                    }
+                source: "qrc:///images/busy-indicator.png"
+                RotationAnimator on rotation {
+                    running: root.visible
+                    loops: Animation.Infinite
+                    duration: 1000
+                    from: 0
+                    to: 360
                 }
             }
         }

@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 6.6
-import QtQuick.Controls 6.64 as QtQuickControls1
-import QtQuick.Controls 2.2
+import QtQuick.Controls 6.6 as QtQuickControls1
+import QtQuick.Controls 6.6
 import QtQuick.Layouts 6.6
 
 import "../components" as MoneroComponents

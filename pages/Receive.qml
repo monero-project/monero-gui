@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 6.6
-import QtQuick.Controls 2.0
+import QtQuick.Controls 6.6
 // Qt6: Controls.Styles removed, use attached properties4
 import QtQuick.Layouts 6.6
 import QtQuick.Dialogs 6.6
@@ -261,8 +261,8 @@ Rectangle {
                             amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
                     }
                 }
 
@@ -321,8 +321,8 @@ Rectangle {
                             amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                     }
                 }
 
@@ -744,14 +744,13 @@ Rectangle {
 
         MessageDialog {
             id: receivePageDialog
-            standardButtons: StandardButton.Ok
+            buttons: DialogButtonBox.Ok
         }
 
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
-            selectExisting: false
+        currentFolder: shortcuts.pictures
             nameFilters: ["Image (*.png)"]
             onAccepted: {
                 if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {

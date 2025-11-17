@@ -982,8 +982,7 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" + appWindow.accountsDir
-        selectExisting: false;
+        currentFolder: "file://" + appWindow.accountsDir
 
         onAccepted: {
             handleTransactionConfirmed()
@@ -1731,7 +1730,7 @@ ApplicationWindow {
 
         title: "Please choose a folder"
         selectFolder: true
-        folder: "file://" + persistentSettings.blockchainDataDir
+        currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
@@ -2485,7 +2484,8 @@ ApplicationWindow {
         onClosed: { if (previousActiveFocusItem) previousActiveFocusItem.forceActiveFocus() }
     }
 
-    MoneroComponents.MenuBar { }
+    // Temporarily commented out to test if MenuBar is causing the "Desktop" module error
+    // MoneroComponents.MenuBar { }
 
     Network {
         id: network
