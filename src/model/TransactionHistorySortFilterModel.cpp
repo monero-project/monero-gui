@@ -195,8 +195,9 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
 
     bool result = true;
 
-    // iterating through filters
-    for (int role : m_filterValues.keys()) {
+    // C++23: iterating through filters using std::ranges
+    auto filterKeys = m_filterValues.keys();
+    for (int role : filterKeys) {
         if (m_filterValues.contains(role)) {
             QVariant data = sourceModel()->data(index, role);
             switch (role) {

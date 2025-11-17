@@ -29,6 +29,8 @@
 #pragma once
 
 #include <vector>
+#include <ranges>
+#include <algorithm>
 
 #include <span.h>
 
@@ -59,26 +61,26 @@ public:
 
   const std::vector<uint8_t> *find_first(packet_tag::type type) const
   {
-    for (const auto &packet : packets)
-    {
-      if (packet.first.packet_type == type)
-      {
-        return &packet.second;
-      }
-    }
-    return nullptr;
+    // C++23: Use std::ranges::find_if for modern range-based search
+    auto it = std::ranges::find_if(packets, 
+      [type](const auto &packet) { return packet.first.packet_type == type; });
+    return (it != packets.end()) ? &it->second : nullptr;
   }
 
   template <typename Callback>
   void for_each(packet_tag::type type, Callback &callback) const
   {
-    for (const auto &packet : packets)
-    {
-      if (packet.first.packet_type == type)
-      {
-        callback(packet.second);
-      }
-    }
+    // C++23: Use std::ranges::for_each with filter view
+    auto matching_packets = packets 
+      | std::views::filter([type](const auto &packet) { 
+          return packet.first.packet_type == type; 
+        })
+      | std::views::transform([](const auto &packet) { 
+          return std::cref(packet.second); 
+        });
+    std::ranges::for_each(matching_packets, [&callback](const auto &packet_ref) {
+      callback(packet_ref.get());
+    });
   }
 
 private:

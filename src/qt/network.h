@@ -30,6 +30,8 @@
 
 #include <QCoreApplication>
 #include <QtNetwork>
+#include <expected>
+#include <string>
 
 // TODO: wallet_merged - epee library triggers the warnings
 #pragma GCC diagnostic push
@@ -86,11 +88,31 @@ public:
         std::string &response,
         const QString &contentType = {}) const;
 
+    // C++23: std::expected-based error handling
+    // Provides type-safe error handling without exceptions
+    std::expected<std::string, std::string> getExpected(const QString &url, const QString &contentType = {}) const;
+    std::expected<std::string, QString> getExpected(
+        std::shared_ptr<epee::net_utils::http::abstract_http_client> httpClient,
+        const QString &url,
+        const QString &contentType = {}) const;
+
+    // C++23: Coroutine-based async operations (see CoroutineTask.h for implementation)
+    // Example usage:
+    //   Task<std::string> fetchAsync() {
+    //       auto result = co_await getExpected("https://example.com");
+    //       if (result.has_value()) {
+    //           co_return result.value();
+    //       }
+    //       co_return std::string{};
+    //   }
+
 signals:
     void proxyAddressChanged() const;
 
 private:
     std::shared_ptr<epee::net_utils::http::abstract_http_client> newClient() const;
+    // C++23: std::expected-based client creation
+    std::expected<std::shared_ptr<epee::net_utils::http::abstract_http_client>, std::string> newClientExpected() const;
 
 private:
     QString m_proxyAddress;

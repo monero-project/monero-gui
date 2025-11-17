@@ -30,6 +30,9 @@
 
 #include <QDebug>
 #include <QtCore>
+#include <expected>
+#include <ranges>
+#include <algorithm>
 
 #include "utils.h"
 
@@ -181,4 +184,66 @@ std::shared_ptr<abstract_http_client> Network::newClient() const
         throw std::runtime_error("failed to set proxy address");
     }
     return client;
+}
+
+// C++23: std::expected-based error handling implementation
+std::expected<std::shared_ptr<abstract_http_client>, std::string> Network::newClientExpected() const
+{
+    std::shared_ptr<abstract_http_client> client(new net::http::client());
+    if (!client->set_proxy(m_proxyAddress.toStdString()))
+    {
+        return std::unexpected("failed to set proxy address");
+    }
+    return client;
+}
+
+std::expected<std::string, QString> Network::getExpected(
+    std::shared_ptr<abstract_http_client> httpClient,
+    const QString &url,
+    const QString &contentType /* = {} */) const
+{
+    const QUrl urlParsed(url);
+    httpClient->set_server(urlParsed.host().toStdString(), urlParsed.scheme() == "https" ? "443" : "80", {});
+
+    const QString uri = (urlParsed.hasQuery() ? urlParsed.path() + "?" + urlParsed.query() : urlParsed.path());
+    const http_response_info *pri = NULL;
+    constexpr std::chrono::milliseconds timeout = std::chrono::seconds(15);
+
+    fields_list headers({{"User-Agent", randomUserAgent().toStdString()}});
+    if (!contentType.isEmpty())
+    {
+        headers.push_back({"Content-Type", contentType.toStdString()});
+    }
+    const bool result = httpClient->invoke(uri.toStdString(), "GET", {}, timeout, std::addressof(pri), headers);
+    if (!result)
+    {
+        return std::unexpected(QString("unknown error"));
+    }
+    if (!pri)
+    {
+        return std::unexpected(QString("internal error"));
+    }
+    if (pri->m_response_code != 200)
+    {
+        return std::unexpected(QString("response code %1").arg(pri->m_response_code));
+    }
+
+    return std::string(pri->m_body);
+}
+
+std::expected<std::string, std::string> Network::getExpected(const QString &url, const QString &contentType /* = {} */) const
+{
+    auto clientResult = newClientExpected();
+    if (!clientResult.has_value())
+    {
+        return std::unexpected(clientResult.error());
+    }
+
+    auto responseResult = getExpected(clientResult.value(), url, contentType);
+    if (!responseResult.has_value())
+    {
+        return std::unexpected(responseResult.error().toStdString());
+    }
+
+    return responseResult.value();
 }

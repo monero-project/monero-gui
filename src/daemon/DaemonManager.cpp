@@ -216,10 +216,11 @@ void DaemonManager::printOutput()
     }();
     QStringList strLines = QString(byteArray).split("\n");
 
-    foreach (QString line, strLines) {
+    // C++23: Use std::ranges::for_each instead of Qt's foreach
+    std::ranges::for_each(strLines, [this](const QString &line) {
         emit daemonConsoleUpdated(line);
         qDebug() << "Daemon: " + line;
-    }
+    });
 }
 
 void DaemonManager::printError()
@@ -230,10 +231,11 @@ void DaemonManager::printError()
     }();
     QStringList strLines = QString(byteArray).split("\n");
 
-    foreach (QString line, strLines) {
+    // C++23: Use std::ranges::for_each instead of Qt's foreach
+    std::ranges::for_each(strLines, [this](const QString &line) {
         emit daemonConsoleUpdated(line);
         qDebug() << "Daemon ERROR: " + line;
-    }
+    });
 }
 
 bool DaemonManager::running(NetworkType::Type nettype, const QString &dataDir) const
