@@ -100,20 +100,32 @@ jobs:
             echo "Cloned ${repo} at ${QT_TAG} (direct)"
             continue
           fi
-          # Fallback: clone default branch shallow, then fetch and checkout the tag
+          # Fallback: clone default branch (not shallow), fetch tags and try several tag name forms
           echo "Direct clone failed for ${repo}, cloning default branch and fetching tag ${QT_TAG}..."
-          if git clone --depth 1 "${url}"; then
+          if git clone "${url}"; then
             cd "${repo}"
-            # try to fetch the tag specifically (shallow tag fetch); fall back to fetching all tags
-            if ! git fetch --depth 1 origin "refs/tags/${QT_TAG}"; then
-              git fetch --tags origin || true
-            fi
-            # checkout the tag as a branch (creates local branch from tag)
-            if git rev-parse --verify "refs/tags/${QT_TAG}" >/dev/null 2>&1; then
-              git checkout -b "${QT_TAG}" "refs/tags/${QT_TAG}"
+            # ensure we have tag objects
+            git fetch --tags origin || true
+            # try the tag exactly as provided, then without a leading 'v' if present, and resolve annotated tag -> commit
+            tried_tags=("${QT_TAG}")
+            if [[ "${QT_TAG}" = v* ]]; then
+              tried_tags+=("${QT_TAG#v}")
             else
-              # last resort: try to checkout tag name (handles annotated/lightweight differences)
-              git checkout -b "${QT_TAG}" "tags/${QT_TAG}" || { echo "Tag ${QT_TAG} not found in ${repo}"; exit 1; }
+              tried_tags+=("v${QT_TAG}")
+            fi
+            found=0
+            for t in "${tried_tags[@]}"; do
+              # resolve tag to its commit target (handles annotated tags)
+              if commit_sha=$(git rev-parse --verify --quiet "refs/tags/${t}^{commit}"); then
+                git checkout -b "${t}" "${commit_sha}" && found=1 && break
+              elif commit_sha=$(git rev-parse --verify --quiet "refs/tags/${t}"); then
+                # fallback: try tag object itself (lightweight)
+                git checkout -b "${t}" "${commit_sha}" && found=1 && break
+              fi
+            done
+            if [ "${found}" -ne 1 ]; then
+              echo "Tag ${QT_TAG} (or alternate forms) not found in ${repo}"
+              exit 1
             fi
             cd ..
           else
