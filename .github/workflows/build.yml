@@ -5,7 +5,7 @@ on: [push, pull_request]
 env:
   FREE_DISKSPACE: |
     sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
-  QT_TAG: 6.7.0
+  QT_TAG: v6.7.0
   QT_PREFIX: ${{ github.workspace }}/qt-install
 
 jobs:
