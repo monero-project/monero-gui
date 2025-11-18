@@ -87,7 +87,7 @@ jobs:
           qt5compat
           qtimageformats
           qtmultimedia
-          qtquickcontrols2
+          qtquickcontrols
           qtsvg
           qttools
           qttranslations
@@ -105,21 +105,31 @@ jobs:
           if git clone "${url}"; then
             cd "${repo}"
             # ensure we have tag objects
-            git fetch --tags origin || true
-            # try the tag exactly as provided, then without a leading 'v' if present, and resolve annotated tag -> commit
+            git fetch --tags --prune origin || true
+            # collect candidate tag names: exact QT_TAG, QT_VERSION variants, plus any remote tags containing the version
             tried_tags=("${QT_TAG}")
             if [[ "${QT_TAG}" = v* ]]; then
               tried_tags+=("${QT_TAG#v}")
             else
               tried_tags+=("v${QT_TAG}")
             fi
+            tried_tags+=("${QT_VERSION}")
+            tried_tags+=("v${QT_VERSION}")
+            # add any remote tags that contain the QT_VERSION (e.g. v6.7.0-rc1)
+            while read -r tag; do
+              tried_tags+=("$tag")
+            done < <(git ls-remote --tags --refs origin | awk -F/ '{print $NF}' | grep -E "${QT_VERSION}" || true)
+            # deduplicate candidates and try to resolve each to a commit (handle annotated tags)
+            declare -A seen=()
             found=0
             for t in "${tried_tags[@]}"; do
-              # resolve tag to its commit target (handles annotated tags)
+              if [[ -z "${t}" ]] || [[ -n "${seen[$t]}" ]]; then
+                continue
+              fi
+              seen[$t]=1
               if commit_sha=$(git rev-parse --verify --quiet "refs/tags/${t}^{commit}"); then
                 git checkout -b "${t}" "${commit_sha}" && found=1 && break
               elif commit_sha=$(git rev-parse --verify --quiet "refs/tags/${t}"); then
-                # fallback: try tag object itself (lightweight)
                 git checkout -b "${t}" "${commit_sha}" && found=1 && break
               fi
             done
