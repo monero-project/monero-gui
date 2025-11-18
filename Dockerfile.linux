@@ -188,17 +188,10 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
 RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     rm /usr/lib/x86_64-linux-gnu/libXext.a && \
     rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
-    git clone https://code.qt.io/qt/qt6.git -b ${QT_VERSION} --depth 1 && \
+    wget -qO qt-everywhere-src.tar.xz "https://download.qt.io/official_releases/qt/6.6/${QT_VERSION}/single/qt-everywhere-src-${QT_VERSION}.tar.xz" && \
+    tar -xf qt-everywhere-src.tar.xz && \
+    mv "qt-everywhere-src-${QT_VERSION}" qt6 && \
     cd qt6 && \
-    git clone https://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qt5compat.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
-    git clone https://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
     sed -ri s/\(Libs:.*\)/\\1\ -lexpat/ /usr/local/lib/pkgconfig/fontconfig.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
@@ -220,8 +213,8 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     .. && \
     cmake --build . --parallel $THREADS && \
     cmake --install . && \
-    cd ../../.. && \
-    rm -rf $(pwd)
+    cd / && \
+    rm -rf qt6 qt-everywhere-src.tar.xz
 
 RUN git clone -b v1.0.26 --depth 1 https://github.com/libusb/libusb && \
     cd libusb && \

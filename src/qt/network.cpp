@@ -70,6 +70,99 @@ quint64 HttpClient::received() const
     return m_received;
 }
 
+// epee::net_utils::network_address interface implementations
+bool HttpClient::equal(const HttpClient& other) const
+{
+    return host_str() == other.host_str() && port() == other.port();
+}
+
+bool HttpClient::less(const HttpClient& other) const
+{
+    const std::string thisHost = host_str();
+    const std::string otherHost = other.host_str();
+    if (thisHost != otherHost)
+    {
+        return thisHost < otherHost;
+    }
+    return port() < other.port();
+}
+
+bool HttpClient::is_same_host(const HttpClient& other) const
+{
+    return host_str() == other.host_str();
+}
+
+std::string HttpClient::str() const
+{
+    const std::string host = host_str();
+    const std::uint16_t p = port();
+    if (p == 0)
+    {
+        return host;
+    }
+    return host + ":" + std::to_string(p);
+}
+
+std::string HttpClient::host_str() const
+{
+    // Use get_host() from the base class (net::http::client -> http_simple_client_template)
+    return get_host();
+}
+
+bool HttpClient::is_loopback() const
+{
+    const std::string host = host_str();
+    return host == "127.0.0.1" || host == "::1" || host == "localhost";
+}
+
+bool HttpClient::is_local() const
+{
+    return is_loopback();
+}
+
+epee::net_utils::address_type HttpClient::get_type_id() const
+{
+    // HttpClient is used for HTTP connections, treat as IPv4 for now
+    // This could be enhanced to detect IPv6 addresses
+    const std::string host = host_str();
+    if (host.find(':') != std::string::npos && host.find('.') == std::string::npos)
+    {
+        // Likely IPv6 address
+        return epee::net_utils::address_type::ipv6;
+    }
+    return epee::net_utils::address_type::ipv4;
+}
+
+epee::net_utils::zone HttpClient::get_zone() const
+{
+    // HttpClient connections are typically public network
+    return epee::net_utils::zone::public_;
+}
+
+bool HttpClient::is_blockable() const
+{
+    // HTTP connections can generally be blocked
+    return true;
+}
+
+std::uint16_t HttpClient::port() const
+{
+    // Use get_port() from the base class and convert to uint16_t
+    const std::string portStr = get_port();
+    if (portStr.empty())
+    {
+        return 0;
+    }
+    try
+    {
+        return static_cast<std::uint16_t>(std::stoul(portStr));
+    }
+    catch (...)
+    {
+        return 0;
+    }
+}
+
 bool HttpClient::on_header(const http_response_info &headers)
 {
     if (m_cancel.exchange(false))

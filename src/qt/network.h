@@ -62,6 +62,21 @@ public:
     quint64 contentLength() const;
     quint64 received() const;
 
+    // epee::net_utils::network_address interface methods
+    // Required for compatibility with epee's network_address template
+    // Note: HttpClient cannot be copied (QObject), but these methods satisfy the interface
+    bool equal(const HttpClient& other) const;
+    bool less(const HttpClient& other) const;
+    bool is_same_host(const HttpClient& other) const;
+    std::string str() const;
+    std::string host_str() const;
+    bool is_loopback() const;
+    bool is_local() const;
+    epee::net_utils::address_type get_type_id() const;
+    epee::net_utils::zone get_zone() const;
+    bool is_blockable() const;
+    std::uint16_t port() const;
+
 signals:
     void contentLengthChanged() const;
     void receivedChanged() const;
