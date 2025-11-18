@@ -77,6 +77,7 @@ jobs:
       run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config ninja cmake icu4c abseil
     - name: clone qt6 repos
       run: |
+        set -e
         git clone https://code.qt.io/qt/qt6.git -b ${QT_TAG} --depth 1
         cd qt6
         git clone https://code.qt.io/qt/qtbase.git -b ${QT_TAG} --depth 1
@@ -90,6 +91,7 @@ jobs:
         git clone https://code.qt.io/qt/qttranslations.git -b ${QT_TAG} --depth 1
     - name: build qt6 from source
       run: |
+        set -e
         cd qt6/qtbase
         mkdir build && cd build
         cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
@@ -100,28 +102,34 @@ jobs:
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
         cd ../../qtdeclarative && mkdir build && cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DCMAKE_PREFIX_PATH="${QT_PREFIX}" ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
         cd ../../qt5compat && mkdir build && cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DCMAKE_PREFIX_PATH="${QT_PREFIX}" ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
         cd ../../qtsvg && mkdir build && cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DCMAKE_PREFIX_PATH="${QT_PREFIX}" ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
         cd ../../qtquickcontrols && mkdir build && cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DCMAKE_PREFIX_PATH="${QT_PREFIX}" ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
         cd ../../qttools && mkdir build && cd build
         cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DCMAKE_PREFIX_PATH="${QT_PREFIX}" \
           -DFEATURE_linguist=ON -DFEATURE_lrelease=ON ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
         cmake --install .
     - name: build monero-gui
       run: |
+        set -e
         mkdir build && cd build
         cmake -G Ninja -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH="${QT_PREFIX}" ..
         cmake --build . --parallel $(sysctl -n hw.ncpu)
