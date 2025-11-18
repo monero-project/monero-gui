@@ -41,7 +41,6 @@ Rectangle {
 
     ColumnLayout {
         id: settingsI2p
-        Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -65,6 +64,24 @@ Rectangle {
             Layout.fillWidth: true
         }
 
+        MoneroComponents.TextPlain {
+            font.pixelSize: 12
+            color: MoneroComponents.Style.dimmedFontColor
+            text: qsTr("⚠️ Important: When i2p is enabled, you may need to use i2p-accessible remote nodes. Regular nodes may not be reachable through i2p. Also, the i2p router needs time to establish tunnels (usually 1-5 minutes after starting).") + translationManager.emptyString
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+            visible: persistentSettings.i2pEnabled
+        }
+
+        MoneroComponents.TextPlain {
+            font.pixelSize: 12
+            color: "#FF6B6B"
+            text: qsTr("🚨 CRITICAL: The remote node MUST be fully synced for transactions to work! Check the sync status in the left panel. If the daemon shows 'Synchronizing', wait until it's fully synced before sending transactions. Unsynced nodes may cause transactions to be lost or delayed.") + translationManager.emptyString
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+            visible: persistentSettings.i2pEnabled && (typeof appWindow !== "undefined" && !appWindow.daemonSynced)
+        }
+
         MoneroComponents.RemoteNodeEdit {
             id: i2pRouterEdit
             Layout.leftMargin: 0
@@ -75,7 +92,7 @@ Rectangle {
             daemonAddrLabelText: qsTr("i2p Router Address") + translationManager.emptyString
             daemonPortLabelText: qsTr("i2p Router Port") + translationManager.emptyString
 
-            initialAddress: persistentSettings.i2pAddress || "127.0.0.1:7656"
+            initialAddress: persistentSettings.i2pAddress || "127.0.0.1:4447"
             onEditingFinished: {
                 persistentSettings.i2pAddress = i2pRouterEdit.getAddress();
                 // Update wallet proxy if i2p is enabled and wallet is connected
@@ -84,6 +101,59 @@ Rectangle {
                     currentWallet.connectToDaemon();
                 }
             }
+        }
+
+        // Port presets dropdown
+        RowLayout {
+            Layout.topMargin: 5
+            Layout.fillWidth: true
+            spacing: 10
+
+            MoneroComponents.TextPlain {
+                Layout.preferredWidth: 150
+                font.pixelSize: 14
+                color: MoneroComponents.Style.dimmedFontColor
+                text: qsTr("Common Ports:") + translationManager.emptyString
+            }
+
+            MoneroComponents.StandardDropdown {
+                id: portPresetDropdown
+                Layout.preferredWidth: 250
+                labelText: ""
+                labelFontSize: 0
+                dropdownHeight: 35
+                fontSize: 13
+                dataModel: portPresetModel
+                currentIndex: 0
+
+                onChanged: {
+                    var selectedPort = portPresetModel.get(currentIndex).port;
+                    if (selectedPort !== "custom") {
+                        i2pRouterEdit.daemonPortText = selectedPort;
+                        // Trigger address update
+                        i2pRouterEdit.editingFinished();
+                    }
+                }
+            }
+        }
+
+        ListModel {
+            id: portPresetModel
+            Component.onCompleted: {
+                append({column1: qsTr("i2pd SOCKS (4447) - Recommended"), port: "4447"});
+                append({column1: qsTr("Java i2p SOCKS (4444)"), port: "4444"});
+                append({column1: qsTr("SAM Port (7656) - Not SOCKS"), port: "7656"});
+                append({column1: qsTr("Custom Port"), port: "custom"});
+            }
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.topMargin: 5
+            font.pixelSize: 12
+            color: MoneroComponents.Style.dimmedFontColor
+            text: qsTr("Note: Port 4447 is the default SOCKS proxy port for i2pd. Port 4444 is for Java i2p router. Port 7656 is the SAM port (not SOCKS).") + translationManager.emptyString
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
         }
 
         MoneroComponents.StandardButton {
@@ -119,6 +189,42 @@ Rectangle {
 
     Component.onCompleted: {
         console.log('SettingsI2p loaded');
+        
+        // Sync port preset dropdown with current port
+        var currentAddress = persistentSettings.i2pAddress || "127.0.0.1:4447";
+        var parts = currentAddress.split(":");
+        var currentPort = parts.length > 1 ? parts[1] : "4447";
+        
+        // Find matching preset or default to custom
+        var presetIndex = 0;
+        for (var i = 0; i < portPresetModel.count; i++) {
+            if (portPresetModel.get(i).port === currentPort) {
+                presetIndex = i;
+                break;
+            }
+            if (i === portPresetModel.count - 1) {
+                // Last item is "Custom", use it if no match
+                presetIndex = i;
+            }
+        }
+        portPresetDropdown.currentIndex = presetIndex;
+    }
+
+    // Cleanup function called when page is closed
+    function onPageClosed() {
+        // Close dropdown if it's open to prevent glitches
+        // Clear currentItem immediately to allow popup to close
+        if (portPresetDropdown && portPresetDropdown.expanded) {
+            appWindow.currentItem = null;
+        }
+    }
+
+    Component.onDestruction: {
+        // Ensure dropdown is closed when component is destroyed
+        // This prevents the popup from staying visible after navigation
+        if (portPresetDropdown && portPresetDropdown.expanded) {
+            appWindow.currentItem = null;
+        }
     }
 
     // Function to update test result message

@@ -37,6 +37,15 @@ PlatformLabs.MenuBar {
             text: qsTr("Close Wallet")
             onTriggered: appWindow.showWizard()
         }
+        PlatformLabs.MenuItem {
+            text: qsTr("Quit")
+            shortcut: StandardKey.Quit
+            onTriggered: {
+                // Explicit quit from menu - bypass close event handler
+                appWindow.quitRequested = true;
+                appWindow.close();
+            }
+        }
     }
     PlatformLabs.Menu {
         title: qsTr("View")

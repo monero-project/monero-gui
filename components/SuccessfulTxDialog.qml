@@ -148,7 +148,11 @@ Rectangle {
                 primary: false
                 KeyNavigation.tab: doneButton
                 onClicked: {
-                    doSearchInHistory(root.transactionID);
+                    // Fix TypeError: transactionID might be an array, convert to string
+                    var txId = Array.isArray(root.transactionID) ? root.transactionID[0] : root.transactionID;
+                    if (txId) {
+                        doSearchInHistory(txId);
+                    }
                     root.close()
                     root.rejected()
                 }

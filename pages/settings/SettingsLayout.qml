@@ -272,12 +272,15 @@ Rectangle {
             onClicked: {
                 persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
                 // Reconnect wallet with new proxy settings if wallet is open
-                if (currentWallet && currentWallet.connected()) {
-                    var proxyAddress = persistentSettings.i2pEnabled ? 
-                        persistentSettings.getI2pProxyAddress() : 
-                        persistentSettings.getWalletProxyAddress();
+                if (currentWallet) {
+                    var proxyAddress = persistentSettings.getWalletProxyAddress();
+                    console.log("i2p toggled, new proxy address:", proxyAddress);
                     currentWallet.proxyAddress = proxyAddress;
                     // Trigger reconnection by calling connectToDaemon
+                    // Note: This may take longer with i2p as tunnels need to be established
+                    if (persistentSettings.i2pEnabled) {
+                        console.log("i2p enabled - connection may take 1-5 minutes for tunnels to establish");
+                    }
                     currentWallet.connectToDaemon();
                 }
             }

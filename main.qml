@@ -74,6 +74,7 @@ ApplicationWindow {
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
+    property bool quitRequested: false // Flag to track explicit quit requests (File > Quit)
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
@@ -1037,6 +1038,22 @@ ApplicationWindow {
             // Store to file
             transaction.setFilename(path);
         }
+        
+        // CRITICAL: Warn if daemon is not synced when using i2p
+        // Unsynced nodes can cause transactions to be lost or delayed
+        if (persistentSettings.i2pEnabled && !daemonSynced) {
+            informationPopup.title = qsTr("Warning: Daemon Not Synced") + translationManager.emptyString
+            informationPopup.text = qsTr("The remote node is not fully synced. Sending transactions through an unsynced node may cause them to be lost or delayed. It is strongly recommended to wait until the daemon is fully synced (check the left panel for sync status) before sending transactions. Do you want to proceed anyway?") + translationManager.emptyString
+            informationPopup.icon = StandardIcon.Warning
+            informationPopup.onCloseCallback = function() {
+                // User acknowledged, proceed with transaction
+                appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+                currentWallet.commitTransactionAsync(transaction);
+            }
+            informationPopup.open();
+            return;
+        }
+        
         appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
         currentWallet.commitTransactionAsync(transaction);
     }
@@ -1530,7 +1547,8 @@ ApplicationWindow {
         property bool proxyEnabled: isTails
         
         // i2p settings
-        property string i2pAddress: "127.0.0.1:7656"
+        // Note: Default port 4447 is i2pd's SOCKS proxy port (not 7656 which is SAM port)
+        property string i2pAddress: "127.0.0.1:4447"
         property bool i2pEnabled: false
         
         function getProxyAddress() {
@@ -1550,7 +1568,7 @@ ApplicationWindow {
                 return "";
             }
             if (i2pAddress == "") {
-                return "127.0.0.1:7656"; // Default i2p router address
+                return "127.0.0.1:4447"; // Default i2pd SOCKS proxy port (not 7656 which is SAM)
             }
             return i2pAddress;
         }
@@ -1558,7 +1576,13 @@ ApplicationWindow {
             // Priority: i2p > regular proxy
             // If i2p is enabled, use i2p proxy for all wallet-to-daemon communication
             if (i2pEnabled) {
-                return getI2pProxyAddress();
+                var i2pProxy = getI2pProxyAddress();
+                if (i2pProxy === "") {
+                    console.warn("i2p is enabled but i2p proxy address is empty");
+                    return "";
+                }
+                console.log("Using i2p proxy:", i2pProxy);
+                return i2pProxy;
             }
             
             // Otherwise, use regular proxy logic
@@ -2252,9 +2276,23 @@ ApplicationWindow {
         confirmationDialog.open();
     }
 
-    onClosing: {
-        close.accepted = false;
-        console.log("blocking close event");
+    // Qt6: Use proper CloseEvent handler to avoid deprecated parameter injection warning
+    onClosing: function(closeEvent) {
+        // Always block immediate close to handle cleanup
+        closeEvent.accepted = false;
+        
+        // If user explicitly requested quit (File > Quit), skip ALL checks and close immediately
+        // This must be checked FIRST before any other logic
+        console.log("onClosing called, quitRequested =", quitRequested);
+        if (quitRequested) {
+            console.log("explicit quit requested - closing immediately without any checks or prompts");
+            // Reset flag immediately to prevent loops
+            quitRequested = false;
+            closeAccepted();
+            return;
+        }
+        
+        console.log("blocking close event - will prompt user");
         if(isAndroid) {
             console.log("blocking android exit");
             if(qrScannerEnabled)
@@ -2267,8 +2305,6 @@ ApplicationWindow {
                 // first close
                 return;
             }
-
-
         }
 
         // If daemon is running - prompt user before exiting
@@ -2297,10 +2333,75 @@ ApplicationWindow {
 
     function closeAccepted(){
         console.log("close accepted");
-        // Close wallet non async on exit
-        daemonManager.exit();
-        p2poolManager.exit();
-        closeWallet(Qt.quit);
+        // Prevent any further close event handling to avoid loops
+        var wasQuitRequested = quitRequested;
+        quitRequested = false;
+        
+        // Exit daemon and p2pool managers immediately
+        if (typeof daemonManager !== "undefined") {
+            daemonManager.exit();
+        }
+        if (typeof p2poolManager !== "undefined") {
+            p2poolManager.exit();
+        }
+        
+        // If explicit quit was requested, close wallet quickly and quit
+        // Otherwise, do normal wallet close with callback
+        if (wasQuitRequested) {
+            console.log("explicit quit - closing wallet quickly");
+            // For explicit quit, try to close wallet but don't wait too long
+            if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+                // Disconnect signals immediately to prevent any callbacks
+                try {
+                    currentWallet.heightRefreshed.disconnect();
+                    currentWallet.refreshed.disconnect();
+                    currentWallet.updated.disconnect();
+                    currentWallet.backgroundSyncSetup.disconnect();
+                    currentWallet.backgroundSyncStarted.disconnect();
+                    currentWallet.backgroundSyncStopped.disconnect();
+                    currentWallet.newBlock.disconnect();
+                    currentWallet.moneySpent.disconnect();
+                    currentWallet.moneyReceived.disconnect();
+                    currentWallet.unconfirmedMoneyReceived.disconnect();
+                    currentWallet.transactionCreated.disconnect();
+                    currentWallet.connectionStatusChanged.disconnect();
+                    currentWallet.deviceButtonRequest.disconnect();
+                    currentWallet.deviceButtonPressed.disconnect();
+                    currentWallet.walletPassphraseNeeded.disconnect();
+                    currentWallet.transactionCommitted.disconnect();
+                } catch(e) {
+                    console.log("error disconnecting signals:", e);
+                }
+                
+                // Close wallet asynchronously with timeout
+                var quitTimer = Qt.createQmlObject('import QtQuick 6.6; Timer { interval: 2000; running: true; repeat: false }', appWindow);
+                quitTimer.triggered.connect(function() {
+                    console.log("quit timeout (2s) - forcing exit");
+                    Qt.quit();
+                });
+                
+                walletManager.closeWalletAsync(function() {
+                    console.log("wallet closed, quitting");
+                    quitTimer.stop();
+                    Qt.quit();
+                });
+            } else {
+                // No wallet open, quit immediately
+                console.log("no wallet open, quitting immediately");
+                Qt.quit();
+            }
+        } else {
+            // Normal close path - wait for wallet to close properly
+            if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+                closeWallet(function() {
+                    console.log("wallet closed, quitting");
+                    Qt.quit();
+                });
+            } else {
+                console.log("no wallet open, quitting immediately");
+                Qt.quit();
+            }
+        }
     }
 
     function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {

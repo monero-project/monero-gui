@@ -145,6 +145,13 @@ ColumnLayout {
         id: popup
         padding: 0
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        
+        // Close popup when parent is being destroyed or hidden
+        onParentChanged: {
+            if (!parent) {
+                close();
+            }
+        }
 
         Rectangle {
             id: droplist
