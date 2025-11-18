@@ -82,6 +82,15 @@ Rectangle {
             visible: persistentSettings.i2pEnabled && (typeof appWindow !== "undefined" && !appWindow.daemonSynced)
         }
 
+        MoneroComponents.TextPlain {
+            font.pixelSize: 12
+            color: "#FFA500"
+            text: qsTr("⚠️ SOCKS Proxy Errors: If you see 'Socks request rejected or failed' errors in the logs, it usually means: 1) The i2p router is not running, 2) Wrong port configured (use SOCKS proxy port, typically 4447 for i2pd, NOT 7656 which is SAM), 3) Router hasn't established tunnels yet (wait 1-5 minutes after starting), or 4) SOCKS proxy not enabled in router config. Use 'Test i2p Connection' button to verify the router is accessible.") + translationManager.emptyString
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+            visible: persistentSettings.i2pEnabled && (typeof appWindow !== "undefined" && appWindow.i2pConnectionFailures >= 3)
+        }
+
         MoneroComponents.RemoteNodeEdit {
             id: i2pRouterEdit
             Layout.leftMargin: 0
@@ -97,8 +106,21 @@ Rectangle {
                 persistentSettings.i2pAddress = i2pRouterEdit.getAddress();
                 // Update wallet proxy if i2p is enabled and wallet is connected
                 if (persistentSettings.i2pEnabled && currentWallet && currentWallet.connected()) {
-                    currentWallet.proxyAddress = persistentSettings.getI2pProxyAddress();
-                    currentWallet.connectToDaemon();
+                    var newProxyAddress = persistentSettings.getI2pProxyAddress();
+                    console.log("i2p address changed, updating proxy to:", newProxyAddress);
+                    
+                    // Show status message
+                    if (typeof appWindow !== "undefined") {
+                        appWindow.showStatusMessage(qsTr("Reconnecting with new i2p settings..."), 3);
+                    }
+                    
+                    // Update proxy address
+                    currentWallet.proxyAddress = newProxyAddress;
+                    
+                    // Reconnect asynchronously to avoid blocking UI
+                            console.log("Reconnecting to daemon with new i2p proxy...");
+                    currentWallet.connectToDaemonAsync();
+                    // Connection status will be updated via connectionStatusChanged signal
                 }
             }
         }
@@ -185,6 +207,20 @@ Rectangle {
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
         }
+
+        MoneroComponents.StandardButton {
+            Layout.topMargin: 20
+            Layout.preferredWidth: 250
+            text: qsTr("View i2p FAQ") + translationManager.emptyString
+
+            onClicked: {
+                i2pFaqDialog.open()
+            }
+        }
+    }
+
+    MoneroComponents.I2pFaqDialog {
+        id: i2pFaqDialog
     }
 
     Component.onCompleted: {

@@ -346,6 +346,31 @@ bool Wallet::connectToDaemon()
     return m_walletImpl->connectToDaemon();
 }
 
+void Wallet::connectToDaemonAsync()
+{
+    qDebug() << "connectToDaemonAsync: connecting to daemon...";
+    setConnectionStatus(ConnectionStatus_Connecting);
+    const auto future = m_scheduler.run([this] {
+        bool connected = m_walletImpl->connectToDaemon();
+        if (connected)
+        {
+            qDebug() << "connectToDaemonAsync: successfully connected";
+            setConnectionStatus(ConnectionStatus_Connected);
+        }
+        else
+        {
+            QString errorMsg = QString::fromStdString(m_walletImpl->errorString());
+            qWarning() << "connectToDaemonAsync: failed to connect. Error:" << errorMsg;
+            setConnectionStatus(ConnectionStatus_Disconnected);
+        }
+    });
+    if (!future.first)
+    {
+        qWarning() << "connectToDaemonAsync: failed to schedule connection";
+        setConnectionStatus(ConnectionStatus_Disconnected);
+    }
+}
+
 void Wallet::setTrustedDaemon(bool arg)
 {
     m_walletImpl->setTrustedDaemon(arg);

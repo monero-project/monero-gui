@@ -178,6 +178,9 @@ public:
 
     //! connects to daemon
     Q_INVOKABLE bool connectToDaemon();
+    
+    //! connects to daemon asynchronously (non-blocking)
+    Q_INVOKABLE void connectToDaemonAsync();
 
     //! indicates id daemon is trusted
     Q_INVOKABLE void setTrustedDaemon(bool arg);

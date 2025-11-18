@@ -68,6 +68,26 @@ GridLayout {
         walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
     }
 
+    // Debounce timers to prevent hangs from rapid verification calls
+    Timer {
+        id: walletNameVerifyTimer
+        interval: 300
+        running: false
+        repeat: false
+        onTriggered: walletName.error = !walletName.verify();
+    }
+
+    Timer {
+        id: walletLocationVerifyTimer
+        interval: 300
+        running: false
+        repeat: false
+        onTriggered: {
+            walletLocation.error = !walletLocation.verify();
+            walletName.error = !walletName.verify();
+        }
+    }
+
     ColumnLayout {
         MoneroComponents.LineEdit {
             id: walletName
@@ -101,7 +121,10 @@ GridLayout {
             errorWhenEmpty: true
             text: defaultAccountName
 
-            onTextChanged: walletName.error = !walletName.verify();
+            onTextChanged: {
+                // Debounce verification to prevent hangs from rapid file system checks
+                walletNameVerifyTimer.restart();
+            }
             Component.onCompleted: walletName.error = !walletName.verify();
 
             Accessible.role: Accessible.EditableText
@@ -166,8 +189,8 @@ GridLayout {
             errorWhenEmpty: true
             text: appWindow.accountsDir + "/"
             onTextChanged: {
-                walletLocation.error = !walletLocation.verify();
-                walletName.error = !walletName.verify();
+                // Debounce verification to prevent hangs from rapid file system checks
+                walletLocationVerifyTimer.restart();
             }
             Component.onCompleted: walletLocation.error = !walletLocation.verify();
             Accessible.role: Accessible.EditableText
@@ -235,6 +258,9 @@ GridLayout {
         onAccepted: {
             walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.fileUrl);
             fileWalletDialog.visible = false;
+            // Use timer to debounce, but also verify immediately since user action is complete
+            walletLocationVerifyTimer.stop();
+            walletLocation.error = !walletLocation.verify();
             walletName.error = !walletName.verify();
         }
         onRejected: {

@@ -75,6 +75,9 @@ ApplicationWindow {
     property bool daemonSynced: false
     property bool walletSynced: false
     property bool quitRequested: false // Flag to track explicit quit requests (File > Quit)
+    property bool isClosing: false // Flag to prevent close event loops
+    property int i2pConnectionFailures: 0 // Track consecutive i2p connection failures
+    property int lastConnectionAttempt: 0 // Timestamp of last connection attempt
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
@@ -478,8 +481,62 @@ ApplicationWindow {
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
+        
+        // Track i2p connection failures to prevent excessive retries
         if (status == Wallet.ConnectionStatus_Disconnected) {
             firstBlockSeen = 0;
+            
+            // If i2p is enabled and we're disconnected, track failures
+            if (persistentSettings.i2pEnabled) {
+                var now = Utils.epoch();
+                // Only count failures if enough time has passed since last attempt (exponential backoff)
+                var timeSinceLastAttempt = now - lastConnectionAttempt;
+                var backoffTime = Math.min(300, Math.pow(2, Math.min(i2pConnectionFailures, 8))); // Max 5 minutes
+                
+                if (timeSinceLastAttempt >= backoffTime) {
+                    i2pConnectionFailures++;
+                    lastConnectionAttempt = now;
+                    
+                    // Check for SOCKS proxy errors in wallet error string
+                    var errorMsg = "";
+                    if (currentWallet && currentWallet.errorString) {
+                        errorMsg = currentWallet.errorString;
+                    }
+                    var isSocksError = errorMsg.indexOf("Socks") >= 0 || errorMsg.indexOf("socks") >= 0;
+                    
+                    // Warn user after 3 consecutive failures
+                    if (i2pConnectionFailures === 3) {
+                        if (isSocksError) {
+                            console.warn("i2p SOCKS proxy connection has failed 3 times. The i2p router may not be running or accessible at " + persistentSettings.getI2pProxyAddress());
+                            showStatusMessage(qsTr("Warning: i2p router not accessible. Check if i2p router is running and configured correctly."), 6);
+                        } else {
+                            console.warn("i2p connection has failed 3 times. The i2p router may not be accessible.");
+                            showStatusMessage(qsTr("Warning: i2p connection failing. Check i2p router status."), 5);
+                        }
+                    }
+                    
+                    // After 5 failures with SOCKS errors, provide specific guidance
+                    if (i2pConnectionFailures === 5 && isSocksError) {
+                        console.error("i2p SOCKS proxy repeatedly failing. Common causes: 1) i2p router not running, 2) Wrong port (should be SOCKS port, typically 4447 for i2pd), 3) Router not ready (tunnels not established yet)");
+                        showStatusMessage(qsTr("Error: i2p router SOCKS proxy failing. Verify router is running and SOCKS proxy is enabled on port " + persistentSettings.getI2pProxyAddress().split(":")[1]), 8);
+                    }
+                    
+                    // After 10 failures, suggest disabling i2p
+                    if (i2pConnectionFailures >= 10) {
+                        console.error("i2p connection has failed 10+ times. Consider disabling i2p or checking router configuration.");
+                        showStatusMessage(qsTr("Error: i2p connection repeatedly failing. Consider disabling i2p in Settings > Interface."), 8);
+                    }
+                }
+            } else {
+                // Reset failure counter when i2p is disabled
+                i2pConnectionFailures = 0;
+            }
+        } else if (status == Wallet.ConnectionStatus_Connected) {
+            // Reset failure counter on successful connection
+            if (i2pConnectionFailures > 0) {
+                console.log("i2p connection restored after " + i2pConnectionFailures + " failures");
+                i2pConnectionFailures = 0;
+            }
         }
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
@@ -1581,8 +1638,17 @@ ApplicationWindow {
                     console.warn("i2p is enabled but i2p proxy address is empty");
                     return "";
                 }
-                console.log("Using i2p proxy:", i2pProxy);
+                
+                // Only log connection attempts if failures are low (avoid spam)
+                if (appWindow.i2pConnectionFailures < 3) {
+                    console.log("Using i2p proxy:", i2pProxy);
+                }
                 return i2pProxy;
+            }
+            
+            // Reset failure counter when i2p is disabled
+            if (appWindow.i2pConnectionFailures > 0) {
+                appWindow.i2pConnectionFailures = 0;
             }
             
             // Otherwise, use regular proxy logic
@@ -2173,6 +2239,18 @@ ApplicationWindow {
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
 
+        // If i2p is enabled and we have many failures, use exponential backoff
+        if (persistentSettings.i2pEnabled && i2pConnectionFailures > 0) {
+            var now = Utils.epoch();
+            var timeSinceLastAttempt = now - lastConnectionAttempt;
+            var backoffTime = Math.min(300, Math.pow(2, Math.min(i2pConnectionFailures, 8))); // Max 5 minutes
+            
+            if (timeSinceLastAttempt < backoffTime) {
+                // Skip connection attempt - still in backoff period
+                return;
+            }
+        }
+
         const firstRun = appWindow.disconnectedEpoch == 0;
         if (firstRun) {
             appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
@@ -2278,6 +2356,13 @@ ApplicationWindow {
 
     // Qt6: Use proper CloseEvent handler to avoid deprecated parameter injection warning
     onClosing: function(closeEvent) {
+        // If we're already closing, just accept the event to prevent loops
+        if (isClosing) {
+            console.log("already closing - accepting close event");
+            closeEvent.accepted = true;
+            return;
+        }
+        
         // Always block immediate close to handle cleanup
         closeEvent.accepted = false;
         
@@ -2286,8 +2371,10 @@ ApplicationWindow {
         console.log("onClosing called, quitRequested =", quitRequested);
         if (quitRequested) {
             console.log("explicit quit requested - closing immediately without any checks or prompts");
-            // Reset flag immediately to prevent loops
+            // Set closing flag and accept event to prevent loops
+            isClosing = true;
             quitRequested = false;
+            closeEvent.accepted = true;
             closeAccepted();
             return;
         }
@@ -2309,8 +2396,12 @@ ApplicationWindow {
 
         // If daemon is running - prompt user before exiting
         if(daemonManager == undefined || persistentSettings.useRemoteNode) {
+            isClosing = true;
+            closeEvent.accepted = true;
             closeAccepted();
         } else if (appWindow.walletMode == 0) {
+            isClosing = true;
+            closeEvent.accepted = true;
             stopDaemon(closeAccepted, true);
         } else {
             showProcessingSplash(qsTr("Checking local node status..."));
@@ -2319,6 +2410,8 @@ ApplicationWindow {
                 if (running && persistentSettings.askStopLocalNode) {
                     showDaemonIsRunningDialog(closeAccepted);
                 } else {
+                    isClosing = true;
+                    closeEvent.accepted = true;
                     closeAccepted();
                 }
             };
@@ -2333,6 +2426,9 @@ ApplicationWindow {
 
     function closeAccepted(){
         console.log("close accepted");
+        // Ensure closing flag is set to prevent loops
+        isClosing = true;
+        
         // Prevent any further close event handling to avoid loops
         var wasQuitRequested = quitRequested;
         quitRequested = false;

@@ -271,17 +271,30 @@ Rectangle {
             checked: persistentSettings.i2pEnabled
             onClicked: {
                 persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
+                // Reset connection failure counter when toggling i2p
+                if (typeof appWindow !== "undefined") {
+                    appWindow.i2pConnectionFailures = 0;
+                    appWindow.lastConnectionAttempt = 0;
+                }
                 // Reconnect wallet with new proxy settings if wallet is open
                 if (currentWallet) {
                     var proxyAddress = persistentSettings.getWalletProxyAddress();
                     console.log("i2p toggled, new proxy address:", proxyAddress);
-                    currentWallet.proxyAddress = proxyAddress;
-                    // Trigger reconnection by calling connectToDaemon
-                    // Note: This may take longer with i2p as tunnels need to be established
+                    
+                    // Show status message
                     if (persistentSettings.i2pEnabled) {
+                        appWindow.showStatusMessage(qsTr("Enabling i2p - reconnecting..."), 3);
                         console.log("i2p enabled - connection may take 1-5 minutes for tunnels to establish");
+                    } else {
+                        appWindow.showStatusMessage(qsTr("Disabling i2p - reconnecting..."), 3);
                     }
-                    currentWallet.connectToDaemon();
+                    
+                    currentWallet.proxyAddress = proxyAddress;
+                    
+                    // Reconnect asynchronously to avoid blocking UI
+                    console.log("Reconnecting to daemon with new proxy settings...");
+                    currentWallet.connectToDaemonAsync();
+                    // Connection status will be updated via connectionStatusChanged signal
                 }
             }
             text: qsTr("Enable i2p for all incoming and outgoing Monero network activities") + translationManager.emptyString

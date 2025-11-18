@@ -5,7 +5,7 @@ on: [push, pull_request]
 env:
   FREE_DISKSPACE: |
     sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
-  QT_TAG: v5.15.17-lts-lgpl
+  QT_TAG: 6.7.0
   QT_PREFIX: ${{ github.workspace }}/qt-install
 
 jobs:
@@ -16,9 +16,9 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt6 pkg-config icu4c abseil
     - name: build
-      run: DEV_MODE=ON make release -j3
+      run: DEV_MODE=ON CMAKE_PREFIX_PATH="/opt/homebrew/opt/qt6;/opt/homebrew/opt/icu4c;/opt/homebrew/opt/abseil" make release -j3
     - name: test qml
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
@@ -40,7 +40,7 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
+      run: sudo apt -y install qt6-base-dev qt6-declarative-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtquick-templates qml6-module-qt-labs-platform qml6-module-qt-labs-folderlistmodel qml6-module-qt-labs-settings qml6-module-qtqml-models libqt6svg6-dev libqt6core5compat6-dev libgcrypt20-dev xvfb
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -58,7 +58,7 @@ jobs:
     - uses: eine/setup-msys2@v2
       with:
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt6 mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-declarative mingw-w64-x86_64-qt6-tools mingw-w64-x86_64-qt6-svg mingw-w64-x86_64-qt6-5compat mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
     - name: build
       run: DEV_MODE=ON make release-win64 -j2
     - name: deploy
@@ -74,31 +74,59 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config
-    - name: clone qt repo
-      run: git clone -b "${QT_TAG}" --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
-    - name: build qt from source
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config ninja cmake icu4c abseil
+    - name: clone qt6 repos
       run: |
-        cd qt5
+        git clone https://code.qt.io/qt/qt6.git -b ${QT_TAG} --depth 1
+        cd qt6
+        git clone https://code.qt.io/qt/qtbase.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qtdeclarative.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qt5compat.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qtimageformats.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qtmultimedia.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qtquickcontrols.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qtsvg.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qttools.git -b ${QT_TAG} --depth 1
+        git clone https://code.qt.io/qt/qttranslations.git -b ${QT_TAG} --depth 1
+    - name: build qt6 from source
+      run: |
+        cd qt6/qtbase
         mkdir build && cd build
-        ../configure -prefix "${QT_PREFIX}" -opensource -confirm-license -release -nomake examples -nomake tests -no-rpath -skip qtwebengine -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtnetworkauth -skip qtpurchasing -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
-        cd ../qttools/src/linguist/lrelease
-        ../../../../build/qtbase/bin/qmake
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
-        cd ../../../../qttools/src/macdeployqt/macdeployqt/
-        ../../../../build/qtbase/bin/qmake
-        make -j"$(sysctl -n hw.ncpu)"
-        make install
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DFEATURE_openssl=ON -DFEATURE_sql_sqlite=OFF -DFEATURE_dbus=OFF \
+          -DQT_BUILD_EXAMPLES=OFF -DQT_BUILD_TESTS=OFF -DQT_BUILD_TOOLS=ON \
+          -DQT_FEATURE_opengl=ON -DQT_FEATURE_opengl_desktop=ON \
+          ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
+        cd ../../qtdeclarative && mkdir build && cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
+        cd ../../qt5compat && mkdir build && cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
+        cd ../../qtsvg && mkdir build && cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
+        cd ../../qtquickcontrols && mkdir build && cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
+        cd ../../qttools && mkdir build && cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${QT_PREFIX}" \
+          -DFEATURE_linguist=ON -DFEATURE_lrelease=ON ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
+        cmake --install .
     - name: build monero-gui
       run: |
         mkdir build && cd build
-        cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH="${QT_PREFIX}" ..
-        make -j"$(sysctl -n hw.ncpu)"
+        cmake -G Ninja -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH="${QT_PREFIX}" ..
+        cmake --build . --parallel $(sysctl -n hw.ncpu)
     - name: deploy
-      run: make deploy
+      run: cmake --build . --target deploy
       working-directory: build
     - name: test qml
       run: build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
