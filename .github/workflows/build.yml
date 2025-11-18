@@ -87,7 +87,7 @@ jobs:
           qt5compat
           qtimageformats
           qtmultimedia
-          qtquickcontrols
+          qtquickcontrols2
           qtsvg
           qttools
           qttranslations
