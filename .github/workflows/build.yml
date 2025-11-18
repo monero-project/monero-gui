@@ -81,15 +81,46 @@ jobs:
         set -e
         mkdir -p qt6
         cd qt6
-        git clone https://code.qt.io/qt/qtbase.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qtdeclarative.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qt5compat.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qtimageformats.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qtmultimedia.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qtquickcontrols.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qtsvg.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qttools.git -b ${QT_TAG} --depth 1
-        git clone https://code.qt.io/qt/qttranslations.git -b ${QT_TAG} --depth 1
+        repos=(
+          qtbase
+          qtdeclarative
+          qt5compat
+          qtimageformats
+          qtmultimedia
+          qtquickcontrols
+          qtsvg
+          qttools
+          qttranslations
+        )
+        for repo in "${repos[@]}"; do
+          url="https://code.qt.io/qt/${repo}.git"
+          echo "Cloning ${repo}..."
+          # Try fast path: clone the tag/branch directly
+          if git clone --depth 1 --branch "${QT_TAG}" "${url}"; then
+            echo "Cloned ${repo} at ${QT_TAG} (direct)"
+            continue
+          fi
+          # Fallback: clone default branch shallow, then fetch and checkout the tag
+          echo "Direct clone failed for ${repo}, cloning default branch and fetching tag ${QT_TAG}..."
+          if git clone --depth 1 "${url}"; then
+            cd "${repo}"
+            # try to fetch the tag specifically (shallow tag fetch); fall back to fetching all tags
+            if ! git fetch --depth 1 origin "refs/tags/${QT_TAG}"; then
+              git fetch --tags origin || true
+            fi
+            # checkout the tag as a branch (creates local branch from tag)
+            if git rev-parse --verify "refs/tags/${QT_TAG}" >/dev/null 2>&1; then
+              git checkout -b "${QT_TAG}" "refs/tags/${QT_TAG}"
+            else
+              # last resort: try to checkout tag name (handles annotated/lightweight differences)
+              git checkout -b "${QT_TAG}" "tags/${QT_TAG}" || { echo "Tag ${QT_TAG} not found in ${repo}"; exit 1; }
+            fi
+            cd ..
+          else
+            echo "Failed to clone ${repo} repository"
+            exit 1
+          fi
+        done
     - name: build qt6 from source
       run: |
         set -e
@@ -158,10 +189,11 @@ jobs:
     - name: free up diskspace
       run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
-      run: docker build --tag monero:build-env-linux \
-        --build-arg THREADS=3 \
-        --build-arg QT_VERSION=${{ env.QT_VERSION }} \
-        --file Dockerfile.linux .
+      run: |
+        docker build --tag monero:build-env-linux \
+          --build-arg THREADS=3 \
+          --build-arg QT_VERSION=${{ env.QT_VERSION }} \
+          --file Dockerfile.linux .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static -j3'
     - name: sha256sum
@@ -184,10 +216,11 @@ jobs:
     - name: free up diskspace
       run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
-      run: docker build --tag monero:build-env-windows \
-        --build-arg THREADS=3 \
-        --build-arg QT_VERSION=${{ env.QT_VERSION }} \
-        --file Dockerfile.windows .
+      run: |
+        docker build --tag monero:build-env-windows \
+          --build-arg THREADS=3 \
+          --build-arg QT_VERSION=${{ env.QT_VERSION }} \
+          --file Dockerfile.windows .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j3'
     - name: sha256sum
@@ -208,10 +241,11 @@ jobs:
     - name: free up diskspace
       run: ${{env.FREE_DISKSPACE}}
     - name: prepare build environment
-      run: docker build --tag monero:build-env-android \
-        --build-arg THREADS=3 \
-        --build-arg QT_VERSION=${{ env.QT_VERSION }} \
-        --file Dockerfile.android .
+      run: |
+        docker build --tag monero:build-env-android \
+          --build-arg THREADS=3 \
+          --build-arg QT_VERSION=${{ env.QT_VERSION }} \
+          --file Dockerfile.android .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -e THREADS=3 monero:build-env-android
     - uses: actions/upload-artifact@v4
