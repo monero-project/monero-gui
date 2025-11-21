@@ -39,9 +39,9 @@ class WalletListenerImpl : public Monero::WalletListener, public PassphraseRecei
 public:
     WalletListenerImpl(Wallet * w);
 
-    virtual void moneySpent(const std::string &txId, uint64_t amount) override;
+    virtual void moneySpent(const std::string &txId, uint64_t amount, std::pair<uint32_t, uint32_t> subaddr_index = {}) override;
 
-    virtual void moneyReceived(const std::string &txId, uint64_t amount) override;
+    virtual void moneyReceived(const std::string &txId, uint64_t amount, const uint64_t burnt, const bool is_change = false, const bool is_coinbase = false) override;
 
     virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override;
 
@@ -59,6 +59,12 @@ public:
     virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override;
 
     virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override;
+
+    void onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached) override;
+
+    Monero::optional<std::string> onGetPassword(const char *reason) override;
+
+    void onPoolTxRemoved(const std::string &txid) override;
 
 private:
     Wallet * m_wallet;
