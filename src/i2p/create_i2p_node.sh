@@ -464,11 +464,13 @@ EOF
             chmod +x "$STARTUP_SCRIPT"
 
             echo "STATUS:Starting monerod in background..."
-            nohup "$STARTUP_SCRIPT" > "$MONERO_LOG" 2>&1 & || {
-                echo "STATUS:Warning: Could not start monerod"
+            if [ -f "$STARTUP_SCRIPT" ] && [ -x "$STARTUP_SCRIPT" ]; then
+                nohup "$STARTUP_SCRIPT" > "$MONERO_LOG" 2>&1 &
+            else
+                echo "STATUS:Warning: Startup script not found or not executable"
                 echo "STATUS:You may need to run: $STARTUP_SCRIPT"
                 return 1
-            }
+            fi
             ;;
     esac
 }

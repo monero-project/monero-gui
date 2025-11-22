@@ -26,7 +26,6 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "libwalletqt/I2PNodeManager.h"
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
@@ -72,6 +71,11 @@
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "I2PNodeManager.h"
+
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -389,6 +393,7 @@ int main(int argc, char *argv[])
 
                                           qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
+                                          // <<< --- REGISTERED TYPE HERE
                                           qmlRegisterType<I2PNodeManager>("monero.components.i2p", 1, 0, "I2PNodeManager");
 
 
@@ -456,6 +461,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
+
+    I2PNodeManager *i2pNodeManager = new I2PNodeManager(&app);
+    engine.rootContext()->setContextProperty("i2pController", i2pNodeManager);
 
     engine.addImportPath(":/fonts");
 
