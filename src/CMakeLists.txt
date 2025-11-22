@@ -74,7 +74,8 @@ set(monero_wallet_gui_sources
 )
 
 if(NOT ANDROID)
-    add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} ${monero_wallet_gui_sources})
+    add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} ${monero_wallet_gui_sources}
+        i2p/create_i2p_node.sh)
 else()
     add_library(monero-wallet-gui SHARED ${monero_wallet_gui_sources})
     set_target_properties(monero-wallet-gui PROPERTIES COMPILE_DEFINITIONS "ANDROID")
