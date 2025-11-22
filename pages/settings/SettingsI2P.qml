@@ -70,21 +70,38 @@ Rectangle {
             }
 
             Button {
-                // visible: !i2pManager.isMobile // Commented out until C++ wiring is done
-                text: "CREATE YOUR OWN NODE (DOCKER)"
-                Layout.fillWidth: true
-                onClicked: createNodeModal.open()
-                background: Rectangle { color: "#FF6600"; radius: 5 }
-                contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter }
-            }
-        }
-    }
+                    text: "Create your own node (Recommended)"
+                    Layout.preferredWidth: 300
+                    Layout.preferredHeight: 50
 
-    I2PNodeModal {
-        id: createNodeModal
-        anchors.centerIn: parent
-        width: 600
-        height: 300
-        onSubmitPassword: requestNodeCreation(passwordText)
+                    background: Rectangle {
+                        color: parent.down ? "#333" : "transparent"
+                        border.color: "#F26822"
+                        border.width: 2
+                        radius: 10
+                    }
+
+                    contentItem: RowLayout {
+                        spacing: 10
+                        anchors.centerIn: parent
+                        Text { text: "✨"; font.pixelSize: 20 }
+                        Text {
+                            text: "Create your own node (Recommended)"
+                            color: "#F26822"
+                            font.bold: true
+                        }
+                    }
+
+                    onClicked: {
+                        i2pSetupModal.open()
+                        i2pController.startNodeSetup()
+                    }
+                }
+
+            MoneroComponents.I2PSetupModal {
+                id: i2pSetupModal
+            }
+
+        }
     }
 }

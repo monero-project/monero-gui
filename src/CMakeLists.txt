@@ -6,8 +6,8 @@ qt5_add_resources(RESOURCES ../qml.qrc)
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
-	"*.h"
-	"*.cpp"
+    "*.h"
+    "*.cpp"
     "main/*.h"
     "main/*.cpp"
     "libwalletqt/WalletManager.cpp"
@@ -95,7 +95,7 @@ message(STATUS "OpenGL: libraries at ${OPENGL_LIBRARIES}")
 target_include_directories(monero-wallet-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 target_include_directories(monero-wallet-gui PUBLIC
-	${CMAKE_SOURCE_DIR}/monero/include
+    ${CMAKE_SOURCE_DIR}/monero/include
     ${CMAKE_SOURCE_DIR}/monero/src
     ${CMAKE_SOURCE_DIR}/monero/external/easylogging++
     ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include
@@ -112,8 +112,8 @@ target_include_directories(monero-wallet-gui PUBLIC
 )
 
 target_compile_definitions(monero-wallet-gui
-	PUBLIC
-	${Qt5Widgets_DEFINITIONS}
+    PUBLIC
+    ${Qt5Widgets_DEFINITIONS}
     ${Qt5Qml_DEFINITIONS}
 )
 
@@ -165,3 +165,11 @@ include(Deploy)
 install(TARGETS monero-wallet-gui
     DESTINATION bin
 )
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh
+DESTINATION ${CMAKE_BINARY_DIR}/bin/scripts
+FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh
+   DESTINATION bin/scripts
+   PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)

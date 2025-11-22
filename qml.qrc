@@ -299,5 +299,6 @@
         <file>wizard/SeedListItem.qml</file>
         <file>wizard/SeedListGrid.qml</file>
         <file>wizard/template.pdf</file>
+        <file>pages/settings/SettingsI2P.qml</file>
     </qresource>
 </RCC>
