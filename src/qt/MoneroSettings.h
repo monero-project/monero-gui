@@ -71,6 +71,12 @@ public:
     void setI2pEnabled(bool enabled);
 
 
+    QString i2pConnectionMethod() const;
+    void setI2pConnectionMethod(const QString &value);
+
+    QStringList i2pTrustedNodes() const;
+    void setI2pTrustedNodes(const QStringList &value);
+
     static QString portableFolderName();
     static bool portableConfigExists();
 
@@ -107,6 +113,9 @@ private:
     bool m_initialized = false;
     bool m_writable = true;
     int m_timerId = 0;
+
+    QString m_i2pConnectionMethod;
+    QStringList m_i2pTrustedNodes;
 };
 
 #endif // MONEROSETTINGS_H

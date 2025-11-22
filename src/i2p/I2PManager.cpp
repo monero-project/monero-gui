@@ -18,11 +18,11 @@ I2PManager::I2PManager(QObject *parent) : QObject(parent)
     s.endGroup();
 
     // default seeds if list empty
-    m_trustedNodes = {
+    m_trustedNodes = QStringList {
         "core5hzivg4v5ttxbor4a3haja6dssksqsmiootlptnsrfsgwqqa.b32.i2p:18089",
         "dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p:18089",
         "sel36x6fibfzujwvt4hf5gxolz6kd3jpvbjqg6o3ud2xtionyl2q.b32.i2p:18089",
-        "yht4tm2slhyue42zy5p2dn3sft2ffjjrpuy7oc2lpbhifcidml4q.b32.i2p:18089",
+        "yht4tm2slhyue42zy5p2dn3sft2ffjjrpuy7oc2lpbhifcidml4q.b32.i2p:18089"
     };
     emit trustedNodesChanged();
 
@@ -99,7 +99,7 @@ void I2PManager::providePassword(const QString &pw)
     QByteArray line = pw.toUtf8();
     line.append('\n');
     m_process->write(line);
-    m_process->flush();
+   // m_process->flush(); <-- no flush function?
     m_waitingForPassword = false;
 }
 
@@ -124,7 +124,7 @@ void I2PManager::startScript()
     m_process->setProcessChannelMode(QProcess::MergedChannels);
     connect(m_process, &QProcess::readyReadStandardOutput,
             this, &I2PManager::handleProcessOutput);
-    connect(m_process, &QProcess::finished,
+    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
             this, &I2PManager::handleProcessFinished);
     connect(m_process, &QProcess::errorOccurred,
             this, &I2PManager::handleProcessError);
