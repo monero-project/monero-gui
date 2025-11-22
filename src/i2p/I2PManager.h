@@ -4,8 +4,7 @@
 #include <QProcess>
 #include <QStringList>
 
-class I2PManager : public QObject
-{
+class I2PManager : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
@@ -17,13 +16,16 @@ class I2PManager : public QObject
 public:
     explicit I2PManager(QObject *parent = nullptr);
 
-    // get/set
+    // getter/setter
     bool enabled() const { return m_enabled; }
-    void setEnabled(bool v);
+    void setEnabled(bool enabled);
+
     bool connected() const { return m_connected; }
     QString status() const { return m_status; }
+
     QString connectionMode() const { return m_connectionMode; }
     void setConnectionMode(const QString &mode);
+
     QStringList trustedNodes() const { return m_trustedNodes; }
 
     // callable from QML
@@ -38,15 +40,14 @@ signals:
     void statusChanged();
     void connectionModeChanged();
     void trustedNodesChanged();
-
     void nodeCreationStarted();
     void nodeCreationFinished(bool ok, const QString &message);
     void passwordRequested(const QString &reason);
 
 private slots:
     void handleProcessOutput();
-    void handleProcessFinished(int exitCode, QProcess::ExitStatus st);
-    void handleProcessError(QProcess::ProcessError err);
+    void handleProcessFinished(int exitCode, QProcess::ExitStatus status);
+    void handleProcessError(QProcess::ProcessError error);
 
 private:
     void startScript();
