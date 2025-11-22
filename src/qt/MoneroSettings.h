@@ -44,6 +44,7 @@
 #include <QObject>
 #include <QDebug>
 #include <qsettings.h>
+#include <QStringList>
 
 static const int settingsWriteDelay = 500; // ms
 
@@ -54,6 +55,9 @@ class MoneroSettings : public QObject, public QQmlParserStatus
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName FINAL)
     Q_PROPERTY(bool portable READ portable NOTIFY portableChanged)
     Q_PROPERTY(QString portableFolderName READ portableFolderName CONSTANT)
+    Q_PROPERTY(bool i2pEnabled READ i2pEnabled WRITE setI2pEnabled NOTIFY i2pEnabledChanged)
+    Q_PROPERTY(QString i2pConnectionMethod READ i2pConnectionMethod WRITE setI2pConnectionMethod NOTIFY i2pConnectionMethodChanged)
+    Q_PROPERTY(QStringList i2pTrustedNodes READ i2pTrustedNodes WRITE setI2pTrustedNodes NOTIFY i2pTrustedNodesChanged)
 
 public:
     explicit MoneroSettings(QObject *parent = nullptr);
@@ -63,6 +67,10 @@ public:
     Q_INVOKABLE bool setPortable(bool enabled);
     Q_INVOKABLE void setWritable(bool enabled);
 
+    bool i2pEnabled() const;
+    void setI2pEnabled(bool enabled);
+
+
     static QString portableFolderName();
     static bool portableConfigExists();
 
@@ -70,7 +78,10 @@ public slots:
     void _q_propertyChanged();
 
 signals:
-    void portableChanged() const;
+    void portableChanged();
+    void i2pEnabledChanged();
+    void i2pConnectionMethodChanged();
+    void i2pTrustedNodesChanged();
 
 protected:
     void timerEvent(QTimerEvent *event) override;

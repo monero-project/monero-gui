@@ -38,6 +38,8 @@ file(GLOB SOURCE_FILES
     "daemon/*.cpp"
     "p2pool/*.h"
     "p2pool/*.cpp"
+    "i2p/*.h"
+    "i2p/*.cpp"
     "model/*.h"
     "model/*.cpp"
     "qt/*.h"
@@ -97,13 +99,14 @@ target_include_directories(monero-wallet-gui PUBLIC
     ${CMAKE_SOURCE_DIR}/monero/external/easylogging++
     ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include
     ${CMAKE_SOURCE_DIR}/monero/external/qrcodegen
-	${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_CURRENT_SOURCE_DIR}/daemon
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/daemon
     ${CMAKE_CURRENT_SOURCE_DIR}/p2pool
-	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
-	${CMAKE_CURRENT_SOURCE_DIR}/model
-	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
-	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
+    ${CMAKE_CURRENT_SOURCE_DIR}/i2p
+    ${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
+    ${CMAKE_CURRENT_SOURCE_DIR}/model
+    ${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
+    ${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${X11_INCLUDE_DIR}
 )
 

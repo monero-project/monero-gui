@@ -13,25 +13,7 @@
 //
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-//    of conditions and the following disclaimer in the documentation and/or other
-//    materials provided with the distribution.
-//
-// 3. Neither the name of the copyright holder nor the names of its contributors may be
-//    used to endorse or promote products derived from this software without specific
-//    prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+// …
 #include <QtCore>
 #include <QMetaObject>
 #include <QSettings>
@@ -39,36 +21,17 @@
 #include <QJSValue>
 #include <QHash>
 #include <QMetaProperty>
+#include <QStringList>    // for QStringList in I2P trusted nodes
 
 #include "qt/MoneroSettings.h"
 
 /*!
     \qmlmodule moneroSettings 1.0
     \title Monero Settings QML Component
-    \ingroup qmlmodules
-    \brief Provides persistent platform-independent application settings.
-
-    This component was introduced in order to have control over where the
-    configuration file is written. This is needed for Tails OS and
-    portable installations.
-
-    For more information, see: https://doc.qt.io/qt-5/qml-qt-labs-settings-settings.html and
-    https://github.com/qt/qtdeclarative/blob/v5.12.0/src/imports/settings/qqmlsettings.cpp
-
-    To use this module, import the module with the following line:
-    \code
-    import moneroComponents.Settings 1.0
-    \endcode
-
-    Usage:
-    \code
-    MoneroSettings { id: persistentSettings, property bool foo: true }
-    \endcode
-
+    …
     @TODO: Remove this QML component after migrating to Qt >= 5.12.0, as
     `Qt.labs.settings` provides the fileName via a Q_PROPERTY
 */
-
 
 void MoneroSettings::load()
 {
@@ -114,7 +77,7 @@ void MoneroSettings::_q_propertyChanged()
         const QVariant value = readProperty(property);
         this->m_changedProperties.insert(property.name(), value);
 #ifdef QT_DEBUG
-        //qDebug() << "QQmlSettings: cache" << property.name() << ":" << value;
+        // qDebug() << "QQmlSettings: cache" << property.name() << ":" << value;
 #endif
     }
 
@@ -154,8 +117,7 @@ void MoneroSettings::reset()
 
 void MoneroSettings::store()
 {
-    if (!m_writable)
-    {
+    if (!m_writable) {
         return;
     }
 
@@ -165,7 +127,7 @@ void MoneroSettings::store()
         this->m_settings->setValue(it.key(), it.value());
 
 #ifdef QT_DEBUG
-            //qDebug() << "QQmlSettings: store" << it.key() << ":" << it.value();
+            // qDebug() << "QQmlSettings: store" << it.key() << ":" << it.value();
 #endif
 
         ++it;
@@ -203,8 +165,7 @@ std::unique_ptr<QSettings> MoneroSettings::portableSettings() const
 
 std::unique_ptr<QSettings> MoneroSettings::unportableSettings() const
 {
-    if (this->m_fileName.isEmpty())
-    {
+    if (this->m_fileName.isEmpty()) {
         return std::unique_ptr<QSettings>(new QSettings());
     }
     return std::unique_ptr<QSettings>(new QSettings(this->m_fileName, QSettings::IniFormat));
@@ -214,8 +175,7 @@ void MoneroSettings::swap(std::unique_ptr<QSettings> newSettings)
 {
     const QMetaObject *mo = this->metaObject();
     const int count = mo->propertyCount();
-    for (int offset = mo->propertyOffset(); offset < count; ++offset)
-    {
+    for (int offset = mo->propertyOffset(); offset < count; ++offset) {
         const QMetaProperty &property = mo->property(offset);
         const QVariant value = readProperty(property);
         newSettings->setValue(property.name(), value);
@@ -244,16 +204,14 @@ QString MoneroSettings::fileName() const
 bool MoneroSettings::setPortable(bool enabled)
 {
     std::unique_ptr<QSettings> newSettings = enabled ? portableSettings() : unportableSettings();
-    if (newSettings->status() != QSettings::NoError)
-    {
+    if (newSettings->status() != QSettings::NoError) {
         return false;
     }
 
     setWritable(true);
     swap(std::move(newSettings));
 
-    if (!enabled)
-    {
+    if (!enabled) {
         QFile::remove(portableFilePath());
     }
 
@@ -264,6 +222,79 @@ void MoneroSettings::setWritable(bool enabled)
 {
     m_writable = enabled;
 }
+
+/* -----------------------------------------------------------------------
+ *  I2P settings getters/setters
+ *
+ *  These methods persist the I2P configuration in the underlying QSettings.
+ *  You must also add matching Q_PROPERTY declarations and signals
+ *  (i2pEnabledChanged, i2pConnectionMethodChanged, i2pTrustedNodesChanged)
+ *  to MoneroSettings.h.
+ * --------------------------------------------------------------------- */
+
+/**
+ * Returns true if I2P tunnelling is enabled, false otherwise.
+ * Default is false when not set.
+ */
+bool MoneroSettings::i2pEnabled() const
+{
+    return m_settings ? m_settings->value("i2pEnabled", false).toBool() : false;
+}
+
+void MoneroSettings::setI2pEnabled(bool enabled)
+{
+    if (!m_settings)
+        return;
+    bool current = m_settings->value("i2pEnabled", false).toBool();
+    if (current == enabled)
+        return;
+    m_settings->setValue("i2pEnabled", enabled);
+    emit i2pEnabledChanged();
+}
+
+/**
+ * Returns the current I2P connection method (e.g. "auto", "stream", "SAM").
+ * Default is "auto" when not set.
+ */
+QString MoneroSettings::i2pConnectionMethod() const
+{
+    return m_settings ? m_settings->value("i2pConnectionMethod", "auto").toString()
+                      : QString("auto");
+}
+
+void MoneroSettings::setI2pConnectionMethod(const QString &method)
+{
+    if (!m_settings)
+        return;
+    QString current = m_settings->value("i2pConnectionMethod", "auto").toString();
+    if (current == method)
+        return;
+    m_settings->setValue("i2pConnectionMethod", method);
+    emit i2pConnectionMethodChanged();
+}
+
+/**
+ * Returns a list of user-defined trusted I2P nodes.  Returns an empty
+ * list if none have been stored.
+ */
+QStringList MoneroSettings::i2pTrustedNodes() const
+{
+    return m_settings ? m_settings->value("i2pTrustedNodes").toStringList()
+                      : QStringList();
+}
+
+void MoneroSettings::setI2pTrustedNodes(const QStringList &nodes)
+{
+    if (!m_settings)
+        return;
+    QStringList current = m_settings->value("i2pTrustedNodes").toStringList();
+    if (current == nodes)
+        return;
+    m_settings->setValue("i2pTrustedNodes", nodes);
+    emit i2pTrustedNodesChanged();
+}
+
+/* --------------------------------------------------------------------- */
 
 void MoneroSettings::timerEvent(QTimerEvent *event)
 {

@@ -1,0 +1,63 @@
+#pragma once
+
+#include <QObject>
+#include <QProcess>
+#include <QStringList>
+
+class I2PManager : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool connected READ connected NOTIFY connectedChanged)
+    Q_PROPERTY(QString status READ status NOTIFY statusChanged)
+    Q_PROPERTY(QString connectionMode READ connectionMode WRITE setConnectionMode NOTIFY connectionModeChanged)
+    Q_PROPERTY(QStringList trustedNodes READ trustedNodes NOTIFY trustedNodesChanged)
+
+public:
+    explicit I2PManager(QObject *parent = nullptr);
+
+    // get/set
+    bool enabled() const { return m_enabled; }
+    void setEnabled(bool v);
+    bool connected() const { return m_connected; }
+    QString status() const { return m_status; }
+    QString connectionMode() const { return m_connectionMode; }
+    void setConnectionMode(const QString &mode);
+    QStringList trustedNodes() const { return m_trustedNodes; }
+
+    // callable from QML
+    Q_INVOKABLE void refreshStatus();
+    Q_INVOKABLE void startCreateNode();
+    Q_INVOKABLE void cancelCreateNode();
+    Q_INVOKABLE void providePassword(const QString &pw);
+
+signals:
+    void enabledChanged();
+    void connectedChanged();
+    void statusChanged();
+    void connectionModeChanged();
+    void trustedNodesChanged();
+
+    void nodeCreationStarted();
+    void nodeCreationFinished(bool ok, const QString &message);
+    void passwordRequested(const QString &reason);
+
+private slots:
+    void handleProcessOutput();
+    void handleProcessFinished(int exitCode, QProcess::ExitStatus st);
+    void handleProcessError(QProcess::ProcessError err);
+
+private:
+    void startScript();
+    void stopScript();
+    void setStatus(const QString &s);
+
+    bool m_enabled = false;
+    bool m_connected = false;
+    QString m_status;
+    QString m_connectionMode;
+    QStringList m_trustedNodes;
+    QProcess *m_process = nullptr;
+    bool m_waitingForPassword = false;
+};
