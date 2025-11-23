@@ -1,3 +1,16 @@
+cmake_minimum_required(VERSION 3.5)
+
+# --- NUCLEAR FIX START ---
+# FORCE the prefix path to use semicolons (;) instead of colons to fix the Qt Creator bug
+set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5;/opt/homebrew/opt/boost" CACHE STRING "" FORCE)
+
+# Explicitly tell CMake where Homebrew OpenSSL is
+set(OPENSSL_ROOT_DIR "/opt/homebrew/opt/openssl@3" CACHE STRING "" FORCE)
+
+# Explicitly tell CMake where Homebrew ICU is
+set(ICU_ROOT "/opt/homebrew/opt/icu4c" CACHE PATH "" FORCE)
+# --- NUCLEAR FIX END ---
+
 add_subdirectory(QR-Code-scanner)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
@@ -168,10 +181,15 @@ install(TARGETS monero-wallet-gui
     DESTINATION bin
 )
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh
-DESTINATION ${CMAKE_BINARY_DIR}/bin/scripts
-FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+# Ensure the scripts directory exists
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/bin/scripts")
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh
+# Copy the script to the build folder
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh"
+     DESTINATION "${CMAKE_BINARY_DIR}/bin/scripts"
+     FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# Install the script when deploying
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/i2p/create_i2p_node.sh"
    DESTINATION bin/scripts
    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
