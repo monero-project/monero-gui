@@ -38,6 +38,8 @@ file(GLOB SOURCE_FILES
     "daemon/*.cpp"
     "p2pool/*.h"
     "p2pool/*.cpp"
+    "i2p/I2PNodeManager.h"
+    "i2p/I2PNodeManager.cpp"
     "i2p/*.h"
     "i2p/*.cpp"
     "model/*.h"
