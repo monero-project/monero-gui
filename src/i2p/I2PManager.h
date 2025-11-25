@@ -3,6 +3,10 @@
 #include <QObject>
 #include <QProcess>
 #include <QStringList>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkProxy>
 
 class I2PManager : public QObject {
     Q_OBJECT
@@ -33,6 +37,8 @@ public:
     Q_INVOKABLE void startCreateNode();
     Q_INVOKABLE void cancelCreateNode();
     Q_INVOKABLE void providePassword(const QString &pw);
+    Q_INVOKABLE bool i2pStatus() const;
+    Q_INVOKABLE void setProxyForI2p();
 
 signals:
     void enabledChanged();
@@ -56,6 +62,9 @@ private:
 
     bool m_enabled = false;
     bool m_connected = false;
+    QNetworkAccessManager *m_networkManager = nullptr;
+    QNetworkReply *m_statusReply = nullptr;
+    QString m_i2pAddress;
     QString m_status;
     QString m_connectionMode;
     QStringList m_trustedNodes;
