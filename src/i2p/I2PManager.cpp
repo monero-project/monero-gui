@@ -2,6 +2,12 @@
 #include <QSettings>
 #include <QCoreApplication>
 #include <QFileInfo>
+#include "libwalletqt/WalletManager.h"
+#include <QNetworkProxy>
+#include <QUrl>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QDebug>   
 
 static QString scriptPath()
 {
@@ -103,12 +109,35 @@ void I2PManager::providePassword(const QString &pw)
     m_waitingForPassword = false;
 }
 
-void I2PManager::setStatus(const QString &s)
+void I2PManager::startScript()
 {
-    if (m_status == s)
+    const QString sp = scriptPath();
+    if (!QFileInfo::exists(sp)) {
+        setStatus(tr("I2P setup script not found: %1").arg(sp));
+        emit nodeCreationFinished(false, status());
         return;
-    m_status = s;
-    emit statusChanged();
+    }
+    
+    // Ensure script is executable
+    QFile::setPermissions(sp, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner |
+                             QFile::ReadGroup | QFile::ExeGroup |
+                             QFile::ReadOther | QFile::ExeOther);
+    
+    m_process = new QProcess(this);
+    m_process->setProgram("sudo");
+    m_process->setArguments(QStringList() << "-S" << "bash" << sp);
+    m_process->setProcessChannelMode(QProcess::MergedChannels);
+    connect(m_process, &QProcess::readyReadStandardOutput,
+            this, &I2PManager::handleProcessOutput);
+    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+            this, &I2PManager::handleProcessFinished);
+    connect(m_process, &QProcess::errorOccurred,
+            this, &I2PManager::handleProcessError);
+
+    emit nodeCreationStarted();
+    setStatus(tr("Starting I2P node setup…"));
+    m_process->start();
+    // Password will be provided via providePassword() when PASSWORD_PROMPT is received
 }
 
 void I2PManager::startScript()
@@ -185,6 +214,57 @@ void I2PManager::handleProcessFinished(int code, QProcess::ExitStatus)
         setStatus(tr("I2P setup failed (exit code %1)").arg(code));
     emit nodeCreationFinished(ok, m_status);
     stopScript();
+    bool I2PManager::i2pStatus() const
+{
+    // Check if I2P connection is active by attempting RPC call through I2P proxy
+    if (!m_networkManager) {
+        const_cast<I2PManager*>(this)->m_networkManager = new QNetworkAccessManager(const_cast<I2PManager*>(this));
+    }
+    
+    QNetworkRequest request(QUrl("http://127.0.0.1:18089/json_rpc"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    QNetworkProxy proxy;
+    proxy.setType(QNetworkProxy::Socks5Proxy);
+    proxy.setHostName("127.0.0.1");
+    proxy.setPort(4447);
+    
+    m_networkManager->setProxy(proxy);
+    
+    QJsonObject json;
+    json["jsonrpc"] = "2.0";
+    json["id"] = "0";
+    json["method"] = "get_info";
+    QJsonDocument doc(json);
+    
+    QNetworkReply *reply = m_networkManager->post(request, doc.toJson());
+    
+    // For synchronous check, wait briefly (in practice, make this async)
+    // This is a simplified implementation
+    if (reply->waitForReadyRead(2000)) {
+        bool success = (reply->error() == QNetworkReply::NoError);
+        reply->deleteLater();
+        return success;
+    }
+    
+    reply->deleteLater();
+    return false;
+}
+
+void I2PManager::setProxyForI2p()
+{
+    // Set proxy in WalletManager
+    WalletManager *walletManager = WalletManager::instance();
+    if (walletManager) {
+        walletManager->setProxyAddress("127.0.0.1:4447");
+        qDebug() << "I2P proxy set to 127.0.0.1:4447";
+    }
+    
+    // Update connection status
+    if (m_enabled) {
+        refreshStatus();
+    }
+}
 }
 
 void I2PManager::handleProcessError(QProcess::ProcessError)
