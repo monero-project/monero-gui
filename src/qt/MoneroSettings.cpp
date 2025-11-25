@@ -294,6 +294,39 @@ void MoneroSettings::setI2pTrustedNodes(const QStringList &nodes)
     emit i2pTrustedNodesChanged();
 }
 
+int MoneroSettings::anonymityNetwork() const
+{
+    return m_settings ? m_settings->value("anonymityNetwork", 0).toInt() : 0;
+}
+
+void MoneroSettings::setAnonymityNetwork(int value)
+{
+    if (!m_settings) return;
+
+    int current = m_settings->value("anonymityNetwork", 0).toInt();
+    if (current == value) return;
+
+    m_settings->setValue("anonymityNetwork", value);
+    m_anonymityNetwork = value;
+    emit anonymityNetworkChanged();
+}
+
+QString MoneroSettings::i2pAddress() const
+{
+    return m_settings ? m_settings->value("i2pAddress", "").toString() : QString("");
+}
+
+void MoneroSettings::setI2pAddress(const QString &address)
+{
+    if (!m_settings) return;
+
+    QString current = m_settings->value("i2pAddress", "").toString();
+    if (current == address) return;
+
+    m_settings->setValue("i2pAddress", address);
+    m_i2pAddress = address;
+    emit i2pAddressChanged();
+}
 
 void MoneroSettings::timerEvent(QTimerEvent *event)
 {
