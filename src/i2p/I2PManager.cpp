@@ -140,29 +140,6 @@ void I2PManager::startScript()
     // Password will be provided via providePassword() when PASSWORD_PROMPT is received
 }
 
-void I2PManager::startScript()
-{
-    const QString sp = scriptPath();
-    if (!QFileInfo::exists(sp)) {
-        setStatus(tr("I2P setup script not found: %1").arg(sp));
-        emit nodeCreationFinished(false, status());
-        return;
-    }
-    m_process = new QProcess(this);
-    m_process->setProgram(sp);
-    m_process->setProcessChannelMode(QProcess::MergedChannels);
-    connect(m_process, &QProcess::readyReadStandardOutput,
-            this, &I2PManager::handleProcessOutput);
-    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-            this, &I2PManager::handleProcessFinished);
-    connect(m_process, &QProcess::errorOccurred,
-            this, &I2PManager::handleProcessError);
-
-    emit nodeCreationStarted();
-    setStatus(tr("Starting I2P node setup…"));
-    m_process->start();
-}
-
 void I2PManager::stopScript()
 {
     if (!m_process)
@@ -214,7 +191,14 @@ void I2PManager::handleProcessFinished(int code, QProcess::ExitStatus)
         setStatus(tr("I2P setup failed (exit code %1)").arg(code));
     emit nodeCreationFinished(ok, m_status);
     stopScript();
-    bool I2PManager::i2pStatus() const
+}
+
+void I2PManager::handleProcessError(QProcess::ProcessError)
+{
+    setStatus(tr("I2P setup process error"));
+}
+
+bool I2PManager::i2pStatus() const
 {
     // Check if I2P connection is active by attempting RPC call through I2P proxy
     if (!m_networkManager) {
@@ -264,10 +248,4 @@ void I2PManager::setProxyForI2p()
     if (m_enabled) {
         refreshStatus();
     }
-}
-}
-
-void I2PManager::handleProcessError(QProcess::ProcessError)
-{
-    setStatus(tr("I2P setup process error"));
 }
