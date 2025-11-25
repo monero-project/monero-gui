@@ -80,6 +80,11 @@ public:
     QStringList i2pTrustedNodes() const;
     void setI2pTrustedNodes(const QStringList &value);
 
+    int anonymityNetwork() const;
+    void setAnonymityNetwork(int value);
+    QString i2pAddress() const;
+    void setI2pAddress(const QString &value);
+
     static QString portableFolderName();
     static bool portableConfigExists();
 
@@ -91,6 +96,8 @@ signals:
     void i2pEnabledChanged();
     void i2pConnectionMethodChanged();
     void i2pTrustedNodesChanged();
+    void anonymityNetworkChanged();
+    void i2pAddressChanged();
 
 protected:
     void timerEvent(QTimerEvent *event) override;
@@ -119,6 +126,8 @@ private:
 
     QString m_i2pConnectionMethod;
     QStringList m_i2pTrustedNodes;
+    int m_anonymityNetwork = 0;
+    QString m_i2pAddress;
 };
 
 #endif // MONEROSETTINGS_H
