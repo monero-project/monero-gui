@@ -58,6 +58,9 @@ class MoneroSettings : public QObject, public QQmlParserStatus
     Q_PROPERTY(bool i2pEnabled READ i2pEnabled WRITE setI2pEnabled NOTIFY i2pEnabledChanged)
     Q_PROPERTY(QString i2pConnectionMethod READ i2pConnectionMethod WRITE setI2pConnectionMethod NOTIFY i2pConnectionMethodChanged)
     Q_PROPERTY(QStringList i2pTrustedNodes READ i2pTrustedNodes WRITE setI2pTrustedNodes NOTIFY i2pTrustedNodesChanged)
+    Q_PROPERTY(bool i2pEnabled READ i2pEnabled WRITE setI2pEnabled NOTIFY i2pEnabledChanged)
+    Q_PROPERTY(int anonymityNetwork READ anonymityNetwork WRITE setAnonymityNetwork NOTIFY anonymityNetworkChanged)
+    Q_PROPERTY(QString i2pAddress READ i2pAddress WRITE setI2pAddress NOTIFY i2pAddressChanged)
 
 public:
     explicit MoneroSettings(QObject *parent = nullptr);
