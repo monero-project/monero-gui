@@ -45,11 +45,11 @@ signals:
     void connectedChanged();
     void statusChanged();
     void connectionModeChanged();
-    void proxyAddressRequested(const QString &address);
     void trustedNodesChanged();
     void nodeCreationStarted();
     void nodeCreationFinished(bool ok, const QString &message);
     void passwordRequested(const QString &reason);
+    void proxyAddressRequested(const QString &address);
 
 private slots:
     void handleProcessOutput();
