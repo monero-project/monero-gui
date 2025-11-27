@@ -4,9 +4,12 @@
 #include <QProcess>
 #include <QStringList>
 #include <QNetworkAccessManager>
+<<<<<<< HEAD
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QNetworkProxy>
+=======
+>>>>>>> 94bf7222 (Extend I2PManager with proxy and status methods)
 
 class I2PManager : public QObject {
     Q_OBJECT
@@ -39,7 +42,10 @@ public:
     Q_INVOKABLE void providePassword(const QString &pw);
     Q_INVOKABLE bool i2pStatus() const;
     Q_INVOKABLE void setProxyForI2p();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94bf7222 (Extend I2PManager with proxy and status methods)
 signals:
     void enabledChanged();
     void connectedChanged();
@@ -71,4 +77,5 @@ private:
     QStringList m_trustedNodes;
     QProcess *m_process = nullptr;
     bool m_waitingForPassword = false;
+    QNetworkAccessManager *m_networkManager = nullptr;
 };
