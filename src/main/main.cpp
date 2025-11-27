@@ -76,6 +76,7 @@
 #include <QQmlContext>
 
 #include "I2PNodeManager.h"
+#include "i2p/I2PManager.h"
 
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
@@ -391,13 +392,21 @@ int main(int argc, char *argv[])
 
                                           // Temporary Qt.labs.settings replacement
                                           qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
+<<<<<<< HEAD
                                           
+=======
+
+>>>>>>> 547acb10 (Register I2PManager and integrate I2P proxy in main app)
                                           qmlRegisterSingletonType<I2PManager>("moneroComponents.I2P", 1, 0, "I2PManager", 
                                             [](QQmlEngine*, QJSEngine*) -> QObject* {
                                                 static I2PManager *mgr = new I2PManager();
                                                 return mgr;
                                             });
+<<<<<<< HEAD
                                           
+=======
+
+>>>>>>> 547acb10 (Register I2PManager and integrate I2P proxy in main app)
                                           qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
                                           // <<< --- REGISTERED TYPE HERE
