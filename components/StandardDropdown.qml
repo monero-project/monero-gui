@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2024, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -59,10 +59,20 @@ ColumnLayout {
     property int dropdownHeight: 39
     property int fontSize: 14
     property int fontItemSize: 14
+
+    // Expanded Styling Properties
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
+    property int borderWidth: 1
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
     property bool headerFontBold: false
+
+    // Custom Item Styling
+    property string itemFontFamily: MoneroComponents.Style.fontRegular.name
+    property color itemTextColor: "#FFFFFF"
+    property color selectedItemTextColor: "#FA6800"
+    property bool itemTextShadow: false
+    property color textShadowColor: "black" // New property for shadow color
 
     signal changed();
 
@@ -90,8 +100,8 @@ ColumnLayout {
 
     Rectangle {
         id: head
-        color: dropArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
-        border.width: dropdown.headerBorder ? 1 : 0
+        color: dropArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : colorHeaderBackground
+        border.width: dropdown.headerBorder ? dropdown.borderWidth : 0
         border.color: dropdown.colorBorder
         radius: 4
         Layout.fillWidth: true
@@ -105,11 +115,16 @@ ColumnLayout {
             anchors.rightMargin: 12
             width: droplist.width
             elide: Text.ElideRight
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: dropdown.itemFontFamily
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontSize
             color: dropdown.textColor
-            text: columnid.currentIndex < repeater.model.count ? qsTr(repeater.model.get(columnid.currentIndex).column1) + translationManager.emptyString : ""
+            // Fix: Check for both column1 and text properties for compatibility
+            text: {
+                if (columnid.currentIndex >= repeater.model.count) return "";
+                var item = repeater.model.get(columnid.currentIndex);
+                return qsTr(item.column1 !== undefined ? item.column1 : item.text) + translationManager.emptyString;
+            }
         }
 
         Item {
@@ -128,7 +143,7 @@ ColumnLayout {
                 width: 12
                 fontAwesomeFallbackIcon: FontAwesome.arrowDown
                 fontAwesomeFallbackSize: 14
-                color: MoneroComponents.Style.defaultFontColor
+                color: dropdown.textColor
             }
         }
 
@@ -137,7 +152,7 @@ ColumnLayout {
             anchors.fill: parent
             onClicked: dropdown.expanded ? popup.close() : popup.open()
             hoverEnabled: true
-            cursorShape: Qt.ArrowCursor
+            cursorShape: Qt.PointingHandCursor
         }
     }
 
@@ -145,6 +160,7 @@ ColumnLayout {
         id: popup
         padding: 0
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
 
         Rectangle {
             id: droplist
@@ -154,6 +170,9 @@ ColumnLayout {
             clip: true
             height: dropdown.expanded ? columnid.height : 0
             color: dropdown.pressedColor
+            border.width: dropdown.borderWidth
+            border.color: dropdown.colorBorder
+            radius: 4
 
             Behavior on height {
                 NumberAnimation { duration: 100; easing.type: Easing.InQuad }
@@ -168,20 +187,16 @@ ColumnLayout {
 
                 Repeater {
                     id: repeater
-
-                    // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+                    // Default values if not overridden by SettingsI2P
                     property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
-                    property string stringSlow: qsTr("Slow (x0.2 fee)") + translationManager.emptyString
-                    property string stringNormal: qsTr("Normal (x1 fee)")  + translationManager.emptyString
-                    property string stringFast: qsTr("Fast (x5 fee)")  + translationManager.emptyString
-                    property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
 
                     delegate: Rectangle {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         height: (dropdown.dropdownHeight * 0.75)
-                        //radius: index === repeater.count - 1 ? 4 : 0
-                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+
+                        // Background logic: Darker Black for selected/hover, Translucent for others
+                        color: (index === columnid.currentIndex || itemArea.containsMouse) ? dropdown.releasedColor : "transparent"
 
                         MoneroComponents.TextPlain {
                             id: col1Text
@@ -190,11 +205,22 @@ ColumnLayout {
                             anchors.right: col2Text.left
                             anchors.leftMargin: 12
                             anchors.rightMargin: 0
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            z: 100
+
+                            font.family: dropdown.itemFontFamily
                             font.bold: false
                             font.pixelSize: fontItemSize
-                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
-                            text: qsTr(column1) + translationManager.emptyString
+                            position: absolute
+
+                            // Text Color Logic
+                            color: (index === columnid.currentIndex || itemArea.containsMouse) ? dropdown.selectedItemTextColor : dropdown.itemTextColor
+
+                            // Text Shadow / Emboss Effect (Only for selected item if enabled)
+                            style: dropdown.itemTextShadow && (index === columnid.currentIndex) ? Text.Raised : Text.Normal
+                            styleColor: dropdown.textShadowColor
+
+                            // Fix: Support both column1 and text
+                            text: qsTr(model.column1 !== undefined ? model.column1 : model.text) + translationManager.emptyString
                         }
 
                         MoneroComponents.TextPlain {
@@ -202,9 +228,9 @@ ColumnLayout {
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
                             anchors.rightMargin: 45
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: dropdown.itemFontFamily
                             font.pixelSize: 14
-                            color: "#FFFFFF"
+                            color: itemTextColor
                             text: ""
                         }
 
@@ -212,7 +238,7 @@ ColumnLayout {
                             id: itemArea
                             anchors.fill: parent
                             hoverEnabled: true
-                            cursorShape: Qt.ArrowCursor
+                            cursorShape: Qt.PointingHandCursor
 
                             onClicked: {
                                 popup.close()
@@ -225,4 +251,5 @@ ColumnLayout {
             }
         }
     }
+
 }

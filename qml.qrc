@@ -12,6 +12,7 @@
         <file>components/RemoteNodeList.qml</file>
         <file>components/SettingsListItem.qml</file>
         <file>components/Slider.qml</file>
+        <file>components/StandardSwitch.qml</file>
         <file>components/Tooltip.qml</file>
         <file>components/UpdateDialog.qml</file>
         <file>images/whatIsIcon.png</file>
@@ -31,11 +32,6 @@
         <file>components/NetworkStatusItem.qml</file>
         <file>components/Input.qml</file>
         <file>components/StandardButton.qml</file>
-        <file>components/SettingsListItem.qml</file>
-        <file>components/Slider.qml</file>
-        <file>components/StandardSwitch.qml</file>
-        <file>components/Tooltip.qml</file>
-        <file>components/UpdateDialog.qml</file>
         <file>components/LineEdit.qml</file>
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>

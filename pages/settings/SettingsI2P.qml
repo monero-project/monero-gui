@@ -23,6 +23,7 @@ ColumnLayout {
         opacity: 0.5
     }
 
+    // Master Switch
     MoneroComponents.StandardSwitch {
         id: i2pSwitch
         text: qsTr("Enable I2P Network") + translationManager.emptyString
@@ -61,13 +62,17 @@ ColumnLayout {
             id: nodeDropdown
             Layout.preferredWidth: 350
 
-            // COMMUNITY VOUCHED NODES (Reliable .b32 addresses)
+            // STYLE: Orange Outline & Text
+            colorBorder: MoneroComponents.Style.orange
+            textColor: MoneroComponents.Style.orange
+
+            // COMMUNITY NODES (Using column1 for display)
             dataModel: [
-                { text: qsTr("Auto-detect / Custom"), value: "" },
-                { text: "SethForPrivacy (rb752...)", value: "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081" },
-                { text: "MoneroWorld (monerow.org)", value: "monerow.org.b32.i2p:18081" },
-                { text: "Plowsof (plowsof.b32.i2p)", value: "plowsof.b32.i2p:18081" },
-                { text: "DamnSmall (dsmll...)", value: "dsmll6q65555555555555555555.b32.i2p:18081" }
+                { column1: qsTr("Auto-detect / Custom"), value: "" },
+                { column1: "SethForPrivacy", value: "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081" },
+                { column1: "MoneroWorld", value: "monerow.org.b32.i2p:18081" },
+                { column1: "Plowsof", value: "plowsof.b32.i2p:18081" },
+                { column1: "DamnSmall", value: "dsmll6q65555555555555555555.b32.i2p:18081" }
             ]
 
             onChanged: {
@@ -80,6 +85,7 @@ ColumnLayout {
         }
     }
 
+    // Manual Address Override
     RowLayout {
         visible: i2pSwitch.checked
         Layout.topMargin: 5
@@ -89,6 +95,10 @@ ColumnLayout {
             Layout.preferredWidth: 350
             text: persistentSettings.i2pAddress
             placeholderText: "address.b32.i2p:18081"
+
+            // STYLE: Digital Monospaced Font in Orange
+            font.family: MoneroComponents.Style.fontMonoRegular.name
+            color: MoneroComponents.Style.orange
 
             onEditingFinished: {
                 if(text !== "") persistentSettings.i2pAddress = text
@@ -131,7 +141,7 @@ ColumnLayout {
             text: I2PManager.status
             font.family: MoneroComponents.Style.fontBold.name
             font.pixelSize: 14
-            color: I2PManager.connected ? "#2EB358" : MoneroComponents.Style.dimmedFontColor
+            color: I2PManager.connected ? MoneroComponents.Style.green : MoneroComponents.Style.dimmedFontColor
         }
     }
 
@@ -158,5 +168,52 @@ ColumnLayout {
         running: true
         repeat: true
         onTriggered: I2PManager.refreshStatus()
+    }
+
+    // Progress Dialog
+    Popup {
+        id: i2pProgressModal
+        modal: true
+        focus: true
+        anchors.centerIn: parent
+        width: 400
+        height: 200
+        visible: false
+
+        background: Rectangle {
+            color: MoneroComponents.Style.middlePanelBackgroundColor
+            border.color: MoneroComponents.Style.appWindowBorderColor
+            radius: 4
+        }
+
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: 20
+
+            MoneroComponents.Label {
+                text: qsTr("Starting I2P Router...")
+                fontSize: 18
+                fontBold: true
+            }
+
+            BusyIndicator {
+                running: true
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            MoneroComponents.StandardButton {
+                text: qsTr("Cancel")
+                onClicked: {
+                    I2PManager.cancelCreateNode();
+                    i2pProgressModal.close();
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: I2PManager
+        function onNodeCreationStarted() { i2pProgressModal.open(); }
+        function onNodeCreationFinished(success, message) { i2pProgressModal.close(); if (!success) console.log("I2P Error: " + message); }
     }
 }
