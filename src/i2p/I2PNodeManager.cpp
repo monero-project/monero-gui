@@ -9,7 +9,7 @@ I2PNodeManager::I2PNodeManager(QObject *parent)
 {
     m_status = "Ready";
 
-    // Using m_trustedNodes
+    // --- TRUSTED REMOTE NODES (RPC) ---
     m_trustedNodes << "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081"; // SethForPrivacy
     m_trustedNodes << "monerow.org.b32.i2p:18081"; // MoneroWorld
     m_trustedNodes << "plowsof.b32.i2p:18081"; // Plowsof
@@ -38,10 +38,9 @@ void I2PNodeManager::setStatus(const QString &s) {
     emit statusChanged();
 }
 
-// --- QML Methods ---
+// --- QML Interface Methods ---
 
 void I2PNodeManager::refreshStatus() {
-    // Check process state
     if (m_process->state() == QProcess::Running) {
         setStatus("Running");
         m_connected = true;
@@ -93,12 +92,11 @@ void I2PNodeManager::startNode(bool useDocker)
 
     QString binDir = QCoreApplication::applicationDirPath();
     QString scriptName = useDocker ? "create_i2p_node_docker.sh" : "create_i2p_node.sh";
-
-    // Logic to find the script in bin or src folders
+    // Check if scripts folder exists in bin (deployment) or source (dev)
     QString scriptPath = binDir + "/scripts/" + scriptName;
 
     if (!QFile::exists(scriptPath)) {
-        // Fallback for dev environment
+        // Fallback for some dev environments
         scriptPath = QCoreApplication::applicationDirPath() + "/../scripts/" + scriptName;
     }
 
@@ -132,7 +130,7 @@ void I2PNodeManager::onProcessOutput()
         if (line.trimmed().isEmpty()) continue;
         qDebug() << "I2P Script:" << line;
 
-        // Detect password prompt for sudo
+        // Detect password prompt
         if (line.contains("password", Qt::CaseInsensitive) && line.contains("sudo", Qt::CaseInsensitive)) {
             emit passwordRequested("Administrative privileges required to start I2P service");
         }
