@@ -10,17 +10,15 @@ I2PNodeManager::I2PNodeManager(QObject *parent)
     m_status = "ready.";
 
     // --- TRUSTED REMOTE NODES (RPC) ---
-    // These are for users who DONT want to run a local node.
-    // They connect directly to these via I2P proxy.
-    m_remoteNodes << "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081"; // SethForPrivacy
-    m_remoteNodes << "monerow.org.b32.i2p:18081"; // MoneroWorld
-    m_remoteNodes << "plowsof.b32.i2p:18081"; // Plowsof
+    m_trustedNodes << "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081"; // SethForPrivacy
+    m_trustedNodes << "monerow.org.b32.i2p:18081"; // MoneroWorld
+    m_trustedNodes << "plowsof.b32.i2p:18081"; // Plowsof
 
     connect(m_process, &QProcess::readyReadStandardOutput, this, &I2PNodeManager::onProcessOutput);
     connect(m_process, &QProcess::readyReadStandardError, this, &I2PNodeManager::onProcessOutput);
     connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
             this, &I2PNodeManager::onProcessFinished);
-}
+
 
 void I2PNodeManager::startNode(bool useDocker)
 {
@@ -30,19 +28,21 @@ void I2PNodeManager::startNode(bool useDocker)
         return;
     }
 
-    m_status = "initializing...";
-    emit statusChanged();
+    setStatus("Initializing...");
 
     QString binDir = QCoreApplication::applicationDirPath();
     QString scriptName = useDocker ? "create_i2p_node_docker.sh" : "create_i2p_node.sh";
+    // Check if scripts folder exists in bin (deployment) or source (dev)
     QString scriptPath = binDir + "/scripts/" + scriptName;
+
+    if (!QFile::exists(scriptPath)) {
+        // Fallback for some dev environments
+        scriptPath = QCoreApplication::applicationDirPath() + "/../scripts/" + scriptName;
+    }
 
     qDebug() << "launching i2p script:" << scriptPath;
 
     m_process->start("/bin/bash", QStringList() << scriptPath);
-
-    m_running = true;
-    emit isRunningChanged();
 }
 
 void I2PNodeManager::stopNode()
@@ -51,8 +51,8 @@ void I2PNodeManager::stopNode()
     if (m_process->state() == QProcess::NotRunning) return;
 
     qDebug() << "stopping node process...";
-    m_status = "stopping...";
-    emit statusChanged();
+    setStatus("Stopping...");
+
     m_process->terminate();
     if (!m_process->waitForFinished(3000)) {
         m_process->kill();
@@ -63,31 +63,39 @@ void I2PNodeManager::onProcessOutput()
 {
     // ... (Keep your existing output logic here) ...
     QByteArray data = m_process->readAllStandardOutput();
-    QString output = QString::fromLocal8Bit(data).trimmed();
-
+    QByteArray errorData = m_process->readAllStandardError();
+    QString output = QString::fromLocal8Bit(data + errorData).trimmed();
     QStringList lines = output.split("\n");
+
     for (const QString &line : lines) {
+        if (line.trimmed().isEmpty()) continue;
+        qDebug() << "I2P Script:" << line;
+
+        // Detect password prompt
+        if (line.contains("password", Qt::CaseInsensitive) && line.contains("sudo", Qt::CaseInsensitive)) {
+            emit passwordRequested("Administrative privileges required to start I2P service");
+        }
+
         if (line.startsWith("STATUS:")) {
-            m_status = line.mid(7).trimmed();
-            emit statusChanged();
-            qDebug() << "I2P:" << m_status;
+            setStatus(line.mid(7).trimmed());
         }
     }
 }
 
 void I2PNodeManager::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    // ... (Keep your existing finished logic here) ...
-    qDebug() << "i2p script finished code:" << exitCode;
-    m_running = false;
-    emit isRunningChanged();
+    bool success = (exitCode == 0 && exitStatus == QProcess::NormalExit);
 
-    if (exitCode == 0) {
-        m_status = "stopped.";
+    if (success) {
+        setStatus("Ready");
+        m_connected = true;
+        emit nodeCreationFinished(true, "I2P Router started successfully");
     } else {
-        m_status = "error: node stopped unexpectedly";
+        setStatus("Error: Stopped unexpectedly");
+        m_connected = false;
+        emit nodeCreationFinished(false, "I2P Router process failed");
     }
-    emit statusChanged();
+    emit connectedChanged();
 }
 
 void I2PNodeManager::setEnabled(bool enabled) {
