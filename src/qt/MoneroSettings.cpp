@@ -33,19 +33,16 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-##include <QtCore>
+#include <QtCore>
 #include <QMetaObject>
 #include <QSettings>
-#include <QPointer>
+#include <QFileInfo>
+#include <QDir>
 #include <QJSValue>
-#include <QHash>
-#include <QMetaProperty>
-#include <QStringList>
-
 #include "qt/MoneroSettings.h"
 
-    // Initialize static member
-    MoneroSettings *MoneroSettings::m_instance = nullptr;
+// Initialize static member
+MoneroSettings *MoneroSettings::m_instance = nullptr;
 
 MoneroSettings::MoneroSettings(QObject *parent) :
     QObject(parent)
@@ -276,7 +273,6 @@ void MoneroSettings::setAnonymityNetwork(int value)
     int current = m_settings->value("anonymityNetwork", 0).toInt();
     if (current == value) return;
     m_settings->setValue("anonymityNetwork", value);
-    m_anonymityNetwork = value;
     emit anonymityNetworkChanged();
 }
 
@@ -291,7 +287,6 @@ void MoneroSettings::setI2pAddress(const QString &address)
     QString current = m_settings->value("i2pAddress", "").toString();
     if (current == address) return;
     m_settings->setValue("i2pAddress", address);
-    m_i2pAddress = address;
     emit i2pAddressChanged();
 }
 

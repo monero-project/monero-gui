@@ -92,6 +92,7 @@ void I2PNodeManager::startNode(bool useDocker)
 
     QString binDir = QCoreApplication::applicationDirPath();
     QString scriptName = useDocker ? "create_i2p_node_docker.sh" : "create_i2p_node.sh";
+
     // Check if scripts folder exists in bin (deployment) or source (dev)
     QString scriptPath = binDir + "/scripts/" + scriptName;
 

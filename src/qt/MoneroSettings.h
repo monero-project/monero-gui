@@ -61,9 +61,7 @@ class MoneroSettings : public QObject, public QQmlParserStatus
 
 public:
     explicit MoneroSettings(QObject *parent = nullptr);
-
-    // Singleton Accessor
-    static MoneroSettings *instance();
+    static MoneroSettings *instance(); // Singleton
 
     QString fileName() const;
     void setFileName(const QString &fileName);
@@ -123,12 +121,11 @@ private:
     bool m_writable = true;
     int m_timerId = 0;
 
-    // Singleton Instance
     static MoneroSettings *m_instance;
 
     QString m_i2pConnectionMethod;
     QStringList m_i2pTrustedNodes;
-    int m_anonymityNetwork = 0;  // 0=Clearnet, 1=Tor, 2=I2P
+    int m_anonymityNetwork = 0;
     QString m_i2pAddress;
 };
 
