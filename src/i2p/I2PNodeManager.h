@@ -8,7 +8,7 @@
 #include <QNetworkReply>
 #include <QNetworkProxy>
 
-class I2PManager : public QObject {
+class I2PNodeManager : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
@@ -18,7 +18,7 @@ class I2PManager : public QObject {
     Q_PROPERTY(QStringList trustedNodes READ trustedNodes NOTIFY trustedNodesChanged)
 
 public:
-    explicit I2PManager(QObject *parent = nullptr);
+    explicit I2PNodeManager(QObject *parent = nullptr);
 
     // getter/setter
     bool enabled() const { return m_enabled; }
@@ -52,13 +52,13 @@ signals:
     void proxyAddressRequested(const QString &address);
 
 private slots:
-    void handleProcessOutput();
-    void handleProcessFinished(int exitCode, QProcess::ExitStatus status);
+    void onProcessOutput();
+    void onProcessFinished(int exitCode, QProcess::ExitStatus status);
     void handleProcessError(QProcess::ProcessError error);
 
 private:
-    void startScript();
-    void stopScript();
+    void startNode(bool useDocker);
+    void stopNode();
     void setStatus(const QString &s);
 
     bool m_enabled = false;
