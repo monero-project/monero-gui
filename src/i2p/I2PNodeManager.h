@@ -8,6 +8,7 @@
 #include <QNetworkReply>
 #include <QNetworkProxy>
 
+// FIXED: Class name matches CPP file
 class I2PNodeManager : public QObject {
     Q_OBJECT
 
