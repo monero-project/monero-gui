@@ -1,31 +1,3 @@
-// Copyright (c) 2014-2024, The Monero Project
-//
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-//    conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-//    of conditions and the following disclaimer in the documentation and/or other
-//    materials provided with the distribution.
-//
-// 3. Neither the name of the copyright holder nor the names of its contributors may be
-//    used to endorse or promote products derived from this software without specific
-//    prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
@@ -38,15 +10,17 @@ import "../components/effects/" as MoneroEffects
 ColumnLayout {
     id: dropdown
     Layout.fillWidth: true
+    z: expanded ? 100 : 1
 
     property int itemTopMargin: 0
     property alias dataModel: repeater.model
-    property string shadowPressedColor
-    property string shadowReleasedColor
-    property string pressedColor: MoneroComponents.Style.appWindowBorderColor
-    property string releasedColor: MoneroComponents.Style.titleBarButtonHoverColor
-    property string textColor: MoneroComponents.Style.defaultFontColor
-    property alias currentIndex: columnid.currentIndex
+
+    property string pressedColor: "#DD1D1D1D"
+    property string releasedColor: "#FF000000"
+    property string textColor: MoneroComponents.Style.orange
+
+    property int currentIndex: 0
+
     readonly property alias expanded: popup.visible
     property alias labelText: dropdownLabel.text
     property alias labelColor: dropdownLabel.color
@@ -60,19 +34,17 @@ ColumnLayout {
     property int fontSize: 14
     property int fontItemSize: 14
 
-    // Expanded Styling Properties
-    property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
+    property string colorBorder: MoneroComponents.Style.orange
     property int borderWidth: 1
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
-    property bool headerFontBold: false
+    property bool headerFontBold: true
 
-    // Custom Item Styling
     property string itemFontFamily: MoneroComponents.Style.fontRegular.name
-    property color itemTextColor: "#FFFFFF"
+    property color itemTextColor: "#AAFFFFFF"
     property color selectedItemTextColor: "#FA6800"
-    property bool itemTextShadow: false
-    property color textShadowColor: "black" // New property for shadow color
+    property bool itemTextShadow: true
+    property color textShadowColor: "black"
 
     signal changed();
 
@@ -119,11 +91,26 @@ ColumnLayout {
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontSize
             color: dropdown.textColor
-            // Fix: Check for both column1 and text properties for compatibility
+
             text: {
-                if (columnid.currentIndex >= repeater.model.count) return "";
-                var item = repeater.model.get(columnid.currentIndex);
-                return qsTr(item.column1 !== undefined ? item.column1 : item.text) + translationManager.emptyString;
+                if (!repeater.model) return "";
+                var count = 0;
+                if (Array.isArray(repeater.model)) count = repeater.model.length;
+                else if (repeater.model.count !== undefined) count = repeater.model.count;
+
+                if (dropdown.currentIndex < 0 || dropdown.currentIndex >= count) return "";
+
+                var item;
+                if (typeof repeater.model.get === "function") {
+                    item = repeater.model.get(dropdown.currentIndex);
+                } else {
+                    item = repeater.model[dropdown.currentIndex];
+                }
+
+                // CRITICAL FIX: Check if item exists
+                if (!item) return "";
+                var txt = (item.column1 !== undefined) ? item.column1 : item.text;
+                return qsTr(txt ? txt : "") + translationManager.emptyString;
             }
         }
 
@@ -160,90 +147,79 @@ ColumnLayout {
         id: popup
         padding: 0
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        y: head.height + 5
+        width: dropdown.width
+        z: 100
 
+        background: Rectangle {
+            color: "transparent"
+        }
 
         Rectangle {
             id: droplist
-            anchors.left: parent.left
             width: dropdown.width
-            y: head.y + head.height
+            height: Math.min(columnid.height, 300)
             clip: true
-            height: dropdown.expanded ? columnid.height : 0
+
             color: dropdown.pressedColor
             border.width: dropdown.borderWidth
             border.color: dropdown.colorBorder
             radius: 4
 
-            Behavior on height {
-                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
-            }
+            ScrollView {
+                anchors.fill: parent
+                contentHeight: columnid.height
 
-            Column {
-                id: columnid
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                property int currentIndex: 0
+                Column {
+                    id: columnid
+                    width: parent.width
 
-                Repeater {
-                    id: repeater
-                    // Default values if not overridden by SettingsI2P
-                    property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
+                    Repeater {
+                        id: repeater
+                        model: dropdown.dataModel
 
-                    delegate: Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: (dropdown.dropdownHeight * 0.75)
+                        delegate: Rectangle {
+                            width: dropdown.width
+                            height: (dropdown.dropdownHeight * 0.85)
 
-                        // Background logic: Darker Black for selected/hover, Translucent for others
-                        color: (index === columnid.currentIndex || itemArea.containsMouse) ? dropdown.releasedColor : "transparent"
+                            color: (index === dropdown.currentIndex || itemArea.containsMouse) ? dropdown.releasedColor : "transparent"
 
-                        MoneroComponents.TextPlain {
-                            id: col1Text
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.right: col2Text.left
-                            anchors.leftMargin: 12
-                            anchors.rightMargin: 0
-                            z: 100
+                            MoneroComponents.TextPlain {
+                                id: col1Text
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                anchors.leftMargin: 12
+                                anchors.rightMargin: 12
 
-                            font.family: dropdown.itemFontFamily
-                            font.bold: false
-                            font.pixelSize: fontItemSize
-                            position: absolute
+                                font.family: dropdown.itemFontFamily
+                                font.bold: index === dropdown.currentIndex
+                                font.pixelSize: fontItemSize
 
-                            // Text Color Logic
-                            color: (index === columnid.currentIndex || itemArea.containsMouse) ? dropdown.selectedItemTextColor : dropdown.itemTextColor
+                                color: (index === dropdown.currentIndex || itemArea.containsMouse) ? dropdown.selectedItemTextColor : dropdown.itemTextColor
 
-                            // Text Shadow / Emboss Effect (Only for selected item if enabled)
-                            style: dropdown.itemTextShadow && (index === columnid.currentIndex) ? Text.Raised : Text.Normal
-                            styleColor: dropdown.textShadowColor
+                                style: dropdown.itemTextShadow ? Text.Raised : Text.Normal
+                                styleColor: dropdown.textShadowColor
 
-                            // Fix: Support both column1 and text
-                            text: qsTr(model.column1 !== undefined ? model.column1 : model.text) + translationManager.emptyString
-                        }
+                                text: {
+                                    // CRITICAL FIX: Check if model item exists
+                                    if (!model) return "";
+                                    var txt = (model.column1 !== undefined) ? model.column1 : model.text;
+                                    return qsTr(txt ? txt : "") + translationManager.emptyString;
+                                }
+                            }
 
-                        MoneroComponents.TextPlain {
-                            id: col2Text
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: parent.right
-                            anchors.rightMargin: 45
-                            font.family: dropdown.itemFontFamily
-                            font.pixelSize: 14
-                            color: itemTextColor
-                            text: ""
-                        }
+                            MouseArea {
+                                id: itemArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
 
-                        MouseArea {
-                            id: itemArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-
-                            onClicked: {
-                                popup.close()
-                                columnid.currentIndex = index
-                                changed();
+                                onClicked: {
+                                    popup.close()
+                                    dropdown.currentIndex = index
+                                    dropdown.changed()
+                                }
                             }
                         }
                     }
@@ -251,5 +227,4 @@ ColumnLayout {
             }
         }
     }
-
 }

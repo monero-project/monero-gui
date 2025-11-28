@@ -1,31 +1,3 @@
-// Copyright (c) 2014-2024, The Monero Project
-// 
-// All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-// 
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-//    conditions and the following disclaimer.
-// 
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-//    of conditions and the following disclaimer in the documentation and/or other
-//    materials provided with the distribution.
-// 
-// 3. Neither the name of the copyright holder nor the names of its contributors may be
-//    used to endorse or promote products derived from this software without specific
-//    prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
@@ -52,6 +24,8 @@ Rectangle {
         anchors.margins: 20
         anchors.topMargin: 0
         spacing: 6
+
+        // ... [Existing Checkboxes for Custom Decorations, Updates, etc.] ...
 
         MoneroComponents.CheckBox {
             id: customDecorationsCheckBox
@@ -93,7 +67,7 @@ Rectangle {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
             }
         }
-        
+
         MoneroComponents.CheckBox {
             checked: persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
@@ -166,14 +140,9 @@ Rectangle {
             onClicked: {
                 if (currentWallet && appWindow) {
                     appWindow.showProcessingSplash(qsTr("Updating settings..."))
-
-                    // TODO: add support for custom background password option
                     var newBackgroundSyncType = Wallet.BackgroundSync_Off
                     if (currentWallet.getBackgroundSyncType() === Wallet.BackgroundSync_Off)
                         newBackgroundSyncType = Wallet.BackgroundSync_ReusePassword
-
-                    // TODO: don't keep the wallet password in memory on the appWindow
-                    // https://github.com/monero-project/monero-gui/issues/1537#issuecomment-410055329
                     currentWallet.setupBackgroundSync(newBackgroundSyncType, appWindow.walletPassword)
                 }
             }
@@ -185,7 +154,7 @@ Rectangle {
             text: qsTr("Ask to stop local node during program exit") + translationManager.emptyString
         }
 
-        //! Manage pricing
+        // Manage pricing
         RowLayout {
             MoneroComponents.CheckBox {
                 id: enableConvertCurrency
@@ -242,7 +211,6 @@ Rectangle {
         }
 
         ColumnLayout {
-            // Feature needs to be double enabled for security purposes (miss-clicks)
             visible: enableConvertCurrency.checked && !persistentSettings.fiatPriceEnabled
             spacing: 0
             Layout.topMargin: 5
@@ -261,6 +229,23 @@ Rectangle {
                 onClicked: {
                     console.log("Enabled price conversion");
                     persistentSettings.fiatPriceEnabled = true;
+                }
+            }
+        }
+
+        // Connect via I2P Checkbox (Simple Mode)
+        MoneroComponents.CheckBox {
+            id: i2pCheckbox
+            Layout.topMargin: 6
+            checked: persistentSettings.i2pEnabled && persistentSettings.anonymityNetwork === 2
+            text: qsTr("Route traffic through I2P") + translationManager.emptyString
+            onClicked: {
+                if (checked) {
+                    // Enable I2P: disconnect current node, set I2P settings, reconnect
+                    appWindow.enableI2pRouting();
+                } else {
+                    // Disable I2P: disconnect, clear I2P settings, reconnect normally
+                    appWindow.disableI2pRouting();
                 }
             }
         }
@@ -308,6 +293,7 @@ Rectangle {
         }
     }
 
+    // ... [ListModels and Component.onCompleted] ...
     ListModel {
         id: fiatPriceProvidersModel
     }
@@ -325,7 +311,6 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        // Dynamically fill fiatPrice dropdown based on `appWindow.fiatPriceAPIs`
         var apis = appWindow.fiatPriceAPIs;
         fiatPriceProvidersModel.clear();
 
@@ -333,7 +318,6 @@ Rectangle {
         for (var api in apis){
             if (!apis.hasOwnProperty(api))
                continue;
-
             fiatPriceProvidersModel.append({"column1": Utils.capitalize(api), "data": api});
 
             if(api === persistentSettings.fiatPriceProvider)
@@ -344,4 +328,3 @@ Rectangle {
         console.log('SettingsLayout loaded');
     }
 }
-

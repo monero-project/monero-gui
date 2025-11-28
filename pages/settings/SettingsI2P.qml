@@ -9,9 +9,6 @@ ColumnLayout {
     Layout.fillHeight: true
     spacing: 20
 
-    // ----------------------------------------------------
-    // Section 1: Network Privacy
-    // ----------------------------------------------------
     MoneroComponents.LabelSubheader {
         text: qsTr("I2P Privacy & Routing") + translationManager.emptyString
     }
@@ -23,7 +20,6 @@ ColumnLayout {
         opacity: 0.5
     }
 
-    // Master Switch
     MoneroComponents.StandardSwitch {
         id: i2pSwitch
         text: qsTr("Enable I2P Network") + translationManager.emptyString
@@ -45,13 +41,11 @@ ColumnLayout {
         Layout.fillWidth: true
     }
 
-    // ----------------------------------------------------
-    // Section 2: Remote Node Selection
-    // ----------------------------------------------------
     RowLayout {
         visible: i2pSwitch.checked
         Layout.topMargin: 10
         spacing: 20
+        z: 100
 
         MoneroComponents.Label {
             text: qsTr("Remote I2P Node") + translationManager.emptyString
@@ -60,13 +54,21 @@ ColumnLayout {
 
         MoneroComponents.StandardDropdown {
             id: nodeDropdown
-            Layout.preferredWidth: 350
+            Layout.preferredWidth: 400
 
-            // STYLE: Orange Outline & Text
             colorBorder: MoneroComponents.Style.orange
+            borderWidth: 2
+            colorHeaderBackground: "#E61D1D1D"
+            pressedColor: "#D91D1D1D"
+            releasedColor: "#FF000000"
             textColor: MoneroComponents.Style.orange
+            headerFontBold: true
+            itemFontFamily: MoneroComponents.Style.fontMonoRegular.name
+            itemTextColor: Qt.rgba(1.0, 0.42, 0.23, 0.7)
+            selectedItemTextColor: MoneroComponents.Style.orange
+            itemTextShadow: true
+            textShadowColor: "black"
 
-            // COMMUNITY NODES (Using column1 for display)
             dataModel: [
                 { column1: qsTr("Auto-detect / Custom"), value: "" },
                 { column1: "SethForPrivacy", value: "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081" },
@@ -77,7 +79,7 @@ ColumnLayout {
 
             onChanged: {
                 var selected = dataModel[currentIndex];
-                if (selected.value !== "") {
+                if (selected && selected.value !== "") {
                     i2pAddressInput.text = selected.value;
                     persistentSettings.i2pAddress = selected.value;
                 }
@@ -85,20 +87,20 @@ ColumnLayout {
         }
     }
 
-    // Manual Address Override
     RowLayout {
         visible: i2pSwitch.checked
         Layout.topMargin: 5
+        z: 1
 
         MoneroComponents.Input {
             id: i2pAddressInput
-            Layout.preferredWidth: 350
+            Layout.preferredWidth: 400
             text: persistentSettings.i2pAddress
             placeholderText: "address.b32.i2p:18081"
 
-            // STYLE: Digital Monospaced Font in Orange
             font.family: MoneroComponents.Style.fontMonoRegular.name
             color: MoneroComponents.Style.orange
+            font.bold: true
 
             onEditingFinished: {
                 if(text !== "") persistentSettings.i2pAddress = text
@@ -106,9 +108,6 @@ ColumnLayout {
         }
     }
 
-    // ----------------------------------------------------
-    // Section 3: Embedded Router Management
-    // ----------------------------------------------------
     MoneroComponents.LabelSubheader {
         Layout.topMargin: 30
         text: qsTr("Embedded I2P Router") + translationManager.emptyString
@@ -162,7 +161,6 @@ ColumnLayout {
         }
     }
 
-    // Status Polling
     Timer {
         interval: 2000
         running: true
@@ -170,7 +168,6 @@ ColumnLayout {
         onTriggered: I2PManager.refreshStatus()
     }
 
-    // Progress Dialog
     Popup {
         id: i2pProgressModal
         modal: true
@@ -179,6 +176,7 @@ ColumnLayout {
         width: 400
         height: 200
         visible: false
+        z: 200
 
         background: Rectangle {
             color: MoneroComponents.Style.middlePanelBackgroundColor

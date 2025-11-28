@@ -52,6 +52,12 @@ Rectangle {
             case Wallet.ConnectionStatus_Connected:
                 if (!appWindow.daemonSynced)
                     return qsTr("Synchronizing");
+                 // Show I2P status if enabled
+                 if (persistentSettings.i2pEnabled && persistentSettings.anonymityNetwork === 2) {
+                    if (appWindow.isMining)
+                        return qsTr("I2P") + " + " + qsTr("Mining");
+                     return qsTr("I2P Connected");
+                   }
                 if (persistentSettings.useRemoteNode && persistentSettings.allowRemoteNodeMining && appWindow.isMining)
                     return qsTr("Remote node") + " + " + qsTr("Mining");
                 if (persistentSettings.useRemoteNode)
