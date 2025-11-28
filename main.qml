@@ -216,6 +216,106 @@ ApplicationWindow {
 
         leftPanel.selectItem(middlePanel.state);
     }
+    function enableI2pRouting() {
+        console.log("Enabling I2P routing");
+
+        // Disconnect from current node first
+        if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+            // Stop any daemon if running
+            if (typeof daemonManager !== "undefined" && daemonRunning) {
+                daemonManager.stopAsync();
+            }
+
+            // Disconnect remote node if connected
+            if (persistentSettings.useRemoteNode) {
+                disconnectRemoteNode();
+            }
+        }
+
+        // Set I2P settings
+        persistentSettings.i2pEnabled = true;
+        persistentSettings.anonymityNetwork = 2; // I2P mode
+
+        // Set I2P proxy address if not set
+        if (persistentSettings.i2pAddress === "") {
+            persistentSettings.i2pAddress = "127.0.0.1:4447";
+        }
+
+        // Apply I2P proxy settings
+        I2PManager.setProxyForI2p();
+
+        // Reconnect wallet through I2P proxy
+        reconnectWithI2p();
+    }
+
+    function disableI2pRouting() {
+        console.log("Disabling I2P routing");
+
+        // Disconnect from current connection
+        if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+            if (persistentSettings.useRemoteNode) {
+                disconnectRemoteNode();
+            }
+        }
+
+        // Clear I2P settings
+        persistentSettings.i2pEnabled = false;
+        persistentSettings.anonymityNetwork = 0; // Clearnet mode
+
+        // Reconnect normally (without I2P)
+        reconnectWithoutI2p();
+    }
+
+    function reconnectWithI2p() {
+        if (typeof currentWallet === "undefined" || currentWallet === null) {
+            return;
+        }
+
+        console.log("Reconnecting with I2P proxy");
+
+        // Use local daemon address but route through I2P proxy
+        persistentSettings.useRemoteNode = false;
+        currentDaemonAddress = localDaemonAddress;
+        currentWallet.setDaemonLogin("", "");
+
+        // Reconnect with I2P proxy address
+        const i2pProxy = persistentSettings.getWalletProxyAddress(); // This will return I2P proxy if enabled
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            isTrustedDaemon(),
+            0,
+            false,
+            false,
+            0,
+            i2pProxy
+        );
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
+    }
+
+    function reconnectWithoutI2p() {
+        if (typeof currentWallet === "undefined" || currentWallet === null) {
+            return;
+        }
+
+        console.log("Reconnecting without I2P");
+
+        // Reconnect normally
+        persistentSettings.useRemoteNode = false;
+        currentDaemonAddress = localDaemonAddress;
+        currentWallet.setDaemonLogin("", "");
+
+        // Reconnect without proxy
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            isTrustedDaemon(),
+            0,
+            false,
+            false,
+            0,
+            "" // No proxy
+        );
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
+    }
 
     function sequenceReleased(obj, seq) {
         if (seq === "Ctrl")
