@@ -1,0 +1,687 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/src/cryptonote_protocol/libcryptonote_protocol.dylib"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"monero_add_library_with_deps",
+			"monero_add_library",
+			"target_link_libraries",
+			"set_property",
+			"_pkg_create_imp_target",
+			"_pkg_recalculate",
+			"_pkg_check_modules_internal",
+			"pkg_check_modules",
+			"add_definitions",
+			"include",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"monero/CMakeLists.txt",
+			"monero/src/cryptonote_protocol/CMakeLists.txt",
+			"monero/src/p2p/CMakeLists.txt",
+			"monero/src/cryptonote_core/CMakeLists.txt",
+			"monero/src/blockchain_db/CMakeLists.txt",
+			"monero/src/cryptonote_basic/CMakeLists.txt",
+			"monero/src/device/CMakeLists.txt",
+			"monero/src/crypto/CMakeLists.txt",
+			"monero/src/common/CMakeLists.txt",
+			"monero/src/net/CMakeLists.txt",
+			"monero/contrib/epee/src/CMakeLists.txt",
+			"/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake",
+			"monero/cmake/CheckTrezor.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 33,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 611,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 624,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 34,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 36,
+				"parent" : 5
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 7
+			},
+			{
+				"file" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 4,
+				"line" : 44,
+				"parent" : 9
+			},
+			{
+				"file" : 5
+			},
+			{
+				"command" : 3,
+				"file" : 5,
+				"line" : 67,
+				"parent" : 11
+			},
+			{
+				"file" : 6
+			},
+			{
+				"command" : 3,
+				"file" : 6,
+				"line" : 70,
+				"parent" : 13
+			},
+			{
+				"file" : 7
+			},
+			{
+				"command" : 3,
+				"file" : 7,
+				"line" : 71,
+				"parent" : 15
+			},
+			{
+				"file" : 8
+			},
+			{
+				"command" : 3,
+				"file" : 8,
+				"line" : 66,
+				"parent" : 17
+			},
+			{
+				"file" : 9
+			},
+			{
+				"command" : 3,
+				"file" : 9,
+				"line" : 35,
+				"parent" : 19
+			},
+			{
+				"file" : 10
+			},
+			{
+				"command" : 3,
+				"file" : 10,
+				"line" : 64,
+				"parent" : 21
+			},
+			{
+				"file" : 0
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 1148,
+				"parent" : 23
+			},
+			{
+				"command" : 7,
+				"file" : 11,
+				"line" : 867,
+				"parent" : 24
+			},
+			{
+				"command" : 6,
+				"file" : 11,
+				"line" : 695,
+				"parent" : 25
+			},
+			{
+				"command" : 5,
+				"file" : 11,
+				"line" : 359,
+				"parent" : 26
+			},
+			{
+				"command" : 4,
+				"file" : 11,
+				"line" : 340,
+				"parent" : 27
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 577,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 498,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 1061,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 1062,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 1063,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 473,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 497,
+				"parent" : 23
+			},
+			{
+				"command" : 10,
+				"file" : 0,
+				"line" : 673,
+				"parent" : 23
+			},
+			{
+				"file" : 12,
+				"parent" : 36
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 157,
+				"parent" : 37
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 665,
+				"parent" : 23
+			},
+			{
+				"command" : 11,
+				"file" : 0,
+				"line" : 573,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 160,
+				"parent" : 40
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 1125,
+				"parent" : 23
+			},
+			{
+				"command" : 12,
+				"file" : 0,
+				"line" : 575,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 152,
+				"parent" : 43
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 180,
+				"parent" : 37
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 391,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 67,
+				"parent" : 37
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 158,
+				"parent" : 37
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 161,
+				"parent" : 37
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 455,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 560,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 645,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 649,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 656,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 666,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 12,
+				"line" : 182,
+				"parent" : 37
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 1126,
+				"parent" : 23
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 1065,
+				"parent" : 23
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "libminiupnpc-static::@cff63f8557b2f769bc1d"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lmdb::@6c0318a63c238d1b40b4"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "easylogging::@67ae4ab8ad0deadec0e8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "randomx::@3cfcb9f1b9be96d94b82"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "epee::@2d31c5e5f3a963729190"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "version::@e755a04db5c24671c7bc"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "common::@4954347f4cf3ee74e34e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cncrypto::@0038c9c6d3d93ff875b8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "ringct_basic::@e5510959f47534a05345"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "ringct::@e5510959f47534a05345"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "checkpoints::@9321b6784caff9bb6eaa"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_format_utils_basic::@5d3e877fca902856ef8e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_basic::@5d3e877fca902856ef8e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_core::@45215b4d8c051e91df83"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "net::@cc23d53a81cb321cd581"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "hardforks::@4aeff871341287a1f0e4"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "blockchain_db::@e3f14e82041c184aa358"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "p2p::@c3245565fa01d55c069f"
+		},
+		{
+			"id" : "obj_cryptonote_protocol::@22a5796a781fd3967f5a"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "device::@dc635d948a044c513274"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "libs"
+	},
+	"id" : "cryptonote_protocol::@22a5796a781fd3967f5a",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-dynamiclib -Wl,-headerpad_max_install_names",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-undefined,error",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/p2p -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/cryptonote_core -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/blockchain_db -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/cryptonote_basic -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/checkpoints -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/db_drivers/liblmdb -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/ringct -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/device -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/hardforks -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/net -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/common -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/crypto -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/randomx -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/contrib/epee/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/easylogging++",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/p2p/libp2p.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework AppKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework IOKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework CoreFoundation",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/cryptonote_core/libcryptonote_core.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/blockchain_db/libblockchain_db.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "monero/src/cryptonote_basic/libcryptonote_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "monero/src/checkpoints/libcheckpoints.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "monero/external/db_drivers/liblmdb/liblmdb.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/ringct/libringct.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/device/libdevice.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "monero/src/ringct/libringct_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "/opt/homebrew/lib/libhidapi.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "monero/src/cryptonote_basic/libcryptonote_format_utils_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/hardforks/libhardforks.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/libversion.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/net/libnet.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/common/libcommon.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/src/crypto/libcncrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "monero/external/randomx/librandomx.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "/opt/homebrew/Cellar/libsodium/1.0.20/lib/libsodium.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 18,
+				"fragment" : "/opt/homebrew/lib/libunbound.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 20,
+				"fragment" : "monero/contrib/epee/src/libepee.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "monero/external/easylogging++/libeasylogging.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libssl.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/Cellar/zeromq/4.3.5_2/lib/libzmq.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/external/miniupnp/miniupnpc/libminiupnpc.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_filesystem.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_serialization.dylib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "cryptonote_protocol",
+	"nameOnDisk" : "libcryptonote_protocol.dylib",
+	"paths" : 
+	{
+		"build" : "monero/src/cryptonote_protocol",
+		"source" : "monero/src/cryptonote_protocol"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/cryptonote_protocol/CMakeFiles/obj_cryptonote_protocol.dir/block_queue.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/cryptonote_protocol/CMakeFiles/obj_cryptonote_protocol.dir/cryptonote_protocol_handler-base.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/cryptonote_protocol/CMakeFiles/obj_cryptonote_protocol.dir/levin_notify.cpp.o",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

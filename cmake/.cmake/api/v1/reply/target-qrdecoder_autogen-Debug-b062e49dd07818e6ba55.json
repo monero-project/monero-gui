@@ -1,0 +1,71 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/QR-Code-scanner/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "qrdecoder_autogen_timestamp_deps::@c2c9a1b7470bbe0ef90a"
+		}
+	],
+	"id" : "qrdecoder_autogen::@c2c9a1b7470bbe0ef90a",
+	"isGeneratorProvided" : true,
+	"name" : "qrdecoder_autogen",
+	"paths" : 
+	{
+		"build" : "src/QR-Code-scanner",
+		"source" : "src/QR-Code-scanner"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/QR-Code-scanner/CMakeFiles/qrdecoder_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/QR-Code-scanner/CMakeFiles/qrdecoder_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/QR-Code-scanner/qrdecoder_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

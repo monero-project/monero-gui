@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "monero/src/seraphis_crypto",
+		"source" : "monero/src/seraphis_crypto"
+	}
+}

@@ -1,0 +1,56 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"monero/src/simplewallet/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"bin/monero-wallet-cli"
+			],
+			"targetId" : "simplewallet::@89065defe1cb7b6a9725",
+			"targetIndex" : 101,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "simplewallet::@89065defe1cb7b6a9725",
+				"index" : 101
+			},
+			"destination" : "bin",
+			"type" : "cxxModuleBmi"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "monero/src/simplewallet",
+		"source" : "monero/src/simplewallet"
+	}
+}

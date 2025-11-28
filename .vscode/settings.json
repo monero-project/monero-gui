@@ -1,0 +1,26 @@
+{
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.intelliSenseMode": "macos-clang-arm64",
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "/opt/homebrew/opt/qt@5/include",
+        "/opt/homebrew/opt/qt@5/include/QtCore",
+        "/opt/homebrew/opt/qt@5/include/QtGui",
+        "/opt/homebrew/opt/qt@5/include/QtQml",
+        "/opt/homebrew/opt/qt@5/include/QtNetwork"
+    ],
+    "C_Cpp.default.defines": [
+        "QT_CORE_LIB",
+        "QT_GUI_LIB",
+        "QT_QML_LIB",
+        "QT_NETWORK_LIB"
+    ],
+    "files.associations": {
+        "*.h": "cpp",
+        "*.cpp": "cpp"
+    }
+}
+
+

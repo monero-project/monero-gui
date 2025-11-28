@@ -1,0 +1,56 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"monero/src/wallet/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 103,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				"bin/monero-wallet-rpc"
+			],
+			"targetId" : "wallet_rpc_server::@7cb4c358204534e753da",
+			"targetIndex" : 114,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "wallet_rpc_server::@7cb4c358204534e753da",
+				"index" : 114
+			},
+			"destination" : "bin",
+			"type" : "cxxModuleBmi"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "monero/src/wallet",
+		"source" : "monero/src/wallet"
+	}
+}

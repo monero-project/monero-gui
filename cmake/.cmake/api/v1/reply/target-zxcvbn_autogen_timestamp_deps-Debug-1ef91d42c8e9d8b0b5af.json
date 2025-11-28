@@ -1,0 +1,27 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/zxcvbn-c/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "zxcvbn_autogen_timestamp_deps::@bb5823a9f93b935b8eb5",
+	"isGeneratorProvided" : true,
+	"name" : "zxcvbn_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "src/zxcvbn-c",
+		"source" : "src/zxcvbn-c"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

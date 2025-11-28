@@ -1,0 +1,369 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/src/mnemonics/libmnemonics.dylib"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"monero_add_library_with_deps",
+			"monero_add_library",
+			"target_link_libraries",
+			"add_definitions",
+			"include",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"monero/CMakeLists.txt",
+			"monero/src/mnemonics/CMakeLists.txt",
+			"monero/contrib/epee/src/CMakeLists.txt",
+			"monero/cmake/CheckTrezor.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 38,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 611,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 624,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 42,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 64,
+				"parent" : 5
+			},
+			{
+				"file" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 577,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 498,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1061,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1062,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1063,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 473,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 497,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 673,
+				"parent" : 7
+			},
+			{
+				"file" : 3,
+				"parent" : 15
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 157,
+				"parent" : 16
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 665,
+				"parent" : 7
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 573,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 160,
+				"parent" : 19
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1125,
+				"parent" : 7
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 575,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 152,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 180,
+				"parent" : 16
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 391,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 67,
+				"parent" : 16
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 158,
+				"parent" : 16
+			},
+			{
+				"command" : 4,
+				"file" : 3,
+				"line" : 161,
+				"parent" : 16
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 455,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 560,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 645,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 649,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 656,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 666,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 3,
+				"line" : 182,
+				"parent" : 16
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 1126,
+				"parent" : 7
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 1065,
+				"parent" : 7
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "easylogging::@67ae4ab8ad0deadec0e8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "epee::@2d31c5e5f3a963729190"
+		},
+		{
+			"id" : "obj_mnemonics::@ce3c6c8014cd759f5aac"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "libs"
+	},
+	"id" : "mnemonics::@ce3c6c8014cd759f5aac",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-dynamiclib -Wl,-headerpad_max_install_names",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-undefined,error",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/contrib/epee/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/easylogging++",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/contrib/epee/src/libepee.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/external/easylogging++/libeasylogging.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework AppKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework IOKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework CoreFoundation",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_filesystem.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libssl.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "mnemonics",
+	"nameOnDisk" : "libmnemonics.dylib",
+	"paths" : 
+	{
+		"build" : "monero/src/mnemonics",
+		"source" : "monero/src/mnemonics"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/mnemonics/CMakeFiles/obj_mnemonics.dir/electrum-words.cpp.o",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

@@ -1,0 +1,71 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/zxcvbn-c/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "zxcvbn_autogen_timestamp_deps::@bb5823a9f93b935b8eb5"
+		}
+	],
+	"id" : "zxcvbn_autogen::@bb5823a9f93b935b8eb5",
+	"isGeneratorProvided" : true,
+	"name" : "zxcvbn_autogen",
+	"paths" : 
+	{
+		"build" : "src/zxcvbn-c",
+		"source" : "src/zxcvbn-c"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/CMakeFiles/zxcvbn_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/CMakeFiles/zxcvbn_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/zxcvbn_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

@@ -1,0 +1,27 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/openpgp/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "openpgp_autogen_timestamp_deps::@a9e41d27da4ac04c5183",
+	"isGeneratorProvided" : true,
+	"name" : "openpgp_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "src/openpgp",
+		"source" : "src/openpgp"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}
