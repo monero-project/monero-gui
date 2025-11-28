@@ -606,7 +606,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>I2PManager</name>
     <message>
-        <location filename="../src/i2p/I2PManager.cpp" line="+57"/>
+        <location filename="../src/i2p/I2PNodeManager.cpp" line="+57"/>
         <location line="+21"/>
         <source>I2P disabled</source>
         <translation type="unfinished"></translation>
