@@ -3,16 +3,15 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QDebug>
+#include <QFileInfo>
 
 I2PNodeManager::I2PNodeManager(QObject *parent)
     : QObject(parent), m_process(new QProcess(this))
 {
     m_status = "Ready";
-
-    // --- TRUSTED REMOTE NODES (RPC) ---
-    m_trustedNodes << "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081"; // SethForPrivacy
-    m_trustedNodes << "monerow.org.b32.i2p:18081"; // MoneroWorld
-    m_trustedNodes << "plowsof.b32.i2p:18081"; // Plowsof
+    m_trustedNodes << "rb752hk56y2k32wh6q7356566q65555555555555555555.b32.i2p:18081";
+    m_trustedNodes << "monerow.org.b32.i2p:18081";
+    m_trustedNodes << "plowsof.b32.i2p:18081";
 
     connect(m_process, &QProcess::readyReadStandardOutput, this, &I2PNodeManager::onProcessOutput);
     connect(m_process, &QProcess::readyReadStandardError, this, &I2PNodeManager::onProcessOutput);
@@ -37,8 +36,6 @@ void I2PNodeManager::setStatus(const QString &s) {
     m_status = s;
     emit statusChanged();
 }
-
-// --- QML Interface Methods ---
 
 void I2PNodeManager::refreshStatus() {
     if (m_process->state() == QProcess::Running) {
@@ -79,8 +76,6 @@ void I2PNodeManager::setProxyForI2p() {
     }
 }
 
-// --- Internal Implementation ---
-
 void I2PNodeManager::startNode(bool useDocker)
 {
     if (m_process->state() != QProcess::NotRunning) {
@@ -90,19 +85,30 @@ void I2PNodeManager::startNode(bool useDocker)
 
     setStatus("Initializing...");
 
-    QString binDir = QCoreApplication::applicationDirPath();
+    QString appDir = QCoreApplication::applicationDirPath();
     QString scriptName = useDocker ? "create_i2p_node_docker.sh" : "create_i2p_node.sh";
 
-    // Check if scripts folder exists in bin (deployment) or source (dev)
-    QString scriptPath = binDir + "/scripts/" + scriptName;
+    QStringList searchPaths;
+    searchPaths << appDir + "/scripts/" + scriptName;
+    searchPaths << appDir + "/../scripts/" + scriptName;
+    searchPaths << appDir + "/../../../scripts/" + scriptName; // macOS Bundle fix
 
-    if (!QFile::exists(scriptPath)) {
-        // Fallback for some dev environments
-        scriptPath = QCoreApplication::applicationDirPath() + "/../scripts/" + scriptName;
+    QString scriptPath;
+    for (const QString &path : searchPaths) {
+        if (QFileInfo::exists(path)) {
+            scriptPath = path;
+            break;
+        }
     }
 
-    qDebug() << "launching i2p script:" << scriptPath;
+    if (scriptPath.isEmpty()) {
+        qDebug() << "Error: Could not find I2P script. Checked paths:" << searchPaths;
+        setStatus("Error: Script not found");
+        emit nodeCreationFinished(false, "Could not locate I2P startup script.");
+        return;
+    }
 
+    qDebug() << "Launching I2P script found at:" << scriptPath;
     m_process->start("/bin/bash", QStringList() << scriptPath);
 }
 
@@ -131,7 +137,6 @@ void I2PNodeManager::onProcessOutput()
         if (line.trimmed().isEmpty()) continue;
         qDebug() << "I2P Script:" << line;
 
-        // Detect password prompt
         if (line.contains("password", Qt::CaseInsensitive) && line.contains("sudo", Qt::CaseInsensitive)) {
             emit passwordRequested("Administrative privileges required to start I2P service");
         }
@@ -144,10 +149,7 @@ void I2PNodeManager::onProcessOutput()
 
 void I2PNodeManager::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug() << "i2p script finished code:" << exitCode;
-
     bool success = (exitCode == 0 && exitStatus == QProcess::NormalExit);
-
     if (success) {
         setStatus("Ready");
         m_connected = true;
