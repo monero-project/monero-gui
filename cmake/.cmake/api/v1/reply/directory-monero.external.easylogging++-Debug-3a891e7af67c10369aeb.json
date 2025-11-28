@@ -1,0 +1,45 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"monero/external/easylogging++/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 63,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"monero/external/easylogging++/libeasylogging.dylib"
+			],
+			"targetId" : "easylogging::@67ae4ab8ad0deadec0e8",
+			"targetIndex" : 27,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "monero/external/easylogging++",
+		"source" : "monero/external/easylogging++"
+	}
+}

@@ -1,0 +1,500 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/external/miniupnp/miniupnpc/libminiupnpc.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"add_definitions",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"target_link_libraries",
+			"target_compile_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"monero/external/miniupnp/miniupnpc/CMakeLists.txt",
+			"monero/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 114,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 577,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 498,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 473,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 497,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 573,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 160,
+				"parent" : 7
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 575,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 152,
+				"parent" : 9
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 124,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 126,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 391,
+				"parent" : 2
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 455,
+				"parent" : 2
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 560,
+				"parent" : 2
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 580,
+				"parent" : 2
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 645,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=c11 -arch arm64 -fPIC -fcolor-diagnostics"
+				},
+				{
+					"fragment" : " -Wno-undef -Wno-unused-result -Wno-unused-value"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 8,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "MINIUPNPC_SET_SOCKET_TIMEOUT"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "MINIUPNP_STATICLIB"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "_BSD_SOURCE"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "_DARWIN_C_SOURCE"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "_DEFAULT_SOURCE"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 17,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/miniupnp/miniupnpc"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		}
+	],
+	"folder" : 
+	{
+		"name" : "external"
+	},
+	"id" : "libminiupnpc-static::@cff63f8557b2f769bc1d",
+	"name" : "libminiupnpc-static",
+	"nameOnDisk" : "libminiupnpc.a",
+	"paths" : 
+	{
+		"build" : "monero/external/miniupnp/miniupnpc",
+		"source" : "monero/external/miniupnp/miniupnpc"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/igd_desc_parse.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/miniupnpc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/minixml.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/minisoap.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/minissdpc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/miniwget.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpcommands.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpdev.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpreplyparse.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/upnperrors.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/connecthostport.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/portlistingparse.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/receivedata.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/listdevices.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/miniupnp/miniupnpc/addr_is_reserved.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/connecthostport.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/igd_desc_parse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/minisoap.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/minissdpc.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/miniupnpc.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/miniupnpctypes.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/miniwget.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/minixml.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/portlistingparse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/receivedata.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpcommands.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpdev.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/upnperrors.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/upnpreplyparse.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "monero/external/miniupnp/miniupnpc/addr_is_reserved.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake/monero/external/miniupnp/miniupnpc/miniupnpcstrings.h",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

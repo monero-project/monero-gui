@@ -1,0 +1,259 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/external/qrcodegen/libqrcodegen.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"add_definitions",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories",
+			"target_include_directories",
+			"set_target_properties"
+		],
+		"files" : 
+		[
+			"monero/external/qrcodegen/CMakeLists.txt",
+			"monero/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 577,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 498,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 473,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 497,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 573,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 160,
+				"parent" : 7
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 575,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 152,
+				"parent" : 9
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 391,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 455,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 560,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 580,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 645,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 7,
+				"parent" : 0
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 5,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -fvisibility=default -g -std=c++11 -arch arm64 -fPIC -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 8,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/qrcodegen"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					17
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "qrcodegen::@ec0f2a9368362dee85ad",
+	"name" : "qrcodegen",
+	"nameOnDisk" : "libqrcodegen.a",
+	"paths" : 
+	{
+		"build" : "monero/external/qrcodegen",
+		"source" : "monero/external/qrcodegen"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/qrcodegen/QrCode.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

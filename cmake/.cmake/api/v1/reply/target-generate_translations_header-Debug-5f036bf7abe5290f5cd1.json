@@ -1,0 +1,134 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"ExternalProject_Add"
+		],
+		"files" : 
+		[
+			"/opt/homebrew/share/cmake/Modules/ExternalProject.cmake",
+			"monero/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 639,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2998,
+				"parent" : 1
+			}
+		]
+	},
+	"folder" : 
+	{
+		"name" : "ExternalProjectTargets/generate_translations_header"
+	},
+	"id" : "generate_translations_header::@0629ffb76ca631b69590",
+	"name" : "generate_translations_header",
+	"paths" : 
+	{
+		"build" : "monero",
+		"source" : "monero"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "cmake/monero/CMakeFiles/generate_translations_header",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/CMakeFiles/generate_translations_header.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/CMakeFiles/generate_translations_header-complete.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-build.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-configure.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-download.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-install.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-mkdir.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-patch.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/monero/generate_translations_header-prefix/src/generate_translations_header-stamp/generate_translations_header-update.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

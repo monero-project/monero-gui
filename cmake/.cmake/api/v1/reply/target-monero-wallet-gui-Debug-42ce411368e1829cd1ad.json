@@ -1,0 +1,2577 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"install",
+			"target_link_directories",
+			"target_link_libraries",
+			"set_property",
+			"_pkg_create_imp_target",
+			"_pkg_recalculate",
+			"_pkg_check_modules_internal",
+			"pkg_check_modules",
+			"set_target_properties",
+			"include",
+			"find_package",
+			"_populate_Network_target_properties",
+			"add_custom_command",
+			"target_compile_definitions",
+			"add_definitions",
+			"include_directories",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"src/CMakeLists.txt",
+			"monero/src/wallet/api/CMakeLists.txt",
+			"/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake",
+			"monero/CMakeLists.txt",
+			"monero/src/wallet/CMakeLists.txt",
+			"monero/src/device_trezor/CMakeLists.txt",
+			"/opt/homebrew/lib/cmake/absl/abslTargets.cmake",
+			"/opt/homebrew/lib/cmake/absl/abslConfig.cmake",
+			"/opt/homebrew/lib/cmake/protobuf/protobuf-config.cmake",
+			"monero/cmake/CheckTrezor.cmake",
+			"/opt/homebrew/lib/cmake/protobuf/protobuf-targets.cmake",
+			"monero/src/cryptonote_core/CMakeLists.txt",
+			"monero/src/multisig/CMakeLists.txt",
+			"monero/src/cryptonote_basic/CMakeLists.txt",
+			"monero/src/common/CMakeLists.txt",
+			"monero/src/device/CMakeLists.txt",
+			"monero/src/crypto/CMakeLists.txt",
+			"monero/contrib/epee/src/CMakeLists.txt",
+			"src/openpgp/CMakeLists.txt",
+			"src/QR-Code-scanner/CMakeLists.txt",
+			"/opt/homebrew/opt/qt@5/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake",
+			"/opt/homebrew/opt/qt@5/lib/cmake/Qt5XmlPatterns/Qt5XmlPatternsConfig.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 87,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 176,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 135,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 140,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 66,
+				"parent" : 5
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 8,
+				"file" : 3,
+				"line" : 1148,
+				"parent" : 7
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 867,
+				"parent" : 8
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 695,
+				"parent" : 9
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 359,
+				"parent" : 10
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 340,
+				"parent" : 11
+			},
+			{
+				"file" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 4,
+				"line" : 49,
+				"parent" : 13
+			},
+			{
+				"file" : 5
+			},
+			{
+				"command" : 3,
+				"file" : 5,
+				"line" : 88,
+				"parent" : 15
+			},
+			{
+				"command" : 10,
+				"file" : 3,
+				"line" : 673,
+				"parent" : 7
+			},
+			{
+				"file" : 9,
+				"parent" : 17
+			},
+			{
+				"command" : 11,
+				"file" : 9,
+				"line" : 50,
+				"parent" : 18
+			},
+			{
+				"file" : 8,
+				"parent" : 19
+			},
+			{
+				"command" : 11,
+				"file" : 8,
+				"line" : 9,
+				"parent" : 20
+			},
+			{
+				"file" : 7,
+				"parent" : 21
+			},
+			{
+				"command" : 10,
+				"file" : 7,
+				"line" : 32,
+				"parent" : 22
+			},
+			{
+				"file" : 6,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 887,
+				"parent" : 24
+			},
+			{
+				"command" : 10,
+				"file" : 8,
+				"line" : 16,
+				"parent" : 20
+			},
+			{
+				"file" : 10,
+				"parent" : 26
+			},
+			{
+				"command" : 9,
+				"file" : 10,
+				"line" : 71,
+				"parent" : 27
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 896,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 968,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 770,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 761,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 707,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 752,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 734,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1085,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1076,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1175,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 365,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 500,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1319,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1472,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1490,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1508,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1526,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1418,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1373,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1725,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 842,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1671,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1698,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 545,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 680,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1562,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1635,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 518,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 590,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 626,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 653,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 644,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1761,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1770,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1787,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 1599,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 168,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 6,
+				"line" : 311,
+				"parent" : 24
+			},
+			{
+				"file" : 11
+			},
+			{
+				"command" : 3,
+				"file" : 11,
+				"line" : 48,
+				"parent" : 67
+			},
+			{
+				"file" : 12
+			},
+			{
+				"command" : 3,
+				"file" : 12,
+				"line" : 49,
+				"parent" : 69
+			},
+			{
+				"file" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 13,
+				"line" : 67,
+				"parent" : 71
+			},
+			{
+				"file" : 14
+			},
+			{
+				"command" : 3,
+				"file" : 14,
+				"line" : 66,
+				"parent" : 73
+			},
+			{
+				"file" : 15
+			},
+			{
+				"command" : 3,
+				"file" : 15,
+				"line" : 70,
+				"parent" : 75
+			},
+			{
+				"file" : 16
+			},
+			{
+				"command" : 3,
+				"file" : 16,
+				"line" : 71,
+				"parent" : 77
+			},
+			{
+				"file" : 17
+			},
+			{
+				"command" : 3,
+				"file" : 17,
+				"line" : 64,
+				"parent" : 79
+			},
+			{
+				"file" : 18
+			},
+			{
+				"command" : 3,
+				"file" : 18,
+				"line" : 18,
+				"parent" : 81
+			},
+			{
+				"file" : 19
+			},
+			{
+				"command" : 3,
+				"file" : 19,
+				"line" : 4,
+				"parent" : 83
+			},
+			{
+				"file" : 22
+			},
+			{
+				"command" : 11,
+				"file" : 22,
+				"line" : 172,
+				"parent" : 85
+			},
+			{
+				"file" : 21,
+				"parent" : 86
+			},
+			{
+				"command" : 11,
+				"file" : 21,
+				"line" : 93,
+				"parent" : 87
+			},
+			{
+				"file" : 20,
+				"parent" : 88
+			},
+			{
+				"command" : 12,
+				"file" : 20,
+				"line" : 196,
+				"parent" : 89
+			},
+			{
+				"command" : 4,
+				"file" : 20,
+				"line" : 44,
+				"parent" : 90
+			},
+			{
+				"command" : 13,
+				"file" : 0,
+				"line" : 172,
+				"parent" : 0
+			},
+			{
+				"command" : 14,
+				"file" : 0,
+				"line" : 124,
+				"parent" : 0
+			},
+			{
+				"command" : 15,
+				"file" : 22,
+				"line" : 99,
+				"parent" : 85
+			},
+			{
+				"command" : 15,
+				"file" : 22,
+				"line" : 103,
+				"parent" : 85
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			},
+			{
+				"command" : 17,
+				"file" : 0,
+				"line" : 105,
+				"parent" : 0
+			},
+			{
+				"command" : 17,
+				"file" : 0,
+				"line" : 107,
+				"parent" : 0
+			},
+			{
+				"command" : 16,
+				"file" : 22,
+				"line" : 179,
+				"parent" : 85
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -fvisibility=default -fvisibility=default -DGTEST_HAS_TR1_TUPLE=0  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -fno-strict-aliasing -fPIC  -g -std=gnu++17 -arch arm64 -fcolor-diagnostics"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-DZMQ_BUILD_DRAFT_API=1"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 4,
+					"define" : "PROTOBUF_USE_DLLS"
+				},
+				{
+					"backtrace" : 93,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 93,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 93,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 93,
+					"define" : "QT_QML_LIB"
+				},
+				{
+					"backtrace" : 93,
+					"define" : "QT_WIDGETS_LIB"
+				},
+				{
+					"backtrace" : 94,
+					"define" : "WITH_DESKTOP_ENTRY"
+				},
+				{
+					"backtrace" : 95,
+					"define" : "WITH_UPDATER"
+				}
+			],
+			"frameworks" : 
+			[
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework"
+				},
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework"
+				},
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework"
+				},
+				{
+					"backtrace" : 97,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework"
+				},
+				{
+					"backtrace" : 97,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework"
+				},
+				{
+					"backtrace" : 98,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework"
+				},
+				{
+					"backtrace" : 99,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework"
+				},
+				{
+					"backtrace" : 100,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework"
+				},
+				{
+					"backtrace" : 103,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework"
+				},
+				{
+					"backtrace" : 96,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework"
+				},
+				{
+					"backtrace" : 96,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/src/monero-wallet-gui_autogen/include"
+				},
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework/Headers"
+				},
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework/Headers"
+				},
+				{
+					"backtrace" : 96,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework/Headers"
+				},
+				{
+					"backtrace" : 97,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework/Headers"
+				},
+				{
+					"backtrace" : 97,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework/Headers"
+				},
+				{
+					"backtrace" : 98,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework/Headers"
+				},
+				{
+					"backtrace" : 99,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework/Headers"
+				},
+				{
+					"backtrace" : 100,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework/Headers"
+				},
+				{
+					"backtrace" : 101,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/Versions/5/Headers/5.15.17"
+				},
+				{
+					"backtrace" : 101,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/Versions/5/Headers/5.15.17/QtGui"
+				},
+				{
+					"backtrace" : 101,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/Versions/5/Headers/5.15.17"
+				},
+				{
+					"backtrace" : 101,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/Versions/5/Headers/5.15.17/QtCore"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/include"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/qrcodegen"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/daemon"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/p2pool"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/i2p"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/libwalletqt"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/model"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/QR-Code-scanner"
+				},
+				{
+					"backtrace" : 102,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/zxcvbn-c"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/src/../include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 103,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/Headers"
+				},
+				{
+					"backtrace" : 103,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/./mkspecs/macx-clang"
+				},
+				{
+					"backtrace" : 96,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/Headers"
+				},
+				{
+					"backtrace" : 96,
+					"isSystem" : true,
+					"path" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers"
+				},
+				{
+					"backtrace" : 96,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework/Headers"
+				},
+				{
+					"backtrace" : 4,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/Cellar/zeromq/4.3.5_2/include"
+				},
+				{
+					"backtrace" : 4,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/Cellar/libsodium/1.0.20/include"
+				},
+				{
+					"backtrace" : 4,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					4,
+					4
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				4,
+				6,
+				8,
+				10,
+				12,
+				14,
+				16,
+				18,
+				20,
+				22,
+				25,
+				27,
+				29,
+				30,
+				32,
+				34,
+				36,
+				38,
+				40,
+				41,
+				43,
+				45,
+				47,
+				49,
+				51,
+				53,
+				55,
+				57,
+				59,
+				61,
+				65,
+				67,
+				69,
+				72,
+				74,
+				76,
+				78,
+				79
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "monero-wallet-gui_autogen::@145eef247bfb46b6828c"
+		},
+		{
+			"id" : "monero-wallet-gui_autogen_timestamp_deps::@145eef247bfb46b6828c"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lmdb::@6c0318a63c238d1b40b4"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "easylogging::@67ae4ab8ad0deadec0e8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "qrcodegen::@ec0f2a9368362dee85ad"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "randomx::@3cfcb9f1b9be96d94b82"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "epee::@2d31c5e5f3a963729190"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "version::@e755a04db5c24671c7bc"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "common::@4954347f4cf3ee74e34e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cncrypto::@0038c9c6d3d93ff875b8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "ringct_basic::@e5510959f47534a05345"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "ringct::@e5510959f47534a05345"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "checkpoints::@9321b6784caff9bb6eaa"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_format_utils_basic::@5d3e877fca902856ef8e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_basic::@5d3e877fca902856ef8e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_core::@45215b4d8c051e91df83"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "multisig::@b2332eb69b6ab27e5032"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "net::@cc23d53a81cb321cd581"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "hardforks::@4aeff871341287a1f0e4"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "blockchain_db::@e3f14e82041c184aa358"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "mnemonics::@ce3c6c8014cd759f5aac"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "rpc_base::@9294205331c7dee69638"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "wallet::@7cb4c358204534e753da"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "wallet_api::@c33807fde47f438bfdde"
+		},
+		{
+			"backtrace" : 92,
+			"id" : "daemon::@3aba8380799601d16c14"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "device::@dc635d948a044c513274"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "device_trezor::@1ad3aa2a61381ae914d5"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "quirc::@89556154f30252d09d22"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "translations::@56db91615562bff8d766"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "qrdecoder::@c2c9a1b7470bbe0ef90a"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "openpgp::@a9e41d27da4ac04c5183"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "zxcvbn::@bb5823a9f93b935b8eb5"
+		}
+	],
+	"id" : "monero-wallet-gui::@145eef247bfb46b6828c",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 2,
+				"path" : "bin"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-DQT_QML_DEBUG -fvisibility=default -fvisibility=default -DGTEST_HAS_TR1_TUPLE=0  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -fno-strict-aliasing -fPIC  -g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-search_paths_first -Wl,-headerpad_max_install_names",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-bind_at_load -Wl,-dead_strip -Wl,-dead_strip_dylibs",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-F/opt/homebrew/opt/qt@5/lib",
+				"role" : "frameworkPath"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-L/opt/homebrew/opt/icu4c/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/opt/homebrew/opt/qt@5/lib -Wl,-rpath,/opt/homebrew/opt/icu4c/lib -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/wallet/api -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/src/openpgp -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/translations -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/wallet -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/net -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/rpc -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/multisig -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/device_trezor -Wl,-rpath,/opt/homebrew/lib -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/cryptonote_core -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/blockchain_db -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/cryptonote_basic -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/checkpoints -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/ringct -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/device -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/common -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/crypto -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/randomx -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/hardforks -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/mnemonics -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/contrib/epee/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/easylogging++ -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/db_drivers/liblmdb",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/wallet/api/libwallet_api.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/external/qrcodegen/libqrcodegen.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtQuick",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtSvg",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtWidgets",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtXml",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtMacExtras",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtGui",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtQmlModels",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtQml",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtXmlPatterns",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtNetwork",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework QtCore",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-F/opt/homebrew/opt/qt@5/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platforms/libqcocoa.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqgif.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqicns.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqico.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqjpeg.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqmacheif.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqmacjp2.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platforms/libqminimal.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platforms/libqoffscreen.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqpdf.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/iconengines/libqsvgicon.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqsvg.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqtga.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqtiff.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/generic/libqtuiotouchplugin.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqwbmp.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platforms/libqwebgl.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/imageformats/libqwebp.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/platformthemes/libqxdgdesktopportal.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_messages.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_local.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_server.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_debugger.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_inspector.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_native.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_nativedebugger.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_preview.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_profiler.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_quickprofiler.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/qmltooling/libqmldbg_tcp.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/plugins/bearer/libqgenericbearer.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework/QtNetwork",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-framework AppKit",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "src/openpgp/libopenpgp.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "src/QR-Code-scanner/libqrdecoder.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "translations/libtranslations.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "src/zxcvbn-c/libzxcvbn.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/wallet/libwallet.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/net/libnet.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "/opt/homebrew/Cellar/zeromq/4.3.5_2/lib/libzmq.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "monero/src/rpc/librpc_base.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "monero/src/multisig/libmultisig.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "monero/src/device_trezor/libdevice_trezor.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "/opt/homebrew/lib/libprotobuf.33.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_check_op.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_die_if_null.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_conditions.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_message.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 29,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_nullguard.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_examine_stack.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_format.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_structured_proto.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_log_sink_set.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_sink.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_entry.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_proto.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 32,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_marshalling.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_reflection.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_config.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 33,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_program_name.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 34,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_private_handle_accessor.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_commandlineflag.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 35,
+				"fragment" : "/opt/homebrew/lib/libabsl_flags_commandlineflag_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_initialize.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 36,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_globals.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_globals.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 37,
+				"fragment" : "/opt/homebrew/lib/libabsl_vlog_config_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 38,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_internal_fnmatch.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 39,
+				"fragment" : "/opt/homebrew/lib/libabsl_raw_hash_set.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 40,
+				"fragment" : "/opt/homebrew/lib/libabsl_hashtablez_sampler.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_distributions.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 41,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_seed_sequences.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 42,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_entropy_pool.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 43,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_randen.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 44,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_randen_hwaes.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 45,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_randen_hwaes_impl.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 44,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_randen_slow.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 46,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_platform.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 42,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_internal_seed_material.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 47,
+				"fragment" : "/opt/homebrew/lib/libabsl_random_seed_gen_exception.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_statusor.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_status.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_cord.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 48,
+				"fragment" : "/opt/homebrew/lib/libabsl_cordz_info.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 48,
+				"fragment" : "/opt/homebrew/lib/libabsl_cord_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_hash.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 49,
+				"fragment" : "/opt/homebrew/lib/libabsl_city.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 48,
+				"fragment" : "/opt/homebrew/lib/libabsl_cordz_functions.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 50,
+				"fragment" : "/opt/homebrew/lib/libabsl_exponential_biased.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 51,
+				"fragment" : "/opt/homebrew/lib/libabsl_cordz_handle.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 48,
+				"fragment" : "/opt/homebrew/lib/libabsl_crc_cord_state.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 48,
+				"fragment" : "/opt/homebrew/lib/libabsl_crc32c.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 52,
+				"fragment" : "/opt/homebrew/lib/libabsl_crc_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 52,
+				"fragment" : "/opt/homebrew/lib/libabsl_crc_cpu_detect.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 53,
+				"fragment" : "/opt/homebrew/lib/libabsl_leak_check.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 54,
+				"fragment" : "/opt/homebrew/lib/libabsl_strerror.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 55,
+				"fragment" : "/opt/homebrew/lib/libabsl_str_format_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_synchronization.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 53,
+				"fragment" : "/opt/homebrew/lib/libabsl_stacktrace.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 54,
+				"fragment" : "/opt/homebrew/lib/libabsl_symbolize.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 56,
+				"fragment" : "/opt/homebrew/lib/libabsl_debugging_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 57,
+				"fragment" : "/opt/homebrew/lib/libabsl_demangle_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 58,
+				"fragment" : "/opt/homebrew/lib/libabsl_demangle_rust.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 59,
+				"fragment" : "/opt/homebrew/lib/libabsl_decode_rust_punycode.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 60,
+				"fragment" : "/opt/homebrew/lib/libabsl_utf8_for_code_point.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 61,
+				"fragment" : "/opt/homebrew/lib/libabsl_graphcycles_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 61,
+				"fragment" : "/opt/homebrew/lib/libabsl_kernel_timeout_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 61,
+				"fragment" : "/opt/homebrew/lib/libabsl_malloc_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 61,
+				"fragment" : "/opt/homebrew/lib/libabsl_tracing_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_time.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 62,
+				"fragment" : "/opt/homebrew/lib/libabsl_civil_time.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 62,
+				"fragment" : "/opt/homebrew/lib/libabsl_time_zone.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 63,
+				"fragment" : "-Wl,-framework,CoreFoundation",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libutf8_validity.33.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_strings.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 49,
+				"fragment" : "/opt/homebrew/lib/libabsl_int128.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 64,
+				"fragment" : "/opt/homebrew/lib/libabsl_strings_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 64,
+				"fragment" : "/opt/homebrew/lib/libabsl_string_view.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_base.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 65,
+				"fragment" : "/opt/homebrew/lib/libabsl_spinlock_wait.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 66,
+				"fragment" : "/opt/homebrew/lib/libabsl_throw_delegate.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 65,
+				"fragment" : "/opt/homebrew/lib/libabsl_raw_logging_internal.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/homebrew/lib/libabsl_log_severity.2508.0.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "/opt/homebrew/lib/libusb-1.0.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/cryptonote_core/libcryptonote_core.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "monero/src/blockchain_db/libblockchain_db.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 70,
+				"fragment" : "monero/src/cryptonote_basic/libcryptonote_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 72,
+				"fragment" : "monero/src/checkpoints/libcheckpoints.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "monero/src/ringct/libringct.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "monero/src/device/libdevice.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "monero/src/ringct/libringct_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/common/libcommon.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 74,
+				"fragment" : "/opt/homebrew/lib/libunbound.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 74,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 76,
+				"fragment" : "/opt/homebrew/lib/libhidapi.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 76,
+				"fragment" : "monero/src/cryptonote_basic/libcryptonote_format_utils_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 74,
+				"fragment" : "monero/src/crypto/libcncrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 78,
+				"fragment" : "monero/external/randomx/librandomx.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 78,
+				"fragment" : "/opt/homebrew/Cellar/libsodium/1.0.20/lib/libsodium.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "monero/src/hardforks/libhardforks.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "monero/src/libversion.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 68,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_program_options.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/mnemonics/libmnemonics.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/contrib/epee/src/libepee.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 80,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 80,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_filesystem.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 80,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 80,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libssl.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 80,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/external/easylogging++/libeasylogging.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/external/db_drivers/liblmdb/liblmdb.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_serialization.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 82,
+				"fragment" : "/opt/homebrew/lib/libgcrypt.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 82,
+				"fragment" : "/opt/homebrew/lib/libgpg-error.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 84,
+				"fragment" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/QtGui",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 84,
+				"fragment" : "external/libquirc.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 91,
+				"fragment" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/QtCore",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "monero-wallet-gui",
+	"nameOnDisk" : "monero-wallet-gui",
+	"paths" : 
+	{
+		"build" : "src",
+		"source" : "src"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				4,
+				6,
+				8,
+				10,
+				12,
+				14,
+				16,
+				18,
+				20,
+				22,
+				25,
+				27,
+				29,
+				30,
+				32,
+				34,
+				36,
+				38,
+				40,
+				41,
+				43,
+				45,
+				47,
+				49,
+				51,
+				53,
+				55,
+				57,
+				59,
+				61,
+				65,
+				67,
+				69,
+				72,
+				74,
+				76,
+				78,
+				79
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				5,
+				7,
+				9,
+				11,
+				13,
+				15,
+				17,
+				19,
+				21,
+				23,
+				24,
+				26,
+				28,
+				31,
+				33,
+				35,
+				37,
+				39,
+				42,
+				44,
+				46,
+				48,
+				50,
+				52,
+				54,
+				56,
+				58,
+				60,
+				62,
+				63,
+				64,
+				66,
+				68,
+				70,
+				71,
+				73,
+				75,
+				77
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				80,
+				81,
+				82,
+				83
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				84
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/monero-wallet-gui_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/NetworkType.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/TranslationManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/TranslationManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/daemon/DaemonManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/daemon/DaemonManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/i2p/I2PNodeManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/i2p/I2PNodeManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/AddressBook.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/AddressBook.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/PassphraseHelper.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/PassphraseHelper.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/PendingTransaction.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/PendingTransaction.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/QRCodeImageProvider.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/QRCodeImageProvider.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/Subaddress.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/Subaddress.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/SubaddressAccount.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/SubaddressAccount.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/TransactionHistory.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/TransactionHistory.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/TransactionInfo.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/TransactionInfo.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/Transfer.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/UnsignedTransaction.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/UnsignedTransaction.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/Wallet.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/Wallet.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/WalletListenerImpl.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/libwalletqt/WalletManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/libwalletqt/WalletManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/Logger.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/Logger.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/MainApp.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/MainApp.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/clipboardAdapter.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/clipboardAdapter.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/filter.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/filter.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/oscursor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/oscursor.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main/oshelper.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/main/oshelper.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/model/AddressBookModel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/model/AddressBookModel.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/model/SubaddressAccountModel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/model/SubaddressAccountModel.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/model/SubaddressModel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/model/SubaddressModel.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/model/TransactionHistoryModel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/model/TransactionHistoryModel.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/model/TransactionHistorySortFilterModel.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/model/TransactionHistorySortFilterModel.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/p2pool/P2PoolManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/p2pool/P2PoolManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/FutureScheduler.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/FutureScheduler.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/KeysFiles.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/KeysFiles.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/MoneroSettings.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/MoneroSettings.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/NetworkAccessBlockingFactory.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/ScopeGuard.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/TailsOS.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/TailsOS.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/downloader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/downloader.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/ipc.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/ipc.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/macoshelper.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/network.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/network.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/updater.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/updater.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/qt/utils.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/qt/macoshelper.mm",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/qrc_qml.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "images/appicon.icns",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/i2p/create_i2p_node.sh",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/monero-wallet-gui_autogen/timestamp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"path" : "qml.qrc",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/monero-wallet-gui_autogen/timestamp.rule",
+			"sourceGroupIndex" : 3
+		}
+	],
+	"type" : "EXECUTABLE"
+}

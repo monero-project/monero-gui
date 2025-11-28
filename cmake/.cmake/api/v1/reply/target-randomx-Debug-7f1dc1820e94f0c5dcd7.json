@@ -1,0 +1,589 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/external/randomx/librandomx.dylib"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"install",
+			"add_definitions",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories",
+			"set_property"
+		],
+		"files" : 
+		[
+			"monero/external/randomx/CMakeLists.txt",
+			"monero/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 214,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 226,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 577,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 498,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 473,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 497,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 573,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 160,
+				"parent" : 8
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 575,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 152,
+				"parent" : 10
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 391,
+				"parent" : 3
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 455,
+				"parent" : 3
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 560,
+				"parent" : 3
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 580,
+				"parent" : 3
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 645,
+				"parent" : 3
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 221,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -fvisibility=default -march=armv8-a+crypto -g -std=c++11 -arch arm64 -fPIC -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 4,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 9,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				},
+				{
+					"define" : "randomx_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					17
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				4,
+				5,
+				6,
+				7,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				18,
+				19,
+				21,
+				22,
+				25
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -march=armv8-a+crypto -g -std=c11 -arch arm64 -fPIC -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 4,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 9,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				},
+				{
+					"define" : "randomx_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				8,
+				17,
+				20,
+				23,
+				24
+			]
+		}
+	],
+	"id" : "randomx::@3cfcb9f1b9be96d94b82",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 2,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 2,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-dynamiclib -Wl,-headerpad_max_install_names",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-undefined,error",
+				"role" : "flags"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "randomx",
+	"nameOnDisk" : "librandomx.dylib",
+	"paths" : 
+	{
+		"build" : "monero/external/randomx",
+		"source" : "monero/external/randomx"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				25
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				24
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/aes_hash.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/argon2_ref.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/argon2_ssse3.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/argon2_avx2.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/bytecode_machine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/cpu.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/dataset.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/soft_aes.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/virtual_memory.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/vm_interpreted.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/allocator.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/assembly_generator_x86.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/instruction.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/randomx.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/superscalar.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/vm_compiled.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/vm_interpreted_light.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/argon2_core.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/blake2_generator.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/instructions_portable.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/reciprocal.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/virtual_machine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/vm_compiled_light.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/blake2/blake2b.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "monero/external/randomx/src/jit_compiler_a64_static.S",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "monero/external/randomx/src/jit_compiler_a64.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

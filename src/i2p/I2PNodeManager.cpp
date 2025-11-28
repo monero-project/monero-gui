@@ -1,9 +1,31 @@
+#include <QCoreApplication>
 #include "I2PNodeManager.h"
 #include "qt/MoneroSettings.h"
-#include <QCoreApplication>
 #include <QDir>
 #include <QDebug>
 #include <QFileInfo>
+#include <cstring>
+
+// Helper function to securely wipe memory
+// This prevents the password from remaining in memory after use
+static void secureWipe(QByteArray &data) {
+    if (!data.isEmpty()) {
+        // Use volatile pointer to prevent compiler optimization
+        volatile char *ptr = data.data();
+        size_t size = data.size();
+        // Zero out the memory
+        memset(const_cast<char*>(ptr), 0, size);
+        
+        // Memory barrier to ensure writes complete before clearing
+        // This prevents compiler from optimizing away the memset
+#ifdef __GNUC__
+        asm volatile("" ::: "memory");
+#elif defined(_MSC_VER)
+        _ReadWriteBarrier();
+#endif
+    }
+    data.clear();
+}
 
 I2PNodeManager::I2PNodeManager(QObject *parent)
     : QObject(parent), m_process(new QProcess(this))
@@ -15,8 +37,9 @@ I2PNodeManager::I2PNodeManager(QObject *parent)
 
     connect(m_process, &QProcess::readyReadStandardOutput, this, &I2PNodeManager::onProcessOutput);
     connect(m_process, &QProcess::readyReadStandardError, this, &I2PNodeManager::onProcessOutput);
-    connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+    connect(m_process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
             this, &I2PNodeManager::onProcessFinished);
+    connect(m_process, &QProcess::errorOccurred, this, &I2PNodeManager::handleProcessError);
 }
 
 void I2PNodeManager::setEnabled(bool enabled) {
@@ -59,9 +82,23 @@ void I2PNodeManager::cancelCreateNode() {
 }
 
 void I2PNodeManager::providePassword(const QString &pw) {
-    if (m_process->state() == QProcess::Running) {
-        m_process->write((pw + "\n").toUtf8());
+    if (m_process->state() != QProcess::Running) {
+        return;
     }
+    
+    // Convert to QByteArray immediately to minimize QString lifetime
+    QByteArray passwordBytes = pw.toUtf8();
+    passwordBytes.append('\n');
+    
+    // Send password to process
+    m_process->write(passwordBytes);
+    
+    // Securely wipe the password from memory
+    secureWipe(passwordBytes);
+    
+    // Note: QString 'pw' parameter will be destroyed when function returns,
+    // but QString uses copy-on-write, so we can't guarantee immediate wiping.
+    // The QByteArray copy is wiped above, which is the most we can do safely.
 }
 
 bool I2PNodeManager::i2pStatus() const {
@@ -83,20 +120,50 @@ void I2PNodeManager::startNode(bool useDocker)
         return;
     }
 
+    // iOS and Android cannot execute shell scripts due to platform restrictions
+#if defined(Q_OS_IOS) || defined(Q_OS_ANDROID)
+    setStatus("Error: Not supported on mobile");
+    emit nodeCreationFinished(false, "I2P node hosting is not available on mobile platforms. Please connect to a remote node.");
+    return;
+#endif
+
     setStatus("Initializing...");
 
     QString appDir = QCoreApplication::applicationDirPath();
-    QString scriptName = useDocker ? "create_i2p_node_docker.sh" : "create_i2p_node.sh";
+    
+    // Platform-specific script extension
+#ifdef Q_OS_WIN
+    QString scriptExt = ".bat";
+    QString baseScriptName = useDocker ? "create_i2p_node_docker" : "create_i2p_node";
+    QString scriptName = baseScriptName + scriptExt;
+#else
+    QString scriptExt = ".sh";
+    QString baseScriptName = useDocker ? "create_i2p_node_docker" : "create_i2p_node";
+    QString scriptName = baseScriptName + scriptExt;
+#endif
 
+    // Build search paths using QDir for cross-platform compatibility
     QStringList searchPaths;
-    searchPaths << appDir + "/scripts/" + scriptName;
-    searchPaths << appDir + "/../scripts/" + scriptName;
-    searchPaths << appDir + "/../../../scripts/" + scriptName; // macOS Bundle fix
+    QDir appDirObj(appDir);
+    QString sep = QDir::separator();
+    
+    // Standard location: appDir/scripts/
+    searchPaths << appDirObj.filePath("scripts" + sep + scriptName);
+    
+    // Parent directory: ../scripts/
+    searchPaths << appDirObj.filePath(".." + sep + "scripts" + sep + scriptName);
+    
+    // macOS Bundle: ../../../scripts/ (for .app bundles)
+    // Note: Q_OS_MACOS includes both macOS and iOS, but we check for iOS separately above
+#if defined(Q_OS_MACOS) && !defined(Q_OS_IOS)
+    searchPaths << appDirObj.filePath(".." + sep + ".." + sep + ".." + sep + "scripts" + sep + scriptName);
+#endif
 
     QString scriptPath;
     for (const QString &path : searchPaths) {
-        if (QFileInfo::exists(path)) {
-            scriptPath = path;
+        QFileInfo fileInfo(path);
+        if (fileInfo.exists() && fileInfo.isFile()) {
+            scriptPath = QDir::toNativeSeparators(fileInfo.absoluteFilePath());
             break;
         }
     }
@@ -109,7 +176,21 @@ void I2PNodeManager::startNode(bool useDocker)
     }
 
     qDebug() << "Launching I2P script found at:" << scriptPath;
+    
+    // Platform-specific script execution
+#ifdef Q_OS_WIN
+    // On Windows, execute .bat files directly or use cmd.exe
+    // Note: If using bash scripts on Windows, you'd need Git Bash or WSL
+    m_process->start("cmd.exe", QStringList() << "/c" << scriptPath);
+#elif defined(Q_OS_IOS) || defined(Q_OS_ANDROID)
+    // Mobile platforms cannot execute shell scripts (handled above, but defensive check)
+    setStatus("Error: Not supported");
+    emit nodeCreationFinished(false, "Script execution not available on mobile platforms.");
+    return;
+#else
+    // On Unix-like systems (Linux, macOS), use bash
     m_process->start("/bin/bash", QStringList() << scriptPath);
+#endif
 }
 
 void I2PNodeManager::stopNode()
@@ -163,6 +244,7 @@ void I2PNodeManager::onProcessFinished(int exitCode, QProcess::ExitStatus exitSt
 }
 
 void I2PNodeManager::handleProcessError(QProcess::ProcessError error) {
+    Q_UNUSED(error);
     setStatus("Process Error");
     emit nodeCreationFinished(false, "Failed to launch I2P script");
 }

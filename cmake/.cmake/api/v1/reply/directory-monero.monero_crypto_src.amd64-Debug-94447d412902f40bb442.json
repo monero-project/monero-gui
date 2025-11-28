@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "monero/monero_crypto_src/amd64",
+		"source" : "monero/external/supercop/src/amd64"
+	}
+}

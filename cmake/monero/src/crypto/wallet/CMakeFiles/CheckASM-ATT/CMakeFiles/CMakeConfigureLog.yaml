@@ -1,0 +1,1032 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/opt/qt@5/sbin/"
+      - "/opt/homebrew/opt/qt@5/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/opt/homebrew/opt/qt@5/bin/uname"
+      - "/opt/homebrew/opt/qt@5/sbin/uname"
+      - "/opt/homebrew/opt/qt@5/uname"
+      - "/opt/X11/bin/uname"
+      - "/opt/homebrew/opt/qt@5/bin/uname"
+      - "/opt/homebrew/bin/uname"
+      - "/opt/homebrew/sbin/uname"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/uname"
+      - "/usr/local/bin/uname"
+      - "/System/Cryptexes/App/usr/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:17 (project)"
+    message: |
+      The system is: Darwin - 24.6.0 - arm64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:61 (_cmake_find_compiler)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_ASM-ATT_COMPILER"
+    description: "ASM-ATT compiler"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gas"
+      - "as"
+    candidate_directories:
+      - "/usr/bin/"
+    searched_directories:
+      - "/usr/bin/gas"
+    found: "/usr/bin/as"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    message: |
+      Checking whether the ASM-ATT compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      Apple clang version 17.0.0 (clang-1700.4.4.1)
+      Target: arm64-apple-darwin24.6.0
+      Thread model: posix
+      InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:1290 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    message: |
+      Checking whether the ASM-ATT compiler is AppleClang using "--version" matched "(Apple (clang|LLVM) version)":
+      Apple clang version 17.0.0 (clang-1700.4.4.1)
+      Target: arm64-apple-darwin24.6.0
+      Thread model: posix
+      InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/ar"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/nm"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/usr/bin/objcopy"
+      - "/opt/X11/bin/objcopy"
+      - "/opt/homebrew/opt/qt@5/bin/objcopy"
+      - "/opt/homebrew/bin/objcopy"
+      - "/opt/homebrew/sbin/objcopy"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/objcopy"
+      - "/usr/local/bin/objcopy"
+      - "/System/Cryptexes/App/usr/bin/objcopy"
+      - "/bin/objcopy"
+      - "/usr/sbin/objcopy"
+      - "/sbin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/objcopy"
+      - "/Library/Apple/usr/bin/objcopy"
+      - "/usr/local/MacGPG2/bin/objcopy"
+    found: false
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/usr/bin/readelf"
+      - "/opt/X11/bin/readelf"
+      - "/opt/homebrew/opt/qt@5/bin/readelf"
+      - "/opt/homebrew/bin/readelf"
+      - "/opt/homebrew/sbin/readelf"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/readelf"
+      - "/usr/local/bin/readelf"
+      - "/System/Cryptexes/App/usr/bin/readelf"
+      - "/bin/readelf"
+      - "/usr/sbin/readelf"
+      - "/sbin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/readelf"
+      - "/Library/Apple/usr/bin/readelf"
+      - "/usr/local/MacGPG2/bin/readelf"
+    found: false
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/opt/X11/bin/dlltool"
+      - "/opt/homebrew/opt/qt@5/bin/dlltool"
+      - "/opt/homebrew/bin/dlltool"
+      - "/opt/homebrew/sbin/dlltool"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/System/Cryptexes/App/usr/bin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/dlltool"
+      - "/Library/Apple/usr/bin/dlltool"
+      - "/usr/local/MacGPG2/bin/dlltool"
+    found: false
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/usr/bin/addr2line"
+      - "/opt/X11/bin/addr2line"
+      - "/opt/homebrew/opt/qt@5/bin/addr2line"
+      - "/opt/homebrew/bin/addr2line"
+      - "/opt/homebrew/sbin/addr2line"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/addr2line"
+      - "/usr/local/bin/addr2line"
+      - "/System/Cryptexes/App/usr/bin/addr2line"
+      - "/bin/addr2line"
+      - "/usr/sbin/addr2line"
+      - "/sbin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/addr2line"
+      - "/Library/Apple/usr/bin/addr2line"
+      - "/usr/local/MacGPG2/bin/addr2line"
+    found: false
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineASM-ATTCompiler.cmake:9 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/opt/X11/bin/tapi"
+      - "/opt/homebrew/opt/qt@5/bin/tapi"
+      - "/opt/homebrew/bin/tapi"
+      - "/opt/homebrew/sbin/tapi"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/System/Cryptexes/App/usr/bin/tapi"
+      - "/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/tapi"
+      - "/Library/Apple/usr/bin/tapi"
+      - "/usr/local/MacGPG2/bin/tapi"
+    found: false
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Platform/Darwin.cmake:76 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:17 (project)"
+    mode: "program"
+    variable: "CMAKE_INSTALL_NAME_TOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "install_name_tool"
+    candidate_directories:
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/opt/qt@5/sbin/"
+      - "/opt/homebrew/opt/qt@5/"
+      - "/opt/X11/bin/"
+      - "/opt/homebrew/opt/qt@5/bin/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/usr/local/MacGPG2/bin/"
+    searched_directories:
+      - "/opt/homebrew/opt/qt@5/bin/install_name_tool"
+      - "/opt/homebrew/opt/qt@5/sbin/install_name_tool"
+      - "/opt/homebrew/opt/qt@5/install_name_tool"
+      - "/opt/X11/bin/install_name_tool"
+      - "/opt/homebrew/opt/qt@5/bin/install_name_tool"
+      - "/opt/homebrew/bin/install_name_tool"
+      - "/opt/homebrew/sbin/install_name_tool"
+      - "/opt/homebrew/opt/python@3.13/libexec/bin/install_name_tool"
+      - "/usr/local/bin/install_name_tool"
+      - "/System/Cryptexes/App/usr/bin/install_name_tool"
+    found: "/usr/bin/install_name_tool"
+    search_context:
+      ENV{CMAKE_PREFIX_PATH}:
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+        - "/opt/homebrew/opt/qt@5"
+      ENV{PATH}:
+        - "/opt/X11/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+        - "/opt/homebrew/bin"
+        - "/opt/homebrew/sbin"
+        - "/opt/homebrew/opt/python@3.13/libexec/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/opt/X11/bin"
+        - "/Library/Apple/usr/bin"
+        - "/usr/local/MacGPG2/bin"
+        - "/opt/homebrew/opt/qt@5/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+...

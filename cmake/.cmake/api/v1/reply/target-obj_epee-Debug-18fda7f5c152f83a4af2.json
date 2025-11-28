@@ -1,0 +1,1224 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./byte_slice.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./byte_stream.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./hex.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./abstract_http_client.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./http_auth.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./mlog.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./net_helper.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./net_utils_base.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./string_tools.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./parserse_base_utils.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./wipeable_string.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./levin_base.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./memwipe.c.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./connection_basic.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./network_throttle.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./network_throttle-detail.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./mlocker.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./buffer.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./net_ssl.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./int-util.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./portable_storage.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./misc_language.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./file_io_utils.cpp.o"
+		},
+		{
+			"path" : "monero/contrib/epee/src/CMakeFiles/obj_epee.dir/./net_parse_helpers.cpp.o"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"monero_add_library_with_deps",
+			"monero_add_library",
+			"add_definitions",
+			"include",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"monero/CMakeLists.txt",
+			"monero/contrib/epee/src/CMakeLists.txt",
+			"monero/cmake/CheckTrezor.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 34,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 611,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 623,
+				"parent" : 2
+			},
+			{
+				"file" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 577,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 498,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 1061,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 1062,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 1063,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 473,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 497,
+				"parent" : 4
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 673,
+				"parent" : 4
+			},
+			{
+				"file" : 2,
+				"parent" : 12
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 157,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 665,
+				"parent" : 4
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 573,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 160,
+				"parent" : 16
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 1125,
+				"parent" : 4
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 575,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 152,
+				"parent" : 19
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 180,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 391,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 67,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 158,
+				"parent" : 13
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 161,
+				"parent" : 13
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 455,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 560,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 645,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 649,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 656,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 666,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 182,
+				"parent" : 13
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 1126,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 1065,
+				"parent" : 4
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -fvisibility=default -march=armv8-a+crypto -fno-strict-aliasing -D_GNU_SOURCE   -Wall -Wextra -Wpointer-arith -Wundef -Wvla -Wwrite-strings -Wno-error=extra -Wno-error=deprecated-declarations -Wno-unused-parameter -Wno-error=unused-variable -Wno-error=undef -Wno-error=uninitialized -Wno-error=inline-asm -Wno-reorder -Wno-missing-field-initializers -fPIC  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -Werror=switch -Werror=return-type -fno-strict-aliasing -mfix-cortex-a53-835769 -fvisibility=default -DGTEST_HAS_TR1_TUPLE=0 -fno-aligned-allocation -ftemplate-depth=900 -g -g3 -std=c++17 -arch arm64 -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "BOOST_ASIO_ENABLE_SEQUENTIAL_STRAND_ALLOCATION"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "BOOST_NO_AUTO_PTR"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "BOOST_UUID_DISABLE_ALIGNMENT"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 14,
+					"define" : "DEVICE_TREZOR_READY=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "HAVE_HIDAPI"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 18,
+					"define" : "HAVE_READLINE"
+				},
+				{
+					"backtrace" : 20,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "HAVE_TREZOR_LIBUSB=1"
+				},
+				{
+					"backtrace" : 22,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "PROTOBUF_HAS_ABSEIL"
+				},
+				{
+					"backtrace" : 24,
+					"define" : "PROTOBUF_INLINE_NOT_IN_HEADERS=0"
+				},
+				{
+					"backtrace" : 25,
+					"define" : "TREZOR_DEBUG=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 27,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 28,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 29,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				},
+				{
+					"backtrace" : 30,
+					"path" : "/opt/homebrew/include"
+				},
+				{
+					"backtrace" : 31,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/db_drivers/liblmdb"
+				},
+				{
+					"backtrace" : 32,
+					"path" : "/opt/homebrew/include/hidapi"
+				},
+				{
+					"backtrace" : 33,
+					"path" : "/opt/homebrew/Cellar/libusb/1.0.29/include/libusb-1.0"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/opt/homebrew/opt/readline/include"
+				},
+				{
+					"backtrace" : 35,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/boost/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -march=armv8-a+crypto -fno-strict-aliasing -D_GNU_SOURCE   -Wall -Wextra -Wpointer-arith -Wundef -Wvla -Wwrite-strings -Wno-error=extra -Wno-error=deprecated-declarations -Wno-unused-parameter -Wno-error=unused-variable -Wno-error=undef -Wno-error=uninitialized -Wno-error=inline-asm -Waggregate-return -Wnested-externs -Wold-style-definition -Wstrict-prototypes -fPIC  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -Werror=switch -Werror=return-type -fno-strict-aliasing -mfix-cortex-a53-835769 -g -g3 -std=c11 -arch arm64 -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "AUTO_INITIALIZE_EASYLOGGINGPP"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "BLOCKCHAIN_DB=DB_LMDB"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "BOOST_ASIO_ENABLE_SEQUENTIAL_STRAND_ALLOCATION"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "BOOST_NO_AUTO_PTR"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "BOOST_UUID_DISABLE_ALIGNMENT"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "BUILD_SHARED_LIBS"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "DEFAULT_DB_TYPE=\"lmdb\""
+				},
+				{
+					"backtrace" : 14,
+					"define" : "DEVICE_TREZOR_READY=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "HAVE_HIDAPI"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "HAVE_MEMSET_S"
+				},
+				{
+					"backtrace" : 18,
+					"define" : "HAVE_READLINE"
+				},
+				{
+					"backtrace" : 20,
+					"define" : "HAVE_STRPTIME"
+				},
+				{
+					"backtrace" : 21,
+					"define" : "HAVE_TREZOR_LIBUSB=1"
+				},
+				{
+					"backtrace" : 22,
+					"define" : "PER_BLOCK_CHECKPOINT"
+				},
+				{
+					"backtrace" : 23,
+					"define" : "PROTOBUF_HAS_ABSEIL"
+				},
+				{
+					"backtrace" : 24,
+					"define" : "PROTOBUF_INLINE_NOT_IN_HEADERS=0"
+				},
+				{
+					"backtrace" : 25,
+					"define" : "TREZOR_DEBUG=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/rapidjson/include"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/easylogging++"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/src"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/contrib/epee/include"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external"
+				},
+				{
+					"backtrace" : 26,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/supercop/include"
+				},
+				{
+					"backtrace" : 27,
+					"path" : "/opt/homebrew/opt/openssl@3/include"
+				},
+				{
+					"backtrace" : 28,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/generated_include"
+				},
+				{
+					"backtrace" : 29,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/monero/translations"
+				},
+				{
+					"backtrace" : 30,
+					"path" : "/opt/homebrew/include"
+				},
+				{
+					"backtrace" : 31,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/monero/external/db_drivers/liblmdb"
+				},
+				{
+					"backtrace" : 32,
+					"path" : "/opt/homebrew/include/hidapi"
+				},
+				{
+					"backtrace" : 33,
+					"path" : "/opt/homebrew/Cellar/libusb/1.0.29/include/libusb-1.0"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "/opt/homebrew/opt/readline/include"
+				},
+				{
+					"backtrace" : 35,
+					"isSystem" : true,
+					"path" : "/opt/homebrew/opt/boost/include"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				12
+			]
+		}
+	],
+	"id" : "obj_epee::@2d31c5e5f3a963729190",
+	"name" : "obj_epee",
+	"paths" : 
+	{
+		"build" : "monero/contrib/epee/src",
+		"source" : "monero/contrib/epee/src"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "epee",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59,
+				60,
+				61,
+				62,
+				63,
+				64,
+				65,
+				66,
+				67,
+				68,
+				69,
+				70,
+				71,
+				72,
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81,
+				82,
+				83,
+				84,
+				85,
+				86,
+				87,
+				88
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/byte_slice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/byte_stream.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/hex.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/abstract_http_client.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/http_auth.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/mlog.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/net_helper.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/net_utils_base.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/string_tools.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/parserse_base_utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/wipeable_string.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/levin_base.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "monero/contrib/epee/src/memwipe.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/connection_basic.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/network_throttle.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/network_throttle-detail.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/mlocker.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/buffer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/net_ssl.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/int-util.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/portable_storage.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/misc_language.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/file_io_utils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "monero/contrib/epee/src/net_parse_helpers.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/byte_slice.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/byte_stream.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/console_handler.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/file_io_utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/fnv1.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/hex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/include_base_utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/int-util.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/math_helper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/memwipe.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/misc_language.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/misc_log_ex.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/mlocker.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/abstract_http_client.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/abstract_tcp_server2.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/abstract_tcp_server2.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/buffer.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/connection_basic.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/enums.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_auth.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_client.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_client_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_protocol_handler.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_protocol_handler.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_server_handlers_map2.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/http_server_impl_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/jsonrpc_structs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/levin_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/levin_protocol_handler_async.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/local_ip.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/net_helper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/net_parse_helpers.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/net_ssl.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/net_utils_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/network_throttle-detail.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/net/network_throttle.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/profile_tools.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/readline_buffer.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/rolling_median.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/serialization/keyvalue_serialization.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/serialization/keyvalue_serialization_overloads.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/serialization/wire.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/span.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/stats.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/stats.inl",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/http_abstract_invoke.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/levin_abstract_invoke2.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/parserse_base_utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_base.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_bin_utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_from_bin.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_from_json.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_template_helper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_to_bin.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_to_json.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/storages/portable_storage_val_converters.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/string_coding.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/string_tools.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/string_tools_lexical.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/syncobj.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/time_helper.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/warnings.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "monero/contrib/epee/include/wipeable_string.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "OBJECT_LIBRARY"
+}

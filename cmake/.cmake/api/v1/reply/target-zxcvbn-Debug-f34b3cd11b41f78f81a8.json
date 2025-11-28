@@ -1,0 +1,445 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "src/zxcvbn-c/libzxcvbn.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"add_definitions",
+			"include_directories",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"src/zxcvbn-c/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 99,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 103,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 179,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -fvisibility=default -fvisibility=default -DGTEST_HAS_TR1_TUPLE=0  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -fno-strict-aliasing -fPIC -g -std=gnu++17 -arch arm64 -fPIC -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "WITH_DESKTOP_ENTRY"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "WITH_UPDATER"
+				}
+			],
+			"frameworks" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/src/zxcvbn-c/zxcvbn_autogen/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/Headers"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/./mkspecs/macx-clang"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework/Headers"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework/Headers"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework/Headers"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework/Headers"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework/Headers"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework/Headers"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/zxcvbn-c"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "17"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=c11  -Wformat -Wformat-security -fstack-protector -fstack-protector-strong -fno-strict-aliasing -fPIC -g -arch arm64 -fPIC -fcolor-diagnostics"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "WITH_DESKTOP_ENTRY"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "WITH_UPDATER"
+				}
+			],
+			"frameworks" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/cmake/src/zxcvbn-c/zxcvbn_autogen/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtCore.framework/Headers"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/opt/homebrew/opt/qt@5/./mkspecs/macx-clang"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQuick.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtGui.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQmlModels.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtQml.framework/Headers"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtNetwork.framework/Headers"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtSvg.framework/Headers"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework/Headers"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXml.framework/Headers"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtMacExtras.framework/Headers"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/opt/homebrew/opt/qt@5/lib/QtXmlPatterns.framework/Headers"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "/Users/gjeane/work/draft_3/monero-gui/src/zxcvbn-c"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "zxcvbn_autogen_timestamp_deps::@bb5823a9f93b935b8eb5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "zxcvbn_autogen::@bb5823a9f93b935b8eb5"
+		}
+	],
+	"id" : "zxcvbn::@bb5823a9f93b935b8eb5",
+	"name" : "zxcvbn",
+	"nameOnDisk" : "libzxcvbn.a",
+	"paths" : 
+	{
+		"build" : "src/zxcvbn-c",
+		"source" : "src/zxcvbn-c"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/zxcvbn_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "src/zxcvbn-c/zxcvbn.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/zxcvbn_autogen/timestamp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "cmake/src/zxcvbn-c/zxcvbn_autogen/timestamp.rule",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

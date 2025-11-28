@@ -1,0 +1,63 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"monero/contrib/epee/src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 56,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 59,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"monero/contrib/epee/src/libepee.dylib"
+			],
+			"targetId" : "epee::@2d31c5e5f3a963729190",
+			"targetIndex" : 28,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"monero/contrib/epee/src/libepee_readline.dylib"
+			],
+			"targetId" : "epee_readline::@2d31c5e5f3a963729190",
+			"targetIndex" : 29,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "monero/contrib/epee/src",
+		"source" : "monero/contrib/epee/src"
+	}
+}

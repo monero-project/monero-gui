@@ -1,0 +1,107 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 176,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 187,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 199,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 208,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "bin",
+			"paths" : 
+			[
+				{
+					"from" : "bin/monero-wallet-gui.app",
+					"to" : "monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui"
+				}
+			],
+			"targetId" : "monero-wallet-gui::@145eef247bfb46b6828c",
+			"targetIndex" : 43,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "monero-wallet-gui::@145eef247bfb46b6828c",
+				"index" : 43
+			},
+			"destination" : "bin",
+			"type" : "cxxModuleBmi"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "bin/scripts",
+			"paths" : 
+			[
+				"src/i2p/create_i2p_node.sh"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "bin/scripts",
+			"paths" : 
+			[
+				"src/i2p/create_i2p_node.sh"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "bin/scripts",
+			"paths" : 
+			[
+				"src/i2p/create_i2p_node_docker.sh"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src",
+		"source" : "src"
+	}
+}

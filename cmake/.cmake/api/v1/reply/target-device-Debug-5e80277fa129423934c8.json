@@ -1,0 +1,511 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "monero/src/device/libdevice.dylib"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"monero_add_library_with_deps",
+			"monero_add_library",
+			"target_link_libraries",
+			"add_definitions",
+			"include",
+			"add_definition_if_library_exists",
+			"add_definition_if_function_found",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"monero/CMakeLists.txt",
+			"monero/src/device/CMakeLists.txt",
+			"monero/src/ringct/CMakeLists.txt",
+			"monero/src/crypto/CMakeLists.txt",
+			"monero/contrib/epee/src/CMakeLists.txt",
+			"monero/src/common/CMakeLists.txt",
+			"monero/cmake/CheckTrezor.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 65,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 611,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 624,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 70,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 44,
+				"parent" : 5
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 71,
+				"parent" : 7
+			},
+			{
+				"file" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 4,
+				"line" : 64,
+				"parent" : 9
+			},
+			{
+				"file" : 5
+			},
+			{
+				"command" : 3,
+				"file" : 5,
+				"line" : 66,
+				"parent" : 11
+			},
+			{
+				"file" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 577,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 498,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1061,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1062,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1063,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 473,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 497,
+				"parent" : 13
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 673,
+				"parent" : 13
+			},
+			{
+				"file" : 6,
+				"parent" : 21
+			},
+			{
+				"command" : 4,
+				"file" : 6,
+				"line" : 157,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 665,
+				"parent" : 13
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 573,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 160,
+				"parent" : 25
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 1125,
+				"parent" : 13
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 575,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 152,
+				"parent" : 28
+			},
+			{
+				"command" : 4,
+				"file" : 6,
+				"line" : 180,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 391,
+				"parent" : 13
+			},
+			{
+				"command" : 4,
+				"file" : 6,
+				"line" : 67,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 6,
+				"line" : 158,
+				"parent" : 22
+			},
+			{
+				"command" : 4,
+				"file" : 6,
+				"line" : 161,
+				"parent" : 22
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 455,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 560,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 645,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 649,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 656,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 666,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 6,
+				"line" : 182,
+				"parent" : 22
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 1126,
+				"parent" : 13
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 1065,
+				"parent" : 13
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "easylogging::@67ae4ab8ad0deadec0e8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "randomx::@3cfcb9f1b9be96d94b82"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "epee::@2d31c5e5f3a963729190"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "version::@e755a04db5c24671c7bc"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "common::@4954347f4cf3ee74e34e"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cncrypto::@0038c9c6d3d93ff875b8"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "ringct_basic::@e5510959f47534a05345"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "cryptonote_format_utils_basic::@5d3e877fca902856ef8e"
+		},
+		{
+			"id" : "obj_device::@dc635d948a044c513274"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "libs"
+	},
+	"id" : "device::@dc635d948a044c513274",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-dynamiclib -Wl,-headerpad_max_install_names",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-undefined,error",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/cryptonote_basic -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/ringct -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/common -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/src/crypto -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/contrib/epee/src -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/easylogging++ -Wl,-rpath,/Users/gjeane/work/draft_3/monero-gui/cmake/monero/external/randomx",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/lib/libhidapi.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/cryptonote_basic/libcryptonote_format_utils_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/ringct/libringct_basic.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_serialization.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/libversion.dylib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework AppKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework IOKit",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-framework CoreFoundation",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "monero/src/common/libcommon.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "monero/src/crypto/libcncrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/contrib/epee/src/libepee.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "monero/external/easylogging++/libeasylogging.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libssl.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "monero/external/randomx/librandomx.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "/opt/homebrew/Cellar/libsodium/1.0.20/lib/libsodium.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "/opt/homebrew/lib/libunbound.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_date_time.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_chrono.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_filesystem.dylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "/opt/homebrew/opt/boost/lib/libboost_thread.dylib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "device",
+	"nameOnDisk" : "libdevice.dylib",
+	"paths" : 
+	{
+		"build" : "monero/src/device",
+		"source" : "monero/src/device"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/device/CMakeFiles/obj_device.dir/device.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/device/CMakeFiles/obj_device.dir/device_default.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/device/CMakeFiles/obj_device.dir/log.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/device/CMakeFiles/obj_device.dir/device_ledger.cpp.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "cmake/monero/src/device/CMakeFiles/obj_device.dir/device_io_hid.cpp.o",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}
