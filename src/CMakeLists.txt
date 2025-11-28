@@ -145,6 +145,7 @@ target_link_libraries(monero-wallet-gui
     qrcodegen
     easylogging
     ${QT5_LIBRARIES}
+    Qt5::Network     #Adds QNetworkProxy support
     ${EXTRA_LIBRARIES}
     openpgp
     qrdecoder

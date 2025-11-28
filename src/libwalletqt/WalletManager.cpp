@@ -42,49 +42,88 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
-
+// Added for I2P Integration
+#include "qt/MoneroSettings.h"
+#include <QNetworkProxy>
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
 
 class WalletPassphraseListenerImpl : public  Monero::WalletListener, public PassphraseReceiver
 {
 public:
-  WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr) {}
+    WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr) {}
 
-  virtual void moneySpent(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
-  virtual void moneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
-  virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
-  virtual void newBlock(uint64_t height) override { (void) height; };
-  virtual void updated() override {};
-  virtual void refreshed() override {};
+    virtual void moneySpent(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
+    virtual void moneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
+    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
+    virtual void newBlock(uint64_t height) override { (void) height; };
+    virtual void updated() override {};
+    virtual void refreshed() override {};
 
-  virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override
-  {
-      qDebug() << __FUNCTION__;
-      m_phelper.onPassphraseEntered(passphrase, enter_on_device, entry_abort);
-  }
+    virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override
+    {
+        qDebug() << __FUNCTION__;
+        m_phelper.onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+    }
 
-  virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override
-  {
-      qDebug() << __FUNCTION__;
-      return m_phelper.onDevicePassphraseRequest(on_device);
-  }
+    virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override
+    {
+        qDebug() << __FUNCTION__;
+        return m_phelper.onDevicePassphraseRequest(on_device);
+    }
 
-  virtual void onDeviceButtonRequest(uint64_t code) override
-  {
-      qDebug() << __FUNCTION__;
-      emit m_mgr->deviceButtonRequest(code);
-  }
+    virtual void onDeviceButtonRequest(uint64_t code) override
+    {
+        qDebug() << __FUNCTION__;
+        emit m_mgr->deviceButtonRequest(code);
+    }
 
-  virtual void onDeviceButtonPressed() override
-  {
-      qDebug() << __FUNCTION__;
-      emit m_mgr->deviceButtonPressed();
-  }
+    virtual void onDeviceButtonPressed() override
+    {
+        qDebug() << __FUNCTION__;
+        emit m_mgr->deviceButtonPressed();
+    }
 
 private:
-  WalletManager * m_mgr;
-  PassphraseHelper m_phelper;
+    WalletManager * m_mgr;
+    PassphraseHelper m_phelper;
+};
+
+// Privacy Proxy Factory
+
+class I2PProxyFactory : public QNetworkProxyFactory {
+public:
+    QList<QNetworkProxy> queryProxy(const QNetworkProxyQuery &query) override {
+        // 1. FAIL-SAFE: Always allow local loopback (Docker control, Local Daemon)
+        QString host = query.peerHostName();
+        if (host == "localhost" || host == "127.0.0.1" || host == "::1") {
+            return QList<QNetworkProxy>() << QNetworkProxy::NoProxy;
+        }
+
+        // 2. CHECK: Is I2P Enabled?
+        MoneroSettings *settings = MoneroSettings::instance();
+        if (settings->i2pProxyEnabled()) {
+            QString proxyStr = settings->i2pProxyAddress();
+            if (proxyStr.isEmpty()) proxyStr = "127.0.0.1:4447"; // Default I2P port
+
+            QUrl proxyUrl = QUrl::fromUserInput(proxyStr);
+
+            QNetworkProxy proxy;
+            proxy.setType(QNetworkProxy::Socks5Proxy);
+            proxy.setHostName(proxyUrl.host());
+            int port = proxyUrl.port();
+            proxy.setPort(port == -1 ? 4447 : port);
+
+            // CRITICAL: HostNameLookup ensures the PROXY resolves the destination
+            // (preventing DNS leaks of .i2p addresses)
+            proxy.setCapabilities(QNetworkProxy::HostNameLookup | QNetworkProxy::TunnelingCapability);
+
+            return QList<QNetworkProxy>() << proxy;
+        }
+
+        // 3. FALLBACK: Clearnet (if I2P is disabled)
+        return QList<QNetworkProxy>() << QNetworkProxy::NoProxy;
+    }
 };
 
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
@@ -96,7 +135,7 @@ Wallet *WalletManager::createWallet(const QString &path, const QString &password
         delete m_currentWallet;
     }
     Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
-                                                  language.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds);
+                                              language.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds);
     m_currentWallet  = new Wallet(w);
     return m_currentWallet;
 }
@@ -165,7 +204,7 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
         m_currentWallet = NULL;
     }
     Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), "", language.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight,
-                                                       address.toStdString(), viewkey.toStdString(), spendkey.toStdString(), kdfRounds);
+                                                      address.toStdString(), viewkey.toStdString(), spendkey.toStdString(), kdfRounds);
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
 }
@@ -189,7 +228,7 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
         m_currentWallet = NULL;
     }
     Monero::Wallet * w = m_pimpl->createWalletFromDevice(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype),
-                                                         deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString(), kdfRounds, &tmpListener);
+                                                        deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString(), kdfRounds, &tmpListener);
     w->setListener(nullptr);
 
     m_currentWallet = new Wallet(w);
@@ -378,15 +417,6 @@ bool WalletManager::stopMining()
     return m_pimpl->stopMining();
 }
 
-bool WalletManager::localDaemonSynced() const
-{
-    return blockchainHeight() > 1 && blockchainHeight() >= blockchainTargetHeight();
-}
-
-bool WalletManager::isDaemonLocal(const QString &daemon_address) const
-{
-    return daemon_address.isEmpty() ? false : Monero::Utils::isAddressLocal(daemon_address.toStdString());
-}
 
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
@@ -537,11 +567,11 @@ void WalletManager::checkUpdatesAsync(
 
 QString WalletManager::checkUpdates(const QString &software, const QString &subdir) const
 {
-  qDebug() << "Checking for updates";
-  const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
-  if (!std::get<0>(result))
-    return QString("");
-  return QString::fromStdString(std::get<1>(result) + "|" + std::get<2>(result) + "|" + std::get<3>(result) + "|" + std::get<4>(result));
+    qDebug() << "Checking for updates";
+    const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
+    if (!std::get<0>(result))
+        return QString("");
+    return QString::fromStdString(std::get<1>(result) + "|" + std::get<2>(result) + "|" + std::get<3>(result) + "|" + std::get<4>(result));
 }
 
 bool WalletManager::clearWalletCache(const QString &wallet_path) const
@@ -556,18 +586,26 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
 
     // create unique file name
     for (int i = 1; QFile::exists(newFileName); i++) {
-       newFileName = QString("%1%2.%3").arg(fileName).arg(suffix).arg(i);
+        newFileName = QString("%1%2.%3").arg(fileName).arg(suffix).arg(i);
     }
 
     return walletCache.rename(newFileName);
 }
 
+// Updated Constructor
 WalletManager::WalletManager(QObject *parent)
     : QObject(parent)
     , m_passphraseReceiver(nullptr)
     , m_scheduler(this)
 {
-    m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
+    m_pimpl = Monero::WalletManagerFactory::getWalletManager();
+
+    // This applies to the whol app - QML Image fetching, Updates, etc
+    QNetworkProxyFactory::setApplicationProxyFactory(new I2PProxyFactory());
+
+    // Connect settings changes to trigger updates
+    connect(MoneroSettings::instance(), &MoneroSettings::i2pProxyEnabledChanged,
+            this, &WalletManager::onI2pSettingsChanged);
 }
 
 WalletManager::~WalletManager()
@@ -610,4 +648,16 @@ void WalletManager::setProxyAddress(QString address)
         }
         emit proxyAddressChanged();
     });
+}
+
+// I2P settings handler
+void WalletManager::onI2pSettingsChanged() {
+    bool enabled = MoneroSettings::instance()->i2pEnabled();
+    if (enabled) {
+        QString addr = MoneroSettings::instance()->i2pAddress();
+        if (addr.isEmpty()) addr = "127.0.0.1:4447";
+        m_pimpl->setProxy(addr.toStdString());
+    } else {
+        m_pimpl->setProxy(""); // Disable proxy in core
+    }
 }

@@ -64,8 +64,9 @@ void MoneroSettings::load()
         const QVariant currentValue = this->m_settings->value(property.name(), previousValue);
 
         if (!currentValue.isNull() && (!previousValue.isValid()
-                || (currentValue.canConvert(previousValue.type()) && previousValue != currentValue))) {
+                                       || (currentValue.canConvert(previousValue.type()) && previousValue != currentValue))) {
             property.write(this, currentValue);
+
 #ifdef QT_DEBUG
             qDebug() << "QQmlSettings: load" << property.name() << "setting:" << currentValue << "default:" << previousValue;
 #endif
@@ -83,6 +84,7 @@ void MoneroSettings::load()
             QMetaObject::connect(this, signalIndex, this, propertyChangedIndex);
         }
     }
+
 }
 
 void MoneroSettings::_q_propertyChanged()
