@@ -1,40 +1,74 @@
-#ifndef I2PNODEMANAGER_H
-#define I2PNODEMANAGER_H
+#pragma once
 
 #include <QObject>
 #include <QProcess>
-#include <QString>
-#include <QtGlobal>
+#include <QStringList>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkProxy>
 
-class I2PNodeManager : public QObject
-{
+class I2PManager : public QObject {
     Q_OBJECT
-    Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
-    Q_PROPERTY(bool isMobile READ isMobile CONSTANT)
+
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool connected READ connected NOTIFY connectedChanged)
+    Q_PROPERTY(QString status READ status NOTIFY statusChanged)
+    Q_PROPERTY(QString connectionMode READ connectionMode WRITE setConnectionMode NOTIFY connectionModeChanged)
+    Q_PROPERTY(QStringList trustedNodes READ trustedNodes NOTIFY trustedNodesChanged)
 
 public:
-    explicit I2PNodeManager(QObject *parent = nullptr);
-    
-    Q_INVOKABLE void startNodeCreation(const QString &password);
-    Q_INVOKABLE void stopNodeCreation();
-    
-    bool isRunning() const;
-    bool isMobile() const;
+    explicit I2PManager(QObject *parent = nullptr);
+
+    // getter/setter
+    bool enabled() const { return m_enabled; }
+    void setEnabled(bool enabled);
+
+    bool connected() const { return m_connected; }
+    QString status() const { return m_status; }
+
+    QString connectionMode() const { return m_connectionMode; }
+    void setConnectionMode(const QString &mode);
+
+    QStringList trustedNodes() const { return m_trustedNodes; }
+
+    // callable from QML
+    Q_INVOKABLE void refreshStatus();
+    Q_INVOKABLE void startCreateNode();
+    Q_INVOKABLE void cancelCreateNode();
+    Q_INVOKABLE void providePassword(const QString &pw);
+    Q_INVOKABLE bool i2pStatus() const;
+    Q_INVOKABLE void setProxyForI2p();
 
 signals:
-    void isRunningChanged();
-    void nodeCreated();
-    void errorOccurred(const QString &error);
-    void progressUpdate(const QString &status);
+    void enabledChanged();
+    void connectedChanged();
+    void statusChanged();
+    void connectionModeChanged();
+    void trustedNodesChanged();
+    void nodeCreationStarted();
+    void nodeCreationFinished(bool ok, const QString &message);
+    void passwordRequested(const QString &reason);
+    void proxyAddressRequested(const QString &address);
 
 private slots:
-    void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
-    void onReadyReadStandardOutput();
-    void onReadyReadStandardError();
+    void handleProcessOutput();
+    void handleProcessFinished(int exitCode, QProcess::ExitStatus status);
+    void handleProcessError(QProcess::ProcessError error);
 
 private:
-    QProcess *m_process;
-    bool m_isRunning;
-};
+    void startScript();
+    void stopScript();
+    void setStatus(const QString &s);
 
-#endif // I2PNODEMANAGER_H
+    bool m_enabled = false;
+    bool m_connected = false;
+    QNetworkAccessManager *m_networkManager = nullptr;
+    QNetworkReply *m_statusReply = nullptr;
+    QString m_i2pAddress;
+    QString m_status;
+    QString m_connectionMode;
+    QStringList m_trustedNodes;
+    QProcess *m_process = nullptr;
+    bool m_waitingForPassword = false;
+};

@@ -21,7 +21,6 @@ ColumnLayout {
 
     MoneroComponents.StandardDropdown {
         id: knownNodes
-
         Layout.preferredWidth: 400
         Layout.fillWidth: true
         dataModel: [{
@@ -45,7 +44,6 @@ ColumnLayout {
             for (var i = 0; i < dataModel.length; i++) {
                 if (dataModel[i].url === currentUrl)
                     return i;
-
             }
             return 0;
         }
@@ -118,7 +116,6 @@ ColumnLayout {
             // This is called after passwordRequested signal
             if (I2PManager && passwordDialog.password)
                 I2PManager.providePassword(passwordDialog.password);
-
         }
 
         target: passwordDialog
