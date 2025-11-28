@@ -102,8 +102,8 @@ public:
 
         // 2. CHECK: Is I2P Enabled?
         MoneroSettings *settings = MoneroSettings::instance();
-        if (settings->i2pProxyEnabled()) {
-            QString proxyStr = settings->i2pProxyAddress();
+        if (settings->i2pEnabled()) {
+            QString proxyStr = settings->i2pAddress();
             if (proxyStr.isEmpty()) proxyStr = "127.0.0.1:4447"; // Default I2P port
 
             QUrl proxyUrl = QUrl::fromUserInput(proxyStr);
@@ -114,9 +114,9 @@ public:
             int port = proxyUrl.port();
             proxy.setPort(port == -1 ? 4447 : port);
 
-            // CRITICAL: HostNameLookup ensures the PROXY resolves the destination
+            // CRITICAL: HostNameLookupCapability ensures the PROXY resolves the destination
             // (preventing DNS leaks of .i2p addresses)
-            proxy.setCapabilities(QNetworkProxy::HostNameLookup | QNetworkProxy::TunnelingCapability);
+            proxy.setCapabilities(QNetworkProxy::HostNameLookupCapability | QNetworkProxy::TunnelingCapability);
 
             return QList<QNetworkProxy>() << proxy;
         }
@@ -604,7 +604,7 @@ WalletManager::WalletManager(QObject *parent)
     QNetworkProxyFactory::setApplicationProxyFactory(new I2PProxyFactory());
 
     // Connect settings changes to trigger updates
-    connect(MoneroSettings::instance(), &MoneroSettings::i2pProxyEnabledChanged,
+    connect(MoneroSettings::instance(), &MoneroSettings::i2pEnabledChanged,
             this, &WalletManager::onI2pSettingsChanged);
 }
 
