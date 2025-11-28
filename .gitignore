@@ -34,3 +34,18 @@ Session.vim
 tags
 # Persistent undo
 [._]*.un~
+# CMake build files
+cmake/
+CMakeFiles/
+*.cmake.user
+CMakeCache.txt
+cmake_install.cmake
+build.ninja
+rules.ninja
+.ninja_deps
+.ninja_log
+
+# CMake autogen files
+*_autogen/
+AutogenInfo.json
+cmake/
