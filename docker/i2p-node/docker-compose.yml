@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  monero-i2p-node:
+    build:
+      context: .
+      dockerfile: Dockerfile.${PLATFORM:-linux}
+    container_name: monero-i2p-node
+    restart: unless-stopped
+    ports:
+      - "18081:18081"  # Monero RPC
+      - "18089:18089"  # Monero P2P
+      - "4447:4447"    # I2P SOCKS proxy
+      - "7070:7070"    # I2P web console
+    volumes:
+      - monero-data:/data/monero
+      - i2p-data:/data/i2p
+    environment:
+      - MONERO_NETWORK=mainnet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:18081/json_rpc", "-d", "{\"jsonrpc\":\"2.0\",\"id\":\"0\",\"method\":\"get_info\"}", "-H", "Content-Type: application/json"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  monero-data:
+    driver: local
+  i2p-data:
+    driver: local

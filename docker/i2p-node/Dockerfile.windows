@@ -1,0 +1,40 @@
+FROM ubuntu:22.04
+
+ARG MONERO_VERSION=0.18.4.4
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install I2P router and dependencies
+RUN apt-get update && apt-get install -y \
+    i2pd \
+    wget \
+    unzip \
+    ca-certificates \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download and install Monero daemon (Windows binary runs in Linux container via Docker Desktop)
+WORKDIR /tmp
+RUN wget -q https://downloads.getmonero.org/cli/monero-win-x64-v${MONERO_VERSION}.zip && \
+    unzip -q monero-win-x64-v${MONERO_VERSION}.zip && \
+    cp monero-x86_64-w64-mingw32-v${MONERO_VERSION}/monerod.exe /usr/local/bin/monerod && \
+    chmod +x /usr/local/bin/monerod && \
+    rm -rf monero-* && \
+    rm -f *.zip
+
+# Create directories
+RUN mkdir -p /data/monero /data/i2p/tunnels.d /etc/monero /etc/i2p
+
+# Copy configuration templates
+COPY monerod.conf.template /etc/monero/monerod.conf.template
+COPY i2pd.conf.template /etc/i2p/i2pd.conf.template
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+EXPOSE 18081 18089 4447 7070
+
+VOLUME ["/data/monero", "/data/i2p"]
+
+WORKDIR /data
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["monerod", "--config-file=/data/monero/monerod.conf"]

@@ -1,0 +1,23 @@
+# Monero daemon configuration for I2P
+data-dir={{DATA_DIR}}
+log-file={{LOG_FILE}}
+pidfile={{PID_FILE}}
+
+# Network settings
+p2p-bind-ip=127.0.0.1
+p2p-bind-port=18089
+rpc-bind-ip=0.0.0.0
+rpc-bind-port=18081
+
+# I2P proxy configuration
+tx-proxy=i2p,127.0.0.1:4447
+
+# Trusted I2P nodes (seed nodes)
+add-peer=core5hzivg4v5ttxbor4a3haja6dssksqsmiootlptnsrfsgwqqa.b32.i2p:18089
+add-peer=dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p:18089
+add-peer=sel36x6fibfzujwvt4hf5gxolz6kd3jpvbjqg6o3ud2xtionyl2q.b32.i2p:18089
+add-peer=yht4tm2slhyue42zy5p2dn3sft2ffjjrpuy7oc2lpbhifcidml4q.b32.i2p:18089
+
+# Other settings
+non-interactive=true
+confirm-external-bind=true

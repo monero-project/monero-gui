@@ -1,0 +1,16 @@
+# I2P router configuration
+[http]
+enabled = true
+address = 0.0.0.0
+port = 7070
+
+[socksproxy]
+enabled = true
+address = 0.0.0.0
+port = 4447
+
+[upnp]
+enabled = false
+
+[reseed]
+verify = true
