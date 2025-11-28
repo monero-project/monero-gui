@@ -33,7 +33,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#include <QtCore>
+##include <QtCore>
 #include <QMetaObject>
 #include <QSettings>
 #include <QPointer>
@@ -44,13 +44,19 @@
 
 #include "qt/MoneroSettings.h"
 
-/*!
-    \qmlmodule moneroSettings 1.0
-    \title Monero Settings QML Component
-    ...
-    @TODO: Remove this QML component after migrating to Qt >= 5.12.0, as
-    `Qt.labs.settings` provides the fileName via a Q_PROPERTY
-*/
+    // Initialize static member
+    MoneroSettings *MoneroSettings::m_instance = nullptr;
+
+MoneroSettings::MoneroSettings(QObject *parent) :
+    QObject(parent)
+{
+    m_instance = this;
+}
+
+MoneroSettings *MoneroSettings::instance()
+{
+    return m_instance;
+}
 
 void MoneroSettings::load()
 {
@@ -66,30 +72,21 @@ void MoneroSettings::load()
         if (!currentValue.isNull() && (!previousValue.isValid()
                                        || (currentValue.canConvert(previousValue.type()) && previousValue != currentValue))) {
             property.write(this, currentValue);
-
-#ifdef QT_DEBUG
-            qDebug() << "QQmlSettings: load" << property.name() << "setting:" << currentValue << "default:" << previousValue;
-#endif
         }
 
-        // ensure that a non-existent setting gets written
-        // even if the property wouldn't change later
         if (!this->m_settings->contains(property.name()))
             this->_q_propertyChanged();
 
-        // setup change notifications on first load
         if (!this->m_initialized && property.hasNotifySignal()) {
             static const int propertyChangedIndex = mo->indexOfSlot("_q_propertyChanged()");
             int signalIndex = property.notifySignalIndex();
             QMetaObject::connect(this, signalIndex, this, propertyChangedIndex);
         }
     }
-
 }
 
 void MoneroSettings::_q_propertyChanged()
 {
-    // Called on QML property change
     const QMetaObject *mo = this->metaObject();
     const int offset = mo->propertyOffset();
     const int count = mo->propertyCount();
@@ -97,9 +94,6 @@ void MoneroSettings::_q_propertyChanged()
         const QMetaProperty &property = mo->property(i);
         const QVariant value = readProperty(property);
         this->m_changedProperties.insert(property.name(), value);
-#ifdef QT_DEBUG
-        // qDebug() << "QQmlSettings: cache" << property.name() << ":" << value;
-#endif
     }
 
     if (this->m_timerId != 0)
@@ -119,9 +113,6 @@ void MoneroSettings::init()
 {
     if (!this->m_initialized) {
         this->m_settings = portableConfigExists() ? portableSettings() : unportableSettings();
-#ifdef QT_DEBUG
-        qDebug() << "QQmlSettings: stored at" << this->m_settings->fileName();
-#endif
         this->load();
         this->m_initialized = true;
         emit portableChanged();
@@ -138,22 +129,13 @@ void MoneroSettings::reset()
 
 void MoneroSettings::store()
 {
-    if (!m_writable) {
-        return;
-    }
+    if (!m_writable) return;
 
     QHash<const char *, QVariant>::const_iterator it = this->m_changedProperties.constBegin();
-
     while (it != this->m_changedProperties.constEnd()) {
         this->m_settings->setValue(it.key(), it.value());
-
-#ifdef QT_DEBUG
-            // qDebug() << "QQmlSettings: store" << it.key() << ":" << it.value();
-#endif
-
         ++it;
     }
-
     this->m_changedProperties.clear();
 }
 
@@ -212,7 +194,6 @@ void MoneroSettings::setFileName(const QString &fileName)
     if (fileName != this->m_fileName) {
         this->reset();
         this->m_fileName = fileName;
-        this->m_fileName = fileName;
         if (this->m_initialized)
             this->load();
     }
@@ -226,9 +207,7 @@ QString MoneroSettings::fileName() const
 bool MoneroSettings::setPortable(bool enabled)
 {
     std::unique_ptr<QSettings> newSettings = enabled ? portableSettings() : unportableSettings();
-    if (newSettings->status() != QSettings::NoError) {
-        return false;
-    }
+    if (newSettings->status() != QSettings::NoError) return false;
 
     setWritable(true);
     swap(std::move(newSettings));
@@ -236,7 +215,6 @@ bool MoneroSettings::setPortable(bool enabled)
     if (!enabled) {
         QFile::remove(portableFilePath());
     }
-
     return true;
 }
 
@@ -253,45 +231,36 @@ bool MoneroSettings::i2pEnabled() const
 void MoneroSettings::setI2pEnabled(bool enabled)
 {
     if (!m_settings) return;
-
     bool current = m_settings->value("i2pEnabled", false).toBool();
     if (current == enabled) return;
-
     m_settings->setValue("i2pEnabled", enabled);
     emit i2pEnabledChanged();
 }
 
-
 QString MoneroSettings::i2pConnectionMethod() const
 {
-    return m_settings ? m_settings->value("i2pConnectionMethod", "auto").toString()
-                      : QString("auto");
+    return m_settings ? m_settings->value("i2pConnectionMethod", "auto").toString() : QString("auto");
 }
 
 void MoneroSettings::setI2pConnectionMethod(const QString &method)
 {
     if (!m_settings) return;
-
     QString current = m_settings->value("i2pConnectionMethod", "auto").toString();
     if (current == method) return;
-
     m_settings->setValue("i2pConnectionMethod", method);
     emit i2pConnectionMethodChanged();
 }
 
 QStringList MoneroSettings::i2pTrustedNodes() const
 {
-    return m_settings ? m_settings->value("i2pTrustedNodes").toStringList()
-                      : QStringList();
+    return m_settings ? m_settings->value("i2pTrustedNodes").toStringList() : QStringList();
 }
 
 void MoneroSettings::setI2pTrustedNodes(const QStringList &nodes)
 {
     if (!m_settings) return;
-
     QStringList current = m_settings->value("i2pTrustedNodes").toStringList();
     if (current == nodes) return;
-
     m_settings->setValue("i2pTrustedNodes", nodes);
     emit i2pTrustedNodesChanged();
 }
@@ -304,10 +273,8 @@ int MoneroSettings::anonymityNetwork() const
 void MoneroSettings::setAnonymityNetwork(int value)
 {
     if (!m_settings) return;
-
     int current = m_settings->value("anonymityNetwork", 0).toInt();
     if (current == value) return;
-
     m_settings->setValue("anonymityNetwork", value);
     m_anonymityNetwork = value;
     emit anonymityNetworkChanged();
@@ -321,10 +288,8 @@ QString MoneroSettings::i2pAddress() const
 void MoneroSettings::setI2pAddress(const QString &address)
 {
     if (!m_settings) return;
-
     QString current = m_settings->value("i2pAddress", "").toString();
     if (current == address) return;
-
     m_settings->setValue("i2pAddress", address);
     m_i2pAddress = address;
     emit i2pAddressChanged();
@@ -346,10 +311,5 @@ void MoneroSettings::componentComplete()
 }
 
 void MoneroSettings::classBegin()
-{
-}
-
-MoneroSettings::MoneroSettings(QObject *parent) :
-    QObject(parent)
 {
 }
