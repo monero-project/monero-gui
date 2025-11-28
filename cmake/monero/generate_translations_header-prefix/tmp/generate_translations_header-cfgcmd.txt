@@ -1,1 +1,0 @@
-cmd='/opt/homebrew/bin/cmake;-DLRELEASE_PATH=;-GNinja;-S;<SOURCE_DIR><SOURCE_SUBDIR>;-B;<BINARY_DIR>'
