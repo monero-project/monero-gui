@@ -215,6 +215,9 @@ signals:
     void proxyAddressChanged() const;
 
 public slots:
+    // Added for I2P Integration
+    void onI2pSettingsChanged();
+
 private:
     friend class WalletPassphraseListenerImpl;
 

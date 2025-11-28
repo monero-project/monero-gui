@@ -55,6 +55,8 @@ class MoneroSettings : public QObject, public QQmlParserStatus
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName FINAL)
     Q_PROPERTY(bool portable READ portable NOTIFY portableChanged)
     Q_PROPERTY(QString portableFolderName READ portableFolderName CONSTANT)
+    // I2P Properties
+    Q_PROPERTY(bool i2pEnabled READ i2pEnabled WRITE setI2pEnabled NOTIFY i2pEnabledChanged)
     Q_PROPERTY(QString i2pConnectionMethod READ i2pConnectionMethod WRITE setI2pConnectionMethod NOTIFY i2pConnectionMethodChanged)
     Q_PROPERTY(QStringList i2pTrustedNodes READ i2pTrustedNodes WRITE setI2pTrustedNodes NOTIFY i2pTrustedNodesChanged)
     Q_PROPERTY(int anonymityNetwork READ anonymityNetwork WRITE setAnonymityNetwork NOTIFY anonymityNetworkChanged)
@@ -63,6 +65,9 @@ class MoneroSettings : public QObject, public QQmlParserStatus
 public:
     explicit MoneroSettings(QObject *parent = nullptr);
 
+    // SINGLETON ACCESSOR ADDED
+    static MoneroSettings *instance();
+
     QString fileName() const;
     void setFileName(const QString &fileName);
     Q_INVOKABLE bool setPortable(bool enabled);
@@ -70,7 +75,6 @@ public:
 
     bool i2pEnabled() const;
     void setI2pEnabled(bool enabled);
-
 
     QString i2pConnectionMethod() const;
     void setI2pConnectionMethod(const QString &value);
@@ -122,10 +126,14 @@ private:
     bool m_writable = true;
     int m_timerId = 0;
 
+    // Singleton Instance
+    static MoneroSettings *m_instance;
+
     QString m_i2pConnectionMethod;
     QStringList m_i2pTrustedNodes;
     int m_anonymityNetwork = 0;  // 0=Clearnet, 1=Tor, 2=I2P
     QString m_i2pAddress;
+
 };
 
 #endif // MONEROSETTINGS_H
