@@ -43,7 +43,7 @@ $(date)
    - "Monero's privacy features are mandatory, not optional - every transaction is private by default."
    - "I2P nodes help strengthen the network by providing more routing options and redundancy."
 
-### From C++ Files (src/i2p/I2PManager.cpp)
+### From C++ Files (src/i2p/I2PNodeManager.cpp)
 
 1. **Status Messages:**
    - "I2P disabled"
