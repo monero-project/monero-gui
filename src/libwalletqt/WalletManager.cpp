@@ -1,31 +1,3 @@
-// Copyright (c) 2014-2024, The Monero Project
-//
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-//    conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-//    of conditions and the following disclaimer in the documentation and/or other
-//    materials provided with the distribution.
-//
-// 3. Neither the name of the copyright holder nor the names of its contributors may be
-//    used to endorse or promote products derived from this software without specific
-//    prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "wallet/api/wallet2_api.h"
@@ -42,9 +14,11 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
-// Added for I2P Integration
+
 #include "qt/MoneroSettings.h"
+#include "qt/utils.h"
 #include <QNetworkProxy>
+
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
 
@@ -89,42 +63,48 @@ private:
     PassphraseHelper m_phelper;
 };
 
-// Privacy Proxy Factory
-
+// I2P Proxy Logic
 class I2PProxyFactory : public QNetworkProxyFactory {
 public:
     QList<QNetworkProxy> queryProxy(const QNetworkProxyQuery &query) override {
-        // 1. FAIL-SAFE: Always allow local loopback (Docker control, Local Daemon)
         QString host = query.peerHostName();
         if (host == "localhost" || host == "127.0.0.1" || host == "::1") {
             return QList<QNetworkProxy>() << QNetworkProxy::NoProxy;
         }
 
-        // 2. CHECK: Is I2P Enabled?
         MoneroSettings *settings = MoneroSettings::instance();
-        if (settings->i2pEnabled()) {
+        if (settings && settings->i2pEnabled()) {
             QString proxyStr = settings->i2pAddress();
-            if (proxyStr.isEmpty()) proxyStr = "127.0.0.1:4447"; // Default I2P port
+            if (proxyStr.isEmpty()) proxyStr = "127.0.0.1:4447";
 
             QUrl proxyUrl = QUrl::fromUserInput(proxyStr);
-
             QNetworkProxy proxy;
             proxy.setType(QNetworkProxy::Socks5Proxy);
             proxy.setHostName(proxyUrl.host());
             int port = proxyUrl.port();
             proxy.setPort(port == -1 ? 4447 : port);
 
-            // CRITICAL: HostNameLookupCapability ensures the PROXY resolves the destination
-            // (preventing DNS leaks of .i2p addresses)
             proxy.setCapabilities(QNetworkProxy::HostNameLookupCapability | QNetworkProxy::TunnelingCapability);
-
             return QList<QNetworkProxy>() << proxy;
         }
-
-        // 3. FALLBACK: Clearnet (if I2P is disabled)
         return QList<QNetworkProxy>() << QNetworkProxy::NoProxy;
     }
 };
+
+WalletManager::WalletManager(QObject *parent)
+    : QObject(parent)
+    , m_passphraseReceiver(nullptr)
+    , m_scheduler(this)
+{
+    m_pimpl = Monero::WalletManagerFactory::getWalletManager();
+    QNetworkProxyFactory::setApplicationProxyFactory(new I2PProxyFactory());
+    connect(MoneroSettings::instance(), &MoneroSettings::i2pEnabledChanged, this, &WalletManager::onI2pSettingsChanged);
+}
+
+WalletManager::~WalletManager()
+{
+    m_scheduler.shutdownWaitForFinished();
+}
 
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language, NetworkType::Type nettype, quint64 kdfRounds)
@@ -165,7 +145,6 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), w->status());
     m_currentWallet  = new Wallet(w);
 
-    // move wallet to the GUI thread. Otherwise it wont be emitting signals
     if (m_currentWallet->thread() != qApp->thread()) {
         m_currentWallet->moveToThread(qApp->thread());
     }
@@ -179,7 +158,6 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
         emit walletOpened(openWallet(path, password, nettype, kdfRounds));
     });
 }
-
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &seed, const QString &seed_offset, NetworkType::Type nettype, quint64 restoreHeight, quint64 kdfRounds)
 {
@@ -233,14 +211,12 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
 
     m_currentWallet = new Wallet(w);
 
-    // move wallet to the GUI thread. Otherwise it wont be emitting signals
     if (m_currentWallet->thread() != qApp->thread()) {
         m_currentWallet->moveToThread(qApp->thread());
     }
 
     return m_currentWallet;
 }
-
 
 void WalletManager::createWalletFromDeviceAsync(const QString &path, const QString &password, NetworkType::Type nettype,
                                                 const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead, quint64 kdfRounds)
@@ -417,6 +393,15 @@ bool WalletManager::stopMining()
     return m_pimpl->stopMining();
 }
 
+bool WalletManager::localDaemonSynced() const
+{
+    return blockchainHeight() > 1 && blockchainHeight() >= blockchainTargetHeight();
+}
+
+bool WalletManager::isDaemonLocal(const QString &daemon_address) const
+{
+    return daemon_address.isEmpty() ? false : Monero::Utils::isAddressLocal(daemon_address.toStdString());
+}
 
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
@@ -592,27 +577,6 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
     return walletCache.rename(newFileName);
 }
 
-// Updated Constructor
-WalletManager::WalletManager(QObject *parent)
-    : QObject(parent)
-    , m_passphraseReceiver(nullptr)
-    , m_scheduler(this)
-{
-    m_pimpl = Monero::WalletManagerFactory::getWalletManager();
-
-    // This applies to the whol app - QML Image fetching, Updates, etc
-    QNetworkProxyFactory::setApplicationProxyFactory(new I2PProxyFactory());
-
-    // Connect settings changes to trigger updates
-    connect(MoneroSettings::instance(), &MoneroSettings::i2pEnabledChanged,
-            this, &WalletManager::onI2pSettingsChanged);
-}
-
-WalletManager::~WalletManager()
-{
-    m_scheduler.shutdownWaitForFinished();
-}
-
 void WalletManager::onWalletPassphraseNeeded(bool on_device)
 {
     emit this->walletPassphraseNeeded(on_device);
@@ -650,7 +614,6 @@ void WalletManager::setProxyAddress(QString address)
     });
 }
 
-// I2P settings handler
 void WalletManager::onI2pSettingsChanged() {
     bool enabled = MoneroSettings::instance()->i2pEnabled();
     if (enabled) {
@@ -658,6 +621,6 @@ void WalletManager::onI2pSettingsChanged() {
         if (addr.isEmpty()) addr = "127.0.0.1:4447";
         m_pimpl->setProxy(addr.toStdString());
     } else {
-        m_pimpl->setProxy(""); // Disable proxy in core
+        m_pimpl->setProxy("");
     }
 }
