@@ -462,7 +462,7 @@ qmlRegisterType<I2PNodeManager>("moneroComponents.I2P", 1, 0, "I2PNodeManager");
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
     I2PNodeManager *i2pNodeManager = new I2PNodeManager(&app);
-    engine.rootContext()->setContextProperty("i2pController", i2pNodeManager);
+    engine.rootContext()->setContextProperty("I2PManager", i2pNodeManager);
 
     engine.addImportPath(":/fonts");
 
