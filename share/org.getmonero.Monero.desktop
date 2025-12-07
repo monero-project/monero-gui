@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Monero GUI
 GenericName=Monero-GUI
-Comment=Monero GUI
+Comment=Monero: the secure, private, untraceable cryptocurrency
 Exec=monero-wallet-gui
 Type=Application
 Terminal=false
