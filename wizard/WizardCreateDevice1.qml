@@ -55,6 +55,7 @@ Rectangle {
         ListElement { column1: "Ledger Nano S"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano S Plus"; column2: "Ledger";}
         ListElement { column1: "Ledger Nano X"; column2: "Ledger";}
+        ListElement { column1: "Ledger Nano Gen5"; column2: "Ledger";}
         ListElement { column1: "Ledger Stax"; column2: "Ledger";}
         ListElement { column1: "Ledger Flex"; column2: "Ledger";}
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
@@ -181,6 +182,8 @@ Rectangle {
                                         return "qrc:///images/ledgerNanoSPlus.png";
                                     } else if (ledgerType == "Ledger Nano X") {
                                         return "qrc:///images/ledgerNanoX.png";
+                                    } else if (ledgerType == "Ledger Nano Gen5") {
+                                        return "qrc:///images/ledgerNanoGen5.png";
                                     } else if (ledgerType == "Ledger Stax") {
                                         return "qrc:///images/ledgerStax.png";
                                     } else if (ledgerType == "Ledger Flex") {
