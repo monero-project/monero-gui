@@ -51,12 +51,17 @@ class WalletPassphraseListenerImpl : public  Monero::WalletListener, public Pass
 public:
   WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr) {}
 
-  virtual void moneySpent(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
-  virtual void moneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
+  virtual void moneySpent(const std::string &txId, uint64_t amount, std::pair<uint32_t, uint32_t> subaddr_index = {}) override
+  { (void)txId; (void)amount; (void)subaddr_index; };
+  virtual void moneyReceived(const std::string &txId, uint64_t amount, const uint64_t burnt, const bool is_change = false, const bool is_coinbase = false) override
+  { (void)txId; (void)amount; (void)burnt; (void)is_change; (void)is_coinbase; };
   virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
   virtual void newBlock(uint64_t height) override { (void) height; };
   virtual void updated() override {};
   virtual void refreshed() override {};
+  void onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached) override
+  { (void) height; (void) blocks_detached; (void) transfers_detached; }
+  void onPoolTxRemoved(const std::string &txid) override { (void) txid; }
 
   virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override
   {
@@ -80,6 +85,12 @@ public:
   {
       qDebug() << __FUNCTION__;
       emit m_mgr->deviceButtonPressed();
+  }
+
+  Monero::optional<std::string> onGetPassword(const char *reason) override
+  {
+      qDebug() << __FUNCTION__;
+      return Monero::optional<std::string>();
   }
 
 private:

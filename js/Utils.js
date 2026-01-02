@@ -31,7 +31,7 @@ function isNumeric(n) {
 function showSeedPage() {
     // Shows `Settings->Seed & keys`. Prompts a password dialog.
     passwordDialog.onAcceptedCallback = function() {
-        if(walletPassword === passwordDialog.password){
+        if(currentWallet.verifyPassword(passwordDialog.password, persistentSettings.kdfRounds)){
             if(currentWallet.seedLanguage == "") {
                 console.log("No seed language set. Using English as default");
                 currentWallet.setSeedLanguage("English");
@@ -43,6 +43,7 @@ function showSeedPage() {
         }
     }
     passwordDialog.onRejectedCallback = function() {
+        memwipe.wipeQString(passwordDialog.password);
         leftPanel.selectItem(middlePanel.state);
     }
     passwordDialog.open();

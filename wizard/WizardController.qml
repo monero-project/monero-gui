@@ -58,6 +58,11 @@ Rectangle {
             wizardController.walletOptionsName = defaultAccountName;
             wizardController.walletOptionsLocation = '';
         }
+        memwipe.wipeQString(wizardController.walletOptionsPassword);
+        memwipe.wipeQString(wizardController.walletOptionsSeed);
+        memwipe.wipeQString(wizardController.walletOptionsSeedOffset);
+        memwipe.wipeQString(wizardController.walletOptionsRecoverViewkey);
+        memwipe.wipeQString(wizardController.walletOptionsRecoverSpendkey);
         wizardController.walletOptionsPassword = '';
         wizardController.walletOptionsSeed = '';
         wizardController.walletOptionsSeedOffset = '';
@@ -379,7 +384,8 @@ Rectangle {
             oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
 
             // protecting wallet with password
-            wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
+            wizardController.m_wallet.setPassword(/* old_password */ "", wizardController.walletOptionsPassword);
+            memwipe.wipeQString(wizardController.walletOptionsPassword);
 
             // save to persistent settings
             persistentSettings.account_name = wizardController.walletOptionsName
@@ -399,7 +405,7 @@ Rectangle {
             new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
         }
         console.log("saving new wallet to", new_wallet_filename);
-        wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
+        wizardController.m_wallet.storeAsync(handler, new_wallet_filename, /* is_new */ true);
     }
 
     function recoveryWallet() {
@@ -547,7 +553,6 @@ Rectangle {
         persistentSettings.is_recovering_from_device = false;
 
         appWindow.restoreHeight = 0;
-        appWindow.walletPassword = "";
 
         if(typeof fn == 'object')
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fn);

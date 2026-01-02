@@ -104,6 +104,7 @@ ColumnLayout {
             labelFontSize: 14
             password: true
             labelText: qsTr("Password") + translationManager.emptyString
+            isSecret: true
         }
 
         ColumnLayout {
@@ -174,6 +175,7 @@ ColumnLayout {
                     firstUserInput = false;
                 }
             }
+            isSecret: true
         }
 
         RowLayout {

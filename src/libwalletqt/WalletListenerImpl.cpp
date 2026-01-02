@@ -36,13 +36,19 @@ WalletListenerImpl::WalletListenerImpl(Wallet * w)
 
 }
 
-void WalletListenerImpl::moneySpent(const std::string &txId, uint64_t amount)
+void WalletListenerImpl::moneySpent(const std::string &txId,
+                                    uint64_t amount,
+                                    std::pair<uint32_t, uint32_t> subaddr_index /* = {} */)
 {
     qDebug() << __FUNCTION__;
     emit m_wallet->moneySpent(QString::fromStdString(txId), amount);
 }
 
-void WalletListenerImpl::moneyReceived(const std::string &txId, uint64_t amount)
+void WalletListenerImpl::moneyReceived(const std::string &txId,
+                                       uint64_t amount,
+                                       const uint64_t burnt,
+                                       const bool is_change /* = false */,
+                                       const bool is_coinbase /* = false */)
 {
     qDebug() << __FUNCTION__;
     emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
@@ -94,4 +100,20 @@ Monero::optional<std::string> WalletListenerImpl::onDevicePassphraseRequest(bool
 {
     qDebug() << __FUNCTION__;
     return m_phelper.onDevicePassphraseRequest(on_device);
+}
+
+void WalletListenerImpl::onReorg(std::uint64_t height, std::uint64_t blocks_detached, std::size_t transfers_detached)
+{
+    qDebug() << __FUNCTION__;
+}
+
+Monero::optional<std::string> WalletListenerImpl::onGetPassword(const char *reason)
+{
+    qDebug() << __FUNCTION__;
+    return Monero::optional<std::string>();
+}
+
+void WalletListenerImpl::onPoolTxRemoved(const std::string &txid)
+{
+    qDebug() << __FUNCTION__;
 }
