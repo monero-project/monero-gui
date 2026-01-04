@@ -597,7 +597,7 @@ Rectangle {
                 anchors.right: parent ? parent.right : undefined
                 height: {
                     if(!collapsed) return 60;
-                    return 320;
+                    return Math.max(320, mainColumn.implicitHeight + 20);
                 }
                 color: {
                     if(!collapsed) return "transparent"
@@ -637,9 +637,8 @@ Rectangle {
                 }
 
                 ColumnLayout {
+                    id: mainColumn
                     spacing: 0
-                    clip: true
-                    height: parent.height
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.leftMargin: sideMargin
@@ -1047,7 +1046,6 @@ Rectangle {
                     ColumnLayout {
                         spacing: 0
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 40
 
                         Rectangle {
                             color: "transparent"
@@ -1065,18 +1063,19 @@ Rectangle {
                             }
                         }
 
-                        Rectangle {
-                            color: "transparent"
+                        RowLayout {
                             Layout.fillWidth: true
-                            Layout.preferredHeight: 20
+                            spacing: 12
 
                             MoneroComponents.TextPlain {
                                 id: txNoteText
+                                Layout.fillWidth: true
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15
                                 text: tx_note !== "" ? tx_note : "-"
                                 color: MoneroComponents.Style.defaultFontColor
-                                anchors.verticalCenter: parent.verticalCenter
+                                wrapMode: Text.Wrap
+                                Layout.alignment: Qt.AlignVCenter
 
                                 MouseArea {
                                     state: "copyable"
@@ -1088,9 +1087,7 @@ Rectangle {
                             }
 
                             MoneroEffects.ImageMask {
-                                anchors.top: parent.top
-                                anchors.left: txNoteText.right
-                                anchors.leftMargin: 12
+                                Layout.alignment: Qt.AlignVCenter
                                 image: "qrc:///images/edit.svg"
                                 fontAwesomeFallbackIcon: FontAwesome.pencilSquare
                                 fontAwesomeFallbackSize: 22
@@ -1636,13 +1633,17 @@ Rectangle {
     }
 
     function editDescription(_hash, _tx_note, currentPage){
+        inputDialog.multiline = true;
         inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
             appWindow.showStatusMessage(qsTr("Updated description."),3);
+            inputDialog.multiline = false;
             root.update(currentPage);
         }
-        inputDialog.onRejectedCallback = null;
+        inputDialog.onRejectedCallback = function() {
+            inputDialog.multiline = false;
+        }
         inputDialog.open(_tx_note);
     }
 

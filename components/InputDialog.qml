@@ -40,6 +40,7 @@ Item {
     visible: false
     property alias labelText: label.text
     property alias inputText: input.text
+    property bool multiline: false
 
     // same signals as Dialog has
     signal accepted()
@@ -86,6 +87,7 @@ Item {
 
             MoneroComponents.Input {
                 id : input
+                visible: !root.multiline
                 focus: true
                 Layout.topMargin: 6
                 Layout.fillWidth: true
@@ -108,7 +110,7 @@ Item {
                     color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
                 }
 
-                Keys.enabled: root.visible
+                Keys.enabled: root.visible && !root.multiline
                 Keys.onEnterPressed: Keys.onReturnPressed(event)
                 Keys.onReturnPressed: {
                     root.close()
@@ -118,6 +120,21 @@ Item {
                     root.close()
                     root.rejected()
                 }
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: inputMulti
+                visible: root.multiline
+                focus: true
+                Layout.topMargin: 6
+                Layout.fillWidth: true
+                fontFamily: MoneroComponents.Style.fontLight.name
+                fontSize: 24
+                wrapMode: Text.Wrap
+                // LineEditMulti doesn't expose all properties of its internal InputMulti easily,
+                // but we can bind the text.
+                text: root.inputText
+                onTextChanged: root.inputText = text
             }
 
             // Ok/Cancel buttons

@@ -770,13 +770,14 @@ Rectangle {
                   }
               }
 
-              LineEdit {
+              MoneroComponents.LineEditMulti {
                   id: descriptionLine
                   placeholderFontSize: 16
                   fontSize: 16
                   placeholderText: qsTr("Saved to local wallet history") + " (" + qsTr("only visible to you") + ")" + translationManager.emptyString
                   Layout.fillWidth: true
                   visible: descriptionCheckbox.checked
+                  wrapMode: Text.Wrap
               }
           }
 
