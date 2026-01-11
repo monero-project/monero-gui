@@ -4329,7 +4329,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="665"/>
         <source>Wallet is synchronized</source>
-        <translation>Cartera sincronizado</translation>
+        <translation>Cartera sincronizada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="748"/>
