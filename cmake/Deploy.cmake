@@ -51,11 +51,18 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         endif()
 
     elseif(WIN32)
-        find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
-        add_custom_command(TARGET monero-wallet-gui POST_BUILD
-                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
-                           COMMENT "Running windeployqt..."
-        )
+        find_program(WINDEPLOYQT_EXECUTABLE NAMES windeployqt windeployqt-qt5 HINTS "${_qt_bin_dir}")
+        if(WINDEPLOYQT_EXECUTABLE)
+            add_custom_command(TARGET monero-wallet-gui POST_BUILD
+                               COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}"
+                                       "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>"
+                                       -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
+                               COMMENT "Running windeployqt..."
+            )
+        else()
+            message(FATAL_ERROR "Neither windeployqt nor windeployqt-qt5 was found")
+        endif()
+
         set(WIN_DEPLOY_DLLS
             libboost_chrono-mt.dll
             libboost_filesystem-mt.dll
