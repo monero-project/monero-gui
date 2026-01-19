@@ -10,6 +10,7 @@
 #include <QMutexLocker>
 #include <QPair>
 #include <QWaitCondition>
+#include <QThreadPool>
 
 class FutureScheduler : public QObject
 {
@@ -58,6 +59,8 @@ private:
     QWaitCondition Condition;
     QMutex Mutex;
     std::atomic<bool> Stopping;
+
+    QThreadPool Pool;
 };
 
 #endif // FUTURE_SCHEDULER_H
