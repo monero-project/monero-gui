@@ -94,7 +94,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling the Monero GUI from source
 
-*Note*: Qt 5.9.7 is the minimum version required to build the GUI.
+*Note*: Qt 5.12 is the minimum version required to build the GUI.
 
 *Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
 
