@@ -150,6 +150,8 @@ if(UNIX)
   endif()
 endif()
 
+set(QT_MIN_VERSION "5.12")
+
 find_package(PkgConfig REQUIRED)
 
 # TODO: drop this once we switch to Qt 5.14+
@@ -165,7 +167,7 @@ if(Qt5XmlPatterns_FOUND)
 endif()
 
 foreach(QT5_MODULE ${QT5_LIBRARIES})
-  find_package(${QT5_MODULE} REQUIRED)
+  find_package(${QT5_MODULE} ${QT_MIN_VERSION} REQUIRED)
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
 endforeach()
 
