@@ -562,6 +562,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         qCritical() << "QrCodeScanner : something went wrong !";
 #endif
 
+    QObject::connect(eventFilter, &filter::quitRequested, rootObject, [rootObject]{ QMetaObject::invokeMethod(rootObject, "gracefulQuit", Qt::QueuedConnection); });
     QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant,QVariant)), rootObject, SLOT(sequencePressed(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));

@@ -38,6 +38,11 @@ filter::filter(QObject *parent) :
 }
 
 bool filter::eventFilter(QObject *obj, QEvent *ev) {
+    if (ev->type() == QEvent::Quit) {
+        emit quitRequested();
+        return true;
+    }
+
     // macOS sends fileopen signal for incoming uri handlers
     if (ev->type() == QEvent::FileOpen) {
         QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(ev);
