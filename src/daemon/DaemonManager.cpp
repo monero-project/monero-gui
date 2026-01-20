@@ -297,7 +297,7 @@ void DaemonManager::exit()
     m_app_exit = true;
 }
 
-QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
+QVariantMap DaemonManager::validateDataDir(const QString &dataDir, const int estimatedBlockchainSize) const
 {
     QVariantMap result;
     bool valid = true;
@@ -312,9 +312,8 @@ QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
             valid = false;
         }
 
-        // Make sure there is 75GB storage available
         storageAvailable = storage.bytesAvailable()/1000/1000/1000;
-        if (storageAvailable < 75) {
+        if (storageAvailable < estimatedBlockchainSize) {
             valid = false;
         }
     } else {
@@ -339,7 +338,7 @@ bool DaemonManager::checkLmdbExists(QString datadir) {
     if (datadir.isEmpty() || datadir.isNull()) {
         datadir = QString::fromStdString(tools::get_default_data_dir());
     }
-    return validateDataDir(datadir).value("lmdbExists").value<bool>();
+    return QDir(datadir + "/lmdb").exists();
 }
 
 QString DaemonManager::getArgs(const QString &dataDir) {
