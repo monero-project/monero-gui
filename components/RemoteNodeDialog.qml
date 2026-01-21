@@ -139,7 +139,9 @@ MoneroComponents.Dialog {
     MoneroComponents.CheckBox {
         id: setTrustedDaemonCheckBox
         activeFocusOnTab: true
-        text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
+        text: qsTr("Trusted remote node") + translationManager.emptyString
+        tooltip: qsTr("Check this box if this remote node is under your control (i.e. a dedicated server of your own).") + translationManager.emptyString
+        tooltipIconVisible: true
     }
 
     RowLayout {
