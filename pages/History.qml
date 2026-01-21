@@ -95,8 +95,11 @@ Rectangle {
 
             RowLayout {
                 id: sortAndFilter
-                visible: root.txCount > 0
+                visible: isFiltering || root.txCount > 0
                 property bool collapsed: false
+                property bool isFiltering: searchInput.text != "" ||
+                                           fromDatePicker.currentDate.toDateString() !== fromDatePicker.minimumDate.toDateString() ||
+                                           toDatePicker.currentDate.toDateString() !== toDatePicker.maximumDate.toDateString()
                 Layout.alignment: Qt.AlignRight | Qt.AlignBottom
                 Layout.preferredWidth: 100
                 Layout.preferredHeight: 15
@@ -106,6 +109,7 @@ Rectangle {
                     Layout.alignment: Qt.AlignVCenter
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15
+                    visible: !sortAndFilter.isFiltering
                     text: qsTr("Sort & filter") + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -119,9 +123,22 @@ Rectangle {
                     }
                 }
 
+                MoneroComponents.StandardButton {
+                    id: smallResetFiltersButton
+                    text: qsTr("Reset filters") + translationManager.emptyString
+                    visible: sortAndFilter.isFiltering
+                    small: true
+                    onClicked: {
+                        searchInput.text = "";
+                        fromDatePicker.currentDate = fromDatePicker.minimumDate;
+                        toDatePicker.currentDate = toDatePicker.maximumDate;
+                    }
+                }
+
                 MoneroEffects.ImageMask {
                     id: sortCollapsedIcon
                     Layout.alignment: Qt.AlignVCenter
+                    visible: !sortAndFilter.isFiltering
                     height: 8
                     width: 12
                     image: "qrc:///images/whiteDropIndicator.png"
@@ -1347,23 +1364,28 @@ Rectangle {
             }
         }
 
-        Item {
+        ColumnLayout {
             visible: sortAndFilter.collapsed
-            Layout.topMargin: 10
+            Layout.topMargin: 8
             Layout.bottomMargin: 10
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.alignment: Qt.AlignHCenter
 
             MoneroComponents.TextPlain {
                 // status message
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 15
                 text: root.historyStatusMessage;
                 color: MoneroComponents.Style.dimmedFontColor
                 themeTransitionBlackColor: MoneroComponents.Style._b_dimmedFontColor
                 themeTransitionWhiteColor: MoneroComponents.Style._w_dimmedFontColor
+            }
+
+            MoneroComponents.StandardButton {
+                visible: sortAndFilter.isFiltering && root.txCount == 0
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 5
+                text: qsTr("Reset filters") + translationManager.emptyString
+                onClicked: smallResetFiltersButton.clicked()
             }
         }
 
@@ -1671,7 +1693,11 @@ Rectangle {
         if(root.txModelData.length <= 0){
             root.historyStatusMessage = qsTr("No transaction history yet.") + translationManager.emptyString;
         } else if (root.txData.length <= 0){
-            root.historyStatusMessage = qsTr("No results.") + translationManager.emptyString;
+            if (fromDatePicker.currentDate.toDateString() !== fromDatePicker.minimumDate.toDateString() || toDatePicker.currentDate.toDateString() !== toDatePicker.maximumDate.toDateString()) {
+               root.historyStatusMessage = qsTr("No results found.") + " " + (searchInput.text == "" ? qsTr("Please change your dates.") : qsTr("Please change your dates or refine your search.")) + translationManager.emptyString;
+            } else {
+               root.historyStatusMessage = qsTr("No results found.") + " " + qsTr("Please refine your search.") + translationManager.emptyString;
+            }
         } else {
             root.historyStatusMessage = qsTr("%1 transactions total, showing %2.").arg(root.txData.length).arg(txListViewModel.count) + translationManager.emptyString;
         }
