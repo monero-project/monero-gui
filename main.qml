@@ -144,7 +144,7 @@ ApplicationWindow {
         passwordDialog.onAcceptedCallback = function() {
             if(walletPassword === passwordDialog.password)
                 passwordDialog.close();
-            else 
+            else
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
         }
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
@@ -372,6 +372,46 @@ ApplicationWindow {
 
         if (persistentSettings.useRemoteNode) {
             const remoteNode = remoteNodesModel.currentRemoteNode();
+            var firstRemoteNodeAvailable = remoteNodesModel.findFirstRemoteNodeAvailable(persistentSettings.nettype)
+            if (!remoteNodesModel.currentRemoteNode()) {
+                remoteNodesModel.applyRemoteNode(firstRemoteNodeAvailable)
+            } else {
+                if (!remoteNodesModel.currentRemoteNode().networkType) {
+                    //backward compatibility with previous remote nodes that don't have networkType set
+                    if (persistentSettings.nettype != 0) {
+                        if (persistentSettings.nettype == 1) {
+                            if (remoteNodesModel.lastTestnetNodeSelected == -1) {
+                                remoteNodesModel.lastTestnetNodeSelected = firstRemoteNodeAvailable
+                            }
+                            remoteNodesModel.applyRemoteNode(remoteNodesModel.lastTestnetNodeSelected)
+                        } else if (persistentSettings.nettype == 2) {
+                            if (remoteNodesModel.lastStagenetNodeSelected == -1) {
+                                remoteNodesModel.lastStagenetNodeSelected = firstRemoteNodeAvailable
+                            }
+                            remoteNodesModel.applyRemoteNode(remoteNodesModel.lastStagenetNodeSelected)
+                        }
+                    }
+                } else {
+                    if (remoteNodesModel.currentRemoteNode().networkType != persistentSettings.nettype) {
+                        if (persistentSettings.nettype == 0) {
+                            if (remoteNodesModel.lastMainnetNodeSelected == -1) {
+                                remoteNodesModel.lastMainnetNodeSelected = firstRemoteNodeAvailable
+                            }
+                            remoteNodesModel.applyRemoteNode(remoteNodesModel.lastMainnetNodeSelected)
+                        } else if (persistentSettings.nettype == 1) {
+                            if (remoteNodesModel.lastTestnetNodeSelected == -1) {
+                                remoteNodesModel.lastTestnetNodeSelected = firstRemoteNodeAvailable
+                            }
+                            remoteNodesModel.applyRemoteNode(remoteNodesModel.lastTestnetNodeSelected)
+                        } else if (persistentSettings.nettype == 2) {
+                            if (remoteNodesModel.lastStagenetNodeSelected == -1) {
+                                remoteNodesModel.lastStagenetNodeSelected = firstRemoteNodeAvailable
+                            }
+                            remoteNodesModel.applyRemoteNode(remoteNodesModel.lastStagenetNodeSelected)
+                        }
+                    }
+                }
+            }
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
         } else {
@@ -1124,10 +1164,10 @@ ApplicationWindow {
         var isReserveProof = signature.indexOf("ReserveProofV") === 0;
         if (address.length > 0 && !isReserveProof) {
             result = currentWallet.checkTxProof(txid, address, message, signature);
-        } 
+        }
         else if (isReserveProof) {
             result = currentWallet.checkReserveProof(address, message, signature);
-        } 
+        }
         else {
             result = currentWallet.checkSpendProof(txid, message, signature);
         }
@@ -1160,7 +1200,7 @@ ApplicationWindow {
             informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
             informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
-        } 
+        }
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
@@ -1562,6 +1602,9 @@ ApplicationWindow {
         id: remoteNodesModel
 
         property int selected: 0
+        property int lastMainnetNodeSelected: -1
+        property int lastTestnetNodeSelected: -1
+        property int lastStagenetNodeSelected: -1
 
         signal store()
 
@@ -1573,6 +1616,9 @@ ApplicationWindow {
                     remoteNodesModel.append(remoteNode);
                 }
                 selected = remoteNodes.selected % remoteNodesModel.count || 0;
+                lastMainnetNodeSelected = remoteNodes.lastMainnetNodeSelected;
+                lastTestnetNodeSelected = remoteNodes.lastTestnetNodeSelected;
+                lastStagenetNodeSelected = remoteNodes.lastStagenetNodeSelected;
             } catch (e) {
                 console.error('failed to parse remoteNodesSerialized', e);
             }
@@ -1584,6 +1630,9 @@ ApplicationWindow {
                 }
                 persistentSettings.remoteNodesSerialized = JSON.stringify({
                     selected: selected,
+                    lastMainnetNodeSelected: lastMainnetNodeSelected,
+                    lastTestnetNodeSelected: lastTestnetNodeSelected,
+                    lastStagenetNodeSelected: lastStagenetNodeSelected,
                     nodes: remoteNodes
                 });
             });
@@ -1592,7 +1641,9 @@ ApplicationWindow {
         function appendIfNotExists(newRemoteNode) {
             for (var index = 0; index < remoteNodesModel.count; ++index) {
                 const remoteNode = remoteNodesModel.get(index);
-                if (remoteNode.address == newRemoteNode.address &&
+                if (remoteNode.label == newRemoteNode.label &&
+                    remoteNode.networkType == newRemoteNode.networkType &&
+                    remoteNode.address == newRemoteNode.address &&
                     remoteNode.username == newRemoteNode.username &&
                     remoteNode.password == newRemoteNode.password &&
                     remoteNode.trusted == newRemoteNode.trusted) {
@@ -1612,6 +1663,13 @@ ApplicationWindow {
                 currentWallet.setTrustedDaemon(remoteNode.trusted);
                 appWindow.connectRemoteNode();
             }
+            if (persistentSettings.nettype == 0) {
+                remoteNodesModel.lastMainnetNodeSelected = selected;
+            } else if (persistentSettings.nettype == 1) {
+                remoteNodesModel.lastTestnetNodeSelected = selected;
+            } else if (persistentSettings.nettype == 2) {
+                remoteNodesModel.lastStagenetNodeSelected = selected;
+            }
         }
 
         function currentRemoteNode() {
@@ -1619,6 +1677,8 @@ ApplicationWindow {
                 return remoteNodesModel.get(selected);
             }
             return {
+                label: "",
+                networkType: "",
                 address: "",
                 username: "",
                 password: "",
@@ -1628,11 +1688,30 @@ ApplicationWindow {
 
         function removeSelectNextIfNeeded(index) {
             remoteNodesModel.remove(index);
+            if (index < remoteNodesModel.lastMainnetNodeSelected) {
+                remoteNodesModel.lastMainnetNodeSelected = remoteNodesModel.lastMainnetNodeSelected - 1
+            }
+            if (index < remoteNodesModel.lastTestnetNodeSelected) {
+                remoteNodesModel.lastTestnetNodeSelected = remoteNodesModel.lastTestnetNodeSelected - 1
+            }
+            if (index < remoteNodesModel.lastStagenetNodeSelected) {
+                remoteNodesModel.lastStagenetNodeSelected = remoteNodesModel.lastStagenetNodeSelected - 1
+            }
             if (selected == index) {
                 applyRemoteNode(selected % remoteNodesModel.count || 0);
             } else if (selected > index) {
                 selected = selected - 1;
             }
+        }
+
+        function findFirstRemoteNodeAvailable(nettype) {
+            for (var index = 0; index < remoteNodesModel.count; ++index) {
+                const remoteNode = remoteNodesModel.get(index);
+                if (remoteNode.networkType == nettype || persistentSettings.nettype == 0 && !remoteNode.networkType) {
+                    return index;
+                }
+            }
+            return -1;
         }
 
         onCountChanged: store()
@@ -2392,6 +2471,17 @@ ApplicationWindow {
             }
         }
         console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
+    }
+
+    function networkTypeAsString() {
+        if (persistentSettings.nettype == 0){
+            return "mainnet";
+        }
+        else if (persistentSettings.nettype == 1) {
+            return "testnet";
+        } else {
+            return "stagenet"
+        }
     }
 
     Rectangle {
