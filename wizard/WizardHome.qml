@@ -145,8 +145,8 @@ Rectangle {
             }
 
             WizardMenuItem {
-                headerText: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
-                bodyText: qsTr("Enter your private keys or 25-word mnemonic seed to restore your wallet.") + translationManager.emptyString
+                headerText: qsTr("Restore wallet from mnemonic seed or keys") + translationManager.emptyString
+                bodyText: qsTr("Enter your mnemonic seed or private keys to restore your wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet.png"
 
                 onMenuClicked: {
