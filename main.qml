@@ -1521,6 +1521,7 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+        property int keepLocalNodeRunning: 2 //0 = stop local node, 1 = keep it running, 2 = always ask
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
@@ -1711,7 +1712,25 @@ ApplicationWindow {
                 onRejectedCallback();
         }
     }
-
+    
+    StandardDialog {
+        z: parent.z + 1
+        id: localNodeRunningConfirmationDialog
+        closeVisible: false
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onRejected: {
+            //Stop local node
+            if (onRejectedCallback)
+                onRejectedCallback();
+        }
+        onAccepted:  {
+            //Keep local node running
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+    }
+    
     MoneroComponents.UpdateDialog {
         id: updateDialog
 
@@ -1956,7 +1975,7 @@ ApplicationWindow {
             radius: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
-                remoteNodeDialog.visible
+                remoteNodeDialog.visible || localNodeRunningConfirmationDialog.visible
         }
 
 
@@ -2192,19 +2211,29 @@ ApplicationWindow {
     }
 
     function showDaemonIsRunningDialog(onClose) {
-        // Show confirmation dialog
-        confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
-        confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
-        confirmationDialog.icon = StandardIcon.Question;
-        confirmationDialog.cancelText = qsTr("Force stop") + translationManager.emptyString;
-        confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
-        confirmationDialog.onAcceptedCallback = function() {
+        if (persistentSettings.keepLocalNodeRunning == 2) {
+            // 2 = always ask
+            // Show confirmation dialog
+            localNodeRunningConfirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
+            localNodeRunningConfirmationDialog.closeVisible = false;
+            localNodeRunningConfirmationDialog.text  = qsTr("Your local node is now running in the background. It is recommended to keep it running in order to help the network and to maintain your blockchain synchronized.") + translationManager.emptyString;
+            localNodeRunningConfirmationDialog.icon = StandardIcon.Question;
+            localNodeRunningConfirmationDialog.cancelText = qsTr("Stop local node") + translationManager.emptyString;
+            localNodeRunningConfirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
+            localNodeRunningConfirmationDialog.onAcceptedCallback = function() {
+                onClose();
+            }
+            localNodeRunningConfirmationDialog.onRejectedCallback = function() {
+                stopDaemon(onClose);
+            };
+            localNodeRunningConfirmationDialog.open();  
+        } else if (persistentSettings.keepLocalNodeRunning == 1) {
+            //1 = keep local node running
             onClose();
-        }
-        confirmationDialog.onRejectedCallback = function() {
+        } else if (persistentSettings.keepLocalNodeRunning == 0) {
+            //0 = stop local node
             stopDaemon(onClose);
-        };
-        confirmationDialog.open();
+        }        
     }
 
     onClosing: {
