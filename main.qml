@@ -1438,8 +1438,8 @@ ApplicationWindow {
             if (isTails) {
                 oshelper.createDesktopEntry();
             } else if (isLinux) {
-                confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
-                confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
+                confirmationDialog.title = qsTr("Create desktop shortcut") + translationManager.emptyString;
+                confirmationDialog.text  = qsTr("Would you like to create a shortcut to Monero GUI on your desktop?") + translationManager.emptyString;
                 confirmationDialog.icon = StandardIcon.Question;
                 confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                 confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
