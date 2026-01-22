@@ -73,6 +73,7 @@ ApplicationWindow {
     property var transaction;
     property var walletPassword
     property int restoreHeight:0
+    property int currentBlockHeight: 0
     property bool daemonSynced: false
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
@@ -735,6 +736,8 @@ ApplicationWindow {
     }
 
     function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
+        appWindow.currentBlockHeight = dCurrentBlock.toFixed(0);
+
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
@@ -747,11 +750,12 @@ ApplicationWindow {
         // Update progress bars
         if(!daemonSynced) {
             leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-firstBlockSeen);
-            leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
+            leftPanel.progressBar.visible = false;
         } else {
-            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Daemon is synchronized (%1)").arg(dCurrentBlock.toFixed(0)));
+            leftPanel.progressBar.visible = Qt.binding(function() { return !appWindow.disconnected && !leftPanel.daemonProgressBar.isSynchronizing });
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Node: synchronized (height: %1)").arg(dCurrentBlock.toFixed(0)));
             if(walletSynced)
-                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet is synchronized"))
+                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet: synchronized (restore height: %1)").arg(currentWallet ? currentWallet.walletCreationHeight.toFixed(0) : ""))
         }
 
         // Update wallet sync progress
@@ -858,7 +862,11 @@ ApplicationWindow {
         leftPanel.progressBar.updateProgress(blockHeight,targetHeight, blocksToSync);
 
         // If wallet is syncing, daemon is already synced
-        leftPanel.daemonProgressBar.updateProgress(1,1,0,qsTr("Daemon is synchronized"));
+        if (appWindow.currentBlockHeight != 0) {
+            leftPanel.daemonProgressBar.updateProgress(1, 1, 0, qsTr("Node: synchronized (height: %1)").arg(appWindow.currentBlockHeight));
+        } else {
+            leftPanel.daemonProgressBar.updateProgress(1, 1, 0, qsTr("Node: synchronized"));
+        }
 
         foundNewBlock = true;
     }
