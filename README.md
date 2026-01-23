@@ -215,7 +215,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Fedora
 
-	`sudo dnf install make automake cmake gcc-c++ boost-devel miniupnpc-devel graphviz doxygen unbound-devel libunwind-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel libgcrypt-devel ibgcrypt-devel qt5-qtdeclarative-devel qt5-qtquickcontrols2-devel`
+	`sudo dnf install make automake cmake gcc-c++ boost-devel miniupnpc-devel graphviz doxygen unbound-devel libunwind-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel libgcrypt-devel ibgcrypt-devel`
 
 2. Install Qt:
 
@@ -228,7 +228,9 @@ The following instructions will fetch Qt from your distribution's repositories i
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
     `sudo apt install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+  - For Fedora
 
+    `sudo dnf install qt5-qtbase-devel qt5-qtdeclarative-devel qt5-qml-module-qtqml-models2 qt5-qml-module-qtquick-controls qt5-qml-module-qtquick-controls2 qt5-qml-module-qtquick-dialogs qt5-qml-module-qtquick-xmllistmodel qt5-qml-module-qt-labs-settings qt5-qml-module-qt-labs-platform qt5-qml-module-qt-labs-folderlistmodel qt5-qttools-devel qt5-qml-module-qtquick-templates2 qt5-qtsvg-devel qt5-qtdeclarative-devel qt5-qtquickcontrols2-devel`
   - For Gentoo
   
    
