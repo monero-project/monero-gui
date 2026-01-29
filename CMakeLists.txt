@@ -160,6 +160,11 @@ if(Qt5QmlModels_PKG_CONFIG_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
+find_package(Qt5XmlPatterns QUIET)
+if(Qt5XmlPatterns_FOUND)
+  list(APPEND QT5_LIBRARIES Qt5XmlPatterns)
+endif()
+
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} ${QT_MIN_VERSION} REQUIRED)
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
