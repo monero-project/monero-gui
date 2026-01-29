@@ -100,6 +100,7 @@ ApplicationWindow {
     property bool splashDisplayedBeforeButtonRequest;
     property bool themeTransition: false
     property int backgroundSyncType: Wallet.BackgroundSync_Off;
+    property bool isQuitting: false
 
     // fiat price conversion
     property real fiatPrice: 0
@@ -280,6 +281,15 @@ ApplicationWindow {
             walletPassword,
             persistentSettings.nettype,
             persistentSettings.kdfRounds);
+    }
+
+    function gracefulQuit() {
+        if (isQuitting)
+            return;
+        isQuitting = true;
+        closeWallet(function() {
+            Qt.quit();
+        })
     }
 
     function closeWallet(callback) {
