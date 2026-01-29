@@ -160,7 +160,6 @@ if(Qt5QmlModels_PKG_CONFIG_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
-# TODO: drop this once we switch to Qt 5.12+
 find_package(Qt5XmlPatterns QUIET)
 if(Qt5XmlPatterns_FOUND)
   list(APPEND QT5_LIBRARIES Qt5XmlPatterns)
