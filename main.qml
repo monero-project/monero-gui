@@ -94,7 +94,7 @@ ApplicationWindow {
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
-    property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 100 : 225 // GB
+    property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 110 : 270 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
@@ -1737,7 +1737,7 @@ ApplicationWindow {
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
             var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
-            var validator = daemonManager.validateDataDir(dataDir);
+            var validator = daemonManager.validateDataDir(dataDir, estimatedBlockchainSize);
             if(validator.valid) {
                 persistentSettings.blockchainDataDir = dataDir;
             } else {

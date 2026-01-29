@@ -56,7 +56,7 @@ public:
     // Send daemon command from qml and prints output in console window.
     Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const;
     Q_INVOKABLE void exit();
-    Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
+    Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir, const int estimatedBlockchainSizeGb) const;
     Q_INVOKABLE bool checkLmdbExists(QString datadir);
     Q_INVOKABLE QString getArgs(const QString &dataDir);
 
