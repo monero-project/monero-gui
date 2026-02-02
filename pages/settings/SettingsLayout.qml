@@ -121,6 +121,12 @@ Rectangle {
             text: qsTr("Autosave") + translationManager.emptyString
         }
 
+        MoneroComponents.CheckBox {
+            checked: persistentSettings.enableSubaddressPagination
+            onClicked: persistentSettings.enableSubaddressPagination = !persistentSettings.enableSubaddressPagination
+            text: qsTr("Enable subaddress pagination") + translationManager.emptyString
+        }
+
         MoneroComponents.Slider {
             Layout.fillWidth: true
             Layout.leftMargin: 35

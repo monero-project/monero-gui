@@ -551,13 +551,61 @@ Rectangle {
                 }
             }
 
+            Rectangle {
+                id: primaryAddressContainer
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
+                Layout.topMargin: 6
+                color: MoneroComponents.Style.titleBarButtonHoverColor
+                radius: 3
+                visible: persistentSettings.enableSubaddressPagination && (!subaddressListView.model || subaddressListView.count === 0)
+                
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: 2
+                    color: MoneroComponents.Style.accountColors[0]
+                }
+                
+                MoneroComponents.Label {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 12
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "#0 " + qsTr("Primary address") + translationManager.emptyString
+                    fontSize: 16
+                    color: MoneroComponents.Style.defaultFontColor
+                }
+                
+                MoneroComponents.Label {
+                    anchors.right: parent.right
+                    anchors.rightMargin: 12
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: appWindow.currentWallet ? TxUtils.addressTruncatePretty(appWindow.currentWallet.address(0, 0), 3) : ""
+                    fontSize: 16
+                    fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                    color: MoneroComponents.Style.defaultFontColor
+                }
+                
+                MoneroComponents.TextPlain {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: parent.bottom
+                    anchors.topMargin: 20
+                    text: qsTr("Loading addresses...") + translationManager.emptyString
+                    color: MoneroComponents.Style.dimmedFontColor
+                    font.pixelSize: 12
+                    visible: true
+                }
+            }
+
             ColumnLayout {
                 id: subaddressListRow
                 property int subaddressListItemHeight: 50
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
-                Layout.preferredHeight: subaddressListItemHeight * subaddressListView.count
+                Layout.preferredHeight: persistentSettings.enableSubaddressPagination ? 
+                    Math.min(subaddressListItemHeight * 20, subaddressListItemHeight * subaddressListView.count) :
+                    subaddressListItemHeight * subaddressListView.count
                 visible: subaddressListView.count >= 1
 
                 ListView {
@@ -566,7 +614,32 @@ Rectangle {
                     Layout.fillHeight: true
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
-                    interactive: false
+                    interactive: persistentSettings.enableSubaddressPagination
+                    
+                    cacheBuffer: persistentSettings.enableSubaddressPagination ? 200 : 0
+                    
+                    property bool paginationEnabled: persistentSettings.enableSubaddressPagination && count > persistentSettings.subaddressPageSize
+                    
+                    function loadAllRemaining() {
+                        var model = subaddressListView.model;
+                        if (!model) return;
+                        
+                        while (model.loadedCount < model.totalCount && model.canFetchMore(model.index(0,0))) {
+                            model.fetchMore(model.index(model.rowCount() - 1, 0));
+                        }
+                        subaddressListView.positionViewAtEnd();
+                    }
+                    
+                    onContentYChanged: {
+                        if (paginationEnabled && model && model.shouldPreload) {
+                            var firstVisible = Math.floor(contentY / subaddressListRow.subaddressListItemHeight);
+                            var lastVisible = Math.ceil((contentY + height) / subaddressListRow.subaddressListItemHeight);
+                            
+                            if (model.shouldPreload(firstVisible, lastVisible)) {
+                                model.fetchMore(model.index(model.rowCount() - 1, 0));
+                            }
+                        }
+                    }
 
                     delegate: Rectangle {
                         id: tableItem2
@@ -574,6 +647,8 @@ Rectangle {
                         width: parent ? parent.width : undefined
                         Layout.fillWidth: true
                         color: itemMouseArea.containsMouse || index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+                        
+                        property bool isPlaceholder: false
 
                         Rectangle {
                             visible: index === appWindow.current_subaddress_table_index
@@ -619,7 +694,8 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                                color: tableItem2.isPlaceholder ? MoneroComponents.Style.dimmedFontColor : 
+                                       (index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor)
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
@@ -628,26 +704,33 @@ Rectangle {
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - nameLabel.x - 1
                                 themeTransition: false
+                                opacity: tableItem2.isPlaceholder ? 0.6 : 1.0
                             }
 
                             MoneroComponents.Label {
                                 id: addressLabel
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: tableItem2.isPlaceholder ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
                                 anchors.leftMargin: -addressLabel.width - 5
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
+                                text: tableItem2.isPlaceholder ? "..." : TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
                                 themeTransition: false
+                                opacity: tableItem2.isPlaceholder ? 0.6 : 1.0
                             }
 
                             MouseArea {
                                 id: itemMouseArea
-                                cursorShape: Qt.PointingHandCursor
+                                cursorShape: tableItem2.isPlaceholder ? Qt.ArrowCursor : Qt.PointingHandCursor
                                 anchors.fill: parent
-                                hoverEnabled: true
-                                onClicked: subaddressListView.currentIndex = index;
+                                hoverEnabled: !tableItem2.isPlaceholder
+                                enabled: !tableItem2.isPlaceholder
+                                onClicked: {
+                                    if (!tableItem2.isPlaceholder) {
+                                        subaddressListView.currentIndex = index;
+                                    }
+                                }
                             }
                         }
 
@@ -657,6 +740,7 @@ Rectangle {
                             anchors.rightMargin: 6
                             height: 21
                             spacing: 10
+                            visible: !tableItem2.isPlaceholder
 
                             MoneroComponents.IconButton {
                                 fontAwesomeFallbackIcon: FontAwesome.searchPlus
@@ -726,6 +810,75 @@ Rectangle {
                             }
                         }
                     }
+                    
+                    footer: persistentSettings.enableSubaddressPagination ? loadingFooter : null
+                }
+                
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: visible ? 50 : 0
+                    color: "transparent"
+                    visible: persistentSettings.enableSubaddressPagination && 
+                             subaddressListView.model && 
+                             subaddressListView.model.totalCount > subaddressListView.model.loadedCount
+                    
+                    MoneroComponents.StandardButton {
+                        anchors.centerIn: parent
+                        small: true
+                        text: qsTr("Scroll to bottom") + translationManager.emptyString
+                        fontSize: 13
+                        onClicked: {
+                            var model = subaddressListView.model;
+                            if (model && model.totalCount > 0) {
+                                subaddressListView.loadAllRemaining();
+                            }
+                        }
+                    }
+                }
+                
+                
+                Component {
+                    id: loadingFooter
+                    Rectangle {
+                        width: subaddressListView.width
+                        height: visible ? 50 : 0
+                        color: "transparent"
+                        visible: subaddressListView.model && 
+                                subaddressListView.model.loadedCount < subaddressListView.model.totalCount
+                        
+                        RowLayout {
+                            anchors.centerIn: parent
+                            spacing: 10
+                            
+                            MoneroComponents.TextPlain {
+                                id: loadingSpinner
+                                text: "⟳"
+                                color: MoneroComponents.Style.dimmedFontColor
+                                font.pixelSize: 16
+                                
+                                RotationAnimator {
+                                    target: loadingSpinner
+                                    from: 0
+                                    to: 360
+                                    duration: 1000
+                                    running: parent.parent.parent.visible
+                                    loops: Animation.Infinite
+                                }
+                            }
+                            
+                            MoneroComponents.TextPlain {
+                                text: {
+                                    var model = subaddressListView.model;
+                                    if (model && typeof model.loadedCount === 'number' && typeof model.totalCount === 'number') {
+                                        return qsTr("Loading ") + model.loadedCount + qsTr(" of ") + model.totalCount + qsTr(" addresses...") + translationManager.emptyString;
+                                    }
+                                    return qsTr("Loading more addresses...") + translationManager.emptyString;
+                                }
+                                color: MoneroComponents.Style.dimmedFontColor
+                                font.pixelSize: 14
+                            }
+                        }
+                    }
                 }
             }
 
@@ -774,9 +927,26 @@ Rectangle {
 
         if (appWindow.currentWallet) {
             appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
-            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            
+            if (persistentSettings.enableSubaddressPagination) {
+                delayedRefreshTimer.start();
+            } else {
+                appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            }
+            
             if (subaddressListView.currentIndex == -1) {
                 subaddressListView.currentIndex = 0;
+            }
+        }
+    }
+    
+    Timer {
+        id: delayedRefreshTimer
+        interval: 400  // 400ms delay to allow page transition animation to complete (300ms + buffer).
+        repeat: false
+        onTriggered: {
+            if (appWindow.currentWallet) {
+                appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount);
             }
         }
     }

@@ -1531,6 +1531,8 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+        property bool enableSubaddressPagination: false
+        property int subaddressPageSize: 100
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
