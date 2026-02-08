@@ -52,8 +52,37 @@ Rectangle {
     property alias miningDashboardHeight: mainLayout.height
     property bool showAdvancedSection: false
 
-    component DashboardTitle : MoneroComponents.Label {
-        fontSize: 24
+    component DashboardTitle : ColumnLayout {
+        property string description: ""
+        property string text: ""
+
+        MoneroComponents.Label {
+            fontSize: 24
+            text: parent.text
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.fillWidth: true
+
+            color: MoneroComponents.Style.defaultFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+
+            text: parent.description
+            wrapMode: Text.Wrap
+            textFormat: Text.RichText
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.DefaultCursor
+
+                onClicked: {
+                    if (parent.hoveredLink) {
+                        Qt.openUrlExternally(parent.hoveredLink);
+                    }
+                }
+            }
+        }
     }
 
     component DashboardHeader : MoneroComponents.LabelSubheader {
@@ -73,16 +102,16 @@ Rectangle {
         Layout.rightMargin: 5
     }
 
-    component DashboardLabel : MoneroComponents.TextBlock {
-        color: MoneroComponents.Style.defaultFontColor
-        font.pixelSize: 14
-        tooltipIconVisible: true
+    component DashboardLabel : MoneroComponents.Label {
+        fontSize: 14
     }
 
     component DashboardValue : MoneroComponents.TextBlock {
         Layout.fillWidth: true
+
         color: MoneroComponents.Style.dimmedFontColor
         font.pixelSize: 14
+
         horizontalAlignment: Text.AlignRight
         textFormat: Text.RichText
     }
@@ -108,7 +137,16 @@ Rectangle {
         }
 
         DashboardTitle {
-            text: qsTr("Mining Dashboard") + translationManager.emptyString
+            text:
+                qsTr("Mining Dashboard") + translationManager.emptyString
+            description:
+                qsTr("View detailed statistics about your hardware, the pool, and the overall network.") + translationManager.emptyString + "<br><br>" +
+                qsTr("With P2Pool mining, payouts happen in bursts. You are paid only when the pool finds a block, and when you have a share in the 'window'. It can be normal to go long periods without seeing a payout.") + translationManager.emptyString + "<br><br>" +
+                qsTr("For more consistent payouts, use the calculators available for <a href='%1'>nano</a>, <a href='%2'>mini</a>, and <a href='%3'>main</a>, and choose the chain where your average share time most closely matches the pool's average block time.")
+                  .arg("https://nano.p2pool.observer/calculate-share-time")
+                  .arg("https://mini.p2pool.observer/calculate-share-time")
+                  .arg("https://p2pool.observer/calculate-share-time") + translationManager.emptyString + "<br><br>" + "<b>" +
+                qsTr("Learn more about each value by mousing over the label.") + translationManager.emptyString
         }
 
         RowLayout {
@@ -117,7 +155,10 @@ Rectangle {
                 Repeater {
                     model: localModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label + translationManager.emptyString }
+                        DashboardLabel {
+                            text: model.label
+                            tooltip: model.tooltip
+                        }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -128,7 +169,10 @@ Rectangle {
                 Repeater {
                     model: poolModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label + translationManager.emptyString }
+                        DashboardLabel {
+                            text: model.label
+                            tooltip: model.tooltip
+                        }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -139,7 +183,10 @@ Rectangle {
                 Repeater {
                     model: networkModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label + translationManager.emptyString }
+                        DashboardLabel {
+                            text: model.label
+                            tooltip: model.tooltip
+                        }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -204,29 +251,49 @@ Rectangle {
 
             const mappings = [
                 { model: localModel, data: [
-                    [qsTr("Hashrate"), local.hashrate],
-                    [qsTr("Hashrate (15m)"), local.hashrate_ema15m],
-                    [qsTr("Hashrate (1hr)"), local.hashrate_ema1h],
-                    [qsTr("Hashrate (24hr)"), local.hashrate_ema24h],
-                    [qsTr("Effort (Now/Average):"), `${local.effort}/${local.effort_ema}`],
+                    [qsTr("Hashrate:"), local.hashrate,
+                     qsTr("Your current mining speed. Minor fluctuations are normal, but significant drops may indicate hardware issues or thermal throttling.")],
+
+                    [qsTr("Hashrate (15m):"), local.hashrate_ema15m,
+                     qsTr("Your hashrate averaged over the last 15 minutes. Useful for seeing immediate impact of system usage or thermal throttling. This field is only available after 15 minutes of mining.")],
+
+                    [qsTr("Hashrate (1hr):"), local.hashrate_ema1h,
+                     qsTr("Your hashrate averaged over the last hour. A good indicator of stable performance. This field is only available after an hour of mining.")],
+
+                    [qsTr("Hashrate (24hr):"), local.hashrate_ema24h,
+                     qsTr("Your hashrate averaged over the last day. This is the most accurate representation of your hardware's long-term contribution. This field is only available after a day of mining.")],
+
+                    [qsTr("Effort (Now/Average):"), `${local.effort}/${local.effort_ema}`,
+                     qsTr("Your current progress toward finding the next share. On average, it takes 100% effort to find a share. The second value tracks your long-term average.")]
                 ]},
                 { model: poolModel, data: [
-                    [qsTr("Hashrate"), pool.hashrate],
-                    [qsTr("Last Block Found"), pool.last_block_found_time],
-                    [qsTr("Payment Scheme"), `PPLNS (${pool.pplns_window_size} blocks)`],
-                    [qsTr("In Window?"), pool.is_in_window === "yes" ? `<b>yes</b>` : pool.is_in_window]
+                    [qsTr("Hashrate:"), pool.hashrate,
+                     qsTr("The combined speed of this pool. This determines the difficulty of the P2Pool sidechain and sets the pace for how often you can expect to find a share.")],
+
+                    [qsTr("Last Block Found:"), pool.last_block_found_time,
+                     qsTr("Time elapsed since the pool found a block and paid out a reward. It could take anywhere from a couple minutes, to hours, to days for this field to populate, depending on the chain you've chosen.")],
+
+                    [qsTr("Payment Scheme:"), `PPLNS (${pool.pplns_window_size} blocks)`,
+                     qsTr("PPLNS (Pay Per Last N Shares) rewards miners based on shares found within a specific 'window' of time. Shares submitted to the pool are tied to your wallet address. If you have a share in this window when a block is found, you receive a payout. The more shares in the window, the higher your payout is.")],
+
+                    [qsTr("In Window?"), pool.is_in_window === "yes" ? `<b>yes</b>` : pool.is_in_window,
+                     qsTr("If 'yes', you are currently eligible for a payout. If 'no', you are still working toward finding a share to enter the window. Shares submitted to the pool are tied to your wallet address. This can switch from 'yes' to 'no' when shares fall out of the window.")]
                 ]},
                 { model: networkModel, data: [
-                    [qsTr("Hashrate"), network.hashrate],
-                    [qsTr("Last Block Found"), network.last_block_found_time]
+                    [qsTr("Hashrate:"), network.hashrate,
+                     qsTr("The combined speed of the entire Monero network. This determines the difficulty of the Monero blockchain and sets the pace for how often you can expect the pool to find a block.")],
+
+                    [qsTr("Last Block Found:"), network.last_block_found_time,
+                     qsTr("Time elapsed since the network found a block and paid out a reward. The protocol targets two minutes per block, and dynamically adjusts difficulty to maintain this.")]
                 ]}
             ];
 
             mappings.forEach(m => {
                 m.data.forEach((item, i) => {
                     m.model.set(i, {
-                        label: item[0] + ":" + translationManager.emptyString,
-                        value: format(item[1]) });
+                        label: item[0] + translationManager.emptyString,
+                        value: format(item[1]),
+                        tooltip: (item[2] || "") + translationManager.emptyString});
                 });
             });
 
