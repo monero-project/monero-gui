@@ -36,8 +36,12 @@
 #include <QJsonObject>
 
 namespace {
-     QString formatNumber(const QVariant &value) {
-          return QLocale().toString(value.toLongLong());
+     QString formatNumber(const QVariant &value, int precision = 0) {
+          if (precision != 0) {
+               return QLocale().toString(value.toDouble(), 'f', precision);
+          } else {
+               return QLocale().toString(value.toLongLong());
+          }
      }
 
      QString formatHashrate(const QVariant &hashrateVar) {
@@ -127,6 +131,10 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
           local["shares_found"].toULongLong();
      quint64 shares_failed =
           local["shares_failed"].toULongLong();
+     quint64 total_hashes =
+          local["total_hashes"].toULongLong();
+     quint64 difficulty =
+          pool["sidechainDifficulty"].toULongLong();
 
      if (isSidechainReady() && hashrate != 0) {
           map.insert("hashrate", formatHashrate(hashrate));
@@ -169,6 +177,35 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
           } else {
                map.insert("hashrate_ema24h", formatHashrate(m_hashrate_ema24h));
           }
+
+          bool isNewRound =
+               m_shares_found.toULongLong() < shares_found;
+          bool isFirstRound =
+               !m_shares_found.isValid() || !m_round_hashes.isValid() || !m_effort.isValid();
+          bool isDataStale =
+               m_shares_found.toULongLong() > shares_found || m_round_hashes.toULongLong() > total_hashes;
+
+          if (isNewRound || isFirstRound || isDataStale) {
+               m_shares_found =
+                    shares_found;
+               m_round_hashes =
+                    total_hashes;
+          }
+
+          if(isNewRound && !isFirstRound) {
+               m_effort_ema =
+                    (m_effort_ema.toDouble() + m_effort.toDouble()) / 2.0;
+          }
+
+          double work_done =
+               static_cast<double>(total_hashes - m_round_hashes.toULongLong());
+          double work_remaining =
+               static_cast<double>(difficulty);
+          m_effort =
+               work_done / work_remaining;
+
+          map.insert("effort", formatNumber(m_effort.toDouble() * 100.0, 2) + "%");
+          map.insert("effort_ema", formatNumber(m_effort_ema.toDouble() * 100.0, 1) + "%");
 
           map.insert("shares_found", formatNumber(shares_found));
           map.insert("shares_failed", formatNumber(shares_failed));
@@ -301,13 +338,19 @@ void P2PoolStatsProvider::update()
 
 void P2PoolStatsProvider::clear()
 {
+     /* invalidate lastUpdate timestamp */
+     m_lastUpdate = QDateTime();
+
      /* invalidate hashrate aggregates */
      m_hashrate_ema15m = QVariant();
      m_hashrate_ema1h = QVariant();
      m_hashrate_ema24h = QVariant();
 
-     /* invalidate lastUpdate timestamp */
-     m_lastUpdate = QDateTime();
+     /* invalidate effort calculation */
+     m_shares_found = QVariant();
+     m_round_hashes = QVariant();
+     m_effort = QVariant();
+     m_effort_ema = 1.0;
 
      /* emit the update signal with empty maps to clear any listeners */
      emit p2poolUpdateStats(QVariantMap(), QVariantMap(), QVariantMap(), QVariantMap());

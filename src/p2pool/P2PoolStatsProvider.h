@@ -76,6 +76,11 @@ private:
      QVariant m_hashrate_ema15m;
      QVariant m_hashrate_ema1h;
      QVariant m_hashrate_ema24h;
+
+     QVariant m_shares_found;
+     QVariant m_round_hashes;
+     QVariant m_effort;
+     QVariant m_effort_ema;
 };
 
 #endif // P2POOLSTATSPROVIDER_H
