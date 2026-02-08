@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -347,6 +347,19 @@ Rectangle {
                             walletManager.stopMining()
                             p2poolManager.exit()
                             update()
+                        }
+                    }
+
+                    MoneroComponents.StandardButton {
+                        visible: persistentSettings.allow_p2pool_mining
+                        id: dashboardSoloMinerButton
+                        Layout.leftMargin: 2
+                        small: true
+                        primary: stopSoloMinerButton.enabled
+                        enabled: stopSoloMinerButton.enabled
+                        text: qsTr("Dashboard") + translationManager.emptyString
+                        onClicked: {
+                            stateView.state = "Mining Dashboard";
                         }
                     }
                 }
