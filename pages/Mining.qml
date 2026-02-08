@@ -349,6 +349,19 @@ Rectangle {
                             update()
                         }
                     }
+
+                    MoneroComponents.StandardButton {
+                        visible: persistentSettings.allow_p2pool_mining
+                        id: dashboardSoloMinerButton
+                        Layout.leftMargin: 2
+                        small: true
+                        primary: stopSoloMinerButton.enabled
+                        enabled: stopSoloMinerButton.enabled
+                        text: qsTr("Dashboard") + translationManager.emptyString
+                        onClicked: {
+                            stateView.state = "Mining Dashboard";
+                        }
+                    }
                 }
             }
 
