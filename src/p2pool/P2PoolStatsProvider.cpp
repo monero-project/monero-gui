@@ -183,6 +183,8 @@ QVariantMap P2PoolStatsProvider::fetchPool()
 
      QVariantMap pool =
           fetch("pool/stats")["pool_statistics"].toMap();
+     QVariantMap local =
+          fetch("local/miner");
 
      quint64 hashrate =
           pool["hashRate"].toULongLong();
@@ -190,6 +192,8 @@ QVariantMap P2PoolStatsProvider::fetchPool()
           pool["lastBlockFoundTime"].toULongLong();
      int pplns_window_size =
           pool["pplnsWindowSize"].toInt();
+     double reward_share_percent =
+          local["block_reward_share_percent"].toDouble();
 
      if (isSidechainReady()) {
           map.insert("hashrate", formatHashrate(hashrate));
@@ -199,6 +203,7 @@ QVariantMap P2PoolStatsProvider::fetchPool()
                map.insert("last_block_found_time", "not witnessed yet");
           }
           map.insert("pplns_window_size", formatNumber(pplns_window_size));
+          map.insert("is_in_window", reward_share_percent == 0.0 ? "no" : "yes");
      }
 
      return map;
