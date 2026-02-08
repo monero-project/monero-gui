@@ -46,6 +46,10 @@ public:
 
      Q_INVOKABLE void update();
 
+     QVariantMap fetchLocal();
+     QVariantMap fetchPool();
+     QVariantMap fetchNetwork();
+
 signals:
      void p2poolUpdateStats(
 	  QVariantMap local,
@@ -55,15 +59,11 @@ signals:
      ) const;
 
 private:
+     QVariantMap fetch(const QString &path);
+     QVariantMap fetchRaw();
+
      const bool &m_started;
      const QString &m_p2poolPath;
-private:
-     QVariantMap fetch(const QString &path);
-
-     QVariantMap fetchLocal();
-     QVariantMap fetchPool();
-     QVariantMap fetchNetwork();
-     QVariantMap fetchRaw();
 };
 
 #endif // P2POOLSTATSPROVIDER_H

@@ -71,7 +71,7 @@ private:
     bool running(NetworkType::Type nettype) const;
 signals:
     void p2poolStartFailure() const;
-    void p2poolStatus(bool isMining, int hashrate) const;
+    void p2poolStatus(bool isMining, QVariant hashrate) const;
     void p2poolDownloadFailure(int errorCode) const;
     void p2poolDownloadSuccess() const;
 
