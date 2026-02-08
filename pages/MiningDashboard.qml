@@ -117,7 +117,7 @@ Rectangle {
                 Repeater {
                     model: localModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label }
+                        DashboardLabel { text: model.label + translationManager.emptyString }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -128,7 +128,7 @@ Rectangle {
                 Repeater {
                     model: poolModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label }
+                        DashboardLabel { text: model.label + translationManager.emptyString }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -139,7 +139,7 @@ Rectangle {
                 Repeater {
                     model: networkModel
                     delegate: DashboardRow {
-                        DashboardLabel { text: model.label }
+                        DashboardLabel { text: model.label + translationManager.emptyString }
                         DashboardValue { text: model.value }
                     }
                 }
@@ -204,17 +204,17 @@ Rectangle {
 
             const mappings = [
                 { model: localModel, data: [
-                    [qsTr("Hashrate (15 min)"), local.hashrate_ema15m],
-                    [qsTr("Hashrate (1 hr)"), local.hashrate_ema1h],
-                    [qsTr("Hashrate (24 hr)"), local.hashrate_ema24h],
                     [qsTr("Hashrate"), local.hashrate],
+                    [qsTr("Hashrate (15m)"), local.hashrate_ema15m],
+                    [qsTr("Hashrate (1hr)"), local.hashrate_ema1h],
+                    [qsTr("Hashrate (24hr)"), local.hashrate_ema24h],
                     [qsTr("Shares (Valid/Invalid)"), `${local.shares_found}/${local.shares_failed}`]
                 ]},
                 { model: poolModel, data: [
                     [qsTr("Hashrate"), pool.hashrate],
                     [qsTr("Last Block Found"), pool.last_block_found_time],
                     [qsTr("Payment Scheme"), `PPLNS (${pool.pplns_window_size} blocks)`],
-                    [qsTr("In Window?"), pool.is_in_window === "yes" ? "<b>" + pool.is_in_window + "</b>" : pool.is_in_window]
+                    [qsTr("In Window?"), pool.is_in_window === "yes" ? `<b>yes</b>` : pool.is_in_window]
                 ]},
                 { model: networkModel, data: [
                     [qsTr("Hashrate"), network.hashrate],
