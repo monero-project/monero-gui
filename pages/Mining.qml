@@ -544,11 +544,11 @@ Rectangle {
     function updateStatusText(p2poolHashrate) {
         if (appWindow.isMining) {
             if (persistentSettings.allow_p2pool_mining) {
-                if (p2poolHashrate === 0) {
+                if (!p2poolHashrate) {
                     statusText.text = qsTr("Starting P2Pool") + translationManager.emptyString;
                 }
                 else {
-                    statusText.text = qsTr("Mining with P2Pool, at %1 H/s").arg(p2poolHashrate) + translationManager.emptyString;
+                    statusText.text = qsTr("Mining with P2Pool, at %1").arg(p2poolHashrate) + translationManager.emptyString;
                 }
             }
             else {

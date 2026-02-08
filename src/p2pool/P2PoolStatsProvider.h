@@ -33,17 +33,23 @@
 #include <QString>
 #include <QVariantMap>
 
+
 class P2PoolStatsProvider : public QObject
 {
      Q_OBJECT
+
 public:
      explicit P2PoolStatsProvider(
           const bool &started,
           const QString &p2poolPath,
           QObject *parent = 0
-      );
+     );
 
      Q_INVOKABLE void update();
+
+     QVariantMap fetchLocal();
+     QVariantMap fetchPool();
+     QVariantMap fetchNetwork();
 
 signals:
      void p2poolUpdateStats(
@@ -54,15 +60,11 @@ signals:
      ) const;
 
 private:
+     QVariantMap fetch(const QString &path);
+     QVariantMap fetchRaw();
+
      const bool &m_started;
      const QString &m_p2poolPath;
-private:
-     QVariantMap fetch(const QString &path);
-
-     QVariantMap fetchLocal();
-     QVariantMap fetchPool();
-     QVariantMap fetchNetwork();
-     QVariantMap fetchRaw();
 };
 
 #endif // P2POOLSTATSPROVIDER_H
