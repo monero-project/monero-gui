@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <cmath>
 
 namespace {
      QString formatNumber(const QVariant &value, int precision = 0) {
