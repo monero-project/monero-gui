@@ -203,7 +203,9 @@ Rectangle {
 
             const mappings = [
                 { model: localModel, data: [
-                    [qsTr("Hashrate"), local.hashrate],
+                    [qsTr("Hashrate (15 min)"), local.hashrate_ema15m],
+                    [qsTr("Hashrate (1 hr)"), local.hashrate_ema1h],
+                    [qsTr("Hashrate (24 hr)"), local.hashrate_ema24h],
                     [qsTr("Shares (Valid/Invalid)"), `${local.shares_found}/${local.shares_failed}`]
                 ]},
                 { model: poolModel, data: [

@@ -229,6 +229,7 @@ void P2PoolManager::exit()
         QString dirName = m_p2poolPath + "/stats/";
         QDir dir(dirName);
         dir.removeRecursively();
+        m_p2poolStats->clear();
     }
 }
 

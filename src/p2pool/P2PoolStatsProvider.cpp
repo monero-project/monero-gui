@@ -76,6 +76,7 @@ namespace {
           return parts.join(" ");
      }
 }
+
 P2PoolStatsProvider::P2PoolStatsProvider(
      const bool &started,
      const QString &p2poolPath,
@@ -84,6 +85,7 @@ P2PoolStatsProvider::P2PoolStatsProvider(
        , m_started(started)
        , m_p2poolPath(p2poolPath)
 {
+     clear();
 }
 
 QVariantMap P2PoolStatsProvider::fetch(const QString &path)
@@ -117,15 +119,59 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
      QVariantMap pool =
           fetch("pool/stats")["pool_statistics"].toMap();
 
+     int uptime =
+          local["time_running"].toInt();
+     quint64 hashrate =
+          local["current_hashrate"].toULongLong();
      quint64 total_hashes =
           local["total_hashes"].toULongLong();
      quint64 sidechain_height =
           pool["sidechainHeight"].toULongLong();
 
      if (total_hashes != 0 && sidechain_height != 0) {
-          map.insert("hashrate", formatHashrate(local["current_hashrate"]));
-          map.insert("shares_found", formatNumber(local["shares_found"]));
-          map.insert("shares_failed", formatNumber(local["shares_failed"]));
+          map.insert("hashrate", formatHashrate(hashrate));
+
+          if (m_lastUpdate.isValid() && m_hashrate_ema15m.isValid() && m_hashrate_ema1h.isValid() && m_hashrate_ema24h.isValid()) {
+               int secs =
+                    m_lastUpdate.secsTo(QDateTime::currentDateTime());
+
+               auto alpha = [&](int mins, qint64 secs) {
+                    return 1.0 - std::exp(-static_cast<double>(secs) / static_cast<double>((mins * 60) / 3));
+               };
+
+               auto updateEMA = [&](QVariant& ema, int mins) {
+                    double a =
+                         alpha(mins, secs);
+                    ema = (hashrate * a) + (ema.toDouble() * (1.0 - a));
+               };
+
+               updateEMA(m_hashrate_ema15m, 15);
+               updateEMA(m_hashrate_ema1h, 60);
+               updateEMA(m_hashrate_ema24h, 1440);
+          } else {
+               m_hashrate_ema15m = m_hashrate_ema1h = m_hashrate_ema24h = hashrate;
+          }
+
+          if (uptime < (15 * 60)) {
+               map.insert("hashrate_ema15m", "waiting...");
+          } else {
+               map.insert("hashrate_ema15m", formatHashrate(m_hashrate_ema15m));
+          }
+
+          if (uptime < (60 * 60)) {
+               map.insert("hashrate_ema1h", "waiting...");
+          } else {
+               map.insert("hashrate_ema1h", formatHashrate(m_hashrate_ema1h));
+          }
+
+          if (uptime < (1440 * 60)) {
+               map.insert("hashrate_ema24h", "waiting...");
+          } else {
+               map.insert("hashrate_ema24h", formatHashrate(m_hashrate_ema24h));
+          }
+
+          map.insert("shares_found", formatNumber(shares_found));
+          map.insert("shares_failed", formatNumber(shares_failed));
      }
 
      return map;
@@ -210,5 +256,22 @@ void P2PoolStatsProvider::update()
      QVariantMap raw =
           fetchRaw();
 
+     m_lastUpdate =
+          QDateTime::currentDateTime();
+
      emit p2poolUpdateStats(local, pool, network, raw);
+}
+
+void P2PoolStatsProvider::clear()
+{
+     /* invalidate hashrate aggregates */
+     m_hashrate_ema15m = QVariant();
+     m_hashrate_ema1h = QVariant();
+     m_hashrate_ema24h = QVariant();
+
+     /* invalidate lastUpdate timestamp */
+     m_lastUpdate = QDateTime();
+
+     /* emit the update signal with empty maps to clear any listeners */
+     emit p2poolUpdateStats(QVariantMap(), QVariantMap(), QVariantMap(), QVariantMap());
 }
