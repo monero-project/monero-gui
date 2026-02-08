@@ -171,7 +171,7 @@ Rectangle {
 
     Timer {
         id: timer
-        interval: 1000
+        interval: 5000
         repeat: true
         running: stateView.state === "Mining Dashboard" && p2poolManager !== null
 
