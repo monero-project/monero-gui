@@ -88,6 +88,13 @@ ColumnLayout {
         color: "transparent"
         state: isAndroid ? "Prove" : "Mining"
 
+        readonly property int pushDirection: {
+            if (state == "Mining") return 1;
+            if (state == "Mining Dashboard") return -1;
+
+            return navbarId.currentIndex < navbarId.previousIndex ? 1 : -1;
+        }
+
         onCurrentViewChanged: {
             if (previousView) {
                 if (typeof previousView.onPageClosed === "function") {
@@ -138,7 +145,7 @@ ColumnLayout {
                     PropertyAnimation {
                         target: enterItem
                         property: "x"
-                        from: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * - target.width
+                        from: stateView.pushDirection * - target.width
                         to: 0
                         duration: 300
                         easing.type: Easing.OutCubic
@@ -147,7 +154,7 @@ ColumnLayout {
                         target: exitItem
                         property: "x"
                         from: 0
-                        to: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * target.width
+                        to: stateView.pushDirection * target.width
                         duration: 300
                         easing.type: Easing.OutCubic
                     }
