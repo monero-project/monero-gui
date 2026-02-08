@@ -151,6 +151,11 @@ void P2PoolManager::getStatus() {
     return;
 }
 
+P2PoolStatsProvider* P2PoolManager::getP2PoolStats() const
+{
+  return m_p2poolStats.get();
+}
+
 bool P2PoolManager::start(const QString &flags, const QString &address, const QString &chain, const QString &threads)
 {
     // prepare command line arguments and pass to p2pool
@@ -253,6 +258,8 @@ P2PoolManager::P2PoolManager(QObject *parent)
     if (m_p2pool.length() == 0) {
         qCritical() << "no p2pool binary defined for current platform";
     }
+
+    m_p2poolStats = std::make_unique<P2PoolStatsProvider>(started, m_p2poolPath, this);
 }
 
 P2PoolManager::~P2PoolManager() {
