@@ -29,6 +29,7 @@
 #ifndef P2POOLSTATSPROVIDER_H
 #define P2POOLSTATSPROVIDER_H
 
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QVariantMap>
@@ -45,6 +46,7 @@ public:
      );
 
      Q_INVOKABLE void update();
+     Q_INVOKABLE void clear();
 
      QVariantMap fetchLocal();
      QVariantMap fetchPool();
@@ -59,11 +61,17 @@ signals:
      ) const;
 
 private:
+     const bool &m_started;
+     const QString &m_p2poolPath;
+
      QVariantMap fetch(const QString &path);
      QVariantMap fetchRaw();
 
-     const bool &m_started;
-     const QString &m_p2poolPath;
+     QDateTime m_lastUpdate;
+
+     QVariant m_hashrate_ema15m;
+     QVariant m_hashrate_ema1h;
+     QVariant m_hashrate_ema24h;
 };
 
 #endif // P2POOLSTATSPROVIDER_H
