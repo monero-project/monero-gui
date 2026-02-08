@@ -123,12 +123,12 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
           local["time_running"].toInt();
      quint64 hashrate =
           local["current_hashrate"].toULongLong();
-     quint64 total_hashes =
-          local["total_hashes"].toULongLong();
-     quint64 sidechain_height =
-          pool["sidechainHeight"].toULongLong();
+     quint64 shares_found =
+          local["shares_found"].toULongLong();
+     quint64 shares_failed =
+          local["shares_failed"].toULongLong();
 
-     if (total_hashes != 0 && sidechain_height != 0) {
+     if (isSidechainReady() && hashrate != 0) {
           map.insert("hashrate", formatHashrate(hashrate));
 
           if (m_lastUpdate.isValid() && m_hashrate_ema15m.isValid() && m_hashrate_ema1h.isValid() && m_hashrate_ema24h.isValid()) {
@@ -184,19 +184,21 @@ QVariantMap P2PoolStatsProvider::fetchPool()
      QVariantMap pool =
           fetch("pool/stats")["pool_statistics"].toMap();
 
-     quint64 sidechain_height =
-          pool["sidechainHeight"].toULongLong();
+     quint64 hashrate =
+          pool["hashRate"].toULongLong();
      quint64 last_block_found_time =
-          pool["lastBlockFoundTime"].toLongLong();
+          pool["lastBlockFoundTime"].toULongLong();
+     int pplns_window_size =
+          pool["pplnsWindowSize"].toInt();
 
-     if (sidechain_height > 1) {
-          map.insert("hashrate", formatHashrate(pool["hashRate"]));
+     if (isSidechainReady()) {
+          map.insert("hashrate", formatHashrate(hashrate));
           if (last_block_found_time != 0) {
-               map.insert("last_block_found_time", formatTimeRelative(pool["lastBlockFoundTime"]));
+               map.insert("last_block_found_time", formatTimeRelative(last_block_found_time));
           } else {
                map.insert("last_block_found_time", "not witnessed yet");
           }
-          map.insert("pplns_window_size", formatNumber(pool["pplnsWindowSize"]));
+          map.insert("pplns_window_size", formatNumber(pplns_window_size));
      }
 
      return map;
@@ -209,14 +211,12 @@ QVariantMap P2PoolStatsProvider::fetchNetwork()
      QVariantMap network =
           fetch("network/stats");
 
-     quint64 height =
-          network["height"].toULongLong();
      quint64 difficulty =
           network["difficulty"].toULongLong();
      quint64 hashrate =
           (difficulty > 0) ? (difficulty / DIFFICULTY_TARGET_V2) : 0;
 
-     if (height != 0) {
+     if (isNetworkReady()) {
           map.insert("hashrate", formatHashrate(hashrate));
           map.insert("last_block_found_time", formatTimeRelative(network["timestamp"]));
      }
@@ -243,6 +243,38 @@ QVariantMap P2PoolStatsProvider::fetchRaw()
      }
 
      return map;
+}
+
+bool P2PoolStatsProvider::isSidechainReady()
+{
+     QVariantMap local =
+          fetch("local/miner");
+     QVariantMap pool =
+          fetch("pool/stats")["pool_statistics"].toMap();
+
+     /* two data points are needed in case the local miner is faster
+      * than the sync */
+     int reward_share_percent =
+          local["block_reward_share_percent"].toInt();
+     quint64 height =
+          pool["sidechainHeight"].toULongLong();
+
+     /* this is a "dumb" but reasonable way of checking if our
+      * sidechain is synced and api reset. if something more "robust"
+      * is needed, the true sidechain height can be parsed from the
+      * peers list */
+     return height > 1000 && reward_share_percent != 100;
+}
+
+bool P2PoolStatsProvider::isNetworkReady()
+{
+     QVariantMap network =
+          fetch("network/stats");
+
+     quint64 height =
+          network["height"].toULongLong();
+
+     return height > 0;
 }
 
 void P2PoolStatsProvider::update()
