@@ -55,14 +55,24 @@ function ago(epoch) {
     var now = new Date().getTime() / 1000;
     var delta = Math.max(now - epoch, 0);
 
-    if(delta < 60)
-        return qsTr("%n second(s) ago", "0", Math.floor(delta))
+    if (delta == 0)
+        return qsTr("Just now");
+    if (delta == 1)
+        return qsTr("1 second ago");
+    else if (delta < 60)
+        return qsTr("%n seconds ago", "0", Math.floor(delta))
+    else if (delta == 60)
+        return qsTr("1 minute ago");
     else if (delta < 3600)
-        return qsTr("%n minute(s) ago", "0", Math.floor(delta / 60))
+        return qsTr("%n minutes ago", "0", Math.floor(delta / 60))
+    else if (delta == 3600)
+        return qsTr("1 hour ago");
     else if (delta < 86400)
-        return qsTr("%n hour(s) ago", "0", Math.floor(delta / 3600))
+        return qsTr("%n hours ago", "0", Math.floor(delta / 3600))
+    else if (delta == 86400)
+        return qsTr("1 day ago");
     else
-        return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400))
+        return qsTr("%n days ago", "0", Math.floor(delta / 86400))
 }
 
 function netTypeToString(){
