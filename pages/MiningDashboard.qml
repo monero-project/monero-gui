@@ -208,7 +208,6 @@ Rectangle {
                     [qsTr("Hashrate (15m)"), local.hashrate_ema15m],
                     [qsTr("Hashrate (1hr)"), local.hashrate_ema1h],
                     [qsTr("Hashrate (24hr)"), local.hashrate_ema24h],
-                    [qsTr("Shares (Valid/Invalid)"), `${local.shares_found}/${local.shares_failed}`]
                     [qsTr("Effort (Now/Average):"), `${local.effort}/${local.effort_ema}`],
                 ]},
                 { model: poolModel, data: [

@@ -129,8 +129,6 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
           local["current_hashrate"].toULongLong();
      quint64 shares_found =
           local["shares_found"].toULongLong();
-     quint64 shares_failed =
-          local["shares_failed"].toULongLong();
      quint64 total_hashes =
           local["total_hashes"].toULongLong();
      quint64 difficulty =
@@ -206,9 +204,6 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
 
           map.insert("effort", formatNumber(m_effort.toDouble() * 100.0, 2) + "%");
           map.insert("effort_ema", formatNumber(m_effort_ema.toDouble() * 100.0, 1) + "%");
-
-          map.insert("shares_found", formatNumber(shares_found));
-          map.insert("shares_failed", formatNumber(shares_failed));
      }
 
      return map;
