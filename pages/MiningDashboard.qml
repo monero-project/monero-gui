@@ -84,6 +84,7 @@ Rectangle {
         color: MoneroComponents.Style.dimmedFontColor
         font.pixelSize: 14
         horizontalAlignment: Text.AlignRight
+        textFormat: Text.RichText
     }
 
     ColumnLayout {
@@ -211,7 +212,8 @@ Rectangle {
                 { model: poolModel, data: [
                     [qsTr("Hashrate"), pool.hashrate],
                     [qsTr("Last Block Found"), pool.last_block_found_time],
-                    [qsTr("Payment Scheme"), `PPLNS (${pool.pplns_window_size} blocks)`]
+                    [qsTr("Payment Scheme"), `PPLNS (${pool.pplns_window_size} blocks)`],
+                    [qsTr("In Window?"), pool.is_in_window === "yes" ? "<b>" + pool.is_in_window + "</b>" : pool.is_in_window]
                 ]},
                 { model: networkModel, data: [
                     [qsTr("Hashrate"), network.hashrate],
