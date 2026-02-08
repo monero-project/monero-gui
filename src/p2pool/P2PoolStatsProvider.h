@@ -68,6 +68,9 @@ private:
      QVariantMap fetch(const QString &path);
      QVariantMap fetchRaw();
 
+     bool isSidechainReady();
+     bool isNetworkReady();
+
      QDateTime m_lastUpdate;
 
      QVariant m_hashrate_ema15m;
