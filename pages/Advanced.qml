@@ -78,6 +78,7 @@ ColumnLayout {
         property Item currentView
         property Item previousView
         property Mining miningView: Mining { }
+        property MiningStats miningStatsView: MiningStats { }
         property TxKey prooveView: TxKey { }
         property SharedRingDB sharedRingDBView: SharedRingDB { }
         property Sign signView: Sign { }
@@ -106,6 +107,10 @@ ColumnLayout {
                 name: "Mining"
                 PropertyChanges { target: stateView; currentView: stateView.miningView }
                 PropertyChanges { target: root; panelHeight: stateView.miningView.miningHeight + 140 }
+            }, State {
+                name: "MiningStats"
+                PropertyChanges { target: stateView; currentView: stateView.miningStatsView }
+                PropertyChanges { target: root; panelHeight: stateView.miningStatsView.miningStatsHeight + 140 }
             }, State {
                 name: "Prove"
                 PropertyChanges { target: stateView; currentView: stateView.prooveView }

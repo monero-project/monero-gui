@@ -151,6 +151,24 @@ void P2PoolManager::getStatus() {
     return;
 }
 
+void P2PoolManager::getStats()
+{
+    QVariantMap statsMap;
+    QString statsPath = m_p2poolPath + "/stats";
+    QDirIterator it(statsPath, QDir::Filter::Files, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        QFile statsFile(it.next());
+        statsFile.open(QIODevice::ReadOnly);
+        QTextStream statsOut(&statsFile);
+        QByteArray data;
+        statsOut >> data;
+        statsFile.close();
+        QVariantMap jsonMap = QJsonDocument::fromJson(data).object().toVariantMap();
+        statsMap.insert(jsonMap);
+    }
+    emit p2poolStats(statsMap);
+}
+
 bool P2PoolManager::start(const QString &flags, const QString &address, const QString &chain, const QString &threads)
 {
     // prepare command line arguments and pass to p2pool

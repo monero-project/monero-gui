@@ -379,6 +379,37 @@ Rectangle {
                 }
             }
 
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
+
+                MoneroComponents.Label {
+                    id: statisticsLabel
+                    visible: persistentSettings.allow_p2pool_mining
+                    color: MoneroComponents.Style.defaultFontColor
+                    text: qsTr("Statistics") + translationManager.emptyString
+                    fontSize: 16
+                }
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 16
+
+                MoneroComponents.StandardButton {
+                    id: miningStatsButton
+                    small: true
+                    primary: false
+                    text: qsTr("Open mining statistics") + translationManager.emptyString
+                    enabled: appWindow.isMining
+                    visible: persistentSettings.allow_p2pool_mining
+                    onClicked: {
+                        p2poolManager.getStats();
+                        stateView.state = "MiningStats";
+                    }
+                }
+            }
+
             ListModel {
                 id: chainModel
 
