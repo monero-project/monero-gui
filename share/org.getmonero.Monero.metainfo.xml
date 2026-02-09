@@ -3,8 +3,10 @@
     <id>org.getmonero.Monero</id>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>BSD-3-Clause</project_license>
-    <content_rating type="oars-1.1"/>
-    <developer_name>The Monero Project</developer_name>
+    <content_rating type="oars-1.1" />
+    <developer id="org.getmonero">
+        <name>The Monero Project</name>
+    </developer>
     <categories>
         <category>Network</category>
         <category>Qt</category>
@@ -13,7 +15,7 @@
     </categories>
     <name>Monero GUI</name>
     <summary>Monero: the secure, private, untraceable cryptocurrency</summary>
-    
+
     <description>
         <p>Monero is a private, secure, untraceable, decentralised digital currency. You
             are your bank, you control your funds, and nobody can trace your transfers
@@ -42,7 +44,8 @@
     <screenshots>
         <screenshot type="default">
             <caption>A screenshot of the Monero GUI wallet</caption>
-            <image>https://raw.githubusercontent.com/monero-project/monero-site/master/img/downloads/gui.png</image>
+            <image>
+                https://raw.githubusercontent.com/monero-project/monero-site/master/img/downloads/gui.png</image>
         </screenshot>
     </screenshots>
 
@@ -51,15 +54,15 @@
     <url type="donation">https://getmonero.org/get-started/contributing</url>
     <url type="faq">https://getmonero.org/get-started/faq</url>
     <url type="help">https://getmonero.org/resources/user-guides</url>
-    <url type="translate">https://translate.getmonero.org</url>
     <url type="contact">https://getmonero.org/community/hangouts</url>
     <url type="contribute">https://getmonero.org/get-started/contributing</url>
 
     <releases>
-        <release version="<version>" date="<date>"/>
+        <release version="<version>" date="<date>" />
     </releases>
 
     <custom>
-      <value key="flathub::manifest">https://github.com/monero-project/monero-gui/tree/master/share/org.getmonero.Monero.yaml</value>
+        <value key="flathub::manifest">
+            https://github.com/monero-project/monero-gui/tree/master/share/org.getmonero.Monero.yaml</value>
     </custom>
 </component>
