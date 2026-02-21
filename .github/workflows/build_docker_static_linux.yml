@@ -34,3 +34,31 @@ jobs:
         with:
           name: dinastycoin-gui-linux
           path: build/release/bin/
+      - name: Prepara AppDir e genera AppImage
+        run: |
+          # 1. Scarica linuxdeploy e il plugin Qt
+          wget https://github.com
+          wget https://github.com
+          chmod +x linuxdeploy*.AppImage
+
+          # 2. Crea la struttura per l'AppImage
+          mkdir -p AppDir
+          
+          # 3. Copia l'eseguibile compilato (assicurati che il percorso sia corretto)
+          cp build/release/bin/dinastycoin-wallet-gui AppDir/
+          
+          # 4. Esegui linuxdeploy per creare il pacchetto
+          # Questo comando include l'icona, il file .desktop e tutte le librerie Qt
+          export VERSION=$(date +%Y%m%d)
+          ./linuxdeploy-x86_64.AppImage --appdir AppDir \
+            -e AppDir/dinastycoin-wallet-gui \
+            -i dinastycoin.png \
+            -d dinastycoin-wallet-gui.desktop \
+            --plugin qt \
+            --output appimage
+
+      - name: Carica AppImage finale
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dinastycoin-Wallet-Linux
+          path: "*.AppImage"
