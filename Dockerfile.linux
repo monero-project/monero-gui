@@ -18,26 +18,65 @@ RUN apt update && apt install -y \
     libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev \
     libxcb-randr0-dev libxcb-render-util0-dev libxkbcommon-x11-dev \
     libfontconfig1-dev libfreetype6-dev libdbus-1-dev libssl-dev ca-certificates \
-    libunbound-dev libexpat1-dev libunwind8-dev liblzma-dev
+    libunbound-dev libexpat1-dev libunwind8-dev liblzma-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 2. Aggiornamento CMake (fondamentale per evitare errori di configurazione)
+# 2. Aggiornamento CMake (necessario per Dinastycoin moderno)
 RUN wget https://github.com && \
     sh cmake-3.26.4-linux-x86_64.sh --prefix=/usr/local --skip-license && \
     rm cmake-3.26.4-linux-x86_64.sh
 
-# [Qui vanno i blocchi xorgproto, xcbproto, libxau, libxcb, zlib, freetype, expat, fontconfig, icu, boost, openssl che avevi già...]
-# NOTA: Per brevità non li incollo tutti, ma assicurati che siano presenti nel file finale.
+# 3. Compilazione componenti X11 (Tua struttura originale)
+RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org && \
+    cd xorgproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xorgproto
 
-# 3. Compilazione STATICA di Qt (Questo è il pezzo che mancava per la GUI)
-RUN git clone -b ${QT_VERSION} --depth 1 https://github.com /qt5 && \
-    cd /qt5 && \
+RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org && \
+    cd xcbproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xcbproto
+
+RUN git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org && \
+    cd libxau && ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxau
+
+RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org && \
+    cd libxcb && ./autogen.sh --enable-static --disable-shared && make -j$THREADS install && cd .. && rm -rf libxcb
+
+# 4. Compilazione Zlib, Expat, Fontconfig (Essenziali per la GUI)
+RUN git clone -b v1.3 --depth 1 https://github.com && \
+    cd zlib && ./configure --static && make -j$THREADS install && cd .. && rm -rf zlib
+
+RUN wget https://github.com && \
+    tar -xf expat-2.4.8.tar.bz2 && cd expat-2.4.8 && \
+    ./configure --enable-static --disable-shared --prefix=/usr && make -j$THREADS install && cd .. && rm -rf expat-2.4.8*
+
+RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org && \
+    cd fontconfig && ./autogen.sh --disable-shared --enable-static && make -j$THREADS install && cd .. && rm -rf fontconfig
+
+# 5. Compilazione Boost Statica (Tua struttura originale)
+RUN wget https://archives.boost.io && \
+    tar -xzf boost_1_80_0.tar.gz && cd boost_1_80_0 && ./bootstrap.sh && \
+    ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static install --prefix=/usr && \
+    cd .. && rm -rf boost_1_80_0*
+
+# 6. Compilazione OpenSSL e Unbound
+RUN wget https://www.openssl.org && \
+    tar -xzf openssl-1.1.1u.tar.gz && cd openssl-1.1.1u && \
+    ./config no-shared no-zlib-dynamic --prefix=/usr && make -j$THREADS install && cd .. && rm -rf openssl-1.1.1u*
+
+RUN wget https://www.nlnetlabs.nl && \
+    tar -xzf unbound-1.16.2.tar.gz && cd unbound-1.16.2 && \
+    ./configure --disable-shared --enable-static --without-pyunbound --with-ssl=/usr && make -j$THREADS install && cd .. && rm -rf unbound-1.16.2*
+
+# 7. COMPILAZIONE QT 5.15 STATICA (Il "Motore" della GUI)
+# Nota: Questo step è quello che richiede più tempo in assoluto.
+RUN git clone -b ${QT_VERSION} --depth 1 https://github.com /qt5-src && \
+    cd /qt5-src && \
     ./init-repository --module-subset=qtbase,qtdeclarative,qtgraphicaleffects,qtimageformats,qtquickcontrols,qtquickcontrols2,qtsvg,qtx11extras && \
     ./configure -prefix /opt/qt5 -static -release -opensource -confirm-license \
-    -opengl desktop -no-icu -no-sql-sqlite -no-use-gold-linker \
-    -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-pcre -qt-xcb -xkbcommon -fontconfig -dbus-runtime && \
+    -opengl desktop -no-icu -no-sql-sqlite \
+    -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-pcre -qt-xcb -xkbcommon -fontconfig && \
     make -j$THREADS && \
     make -j$THREADS install && \
-    rm -rf /qt5
+    rm -rf /qt5-src
 
-# Imposta il percorso di QT per il compilatore
+# Imposta variabili ambiente per la build del wallet
 ENV PATH="/opt/qt5/bin:${PATH}"
+ENV QT_PREFIX="/opt/qt5"
