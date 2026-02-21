@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Dinastycoin Wallet GUI
+Comment=Dinastycoin Wallet Graphical User Interface
+Exec=dinastycoin-wallet-gui
+Icon=dinastycoin
+Terminal=false
+Categories=Office;Finance;
+Keywords=dinastycoin;crypto;wallet;
