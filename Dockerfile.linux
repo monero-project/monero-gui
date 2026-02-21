@@ -8,77 +8,104 @@ ENV CPPFLAGS="-fPIC"
 ENV CXXFLAGS="-fPIC"
 ENV SOURCE_DATE_EPOCH=1397818193
 
-# 1. Installazione dipendenze di sistema e OpenGL
-RUN apt update && apt install -y \
-    build-essential automake autopoint bison gettext git gperf pkg-config python3 wget xutils-dev \
-    libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev freeglut3-dev \
-    libglib2.0-dev libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
-    libreadline-dev libx11-dev libxrender-dev libxext-dev libxmu-dev libxi-dev \
-    libxcb1-dev libx11-xcb-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev \
-    libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev \
-    libxcb-randr0-dev libxcb-render-util0-dev libxkbcommon-x11-dev \
-    libfontconfig1-dev libfreetype6-dev libdbus-1-dev libssl-dev ca-certificates \
-    libunbound-dev libexpat1-dev libunwind8-dev liblzma-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# 1. Sistema e dipendenze iniziali
+RUN apt update && \
+    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
+    libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
+    pkg-config python3 wget xutils-dev libdbus-1-dev ca-certificates
 
-# 2. Aggiornamento CMake (necessario per Dinastycoin moderno)
+# 2. Fix CMake (URL Diretto e Funzionante)
 RUN wget https://github.com && \
     chmod +x cmake-3.26.4-linux-x86_64.sh && \
     ./cmake-3.26.4-linux-x86_64.sh --prefix=/usr/local --skip-license && \
     rm cmake-3.26.4-linux-x86_64.sh
 
-
-# 3. Compilazione componenti X11 (Tua struttura originale)
-RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org && \
+# 3. Componenti Xorg e XCB (Tua struttura originale)
+RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xorgproto
 
-RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org && \
+RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xcbproto && \
     cd xcbproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xcbproto
 
-RUN git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org && \
+RUN git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxau && \
     cd libxau && ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxau
 
-RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org && \
-    cd libxcb && ./autogen.sh --enable-static --disable-shared && make -j$THREADS install && cd .. && rm -rf libxcb
+RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
+    cd libxcb && ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && \
+    make -j$THREADS clean && rm /usr/local/lib/libxcb-xinerama.so && \
+    ./autogen.sh --disable-shared --enable-static && make -j$THREADS && \
+    cp src/.libs/libxcb-xinerama.a /usr/local/lib/ && cd .. && rm -rf libxcb
 
-# 4. Compilazione Zlib, Expat, Fontconfig (Essenziali per la GUI)
-RUN git clone -b v1.3 --depth 1 https://github.com && \
+RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-util && \
+    cd libxcb-util && git submodule init && \
+    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
+    ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxcb-util
+
+RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-image && \
+    cd libxcb-image && git submodule init && \
+    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
+    ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxcb-image
+
+RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-keysyms && \
+    cd libxcb-keysyms && git submodule init && \
+    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
+    ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxcb-keysyms
+
+RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-render-util && \
+    cd libxcb-render-util && git submodule init && \
+    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
+    ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxcb-render-util
+
+RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-wm && \
+    cd libxcb-wm && git submodule init && \
+    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
+    ./autogen.sh --enable-shared --disable-static && make -j$THREADS install && cd .. && rm -rf libxcb-wm
+
+RUN git clone -b xkbcommon-0.5.0 --depth 1 https://github.com/xkbcommon/libxkbcommon && \
+    cd libxkbcommon && ./autogen.sh --prefix=/usr --enable-shared --disable-static --enable-x11 --disable-docs && \
+    make -j$THREADS install && cd .. && rm -rf libxkbcommon
+
+RUN git clone -b v1.3 --depth 1 https://github.com/madler/zlib && \
     cd zlib && ./configure --static && make -j$THREADS install && cd .. && rm -rf zlib
 
-RUN wget https://github.com && \
+RUN git clone -b VER-2-10-2 --depth 1 https://gitlab.freedesktop.org/freetype/freetype.git && \
+    cd freetype && ./autogen.sh && ./configure --disable-shared --enable-static --with-zlib=no && \
+    make -j$THREADS install && cd .. && rm -rf freetype
+
+RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.bz2 && \
     tar -xf expat-2.4.8.tar.bz2 && cd expat-2.4.8 && \
-    ./configure --enable-static --disable-shared --prefix=/usr && make -j$THREADS install && cd .. && rm -rf expat-2.4.8*
+    ./configure --enable-static --disable-shared --prefix=/usr && \
+    make -j$THREADS install && cd .. && rm -rf expat-2.4.8*
 
-RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org && \
-    cd fontconfig && ./autogen.sh --disable-shared --enable-static && make -j$THREADS install && cd .. && rm -rf fontconfig
+RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fontconfig && \
+    cd fontconfig && ./autogen.sh --disable-shared --enable-static && \
+    make -j$THREADS install && cd .. && rm -rf fontconfig
 
-# 5. Compilazione Boost Statica (Tua struttura originale)
-RUN wget https://archives.boost.io && \
+RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
+    cd icu/icu4c/source && ./configure --disable-shared --enable-static --disable-tests --disable-samples && \
+    make -j$THREADS install && cd .. && cd .. && cd .. && rm -rf icu
+
+RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && \
     tar -xzf boost_1_80_0.tar.gz && cd boost_1_80_0 && ./bootstrap.sh && \
-    ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static install --prefix=/usr && \
+    ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static install -a --prefix=/usr && \
     cd .. && rm -rf boost_1_80_0*
 
-# 6. Compilazione OpenSSL e Unbound
-RUN wget https://www.openssl.org && \
+RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
     tar -xzf openssl-1.1.1u.tar.gz && cd openssl-1.1.1u && \
-    ./config no-shared no-zlib-dynamic --prefix=/usr && make -j$THREADS install && cd .. && rm -rf openssl-1.1.1u*
+    ./config no-shared no-zlib-dynamic --prefix=/usr && \
+    make -j$THREADS install && cd .. && rm -rf openssl-1.1.1u*
 
-RUN wget https://www.nlnetlabs.nl && \
+RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     tar -xzf unbound-1.16.2.tar.gz && cd unbound-1.16.2 && \
-    ./configure --disable-shared --enable-static --without-pyunbound --with-ssl=/usr && make -j$THREADS install && cd .. && rm -rf unbound-1.16.2*
+    ./configure --disable-shared --enable-static --without-pyunbound --with-libexpat=/usr --with-ssl=/usr --with-libunbound-only --with-pic && \
+    make -j$THREADS install && cd .. && rm -rf unbound-1.16.2*
 
-# 7. COMPILAZIONE QT 5.15 STATICA (Il "Motore" della GUI)
-# Nota: Questo step è quello che richiede più tempo in assoluto.
+# 4. Compilazione QT 5.15 STATICA (Essenziale per la GUI)
 RUN git clone -b ${QT_VERSION} --depth 1 https://github.com /qt5-src && \
-    cd /qt5-src && \
-    ./init-repository --module-subset=qtbase,qtdeclarative,qtgraphicaleffects,qtimageformats,qtquickcontrols,qtquickcontrols2,qtsvg,qtx11extras && \
+    cd /qt5-src && ./init-repository --module-subset=qtbase,qtdeclarative,qtgraphicaleffects,qtimageformats,qtquickcontrols,qtquickcontrols2,qtsvg,qtx11extras && \
     ./configure -prefix /opt/qt5 -static -release -opensource -confirm-license \
-    -opengl desktop -no-icu -no-sql-sqlite \
-    -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-pcre -qt-xcb -xkbcommon -fontconfig && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf /qt5-src
+    -opengl desktop -no-icu -no-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg -qt-freetype -qt-xcb -xkbcommon -fontconfig && \
+    make -j$THREADS && make -j$THREADS install && cd .. && rm -rf /qt5-src
 
-# Imposta variabili ambiente per la build del wallet
 ENV PATH="/opt/qt5/bin:${PATH}"
 ENV QT_PREFIX="/opt/qt5"
