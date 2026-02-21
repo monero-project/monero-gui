@@ -29,6 +29,11 @@ jobs:
             monero:build-env-linux \
             sh -c 'make release -j$(nproc)'
 
+      - name: Verifica posizione eseguibile
+        run: |
+          echo "Ricerca dell'eseguibile in corso..."
+          find build -name "dinastycoin-wallet-gui"
+
       - name: Carica l'eseguibile (Artifact)
         uses: actions/upload-artifact@v4
         with:
