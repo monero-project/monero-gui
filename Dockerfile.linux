@@ -14,29 +14,27 @@ RUN apt update && apt install -y automake autopoint bison gettext git gperf \
     libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev pkg-config python3 \
     wget xutils-dev libdbus-1-dev ca-certificates
 
-# 2. Fix CMake con URL spezzato per evitare troncamenti in chat
-RUN URL="https://github.com" && \
-    wget $URL -O cmake_install.sh && \
-    chmod +x cmake_install.sh && \
-    ./cmake_install.sh --prefix=/usr/local --skip-license && \
-    rm cmake_install.sh
+# 2. Fix CMake - URL protetto da variabile
+RUN CM_URL="https://github.com" && \
+    wget ${CM_URL} -O cmake.sh && chmod +x cmake.sh && \
+    ./cmake.sh --prefix=/usr/local --skip-license && rm cmake.sh
 
-# 3. Componenti Xorg e XCB (Tua struttura originale)
-RUN git clone -b xorgproto-2020.1 --depth 1 \
-    https://gitlab.freedesktop.org && \
+# 3. Componenti Xorg e XCB
+RUN XP="https://gitlab.freedesktop.org" && \
+    git clone -b xorgproto-2020.1 --depth 1 ${XP} && \
     cd xorgproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xorgproto
 
-RUN git clone -b 1.12 --depth 1 \
-    https://gitlab.freedesktop.org && \
+RUN XB="https://gitlab.freedesktop.org" && \
+    git clone -b 1.12 --depth 1 ${XB} && \
     cd xcbproto && ./autogen.sh && make -j$THREADS install && cd .. && rm -rf xcbproto
 
-RUN git clone -b libXau-1.0.9 --depth 1 \
-    https://gitlab.freedesktop.org && \
+RUN XA="https://gitlab.freedesktop.org" && \
+    git clone -b libXau-1.0.9 --depth 1 ${XA} && \
     cd libxau && ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS install && cd .. && rm -rf libxau
 
-RUN git clone -b 1.12 --depth 1 \
-    https://gitlab.freedesktop.org && \
+RUN XL="https://gitlab.freedesktop.org" && \
+    git clone -b 1.12 --depth 1 ${XL} && \
     cd libxcb && ./autogen.sh --enable-shared --disable-static && \
     make -j$THREADS install && make -j$THREADS clean && \
     rm /usr/local/lib/libxcb-xinerama.so && \
@@ -44,94 +42,53 @@ RUN git clone -b 1.12 --depth 1 \
     make -j$THREADS && cp src/.libs/libxcb-xinerama.a /usr/local/lib/ && \
     cd .. && rm -rf libxcb
 
-RUN git clone -b 0.4.0 --depth 1 \
-    https://gitlab.freedesktop.org-util && \
-    cd libxcb-util && git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org m4 && \
-    ./autogen.sh --enable-shared --disable-static && \
-    make -j$THREADS install && cd .. && rm -rf libxcb-util
+# 4. Utility e Librerie Core
+RUN ZL="https://github.com" && \
+    git clone -b v1.3 --depth 1 ${ZL} && \
+    cd zlib && ./configure --static && make -j$THREADS install && cd .. && rm -rf zlib
 
-RUN git clone -b 0.4.0 --depth 1 \
-    https://gitlab.freedesktop.org-image && \
-    cd libxcb-image && git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org m4 && \
-    ./autogen.sh --enable-shared --disable-static && \
-    make -j$THREADS install && cd .. && rm -rf libxcb-image
-
-RUN git clone -b 0.4.0 --depth 1 \
-    https://gitlab.freedesktop.org-keysyms && \
-    cd libxcb-keysyms && git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org m4 && \
-    ./autogen.sh --enable-shared --disable-static && \
-    make -j$THREADS install && cd .. && rm -rf libxcb-keysyms
-
-RUN git clone -b 0.3.9 --depth 1 \
-    https://gitlab.freedesktop.org-render-util && \
-    cd libxcb-render-util && git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org m4 && \
-    ./autogen.sh --enable-shared --disable-static && \
-    make -j$THREADS install && cd .. && rm -rf libxcb-render-util
-
-RUN git clone -b 0.4.1 --depth 1 \
-    https://gitlab.freedesktop.org-wm && \
-    cd libxcb-wm && git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org m4 && \
-    ./autogen.sh --enable-shared --disable-static && \
-    make -j$THREADS install && cd .. && rm -rf libxcb-wm
-
-RUN git clone -b xkbcommon-0.5.0 --depth 1 \
-    https://github.com && \
-    cd libxkbcommon && ./autogen.sh --prefix=/usr --enable-shared \
-    --disable-static --enable-x11 --disable-docs && \
-    make -j$THREADS install && cd .. && rm -rf libxkbcommon
-
-RUN git clone -b v1.3 --depth 1 https://github.com && \
-    cd zlib && ./configure --static && make -j$THREADS install && \
-    cd .. && rm -rf zlib
-
-RUN git clone -b VER-2-10-2 --depth 1 \
-    https://gitlab.freedesktop.org && \
+RUN FT="https://gitlab.freedesktop.org" && \
+    git clone -b VER-2-10-2 --depth 1 ${FT} && \
     cd freetype && ./autogen.sh && ./configure --disable-shared \
-    --enable-static --with-zlib=no && make -j$THREADS install && \
-    cd .. && rm -rf freetype
+    --enable-static --with-zlib=no && make -j$THREADS install && cd .. && rm -rf freetype
 
-RUN EXPAT_URL="https://github.com" && \
-    wget $EXPAT_URL && tar -xf expat-2.4.8.tar.bz2 && cd expat-2.4.8 && \
+RUN EX="https://github.com" && \
+    wget ${EX} -O expat.tar.bz2 && tar -xf expat.tar.bz2 && cd expat-2.4.8 && \
     ./configure --enable-static --disable-shared --prefix=/usr && \
     make -j$THREADS install && cd .. && rm -rf expat-2.4.8*
 
-RUN git clone -b 2.13.92 --depth 1 \
-    https://gitlab.freedesktop.org && \
+RUN FC="https://gitlab.freedesktop.org" && \
+    git clone -b 2.13.92 --depth 1 ${FC} && \
     cd fontconfig && ./autogen.sh --disable-shared --enable-static && \
     make -j$THREADS install && cd .. && rm -rf fontconfig
 
-RUN git clone -b release-64-2 --depth 1 https://github.com && \
+RUN IC="https://github.com" && \
+    git clone -b release-64-2 --depth 1 ${IC} && \
     cd icu/icu4c/source && ./configure --disable-shared --enable-static \
-    --disable-tests --disable-samples && make -j$THREADS install && \
-    cd / && rm -rf /icu
+    --disable-tests --disable-samples && make -j$THREADS install && cd / && rm -rf /icu
 
-RUN BOOST_URL="https://archives.boost.io" && \
-    wget $BOOST_URL && tar -xzf boost_1_80_0.tar.gz && cd boost_1_80_0 && \
+RUN BS="https://archives.boost.io" && \
+    wget ${BS} -O boost.tar.gz && tar -xzf boost.tar.gz && cd boost_1_80_0 && \
     ./bootstrap.sh && ./b2 --with-atomic --with-system --with-filesystem \
     --with-thread --with-date_time --with-chrono --with-regex --with-serialization \
     --with-program_options --with-locale variant=release link=static \
     runtime-link=static install -a --prefix=/usr && cd .. && rm -rf boost_1_80_0*
 
-RUN SSL_URL="https://www.openssl.org" && \
-    wget $SSL_URL && tar -xzf openssl-1.1.1u.tar.gz && cd openssl-1.1.1u && \
+RUN OS="https://www.openssl.org" && \
+    wget ${OS} -O openssl.tar.gz && tar -xzf openssl.tar.gz && cd openssl-1.1.1u && \
     ./config no-shared no-zlib-dynamic --prefix=/usr && \
     make -j$THREADS install && cd .. && rm -rf openssl-1.1.1u*
 
-RUN UNB_URL="https://www.nlnetlabs.nl" && \
-    wget $UNB_URL && tar -xzf unbound-1.16.2.tar.gz && cd unbound-1.16.2 && \
+RUN UB="https://www.nlnetlabs.nl" && \
+    wget ${UB} -O unbound.tar.gz && tar -xzf unbound.tar.gz && cd unbound-1.16.2 && \
     ./configure --disable-shared --enable-static --without-pyunbound \
     --with-libexpat=/usr --with-ssl=/usr --with-libunbound-only --with-pic && \
     make -j$THREADS install && cd .. && rm -rf unbound-1.16.2*
 
-# 4. Compilazione QT 5.15 STATICA
-RUN git clone -b ${QT_VERSION} --depth 1 https://github.com /qt5-src && \
-    cd /qt5-src && ./init-repository --module-subset=qtbase,qtdeclarative,qtgraphicaleffects,\
-qtimageformats,qtquickcontrols,qtquickcontrols2,qtsvg,qtx11extras && \
+# 5. Compilazione QT 5.15 STATICA
+RUN QT_REPO="https://github.com" && \
+    git clone -b ${QT_VERSION} --depth 1 ${QT_REPO} /qt5-src && \
+    cd /qt5-src && ./init-repository --module-subset=qtbase,qtdeclarative,qtgraphicaleffects,qtimageformats,qtquickcontrols,qtquickcontrols2,qtsvg,qtx11extras && \
     ./configure -prefix /opt/qt5 -static -release -opensource -confirm-license \
     -opengl desktop -no-icu -no-sql-sqlite -qt-zlib -qt-libpng -qt-libjpeg \
     -qt-freetype -qt-xcb -xkbcommon -fontconfig && \
