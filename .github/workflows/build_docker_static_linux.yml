@@ -1,9 +1,9 @@
 name: Dinastycoin Linux Build
 
 on:
-  push:
-    branches: [ master, main ]
-  workflow_dispatch:
+#  push:
+#    branches: [ master, main ]
+  workflow_dispatch: # Questo ti permette di avviare la build a mano quando vuoi
 
 jobs:
   build-linux:
