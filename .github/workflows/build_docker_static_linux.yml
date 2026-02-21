@@ -1,0 +1,36 @@
+name: Dinastycoin Linux Build
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch: # Permette di avviare la build manualmente
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # Fondamentale per i wallet tipo Monero
+
+      - name: Pulizia spazio disco
+        run: sudo rm -rf /usr/local/.ghcup /usr/share/dotnet /usr/share/swift /usr/share/miniconda
+
+      - name: Compilazione in Docker
+        run: |
+          # Usiamo 'make release' invece di 'release-static'
+          docker run --rm \
+            -v ${{ github.workspace }}:/dinastycoin-gui \
+            -w /dinastycoin-gui \
+            monero:build-env-linux \
+            sh -c 'make release -j$(nproc)'
+
+      - name: Carica l'eseguibile (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dinastycoin-gui-linux
+          path: build/release/bin/ # Verifica se il percorso dell'eseguibile è corretto dopo la build
