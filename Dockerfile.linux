@@ -203,11 +203,11 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
-    rm /usr/lib/x86_64-linux-gnu/libXext.a && \
-    rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
+RUN rm -f /usr/lib/x86_64-linux-gnu/libX11.a \
+    /usr/lib/x86_64-linux-gnu/libXext.a \
+    /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
     git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
-    cd /tmp/qt5 && \
+    cd qt5 && \
     git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
     git clone git://code.qt.io/qt/qtgraphicaleffects.git -b ${QT_VERSION} --depth 1 && \
