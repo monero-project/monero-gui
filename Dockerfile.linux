@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libexpat1-dev libcurl4-openssl-dev libminiupnpc-dev \
     libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev \
     libinput-dev libsqlite3-dev libjpeg-dev libxkbcommon-dev && \
+    ca-certificates && update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 RUN ln -sf /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGL.so && \
@@ -31,6 +32,7 @@ RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/
     cd xorgproto && \
     git reset --hard c62e8203402cafafa5ba0357b6d1c019156c9f36 && \
     ./autogen.sh && \
+    ./configure && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
