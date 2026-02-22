@@ -8,7 +8,7 @@ ENV CPPFLAGS=""
 ENV CXXFLAGS=""
 ENV SOURCE_DATE_EPOCH=1397818193
 
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential automake autopoint bison gettext git gperf pkg-config python wget xutils-dev \
     libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev freeglut3-dev \
     libglib2.0-dev libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
@@ -16,12 +16,13 @@ RUN apt update && apt install -y \
     libxcb1-dev libx11-xcb-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev \
     libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev \
     libxcb-randr0-dev libxcb-render-util0-dev libxkbcommon-x11-dev \
-    libglvnd-dev libegl1-mesa-dev libgles2-mesa-dev libgl1-dev \
+    libglvnd-dev libegl1-mesa-dev libgles2-mesa-dev \
     libboost-all-dev libssl-dev libzmq3-dev libunbound-dev \
-    libunwind8-dev liblzma-dev libreadline-dev libldns-dev \
-    libexpat1-dev libcurl4-openssl-dev miniupnpc libminiupnpc-dev \
+    libunwind8-dev liblzma-dev libldns-dev \
+    libexpat1-dev libcurl4-openssl-dev libminiupnpc-dev \
     libfontconfig1-dev libdbus-1-dev libfreetype6-dev libicu-dev \
-    libinput-dev libsqlite3-dev libjpeg-dev libxkbcommon-dev
+    libinput-dev libsqlite3-dev libjpeg-dev libxkbcommon-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGL.so && \
     ln -s /usr/lib/x86_64-linux-gnu/libEGL.so.1 /usr/lib/x86_64-linux-gnu/libEGL.so
