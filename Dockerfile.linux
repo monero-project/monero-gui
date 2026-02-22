@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 
+# ... ARG e ENV ...
 ARG THREADS=3
 ARG QT_VERSION=v5.15.17-lts-lgpl
 
@@ -8,6 +9,7 @@ ENV CPPFLAGS=""
 ENV CXXFLAGS=""
 ENV SOURCE_DATE_EPOCH=1397818193
 
+# 1. Installazione pacchetti 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential automake autopoint bison gettext git gperf pkg-config python wget xutils-dev \
     libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev freeglut3-dev \
@@ -26,9 +28,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
+# 2. Fix OpenGL 
 RUN ln -sf /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGL.so && \
     ln -sf /usr/lib/x86_64-linux-gnu/libEGL.so.1 /usr/lib/x86_64-linux-gnu/libEGL.so
 
+# 3. Compilazione dipendenze 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && \
     git reset --hard c62e8203402cafafa5ba0357b6d1c019156c9f36 && \
@@ -165,6 +169,7 @@ RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fon
     make -j$THREADS install && \
     rm -rf $(pwd)
 
+# - Build ICU 
 RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     cd icu/icu4c/source && \
     git reset --hard e2d85306162d3a0691b070b4f0a73e4012433444 && \
@@ -180,7 +185,10 @@ RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && 
     rm boost_1_80_0.tar.gz && \
     cd boost_1_80_0 && \
     ./bootstrap.sh && \
-    ./b2 --with-atomic --with-system --with-filesystem --with-thread --with-date_time --with-chrono --with-regex --with-serialization --with-program_options --with-locale variant=release link=static runtime-link=static cflags="${CFLAGS}" cxxflags="${CXXFLAGS}" install -a --prefix=/usr && \
+    ./b2 install threading=multi link=static runtime-link=static variant=release \
+    --with-atomic --with-system --with-filesystem --with-thread --with-date_time \
+    --with-chrono --with-regex --with-serialization --with-program_options --with-program_options \
+    --with-locale -j$THREADS && \
     rm -rf $(pwd)
 
 RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
@@ -198,11 +206,13 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     tar -xzf unbound-1.16.2.tar.gz && \
     rm unbound-1.16.2.tar.gz && \
     cd unbound-1.16.2 && \
-    ./configure --disable-shared --enable-static --without-pyunbound --with-libexpat=/usr --with-ssl=/usr --with-libevent=no --without-pythonmodule --disable-flto --with-pthreads --with-libunbound-only --with-pic && \
+    ./configure --disable-shared --enable-static --without-pyunbound --with-libexpat=/usr --with-ssl=/usr \
+    --with-libevent=no --without-pythonmodule --disable-flto --with-pthreads --with-libunbound-only --with-pic && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
+# - Build Qt 5.15.17 (Statico) 
 RUN rm -f /usr/lib/x86_64-linux-gnu/libX11.a \
     /usr/lib/x86_64-linux-gnu/libXext.a \
     /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
@@ -287,15 +297,7 @@ RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git &&
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && \
-    cd protobuf && \
-    git reset --hard ab840345966d0fa8e7100d771c92a73bfbadd25c && \
-    ./autogen.sh && \
-    ./configure --enable-static --disable-shared && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
+# - Build CMake 3.24 
 RUN git clone -b v3.24.0 --depth 1 https://github.com/Kitware/CMake && \
     cd CMake && \
     git reset --hard 4be24f031a4829db75b85062cc67125035d8831e && \
@@ -303,3 +305,19 @@ RUN git clone -b v3.24.0 --depth 1 https://github.com/Kitware/CMake && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
+
+# - Build Protobuf 21.5 (con git submodule update!) 
+RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && \
+    cd protobuf && \
+    git reset --hard ab840345966d0fa8e7100d771c92a73bfbadd25c && \
+    ./autogen.sh && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
+
+# - Clona il wallet e usa la "forzatura" OpenGL che abbiamo studiato:
+WORKDIR /dinastycoin-gui
+RUN git clone --recursive https://github.com .
+
+RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so" \
+    make release-static -j$THREADS
