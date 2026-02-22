@@ -161,6 +161,7 @@ RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fon
 RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     cd icu/icu4c/source && \
     git reset --hard e2d85306162d3a0691b070b4f0a73e4012433444 && \
+    export CC=gcc CXX=g++ && \
     ./configure --disable-shared --enable-static --disable-tests --disable-samples && \
     make -j$THREADS && \
     make -j$THREADS install && \
