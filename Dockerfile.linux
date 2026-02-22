@@ -16,7 +16,7 @@ RUN apt update && apt install -y \
     libxcb1-dev libx11-xcb-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev \
     libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev \
     libxcb-randr0-dev libxcb-render-util0-dev libxkbcommon-x11-dev \
-    libglvnd-dev libegl1-mesa-dev libgles2-mesa-dev \
+    libglvnd-dev libegl1-mesa-dev libgles2-mesa-dev libgl1-dev \
     libboost-all-dev libssl-dev libzmq3-dev libunbound-dev \
     libunwind8-dev liblzma-dev libreadline-dev libldns-dev \
     libexpat1-dev libcurl4-openssl-dev miniupnpc libminiupnpc-dev \
