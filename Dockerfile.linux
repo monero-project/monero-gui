@@ -5,7 +5,7 @@ ARG QT_VERSION=v5.15.17-lts-lgpl
 
 ENV CFLAGS=""
 ENV CPPFLAGS=""
-ENV CXXFLAGS="-"
+ENV CXXFLAGS=""
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && apt install -y \
