@@ -191,8 +191,8 @@ RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && 
     --with-locale -j$THREADS && \
     rm -rf $(pwd)
 
-RUN wget --no-check-certificate https://www.openssl.org || \
-    wget --no-check-certificate https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1u/openssl-1.1.1u.tar.gz && \
+RUN wget --no-check-certificate -O openssl-1.1.1u.tar.gz https://www.openssl.org || \
+    wget --no-check-certificate -O openssl-1.1.1u.tar.gz https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1u/openssl-1.1.1u.tar.gz && \
     echo "e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6 openssl-1.1.1u.tar.gz" | sha256sum -c && \
     tar -xzf openssl-1.1.1u.tar.gz && \
     cd openssl-1.1.1u && \
