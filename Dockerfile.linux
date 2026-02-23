@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxcb1-dev libx11-xcb-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev \
     libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev \
     libxcb-randr0-dev libxcb-render-util0-dev libxkbcommon-x11-dev \
-    libglvnd-dev libegl1-mesa-dev libgles2-mesa-dev \
+    libegl1-mesa-dev libgles2-mesa-dev \
     libboost-all-dev libssl-dev libzmq3-dev libunbound-dev \
     libunwind8-dev liblzma-dev libldns-dev \
     libexpat1-dev libcurl4-openssl-dev libminiupnpc-dev \
@@ -28,9 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-# 2. Fix OpenGL 
-RUN ln -sf /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGL.so && \
-    ln -sf /usr/lib/x86_64-linux-gnu/libEGL.so.1 /usr/lib/x86_64-linux-gnu/libEGL.so
+# 2. Removed
 
 # 3. Compilazione dipendenze 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
@@ -191,6 +189,7 @@ RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && 
     --with-locale -j$THREADS && \
     rm -rf $(pwd)
 
+# - Build OpenSSL
 RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
     echo "e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6 openssl-1.1.1u.tar.gz" | sha256sum -c && \
     tar -xzf openssl-1.1.1u.tar.gz && \
@@ -320,8 +319,15 @@ RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && 
 WORKDIR /dinastycoin-gui
 RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
 
-RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so" \
-    make release-static -j$THREADS
+# - Compilazione con forzatura manuale dei percorsi OpenGL (Fix per CMake)
+RUN mkdir -p build/release && cd build/release && \
+    cmake -D CMAKE_BUILD_TYPE=Release \
+          -D STATIC=ON \
+          -D OPENGL_INCLUDE_DIR=/usr/include \
+          -D OPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so \
+          -D OPENGL_opengl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so \
+          ../.. && \
+    make -j$THREADS
 
 # Rimuove i simboli di debug da tutti i binari per alleggerire il pacchetto
 RUN strip /dinastycoin-gui/build/release/bin/* || true
