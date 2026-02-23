@@ -158,6 +158,9 @@ RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fon
     make -j$THREADS install && \
     rm -rf $(pwd)
 
+# Questo "pulisce" i percorsi delle librerie che hai compilato finora
+RUN ldconfig
+
 # - Build ICU 
 RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     cd icu/icu4c/source && \
@@ -307,11 +310,20 @@ WORKDIR /dinastycoin-gui
 RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
 
 # - Compilazione con FORZATURA AMBIENTE (Risolve errore OpenGL libraries vuoto)
+#RUN mkdir -p build/release && cd build/release && \
+#    CPATH="/usr/include" \
+#    LIBRARY_PATH="/usr/lib/x86_64-linux-gnu" \
+#    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON ../.. && \
+#    make -j$THREADS
 RUN mkdir -p build/release && cd build/release && \
-    CPATH="/usr/include" \
-    LIBRARY_PATH="/usr/lib/x86_64-linux-gnu" \
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON ../.. && \
+    cmake -D CMAKE_BUILD_TYPE=Release \
+          -D STATIC=ON \
+          -D OPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so \
+          -D OPENGL_glu_LIBRARY=/usr/lib/x86_64-linux-gnu/libGLU.so \
+          -D OPENGL_INCLUDE_DIR=/usr/include \
+          ../.. && \
     make -j$THREADS
+
 
 # - Rimuove i simboli di debug da tutti i binari per alleggerire il pacchetto
 RUN strip /dinastycoin-gui/build/release/bin/* || true
