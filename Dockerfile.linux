@@ -318,7 +318,7 @@ RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && 
 
 # - Clona il wallet e usa la "forzatura" OpenGL che abbiamo studiato:
 WORKDIR /dinastycoin-gui
-RUN git clone --recursive https://github.com .
+RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
 
 RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so" \
     make release-static -j$THREADS
@@ -328,16 +328,25 @@ RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/us
 RUN mkdir -p /dinastycoin-gui/AppDir/usr/bin
 RUN mkdir -p /dinastycoin-gui/AppDir/usr/share/icons/hicolor/256x256/apps/
 
-# 1. Copia l'eseguibile compilato (controlla il percorso esatto del build)
-RUN cp /dinastycoin-gui/build/release/bin/dinastycoin-wallet-gui /dinastycoin-gui/AppDir/usr/bin/
+# 1. Copia tutti i binari generati dal build nella cartella dell'AppImage
+RUN cp /dinastycoin-gui/build/release/bin/* /dinastycoin-gui/AppDir/usr/bin/
 
 # 2. Copia l'icona e il file desktop
 RUN cp /dinastycoin-gui/dinastycoin.png /dinastycoin-gui/AppDir/usr/share/icons/hicolor/256x256/apps/dinastycoin.png
 RUN cp /dinastycoin-gui/dinastycoin.png /dinastycoin-gui/AppDir/dinastycoin.png
 RUN cp /dinastycoin-gui/dinastycoin-wallet-gui.desktop /dinastycoin-gui/AppDir/
 
-# 3. Crea l'AppRun (lo script che avvia l'AppImage)
+# 3. Copia appimagetool dal repository
+RUN wget https://github.com/appimage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool && \
+chmod +x /usr/local/bin/appimagetool
+ENV APPIMAGE_EXTRACT_AND_RUN=1
+
+# 4. Crea l'AppRun (lo script che avvia l'AppImage)
 RUN echo '#!/bin/sh' > /dinastycoin-gui/AppDir/AppRun && \
     echo 'HERE="$(dirname "$(readlink -f "${0}")")"' >> /dinastycoin-gui/AppDir/AppRun && \
     echo 'exec "${HERE}/usr/bin/dinastycoin-wallet-gui" "$@"' >> /dinastycoin-gui/AppDir/AppRun && \
     chmod +x /dinastycoin-gui/AppDir/AppRun
+
+# 5. Crea il pacchetto AppImage
+RUN appimagetool /dinastycoin-gui/AppDir /dinastycoin-gui/Dinastycoin_Wallet_GUI-x86_64.AppImage
+
