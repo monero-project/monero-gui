@@ -191,15 +191,15 @@ RUN wget https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz && 
     --with-locale -j$THREADS && \
     rm -rf $(pwd)
 
-RUN wget --no-check-certificate -O openssl-1.1.1u.tar.gz https://www.openssl.org || \
-    wget --no-check-certificate -O openssl-1.1.1u.tar.gz https://github.com/openssl/openssl/releases/download/OpenSSL_1_1_1u/openssl-1.1.1u.tar.gz && \
+RUN wget https://www.openssl.org/source/openssl-1.1.1u.tar.gz && \
     echo "e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6 openssl-1.1.1u.tar.gz" | sha256sum -c && \
     tar -xzf openssl-1.1.1u.tar.gz && \
+    rm openssl-1.1.1u.tar.gz && \
     cd openssl-1.1.1u && \
     ./config no-shared no-zlib-dynamic --prefix=/usr --openssldir=/usr && \
     make -j$THREADS && \
-    make install && \
-    cd .. && rm -rf openssl-1.1.1u*
+    make -j$THREADS install && \
+    rm -rf $(pwd)
 
 RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     echo "2e32f283820c24c51ca1dd8afecfdb747c7385a137abe865c99db4b257403581 unbound-1.16.2.tar.gz" | sha256sum -c && \
