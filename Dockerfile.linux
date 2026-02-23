@@ -323,6 +323,9 @@ RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
 RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so" \
     make release-static -j$THREADS
 
+# Rimuove i simboli di debug da tutti i binari per alleggerire il pacchetto
+RUN strip /dinastycoin-gui/build/release/bin/* || true
+
 # - Prepara la struttura AppDir e il pacchetto AppImage
 # Crea la struttura cartelle
 RUN mkdir -p /dinastycoin-gui/AppDir/usr/bin
