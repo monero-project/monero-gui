@@ -309,18 +309,13 @@ RUN git clone -b v21.5 https://github.com/protocolbuffers/protobuf && \
 WORKDIR /dinastycoin-gui
 RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
 
-# - Compilazione con FORZATURA AMBIENTE (Risolve errore OpenGL libraries vuoto)
+# - Compilazione
 #RUN mkdir -p build/release && cd build/release && \
-#    CPATH="/usr/include" \
-#    LIBRARY_PATH="/usr/lib/x86_64-linux-gnu" \
-#    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON ../.. && \
+#    cmake -D CMAKE_BUILD_TYPE=Release ../.. && \
 #    make -j$THREADS
 RUN mkdir -p build/release && cd build/release && \
     cmake -D CMAKE_BUILD_TYPE=Release \
-          -D STATIC=ON \
-          -D OPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so \
-          -D OPENGL_glu_LIBRARY=/usr/lib/x86_64-linux-gnu/libGLU.so \
-          -D OPENGL_INCLUDE_DIR=/usr/include \
+          -D ARCH="x86-64" \
           ../.. && \
     make -j$THREADS
 
