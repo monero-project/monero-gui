@@ -6,6 +6,8 @@ on:
 jobs:
   build-linux:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Autorizza la creazione della Release
     
     steps:
       - name: Checkout del codice
@@ -15,23 +17,30 @@ jobs:
 
       - name: Costruzione Immagine e AppImage (Docker)
         run: |
-          # Esegue tutto il Dockerfile (compilazione + creazione AppImage)
+          # Avvia il Dockerfile (compilazione + OpenGL fix + AppImage)
           docker build --tag dinasty-build --file Dockerfile.linux .
 
       - name: Estrai AppImage e genera Checksum
         run: |
-          # Creiamo il container, copiamo il file e puliamo subito
+          # Pescaggio del file dal container e creazione SHA256
           docker create --name temp-container dinasty-build
           docker cp temp-container:/dinastycoin-gui/Dinastycoin_Wallet_GUI-x86_64.AppImage ./Dinastycoin_Wallet_GUI-x86_64.AppImage
           docker rm temp-container
-          
-          # Genera il file SHA-256 per la verifica
           sha256sum Dinastycoin_Wallet_GUI-x86_64.AppImage > Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
 
-      - name: Carica AppImage e Checksum su GitHub
-        uses: actions/upload-artifact@v4
+      - name: Crea Tag con data
+        id: tagger
+        run: |
+          TAG_NAME="build-$(date +'%Y.%m.%d-%H%M')"
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Pubblica Release Ufficiale
+        uses: softprops/action-gh-release@v2
         with:
-          name: Dinastycoin-AppImage-Package
-          path: |
+          tag_name: ${{ steps.tagger.outputs.tag }}
+          name: Dinastycoin Wallet GUI - ${{ steps.tagger.outputs.tag }}
+          draft: false
+          prerelease: false
+          files: |
             ./Dinastycoin_Wallet_GUI-x86_64.AppImage
             ./Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
