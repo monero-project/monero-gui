@@ -11,9 +11,10 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 # 1. Installazione pacchetti 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
-    libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev \
-    libusb-1.0-0-dev mesa-common-dev pkg-config python wget xutils-dev \
+    build-essential automake autopoint bison gettext git gperf \
+    libgl1-mesa-dev libglib2.0-dev libpng-dev libpthread-stubs0-dev \
+    libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
+    mesa-common-dev pkg-config python wget xutils-dev \
     libdbus-1-dev ca-certificates && update-ca-certificates
 
 # Da valutare    rm -rf /var/lib/apt/lists/*
@@ -161,7 +162,6 @@ RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fon
 RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     cd icu/icu4c/source && \
     git reset --hard e2d85306162d3a0691b070b4f0a73e4012433444 && \
-    export CC=gcc CXX=g++ && \
     ./configure --disable-shared --enable-static --disable-tests --disable-samples && \
     make -j$THREADS && \
     make -j$THREADS install && \
