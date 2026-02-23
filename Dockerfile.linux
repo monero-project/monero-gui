@@ -311,6 +311,7 @@ RUN git clone -b v21.5 --depth 1 https://github.com/protocolbuffers/protobuf && 
     cd protobuf && \
     git reset --hard ab840345966d0fa8e7100d771c92a73bfbadd25c && \
     ./autogen.sh && \
+    ./configure --disable-shared --enable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
@@ -321,3 +322,22 @@ RUN git clone --recursive https://github.com .
 
 RUN EXTRA_CMAKE_FLAGS="-DOPENGL_INCLUDE_DIR=/usr/include -DOPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so" \
     make release-static -j$THREADS
+
+# - Prepara la struttura AppDir e il pacchetto AppImage
+# Crea la struttura cartelle
+RUN mkdir -p /dinastycoin-gui/AppDir/usr/bin
+RUN mkdir -p /dinastycoin-gui/AppDir/usr/share/icons/hicolor/256x256/apps/
+
+# 1. Copia l'eseguibile compilato (controlla il percorso esatto del build)
+RUN cp /dinastycoin-gui/build/release/bin/dinastycoin-wallet-gui /dinastycoin-gui/AppDir/usr/bin/
+
+# 2. Copia l'icona e il file desktop
+RUN cp /dinastycoin-gui/dinastycoin.png /dinastycoin-gui/AppDir/usr/share/icons/hicolor/256x256/apps/dinastycoin.png
+RUN cp /dinastycoin-gui/dinastycoin.png /dinastycoin-gui/AppDir/dinastycoin.png
+RUN cp /dinastycoin-gui/dinastycoin-wallet-gui.desktop /dinastycoin-gui/AppDir/
+
+# 3. Crea l'AppRun (lo script che avvia l'AppImage)
+RUN echo '#!/bin/sh' > /dinastycoin-gui/AppDir/AppRun && \
+    echo 'HERE="$(dirname "$(readlink -f "${0}")")"' >> /dinastycoin-gui/AppDir/AppRun && \
+    echo 'exec "${HERE}/usr/bin/dinastycoin-wallet-gui" "$@"' >> /dinastycoin-gui/AppDir/AppRun && \
+    chmod +x /dinastycoin-gui/AppDir/AppRun
