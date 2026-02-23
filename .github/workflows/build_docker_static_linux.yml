@@ -1,9 +1,7 @@
 name: Dinastycoin Linux Build
 
 on:
-#  push:
-#    branches: [ master, main ]
-  workflow_dispatch: # Questo ti permette di avviare la build a mano quando vuoi
+  workflow_dispatch:
 
 jobs:
   build-linux:
@@ -13,57 +11,27 @@ jobs:
       - name: Checkout del codice
         uses: actions/checkout@v4
         with:
-          submodules: recursive # Necessario per scaricare le dipendenze interne
+          submodules: recursive
 
-      - name: Costruzione dell'immagine Docker
+      - name: Costruzione Immagine e AppImage (Docker)
         run: |
-          # Costruisce l'ambiente di compilazione usando il Dockerfile incluso nel repo
-          docker build --tag monero:build-env-linux --file Dockerfile.linux .
+          # Esegue tutto il Dockerfile (compilazione + creazione AppImage)
+          docker build --tag dinasty-build --file Dockerfile.linux .
 
-      - name: Compilazione in Docker
+      - name: Estrai AppImage e genera Checksum
         run: |
-          # Ora che l'immagine esiste, possiamo avviare la compilazione
-          docker run --rm \
-            -v ${{ github.workspace }}:/dinastycoin-gui \
-            -w /dinastycoin-gui \
-            monero:build-env-linux \
-            sh -c 'make release -j$(nproc)'
+          # Creiamo il container, copiamo il file e puliamo subito
+          docker create --name temp-container dinasty-build
+          docker cp temp-container:/dinastycoin-gui/Dinastycoin_Wallet_GUI-x86_64.AppImage ./Dinastycoin_Wallet_GUI-x86_64.AppImage
+          docker rm temp-container
+          
+          # Genera il file SHA-256 per la verifica
+          sha256sum Dinastycoin_Wallet_GUI-x86_64.AppImage > Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
 
-      - name: Verifica posizione eseguibile
-        run: |
-          echo "Ricerca dell'eseguibile in corso..."
-          find build -name "dinastycoin-wallet-gui"
-
-      - name: Carica l'eseguibile (Artifact)
+      - name: Carica AppImage e Checksum su GitHub
         uses: actions/upload-artifact@v4
         with:
-          name: dinastycoin-gui-linux
-          path: build/release/bin/
-      - name: Prepara AppDir e genera AppImage
-        run: |
-          # 1. Scarica linuxdeploy e il plugin Qt
-          wget https://github.com
-          wget https://github.com
-          chmod +x linuxdeploy*.AppImage
-
-          # 2. Crea la struttura per l'AppImage
-          mkdir -p AppDir
-          
-          # 3. Copia l'eseguibile compilato (assicurati che il percorso sia corretto)
-          cp build/release/bin/dinastycoin-wallet-gui AppDir/
-          
-          # 4. Esegui linuxdeploy per creare il pacchetto
-          # Questo comando include l'icona, il file .desktop e tutte le librerie Qt
-          export VERSION=$(date +%Y%m%d)
-          ./linuxdeploy-x86_64.AppImage --appdir AppDir \
-            -e AppDir/dinastycoin-wallet-gui \
-            -i dinastycoin.png \
-            -d dinastycoin-wallet-gui.desktop \
-            --plugin qt \
-            --output appimage
-
-      - name: Carica AppImage finale
-        uses: actions/upload-artifact@v4
-        with:
-          name: Dinastycoin-Wallet-Linux
-          path: "*.AppImage"
+          name: Dinastycoin-AppImage-Package
+          path: |
+            ./Dinastycoin_Wallet_GUI-x86_64.AppImage
+            ./Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
