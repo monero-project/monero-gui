@@ -13,7 +13,7 @@ ENV SOURCE_DATE_EPOCH=1397818193
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential automake autopoint bison gettext git gperf \
     libgl1-mesa-dev libglib2.0-dev libpng-dev libpthread-stubs0-dev \
-    libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
+    libgl1-mesa-glx libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
     mesa-common-dev libglu1-mesa-dev pkg-config python wget xutils-dev \
     libdbus-1-dev ca-certificates && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -311,6 +311,9 @@ WORKDIR /dinastycoin-gui
 RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef . && \
     git describe --tags || true
 
+# - Per forzare i percorsi nell’ambiente
+ENV OPENGL_gl_LIBRARY=/usr/lib/x86_64-linux-gnu/libGL.so
+ENV OPENGL_INCLUDE_DIR=/usr/include
 # - Compilazione statica completa
 RUN make release-static -j$THREADS
 
