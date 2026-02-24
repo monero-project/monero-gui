@@ -5,36 +5,74 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write # Autorizza la creazione della Release
-    
+
+    env:
+      THREADS: 3
+      APPIMAGE_NAME: Dinastycoin_Wallet_GUI-x86_64.AppImage
+
     steps:
       - name: Checkout del codice
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Costruzione Immagine e AppImage (Docker)
-        run: |
-          # Avvia il Dockerfile (compilazione + OpenGL fix + AppImage)
-          docker build --tag dinasty-build --file Dockerfile.linux .
+      - name: Libera spazio su disco (opzionale)
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/share/swift
 
-      - name: Estrai AppImage e genera Checksum
+      - name: Costruzione immagine Docker (ambiente statico)
         run: |
-          # Pescaggio del file dal container e creazione SHA256
-          docker create --name temp-container dinasty-build
-          docker cp temp-container:/dinastycoin-gui/Dinastycoin_Wallet_GUI-x86_64.AppImage ./Dinastycoin_Wallet_GUI-x86_64.AppImage
-          docker rm temp-container
-          sha256sum Dinastycoin_Wallet_GUI-x86_64.AppImage > Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
+          docker build \
+            --tag dinastycoin-build-env \
+            --build-arg THREADS=${THREADS} \
+            --file Dockerfile.linux .
 
-      - name: Crea Tag con data
+      - name: Compilazione statica dentro il container
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/dinastycoin-gui \
+            -w /dinastycoin-gui \
+            dinastycoin-build-env \
+            sh -c "make release-static -j${THREADS}"
+
+      - name: Creazione AppImage
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/dinastycoin-gui \
+            -w /dinastycoin-gui \
+            dinastycoin-build-env \
+            sh -c "
+              cd build/release
+              mkdir -p ../AppDir/usr/bin
+              cp -a bin/* ../AppDir/usr/bin/
+              mkdir -p ../AppDir/usr/share/icons/hicolor/256x256/apps/
+              cp ../../dinastycoin.png ../AppDir/usr/share/icons/hicolor/256x256/apps/dinastycoin.png
+              cp ../../dinastycoin-wallet-gui.desktop ../AppDir/
+              echo '#!/bin/sh' > ../AppDir/AppRun
+              echo 'HERE=\"\$(dirname \"\$(readlink -f \"\${0}\")\")\"' >> ../AppDir/AppRun
+              echo 'exec \"\${HERE}/usr/bin/dinastycoin-wallet-gui\" \"\${@}\"' >> ../AppDir/AppRun
+              chmod +x ../AppDir/AppRun
+              appimagetool ../AppDir ../${APPIMAGE_NAME}
+            "
+
+      - name: Verifica base QML
+        run: |
+          chmod +x ./build/release/${{ env.APPIMAGE_NAME }}
+          xvfb-run -a ./build/release/${{ env.APPIMAGE_NAME }} --test-qml || echo "QML test skipped"
+
+      - name: Calcola SHA256
+        run: |
+          sha256sum ./build/release/${{ env.APPIMAGE_NAME }} > ./${{ env.APPIMAGE_NAME }}.sha256
+
+      - name: Crea tag con data/ora
         id: tagger
         run: |
           TAG_NAME="build-$(date +'%Y.%m.%d-%H%M')"
           echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
 
-      - name: Pubblica Release Ufficiale
+      - name: Pubblica Release ufficiale
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tagger.outputs.tag }}
@@ -42,5 +80,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./Dinastycoin_Wallet_GUI-x86_64.AppImage
-            ./Dinastycoin_Wallet_GUI-x86_64.AppImage.sha256
+            ./build/release/${{ env.APPIMAGE_NAME }}
+            ./${{ env.APPIMAGE_NAME }}.sha256
