@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev \
     mesa-common-dev libglu1-mesa-dev pkg-config python wget xutils-dev \
     libdbus-1-dev ca-certificates && update-ca-certificates
+    && rm -rf /var/lib/apt/lists/*
 
 # Da valutare    rm -rf /var/lib/apt/lists/*
 
@@ -165,7 +166,7 @@ RUN ldconfig
 RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     cd icu/icu4c/source && \
     git reset --hard e2d85306162d3a0691b070b4f0a73e4012433444 && \
-    ./configure --disable-shared --enable-static --disable-tests --disable-samples && \
+    ./configure --prefix=/usr --disable-shared --enable-static --disable-tests --disable-samples && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
@@ -204,9 +205,9 @@ RUN wget https://www.nlnetlabs.nl/downloads/unbound/unbound-1.16.2.tar.gz && \
     rm -rf $(pwd)
 
 # - Build Qt 5.15.17 (Statico) 
-RUN rm -f /usr/lib/x86_64-linux-gnu/libX11.a \
-    /usr/lib/x86_64-linux-gnu/libXext.a \
-    /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
+RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
+    rm /usr/lib/x86_64-linux-gnu/libXext.a && \
+    rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
     git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd qt5 && \
     git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
@@ -231,9 +232,9 @@ RUN rm -f /usr/lib/x86_64-linux-gnu/libX11.a \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
     -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
     -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
-    -skip qtscript -skip qtx11extras -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools \
+    -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools \
     -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview \
-    -skip qtwinextras  -skip gamepad -skip serialbus -skip location -skip webengine \
+    -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine \
     -nomake examples -nomake tests -nomake tools && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -308,20 +309,16 @@ RUN git clone -b v21.5 https://github.com/protocolbuffers/protobuf && \
 # - Clona il wallet 
 WORKDIR /dinastycoin-gui
 RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
+    git describe --tags || true
 
-# - Compilazione
-#RUN mkdir -p build/release && cd build/release && \
-#    cmake -D CMAKE_BUILD_TYPE=Release ../.. && \
-#    make -j$THREADS
-RUN mkdir -p build/release && cd build/release && \
-    cmake -D CMAKE_BUILD_TYPE=Release \
-          -D ARCH="x86-64" \
-          ../.. && \
-    make -j$THREADS
-
+# - Compilazione statica completa
+RUN make release-static -j$THREADS
 
 # - Rimuove i simboli di debug da tutti i binari per alleggerire il pacchetto
-RUN strip /dinastycoin-gui/build/release/bin/* || true
+# RUN strip /dinastycoin-gui/build/release/bin/* || true
+# || echo "skip strip if not found"
+# RUN find /dinastycoin-gui/build/release/bin -type f -exec strip --strip-unneeded {} + || true
+RUN strip /dinastycoin-gui/build/release/bin/* 2>/dev/null || echo "skip strip if not found"
 
 # - Preparazione AppDir e Pacchetto AppImage
 RUN mkdir -p /dinastycoin-gui/AppDir/usr/bin && \
@@ -340,6 +337,6 @@ ENV APPIMAGE_EXTRACT_AND_RUN=1
 RUN echo '#!/bin/sh' > /dinastycoin-gui/AppDir/AppRun && \
     echo 'HERE="$(dirname "$(readlink -f "${0}")")"' >> /dinastycoin-gui/AppDir/AppRun && \
     echo 'exec "${HERE}/usr/bin/dinastycoin-wallet-gui" "$@"' >> /dinastycoin-gui/AppDir/AppRun && \
-RUN chmod +x /dinastycoin-gui/AppDir/AppRun && \
+    chmod +x /dinastycoin-gui/AppDir/AppRun && \
     appimagetool /dinastycoin-gui/AppDir /dinastycoin-gui/Dinastycoin_Wallet_GUI-x86_64.AppImage
 
