@@ -308,7 +308,7 @@ RUN git clone -b v21.5 https://github.com/protocolbuffers/protobuf && \
 
 # - Clona il wallet 
 WORKDIR /dinastycoin-gui
-RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef .
+RUN git clone --recursive https://github.com/Zefiro369/dinastycoin-gui-zef . && \
     git describe --tags || true
 
 # - Compilazione statica completa
