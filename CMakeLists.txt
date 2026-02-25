@@ -13,13 +13,17 @@ option(STATIC "Link libraries statically, requires static Qt")
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
-option(WITH_UPDATER "Regularly check for new updates" OFF) #disabilitato in fase di test
+option(WITH_UPDATER "Regularly check for new updates" OFF) # OFF disabilitato in fase di test
 option(DEV_MODE "Checkout latest dinastycoin master on build" OFF)
 
- 
-set(CMAKE_CXX_STANDARD 17)
+if(DEV_MODE)
+  # DEV_MODE checks out the dinastycoin submodule to master, which requires C++17.
+  set(CMAKE_CXX_STANDARD 17)
+else()
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+# set(CMAKE_CXX_EXTENSIONS OFF)
 # set(QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/android")
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
 include(CheckCCompilerFlag)
@@ -149,6 +153,8 @@ if(UNIX)
   endif()
 endif()
 
+set(QT_MIN_VERSION "5.12")
+
 find_package(PkgConfig REQUIRED)
 
 # TODO: drop this once we switch to Qt 5.14+
@@ -164,7 +170,7 @@ if(Qt5XmlPatterns_FOUND)
 endif()
 
 foreach(QT5_MODULE ${QT5_LIBRARIES})
-  find_package(${QT5_MODULE} REQUIRED)
+  find_package(${QT5_MODULE} ${QT_MIN_VERSION} REQUIRED)
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
 endforeach()
 
