@@ -378,9 +378,6 @@ Rectangle {
             console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
             oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
 
-            // protecting wallet with password
-            wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
-
             // save to persistent settings
             persistentSettings.account_name = wizardController.walletOptionsName
             persistentSettings.wallet_path = wizardController.m_wallet.path;
@@ -399,6 +396,7 @@ Rectangle {
             new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
         }
         console.log("saving new wallet to", new_wallet_filename);
+        wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
         wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
     }
 
