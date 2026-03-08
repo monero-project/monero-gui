@@ -42,6 +42,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
+#include <QTcpSocket>
 
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
@@ -376,6 +377,17 @@ bool WalletManager::startMining(const QString &address, quint32 threads, bool ba
 bool WalletManager::stopMining()
 {
     return m_pimpl->stopMining();
+}
+
+void WalletManager::checkI2PSamAsync(const QString &host, int port, const QJSValue &callback)
+{
+    m_scheduler.run([host, port] {
+        QTcpSocket socket;
+        socket.connectToHost(host, static_cast<quint16>(port));
+        bool reachable = socket.waitForConnected(2000);
+        if (reachable) socket.disconnectFromHost();
+        return QJSValueList({reachable});
+    }, callback);
 }
 
 bool WalletManager::localDaemonSynced() const

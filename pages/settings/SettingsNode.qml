@@ -352,6 +352,135 @@ Rectangle{
                     }
                 }
             }
+
+            Timer {
+                id: i2pStatusTimer
+                interval: 5000
+                running: appWindow.persistentSettings.anonymityNetworkType === 1
+                repeat: true
+                triggeredOnStart: true
+                onTriggered: {
+                    var host = appWindow.persistentSettings.i2pRouterAddress || "127.0.0.1";
+                    var port = parseInt(appWindow.persistentSettings.i2pSamPort) || 7656;
+                    walletManager.checkI2PSamAsync(host, port, function(reachable) {
+                        var color = reachable ? (MoneroComponents.Style.blackTheme ? "lime" : "green") : MoneroComponents.Style.errorColor;
+                        var label = reachable ? qsTr("Router is online") : qsTr("Router is offline");
+                        i2pStatus.text = "<span style='color: " + color + ";'>" + label + "</span>";
+                    });
+                }
+            }
+
+            MoneroComponents.Label {
+                id: soloTitleLabel
+                fontSize: 24
+                text: qsTr("Anonymity network") + translationManager.emptyString
+            }
+
+            ColumnLayout {
+                spacing: 20
+                Layout.fillWidth: true
+                id: networkColumn
+                z: parent.z + 1
+
+                ColumnLayout {
+                    spacing: 10
+
+                    MoneroComponents.RadioButton {
+                        id: noneRadioButton
+                        text: qsTr("None") + translationManager.emptyString
+                        fontSize: 16
+                        checked: appWindow.persistentSettings.anonymityNetworkType === 0
+                        onClicked: {
+                            checked = true;
+                            i2pRadioButton.checked = false;
+                            appWindow.persistentSettings.anonymityNetworkType = 0;
+                        }
+                    }
+
+                    RowLayout {
+                        spacing: 8
+
+                        MoneroComponents.RadioButton {
+                            id: i2pRadioButton
+                            text: qsTr("I2P") + translationManager.emptyString
+                            fontSize: 16
+                            checked: appWindow.persistentSettings.anonymityNetworkType === 1
+                            onClicked: {
+                                checked = true;
+                                noneRadioButton.checked = false;
+                                appWindow.persistentSettings.anonymityNetworkType = 1;
+                            }
+                        }
+
+                        Image {
+                            source: "../../images/itoopie.svg"
+                            sourceSize.width: 22
+                            sourceSize.height: 22
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                }
+
+                ColumnLayout {
+                    id: i2pSettings
+                    spacing: 20
+                    Layout.fillWidth: true
+                    visible: appWindow.persistentSettings.anonymityNetworkType === 1
+
+                    MoneroComponents.TextPlain {
+                        id: soloMainLabel
+                        text: qsTr("Configure your I2P connection settings. Most users should stick to the default settings.") + translationManager.emptyString
+                        wrapMode: Text.Wrap
+                        Layout.fillWidth: true
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
+                    }
+
+                    RowLayout {
+                        spacing: 32
+                        Layout.fillWidth: true
+
+                        MoneroComponents.LineEdit {
+                            id: i2pRouterAddress
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 300
+                            labelFontSize: 14
+                            labelText: qsTr("Router address") + translationManager.emptyString
+                            text: appWindow.persistentSettings.i2pRouterAddress || "127.0.0.1"
+                            placeholderText: "127.0.0.1"
+                            placeholderFontSize: 14
+                            fontSize: 14
+                            onEditingFinished: {
+                                appWindow.persistentSettings.i2pRouterAddress = text
+                            }
+                        }
+
+                        MoneroComponents.LineEdit {
+                            id: i2pSamPort
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 100
+                            labelFontSize: 14
+                            labelText: qsTr("SAM port") + translationManager.emptyString
+                            text: appWindow.persistentSettings.i2pSamPort || "7656"
+                            placeholderText: "7656"
+                            placeholderFontSize: 14
+                            fontSize: 14
+                            onEditingFinished: {
+                                appWindow.persistentSettings.i2pSamPort = text
+                            }
+                        }
+                    }
+
+                    Text {
+                        id: i2pStatus
+                        textFormat: Text.RichText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        text: "<span style='color: #fa6800;'>" + qsTr("Checking router status...") + "</span>"
+                    }
+                }
+            }
         }
     }
 }
