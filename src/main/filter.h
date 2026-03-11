@@ -44,6 +44,7 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 
 signals:
+    void quitRequested();
     void sequencePressed(const QVariant &o, const QVariant &seq);
     void sequenceReleased(const QVariant &o, const QVariant &seq);
     void mousePressed(const QVariant &o, const QVariant &x, const QVariant &y);

@@ -43,6 +43,8 @@
 #include <QFileInfo>
 #include <QString>
 #include <QUrl>
+#include <QByteArray>
+#include <QRandomGenerator>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -244,6 +246,18 @@ bool OSHelper::isCapsLock() const
 QString OSHelper::temporaryPath() const
 {
     return QDir::tempPath();
+}
+
+QString OSHelper::randomPassword(int numBytes) const
+{
+    numBytes = qBound(16, numBytes, 128);
+
+    QByteArray buf(numBytes, Qt::Uninitialized);
+    auto *rng = QRandomGenerator::system();
+    for (int i = 0; i < numBytes; ++i)
+        buf[i] = char(rng->generate() & 0xFF);
+
+    return QString::fromLatin1(buf.toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals));
 }
 
 bool OSHelper::installed() const

@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.17-lts-lgpl
+ARG QT_VERSION=v5.15.18-lts-lgpl
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
@@ -12,9 +12,9 @@ RUN apt update && \
 RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
     update-alternatives --set x86_64-w64-mingw32-gcc $(which x86_64-w64-mingw32-gcc-posix)
 
-RUN git clone -b v0.18.4.5 --depth 1 https://github.com/monero-project/monero && \
+RUN git clone -b v0.18.4.6 --depth 1 https://github.com/monero-project/monero && \
     cd monero && \
-    git reset --hard 316a98b11ea29b65e61a42cfdc37f762736fd7c1 && \
+    git reset --hard dbcc7d212c094bd1a45f7291dbb99a4b4627a96d && \
     cp -a contrib/depends / && \
     cd .. && \
     rm -rf monero

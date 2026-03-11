@@ -38,7 +38,7 @@ import "." as MoneroComponents
 import "effects/" as MoneroEffects
 import "../js/Utils.js" as Utils
 
-Item {
+FocusScope {
     id: root
     visible: false
 
@@ -65,8 +65,6 @@ Item {
         capsLockTextLabel.visible = oshelper.isCapsLock();
         passwordInput1.reset();
         passwordInput2.reset();
-        if(!appWindow.currentWallet || appWindow.active)
-            passwordInput1.input.forceActiveFocus();
         root.walletName = walletName ? walletName : ""
         errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
@@ -76,6 +74,7 @@ Item {
         root.visible = true;
         appWindow.hideBalanceForced = true;
         appWindow.updateBalance();
+        Qt.callLater(() => passwordInput1.input.forceActiveFocus())
     }
 
     function open(walletName, errorText, okButtonText, okButtonIcon, backgroundSyncOn) {
@@ -214,6 +213,7 @@ Item {
             MoneroComponents.LineEdit {
                 id: passwordInput1
                 password: true
+                input.focus: root.visible && (appWindow.active || Qt.application.state === Qt.ApplicationActive)
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 KeyNavigation.tab: {
