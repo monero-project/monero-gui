@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import Qt5Compat.GraphicalEffects
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -61,7 +60,7 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44  : 38 ) : 0
 
-    LinearGradient {
+    Rectangle {
         visible: isOpenGL && (button.checked || buttonArea.containsMouse)
         height: parent.height
         width: 260
@@ -69,8 +68,6 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: -20
         anchors.leftMargin: parent.getOffset()
-        start: Qt.point(width, 0)
-        end: Qt.point(0, 0)
         gradient: Gradient {
             GradientStop { position: 0.0; color: MoneroComponents.Style.menuButtonGradientStart }
             GradientStop { position: 1.0; color: MoneroComponents.Style.menuButtonGradientStop }

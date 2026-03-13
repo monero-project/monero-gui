@@ -28,7 +28,6 @@
 
 import FontAwesome 1.0
 import QtQuick 2.9
-import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
 
 import "../components" as MoneroComponents
@@ -56,7 +55,7 @@ ColumnLayout {
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegularName
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
@@ -89,7 +88,7 @@ ColumnLayout {
         }
     }
 
-    property string fontFamily: MoneroComponents.Style.fontRegular.name
+    property string fontFamily: MoneroComponents.Style.fontRegularName
     property int fontSize: 18
     property bool fontBold: false
     property alias fontColor: input.color
@@ -171,7 +170,7 @@ ColumnLayout {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: labelFontSize
             font.bold: labelFontBold
             textFormat: Text.RichText

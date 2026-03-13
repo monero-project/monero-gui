@@ -20,7 +20,7 @@ ColumnLayout {
         id: label
         color: MoneroComponents.Style.defaultFontColor
         font.pixelSize: 14
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegularName
     }
 
     QtQuickControls.Slider {

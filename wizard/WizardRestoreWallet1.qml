@@ -191,7 +191,7 @@ Rectangle {
                         textMargin: 2
                         text: ""
 
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         selectionColor: MoneroComponents.Style.textSelectionColor
                         selectedTextColor: MoneroComponents.Style.textSelectedColor
@@ -206,7 +206,7 @@ Rectangle {
                             font.pixelSize: 16
                             anchors.margins: 8
                             anchors.leftMargin: 10
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
                             visible: !seedInput.text

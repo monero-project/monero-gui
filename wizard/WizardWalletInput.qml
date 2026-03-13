@@ -128,7 +128,7 @@ GridLayout {
             MoneroComponents.TextPlain {
                 id: errorMessageWalletName
                 textFormat: Text.PlainText
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: "#FF0000"
                 themeTransition: false
@@ -215,7 +215,7 @@ GridLayout {
             MoneroComponents.TextPlain {
                 id: errorMessageWalletLocation
                 textFormat: Text.PlainText
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: "#FF0000"
                 themeTransition: false

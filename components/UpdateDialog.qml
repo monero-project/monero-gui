@@ -72,7 +72,7 @@ Popup {
         Text {
             color: MoneroComponents.Style.defaultFontColor
             font.bold: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 18
             text: qsTr("New Monero version v%1 is available.").arg(updateDialog.version)
         }
@@ -80,7 +80,7 @@ Popup {
         Text {
             id: errorText
             color: "red"
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 18
             text: updateDialog.error
             visible: text
@@ -89,7 +89,7 @@ Popup {
         Text {
             id: statusText
             color: updateDialog.valid ? MoneroComponents.Style.green : MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 18
             visible: !errorText.visible
 

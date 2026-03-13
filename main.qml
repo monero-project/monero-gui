@@ -26,12 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import Qt5Compat.GraphicalEffects
 import QtQml.Models
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Dialogs
+import QtQuick.Effects
 
 import FontAwesome 1.0
 
@@ -1957,11 +1957,13 @@ ApplicationWindow {
             }
         }
 
-        FastBlur {
+        MultiEffect {
             id: blur
             anchors.fill: blurredArea
             source: blurredArea
-            radius: 64
+            blurEnabled: true
+            blur: overlay.opacity
+            blurMax: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
                 remoteNodeDialog.visible

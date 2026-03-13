@@ -137,7 +137,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     renderType: Text.QtRendering
-                    font.family: MoneroComponents.Style.fontLight.name
+                    font.family: MoneroComponents.Style.fontLightName
                     textFormat: TextEdit.AutoText
                     readOnly: true
                     font.pixelSize: 14

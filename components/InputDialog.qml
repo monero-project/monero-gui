@@ -78,7 +78,7 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
 
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -90,7 +90,7 @@ Item {
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
                 font.pixelSize: 24
                 KeyNavigation.tab: okButton
                 bottomPadding: 10

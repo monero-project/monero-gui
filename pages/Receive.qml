@@ -227,7 +227,7 @@ Rectangle {
                     visible: persistentSettings.fiatPriceEnabled
                     topPadding: 5
                     leftPadding: 5
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     font.bold: false
                     horizontalAlignment: TextInput.AlignLeft
@@ -287,7 +287,7 @@ Rectangle {
                     Layout.maximumWidth: 165
                     topPadding: 5
                     leftPadding: 5
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     font.bold: false
                     horizontalAlignment: TextInput.AlignLeft
@@ -421,7 +421,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Address #") + subaddressListView.currentIndex + translationManager.emptyString
                 wrapMode: Text.WordWrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 17
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.defaultFontColor
@@ -438,7 +438,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: "(" + qsTr("no label") + ")" + translationManager.emptyString
                 wrapMode: Text.WordWrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 17
                 textFormat: Text.RichText
                 color: selectedAddressDrescriptionMouseArea.containsMouse ? MoneroComponents.Style.orange : MoneroComponents.Style.dimmedFontColor
@@ -470,7 +470,7 @@ Rectangle {
                 textFormat: Text.RichText
                 color: selectedAddressMouseArea.containsMouse ? MoneroComponents.Style.orange : MoneroComponents.Style.defaultFontColor
                 font.pixelSize: 15
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 themeTransition: false
                 tooltip: qsTr("Copy address to clipboard") + translationManager.emptyString
                 MouseArea {
@@ -637,7 +637,7 @@ Rectangle {
                                 anchors.left: parent.right
                                 anchors.leftMargin: -addressLabel.width - 5
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
                                 themeTransition: false
                             }

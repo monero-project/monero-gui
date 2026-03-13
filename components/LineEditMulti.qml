@@ -50,7 +50,7 @@ ColumnLayout {
     property int inputRadius: 4
 
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegularName
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
@@ -76,7 +76,7 @@ ColumnLayout {
     property bool labelButtonVisible: false
 
     property string fontColor: MoneroComponents.Style.defaultFontColor
-    property string fontFamily: MoneroComponents.Style.fontRegular.name
+    property string fontFamily: MoneroComponents.Style.fontRegularName
     property bool fontBold: false
     property int fontSize: 16
 
@@ -109,7 +109,7 @@ ColumnLayout {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: item.labelFontSize
             font.bold: labelFontBold
             textFormat: Text.RichText

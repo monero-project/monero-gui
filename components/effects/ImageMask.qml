@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import Qt5Compat.GraphicalEffects
 
 import "../" as MoneroComponents
 import FontAwesome 1.0
@@ -63,12 +62,27 @@ Item {
         visible: false
     }
 
-    ColorOverlay {
+    ShaderEffect {
         id: imgMockColor
         anchors.fill: root
-        source: svgMask
-        color: root.color
+        property variant source: svgMask
+        property color overlayColor: root.color
         visible: image && isOpenGL
+
+        /* broken TODO fix
+        fragmentShader: `
+            #version 440
+            layout(location = 0) in vec2 qt_TexCoord0;
+            layout(location = 0) out vec4 fragColor;
+            uniform sampler2D source;
+            uniform vec4 overlayColor;
+
+            void main() {
+                vec4 texColor = texture(source, qt_TexCoord0);
+                fragColor = vec4(overlayColor.rgb, texColor.a * overlayColor.a);
+            }
+        `
+        */
     }
 
     Text {

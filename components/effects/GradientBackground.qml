@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import Qt5Compat.GraphicalEffects
 
 import "../" as MoneroComponents
 
@@ -55,11 +54,9 @@ Item {
     }
 
     // background opengl
-    LinearGradient {
+    Rectangle {
         visible: isOpenGL
         anchors.fill: parent
-        start: root.start
-        end: root.end
         gradient: Gradient {
             GradientStop {
                 id: gradientStart
@@ -73,6 +70,7 @@ Item {
             }
         }
 
+        //TODO: unchecked, may need updating
         states: [
             State {
                 name: "black";

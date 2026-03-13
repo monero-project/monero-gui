@@ -104,7 +104,7 @@ Rectangle {
             text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
         }
@@ -119,7 +119,7 @@ Rectangle {
                 Layout.topMargin: 12
                 text: qsTr("Mode") + translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 20
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.defaultFontColor

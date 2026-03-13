@@ -29,7 +29,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
-import Qt5Compat.GraphicalEffects
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
@@ -104,7 +103,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.alignment: Qt.AlignVCenter
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 15
                     text: qsTr("Sort & filter") + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
@@ -249,7 +248,7 @@ Rectangle {
                 Layout.preferredHeight: 20
 
                 MoneroComponents.TextPlain {
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 15
                     text: qsTr("Sort by") + ":" + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
@@ -270,7 +269,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: sortBlockheightText
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         text: qsTr("Blockheight") + translationManager.emptyString
                         color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
@@ -329,7 +328,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: sortDateText
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         text: qsTr("Date") + translationManager.emptyString
                         color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
@@ -388,7 +387,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: sortAmountText
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         text: qsTr("Amount") + translationManager.emptyString
                         color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
@@ -441,7 +440,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     // status message
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 15
                     text: root.historyStatusMessage
 
@@ -468,7 +467,7 @@ Rectangle {
                     Layout.preferredHeight: 20
 
                     MoneroComponents.TextPlain {
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         text: qsTr("Page") + ":" + translationManager.emptyString
                         color: MoneroComponents.Style.defaultFontColor
@@ -669,7 +668,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: (isout ? qsTr("Sent") : qsTr("Received")) + (isFailed ? " (" + qsTr("Failed") + ")" : (isPending ? " (" + qsTr("Pending") + ")" : "")) + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
@@ -685,7 +684,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: (amount == 0 ? qsTr("Unknown amount") : displayAmount) + translationManager.emptyString
                                     color: MoneroComponents.Style.defaultFontColor
@@ -719,7 +718,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
@@ -735,7 +734,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: {
                                         if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
@@ -781,7 +780,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: (isout ? qsTr("To") : qsTr("In")) + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
@@ -798,7 +797,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     id: addressField
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: {
                                         if (isout) {
@@ -858,7 +857,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: qsTr("Confirmations") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
@@ -875,7 +874,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     property bool confirmed: confirmations < confirmationsRequired ? false : true
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: confirmed ? confirmations : confirmations + "/" + confirmationsRequired
                                     color: MoneroComponents.Style.defaultFontColor
@@ -916,7 +915,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: qsTr("Date")
                                     color: MoneroComponents.Style.historyHeaderTextColor
@@ -932,7 +931,7 @@ Rectangle {
                                 Layout.preferredHeight: 20
 
                                 MoneroComponents.TextPlain {
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     font.pixelSize: 15
                                     text: persistentSettings.historyHumanDates ? dateHuman : dateTime
 
@@ -1055,7 +1054,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: qsTr("Description") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
@@ -1072,7 +1071,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 id: txNoteText
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: tx_note !== "" ? tx_note : "-"
                                 color: MoneroComponents.Style.defaultFontColor
@@ -1123,7 +1122,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: qsTr("Transaction ID") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
@@ -1139,7 +1138,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: hash
                                 color: MoneroComponents.Style.defaultFontColor
@@ -1167,7 +1166,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: qsTr("Transaction key") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
@@ -1183,7 +1182,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: qsTr("Click to reveal")
                                 color: MoneroComponents.Style.defaultFontColor
@@ -1212,7 +1211,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 15
                                 text: qsTr("Blockheight") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
@@ -1228,7 +1227,7 @@ Rectangle {
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 font.pixelSize: 14
                                 text: (blockheight > 0 ? blockheight : qsTr('Pending')) + translationManager.emptyString;
 
@@ -1358,7 +1357,7 @@ Rectangle {
                 // status message
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 15
                 text: root.historyStatusMessage;
                 color: MoneroComponents.Style.dimmedFontColor

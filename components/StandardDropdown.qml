@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 // Copyright (c) 2014-2024, The Monero Project
 // 
 // All rights reserved.
@@ -28,7 +29,6 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import Qt5Compat.GraphicalEffects
 import FontAwesome 1.0
 import QtQuick.Layouts
 
@@ -73,16 +73,16 @@ ColumnLayout {
         id: dropdownLabelRect
         color: "transparent"
         Layout.fillWidth: true
-        height: (dropdownLabel.height + 10)
-        visible: showingHeader ? true : false
+        implicitHeight: (dropdownLabel.height + 10)
+        visible: dropdown.showingHeader ? true : false
 
         MoneroComponents.TextPlain {
             id: dropdownLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: labelFontSize
-            font.bold: labelFontBold
+            font.family: MoneroComponents.Style.fontRegularName
+            font.pixelSize: dropdown.labelFontSize
+            font.bold: dropdown.labelFontBold
             textFormat: Text.RichText
             color: MoneroComponents.Style.defaultFontColor
         }
@@ -95,7 +95,7 @@ ColumnLayout {
         border.color: dropdown.colorBorder
         radius: 4
         Layout.fillWidth: true
-        Layout.preferredHeight: dropdownHeight
+        Layout.preferredHeight: dropdown.dropdownHeight
 
         MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
@@ -105,7 +105,7 @@ ColumnLayout {
             anchors.rightMargin: 12
             width: droplist.width
             elide: Text.ElideRight
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontSize
             color: dropdown.textColor
@@ -190,9 +190,9 @@ ColumnLayout {
                             anchors.right: col2Text.left
                             anchors.leftMargin: 12
                             anchors.rightMargin: 0
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.bold: false
-                            font.pixelSize: fontItemSize
+                            font.pixelSize: dropdown.fontItemSize
                             color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
                             text: qsTr(column1) + translationManager.emptyString
                         }
@@ -202,7 +202,7 @@ ColumnLayout {
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
                             anchors.rightMargin: 45
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 14
                             color: "#FFFFFF"
                             text: ""
@@ -217,7 +217,7 @@ ColumnLayout {
                             onClicked: {
                                 popup.close()
                                 columnid.currentIndex = index
-                                changed();
+                                xChanged();
                             }
                         }
                     }

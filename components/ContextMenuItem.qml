@@ -53,7 +53,7 @@ MenuItem {
 
         Text {
             color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.buttonTextColor : MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 14
             Layout.fillWidth: true
             text: menuItem.text

@@ -65,7 +65,7 @@ Rectangle {
             id: progressText
             anchors.top: parent.top
             anchors.topMargin: 6
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMediumName
             font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor
@@ -78,7 +78,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMediumName
             font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor

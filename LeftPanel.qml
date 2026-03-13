@@ -28,7 +28,7 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
@@ -122,17 +122,19 @@ Rectangle {
                     fillMode: Image.PreserveAspectFit
                     source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
                 }
-
-                DropShadow {
+                
+                MultiEffect {
                     visible: isOpenGL && !MoneroComponents.Style.blackTheme
                     anchors.fill: card
-                    horizontalOffset: 3
-                    verticalOffset: 3
-                    radius: 10.0
-                    samples: 15
-                    color: "#3B000000"
                     source: card
-                    cached: true
+                    shadowEnabled: true
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                    shadowBlur: 1.0
+                    shadowOpacity: 0.23 // ≈ #3B000000
+                    shadowColor: "#000000"
+
+                    //autoPaddingEnabled: true   // automatically expands bounds for offset + blur
                 }
 
                 MoneroComponents.TextPlain {

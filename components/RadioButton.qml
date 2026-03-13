@@ -76,7 +76,7 @@ Item {
             id: label
             Layout.leftMargin: 10
             color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: radioButton.fontSize
             wrapMode: Text.Wrap
         }

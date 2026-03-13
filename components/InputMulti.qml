@@ -42,7 +42,7 @@ TextArea {
     property bool addressValidation: false
 
     id: textArea
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegularName
     color: fontColor
     font.pixelSize: fontSize
     font.bold: fontBold

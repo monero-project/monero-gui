@@ -2,8 +2,8 @@ import QtCore
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Qt5Compat.GraphicalEffects
 import QtQuick.Dialogs
+import QtQuick.Effects
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0
@@ -167,7 +167,7 @@ Item {
                                 return ""
                             }
                         }
-                        onHideAmountToggled: {
+                        onHideAmountToggled: function(txid) {
                             if(root.hiddenAmounts.indexOf(txid) < 0){
                                 root.hiddenAmounts.push(txid);
                             } else {
@@ -178,16 +178,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
                 source: tracker
+                shadowEnabled: true
+                shadowHorizontalOffset: 2
+                shadowVerticalOffset: 2
+                shadowBlur: 8.0
+                shadowColor: "#20000000"
+                smooth: true
             }
 
             Rectangle {
@@ -238,16 +237,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#30000000"
-                smooth: true
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 8
+                shadowColor: "#30000000"
                 source: qrImg
+                smooth: true
             }
         }
 
@@ -260,14 +258,14 @@ Item {
                 height: 32
 
                 MoneroComponents.TextPlain {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: root.parent.verticalCenter
+                    anchors.horizontalCenter: root.parent.horizontalCenter
                     font.pixelSize: 12
                     font.bold: false
                     color: "white"
                     text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>%1: %2 <a href='#'>(%3)</a>"
                         .arg(qsTr("Currently selected address"))
-                        .arg(addressLabel)
+                        .arg(root.addressLabel)
                         .arg(qsTr("Change")) + translationManager.emptyString
                     textFormat: Text.RichText
                     themeTransition: false
@@ -423,16 +421,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 8
+                shadowColor: "#20000000"
                 source: payment_url_container
+                smooth: true
             }
 
             Item {

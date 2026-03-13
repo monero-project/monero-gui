@@ -265,7 +265,7 @@ Rectangle {
                         Layout.fillWidth: true
 
                         MoneroComponents.TextPlain {
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Address") + translationManager.emptyString
@@ -327,7 +327,7 @@ Rectangle {
                         Layout.maximumWidth: recipientLayout.secondRowWidth
 
                         MoneroComponents.TextPlain {
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Amount") + translationManager.emptyString
@@ -383,12 +383,12 @@ Rectangle {
                                 addressValidation: true
                                 borderDisabled: true
                                 fontColor: error && text != "" ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName
                                 fontSize: 14
                                 inputPaddingBottom: 0
                                 inputPaddingTop: 0
                                 inputPaddingRight: 0
-                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegularName
                                 placeholderFontSize: 14
                                 spacing: 0
                                 wrapMode: Text.WrapAnywhere
@@ -452,13 +452,13 @@ Rectangle {
                                 Layout.preferredWidth: 125
                                 Layout.maximumWidth: 125
                                 borderDisabled: true
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName
                                 fontSize: 14
                                 inputPaddingLeft: 0
                                 inputPaddingRight: 0
                                 inputPaddingTop: 0
                                 inputPaddingBottom: 0
-                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegularName
                                 placeholderFontSize: 14
                                 placeholderLeftMargin: 0
                                 placeholderText: "0.00"
@@ -512,7 +512,7 @@ Rectangle {
                                 Layout.leftMargin: recipientLayout.colSpacing / 2
                                 Layout.preferredWidth: recipientLayout.thirdRowWidth
                                 horizontalAlignment: Text.AlignHCenter
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 text: "XMR"
                                 visible: recipientModel.count == 1
                             }
@@ -561,7 +561,7 @@ Rectangle {
                         MoneroComponents.TextPlain {
                             Layout.fillWidth: true
                             horizontalAlignment: Text.AlignRight
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             text: recipientModel.count > 1 ? qsTr("Total") + translationManager.emptyString : ""
                         }
@@ -575,7 +575,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: MoneroComponents.Style.fontMonoRegularName
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -593,7 +593,7 @@ Rectangle {
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
                         horizontalAlignment: Text.AlignHCenter
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         text: "XMR"
                         visible: recipientModel.count > 1
                     }
@@ -605,7 +605,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: MoneroComponents.Style.fontMonoRegularName
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -624,7 +624,7 @@ Rectangle {
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         horizontalAlignment: Text.AlignHCenter
                         opacity: 0.7
                         text: fiatApiCurrencySymbol()
@@ -687,7 +687,7 @@ Rectangle {
                     id: feeLabel
                     Layout.alignment: Qt.AlignBottom
                     Layout.bottomMargin: 11
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: 0.7

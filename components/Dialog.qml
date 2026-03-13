@@ -58,7 +58,7 @@ Popup {
             id: header
             color: MoneroComponents.Style.defaultFontColor
             font.bold: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 18
             visible: text != ""
         }

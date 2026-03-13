@@ -30,7 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs
 import QtQuick.Layouts
 import QtQuick.Controls 2.0
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import Qt.labs.folderlistmodel 2.1
 import moneroComponents.NetworkType 1.0
 import moneroComponents.WalletKeysFilesModel 1.0
@@ -93,7 +93,7 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     text: qsTr("Recently opened") + ":" + translationManager.emptyString
-                    font.family: MoneroComponents.Style.fontLight.name
+                    font.family: MoneroComponents.Style.fontLightName
                     font.pixelSize: 16
                 }
 
@@ -234,11 +234,11 @@ Rectangle {
                                     }
                                 }
 
-                                Colorize {
+                                MultiEffect {
                                     visible: isOpenGL && !MoneroComponents.Style.blackTheme
                                     anchors.fill: icon
                                     source: icon
-                                    lightness: 0.65 // +65%
+                                    brightness: 0.65 // +65%
                                     saturation: 0.0
                                 }
                             }
@@ -265,7 +265,7 @@ Rectangle {
                                     Layout.preferredHeight: 26
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     Layout.fillWidth: true
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     color: MoneroComponents.Style.defaultFontColor
                                     font.pixelSize: 16
 
@@ -281,7 +281,7 @@ Rectangle {
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                                     Layout.fillWidth: true
                                     text: item.networkType
-                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.family: MoneroComponents.Style.fontRegularName
                                     color: MoneroComponents.Style.dimmedFontColor
                                     font.pixelSize: 14
 

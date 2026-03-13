@@ -64,7 +64,7 @@ Rectangle {
             Layout.bottomMargin: 2
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             text: qsTr("Log level") + translationManager.emptyString
         }
 
@@ -130,7 +130,7 @@ Rectangle {
             Layout.bottomMargin: 2
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             text: qsTr("Daemon log") + translationManager.emptyString
             themeTransition: false
             onColorChanged: {
@@ -171,7 +171,7 @@ Rectangle {
                     textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 14
                     wrapMode: TextEdit.Wrap
                     readOnly: true

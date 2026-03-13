@@ -56,7 +56,7 @@ ColumnLayout {
 
         Text {
             text: title
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             color: MoneroComponents.Style.defaultFontColor
             opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
             font.pixelSize: {
@@ -89,7 +89,7 @@ ColumnLayout {
         color: MoneroComponents.Style.dimmedFontColor
         text: subtitle
 
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegularName
         font.pixelSize: {
             if (wizardController.layoutScale <= 2 ) {
                 return 16;

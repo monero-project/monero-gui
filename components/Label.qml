@@ -64,7 +64,7 @@ Item {
             if(fontFamily){
                 return fontFamily;
             } else {
-                return MoneroComponents.Style.fontRegular.name;
+                return MoneroComponents.Style.fontRegularName;
             }
         }
         font.pixelSize: fontSize

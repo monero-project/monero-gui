@@ -102,7 +102,7 @@ Rectangle {
                 width: contentWidth
                 Layout.maximumWidth: 370
                 color: MoneroComponents.Style.defaultFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 12
                 textFormat: Text.RichText
                 wrapMode: Text.WordWrap

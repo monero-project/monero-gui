@@ -125,7 +125,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 0
-                font.family: MoneroComponents.Style.fontMedium.name
+                font.family: MoneroComponents.Style.fontMediumName
                 font.bold: true
                 font.pixelSize: 13
                 color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
@@ -139,7 +139,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 14
-                font.family: MoneroComponents.Style.fontMedium.name
+                font.family: MoneroComponents.Style.fontMediumName
                 font.pixelSize: 20
                 color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString

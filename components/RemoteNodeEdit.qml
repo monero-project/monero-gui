@@ -47,7 +47,7 @@ GridLayout {
 
     // TODO: LEGACY; remove these placeHolder variables when
     // the wizards get redesigned to the black-theme
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegularName
     property bool placeholderFontBold: false
     property int placeholderFontSize: 15
     property string placeholderColor: MoneroComponents.Style.defaultFontColor

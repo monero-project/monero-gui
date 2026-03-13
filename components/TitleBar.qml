@@ -28,8 +28,8 @@
 
 import QtQuick 2.9
 import QtQuick.Window 2.0
-import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import FontAwesome 1.0
 import "." as MoneroComponents
@@ -287,7 +287,7 @@ Rectangle {
                 }
             }
 
-            Colorize {
+            MultiEffect {
                 visible: isOpenGL && MoneroComponents.Style.blackTheme
                 anchors.fill: imgLogo
                 source: imgLogo

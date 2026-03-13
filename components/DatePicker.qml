@@ -29,7 +29,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -62,7 +61,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 2
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontLight.name
+            font.family: MoneroComponents.Style.fontLightName
             font.pixelSize: 14
             font.bold: false
             textFormat: Text.RichText
@@ -125,7 +124,7 @@ Item {
                 id: dayInput
                 readOnly: true
                 Layout.preferredWidth: childrenRect.width + 40
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
@@ -150,7 +149,7 @@ Item {
             }
 
             MoneroComponents.TextPlain {
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
@@ -161,7 +160,7 @@ Item {
                 id: monthInput
                 readOnly: true
                 Layout.preferredWidth: childrenRect.width + 40
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
@@ -185,7 +184,7 @@ Item {
             }
 
             MoneroComponents.TextPlain {
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
@@ -195,7 +194,7 @@ Item {
             TextInput {
                 id: yearInput
                 Layout.preferredWidth: childrenRect.width + 60
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: datePicker.error ? errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
@@ -315,7 +314,7 @@ Item {
                         MoneroComponents.TextPlain {
                             id: dayText
                             anchors.centerIn: parent
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegularName
                             font.pixelSize: {
                                 if(!styleData.visibleMonth) return 12
                                 return 14
@@ -377,7 +376,7 @@ Item {
                         MoneroComponents.TextPlain {
                             anchors.centerIn: parent
                             elide: Text.ElideRight
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegularName
                             font.pixelSize: 12
                             color: MoneroComponents.Style.lightGreyFontColor
                             themeTransition: false
@@ -395,7 +394,7 @@ Item {
 
                         MoneroComponents.TextPlain {
                             anchors.centerIn: parent
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
+                            font.family: MoneroComponents.Style.fontMonoRegularName
                             font.pixelSize: 14
                             color: MoneroComponents.Style.dimmedFontColor
                             themeTransition: false

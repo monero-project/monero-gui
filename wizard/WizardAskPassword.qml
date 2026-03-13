@@ -117,7 +117,7 @@ ColumnLayout {
                 id: progressText
                 Layout.topMargin: 6
                 Layout.bottomMargin: 6
-                font.family: MoneroComponents.Style.fontMedium.name
+                font.family: MoneroComponents.Style.fontMediumName
                 font.pixelSize: 14
                 font.bold: false
                 color: MoneroComponents.Style.defaultFontColor
@@ -200,7 +200,7 @@ ColumnLayout {
                 text: passwordsMatch ? qsTr("Passwords match!") : qsTr("Passwords do not match") + translationManager.emptyString
                 textFormat: Text.PlainText
                 color: passwordsMatch ? (MoneroComponents.Style.blackTheme ? "#00FF00" : "#008000") : "#FF0000"
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 themeTransition: false
             }

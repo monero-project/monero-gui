@@ -105,7 +105,7 @@ Rectangle {
                     Layout.alignment: Qt.AlignTop
 
                     MoneroComponents.TextPlain {
-                         font.family: MoneroComponents.Style.fontRegular.name
+                         font.family: MoneroComponents.Style.fontRegularName
                          font.pixelSize: 14
                          color: MoneroComponents.Style.defaultFontColor
                          wrapMode: Text.Wrap
@@ -244,7 +244,7 @@ Rectangle {
                 text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
                 visible: errorMsg.text !== ""
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
 

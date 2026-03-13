@@ -125,7 +125,7 @@ Item {
 
         MoneroComponents.TextPlain {
             id: label
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: MoneroComponents.Style.fontBoldName
             font.bold: button.primary ? true : false
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"

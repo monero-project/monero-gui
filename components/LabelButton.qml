@@ -48,7 +48,7 @@ Rectangle {
         id: labelButtonText
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegularName
         font.pixelSize: 12
         font.bold: true
         text: ""

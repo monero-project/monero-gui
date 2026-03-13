@@ -29,7 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import QtQuick.Controls 2.0
 
 import "../components" as MoneroComponents
@@ -66,16 +66,15 @@ RowLayout {
             source: ""
         }
 
-        DropShadow {
+        MultiEffect {
             visible: !rowlayout.checkbox && (isOpenGL && !MoneroComponents.Style.blackTheme)
             anchors.fill: icon
-            horizontalOffset: 3
-            verticalOffset: 3
-            radius: 10.0
-            samples: 15
-            color: "#1E000000"
+            shadowEnabled: true
+            shadowHorizontalOffset: 3
+            shadowVerticalOffset: 3
+            shadowBlur: 10
+            shadowColor: "#1E000000"
             source: icon
-            cached: true
         }
 
         MouseArea {
@@ -100,7 +99,7 @@ RowLayout {
             color: MoneroComponents.Style.defaultFontColor
             opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
             font.bold: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: {
                 if (wizardController.layoutScale == 4) {
                     return 16;
@@ -124,7 +123,7 @@ RowLayout {
             id: body
             Layout.fillWidth: true
             color: MoneroComponents.Style.dimmedFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: {
                 if (wizardController.layoutScale <= 2 ){
                     return 16;

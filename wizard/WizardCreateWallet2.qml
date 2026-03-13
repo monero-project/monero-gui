@@ -153,7 +153,7 @@ Rectangle {
                 color: MoneroComponents.Style.dimmedFontColor
                 text: qsTr("The next page will display your recovery phrase, also known as mnemonic seed.") + " " + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
 
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 wrapMode: Text.WordWrap
                 leftPadding: 0
@@ -226,7 +226,7 @@ Rectangle {
             MoneroComponents.TextPlain {
                 id: recoveryPhraseLabel
                 visible: wizardController.layoutScale != 4
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 15
                 font.bold: false
                 textFormat: Text.RichText
@@ -342,7 +342,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletCreationDate
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         font.bold: false
                         textFormat: Text.RichText
@@ -361,7 +361,7 @@ Rectangle {
                         id: walletCreationDateValue
                         property var locale: Qt.locale()
                         property date currentDate: new Date()
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         font.bold: true
                         textFormat: Text.RichText
@@ -376,7 +376,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletRestoreHeight
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         font.bold: false
                         textFormat: Text.RichText
@@ -395,7 +395,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletRestoreHeightValue
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         font.bold: true
                         textFormat: Text.RichText

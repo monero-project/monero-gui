@@ -96,14 +96,14 @@ Rectangle {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 16
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
                     Layout.rightMargin: 87
-                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.family: MoneroComponents.Style.fontMonoRegularName;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -131,14 +131,14 @@ Rectangle {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 16
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
                     Layout.rightMargin: 87
-                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.family: MoneroComponents.Style.fontMonoRegularName;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -293,7 +293,7 @@ Rectangle {
                                 anchors.left: balanceNumberLabel.left
                                 anchors.leftMargin: -addressLabel.width - 30
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
                                 themeTransition: false
                             }
@@ -305,7 +305,7 @@ Rectangle {
                                 anchors.left: parent.right
                                 anchors.leftMargin: -balanceNumberLabel.width
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: balance + " XMR"
                                 elide: Text.ElideRight
                                 textWidth: 180

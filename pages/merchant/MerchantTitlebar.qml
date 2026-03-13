@@ -28,7 +28,6 @@
 
 import QtQuick 2.9
 import QtQuick.Window 2.0
-import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
 
 import FontAwesome 1.0

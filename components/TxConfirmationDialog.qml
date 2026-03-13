@@ -285,7 +285,7 @@ Rectangle {
                 TextArea.flickable: TextArea {
                     id : recipientsArea
                     color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     topPadding: 0
                     bottomPadding: 0

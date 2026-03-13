@@ -171,7 +171,7 @@ FocusScope {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
 
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -183,7 +183,7 @@ FocusScope {
                 wrapMode: Text.Wrap
 
                 font.pixelSize: 14
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
 
                 color: MoneroComponents.Style.warningColor
             }
@@ -193,7 +193,7 @@ FocusScope {
                 visible: root.errorText || text !== ""
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
             }
@@ -203,7 +203,7 @@ FocusScope {
                 visible: false
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
                 text: qsTr("CAPS LOCK IS ON.") + translationManager.emptyString;
@@ -246,7 +246,7 @@ FocusScope {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
 
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -310,7 +310,7 @@ FocusScope {
                 Layout.fillWidth: true
 
                 font.pixelSize: 14
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLightName
                 font.italic: true
 
                 color: MoneroComponents.Style.defaultFontColor

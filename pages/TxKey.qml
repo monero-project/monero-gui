@@ -67,7 +67,7 @@ Rectangle {
                 text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
                            "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + qsTr("\nFor reserve proofs you don't need to specify tx id or address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -173,7 +173,7 @@ Rectangle {
                            "For the case with Spend Proof, you don't need to specify the recipient address.") + "\n" + qsTr("Transaction is not needed for reserve proof.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -251,7 +251,7 @@ Rectangle {
                 text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }

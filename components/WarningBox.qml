@@ -41,7 +41,7 @@ Rectangle {
             id: content
             Layout.fillWidth: true
             color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: root.fontSize
             horizontalAlignment: TextInput.AlignLeft
             textFormat: Text.RichText

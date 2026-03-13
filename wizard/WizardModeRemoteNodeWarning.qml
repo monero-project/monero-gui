@@ -76,7 +76,7 @@ Rectangle {
                     Layout.topMargin: 14
                     Layout.fillWidth: true
 
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
@@ -89,7 +89,7 @@ Rectangle {
                     Layout.topMargin: 8
                     Layout.fillWidth: true
 
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
                 }

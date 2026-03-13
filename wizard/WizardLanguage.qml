@@ -65,7 +65,7 @@ Rectangle {
             color: MoneroComponents.Style.defaultFontColor
             text: "Welcome - Wilkommen - Bonvenon - Bienvenido - Bienvenue - Välkommen - Selamat datang - Benvenuto - 歡迎 - Welkom - Bem Vindo - добро пожаловать"
 
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.bold: true
             font.pixelSize: 18
             horizontalAlignment: TextInput.AlignHCenter
@@ -183,7 +183,7 @@ Rectangle {
             Layout.alignment: Qt.AlignCenter
             font.bold: true
             font.pixelSize: 12
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             color: MoneroComponents.Style.defaultFontColor
             text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")"
 

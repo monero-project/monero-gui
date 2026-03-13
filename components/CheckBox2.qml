@@ -28,7 +28,6 @@
 
 import QtQuick 2.9
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 import FontAwesome 1.0
 
 import "." 1.0
@@ -60,7 +59,7 @@ RowLayout {
 
             MoneroComponents.TextPlain {
                 id: label
-                font.family: Style.fontLight.name
+                font.family: Style.fontLightName
                 font.pixelSize: checkBox.fontSize
                 color: Style.defaultFontColor
                 wrapMode: Text.Wrap

@@ -112,7 +112,7 @@ Item {
 
         MoneroComponents.TextPlain {
             id: label
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: checkBox.fontSize
             color: MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText

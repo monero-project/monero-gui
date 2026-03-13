@@ -48,7 +48,7 @@ Rectangle {
         property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
         property int fontSize: 15
         property bool fontBold: true
-        property var fontFamily: MoneroComponents.Style.fontRegular.name
+        property var fontFamily: MoneroComponents.Style.fontRegularName
         property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
         property int textMargin: {
             // left-right margins for a given cell
