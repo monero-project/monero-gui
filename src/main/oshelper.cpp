@@ -45,6 +45,7 @@
 #include <QUrl>
 #include <QByteArray>
 #include <QRandomGenerator>
+#include <QXmlStreamReader>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
