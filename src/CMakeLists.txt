@@ -2,7 +2,7 @@ add_subdirectory(QR-Code-scanner)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
-qt6_add_resources(RESOURCES ../qml.qrc)
+qt_add_resources(RESOURCES ../qml.qrc)
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
@@ -156,7 +156,7 @@ endif()
 
 if(STATIC OR ANDROID)
     # Allows to bundle quick control styles
-    qt6_add_qml_module(monero-wallet-gui
+    qt_add_qml_module(monero-wallet-gui
         URI org.monero-project.monero-wallet-gui
         QML_FILES
             ../main.qml

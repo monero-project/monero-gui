@@ -1,1 +1,1 @@
-qt6_add_resources(RESOURCE_FILES *.png)
+qt_add_resources(RESOURCE_FILES *.png)

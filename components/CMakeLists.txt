@@ -9,9 +9,9 @@
 file(GLOB_RECURSE UI_FILES *.ui)
 file(GLOB_RECURSE CODE_FILES *.cpp)
 
-qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+qt_wrap_ui(UI_HEADERS ${UI_FILES})
 #qt6_add_resources(RESOURCE_FILES ../resources/resources.qrc)
-
+  
 # Windows application icon
 if (WIN32)
   set(WINDOWS_RES_FILE ${CMAKE_CURRENT_BINARY_DIR}/resources.obj)
