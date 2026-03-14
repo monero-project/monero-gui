@@ -177,11 +177,15 @@ ColumnLayout {
                     property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
 
                     delegate: Rectangle {
+                        id: item
+                        required property int index
+                        required property string column1
+
                         anchors.left: parent.left
                         anchors.right: parent.right
                         height: (dropdown.dropdownHeight * 0.75)
                         //radius: index === repeater.count - 1 ? 4 : 0
-                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+                        color: itemArea.containsMouse || item.index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                         MoneroComponents.TextPlain {
                             id: col1Text
@@ -193,8 +197,8 @@ ColumnLayout {
                             font.family: MoneroComponents.Style.fontRegularName
                             font.bold: false
                             font.pixelSize: dropdown.fontItemSize
-                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
-                            text: qsTr(column1) + translationManager.emptyString
+                            color: itemArea.containsMouse || item.index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
+                            text: qsTr(item.column1) + translationManager.emptyString
                         }
 
                         MoneroComponents.TextPlain {
@@ -216,7 +220,7 @@ ColumnLayout {
 
                             onClicked: {
                                 popup.close()
-                                columnid.currentIndex = index
+                                columnid.currentIndex = item.index
                                 xChanged();
                             }
                         }

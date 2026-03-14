@@ -85,7 +85,7 @@ ColumnLayout {
         MoneroComponents.Label {
             color: lineEdit.inputHasFocus ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
             fontSize: 13
-            text: (wordNumber + 1)
+            text: (seedListItem.wordNumber + 1)
             themeTransition: false
         }
 
@@ -117,7 +117,7 @@ ColumnLayout {
             color: MoneroComponents.Style.defaultFontColor
             fontSize: seedListItem.focus ? 19 : 16
             fontBold: true
-            text: word
+            text: seedListItem.word
             themeTransition: false
         }
 
@@ -135,7 +135,7 @@ ColumnLayout {
             themeTransition: false
             onTextChanged: {
                 if (wizardCreateWallet2.seedListGrid && wordsMatch) {
-                    if (wordNumber < 20) {
+                    if (seedListItem.wordNumber < 20) {
                         focusOnNextField();
                     }
                     lineEdit.readOnly = true;

@@ -215,7 +215,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.RightButton
-                        onClicked: {
+                        onClicked: function(mouse) {
                             if (mouse.button == Qt.RightButton){
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
@@ -258,8 +258,8 @@ Item {
                 height: 32
 
                 MoneroComponents.TextPlain {
-                    anchors.verticalCenter: root.parent.verticalCenter
-                    anchors.horizontalCenter: root.parent.horizontalCenter
+                    anchors.verticalCenter: root.verticalCenter
+                    anchors.horizontalCenter: root.horizontalCenter
                     font.pixelSize: 12
                     font.bold: false
                     color: "white"

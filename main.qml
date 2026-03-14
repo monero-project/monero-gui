@@ -1962,7 +1962,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             blurEnabled: true
-            blur: overlay.opacity
+            blur: 1.0
             blurMax: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
@@ -2217,7 +2217,7 @@ ApplicationWindow {
         confirmationDialog.open();
     }
 
-    onClosing: {
+    onClosing: function(close) {
         close.accepted = false;
         console.log("blocking close event");
         if(isAndroid) {
