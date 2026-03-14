@@ -93,6 +93,9 @@ Drawer {
                     persistentSettings.language = display_name;
                     persistentSettings.language_wallet = wallet_language;
 
+                    // set current index to update the UI
+                    languagesListView.currentIndex = index
+
                     appWindow.showStatusMessage(qsTr("Language changed."), 3);
                     appWindow.toggleLanguageView();
                 }
@@ -173,28 +176,33 @@ Drawer {
     //Flags model
     XmlListModel {
         id: langModel
-        source: "/lang/languages.xml"
+        source: "qrc:///lang/languages.xml"
         query: "/languages/language"
 
-        XmlListModelRole { name: "display_name"; elementName: "display_name" }
-        XmlListModelRole { name: "locale"; elementName: "locale" }
-        XmlListModelRole { name: "wallet_language"; elementName: "wallet_language" }
-        XmlListModelRole { name: "flag"; elementName: "flag" }
+        XmlListModelRole { name: "display_name"; attributeName: "display_name" }
+        XmlListModelRole { name: "locale"; attributeName: "locale" }
+        XmlListModelRole { name: "wallet_language"; attributeName: "wallet_language" }
+        XmlListModelRole { name: "flag"; attributeName: "flag" }
         // TODO: XmlListModel is read only, we should store current language somewhere else
         // and set current language accordingly
-        XmlListModelRole { name: "isCurrent"; elementName: "enabled" }
+        XmlListModelRole { name: "isCurrent"; attributeName: "enabled" }
 
         onStatusChanged: {
-            if(status === XmlListModel.Ready){
-                console.log("languages available: ",count);
+            if (status === XmlListModel.Ready) {
+                console.log("languages available: ", count);
             }
         }
     }
 
-    function selectCurrentLanguage() {
-        for (var i = 0; i < langModel.count; ++i) {
-            if (langModel.get(i).display_name === persistentSettings.language)  {
-                languagesListView.currentIndex = i;
+    // the get function does not exist in XmlListModel anymore so this is necessary now
+    // TODO: review please, this is really hacky
+    Repeater {
+        model: langModel
+        delegate: Item {
+            Component.onCompleted: {
+                if (model.display_name === persistentSettings.language) {
+                    languagesListView.currentIndex = index;
+                }
             }
         }
     }

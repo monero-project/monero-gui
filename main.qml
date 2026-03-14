@@ -2072,7 +2072,6 @@ ApplicationWindow {
 
     function toggleLanguageView(){
         languageSidebar.visible ? languageSidebar.close() : languageSidebar.open();
-        languageSidebar.selectCurrentLanguage()
         resetLanguageFields()
     }
 
