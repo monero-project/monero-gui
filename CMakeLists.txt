@@ -126,7 +126,7 @@ set(QT6_MODULES
   Qml
   Svg
   Xml
-  OpenGL
+# OpenGL
 )
 
 if(WITH_SCANNER)

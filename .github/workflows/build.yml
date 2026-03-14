@@ -16,7 +16,7 @@ jobs:
     - name: install dependencies
       run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt6 pkg-config
     - name: build
-      run: DEV_MODE=ON make release -j3
+      run: DEV_MODE=ON make release -j"$(sysctl -n hw.ncpu)"
     - name: test qml
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
@@ -38,9 +38,9 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qt6-base-dev qt6-declarative-dev qml6-module-qtqml-models qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtqml-xmllistmodel qml6-module-qt-labs-settings qml6-module-qt-labs-platform qml6-module-qt-labs-folderlistmodel qt6-tools-dev-tools qt6-tools-dev qml6-module-qtquick-templates libqt6svg6-dev libgcrypt20-dev xvfb qml6-module-qt5compat-graphicaleffects qml6-module-qtqml-workerscript qml6-module-qtquick-layouts qml6-module-qtcore
+      run: sudo apt -y install qt6-base-dev qt6-declarative-dev qml6-module-qtqml-models qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtqml-xmllistmodel qml6-module-qt-labs-settings qml6-module-qtquick-effects qml6-module-qt-labs-platform qml6-module-qt-labs-folderlistmodel qt6-tools-dev-tools qt6-tools-dev qml6-module-qtquick-templates libqt6svg6-dev libgcrypt20-dev xvfb qml6-module-qtqml-workerscript qml6-module-qtquick-layouts qml6-module-qtcore
     - name: build
-      run: DEV_MODE=ON make release -j3
+      run: y make release -j"$(nproc)"
     - name: test qml
       run: xvfb-run -a build/release/bin/monero-wallet-gui --test-qml
 
@@ -74,7 +74,7 @@ jobs:
     - name: install dependencies
       run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config
     - name: clone qt repo
-      run: git clone -b "${QT_TAG}" --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
+      run: git clone -b 6.8.2 --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
     - name: build qt from source
       run: |
         pyenv install 3.12.0
