@@ -89,6 +89,9 @@ Source: "bin\extras\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversi
 ; Monero daemon
 Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
 
+; Bundled I2P router
+Source: "bin\i2pd.exe"; DestDir: "{app}"; Flags: ignoreversion
+
 ; Monero daemon wrapped in a batch file that stops before the text window closes, to see any error messages
 Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
