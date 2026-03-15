@@ -10,6 +10,8 @@ file(GLOB SOURCE_FILES
 	"*.cpp"
     "main/*.h"
     "main/*.cpp"
+    "i2p/*.h"
+    "i2p/*.cpp"
     "libwalletqt/WalletManager.cpp"
     "libwalletqt/WalletListenerImpl.cpp"
     "libwalletqt/Wallet.cpp"
@@ -99,6 +101,7 @@ target_include_directories(monero-wallet-gui PUBLIC
     ${CMAKE_SOURCE_DIR}/monero/external/qrcodegen
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
+    ${CMAKE_CURRENT_SOURCE_DIR}/i2p
     ${CMAKE_CURRENT_SOURCE_DIR}/p2pool
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
@@ -155,6 +158,7 @@ if(WITH_SCANNER)
 endif()
 
 add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
+monero_bundle_i2p(monero-wallet-gui)
 
 include(Deploy)
 

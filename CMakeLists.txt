@@ -86,6 +86,7 @@ include_directories(${EASYLOGGING_INCLUDE})
 link_directories(${EASYLOGGING_LIBRARY_DIRS})
 
 include(VersionGui)
+include(I2pBundler)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
