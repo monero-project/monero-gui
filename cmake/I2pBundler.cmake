@@ -31,6 +31,12 @@ include_guard(GLOBAL)
 option(MONERO_GUI_BUNDLE_I2P "Copy a bundled i2p router binary next to the GUI" ON)
 set(I2P_ROUTER_SOURCE "" CACHE FILEPATH "Path to a prebuilt i2p router executable to include in packages")
 
+# SHA256 hashes for bundled i2pd binaries (i2pd v2.56.0 / v2.59.0)
+set(I2P_SHA256_darwin-macos  "79a962913668a968282b10dae0b5ae8aabf5b2758e7bd2b2a32e7caa81b0bb63")
+set(I2P_SHA256_linux-x86_64  "a34b0612f8f717fe022973042db63231e71c2074e0653fedadbcc87377bed202")
+set(I2P_SHA256_linux-aarch64 "6ad067971e23fe64d014b67437657996d4500c9da12b42979f221fd97a7290e0")
+set(I2P_SHA256_win64         "e631f95919e43f548567fff576b98ae5ab64607fd7b2095d83765829f6449029")
+
 function(_monero_locate_i2p_router)
     if(I2P_ROUTER_SOURCE)
         return()
@@ -112,6 +118,21 @@ function(monero_bundle_i2p target_name)
 
     if(NOT EXISTS "${I2P_ROUTER_SOURCE}")
         message(FATAL_ERROR "I2P router source '${I2P_ROUTER_SOURCE}' does not exist")
+    endif()
+
+    # Verify SHA256 hash of the bundled binary
+    get_filename_component(_i2p_dir "${I2P_ROUTER_SOURCE}" DIRECTORY)
+    get_filename_component(_i2p_platform "${_i2p_dir}" NAME)
+    if(DEFINED I2P_SHA256_${_i2p_platform})
+        file(SHA256 "${I2P_ROUTER_SOURCE}" _actual_hash)
+        if(NOT _actual_hash STREQUAL "${I2P_SHA256_${_i2p_platform}}")
+            message(FATAL_ERROR
+                "I2P router binary hash mismatch for '${I2P_ROUTER_SOURCE}'!\n"
+                "  Expected: ${I2P_SHA256_${_i2p_platform}}\n"
+                "  Got:      ${_actual_hash}\n"
+                "The binary may have been tampered with.")
+        endif()
+        message(STATUS "I2P router binary hash verified OK (${_i2p_platform})")
     endif()
 
     if(WIN32)
