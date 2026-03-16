@@ -33,7 +33,6 @@
 
 #include <QMutex>
 #include <QObject>
-#include <QPointer>
 #include <QProcess>
 #include <QString>
 #include <QStringList>
@@ -50,34 +49,50 @@ public:
     explicit I2pManager(QObject *parent = nullptr);
     ~I2pManager() override;
 
+    /// Start the bundled i2pd router. Returns true if the process started
+    /// successfully. Emits routerStarted() on success, routerError() on failure.
     Q_INVOKABLE bool start(const QString &dataDir,
                            quint16 httpProxyPort,
                            quint16 socksProxyPort,
                            quint16 samPort,
                            const QString &extraArguments = QString());
+
+    /// Stop the i2pd router. Returns true if stopped (or was already stopped).
     Q_INVOKABLE bool stop();
+
+    /// Stop and restart with new configuration.
     Q_INVOKABLE bool restart(const QString &dataDir,
                              quint16 httpProxyPort,
                              quint16 socksProxyPort,
                              quint16 samPort,
                              const QString &extraArguments = QString());
+
+    /// Returns true if the i2pd process is currently running.
     Q_INVOKABLE bool isRunning() const;
+
+    /// Returns true if the i2pd binary exists and is a regular file.
     Q_INVOKABLE bool available() const;
+
+    /// Returns the default data directory for i2pd (platform-specific app data path).
     Q_INVOKABLE QString defaultDataDir() const;
+
+    /// Returns a status snapshot map with keys: running, binaryPath, dataDir, ports.
     Q_INVOKABLE QVariantMap status() const;
+
+    /// Returns the absolute path to the bundled i2pd binary.
     Q_INVOKABLE QString binaryPath() const;
 
 signals:
-    void runningChanged(bool running) const;
-    void routerStarted() const;
-    void routerStopped() const;
-    void routerError(const QString &message) const;
-    void routerLog(const QString &line) const;
+    void runningChanged(bool running);
+    void routerStarted();
+    void routerStopped();
+    void routerError(const QString &message);
+    void routerLog(const QString &line);
 
 private slots:
-    void handleReadyRead();
-    void handleReadyReadError();
-    void handleStateChanged(QProcess::ProcessState state);
+    void onReadyRead();
+    void onReadyReadError();
+    void onStateChanged(QProcess::ProcessState state);
 
 private:
     struct RouterConfig {

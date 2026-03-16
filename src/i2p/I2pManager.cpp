@@ -28,19 +28,25 @@
 
 #include "i2p/I2pManager.h"
 
+#include <memory>
+
 #include <QApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QMutexLocker>
 #include <QRegularExpression>
 #include <QStandardPaths>
-#include <QThread>
 
 namespace
 {
-    constexpr quint16 DEFAULT_HTTP_PORT = 4444;
+    constexpr quint16 DEFAULT_HTTP_PORT  = 4444;
     constexpr quint16 DEFAULT_SOCKS_PORT = 4447;
-    constexpr quint16 DEFAULT_SAM_PORT = 7656;
+    constexpr quint16 DEFAULT_SAM_PORT   = 7656;
+
+    constexpr int I2P_START_TIMEOUT_MS       = 10000;
+    constexpr int I2P_STOP_TERMINATE_MS      = 5000;
+    constexpr int I2P_STOP_KILL_MS           = 2000;
+    constexpr int I2P_RESET_KILL_MS          = 1000;
 }
 
 I2pManager::I2pManager(QObject *parent)
@@ -71,10 +77,10 @@ bool I2pManager::start(const QString &dataDir,
     }
 
     const RouterConfig desiredConfig = buildConfig(dataDir,
-                                                  httpProxyPort,
-                                                  socksProxyPort,
-                                                  samPort,
-                                                  extraArguments);
+                                                   httpProxyPort,
+                                                   socksProxyPort,
+                                                   samPort,
+                                                   extraArguments);
 
     if (isRunning() && desiredConfig == m_currentConfig)
     {
@@ -93,18 +99,19 @@ bool I2pManager::start(const QString &dataDir,
     process->setArguments(arguments);
     process->setProcessChannelMode(QProcess::MergedChannels);
 
-    connect(process.get(), &QProcess::readyReadStandardOutput, this, &I2pManager::handleReadyRead);
-    connect(process.get(), &QProcess::readyReadStandardError, this, &I2pManager::handleReadyReadError);
-    connect(process.get(), &QProcess::stateChanged, this, &I2pManager::handleStateChanged);
-
     process->start();
-    if (!process->waitForStarted(10000))
+    if (!process->waitForStarted(I2P_START_TIMEOUT_MS))
     {
-        const QString errorMessage = tr("Unable to start i2pd (%1)").arg(process->errorString());
+        const QString errorMessage = tr("Unable to start i2pd: %1").arg(process->errorString());
         emit routerError(errorMessage);
-        resetProcess();
+        process->kill();
+        process->waitForFinished(I2P_RESET_KILL_MS);
         return false;
     }
+
+    connect(process.get(), &QProcess::readyReadStandardOutput, this, &I2pManager::onReadyRead);
+    connect(process.get(), &QProcess::readyReadStandardError,  this, &I2pManager::onReadyReadError);
+    connect(process.get(), &QProcess::stateChanged,            this, &I2pManager::onStateChanged);
 
     {
         QMutexLocker locker(&m_processMutex);
@@ -126,10 +133,10 @@ bool I2pManager::stop()
     }
 
     m_process->terminate();
-    if (!m_process->waitForFinished(5000))
+    if (!m_process->waitForFinished(I2P_STOP_TERMINATE_MS))
     {
         m_process->kill();
-        m_process->waitForFinished(2000);
+        m_process->waitForFinished(I2P_STOP_KILL_MS);
     }
 
     m_process.reset();
@@ -169,13 +176,14 @@ QString I2pManager::defaultDataDir() const
 
 QVariantMap I2pManager::status() const
 {
+    QMutexLocker locker(&m_processMutex);
     QVariantMap map;
-    map.insert("running", isRunning());
-    map.insert("binaryPath", m_binaryPath);
-    map.insert("dataDir", m_currentConfig.dataDir);
-    map.insert("httpProxyPort", static_cast<int>(m_currentConfig.httpProxyPort));
+    map.insert("running",        m_process && m_process->state() == QProcess::Running);
+    map.insert("binaryPath",     m_binaryPath);
+    map.insert("dataDir",        m_currentConfig.dataDir);
+    map.insert("httpProxyPort",  static_cast<int>(m_currentConfig.httpProxyPort));
     map.insert("socksProxyPort", static_cast<int>(m_currentConfig.socksProxyPort));
-    map.insert("samPort", static_cast<int>(m_currentConfig.samPort));
+    map.insert("samPort",        static_cast<int>(m_currentConfig.samPort));
     map.insert("extraArguments", m_currentConfig.extraArguments);
     return map;
 }
@@ -185,7 +193,7 @@ QString I2pManager::binaryPath() const
     return m_binaryPath;
 }
 
-void I2pManager::handleReadyRead()
+void I2pManager::onReadyRead()
 {
     QMutexLocker locker(&m_processMutex);
     if (!m_process)
@@ -200,7 +208,7 @@ void I2pManager::handleReadyRead()
     }
 }
 
-void I2pManager::handleReadyReadError()
+void I2pManager::onReadyReadError()
 {
     QMutexLocker locker(&m_processMutex);
     if (!m_process)
@@ -215,21 +223,36 @@ void I2pManager::handleReadyReadError()
     }
 }
 
-void I2pManager::handleStateChanged(QProcess::ProcessState state)
+void I2pManager::onStateChanged(QProcess::ProcessState state)
 {
-    if (state == QProcess::NotRunning)
+    if (state != QProcess::NotRunning)
     {
-        setRunning(false);
-        emit routerStopped();
+        return;
     }
+
+    // Check for unexpected/crash exit and emit an error if so
+    QMutexLocker locker(&m_processMutex);
+    if (m_process)
+    {
+        const int exitCode = m_process->exitCode();
+        const QProcess::ExitStatus exitStatus = m_process->exitStatus();
+        if (exitStatus == QProcess::CrashExit || exitCode != 0)
+        {
+            const QString msg = tr("i2pd exited unexpectedly (code %1)").arg(exitCode);
+            emit routerError(msg);
+        }
+    }
+
+    setRunning(false);
+    emit routerStopped();
 }
 
 bool I2pManager::RouterConfig::operator==(const RouterConfig &other) const
 {
-    return dataDir == other.dataDir
-        && httpProxyPort == other.httpProxyPort
+    return dataDir        == other.dataDir
+        && httpProxyPort  == other.httpProxyPort
         && socksProxyPort == other.socksProxyPort
-        && samPort == other.samPort
+        && samPort        == other.samPort
         && extraArguments == other.extraArguments;
 }
 
@@ -240,10 +263,10 @@ I2pManager::RouterConfig I2pManager::buildConfig(const QString &dataDir,
                                                   const QString &extraArguments) const
 {
     RouterConfig config;
-    config.dataDir = ensureDataDir(dataDir.isEmpty() ? defaultDataDir() : dataDir);
-    config.httpProxyPort = httpProxyPort == 0 ? DEFAULT_HTTP_PORT : httpProxyPort;
+    config.dataDir        = ensureDataDir(dataDir.isEmpty() ? defaultDataDir() : dataDir);
+    config.httpProxyPort  = httpProxyPort  == 0 ? DEFAULT_HTTP_PORT  : httpProxyPort;
     config.socksProxyPort = socksProxyPort == 0 ? DEFAULT_SOCKS_PORT : socksProxyPort;
-    config.samPort = samPort == 0 ? DEFAULT_SAM_PORT : samPort;
+    config.samPort        = samPort        == 0 ? DEFAULT_SAM_PORT   : samPort;
     config.extraArguments = extraArguments;
     return config;
 }
@@ -257,15 +280,14 @@ QStringList I2pManager::assembleArguments(const RouterConfig &config) const
     args << QStringLiteral("--sam.port=%1").arg(config.samPort);
     args << QStringLiteral("--loglevel=info");
 
-    QString trimmed = config.extraArguments.trimmed();
+    const QString trimmed = config.extraArguments.trimmed();
     if (!trimmed.isEmpty())
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         args << QProcess::splitCommand(trimmed);
 #else
-        const QRegularExpression splitter("\\s+");
-        const QStringList extraParts = trimmed.split(splitter, Qt::SkipEmptyParts);
-        args << extraParts;
+        const QRegularExpression splitter(QStringLiteral("\\s+"));
+        args << trimmed.split(splitter, Qt::SkipEmptyParts);
 #endif
     }
 
@@ -285,7 +307,7 @@ void I2pManager::resetProcess()
     if (m_process)
     {
         m_process->kill();
-        m_process->waitForFinished(1000);
+        m_process->waitForFinished(I2P_RESET_KILL_MS);
         m_process.reset();
     }
     setRunning(false);

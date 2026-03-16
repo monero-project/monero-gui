@@ -886,9 +886,9 @@ ApplicationWindow {
                     persistentSettings.i2pSocksProxyPort,
                     persistentSettings.i2pSamPort,
                     persistentSettings.i2pExtraArgs);
-        i2pRouterStarting = false;
 
         if (!started) {
+            i2pRouterStarting = false;
             i2pStatusMessage = qsTr("Unable to start I2P router. Check the binary and configuration.") + translationManager.emptyString;
         }
 
@@ -1630,16 +1630,19 @@ ApplicationWindow {
     Connections {
         target: i2pSupported ? i2pManager : null
         onRouterStarted: {
+            i2pRouterStarting = false;
             var msg = qsTr("I2P router running (%1)").arg(resolveI2pDataDir()) + translationManager.emptyString;
             i2pStatusMessage = msg;
             appendI2pLog(msg);
         }
         onRouterStopped: {
+            i2pRouterStarting = false;
             var msg = qsTr("I2P router stopped") + translationManager.emptyString;
             i2pStatusMessage = msg;
             appendI2pLog(msg);
         }
         onRouterError: function(message) {
+            i2pRouterStarting = false;
             var msg = message + translationManager.emptyString;
             i2pStatusMessage = msg;
             appendI2pLog(msg);
@@ -2476,6 +2479,9 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
+        if (i2pSupported && i2pManager.running) {
+            i2pManager.stop();
+        }
         closeWallet(Qt.quit);
     }
 
