@@ -368,8 +368,6 @@ Rectangle{
             Layout.fillWidth: true
             spacing: 18
 
-            property bool routerRunning: appWindow.i2pSupported && i2pManager.running
-
             MoneroComponents.TextPlain {
                 font.bold: true
                 font.pixelSize: 16
@@ -380,130 +378,57 @@ Rectangle{
             MoneroComponents.TextPlain {
                 wrapMode: Text.WordWrap
                 color: MoneroComponents.Style.dimmedFontColor
-                text: qsTr("Run a bundled I2P router next to the GUI so local nodes can speak to the network without extra shell commands. This mimics how Bisq wraps Tor.") + translationManager.emptyString
+                text: qsTr("Route the local daemon through I2P by connecting to a SAMv3-capable router you run yourself. Install i2pd or Java I2P, enable the SAM bridge (default port 7656), then configure the address below.") + translationManager.emptyString
             }
 
             MoneroComponents.CheckBox {
-                text: qsTr("Enable built-in I2P router") + translationManager.emptyString
+                text: qsTr("Enable I2P (SAMv3 bridge)") + translationManager.emptyString
                 checked: persistentSettings.i2pEnabled
-                enabled: appWindow.i2pSupported
                 onClicked: {
                     persistentSettings.i2pEnabled = !persistentSettings.i2pEnabled;
-                    if (persistentSettings.i2pEnabled) {
-                        appWindow.ensureI2pRouterRunning();
-                    } else {
-                        appWindow.stopI2pRouterIfNeeded(true);
-                    }
+                    if (persistentSettings.i2pEnabled)
+                        appWindow.probeI2pBridge();
                 }
             }
 
             MoneroComponents.TextPlain {
                 wrapMode: Text.WordWrap
-                color: i2pLayout.routerRunning ? MoneroComponents.Style.goodColor : MoneroComponents.Style.dimmedFontColor
-                text: appWindow.i2pSupported
-                        ? ((i2pLayout.routerRunning ? qsTr("Status: running") : qsTr("Status: stopped")) + " – " + (i2pStatusMessage || qsTr("waiting")))
-                        : qsTr("Status: unavailable (router binary missing)")
-                + translationManager.emptyString
-            }
-
-            RowLayout {
-                spacing: 12
-
-                MoneroComponents.StandardButton {
-                    Layout.preferredWidth: 180
-                    text: i2pLayout.routerRunning ? qsTr("Stop router") : qsTr("Start router") + translationManager.emptyString
-                    enabled: appWindow.i2pSupported && persistentSettings.i2pEnabled && !appWindow.i2pRouterStarting
-                    onClicked: {
-                        if (!appWindow.i2pSupported) {
-                            return;
-                        }
-                        if (i2pManager.running) {
-                            i2pManager.stop();
-                        } else {
-                            appWindow.ensureI2pRouterRunning();
-                        }
-                    }
-                }
-
-                MoneroComponents.StandardButton {
-                    small: true
-                    text: qsTr("Open data dir") + translationManager.emptyString
-                    enabled: appWindow.i2pSupported
-                    onClicked: Qt.openUrlExternally("file://" + appWindow.resolveI2pDataDir())
-                }
-            }
-
-            MoneroComponents.LineEditMulti {
-                Layout.fillWidth: true
-                labelText: qsTr("Router data directory") + translationManager.emptyString
-                text: persistentSettings.i2pDataDir ? persistentSettings.i2pDataDir : appWindow.resolveI2pDataDir()
-                readOnly: true
-                labelButtonVisible: true
-                labelButtonText: qsTr("Change") + translationManager.emptyString
-                onLabelButtonClicked: appWindow.openI2pDataDirDialog()
+                color: appWindow.i2pBridgeReachable
+                    ? MoneroComponents.Style.goodColor
+                    : MoneroComponents.Style.dimmedFontColor
+                text: (appWindow.i2pStatusMessage || qsTr("Press \"Test\" to check the SAM bridge")) + translationManager.emptyString
             }
 
             RowLayout {
                 spacing: 18
+                Layout.fillWidth: true
 
                 MoneroComponents.LineEdit {
                     Layout.fillWidth: true
-                    labelText: qsTr("HTTP proxy port") + translationManager.emptyString
-                    text: String(persistentSettings.i2pHttpProxyPort)
-                    validator: IntValidator { bottom: 1; top: 65535 }
-                    onEditingFinished: {
-                        var value = parseInt(text);
-                        if (!isNaN(value)) {
-                            persistentSettings.i2pHttpProxyPort = value;
-                        }
-                    }
+                    labelText: qsTr("SAM host") + translationManager.emptyString
+                    placeholderText: "127.0.0.1"
+                    text: persistentSettings.i2pSamHost
+                    onEditingFinished: persistentSettings.i2pSamHost = text.trim() || "127.0.0.1"
                 }
 
                 MoneroComponents.LineEdit {
-                    Layout.fillWidth: true
-                    labelText: qsTr("SOCKS proxy port") + translationManager.emptyString
-                    text: String(persistentSettings.i2pSocksProxyPort)
+                    Layout.preferredWidth: 120
+                    labelText: qsTr("SAM port") + translationManager.emptyString
+                    text: String(persistentSettings.i2pSamPort)
                     validator: IntValidator { bottom: 1; top: 65535 }
                     onEditingFinished: {
                         var value = parseInt(text);
-                        if (!isNaN(value)) {
-                            persistentSettings.i2pSocksProxyPort = value;
-                        }
+                        if (!isNaN(value))
+                            persistentSettings.i2pSamPort = value;
                     }
                 }
             }
 
-            MoneroComponents.LineEdit {
-                Layout.fillWidth: true
-                labelText: qsTr("SAM port") + translationManager.emptyString
-                text: String(persistentSettings.i2pSamPort)
-                validator: IntValidator { bottom: 1; top: 65535 }
-                onEditingFinished: {
-                    var value = parseInt(text);
-                    if (!isNaN(value)) {
-                        persistentSettings.i2pSamPort = value;
-                    }
-                }
-            }
-
-            MoneroComponents.LineEditMulti {
-                Layout.fillWidth: true
-                labelText: qsTr("Extra router arguments") + translationManager.emptyString
-                placeholderText: qsTr("(optional)") + translationManager.emptyString
-                text: persistentSettings.i2pExtraArgs
-                onEditingFinished: persistentSettings.i2pExtraArgs = text
-            }
-
-            MoneroComponents.CheckBox {
-                text: qsTr("Start router with GUI") + translationManager.emptyString
-                checked: persistentSettings.i2pAutostart
-                onClicked: persistentSettings.i2pAutostart = !persistentSettings.i2pAutostart
-            }
-
-            MoneroComponents.CheckBox {
-                text: qsTr("Stop router when daemon stops") + translationManager.emptyString
-                checked: persistentSettings.i2pAutoStopWithDaemon
-                onClicked: persistentSettings.i2pAutoStopWithDaemon = !persistentSettings.i2pAutoStopWithDaemon
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Test connection") + translationManager.emptyString
+                enabled: persistentSettings.i2pEnabled
+                onClicked: appWindow.probeI2pBridge()
             }
 
             Rectangle {
@@ -517,7 +442,6 @@ Rectangle{
             MoneroComponents.CheckBox {
                 text: qsTr("Share this node over I2P (anonymous inbound peers)") + translationManager.emptyString
                 checked: persistentSettings.i2pInboundEnabled
-                enabled: appWindow.i2pSupported
                 onClicked: persistentSettings.i2pInboundEnabled = !persistentSettings.i2pInboundEnabled
             }
 
@@ -525,7 +449,7 @@ Rectangle{
                 visible: persistentSettings.i2pInboundEnabled
                 wrapMode: Text.WordWrap
                 color: MoneroComponents.Style.dimmedFontColor
-                text: qsTr("Use the published .b32.i2p address from your router's server tunnel so other nodes can reach you over I2P. The GUI will pass this data to --anonymous-inbound when the daemon starts.") + translationManager.emptyString
+                text: qsTr("Enter the .b32.i2p address published by your router's server tunnel. The GUI passes this to --anonymous-inbound when the daemon starts.") + translationManager.emptyString
             }
 
             MoneroComponents.LineEditMulti {
@@ -574,27 +498,6 @@ Rectangle{
                 }
             }
 
-            MoneroComponents.LineEditMulti {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 140
-                readOnly: true
-                wrapMode: Text.Wrap
-                copyButton: true
-                labelText: qsTr("Recent router log") + translationManager.emptyString
-                placeholderText: qsTr("Log output will appear here once the router starts") + translationManager.emptyString
-                text: appWindow.getI2pLogText()
-            }
-
-            RowLayout {
-                spacing: 12
-                MoneroComponents.StandardButton {
-                    small: true
-                    text: qsTr("Clear log") + translationManager.emptyString
-                    enabled: appWindow.i2pLogLines.length > 0
-                    onClicked: appWindow.clearI2pLogs()
-                }
-                Item { Layout.fillWidth: true }
-            }
         }
     }
 }

@@ -158,7 +158,6 @@ if(WITH_SCANNER)
 endif()
 
 add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
-monero_bundle_i2p(monero-wallet-gui)
 
 include(Deploy)
 

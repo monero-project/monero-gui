@@ -86,7 +86,8 @@ include_directories(${EASYLOGGING_INCLUDE})
 link_directories(${EASYLOGGING_LIBRARY_DIRS})
 
 include(VersionGui)
-include(I2pBundler)
+# I2P support connects to an existing SAMv3-capable router (i2pd / Java I2P).
+# No binary is bundled; I2pBundler.cmake has been removed.
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
@@ -130,6 +131,7 @@ set(QT5_LIBRARIES
   Qt5Qml
   Qt5Svg
   Qt5Xml
+  Qt5Network
 )
 
 if(WITH_SCANNER)

@@ -101,11 +101,9 @@ ApplicationWindow {
     property bool themeTransition: false
     property int backgroundSyncType: Wallet.BackgroundSync_Off;
     property bool isQuitting: false
-    readonly property bool i2pSupported: typeof i2pManager !== "undefined"
-    property bool i2pRouterStarting: false
+    readonly property bool i2pSupported: typeof i2pBridge !== "undefined"
+    property bool i2pBridgeReachable: false
     property string i2pStatusMessage: ""
-    property var i2pLogLines: []
-    readonly property int i2pLogCapacity: 200
 
     // fiat price conversion
     property real fiatPrice: 0
@@ -802,41 +800,6 @@ ApplicationWindow {
             currentWallet.refreshHeightAsync();
     }
 
-    function resolveI2pDataDir() {
-        if (persistentSettings.i2pDataDir && persistentSettings.i2pDataDir !== "") {
-            return persistentSettings.i2pDataDir;
-        }
-        if (i2pSupported) {
-            return i2pManager.defaultDataDir();
-        }
-        return "";
-    }
-
-    function openI2pDataDirDialog() {
-        if (typeof i2pDataDirDialog !== "undefined") {
-            i2pDataDirDialog.open();
-        }
-    }
-
-    function appendI2pLog(line) {
-        if (!line || line.length === 0)
-            return;
-        var logs = i2pLogLines.slice();
-        logs.push(line);
-        if (logs.length > i2pLogCapacity)
-            logs.splice(0, logs.length - i2pLogCapacity);
-        i2pLogLines = logs;
-        i2pStatusMessage = line;
-    }
-
-    function clearI2pLogs() {
-        i2pLogLines = [];
-    }
-
-    function getI2pLogText() {
-        return i2pLogLines.join("\n");
-    }
-
     function buildI2pAnonymousInboundFlag() {
         if (!persistentSettings.i2pInboundEnabled)
             return "";
@@ -864,66 +827,29 @@ ApplicationWindow {
         return flag;
     }
 
-    function ensureI2pRouterRunning() {
-        if (!i2pSupported || !persistentSettings.i2pEnabled) {
-            return true;
-        }
-
-        const dataDir = resolveI2pDataDir();
-        if (dataDir === "") {
-            return false;
-        }
-
-        if (!i2pManager.available()) {
-            i2pStatusMessage = qsTr("I2P binary missing: %1").arg(i2pManager.binaryPath()) + translationManager.emptyString;
-            return false;
-        }
-
-        i2pRouterStarting = true;
-        const started = i2pManager.start(
-                    dataDir,
-                    persistentSettings.i2pHttpProxyPort,
-                    persistentSettings.i2pSocksProxyPort,
-                    persistentSettings.i2pSamPort,
-                    persistentSettings.i2pExtraArgs);
-
-        if (!started) {
-            i2pRouterStarting = false;
-            i2pStatusMessage = qsTr("Unable to start I2P router. Check the binary and configuration.") + translationManager.emptyString;
-        }
-
-        return started;
-    }
-
-    function stopI2pRouterIfNeeded(forceStop) {
-        if (!i2pSupported) {
+    function probeI2pBridge() {
+        if (!i2pSupported || !persistentSettings.i2pEnabled)
             return;
-        }
-        if (!i2pManager.running) {
-            return;
-        }
-        if (!forceStop && persistentSettings.i2pEnabled) {
-            return;
-        }
-        i2pManager.stop();
+        var host = (persistentSettings.i2pSamHost || "127.0.0.1").trim();
+        var port = parseInt(persistentSettings.i2pSamPort) || 7656;
+        i2pBridge.probe(host, port);
     }
 
     function appendI2pDaemonArguments(flags) {
         var sanitized = (flags || "").trim();
-        if (!i2pSupported || !persistentSettings.i2pEnabled || !i2pManager.running) {
+        if (!i2pSupported || !persistentSettings.i2pEnabled)
             return sanitized;
-        }
 
-        var i2pArgument = "--tx-proxy i2p,127.0.0.1:" + persistentSettings.i2pSamPort;
-        if (sanitized.indexOf("--tx-proxy") === -1) {
+        var host = (persistentSettings.i2pSamHost || "127.0.0.1").trim();
+        var port = parseInt(persistentSettings.i2pSamPort) || 7656;
+        var i2pArgument = "--tx-proxy i2p," + host + ":" + port;
+        if (sanitized.indexOf("--tx-proxy") === -1)
             sanitized = sanitized.length ? sanitized + " " + i2pArgument : i2pArgument;
-        }
 
         var inboundFlag = buildI2pAnonymousInboundFlag();
         if (persistentSettings.i2pInboundEnabled && inboundFlag === "") {
             console.warn("I2P anonymous inbound enabled but configuration incomplete");
         }
-
         if (inboundFlag !== "") {
             var inboundOption = "--anonymous-inbound " + inboundFlag;
             sanitized = sanitized.length ? sanitized + " " + inboundOption : inboundOption;
@@ -937,16 +863,6 @@ ApplicationWindow {
 
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
-
-        if (persistentSettings.i2pEnabled && !ensureI2pRouterRunning()) {
-            daemonStartStopInProgress = 0;
-            informationPopup.title = qsTr("I2P router not running") + translationManager.emptyString;
-            informationPopup.text = qsTr("Enable the bundled I2P router or disable the integration to continue.") + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Warning;
-            informationPopup.open();
-            currentWallet.startRefresh();
-            return;
-        }
 
         if (persistentSettings.i2pInboundEnabled && buildI2pAnonymousInboundFlag() === "") {
             daemonStartStopInProgress = 0;
@@ -974,9 +890,6 @@ ApplicationWindow {
             daemonStartStopInProgress = 0;
             if (splash) {
                 hideProcessingSplash();
-            }
-            if (persistentSettings.i2pAutoStopWithDaemon) {
-                stopI2pRouterIfNeeded(false);
             }
             callback(result);
         });
@@ -1622,33 +1535,18 @@ ApplicationWindow {
 
         remoteNodesModel.initialize();
 
-        if (i2pSupported && persistentSettings.i2pEnabled && persistentSettings.i2pAutostart) {
-            ensureI2pRouterRunning();
+        if (i2pSupported && persistentSettings.i2pEnabled) {
+            probeI2pBridge();
         }
     }
 
     Connections {
-        target: i2pSupported ? i2pManager : null
-        onRouterStarted: {
-            i2pRouterStarting = false;
-            var msg = qsTr("I2P router running (%1)").arg(resolveI2pDataDir()) + translationManager.emptyString;
-            i2pStatusMessage = msg;
-            appendI2pLog(msg);
-        }
-        onRouterStopped: {
-            i2pRouterStarting = false;
-            var msg = qsTr("I2P router stopped") + translationManager.emptyString;
-            i2pStatusMessage = msg;
-            appendI2pLog(msg);
-        }
-        onRouterError: function(message) {
-            i2pRouterStarting = false;
-            var msg = message + translationManager.emptyString;
-            i2pStatusMessage = msg;
-            appendI2pLog(msg);
-        }
-        onRouterLog: function(line) {
-            appendI2pLog(line);
+        target: i2pSupported ? i2pBridge : null
+        onProbeFinished: function(reachable) {
+            i2pBridgeReachable = reachable;
+            i2pStatusMessage = reachable
+                ? (qsTr("SAM bridge reachable") + translationManager.emptyString)
+                : (qsTr("SAM bridge not reachable — start your I2P router") + translationManager.emptyString);
         }
     }
 
@@ -1752,13 +1650,8 @@ ApplicationWindow {
         }
 
         property bool i2pEnabled: false
-        property bool i2pAutostart: true
-        property bool i2pAutoStopWithDaemon: true
-        property string i2pDataDir: ""
-        property int i2pHttpProxyPort: 4444
-        property int i2pSocksProxyPort: 4447
+        property string i2pSamHost: "127.0.0.1"
         property int i2pSamPort: 7656
-        property string i2pExtraArgs: ""
         property bool i2pInboundEnabled: false
         property string i2pInboundAddress: ""
         property string i2pInboundLocalHost: "127.0.0.1"
@@ -1979,18 +1872,6 @@ ApplicationWindow {
             blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
             delete validator;
         }
-    }
-
-    FileDialog {
-        id: i2pDataDirDialog
-        title: qsTr("Select I2P data directory") + translationManager.emptyString
-        selectFolder: true
-        folder: persistentSettings.i2pDataDir ? "file://" + persistentSettings.i2pDataDir : "file://" + resolveI2pDataDir()
-        onAccepted: {
-            var dir = walletManager.urlToLocalPath(i2pDataDirDialog.fileUrl);
-            persistentSettings.i2pDataDir = dir;
-        }
-        onRejected: console.log("i2p data dir selection canceled");
     }
 
     PasswordDialog {
@@ -2479,9 +2360,6 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
-        if (i2pSupported && i2pManager.running) {
-            i2pManager.stop();
-        }
         closeWallet(Qt.quit);
     }
 
