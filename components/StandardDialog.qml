@@ -144,6 +144,9 @@ Rectangle {
                     selectByMouse: false
                     wrapMode: TextEdit.Wrap
                     color: MoneroComponents.Style.defaultFontColor
+                    background: Rectangle {
+                        color: "transparent"
+                    }
 
                     MouseArea {
                         anchors.fill: parent
