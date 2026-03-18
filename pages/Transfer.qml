@@ -155,7 +155,7 @@ Rectangle {
           visible: root.warningContent !== ""
 
           MoneroComponents.WarningBox {
-              text: warningContent
+              text: root.warningContent
               onLinkActivated: {
                   appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
               }
@@ -746,7 +746,7 @@ Rectangle {
       MoneroComponents.WarningBox {
           text: qsTr("Description field contents match long payment ID format. \
           Please don't paste long payment ID into description field, your funds might be lost.") + translationManager.emptyString;
-          visible: warningLongPidDescription
+          visible: root.warningLongPidDescription
       }
 
       ColumnLayout {
@@ -819,7 +819,7 @@ Rectangle {
           text: qsTr("Long payment IDs are obsolete. \
           Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
           If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: paymentIdCheckbox.checked || warningLongPidDescription
+          visible: paymentIdCheckbox.checked || root.warningLongPidDescription
       }
 
       MoneroComponents.WarningBox {
@@ -834,7 +834,7 @@ Rectangle {
               rightIcon: "qrc:///images/rightArrow.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
+              enabled: !sendButtonWarningBox.visible && !root.warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority

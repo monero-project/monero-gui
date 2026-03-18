@@ -30,12 +30,13 @@ import "../js/Wizard.js" as Wizard
 import "../components"
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 
 ColumnLayout {
+    id: root
     property string title: ""
     property string subtitle: ""
     property alias imageIcon: icon.source
@@ -48,14 +49,14 @@ ColumnLayout {
 
         Image {
             id: icon
-            visible: icon.source != ""
+            visible: icon.source !== ""
             source: ""
             width: wizardController.layoutScale == 4 ? 35 : 50
             height: wizardController.layoutScale == 4 ? 35 : 50
         }
 
         Text {
-            text: title
+            text: root.title
             font.family: MoneroComponents.Style.fontRegularName
             color: MoneroComponents.Style.defaultFontColor
             opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
@@ -84,10 +85,10 @@ ColumnLayout {
     Text {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignLeft
-        visible: parent.subtitle !== "" && subtitleVisible
+        visible: parent.subtitle !== "" && root.subtitleVisible
 
         color: MoneroComponents.Style.dimmedFontColor
-        text: subtitle
+        text: root.subtitle
 
         font.family: MoneroComponents.Style.fontRegularName
         font.pixelSize: {

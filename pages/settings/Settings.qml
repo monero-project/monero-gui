@@ -92,7 +92,7 @@ ColumnLayout {
         property SettingsLog settingsLogView: SettingsLog { }
         property SettingsInfo settingsInfoView: SettingsInfo { }
         Layout.fillWidth: true
-        Layout.preferredHeight: settingsHeight
+        Layout.preferredHeight: settingsPage.settingsHeight
         color: "transparent"
         state: "Wallet"
 

@@ -38,6 +38,7 @@ import "../../components" as MoneroComponents
 
 
 Rectangle {
+    id: root
     color: "transparent"
     Layout.fillWidth: true
     property alias infoHeight: infoLayout.height
@@ -307,7 +308,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: walletModeString
+                text: root.walletModeString
             }
 
             Rectangle {
@@ -394,7 +395,7 @@ Rectangle {
                         data += currentWallet.walletCreationHeight;
 
                     data += "\nWallet log path: " + logger.logFilePath;
-                    data += "\nWallet mode: " + walletModeString;
+                    data += "\nWallet mode: " + root.walletModeString;
                     data += "\nGraphics mode: " + (isOpenGL ? "OpenGL" : "Low graphics mode");
                     if (isTails)
                         data += "\nTails: " + (tailsUsePersistence ? "persistent" : "persistence disabled");

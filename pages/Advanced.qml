@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "../components" as MoneroComponents
@@ -50,25 +50,25 @@ ColumnLayout {
         Layout.bottomMargin: height
 
         MoneroComponents.NavbarItem {
-            active: state == "Mining"
+            active: root.state == "Mining"
             text: qsTr("Mining") + translationManager.emptyString
-            onSelected: state = "Mining"
+            onSelected: root.state = "Mining"
             visible: !isAndroid
         }
         MoneroComponents.NavbarItem {
-            active: state == "Prove"
+            active: root.state == "Prove"
             text: qsTr("Prove/check") + translationManager.emptyString
-            onSelected: state = "Prove"
+            onSelected: root.state = "Prove"
         }
         MoneroComponents.NavbarItem {
-            active: state == "SharedRingDB"
+            active: root.state == "SharedRingDB"
             text: qsTr("Shared RingDB") + translationManager.emptyString
-            onSelected: state = "SharedRingDB"
+            onSelected: root.state = "SharedRingDB"
         }
         MoneroComponents.NavbarItem {
-            active: state == "Sign"
+            active: root.state == "Sign"
             text: qsTr("Sign/verify") + translationManager.emptyString
-            onSelected: state = "Sign"
+            onSelected: root.state = "Sign"
         }
     }
 
@@ -81,7 +81,7 @@ ColumnLayout {
         property SharedRingDB sharedRingDBView: SharedRingDB { }
         property Sign signView: Sign { }
         Layout.fillWidth: true
-        Layout.preferredHeight: panelHeight
+        Layout.preferredHeight: root.panelHeight
         color: "transparent"
         state: isAndroid ? "Prove" : "Mining"
 

@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -77,7 +77,7 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: simpleModeAvailable ? 1.0 : 0.5
+                opacity: wizardModeSelection1.simpleModeAvailable ? 1.0 : 0.5
                 Layout.topMargin: 20
                 headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
@@ -95,7 +95,7 @@ Rectangle {
                 imageIcon: "qrc:///images/remote-node.png"
 
                 onMenuClicked: {
-                    if (simpleModeAvailable) {
+                    if (wizardModeSelection1.simpleModeAvailable) {
                         applyWalletMode(0, 'wizardModeRemoteNodeWarning');
                     }
                 }
@@ -111,7 +111,7 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: simpleModeAvailable ? 1.0 : 0.5
+                opacity: wizardModeSelection1.simpleModeAvailable ? 1.0 : 0.5
                 headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
                 bodyText: {
                     if (isTails) {
@@ -127,7 +127,7 @@ Rectangle {
                 imageIcon: "qrc:///images/local-node.png"
 
                 onMenuClicked: {
-                    if (simpleModeAvailable) {
+                    if (wizardModeSelection1.simpleModeAvailable) {
                         appWindow.persistentSettings.pruneBlockchain = true;
                         applyWalletMode(1, 'wizardModeBootstrap');
                     }

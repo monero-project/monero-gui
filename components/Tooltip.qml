@@ -26,14 +26,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import FontAwesome 1.0
 import "." as MoneroComponents
 
 Rectangle {
+    id: root
     property alias text: tooltip.text
     property alias tooltipPopup: popup
     property bool tooltipIconVisible: false
@@ -47,7 +48,7 @@ Rectangle {
 
     Text {
         id: icon
-        visible: tooltipIconVisible
+        visible: root.tooltipIconVisible
         color: MoneroComponents.Style.defaultFontColor
         font.family: FontAwesome.fontFamily
         font.pixelSize: 10
@@ -79,12 +80,12 @@ Rectangle {
         }
         closePolicy: Popup.NoAutoClose
         padding: 10
-        x: tooltipLeft
-            ? (tooltipIconVisible ? icon.x - icon.width : parent.x - tooltip.width - 20 + parent.width/2)
-            : (tooltipIconVisible ? icon.x + icon.width : parent.x + parent.width/2)
-        y: tooltipBottom
-            ? (tooltipIconVisible ? icon.y + height : parent.y + parent.height + 2)
-            : (tooltipIconVisible ? icon.y - height : parent.y - tooltip.height - 20)
+        x: root.tooltipLeft
+            ? (root.tooltipIconVisible ? icon.x - icon.width : parent.x - tooltip.width - 20 + parent.width/2)
+            : (root.tooltipIconVisible ? icon.x + icon.width : parent.x + parent.width/2)
+        y: root.tooltipBottom
+            ? (root.tooltipIconVisible ? icon.y + height : parent.y + parent.height + 2)
+            : (root.tooltipIconVisible ? icon.y - height : parent.y - tooltip.height - 20)
         enter: Transition {
             NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 150 }
         }

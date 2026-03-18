@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick.Controls
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Layouts
 
 import "../js/Utils.js" as Utils
@@ -91,16 +91,16 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        backgroundColor: lineEditBackgroundColor
-        fontColor: lineEditFontColor
-        fontBold: lineEditFontBold
-        fontSize: lineEditFontSize
+        backgroundColor: root.lineEditBackgroundColor
+        fontColor: root.lineEditFontColor
+        fontBold: root.lineEditFontBold
+        fontSize: root.lineEditFontSize
         onEditingFinished: {
-            text = text.replace(ipv6Regex, "[$1]");
+            text = text.replace(root.ipv6Regex, "[$1]");
             root.editingFinished();
         }
         onTextChanged: root.textChanged()
-        text: initialHostPort[1]
+        text: root.initialHostPort[1]
     }
 
     MoneroComponents.LineEdit {
@@ -113,14 +113,14 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        backgroundColor: lineEditBackgroundColor
-        fontColor: lineEditFontColor
-        fontBold: lineEditFontBold
-        fontSize: lineEditFontSize
+        backgroundColor: root.lineEditBackgroundColor
+        fontColor: root.lineEditFontColor
+        fontBold: root.lineEditFontBold
+        fontSize: root.lineEditFontSize
         validator: IntValidator{bottom: 1; top: 65535;}
 
         onEditingFinished: root.editingFinished()
         onTextChanged: root.textChanged()
-        text: initialHostPort[2]
+        text: root.initialHostPort[2]
     }
 }

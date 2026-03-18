@@ -28,7 +28,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils

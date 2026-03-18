@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents

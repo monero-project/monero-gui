@@ -96,16 +96,16 @@ Rectangle {
                 Layout.bottomMargin: 10
 
                 MoneroComponents.NavbarItem {
-                    active: state == "Address"
+                    active: pageReceive.state == "Address"
                     text: qsTr("Address") + translationManager.emptyString
-                    onSelected: state = "Address"
+                    onSelected: pageReceive.state = "Address"
                 }
 
                 MoneroComponents.NavbarItem {
-                    active: state == "PaymentRequest"
+                    active: pageReceive.state == "PaymentRequest"
                     text: qsTr("Payment request") + translationManager.emptyString
                     onSelected: {
-                        state = "PaymentRequest";
+                        pageReceive.state = "PaymentRequest";
                         qrCodeTextMouseArea.hoverEnabled = true;
                     }
                 }
@@ -135,7 +135,7 @@ Rectangle {
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onEntered: qrCodeTooltip.tooltipPopup.open()
                         onExited: qrCodeTooltip.tooltipPopup.close()
-                        onClicked: {
+                        onClicked: function(mouse) {
                             if (mouse.button == Qt.LeftButton){
                                 walletManager.saveQrCodeToClipboard(generateQRCodeString());
                                 appWindow.showStatusMessage(qsTr("QR code copied to clipboard") + translationManager.emptyString, 3);

@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -106,8 +106,8 @@ GridLayout {
 
             Accessible.role: Accessible.EditableText
             Accessible.name: labelText + text
-            KeyNavigation.up: walletNameKeyNavigationBackTab
-            KeyNavigation.backtab: walletNameKeyNavigationBackTab
+            KeyNavigation.up: grid.walletNameKeyNavigationBackTab
+            KeyNavigation.backtab: grid.walletNameKeyNavigationBackTab
             KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
             KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
         }
@@ -194,8 +194,8 @@ GridLayout {
                 Accessible.name: qsTr("Browse") + translationManager.emptyString
                 KeyNavigation.up: walletLocation
                 KeyNavigation.backtab: walletLocation
-                KeyNavigation.down: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
-                KeyNavigation.tab: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
+                KeyNavigation.down: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : grid.browseButtonKeyNavigationTab
+                KeyNavigation.tab: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : grid.browseButtonKeyNavigationTab
             }
         }
 
@@ -223,8 +223,8 @@ GridLayout {
                 Accessible.name: text
                 KeyNavigation.up: browseButton
                 KeyNavigation.backtab: browseButton
-                KeyNavigation.down: browseButtonKeyNavigationTab
-                KeyNavigation.tab: browseButtonKeyNavigationTab
+                KeyNavigation.down: grid.browseButtonKeyNavigationTab
+                KeyNavigation.tab: grid.browseButtonKeyNavigationTab
             }
         }
     }

@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import FontAwesome 1.0
@@ -78,7 +78,7 @@ Rectangle {
 
         ColumnLayout {
             id: balanceRow
-            visible: !selectAndSend
+            visible: !pageAccount.selectAndSend
             spacing: 0
 
             MoneroComponents.LabelSubheader {
@@ -175,7 +175,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: createNewAccountButton
-                    visible: !selectAndSend
+                    visible: !pageAccount.selectAndSend
                     small: true
                     text: qsTr("Create new account") + translationManager.emptyString
                     fontSize: 13
@@ -223,7 +223,7 @@ Rectangle {
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false
-                    currentIndex: currentAccountIndex
+                    currentIndex: pageAccount.currentAccountIndex
 
                     delegate: Rectangle {
                         id: tableItem2

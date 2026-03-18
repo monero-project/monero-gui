@@ -29,7 +29,7 @@
 import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 import moneroComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
@@ -167,26 +167,26 @@ Rectangle {
                          Image {
                              Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                              source: {
-                                if (hardwareWalletType == "Trezor") {
-                                    if (trezorType == "Trezor Model T") {
+                                if (wizardCreateDevice1.hardwareWalletType == "Trezor") {
+                                    if (wizardCreateDevice1.trezorType == "Trezor Model T") {
                                         return "qrc:///images/trezorT.png";
-                                    } else if (trezorType == "Trezor Safe 3") {
+                                    } else if (wizardCreateDevice1.trezorType == "Trezor Safe 3") {
                                         return "qrc:///images/trezor3.png";
-                                    } else if (trezorType == "Trezor Safe 5") {
+                                    } else if (wizardCreateDevice1.trezorType == "Trezor Safe 5") {
                                         return "qrc:///images/trezor5.png";
                                     }
-                                } else if (hardwareWalletType == "Ledger") {
-                                    if (ledgerType == "Ledger Nano S") {
+                                } else if (wizardCreateDevice1.hardwareWalletType == "Ledger") {
+                                    if (wizardCreateDevice1.ledgerType == "Ledger Nano S") {
                                         return "qrc:///images/ledgerNanoS.png";
-                                    } else if (ledgerType == "Ledger Nano S Plus") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano S Plus") {
                                         return "qrc:///images/ledgerNanoSPlus.png";
-                                    } else if (ledgerType == "Ledger Nano X") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano X") {
                                         return "qrc:///images/ledgerNanoX.png";
-                                    } else if (ledgerType == "Ledger Nano Gen5") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano Gen5") {
                                         return "qrc:///images/ledgerNanoGen5.png";
-                                    } else if (ledgerType == "Ledger Stax") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Stax") {
                                         return "qrc:///images/ledgerStax.png";
-                                    } else if (ledgerType == "Ledger Flex") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Flex") {
                                         return "qrc:///images/ledgerFlex.png";
                                     }
                                 }

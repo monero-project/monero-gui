@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 import FontAwesome 1.0
 
 import "../components" as MoneroComponents

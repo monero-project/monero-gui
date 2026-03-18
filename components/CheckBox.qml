@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -69,7 +69,7 @@ Item {
 
     RowLayout {
         id: checkBoxLayout
-        layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
+        layoutDirection: checkBox.iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
         spacing: 10
 
         Item {

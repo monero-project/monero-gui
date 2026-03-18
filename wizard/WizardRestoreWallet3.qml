@@ -29,9 +29,9 @@
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 
 
 Rectangle {

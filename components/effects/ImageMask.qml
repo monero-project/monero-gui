@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 
 import "../" as MoneroComponents
 import FontAwesome 1.0
@@ -67,7 +67,7 @@ Item {
         anchors.fill: root
         property variant source: svgMask
         property color overlayColor: root.color
-        visible: image && isOpenGL
+        visible: root.image && isOpenGL
 
         /* broken TODO fix
         fragmentShader: `

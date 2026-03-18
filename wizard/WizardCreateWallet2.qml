@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 2.0
+import QtQuick.Controls
 import moneroComponents.Clipboard 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -418,19 +418,19 @@ Rectangle {
                                                                                                                                                                                    : seedListGridColumn.children[0].children[24]
                 btnNextKeyNavigationTab: mobileDialog.visible ? mobileHeader : header
                 btnNext.enabled: walletCreationDate.opacity == 1 || appWindow.ctrlPressed ? true
-                                                                                          : seedListGridColumn.children[0].children[hiddenWords[0]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[1]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[2]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[3]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[4]].icon.wordsMatch
+                                                                                          : seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[0]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[1]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[2]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[3]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[4]].icon.wordsMatch
                 onNextClicked: {
                     //choose five random words to hide
-                    for (var i = 0; i < hiddenWords.length; i++) {
+                    for (var i = 0; i < wizardCreateWallet2.hiddenWords.length; i++) {
                         wizardCreateWallet2.hiddenWords[i] = Math.floor(Math.random() * 5) + 5 * i
                     }
 
                     wizardCreateWallet2.state = "verify";
-                    for (var i = 0; i < hiddenWords.length; i++) {
+                    for (var i = 0; i < wizardCreateWallet2.hiddenWords.length; i++) {
                         seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[i]].wordText.visible = false;
                     }
                     seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[0]].lineEdit.forceActiveFocus();

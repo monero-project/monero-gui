@@ -79,8 +79,8 @@ Rectangle {
         RowLayout {
             Layout.preferredHeight: 24
             Layout.preferredWidth: parent.width - root.sideMargin
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
             Layout.bottomMargin: 10
 
             MoneroComponents.Label {
@@ -144,8 +144,8 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: 8
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
             visible: sortAndFilter.collapsed
 
             MoneroComponents.LineEdit {
@@ -200,8 +200,8 @@ Rectangle {
             visible: sortAndFilter.collapsed
             Layout.fillWidth: true
             Layout.topMargin: 4
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
             columns: 2
             columnSpacing: 20
 
@@ -238,8 +238,8 @@ Rectangle {
             Layout.topMargin: 20
             Layout.bottomMargin: 20
             Layout.fillWidth: true
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
 
             Rectangle {
                 visible: sortAndFilter.collapsed
@@ -1350,8 +1350,8 @@ Rectangle {
             visible: sortAndFilter.collapsed
             Layout.topMargin: 10
             Layout.bottomMargin: 10
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
 
             MoneroComponents.TextPlain {
                 // status message
@@ -1370,8 +1370,8 @@ Rectangle {
             id: showAdvancedCheckbox
             Layout.topMargin: 30
             Layout.bottomMargin: 20
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
             checked: persistentSettings.historyShowAdvanced
             onClicked: persistentSettings.historyShowAdvanced = !persistentSettings.historyShowAdvanced
             text: qsTr("Advanced options") + translationManager.emptyString
@@ -1379,8 +1379,8 @@ Rectangle {
 
         ColumnLayout {
             visible: persistentSettings.historyShowAdvanced
-            Layout.leftMargin: sideMargin
-            Layout.rightMargin: sideMargin
+            Layout.leftMargin: root.sideMargin
+            Layout.rightMargin: root.sideMargin
             spacing: 20
 
             MoneroComponents.CheckBox {

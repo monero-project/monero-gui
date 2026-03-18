@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import QtQml 2.0
-import QtQuick 2.9
+import QtQml
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import moneroComponents.Wallet 1.0

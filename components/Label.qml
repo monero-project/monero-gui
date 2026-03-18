@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -61,15 +61,15 @@ Item {
         anchors.bottomMargin: 2
         anchors.left: parent.left
         font.family: {
-            if(fontFamily){
-                return fontFamily;
+            if(item.fontFamily){
+                return item.fontFamily;
             } else {
                 return MoneroComponents.Style.fontRegularName;
             }
         }
-        font.pixelSize: fontSize
-        font.bold: fontBold
-        color: fontColor
+        font.pixelSize: item.fontSize
+        font.bold: item.fontBold
+        color: item.fontColor
         onLinkActivated: item.linkActivated()
         textFormat: parent.textFormat
         MouseArea {
@@ -77,9 +77,9 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.NoButton
-            cursorShape: parent.hoveredLink || (tooltip && !tooltipIconVisible) ? Qt.PointingHandCursor : Qt.ArrowCursor
-            onEntered: tooltip && !tooltipIconVisible ? parent.tooltipPopup.open() : undefined
-            onExited: tooltip && !tooltipIconVisible ? parent.tooltipPopup.close() : undefined
+            cursorShape: parent.hoveredLink || (item.tooltip && !item.tooltipIconVisible) ? Qt.PointingHandCursor : Qt.ArrowCursor
+            onEntered: item.tooltip && !item.tooltipIconVisible ? parent.tooltipPopup.open() : undefined
+            onExited: item.tooltip && !item.tooltipIconVisible ? parent.tooltipPopup.close() : undefined
         }
     }
 }

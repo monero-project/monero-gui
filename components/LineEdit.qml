@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import FontAwesome 1.0
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Layouts
 
 import "../components" as MoneroComponents
@@ -164,15 +164,15 @@ ColumnLayout {
         color: "transparent"
         Layout.fillWidth: true
         height: (inputLabel.height + 10)
-        visible: showingHeader ? true : false
+        visible: item.showingHeader ? true : false
 
         MoneroComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
             font.family: MoneroComponents.Style.fontRegularName
-            font.pixelSize: labelFontSize
-            font.bold: labelFontBold
+            font.pixelSize: item.labelFontSize
+            font.bold: item.labelFontBold
             textFormat: Text.RichText
             color: MoneroComponents.Style.defaultFontColor
             onLinkActivated: item.labelLinkActivated()
@@ -198,7 +198,7 @@ ColumnLayout {
                         appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
                     }
                 }
-                visible: copyButton && input.text !== ""
+                visible: item.copyButton && input.text !== ""
             }
 
             MoneroComponents.LabelButton {
@@ -208,7 +208,7 @@ ColumnLayout {
                     input.paste();
                 }
                 text: qsTr("Paste") + translationManager.emptyString
-                visible: pasteButton
+                visible: item.pasteButton
             }
         }
     }
@@ -228,10 +228,10 @@ ColumnLayout {
             }
         }
         Layout.fillWidth: true
-        Layout.preferredHeight: inputHeight
+        Layout.preferredHeight: item.inputHeight
 
         leftPadding: item.inputPaddingLeft
-        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight + (password || passwordLinked ? 45 : 0)
+        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + item.inputPaddingRight + (item.password || item.passwordLinked ? 45 : 0)
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
@@ -244,7 +244,7 @@ ColumnLayout {
         echoMode: isPasswordHidden() ? TextInput.Password : TextInput.Normal
 
         MoneroComponents.Label {
-            visible: password || passwordLinked
+            visible: item.password || item.passwordLinked
             fontSize: 20
             text: isPasswordHidden() ? FontAwesome.eye : FontAwesome.eyeSlash
             opacity: eyeMouseArea.containsMouse ? 0.9 : 0.7
@@ -267,14 +267,14 @@ ColumnLayout {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: placeholderCenter ? parent.horizontalCenter : undefined
-            anchors.left: placeholderCenter ? undefined : parent.left
-            anchors.leftMargin: placeholderLeftMargin
+            anchors.horizontalCenter: item.placeholderCenter ? parent.horizontalCenter : undefined
+            anchors.left: item.placeholderCenter ? undefined : parent.left
+            anchors.leftMargin: item.placeholderLeftMargin
 
             opacity: item.placeholderOpacity
             color: item.placeholderColor
             font.family: item.placeholderFontFamily
-            font.pixelSize: placeholderFontSize
+            font.pixelSize: item.placeholderFontSize
             font.bold: item.placeholderFontBold
             text: ""
             z: 3
@@ -288,10 +288,10 @@ ColumnLayout {
 
         Rectangle {
             id: inputFill
-            color: backgroundColor
+            color: item.backgroundColor
             anchors.fill: parent
-            border.width: borderDisabled ? 0 : 1
-            border.color: borderColor
+            border.width: item.borderDisabled ? 0 : 1
+            border.color: item.borderColor
             radius: item.inputRadius
         }
 
@@ -299,7 +299,7 @@ ColumnLayout {
             id: inlineButtons
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: inputPaddingRight
+            anchors.rightMargin: item.inputPaddingRight
             spacing: 4
         }
     }

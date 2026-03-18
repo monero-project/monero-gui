@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
@@ -215,7 +215,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 20
                 color: MoneroComponents.Style.buttonSecondaryTextColor
-                text: showFiatConversion(transactionAmount) + translationManager.emptyString
+                text: showFiatConversion(root.transactionAmount) + translationManager.emptyString
             }
         }
 
@@ -276,7 +276,7 @@ Rectangle {
                 id: flickable
                 property int linesInMultipleRecipientsMode: 7
                 Layout.fillWidth: true
-                Layout.preferredHeight: recipients.length > 1
+                Layout.preferredHeight: root.recipients.length > 1
                     ? linesInMultipleRecipientsMode * (recipientsArea.contentHeight / recipientsArea.lineCount)
                     : recipientsArea.contentHeight
                 boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds

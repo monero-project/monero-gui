@@ -1,6 +1,6 @@
 import "../components" as MoneroComponents;
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Layouts
 import FontAwesome 1.0
 
 ColumnLayout {

@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
@@ -36,6 +36,7 @@ import moneroComponents.WalletManager 1.0
 import "../components" as MoneroComponents
 
 Rectangle {
+    id: root
     property alias signHeight: mainLayout.height
     property bool messageMode: true
     property bool fileMode: false
@@ -137,8 +138,8 @@ Rectangle {
                     onClicked: {
                         checked = true;
                         handleFileButton.checked = false;
-                        messageMode = true;
-                        fileMode = false;
+                        root.messageMode = true;
+                        root.fileMode = false;
                     }
                 }
 
@@ -150,8 +151,8 @@ Rectangle {
                     onClicked: {
                         checked = true;
                         handleMessageButton.checked = false;
-                        fileMode = true;
-                        messageMode = false;
+                        root.fileMode = true;
+                        root.messageMode = false;
                     }
                 }
             }
@@ -166,14 +167,14 @@ Rectangle {
                 Layout.topMargin: 12
                 Layout.bottomMargin: 24
                 textFormat: Text.RichText
-                text: fileMode ? qsTr("Sign file") + translationManager.emptyString : qsTr("Sign message") + translationManager.emptyString
+                text: root.fileMode ? qsTr("Sign file") + translationManager.emptyString : qsTr("Sign message") + translationManager.emptyString
             }
 
             ColumnLayout{
                 id: signMessageRow
                 Layout.fillWidth: true
                 spacing: 10
-                visible: messageMode
+                visible: root.messageMode
 
                 MoneroComponents.LineEditMulti{
                     id: signMessageLine
@@ -191,7 +192,7 @@ Rectangle {
             RowLayout {
                 id: signFileRow
                 Layout.fillWidth: true
-                visible: fileMode
+                visible: root.fileMode
 
                 MoneroComponents.LineEditMulti {
                     id: signFileLine
@@ -226,7 +227,7 @@ Rectangle {
                     labelFontSize: 14
                     labelText: qsTr("Signature") + translationManager.emptyString
                     placeholderFontSize: 16
-                    placeholderText: messageMode ? qsTr("Click [Sign Message] to generate signature") + translationManager.emptyString : qsTr("Click [Sign File] to generate signature") + translationManager.emptyString;
+                    placeholderText: root.messageMode ? qsTr("Click [Sign Message] to generate signature") + translationManager.emptyString : qsTr("Click [Sign File] to generate signature") + translationManager.emptyString;
                     readOnly: true
                     Layout.fillWidth: true
                     copyButton: true
@@ -252,7 +253,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: signMessageButton
-                    visible: messageMode
+                    visible: root.messageMode
                     text: qsTr("Sign Message") + translationManager.emptyString
                     enabled: signMessageLine.text !== ''
                     small: true
@@ -264,7 +265,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: signFileButton
-                    visible: fileMode
+                    visible: root.fileMode
                     small: true
                     Layout.alignment: Qt.AlignBottom
                     text: qsTr("Sign File") + translationManager.emptyString
@@ -285,12 +286,12 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.bottomMargin: 24
                 textFormat: Text.RichText
-                text: fileMode ? qsTr("Verify file") + translationManager.emptyString : qsTr("Verify message") + translationManager.emptyString
+                text: root.fileMode ? qsTr("Verify file") + translationManager.emptyString : qsTr("Verify message") + translationManager.emptyString
             }
 
             MoneroComponents.LineEditMulti {
                 id: verifyMessageLine
-                visible: messageMode
+                visible: root.messageMode
                 Layout.fillWidth: true
                 labelFontSize: 14
                 labelText: qsTr("Message") + translationManager.emptyString
@@ -304,7 +305,7 @@ Rectangle {
             RowLayout {
                 id: verifyFileRow
                 Layout.fillWidth: true
-                visible: fileMode
+                visible: root.fileMode
 
                 MoneroComponents.LineEditMulti {
                     id: verifyFileLine
@@ -373,7 +374,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: verifyFileButton
-                    visible: fileMode
+                    visible: root.fileMode
                     small: true
                     text: qsTr("Verify File") + translationManager.emptyString
                     enabled: verifyFileLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''
@@ -385,7 +386,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: verifyMessageButton
-                    visible: messageMode
+                    visible: root.messageMode
                     small: true
                     text: qsTr("Verify Message") + translationManager.emptyString
                     enabled: verifyMessageLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''

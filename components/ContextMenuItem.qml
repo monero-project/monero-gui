@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import FontAwesome 1.0
 import "../components" as MoneroComponents
@@ -46,9 +46,9 @@ MenuItem {
             id: glyphIcon
 
             color: MoneroComponents.Style.buttonTextColor
-            font.family: glyphIconSolid ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
+            font.family: menuItem.glyphIconSolid ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
             font.pixelSize: 14
-            font.styleName: glyphIconSolid ? "Solid" : "Regular"
+            font.styleName: menuItem.glyphIconSolid ? "Solid" : "Regular"
         }
 
         Text {

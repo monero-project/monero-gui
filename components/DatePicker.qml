@@ -126,7 +126,7 @@ Item {
                 Layout.preferredWidth: childrenRect.width + 40
                 font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : parent.headerFontColor
+                color: datePicker.error ? datePicker.errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
@@ -151,7 +151,7 @@ Item {
             MoneroComponents.TextPlain {
                 font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
+                color: datePicker.error ? datePicker.errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
                 themeTransition: false
             }
@@ -162,7 +162,7 @@ Item {
                 Layout.preferredWidth: childrenRect.width + 40
                 font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : parent.headerFontColor
+                color: datePicker.error ? datePicker.errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
@@ -186,7 +186,7 @@ Item {
             MoneroComponents.TextPlain {
                 font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : MoneroComponents.Style.defaultFontColor
+                color: datePicker.error ? datePicker.errorColor : MoneroComponents.Style.defaultFontColor
                 text: "-"
                 themeTransition: false
             }
@@ -196,7 +196,7 @@ Item {
                 Layout.preferredWidth: childrenRect.width + 60
                 font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
-                color: datePicker.error ? errorColor : parent.headerFontColor
+                color: datePicker.error ? datePicker.errorColor : parent.headerFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectByMouse: true
                 horizontalAlignment: TextInput.AlignHCenter
@@ -248,8 +248,8 @@ Item {
         padding: 0
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         onOpened: {
-            calendar.visibleMonth = currentDate.getMonth();
-            calendar.visibleYear = currentDate.getFullYear();
+            calendar.visibleMonth = datePicker.currentDate.getMonth();
+            calendar.visibleYear = datePicker.currentDate.getFullYear();
         }
 
         Rectangle {

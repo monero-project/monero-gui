@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
+import QtQml.Models
+import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import "../components" as MoneroComponents
@@ -156,15 +156,15 @@ Rectangle {
                         small: true
                         primary: false
                         text: "−"
-                        enabled: threads > 1
-                        onClicked: threads--
+                        enabled: root.threads > 1
+                        onClicked: root.threads--
                     }
 
                     MoneroComponents.TextPlain {
                         Layout.bottomMargin: 1
                         Layout.minimumWidth: 45
                         color: MoneroComponents.Style.defaultFontColor
-                        text: threads
+                        text: root.threads
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: 16
 
@@ -172,10 +172,10 @@ Rectangle {
                             anchors.fill: parent
                             scrollGestureEnabled: false
                             onWheel: {
-                                if (wheel.angleDelta.y > 0 && threads < idealThreadCount) {
-                                    return threads++
-                                } else if (wheel.angleDelta.y < 0 && threads > 1) {
-                                    return threads--
+                                if (wheel.angleDelta.y > 0 && root.threads < idealThreadCount) {
+                                    return root.threads++
+                                } else if (wheel.angleDelta.y < 0 && root.threads > 1) {
+                                    return root.threads--
                                 }
                             }
                         }
@@ -186,8 +186,8 @@ Rectangle {
                         small: true
                         primary: false
                         text: "+"
-                        enabled: threads < idealThreadCount
-                        onClicked: threads++
+                        enabled: root.threads < idealThreadCount
+                        onClicked: root.threads++
                     }
                 }
 
@@ -295,7 +295,7 @@ Rectangle {
                                 if (persistentSettings.allow_p2pool_mining) {
                                     if (p2poolManager.isInstalled()) {
                                         args = daemonManager.getArgs(persistentSettings.blockchainDataDir) //updates arguments
-                                        if (persistentSettings.allowRemoteNodeMining || (args.includes("--zmq-pub tcp://127.0.0.1:18083") || args.includes("--zmq-pub=tcp://127.0.0.1:18083")) && !args.includes("--no-zmq")) {
+                                        if (persistentSettings.allowRemoteNodeMining || (root.args.includes("--zmq-pub tcp://127.0.0.1:18083") || root.args.includes("--zmq-pub=tcp://127.0.0.1:18083")) && !root.args.includes("--no-zmq")) {
                                             startP2Pool()
                                         }
                                         else {
@@ -320,7 +320,7 @@ Rectangle {
                                 }
                                 else 
                                 {
-                                    success = walletManager.startMining(appWindow.currentWallet.address(0, 0), threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                                    success = walletManager.startMining(appWindow.currentWallet.address(0, 0), root.threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                                     if (success) 
                                     {
                                         update()

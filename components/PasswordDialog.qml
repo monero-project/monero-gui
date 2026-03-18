@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Window 2.0
+import QtQuick.Window
 import FontAwesome 1.0
 
 import "." as MoneroComponents
@@ -161,10 +161,10 @@ FocusScope {
 
             Label {
                 text: {
-                    if (newPasswordDialogMode) {
+                    if (root.newPasswordDialogMode) {
                         return qsTr("Please enter new wallet password") + translationManager.emptyString;
                     } else {
-                        var device = passwordDialogMode ? qsTr("wallet password") : qsTr("wallet device passphrase");
+                        var device = root.passwordDialogMode ? qsTr("wallet password") : qsTr("wallet device passphrase");
                         return (root.walletName.length > 0 ? qsTr("Please enter %1 for: ").arg(device) + root.walletName : qsTr("Please enter %1").arg(device)) + translationManager.emptyString;
                     }
                 }
@@ -178,7 +178,7 @@ FocusScope {
 
             Label {
                 text: qsTr("Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.") + translationManager.emptyString
-                visible: passphraseDialogMode
+                visible: root.passphraseDialogMode
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
 
@@ -216,7 +216,7 @@ FocusScope {
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 KeyNavigation.tab: {
-                    if (passwordDialogMode) {
+                    if (root.passwordDialogMode) {
                         return okButton
                     } else {
                         return passwordInput2
@@ -232,7 +232,7 @@ FocusScope {
 
             // padding
             Rectangle {
-                visible: !passwordDialogMode
+                visible: !root.passwordDialogMode
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 height: 10
@@ -241,8 +241,8 @@ FocusScope {
             }
 
             Label {
-                visible: !passwordDialogMode
-                text: newPasswordDialogMode ? qsTr("Please confirm new password") : qsTr("Please confirm wallet device passphrase") + translationManager.emptyString
+                visible: !root.passwordDialogMode
+                text: root.newPasswordDialogMode ? qsTr("Please confirm new password") : qsTr("Please confirm wallet device passphrase") + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
@@ -254,7 +254,7 @@ FocusScope {
             MoneroComponents.LineEdit {
                 id: passwordInput2
                 passwordLinked: passwordInput1
-                visible: !passwordDialogMode
+                visible: !root.passwordDialogMode
                 Layout.topMargin: 6
                 Layout.fillWidth: true
                 KeyNavigation.tab: okButton
@@ -268,7 +268,7 @@ FocusScope {
 
             // padding
             Rectangle {
-                visible: !passwordDialogMode
+                visible: !root.passwordDialogMode
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 height: 10
@@ -295,17 +295,17 @@ FocusScope {
                 MoneroComponents.StandardButton {
                     id: okButton
                     fontAwesomeIcon: true
-                    rightIcon: okButtonIcon
+                    rightIcon: root.okButtonIcon
                     small: true
-                    text: okButtonText ? okButtonText : qsTr("Ok") + translationManager.emptyString
+                    text: root.okButtonText ? root.okButtonText : qsTr("Ok") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
-                    enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
+                    enabled: (root.passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: onOk()
                 }
             }
 
             Label {
-                visible: backgroundSyncing
+                visible: root.backgroundSyncing
                 text: qsTr("Syncing in the background...") + translationManager.emptyString;
                 Layout.fillWidth: true
 

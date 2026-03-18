@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import QtQuick.Layouts
 import FontAwesome 1.0
 
@@ -72,7 +72,7 @@ RowLayout {
                 width: indicatorImage.width
                 height: label.height
                 anchors.left: label.right
-                anchors.leftMargin: textMargin
+                anchors.leftMargin: checkBox.textMargin
                 color: "transparent"
                 rotation: checkBox.checked ? 180  : 0
 

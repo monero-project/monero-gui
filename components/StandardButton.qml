@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import FontAwesome 1.0
 
@@ -145,13 +145,13 @@ Item {
         }
 
         Image {
-            visible: !fontAwesomeIcon && button.rightIcon !== ""
+            visible: !button.fontAwesomeIcon && button.rightIcon !== ""
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
             width: button.small ? 16 : 20
             height: button.small ? 16 : 20
             opacity: buttonRect.opacity
             source: {
-                if (fontAwesomeIcon) return "";
+                if (button.fontAwesomeIcon) return "";
                 if(button.rightIconInactive !== "" && !button.enabled) {
                     return button.rightIconInactive;
                 }
@@ -166,7 +166,7 @@ Item {
             font.pixelSize: button.small ? 16 : 20
             font.styleName: "Solid"
             text: button.rightIcon
-            visible: fontAwesomeIcon && button.rightIcon !== ""
+            visible: button.fontAwesomeIcon && button.rightIcon !== ""
         }
     }
 
