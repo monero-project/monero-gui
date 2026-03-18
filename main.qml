@@ -852,7 +852,6 @@ ApplicationWindow {
             middlePanel.advancedView.miningView.update()
             informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
         }
-        informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
     }
@@ -1000,7 +999,6 @@ ApplicationWindow {
         }
         onRejected: {
             // do nothing
-
         }
 
     }
@@ -1057,7 +1055,6 @@ ApplicationWindow {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         } else {
@@ -1114,10 +1111,8 @@ ApplicationWindow {
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Critical;
         } else {
             informationPopup.text  = result;
-            informationPopup.icon = StandardIcon.Critical;
         }
     }
 
@@ -1148,10 +1143,8 @@ ApplicationWindow {
             var confirmations = results[4];
 
             informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Information
             if (!good) {
                 informationPopup.text = qsTr("Bad signature");
-                informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
                 if (in_pool) {
                     informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
@@ -1167,19 +1160,16 @@ ApplicationWindow {
         else if (results.length == 2 && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
         } 
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(results[2]).arg(results[3]) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = currentWallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
@@ -1760,8 +1750,6 @@ ApplicationWindow {
                 if(!validator.lmdbExists)
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
 
-                confirmationDialog.icon = StandardIcon.Question
-
                 // Continue
                 confirmationDialog.onAcceptedCallback = function() {
                     persistentSettings.blockchainDataDir = dataDir
@@ -1797,11 +1785,9 @@ ApplicationWindow {
                 appWindow.walletPassword = passwordDialog.password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
-                informationPopup.icon  = StandardIcon.Information;
             } else {
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Error: ") + currentWallet.errorString;
-                informationPopup.icon  = StandardIcon.Critical;
             }
             informationPopup.onCloseCallback = null;
             informationPopup.open();
@@ -2204,7 +2190,6 @@ ApplicationWindow {
         // Show confirmation dialog
         confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
         confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
-        confirmationDialog.icon = StandardIcon.Question;
         confirmationDialog.cancelText = qsTr("Force stop") + translationManager.emptyString;
         confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
         confirmationDialog.onAcceptedCallback = function() {
