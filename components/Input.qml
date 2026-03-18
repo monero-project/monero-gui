@@ -39,6 +39,7 @@ TextField {
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: MoneroComponents.Style.defaultFontColor
+    placeholderTextColor: MoneroComponents.Style.dimmedFontColor
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
 
