@@ -50,6 +50,10 @@ TextArea {
     selectByMouse: mouseSelection
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
+    
+    background: Rectangle {
+        color: "transparent"
+    }
 
     property int minimumHeight: 100
     height: contentHeight > minimumHeight ? contentHeight : minimumHeight
