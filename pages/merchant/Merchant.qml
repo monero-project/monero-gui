@@ -258,8 +258,8 @@ Item {
                 height: 32
 
                 MoneroComponents.TextPlain {
-                    anchors.verticalCenter: root.verticalCenter
-                    anchors.horizontalCenter: root.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12
                     font.bold: false
                     color: "white"

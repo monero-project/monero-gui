@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2024, The Monero Project
+// Copyright (c) 2021-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -71,6 +71,7 @@ Rectangle {
     ToolTip {
         id: popup
         height: tooltip.height + 20
+        width: tooltip.width + 20
 
         background: Rectangle {
             border.color: MoneroComponents.Style.buttonInlineBackgroundColor
