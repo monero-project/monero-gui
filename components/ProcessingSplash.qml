@@ -73,26 +73,27 @@ Rectangle {
                 width: 60
                 height: 60
                 anchors.centerIn: parent
-                source: "qrc:///images/moneroLogo_white.png"
+                source: "qrc:///images/monero-vector.svg"
                 mipmap: true
             }
 
             BusyIndicator {
+                id: control
                 running: parent.visible
                 anchors.centerIn: imgLogo
-                /*style: BusyIndicatorStyle {
-                    indicator: Image {
-                        visible: control.running
-                        source: "qrc:///images/busy-indicator.png"
-                        RotationAnimator on rotation {
-                            running: control.running
-                            loops: Animation.Infinite
-                            duration: 1000
-                            from: 0
-                            to: 360
-                        }
+                contentItem: Image {
+                    id: busyImage
+                    visible: control.running
+                    source: "qrc:///images/busy-indicator.png"
+                    anchors.centerIn: parent
+                    RotationAnimator on rotation {
+                        running: control.running
+                        loops: Animation.Infinite
+                        duration: 1000
+                        from: 0
+                        to: 360
                     }
-                }*/
+                }
             }
         }
 
