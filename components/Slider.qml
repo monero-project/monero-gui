@@ -14,7 +14,7 @@ ColumnLayout {
 
     signal moved()
 
-    spacing: 0
+    spacing: 8
 
     MoneroComponents.TextPlain {
         id: label
