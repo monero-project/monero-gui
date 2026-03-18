@@ -167,6 +167,9 @@ Rectangle {
                 TextArea.flickable: TextArea {
                     id : consoleArea
                     color: MoneroComponents.Style.defaultFontColor
+                    background: Rectangle {
+                        color: "transparent"
+                    }
                     selectionColor: MoneroComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     selectByMouse: true
