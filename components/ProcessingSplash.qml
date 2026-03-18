@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -75,6 +75,8 @@ Rectangle {
                 anchors.centerIn: parent
                 source: "qrc:///images/monero-vector.svg"
                 mipmap: true
+                fillMode: Image.PreserveAspectFit
+                sourceSize: Qt.size(120, 120)
             }
 
             BusyIndicator {
