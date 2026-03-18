@@ -4,7 +4,7 @@
 ** Contact: https://www.qt.io/licensing/
 **
 ****************************************************************************/
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -82,7 +82,7 @@ void MoneroSettings::load()
         const QVariant currentValue = this->m_settings->value(property.name(), previousValue);
 
         if (!currentValue.isNull() && (!previousValue.isValid()
-                || (currentValue.canConvert(previousValue.type()) && previousValue != currentValue))) {
+                || (currentValue.canConvert(previousValue.metaType()) && previousValue != currentValue))) {
             property.write(this, currentValue);
 #ifdef QT_DEBUG
             qDebug() << "QQmlSettings: load" << property.name() << "setting:" << currentValue << "default:" << previousValue;

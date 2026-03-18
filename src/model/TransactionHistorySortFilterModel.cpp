@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -81,7 +81,9 @@ void TransactionHistorySortFilterModel::setSearchFilter(const QString &arg)
     if (searchFilter() != arg) {
         m_searchString = arg;
         emit searchFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -95,7 +97,9 @@ void TransactionHistorySortFilterModel::setPaymentIdFilter(const QString &arg)
     if (paymentIdFilter() != arg) {
         m_filterValues[TransactionHistoryModel::TransactionPaymentIdRole] = arg;
         emit paymentIdFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -109,7 +113,9 @@ void TransactionHistorySortFilterModel::setDateFromFilter(const QDate &date)
     if (date != dateFromFilter()) {
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::From, date);
         emit dateFromFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -123,7 +129,9 @@ void TransactionHistorySortFilterModel::setDateToFilter(const QDate &date)
     if (date != dateToFilter()) {
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::To, date);
         emit dateToFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -137,7 +145,9 @@ void TransactionHistorySortFilterModel::setAmountFromFilter(double value)
     if (value != amountFromFilter()) {
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::From, value);
         emit amountFromFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -151,7 +161,9 @@ void TransactionHistorySortFilterModel::setAmountToFilter(double value)
     if (value != amountToFilter()) {
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::To, value);
         emit amountToFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
@@ -165,7 +177,9 @@ void TransactionHistorySortFilterModel::setDirectionFilter(int value)
     if (value != directionFilter()) {
         m_filterValues[TransactionHistoryModel::TransactionDirectionRole] = QVariant::fromValue(value);
         emit directionFilterChanged();
-        invalidateFilter();
+
+        beginFilterChange();
+        endFilterChange();
     }
 }
 
