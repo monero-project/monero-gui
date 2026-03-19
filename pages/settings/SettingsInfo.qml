@@ -209,7 +209,6 @@ Rectangle {
                                                                 + "- Tx descriptions\n\n"
                                                                 + "The old wallet cache file will be renamed and can be restored later.\n"
                                                                 );
-                                confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.onAcceptedCallback = function() {
                                     appWindow.closeWallet(function() {
                                         walletManager.clearWalletCache(persistentSettings.wallet_path);

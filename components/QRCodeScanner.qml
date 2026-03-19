@@ -99,9 +99,7 @@ Rectangle {
         }
         onNotifyError : {
             if( warning )
-                messageDialog.icon = StandardIcon.Critical
             else {
-                messageDialog.icon = StandardIcon.Warning
                 root.state = "Stopped"
             }
             messageDialog.text = error

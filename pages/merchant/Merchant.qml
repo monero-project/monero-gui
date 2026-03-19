@@ -368,7 +368,7 @@ Item {
 //                                onClicked: {
 //                                    merchantPageDialog.title  = qsTr("Payment URL") + translationManager.emptyString;
 //                                    merchantPageDialog.text = qsTr("payment url explanation")
-//                                    merchantPageDialog.icon = StandardIcon.Information
+//                                    //merchantPageDialog.icon = StandardIcon.Information
 //                                    merchantPageDialog.open()
 //                                }
 //                            }
@@ -686,7 +686,6 @@ Item {
                 console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                 receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                 receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
-                receivePageDialog.icon = StandardIcon.Error
                 receivePageDialog.open()
             }
         }

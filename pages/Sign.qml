@@ -61,12 +61,10 @@ Rectangle {
         if (result) {
             signatureVerificationMessage.title = qsTr("Good signature") + translationManager.emptyString
             signatureVerificationMessage.text  = qsTr("This is a good signature") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Information
         }
         else {
             signatureVerificationMessage.title = qsTr("Bad signature") + translationManager.emptyString
             signatureVerificationMessage.text  = qsTr("This signature did not verify") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Critical
         }
         signatureVerificationMessage.open()
     }

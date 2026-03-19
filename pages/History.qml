@@ -1767,7 +1767,6 @@ Rectangle {
                 var text = qsTr("CSV file written to: %1").arg(written) + "\n\n"
                 text += qsTr("Tip: Use your favorite spreadsheet software to sort on blockheight.") + "\n\n" + translationManager.emptyString;
                 confirmationDialog.text = text;
-                confirmationDialog.icon = StandardIcon.Information;
                 confirmationDialog.cancelText = qsTr("Open folder") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = null;
                 confirmationDialog.onRejectedCallback = function() {
@@ -1777,7 +1776,6 @@ Rectangle {
             } else {
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Error exporting transaction data.") + "\n\n" + translationManager.emptyString;
-                informationPopup.icon = StandardIcon.Critical;
                 informationPopup.onCloseCallback = null;
                 informationPopup.open();
 

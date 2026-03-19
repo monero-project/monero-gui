@@ -758,7 +758,6 @@ Rectangle {
                     console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                     receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
-                    receivePageDialog.icon = StandardIcon.Error
                     receivePageDialog.open()
                 } else {
                     appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString, 3);

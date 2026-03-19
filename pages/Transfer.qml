@@ -87,7 +87,6 @@ Rectangle {
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
       oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
     }
@@ -1001,7 +1000,6 @@ Rectangle {
                 console.error("Can't load unsigned transaction: ", transaction.errorString);
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't load unsigned transaction: ") + transaction.errorString
-                informationPopup.icon  = StandardIcon.Critical
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
                 // deleting transaction object, we don't want memleaks
@@ -1012,7 +1010,6 @@ Rectangle {
 
                 // Show confirmation dialog
                 confirmationDialog.title = qsTr("Confirmation") + translationManager.emptyString
-                confirmationDialog.icon = StandardIcon.Question
                 confirmationDialog.onAcceptedCallback = function() {
                     transaction.sign(path+"_signed");
                     transaction.destroy();
@@ -1040,13 +1037,11 @@ Rectangle {
             if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(selectedFile))){
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
-                informationPopup.icon  = StandardIcon.Critical
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
                 informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
-                informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
             }
