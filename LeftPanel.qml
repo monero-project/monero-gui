@@ -106,6 +106,9 @@ Rectangle {
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
         Item {
+            implicitWidth: childrenRect.width
+            implicitHeight: childrenRect.height
+
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
@@ -128,13 +131,11 @@ Rectangle {
                     anchors.fill: card
                     source: card
                     shadowEnabled: true
+                    shadowColor: "#3B000000"
                     shadowHorizontalOffset: 3
                     shadowVerticalOffset: 3
-                    shadowBlur: 1.0
-                    shadowOpacity: 0.23 // ≈ #3B000000
-                    shadowColor: "#000000"
-
-                    //autoPaddingEnabled: true   // automatically expands bounds for offset + blur
+                    shadowBlur: 0.85          // tweak 0.7–1.0 to match original softness
+                    shadowOpacity: 1.0
                 }
 
                 MoneroComponents.TextPlain {
