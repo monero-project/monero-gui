@@ -297,6 +297,9 @@ Rectangle {
                     selectionColor: MoneroComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     wrapMode: TextEdit.Wrap
+                    background: Rectangle {
+                        color: "transparent"
+                    }
                     text: {
                         return recipients.map(function (recipient, index) {
                             var addressBookName = null;
