@@ -56,7 +56,6 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 [Dirs]
 Name: "{app}";
-Name: "{app}\p2pool"; Permissions: users-full
 
 [Files]
 ; The use of the flag "ignoreversion" for the following entries leads to the following behaviour:
@@ -138,6 +137,7 @@ Type: filesandordirs; Name: "{app}\QtQuick.2"
 Type: filesandordirs; Name: "{app}\Material"
 Type: filesandordirs; Name: "{app}\Universal"
 Type: filesandordirs; Name: "{app}\scenegraph"
+Type: filesandordirs; Name: "{localappdata}\monero-core\p2pool"
 Type: filesandordirs; Name: "{app}\p2pool"
 Type: files; Name: "{app}\D3Dcompiler_47.dll"
 Type: files; Name: "{app}\libbz2-1.dll"
@@ -173,6 +173,8 @@ Type: files; Name: "{app}\ssleay32.dll"
 Type: files; Name: "{app}\start-high-dpi.bat"
 Type: files; Name: "{group}\Utilities\x (Check Blockchain Folder).lnk"
 
+[UninstallDelete]
+Type: filesandordirs; Name: "{localappdata}\monero-core\p2pool"
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:";

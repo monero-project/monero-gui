@@ -29,6 +29,7 @@
 #include "P2PoolManager.h"
 #include "net/http_client.h"
 #include "common/util.h"
+#include "main/oshelper.h"
 #include "qt/utils.h"
 #include <QElapsedTimer>
 #include <QFile>
@@ -41,6 +42,7 @@
 #include <QApplication>
 #include <QProcess>
 #include <QMap>
+#include <QStandardPaths>
 #include <QCryptographicHash>
 
 #if defined(Q_OS_MACOS) && defined(__aarch64__) && !defined(Q_OS_MACOS_AARCH64)
@@ -241,9 +243,14 @@ P2PoolManager::P2PoolManager(QObject *parent)
     started = false;
     // Platform dependent path to p2pool
 #ifdef Q_OS_WIN
-    m_p2poolPath = QApplication::applicationDirPath() + "/p2pool";
+    if (OSHelper().installed()) {
+        m_p2poolPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/p2pool";
+    } else {
+        m_p2poolPath = QApplication::applicationDirPath() + "/p2pool";
+    }
+
     if (!QDir(m_p2poolPath).exists()) {
-        QDir().mkdir(m_p2poolPath);
+        QDir().mkpath(m_p2poolPath);
     }
     m_p2pool = m_p2poolPath + "/p2pool.exe";
 #elif defined(Q_OS_UNIX)
