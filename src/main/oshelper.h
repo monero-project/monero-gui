@@ -56,10 +56,10 @@ public:
     Q_INVOKABLE bool isCapsLock() const;
     Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath) const;
     Q_INVOKABLE void openSeedTemplate() const;
+    bool installed() const;
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
 private:
-    bool installed() const;
 
 signals:
 
