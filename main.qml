@@ -287,7 +287,7 @@ ApplicationWindow {
             return;
         isQuitting = true;
         closeWallet(function() {
-            Qt.quit();
+            mainApp.exit(0);
         })
     }
 
@@ -2249,7 +2249,9 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
-        closeWallet(Qt.quit);
+        closeWallet(function() {
+            mainApp.exit(0);
+        });
     }
 
     function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {
