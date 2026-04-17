@@ -130,3 +130,13 @@ function parseDateStringOrRestoreHeightAsInteger(value) {
     }
     return restoreHeight;
 }
+
+function htmlEscape(s) {
+    if (s === null || s === undefined)
+        return "";
+    return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
