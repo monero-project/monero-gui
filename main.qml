@@ -445,41 +445,23 @@ ApplicationWindow {
     }
 
     function onUriHandler(uri){
-        if(uri.startsWith("monero://")){
-            var address = uri.substring("monero://".length);
+        if (uri && (uri.startsWith("monero://") || uri.startsWith("monero:"))) {
+            const normalizedUri = uri.replace("monero://", "monero:");
+            const parsed = walletManager.parse_uri_to_object(normalizedUri);
 
-            var params = {}
-            if(address.length === 0) return;
-            var spl = address.split("?");
+            if (parsed.error) {
+                console.log("Invalid Monero URI: " + parsed.error);
+            } else {
+                middlePanel.transferView.sendTo(
+                    parsed.address || "",
+                    parsed.payment_id || "",
+                    parsed.tx_description || "",
+                    parsed.amount || ""
+                );
 
-            if(spl.length > 2) return;
-            if(spl.length >= 1) {
-                // parse additional params
-                address = spl[0];
-
-                if(spl.length === 2){
-                    spl.shift();
-                    var item = spl[0];
-
-                    var _spl = item.split("&");
-                    for (var param in _spl){
-                        var _item = _spl[param];
-                        if(!_item.indexOf("=") > 0) continue;
-
-                        var __spl = _item.split("=");
-                        if(__spl.length !== 2) continue;
-
-                        params[__spl[0]] = __spl[1];
-                    }
-                }
+                appWindow.raise();
+                appWindow.show();
             }
-
-            // Fill fields
-            middlePanel.transferView.sendTo(address, params["tx_payment_id"], params["tx_description"], params["tx_amount"]);
-
-            // Raise window
-            appWindow.raise();
-            appWindow.show();
         }
     }
 
