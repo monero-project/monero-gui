@@ -1,9 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.2
+import QtCore
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Dialogs
+import QtQuick.Effects
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0
@@ -167,7 +167,7 @@ Item {
                                 return ""
                             }
                         }
-                        onHideAmountToggled: {
+                        onHideAmountToggled: function(txid) {
                             if(root.hiddenAmounts.indexOf(txid) < 0){
                                 root.hiddenAmounts.push(txid);
                             } else {
@@ -178,16 +178,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
                 source: tracker
+                shadowEnabled: true
+                shadowHorizontalOffset: 2
+                shadowVerticalOffset: 2
+                shadowBlur: 8.0
+                shadowColor: "#20000000"
+                smooth: true
             }
 
             Rectangle {
@@ -216,7 +215,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.RightButton
-                        onClicked: {
+                        onClicked: function(mouse) {
                             if (mouse.button == Qt.RightButton){
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
@@ -238,16 +237,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#30000000"
-                smooth: true
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 8
+                shadowColor: "#30000000"
                 source: qrImg
+                smooth: true
             }
         }
 
@@ -267,7 +265,7 @@ Item {
                     color: "white"
                     text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>%1: %2 <a href='#'>(%3)</a>"
                         .arg(qsTr("Currently selected address"))
-                        .arg(addressLabel)
+                        .arg(root.addressLabel)
                         .arg(qsTr("Change")) + translationManager.emptyString
                     textFormat: Text.RichText
                     themeTransition: false
@@ -370,7 +368,7 @@ Item {
 //                                onClicked: {
 //                                    merchantPageDialog.title  = qsTr("Payment URL") + translationManager.emptyString;
 //                                    merchantPageDialog.text = qsTr("payment url explanation")
-//                                    merchantPageDialog.icon = StandardIcon.Information
+//                                    //merchantPageDialog.icon = StandardIcon.Information
 //                                    merchantPageDialog.open()
 //                                }
 //                            }
@@ -423,16 +421,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 8
+                shadowColor: "#20000000"
                 source: payment_url_container
+                smooth: true
             }
 
             Item {
@@ -485,8 +482,8 @@ Item {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
                             }
-                            validator: RegExpValidator {
-                                regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
                             }
                         }
                     }
@@ -675,21 +672,20 @@ Item {
 
     MessageDialog {
         id: merchantPageDialog
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
     }
 
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: shortcuts.pictures
-        selectExisting: false
+        currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+        fileMode: FileDialog.SaveFile
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(fileUrl))) {
-                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, walletManager.amountFromString(amountToReceive.text)), walletManager.urlToLocalPath(selectedFile))) {
+                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                 receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                receivePageDialog.icon = StandardIcon.Error
+                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                 receivePageDialog.open()
             }
         }

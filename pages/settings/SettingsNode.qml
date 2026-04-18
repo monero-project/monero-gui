@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import FontAwesome 1.0
 
 import "../../components" as MoneroComponents
@@ -111,7 +111,7 @@ Rectangle{
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 16
                     text: qsTr("Local node") + translationManager.emptyString
                 }
@@ -123,7 +123,7 @@ Rectangle{
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 15
                     horizontalAlignment: TextInput.AlignLeft
                     wrapMode: Text.WordWrap;
@@ -204,7 +204,7 @@ Rectangle{
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 16
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
@@ -216,7 +216,7 @@ Rectangle{
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 15
                     horizontalAlignment: TextInput.AlignLeft
                     wrapMode: Text.WordWrap;

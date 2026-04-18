@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,11 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Window 2.1
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -76,22 +75,25 @@ Rectangle {
                 anchors.centerIn: parent
                 source: "qrc:///images/monero-vector.svg"
                 mipmap: true
+                fillMode: Image.PreserveAspectFit
+                sourceSize: Qt.size(120, 120)
             }
 
             BusyIndicator {
+                id: control
                 running: parent.visible
                 anchors.centerIn: imgLogo
-                style: BusyIndicatorStyle {
-                    indicator: Image {
-                        visible: control.running
-                        source: "qrc:///images/busy-indicator.png"
-                        RotationAnimator on rotation {
-                            running: control.running
-                            loops: Animation.Infinite
-                            duration: 1000
-                            from: 0
-                            to: 360
-                        }
+                contentItem: Image {
+                    id: busyImage
+                    visible: control.running
+                    source: "qrc:///images/busy-indicator.png"
+                    anchors.centerIn: parent
+                    RotationAnimator on rotation {
+                        running: control.running
+                        loops: Animation.Infinite
+                        duration: 1000
+                        from: 0
+                        to: 360
                     }
                 }
             }

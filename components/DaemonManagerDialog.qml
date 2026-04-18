@@ -26,12 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Window
 import moneroComponents.Wallet 1.0
 
 import "../components" as MoneroComponents
@@ -84,8 +83,8 @@ Window {
                         running = false;
                         root.close();
                     }
-                    countDown--;
-                    if(countDown < 0){
+                    root.countDown--;
+                    if(root.countDown < 0){
                         running = false;
                         // Start daemon
                         root.close()
@@ -96,7 +95,7 @@ Window {
             }
 
             MoneroComponents.TextPlain {
-                text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
+                text: qsTr("Starting local node in %1 seconds").arg(root.countDown) + translationManager.emptyString;
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
@@ -116,7 +115,7 @@ Window {
                 id: okButton
                 visible:false
                 fontSize: 14
-                text: qsTr("Start daemon (%1)").arg(countDown) + translationManager.emptyString
+                text: qsTr("Start daemon (%1)").arg(root.countDown) + translationManager.emptyString
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     timer.stop();

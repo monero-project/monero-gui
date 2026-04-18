@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 import FontAwesome 1.0
 
 import "../components" as MoneroComponents
@@ -72,7 +72,7 @@ ColumnLayout {
                 color: MoneroComponents.Style.defaultFontColor
                 opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                 font.bold: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 16
             }
 
@@ -83,7 +83,7 @@ ColumnLayout {
                 anchors.left: icon.right
                 anchors.leftMargin: 16
                 color: MoneroComponents.Style.dimmedFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 15
                 horizontalAlignment: TextInput.AlignLeft
                 wrapMode: Text.WordWrap;

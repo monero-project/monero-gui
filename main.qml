@@ -26,13 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import QtQml.Models
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Dialogs
+import QtQuick.Effects
 
 import FontAwesome 1.0
 
@@ -288,7 +287,7 @@ ApplicationWindow {
             return;
         isQuitting = true;
         closeWallet(function() {
-            Qt.quit();
+            mainApp.exit(0);
         })
     }
 
@@ -835,7 +834,6 @@ ApplicationWindow {
             middlePanel.advancedView.miningView.update()
             informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
         }
-        informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
     }
@@ -975,15 +973,14 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" + appWindow.accountsDir
-        selectExisting: false;
+        currentFolder: "file://" + appWindow.accountsDir
+        fileMode: FileDialog.SaveFile;
 
         onAccepted: {
             handleTransactionConfirmed()
         }
         onRejected: {
             // do nothing
-
         }
 
     }
@@ -1020,12 +1017,12 @@ ApplicationWindow {
         // View only wallet - we save the tx
         if(viewOnly){
             // No file specified - abort
-            if(!saveTxDialog.fileUrl) {
+            if(!saveTxDialog.selectedFile) {
                 currentWallet.disposeTransaction(transaction)
                 return;
             }
 
-            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            var path = walletManager.urlToLocalPath(saveTxDialog.selectedFile)
 
             // Store to file
             transaction.setFilename(path);
@@ -1040,7 +1037,6 @@ ApplicationWindow {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         } else {
@@ -1097,10 +1093,8 @@ ApplicationWindow {
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Critical;
         } else {
             informationPopup.text  = result;
-            informationPopup.icon = StandardIcon.Critical;
         }
     }
 
@@ -1131,10 +1125,8 @@ ApplicationWindow {
             var confirmations = results[4];
 
             informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Information
             if (!good) {
                 informationPopup.text = qsTr("Bad signature");
-                informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
                 if (in_pool) {
                     informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
@@ -1150,19 +1142,16 @@ ApplicationWindow {
         else if (results.length == 2 && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
         } 
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(results[2]).arg(results[3]) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = currentWallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
@@ -1432,7 +1421,7 @@ ApplicationWindow {
             } else if (isLinux) {
                 confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
                 confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
-                confirmationDialog.icon = StandardIcon.Question;
+                // confirmationDialog.icon = QMessageBox::Question;
                 confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                 confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = function() {
@@ -1717,18 +1706,17 @@ ApplicationWindow {
     }
 
     // Choose blockchain folder
-    FileDialog {
+    FolderDialog {
         id: blockchainFileDialog
         property string directory: ""
         signal changed();
 
         title: "Please choose a folder"
-        selectFolder: true
-        folder: "file://" + persistentSettings.blockchainDataDir
+        currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.folder)
             var validator = daemonManager.validateDataDir(dataDir, estimatedBlockchainSize);
             if(validator.valid) {
                 persistentSettings.blockchainDataDir = dataDir;
@@ -1744,8 +1732,6 @@ ApplicationWindow {
                 if(!validator.lmdbExists)
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
 
-                confirmationDialog.icon = StandardIcon.Question
-
                 // Continue
                 confirmationDialog.onAcceptedCallback = function() {
                     persistentSettings.blockchainDataDir = dataDir
@@ -1756,7 +1742,7 @@ ApplicationWindow {
                 confirmationDialog.open()
             }
 
-            blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
+            blockchainFileDialog.directory = blockchainFileDialog.folder;
             delete validator;
         }
     }
@@ -1781,11 +1767,9 @@ ApplicationWindow {
                 appWindow.walletPassword = passwordDialog.password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
-                informationPopup.icon  = StandardIcon.Information;
             } else {
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Error: ") + currentWallet.errorString;
-                informationPopup.icon  = StandardIcon.Critical;
             }
             informationPopup.onCloseCallback = null;
             informationPopup.open();
@@ -1941,11 +1925,13 @@ ApplicationWindow {
             }
         }
 
-        FastBlur {
+        MultiEffect {
             id: blur
             anchors.fill: blurredArea
             source: blurredArea
-            radius: 64
+            blurEnabled: true
+            blur: 1.0
+            blurMax: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
                 remoteNodeDialog.visible
@@ -2054,7 +2040,6 @@ ApplicationWindow {
 
     function toggleLanguageView(){
         languageSidebar.visible ? languageSidebar.close() : languageSidebar.open();
-        languageSidebar.selectCurrentLanguage()
         resetLanguageFields()
     }
 
@@ -2187,7 +2172,6 @@ ApplicationWindow {
         // Show confirmation dialog
         confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
         confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
-        confirmationDialog.icon = StandardIcon.Question;
         confirmationDialog.cancelText = qsTr("Force stop") + translationManager.emptyString;
         confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
         confirmationDialog.onAcceptedCallback = function() {
@@ -2199,7 +2183,7 @@ ApplicationWindow {
         confirmationDialog.open();
     }
 
-    onClosing: {
+    onClosing: function(close) {
         close.accepted = false;
         console.log("blocking close event");
         if(isAndroid) {
@@ -2247,7 +2231,9 @@ ApplicationWindow {
         // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
-        closeWallet(Qt.quit);
+        closeWallet(function() {
+            mainApp.exit(0);
+        });
     }
 
     function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {

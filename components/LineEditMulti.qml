@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -50,7 +50,7 @@ ColumnLayout {
     property int inputRadius: 4
 
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegularName
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
@@ -76,7 +76,7 @@ ColumnLayout {
     property bool labelButtonVisible: false
 
     property string fontColor: MoneroComponents.Style.defaultFontColor
-    property string fontFamily: MoneroComponents.Style.fontRegular.name
+    property string fontFamily: MoneroComponents.Style.fontRegularName
     property bool fontBold: false
     property int fontSize: 16
 
@@ -103,15 +103,15 @@ ColumnLayout {
         color: "transparent"
         Layout.fillWidth: true
         height: (inputLabel.height + 10)
-        visible: showingHeader ? true : false
+        visible: item.showingHeader ? true : false
 
         MoneroComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: item.labelFontSize
-            font.bold: labelFontBold
+            font.bold: item.labelFontBold
             textFormat: Text.RichText
             color: item.labelFontColor
             onLinkActivated: inputLabelLinkActivated()
@@ -130,12 +130,12 @@ ColumnLayout {
             MoneroComponents.LabelButton {
                 id: labelButton
                 onClicked: labelButtonClicked()
-                visible: labelButtonVisible
+                visible: item.labelButtonVisible
             }
 
             MoneroComponents.LabelButton {
                 id: copyButtonId
-                visible: copyButton && input.text !== ""
+                visible: item.copyButton && input.text !== ""
                 text: qsTr("Copy") + translationManager.emptyString
                 onClicked: {
                     if (input.text.length > 0) {
@@ -153,7 +153,7 @@ ColumnLayout {
                     input.paste();
                 }
                 text: qsTr("Paste") + translationManager.emptyString
-                visible: pasteButton
+                visible: item.pasteButton
             }
         }
     }
@@ -168,7 +168,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         leftPadding: item.inputPaddingLeft
-        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight
+        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + item.inputPaddingRight
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
@@ -210,7 +210,7 @@ ColumnLayout {
             id: inlineButtons
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: inputPaddingRight
+            anchors.rightMargin: item.inputPaddingRight
             spacing: 4
         }
     }

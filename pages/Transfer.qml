@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQml.Models
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
@@ -87,7 +87,6 @@ Rectangle {
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
       oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
     }
@@ -155,7 +154,7 @@ Rectangle {
           visible: root.warningContent !== ""
 
           MoneroComponents.WarningBox {
-              text: warningContent
+              text: root.warningContent
               onLinkActivated: {
                   appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
               }
@@ -265,7 +264,7 @@ Rectangle {
                         Layout.fillWidth: true
 
                         MoneroComponents.TextPlain {
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Address") + translationManager.emptyString
@@ -327,7 +326,7 @@ Rectangle {
                         Layout.maximumWidth: recipientLayout.secondRowWidth
 
                         MoneroComponents.TextPlain {
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             color: MoneroComponents.Style.defaultFontColor
                             text: qsTr("Amount") + translationManager.emptyString
@@ -383,12 +382,12 @@ Rectangle {
                                 addressValidation: true
                                 borderDisabled: true
                                 fontColor: error && text != "" ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName
                                 fontSize: 14
                                 inputPaddingBottom: 0
                                 inputPaddingTop: 0
                                 inputPaddingRight: 0
-                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegularName
                                 placeholderFontSize: 14
                                 spacing: 0
                                 wrapMode: Text.WrapAnywhere
@@ -452,13 +451,13 @@ Rectangle {
                                 Layout.preferredWidth: 125
                                 Layout.maximumWidth: 125
                                 borderDisabled: true
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName
                                 fontSize: 14
                                 inputPaddingLeft: 0
                                 inputPaddingRight: 0
                                 inputPaddingTop: 0
                                 inputPaddingBottom: 0
-                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegularName
                                 placeholderFontSize: 14
                                 placeholderLeftMargin: 0
                                 placeholderText: "0.00"
@@ -480,8 +479,8 @@ Rectangle {
 
                                     amount = text;
                                 }
-                                validator: RegExpValidator {
-                                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                                validator: RegularExpressionValidator {
+                                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                                 }
                             }
 
@@ -512,7 +511,7 @@ Rectangle {
                                 Layout.leftMargin: recipientLayout.colSpacing / 2
                                 Layout.preferredWidth: recipientLayout.thirdRowWidth
                                 horizontalAlignment: Text.AlignHCenter
-                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.family: MoneroComponents.Style.fontRegularName
                                 text: "XMR"
                                 visible: recipientModel.count == 1
                             }
@@ -561,7 +560,7 @@ Rectangle {
                         MoneroComponents.TextPlain {
                             Layout.fillWidth: true
                             horizontalAlignment: Text.AlignRight
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 16
                             text: recipientModel.count > 1 ? qsTr("Total") + translationManager.emptyString : ""
                         }
@@ -575,7 +574,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: MoneroComponents.Style.fontMonoRegularName
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -593,7 +592,7 @@ Rectangle {
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
                         horizontalAlignment: Text.AlignHCenter
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         text: "XMR"
                         visible: recipientModel.count > 1
                     }
@@ -605,7 +604,7 @@ Rectangle {
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.secondRowWidth
                         borderDisabled: true
-                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontFamily: MoneroComponents.Style.fontMonoRegularName
                         fontSize: 14
                         inputHeight: 30
                         inputPaddingLeft: 0
@@ -624,7 +623,7 @@ Rectangle {
                         Layout.preferredWidth: recipientLayout.thirdRowWidth
                         Layout.topMargin: recipientModel.count > 1 ? 0 : -1
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         horizontalAlignment: Text.AlignHCenter
                         opacity: 0.7
                         text: fiatApiCurrencySymbol()
@@ -687,7 +686,7 @@ Rectangle {
                     id: feeLabel
                     Layout.alignment: Qt.AlignBottom
                     Layout.bottomMargin: 11
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: 0.7
@@ -746,7 +745,7 @@ Rectangle {
       MoneroComponents.WarningBox {
           text: qsTr("Description field contents match long payment ID format. \
           Please don't paste long payment ID into description field, your funds might be lost.") + translationManager.emptyString;
-          visible: warningLongPidDescription
+          visible: root.warningLongPidDescription
       }
 
       ColumnLayout {
@@ -819,7 +818,7 @@ Rectangle {
           text: qsTr("Long payment IDs are obsolete. \
           Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
           If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: paymentIdCheckbox.checked || warningLongPidDescription
+          visible: paymentIdCheckbox.checked || root.warningLongPidDescription
       }
 
       MoneroComponents.WarningBox {
@@ -834,7 +833,7 @@ Rectangle {
               rightIcon: "qrc:///images/rightArrow.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
+              enabled: !sendButtonWarningBox.visible && !root.warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -989,11 +988,11 @@ Rectangle {
     FileDialog {
         id: signTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Unsigned transfers (*)"]
 
         onAccepted: {
-            var path = walletManager.urlToLocalPath(fileUrl);
+            var path = walletManager.urlToLocalPath(selectedFile);
             // Load the unsigned tx from file
             var transaction = currentWallet.loadTxFile(path);
 
@@ -1001,7 +1000,6 @@ Rectangle {
                 console.error("Can't load unsigned transaction: ", transaction.errorString);
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't load unsigned transaction: ") + transaction.errorString
-                informationPopup.icon  = StandardIcon.Critical
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
                 // deleting transaction object, we don't want memleaks
@@ -1012,7 +1010,6 @@ Rectangle {
 
                 // Show confirmation dialog
                 confirmationDialog.title = qsTr("Confirmation") + translationManager.emptyString
-                confirmationDialog.icon = StandardIcon.Question
                 confirmationDialog.onAcceptedCallback = function() {
                     transaction.sign(path+"_signed");
                     transaction.destroy();
@@ -1033,20 +1030,18 @@ Rectangle {
     FileDialog {
         id: submitTxDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "signed transfers (*)"]
 
         onAccepted: {
-            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))){
+            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(selectedFile))){
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
-                informationPopup.icon  = StandardIcon.Critical
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
                 informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
-                informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
             }
@@ -1059,11 +1054,10 @@ Rectangle {
     
     FileDialog {
         id: exportOutputsDialog
-        selectMultiple: false
-        selectExisting: false
+        fileMode: FileDialog.SaveFile
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl))
-            if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl), true)) {
+            console.log(walletManager.urlToLocalPath(exportOutputsDialog.selectedFile))
+            if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.selectedFile), true)) {
                 appWindow.showStatusMessage(qsTr("Outputs successfully exported to file") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1076,12 +1070,11 @@ Rectangle {
 
     FileDialog {
         id: importOutputsDialog
-        selectMultiple: false
-        selectExisting: true
+        fileMode: FileDialog.OpenFile
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))
-            if (currentWallet.importOutputs(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))) {
+            console.log(walletManager.urlToLocalPath(importOutputsDialog.selectedFile))
+            if (currentWallet.importOutputs(walletManager.urlToLocalPath(importOutputsDialog.selectedFile))) {
                 appWindow.showStatusMessage(qsTr("Outputs successfully imported to wallet") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1095,11 +1088,10 @@ Rectangle {
     //ExportKeyImagesDialog
     FileDialog {
         id: exportKeyImagesDialog
-        selectMultiple: false
-        selectExisting: false
+        fileMode: FileDialog.SaveFile
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl))
-            if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true)) {
+            console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.selectedFile))
+            if (currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.selectedFile), true)) {
                 appWindow.showStatusMessage(qsTr("Key images successfully exported to file") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);
@@ -1113,12 +1105,11 @@ Rectangle {
     //ImportKeyImagesDialog
     FileDialog {
         id: importKeyImagesDialog
-        selectMultiple: false
-        selectExisting: true
+        fileMode: FileDialog.OpenFile
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))
-            if (currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))) {
+            console.log(walletManager.urlToLocalPath(importKeyImagesDialog.selectedFile))
+            if (currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.selectedFile))) {
                 appWindow.showStatusMessage(qsTr("Key images successfully imported to wallet") + translationManager.emptyString, 3);
             } else {
                 appWindow.showStatusMessage(currentWallet.errorString, 5);

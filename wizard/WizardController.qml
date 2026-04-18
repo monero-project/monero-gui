@@ -26,14 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml 2.0
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.2
+import QtQml
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import moneroComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -289,7 +287,7 @@ Rectangle {
                 anchors.fill: parent
                 clip: true
 
-                delegate: StackViewDelegate {
+                /*delegate: StackViewDelegate {
                     pushTransition: StackViewTransition {
                          PropertyAnimation {
                              target: enterItem
@@ -308,7 +306,7 @@ Rectangle {
                              easing.type: Easing.OutCubic
                          }
                     }
-                }
+                }*/
             }
         }
 	}
@@ -317,12 +315,12 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
-        sidebarVisible: false
+        //sidebarVisible: false
 
         onAccepted: {
-            var keysPath = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            var keysPath = walletManager.urlToLocalPath(fileDialog.selectedFile)
             persistentSettings.nettype = oshelper.getNetworkTypeFromFile(keysPath);
             wizardController.openWalletFile(keysPath);
         }

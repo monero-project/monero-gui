@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQml.Models
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 import moneroComponents.P2PoolManager 1.0
@@ -77,7 +77,7 @@ Rectangle {
             text: qsTr("Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.\n\nMining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + "\n\n" + qsTr("P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
         }
@@ -156,15 +156,15 @@ Rectangle {
                         small: true
                         primary: false
                         text: "−"
-                        enabled: threads > 1
-                        onClicked: threads--
+                        enabled: root.threads > 1
+                        onClicked: root.threads--
                     }
 
                     MoneroComponents.TextPlain {
                         Layout.bottomMargin: 1
                         Layout.minimumWidth: 45
                         color: MoneroComponents.Style.defaultFontColor
-                        text: threads
+                        text: root.threads
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: 16
 
@@ -172,10 +172,10 @@ Rectangle {
                             anchors.fill: parent
                             scrollGestureEnabled: false
                             onWheel: {
-                                if (wheel.angleDelta.y > 0 && threads < idealThreadCount) {
-                                    return threads++
-                                } else if (wheel.angleDelta.y < 0 && threads > 1) {
-                                    return threads--
+                                if (wheel.angleDelta.y > 0 && root.threads < idealThreadCount) {
+                                    return root.threads++
+                                } else if (wheel.angleDelta.y < 0 && root.threads > 1) {
+                                    return root.threads--
                                 }
                             }
                         }
@@ -186,8 +186,8 @@ Rectangle {
                         small: true
                         primary: false
                         text: "+"
-                        enabled: threads < idealThreadCount
-                        onClicked: threads++
+                        enabled: root.threads < idealThreadCount
+                        onClicked: root.threads++
                     }
                 }
 
@@ -295,7 +295,7 @@ Rectangle {
                                 if (persistentSettings.allow_p2pool_mining) {
                                     if (p2poolManager.isInstalled()) {
                                         args = daemonManager.getArgs(persistentSettings.blockchainDataDir) //updates arguments
-                                        if (persistentSettings.allowRemoteNodeMining || (args.includes("--zmq-pub tcp://127.0.0.1:18083") || args.includes("--zmq-pub=tcp://127.0.0.1:18083")) && !args.includes("--no-zmq")) {
+                                        if (persistentSettings.allowRemoteNodeMining || (root.args.includes("--zmq-pub tcp://127.0.0.1:18083") || root.args.includes("--zmq-pub=tcp://127.0.0.1:18083")) && !root.args.includes("--no-zmq")) {
                                             startP2Pool()
                                         }
                                         else {
@@ -305,7 +305,6 @@ Rectangle {
                                     else {
                                         confirmationDialog.title = qsTr("P2Pool installation") + translationManager.emptyString;
                                         confirmationDialog.text  = qsTr("P2Pool will be installed at %1. Proceed?").arg(applicationDirectory) + translationManager.emptyString;
-                                        confirmationDialog.icon = StandardIcon.Question;
                                         confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                                         confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                                         confirmationDialog.onAcceptedCallback = function() {
@@ -320,7 +319,7 @@ Rectangle {
                                 }
                                 else 
                                 {
-                                    success = walletManager.startMining(appWindow.currentWallet.address(0, 0), threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                                    success = walletManager.startMining(appWindow.currentWallet.address(0, 0), root.threads, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                                     if (success) 
                                     {
                                         update()
@@ -586,7 +585,6 @@ Rectangle {
         errorPopup.text = message
         if (persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining)
             errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
-        errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
     }
 
@@ -681,7 +679,6 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
             default:
                 errorPopup.text = qsTr("Unknown error.") + translationManager.emptyString;
         }
-        errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()
     }
@@ -690,7 +687,6 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
         statusMessage.visible = false
         informationPopup.title  = qsTr("P2Pool Installation Succeeded") + translationManager.emptyString;
         informationPopup.text = qsTr("P2Pool has successfully installed.");
-        informationPopup.icon = StandardIcon.Critical
         informationPopup.open()
         update()
     }

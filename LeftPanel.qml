@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
@@ -106,6 +106,9 @@ Rectangle {
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
         Item {
+            implicitWidth: childrenRect.width
+            implicitHeight: childrenRect.height
+
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
@@ -122,17 +125,17 @@ Rectangle {
                     fillMode: Image.PreserveAspectFit
                     source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
                 }
-
-                DropShadow {
+                
+                MultiEffect {
                     visible: isOpenGL && !MoneroComponents.Style.blackTheme
                     anchors.fill: card
-                    horizontalOffset: 3
-                    verticalOffset: 3
-                    radius: 10.0
-                    samples: 15
-                    color: "#3B000000"
                     source: card
-                    cached: true
+                    shadowEnabled: true
+                    shadowColor: "#3B000000"
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                    shadowBlur: 0.85          // tweak 0.7–1.0 to match original softness
+                    shadowOpacity: 1.0
                 }
 
                 MoneroComponents.TextPlain {

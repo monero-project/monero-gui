@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -120,7 +120,7 @@ ColumnLayout {
                 text: "A blockchain database already exists here. Select a new location to start a pruned node"
                 visible: daemonManager ? daemonManager.checkLmdbExists(blockchainFolder.text) : false
                 color: MoneroComponents.Style.defaultFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
             }
         }
 
@@ -132,7 +132,7 @@ ColumnLayout {
                 text: qsTr("Bootstrap node") + translationManager.emptyString
                 Layout.topMargin: 10
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 color: MoneroComponents.Style.defaultFontColor
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
@@ -153,7 +153,7 @@ ColumnLayout {
                 Layout.topMargin: 4
                 Layout.fillWidth: true
 
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 color: MoneroComponents.Style.dimmedFontColor
 
                 font.pixelSize: {

@@ -26,8 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import QtQuick
 
 import "../" as MoneroComponents
 import FontAwesome 1.0
@@ -63,12 +62,27 @@ Item {
         visible: false
     }
 
-    ColorOverlay {
+    ShaderEffect {
         id: imgMockColor
         anchors.fill: root
-        source: svgMask
-        color: root.color
-        visible: image && isOpenGL
+        property variant source: svgMask
+        property color overlayColor: root.color
+        visible: root.image && isOpenGL
+
+        /* broken TODO fix
+        fragmentShader: `
+            #version 440
+            layout(location = 0) in vec2 qt_TexCoord0;
+            layout(location = 0) out vec4 fragColor;
+            uniform sampler2D source;
+            uniform vec4 overlayColor;
+
+            void main() {
+                vec4 texColor = texture(source, qt_TexCoord0);
+                fragColor = vec4(overlayColor.rgb, texColor.a * overlayColor.a);
+            }
+        `
+        */
     }
 
     Text {

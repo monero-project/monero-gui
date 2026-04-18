@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import FontAwesome 1.0
 
@@ -70,7 +70,7 @@ Item {
 
         MoneroComponents.TextPlain {
             id: inlineText
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: MoneroComponents.Style.fontBoldName
             font.bold: true
             font.pixelSize: inlineButton.isFontAwesomeIcon ? 22 : inlineButton.small ? 14 : 16
             color: inlineButton.textColor
@@ -108,16 +108,16 @@ Item {
         }
     }
 
-    DropShadow {
+    MultiEffect {
         visible: !MoneroComponents.Style.blackTheme
         anchors.fill: rect
-        horizontalOffset: 2
-        verticalOffset: 2
-        radius: 7.0
-        samples: 10
-        color: "#1B000000"
-        cached: true
         source: rect
+
+        shadowEnabled: true
+        shadowHorizontalOffset: 2
+        shadowVerticalOffset: 2
+        shadowBlur: 7.0
+        shadowColor: "#1B000000"
     }
 
     Keys.enabled: inlineButton.visible

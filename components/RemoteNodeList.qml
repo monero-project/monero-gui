@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import FontAwesome 1.0
 
@@ -86,6 +86,7 @@ ColumnLayout {
                 }
 
                 Rectangle {
+                    id: daemonItem
                     anchors.fill: parent
                     anchors.rightMargin: 80
                     color: "transparent"
@@ -115,7 +116,7 @@ ColumnLayout {
                         fontFamily: FontAwesome.fontFamilySolid
                         fontColor: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         styleName: "Solid"
-                        visible: trusted
+                        visible: daemonItem.trusted
                         text: FontAwesome.shieldAlt
                         tooltip: qsTr("Trusted daemon") + translationManager.emptyString
                         themeTransition: false

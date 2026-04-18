@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtMultimedia 5.4
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtMultimedia
+import QtQuick.Dialogs
 import moneroComponents.QRCodeScanner 1.0
 
 Rectangle {
@@ -99,15 +99,14 @@ Rectangle {
         }
         onNotifyError : {
             if( warning )
-                messageDialog.icon = StandardIcon.Critical
             else {
-                messageDialog.icon = StandardIcon.Warning
                 root.state = "Stopped"
             }
             messageDialog.text = error
             messageDialog.visible = true
         }
     }
+
 
     VideoOutput {
         id: viewfinder

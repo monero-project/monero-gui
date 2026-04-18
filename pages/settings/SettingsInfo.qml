@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2024, The Monero Project
-// 
+// Copyright (c) 2014-2026, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Dialogs
 
 import "../../js/Wizard.js" as Wizard
 import "../../js/Utils.js" as Utils
@@ -38,6 +38,7 @@ import "../../components" as MoneroComponents
 
 
 Rectangle {
+    id: root
     color: "transparent"
     Layout.fillWidth: true
     property alias infoHeight: infoLayout.height
@@ -208,7 +209,6 @@ Rectangle {
                                                                 + "- Tx descriptions\n\n"
                                                                 + "The old wallet cache file will be renamed and can be restored later.\n"
                                                                 );
-                                confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.onAcceptedCallback = function() {
                                     appWindow.closeWallet(function() {
                                         walletManager.clearWalletCache(persistentSettings.wallet_path);
@@ -307,7 +307,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: walletModeString
+                text: root.walletModeString
             }
 
             Rectangle {
@@ -338,7 +338,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: isOpenGL ? "OpenGL" : "Low graphics mode"
+                text: isOpenGL ? "Native" : "Low graphics mode"
             }
 
             Rectangle {
@@ -394,8 +394,8 @@ Rectangle {
                         data += currentWallet.walletCreationHeight;
 
                     data += "\nWallet log path: " + logger.logFilePath;
-                    data += "\nWallet mode: " + walletModeString;
-                    data += "\nGraphics mode: " + (isOpenGL ? "OpenGL" : "Low graphics mode");
+                    data += "\nWallet mode: " + root.walletModeString;
+                    data += "\nGraphics mode: " + (isOpenGL ? "Native" : "Low graphics mode");
                     if (isTails)
                         data += "\nTails: " + (tailsUsePersistence ? "persistent" : "persistence disabled");
 

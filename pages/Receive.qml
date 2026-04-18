@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import FontAwesome 1.0
 
 import "../components" as MoneroComponents
@@ -96,16 +96,16 @@ Rectangle {
                 Layout.bottomMargin: 10
 
                 MoneroComponents.NavbarItem {
-                    active: state == "Address"
+                    active: pageReceive.state == "Address"
                     text: qsTr("Address") + translationManager.emptyString
-                    onSelected: state = "Address"
+                    onSelected: pageReceive.state = "Address"
                 }
 
                 MoneroComponents.NavbarItem {
-                    active: state == "PaymentRequest"
+                    active: pageReceive.state == "PaymentRequest"
                     text: qsTr("Payment request") + translationManager.emptyString
                     onSelected: {
-                        state = "PaymentRequest";
+                        pageReceive.state = "PaymentRequest";
                         qrCodeTextMouseArea.hoverEnabled = true;
                     }
                 }
@@ -135,7 +135,7 @@ Rectangle {
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onEntered: qrCodeTooltip.tooltipPopup.open()
                         onExited: qrCodeTooltip.tooltipPopup.close()
-                        onClicked: {
+                        onClicked: function(mouse) {
                             if (mouse.button == Qt.LeftButton){
                                 walletManager.saveQrCodeToClipboard(generateQRCodeString());
                                 appWindow.showStatusMessage(qsTr("QR code copied to clipboard") + translationManager.emptyString, 3);
@@ -227,7 +227,7 @@ Rectangle {
                     visible: persistentSettings.fiatPriceEnabled
                     topPadding: 5
                     leftPadding: 5
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     font.bold: false
                     horizontalAlignment: TextInput.AlignLeft
@@ -261,8 +261,8 @@ Rectangle {
                             amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
                     }
                 }
 
@@ -287,7 +287,7 @@ Rectangle {
                     Layout.maximumWidth: 165
                     topPadding: 5
                     leftPadding: 5
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     font.bold: false
                     horizontalAlignment: TextInput.AlignLeft
@@ -321,8 +321,8 @@ Rectangle {
                             amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                     }
                 }
 
@@ -421,7 +421,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Address #") + subaddressListView.currentIndex + translationManager.emptyString
                 wrapMode: Text.WordWrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 17
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.defaultFontColor
@@ -438,7 +438,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: "(" + qsTr("no label") + ")" + translationManager.emptyString
                 wrapMode: Text.WordWrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 17
                 textFormat: Text.RichText
                 color: selectedAddressDrescriptionMouseArea.containsMouse ? MoneroComponents.Style.orange : MoneroComponents.Style.dimmedFontColor
@@ -470,7 +470,7 @@ Rectangle {
                 textFormat: Text.RichText
                 color: selectedAddressMouseArea.containsMouse ? MoneroComponents.Style.orange : MoneroComponents.Style.defaultFontColor
                 font.pixelSize: 15
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 themeTransition: false
                 tooltip: qsTr("Copy address to clipboard") + translationManager.emptyString
                 MouseArea {
@@ -637,7 +637,7 @@ Rectangle {
                                 anchors.left: parent.right
                                 anchors.leftMargin: -addressLabel.width - 5
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
                                 themeTransition: false
                             }
@@ -744,24 +744,23 @@ Rectangle {
 
         MessageDialog {
             id: receivePageDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
         FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
-            selectExisting: false
+            currentFolder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
+            fileMode: FileDialog.SaveFile
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
-                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(selectedFile))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                    receivePageDialog.icon = StandardIcon.Error
+                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                     receivePageDialog.open()
                 } else {
-                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString, 3);
+                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString, 3);
                 }
             }
         }

@@ -26,19 +26,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 2.0
-import QtQuick 2.9
+import QtQuick.Controls
+import QtQuick
 
 import "../components" as MoneroComponents
 
 TextField {
     id: textField
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegularName
     font.pixelSize: 18
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: MoneroComponents.Style.defaultFontColor
+    placeholderTextColor: MoneroComponents.Style.dimmedFontColor
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
 
@@ -57,7 +58,7 @@ TextField {
             textField.forceActiveFocus()
             textField.cursorPosition = previousCursorPosition + (textField.length - previoustextFieldLength);
         }
-        onRemove: textField.remove(selectionStart, selectionEnd);
+        onRemove: textField.remove(textField.selectionStart, textField.selectionEnd);
         onSelectAll: textField.selectAll();
     }
 }

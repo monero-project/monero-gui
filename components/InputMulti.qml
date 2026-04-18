@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 2.0
-import QtQuick 2.9
+import QtQuick.Controls
+import QtQuick
 
 import "../js/TxUtils.js" as TxUtils
 import "../components" as MoneroComponents
@@ -42,7 +42,7 @@ TextArea {
     property bool addressValidation: false
 
     id: textArea
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegularName
     color: fontColor
     font.pixelSize: fontSize
     font.bold: fontBold
@@ -50,6 +50,10 @@ TextArea {
     selectByMouse: mouseSelection
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
+    
+    background: Rectangle {
+        color: "transparent"
+    }
 
     property int minimumHeight: 100
     height: contentHeight > minimumHeight ? contentHeight : minimumHeight
@@ -80,7 +84,7 @@ TextArea {
             textArea.forceActiveFocus()
             textArea.cursorPosition = previousCursorPosition + (textArea.length - previoustextFieldLength);
         }
-        onRemove: textArea.remove(selectionStart, selectionEnd);
+        onRemove: textArea.remove(textArea.selectionStart, textArea.selectionEnd);
         onSelectAll: textArea.selectAll();
     }
 }

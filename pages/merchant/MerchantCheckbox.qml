@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import "../../components" as MoneroComponents
 
@@ -18,8 +18,8 @@ Item {
         spacing: 10
 
         Item {
-            height: root.height
-            width: root.height
+            implicitHeight: root.height
+            implicitWidth: root.height
             Rectangle {
                 id: checkbox
                 anchors.fill: parent
@@ -32,14 +32,13 @@ Item {
                     source: "qrc:///images/uncheckedIcon.png"
                 }
             }
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowEnabled: true
+                shadowBlur: 8
+                shadowColor: "#20000000"
                 smooth: true
                 source: checkbox
             }

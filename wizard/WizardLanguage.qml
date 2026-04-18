@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../components"
 import "../components" as MoneroComponents
@@ -65,7 +65,7 @@ Rectangle {
             color: MoneroComponents.Style.defaultFontColor
             text: "Welcome - Wilkommen - Bonvenon - Bienvenido - Bienvenue - Välkommen - Selamat datang - Benvenuto - 歡迎 - Welkom - Bem Vindo - добро пожаловать"
 
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.bold: true
             font.pixelSize: 18
             horizontalAlignment: TextInput.AlignHCenter
@@ -183,7 +183,7 @@ Rectangle {
             Layout.alignment: Qt.AlignCenter
             font.bold: true
             font.pixelSize: 12
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             color: MoneroComponents.Style.defaultFontColor
             text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")"
 

@@ -26,9 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
 import FontAwesome 1.0
 
 import "." 1.0
@@ -60,7 +59,7 @@ RowLayout {
 
             MoneroComponents.TextPlain {
                 id: label
-                font.family: Style.fontLight.name
+                font.family: Style.fontLightName
                 font.pixelSize: checkBox.fontSize
                 color: Style.defaultFontColor
                 wrapMode: Text.Wrap
@@ -73,7 +72,7 @@ RowLayout {
                 width: indicatorImage.width
                 height: label.height
                 anchors.left: label.right
-                anchors.leftMargin: textMargin
+                anchors.leftMargin: checkBox.textMargin
                 color: "transparent"
                 rotation: checkBox.checked ? 180  : 0
 

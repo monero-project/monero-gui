@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 import moneroComponents.Clipboard 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -153,7 +153,7 @@ Rectangle {
                 color: MoneroComponents.Style.dimmedFontColor
                 text: qsTr("The next page will display your recovery phrase, also known as mnemonic seed.") + " " + qsTr("These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!") + translationManager.emptyString
 
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 wrapMode: Text.WordWrap
                 leftPadding: 0
@@ -226,7 +226,7 @@ Rectangle {
             MoneroComponents.TextPlain {
                 id: recoveryPhraseLabel
                 visible: wizardController.layoutScale != 4
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 15
                 font.bold: false
                 textFormat: Text.RichText
@@ -342,7 +342,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletCreationDate
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         font.bold: false
                         textFormat: Text.RichText
@@ -361,7 +361,7 @@ Rectangle {
                         id: walletCreationDateValue
                         property var locale: Qt.locale()
                         property date currentDate: new Date()
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         font.bold: true
                         textFormat: Text.RichText
@@ -376,7 +376,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletRestoreHeight
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 15
                         font.bold: false
                         textFormat: Text.RichText
@@ -395,7 +395,7 @@ Rectangle {
 
                     MoneroComponents.TextPlain {
                         id: walletRestoreHeightValue
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         font.bold: true
                         textFormat: Text.RichText
@@ -418,19 +418,19 @@ Rectangle {
                                                                                                                                                                                    : seedListGridColumn.children[0].children[24]
                 btnNextKeyNavigationTab: mobileDialog.visible ? mobileHeader : header
                 btnNext.enabled: walletCreationDate.opacity == 1 || appWindow.ctrlPressed ? true
-                                                                                          : seedListGridColumn.children[0].children[hiddenWords[0]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[1]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[2]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[3]].icon.wordsMatch &&
-                                                                                            seedListGridColumn.children[0].children[hiddenWords[4]].icon.wordsMatch
+                                                                                          : seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[0]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[1]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[2]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[3]].icon.wordsMatch &&
+                                                                                            seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[4]].icon.wordsMatch
                 onNextClicked: {
                     //choose five random words to hide
-                    for (var i = 0; i < hiddenWords.length; i++) {
+                    for (var i = 0; i < wizardCreateWallet2.hiddenWords.length; i++) {
                         wizardCreateWallet2.hiddenWords[i] = Math.floor(Math.random() * 5) + 5 * i
                     }
 
                     wizardCreateWallet2.state = "verify";
-                    for (var i = 0; i < hiddenWords.length; i++) {
+                    for (var i = 0; i < wizardCreateWallet2.hiddenWords.length; i++) {
                         seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[i]].wordText.visible = false;
                     }
                     seedListGridColumn.children[0].children[wizardCreateWallet2.hiddenWords[0]].lineEdit.forceActiveFocus();

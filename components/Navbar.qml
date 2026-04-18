@@ -26,11 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 import "." as MoneroComponents
 
 Rectangle {
+    id: root
     default property list<MoneroComponents.NavbarItem> items
     property alias currentIndex: repeater.currentIndex
     property alias previousIndex: repeater.previousIndex
@@ -48,7 +49,7 @@ Rectangle {
         property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
         property int fontSize: 15
         property bool fontBold: true
-        property var fontFamily: MoneroComponents.Style.fontRegular.name
+        property var fontFamily: MoneroComponents.Style.fontRegularName
         property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
         property int textMargin: {
             // left-right margins for a given cell
@@ -90,7 +91,7 @@ Rectangle {
                 Rectangle {
                     Layout.fillHeight: true
                     width: 1
-                    color: items.length > 0 && items[0].active ? grid.borderColor : "transparent";
+                    color: root.items.length > 0 && root.items[0].active ? grid.borderColor : "transparent";
                 }
 
                 Rectangle {
@@ -103,7 +104,7 @@ Rectangle {
 
         Repeater {
             id: repeater
-            model: items.length
+            model: root.items.length
             property int currentIndex: 0
             property int previousIndex: 0
 
@@ -203,7 +204,7 @@ Rectangle {
                 Rectangle {
                     Layout.fillHeight: true
                     width: 1
-                    color: items.length > 0 && items[items.length - 1].active ? grid.borderColor : "transparent"
+                    color: root.items.length > 0 && root.items[root.items.length - 1].active ? grid.borderColor : "transparent"
                 }
 
                 Rectangle {

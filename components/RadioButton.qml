@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -55,16 +55,16 @@ Item {
         Rectangle {
             id: button
             color: "transparent"
-            border.color: borderColor
-            height: radioButton.height
-            width: radioButton.height
+            border.color: radioButton.borderColor
+            implicitHeight: radioButton.height
+            implicitWidth: radioButton.height
             radius: radioButton.height
 
             Rectangle {
                 visible: radioButton.checked
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                color: checkedColor
+                color: radioButton.checkedColor
                 width: 10
                 height: 10
                 radius: 10
@@ -76,7 +76,7 @@ Item {
             id: label
             Layout.leftMargin: 10
             color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: radioButton.fontSize
             wrapMode: Text.Wrap
         }

@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.5
+import QtQuick
 
 QtObject {
     property bool blackTheme: true
@@ -9,10 +9,20 @@ QtObject {
     property QtObject fontLight: FontLoader { id: _fontLight; source: "qrc:/fonts/Roboto-Light.ttf"; }
     property QtObject fontRegular: FontLoader { id: _fontRegular; source: "qrc:/fonts/Roboto-Regular.ttf"; }
 
+    readonly property string fontMediumName: _fontMedium.name
+    readonly property string fontBoldName: _fontBold.name
+    readonly property string fontLightName: _fontLight.name
+    readonly property string fontRegularName: _fontRegular.name
+
     property QtObject fontMonoMedium: FontLoader { id: _fontMonoMedium; source: "qrc:/fonts/RobotoMono-Medium.ttf"; }
     property QtObject fontMonoBold: FontLoader { id: _fontMonoBold; source: "qrc:/fonts/RobotoMono-Bold.ttf"; }
     property QtObject fontMonoLight: FontLoader { id: _fontMonoLight; source: "qrc:/fonts/RobotoMono-Light.ttf"; }
     property QtObject fontMonoRegular: FontLoader { id: _fontMonoRegular; source: "qrc:/fonts/RobotoMono-Regular.ttf"; }
+
+    readonly property string fontMonoMediumName: _fontMonoMedium.name
+    readonly property string fontMonoBoldName: _fontMonoBold.name
+    readonly property string fontMonoLightName: _fontMonoLight.name
+    readonly property string fontMonoRegularName: _fontMonoRegular.name
 
     property string grey: "#404040"
     property string orange: "#FF6C3C"

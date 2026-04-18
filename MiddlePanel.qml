@@ -27,12 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import QtQml 2.0
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQml
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import moneroComponents.Wallet 1.0
 
 import "./pages"
@@ -51,7 +49,7 @@ Rectangle {
     property alias flickable: mainFlickable
 
     property Transfer transferView: Transfer {
-        onPaymentClicked: root.paymentClicked(recipients, paymentId, mixinCount, priority, description)
+        onPaymentClicked: (recipients, paymentId, mixinCount, priority, description) => root.paymentClicked(recipients, paymentId, mixinCount, priority, description)
         onSweepUnmixableClicked: root.sweepUnmixableClicked()
     }
     property Receive receiveView: Receive { }
@@ -71,13 +69,13 @@ Rectangle {
 
     Rectangle {
         // grey background on merchantView
-        visible: currentView === merchantView
+        visible: root.currentView === root.merchantView
         color: MoneroComponents.Style.moneroGrey
         anchors.fill: parent
     }
 
     MoneroEffects.GradientBackground {
-        visible: currentView !== merchantView
+        visible: root.currentView !== root.merchantView
         anchors.fill: parent
         fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
         initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
@@ -165,7 +163,7 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: {
-            if(currentView === merchantView || currentView === historyView)
+            if(root.currentView === root.merchantView || root.currentView === root.historyView)
                 return 0;
 
             return 20;
@@ -200,12 +198,12 @@ Rectangle {
             // Views container
             StackView {
                 id: stackView
-                initialItem: transferView
+                initialItem: root.transferView
                 anchors.fill:parent
                 clip: true // otherwise animation will affect left panel
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
+                /*delegate: StackViewDelegate {
+                    /*pushTransition: StackViewTransition {
                         PropertyAnimation {
                             target: enterItem
                             property: "x"
@@ -223,7 +221,7 @@ Rectangle {
                             easing.type: Easing.OutCubic
                         }
                     }
-                }
+                }*/
             }
 
         }// flickable

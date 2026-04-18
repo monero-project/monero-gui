@@ -26,12 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Window
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -138,13 +137,16 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     renderType: Text.QtRendering
-                    font.family: MoneroComponents.Style.fontLight.name
+                    font.family: MoneroComponents.Style.fontLightName
                     textFormat: TextEdit.AutoText
                     readOnly: true
                     font.pixelSize: 14
                     selectByMouse: false
                     wrapMode: TextEdit.Wrap
                     color: MoneroComponents.Style.defaultFontColor
+                    background: Rectangle {
+                        color: "transparent"
+                    }
 
                     MouseArea {
                         anchors.fill: parent

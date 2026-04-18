@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Dialogs
 import FontAwesome 1.0
 
 import "../../js/Utils.js" as Utils
@@ -114,13 +114,11 @@ Rectangle {
                     } else {
                         informationPopup.text = qsTr("Error: ") + currentWallet.errorString;
                     }
-                    informationPopup.icon  = StandardIcon.Critical
                     informationPopup.onCloseCallback = null
                     informationPopup.open();
                 } else {
                     informationPopup.title = qsTr("Information") + translationManager.emptyString
                     informationPopup.text  = qsTr("Successfully rescanned spent outputs.") + translationManager.emptyString
-                    informationPopup.icon  = StandardIcon.Information
                     informationPopup.onCloseCallback = null
                     informationPopup.open();
                 }
@@ -145,7 +143,6 @@ Rectangle {
                         if (currentWallet.errorString == "The wallet has already seen 1 or more recent transactions than the scanned tx") {
                             informationPopup.title = qsTr("Error") + translationManager.emptyString;
                             informationPopup.text = qsTr("The wallet has already seen 1 or more recent transactions than the scanned transaction.\n\nIn order to rescan the transaction, you can re-sync your wallet by resetting the wallet restore height in the Settings > Info page. Make sure to use a restore height from before your wallet's earliest transaction.") + translationManager.emptyString;
-                            informationPopup.icon = StandardIcon.Critical
                             informationPopup.onCloseCallback = null
                             informationPopup.open();
                         } else {

@@ -26,11 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
@@ -81,7 +80,7 @@ Rectangle {
 
         MessageDialog {
             id: sharedRingDBDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
         MoneroComponents.Label {
@@ -95,7 +94,7 @@ Rectangle {
                        "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
         }
@@ -122,7 +121,7 @@ Rectangle {
 
         MoneroComponents.TextPlain {
             textFormat: Text.RichText
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: 14
             text: qsTr("This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
             wrapMode: Text.Wrap

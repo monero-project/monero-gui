@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.0 as QtQuickControls
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls as QtQuickControls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -14,13 +14,13 @@ ColumnLayout {
 
     signal moved()
 
-    spacing: 0
+    spacing: 8
 
     MoneroComponents.TextPlain {
         id: label
         color: MoneroComponents.Style.defaultFontColor
         font.pixelSize: 14
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegularName
     }
 
     QtQuickControls.Slider {

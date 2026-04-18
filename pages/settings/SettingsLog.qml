@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
@@ -64,7 +64,7 @@ Rectangle {
             Layout.bottomMargin: 2
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             text: qsTr("Log level") + translationManager.emptyString
         }
 
@@ -130,7 +130,7 @@ Rectangle {
             Layout.bottomMargin: 2
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: 18
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             text: qsTr("Daemon log") + translationManager.emptyString
             themeTransition: false
             onColorChanged: {
@@ -167,11 +167,14 @@ Rectangle {
                 TextArea.flickable: TextArea {
                     id : consoleArea
                     color: MoneroComponents.Style.defaultFontColor
+                    background: Rectangle {
+                        color: "transparent"
+                    }
                     selectionColor: MoneroComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     font.pixelSize: 14
                     wrapMode: TextEdit.Wrap
                     readOnly: true

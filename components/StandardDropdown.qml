@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 // Copyright (c) 2014-2024, The Monero Project
 // 
 // All rights reserved.
@@ -26,11 +27,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Controls
 import FontAwesome 1.0
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -73,16 +73,16 @@ ColumnLayout {
         id: dropdownLabelRect
         color: "transparent"
         Layout.fillWidth: true
-        height: (dropdownLabel.height + 10)
-        visible: showingHeader ? true : false
+        implicitHeight: (dropdownLabel.height + 10)
+        visible: dropdown.showingHeader ? true : false
 
         MoneroComponents.TextPlain {
             id: dropdownLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: labelFontSize
-            font.bold: labelFontBold
+            font.family: MoneroComponents.Style.fontRegularName
+            font.pixelSize: dropdown.labelFontSize
+            font.bold: dropdown.labelFontBold
             textFormat: Text.RichText
             color: MoneroComponents.Style.defaultFontColor
         }
@@ -95,7 +95,7 @@ ColumnLayout {
         border.color: dropdown.colorBorder
         radius: 4
         Layout.fillWidth: true
-        Layout.preferredHeight: dropdownHeight
+        Layout.preferredHeight: dropdown.dropdownHeight
 
         MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
@@ -105,7 +105,7 @@ ColumnLayout {
             anchors.rightMargin: 12
             width: droplist.width
             elide: Text.ElideRight
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontSize
             color: dropdown.textColor
@@ -177,11 +177,15 @@ ColumnLayout {
                     property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
 
                     delegate: Rectangle {
+                        id: item
+                        required property int index
+                        required property string column1
+
                         anchors.left: parent.left
                         anchors.right: parent.right
                         height: (dropdown.dropdownHeight * 0.75)
                         //radius: index === repeater.count - 1 ? 4 : 0
-                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+                        color: itemArea.containsMouse || item.index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                         MoneroComponents.TextPlain {
                             id: col1Text
@@ -190,11 +194,11 @@ ColumnLayout {
                             anchors.right: col2Text.left
                             anchors.leftMargin: 12
                             anchors.rightMargin: 0
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.bold: false
-                            font.pixelSize: fontItemSize
-                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
-                            text: qsTr(column1) + translationManager.emptyString
+                            font.pixelSize: dropdown.fontItemSize
+                            color: itemArea.containsMouse || item.index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
+                            text: qsTr(item.column1) + translationManager.emptyString
                         }
 
                         MoneroComponents.TextPlain {
@@ -202,7 +206,7 @@ ColumnLayout {
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
                             anchors.rightMargin: 45
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             font.pixelSize: 14
                             color: "#FFFFFF"
                             text: ""
@@ -216,8 +220,8 @@ ColumnLayout {
 
                             onClicked: {
                                 popup.close()
-                                columnid.currentIndex = index
-                                changed();
+                                columnid.currentIndex = item.index
+                                xChanged();
                             }
                         }
                     }

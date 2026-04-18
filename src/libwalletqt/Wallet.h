@@ -45,6 +45,10 @@
 #include "NetworkType.h"
 #include "PassphraseHelper.h"
 #include "WalletListenerImpl.h"
+#include "model/TransactionHistorySortFilterModel.h"
+#include "model/AddressBookModel.h"
+#include "model/SubaddressModel.h"
+#include "model/SubaddressAccountModel.h"
 
 namespace Monero {
 struct Wallet; // forward declaration
@@ -53,13 +57,9 @@ struct Wallet; // forward declaration
 
 class TransactionHistory;
 class TransactionHistoryModel;
-class TransactionHistorySortFilterModel;
 class AddressBook;
-class AddressBookModel;
 class Subaddress;
-class SubaddressModel;
 class SubaddressAccount;
-class SubaddressAccountModel;
 
 class Wallet : public QObject, public PassprasePrompter
 {

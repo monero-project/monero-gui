@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -48,7 +48,7 @@ Rectangle {
         id: labelButtonText
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegularName
         font.pixelSize: 12
         font.bold: true
         text: ""

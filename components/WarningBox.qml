@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "." as MoneroComponents
 
@@ -41,7 +41,7 @@ Rectangle {
             id: content
             Layout.fillWidth: true
             color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegularName
             font.pixelSize: root.fontSize
             horizontalAlignment: TextInput.AlignLeft
             textFormat: Text.RichText

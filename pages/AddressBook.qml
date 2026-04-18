@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -71,7 +71,7 @@ Rectangle {
                 id: titleLabel
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.defaultFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 32
                 horizontalAlignment: TextInput.AlignLeft
                 wrapMode: Text.WordWrap;
@@ -84,7 +84,7 @@ Rectangle {
             Text {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 16
                 horizontalAlignment: TextInput.AlignLeft
                 wrapMode: Text.WordWrap;
@@ -196,7 +196,7 @@ Rectangle {
                                 anchors.leftMargin: -addressLabel.width - 5
 
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 540 ? 1 : (mainLayout.width < 700 ? 2 : 3));
                             }
 
@@ -527,7 +527,6 @@ Rectangle {
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
       oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
     }

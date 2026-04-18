@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import FontAwesome 1.0
 import "." as MoneroComponents
@@ -267,7 +267,7 @@ Rectangle {
 
         // monero logo
         Item {
-            visible: walletName.length === 0
+            visible: root.walletName.length === 0
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
 
@@ -287,7 +287,7 @@ Rectangle {
                 }
             }
 
-            Colorize {
+            MultiEffect {
                 visible: isOpenGL && MoneroComponents.Style.blackTheme
                 anchors.fill: imgLogo
                 source: imgLogo
@@ -296,7 +296,7 @@ Rectangle {
         }
 
         Item {
-            visible: walletName.length > 0
+            visible: root.walletName.length > 0
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
 
@@ -307,7 +307,7 @@ Rectangle {
                 width: parent.width
                 height: parent.height
                 elide: Text.ElideRight
-                text: walletName
+                text: root.walletName
             }
         }
 

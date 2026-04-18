@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
@@ -191,7 +191,7 @@ Rectangle {
                         textMargin: 2
                         text: ""
 
-                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.family: MoneroComponents.Style.fontRegularName
                         font.pixelSize: 16
                         selectionColor: MoneroComponents.Style.textSelectionColor
                         selectedTextColor: MoneroComponents.Style.textSelectedColor
@@ -206,7 +206,7 @@ Rectangle {
                             font.pixelSize: 16
                             anchors.margins: 8
                             anchors.leftMargin: 10
-                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.family: MoneroComponents.Style.fontRegularName
                             text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
                             visible: !seedInput.text
@@ -273,8 +273,8 @@ Rectangle {
                     labelFontSize: 14
                     placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "0"
                 }

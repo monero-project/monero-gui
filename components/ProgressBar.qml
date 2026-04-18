@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import moneroComponents.Wallet 1.0
 
 import "../components" as MoneroComponents
@@ -65,11 +65,11 @@ Rectangle {
             id: progressText
             anchors.top: parent.top
             anchors.topMargin: 6
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMediumName
             font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor
-            text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
+            text: qsTr("Synchronizing %1").arg(item.syncType) + translationManager.emptyString
             height: 18
         }
 
@@ -78,7 +78,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMediumName
             font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor
@@ -119,7 +119,7 @@ Rectangle {
                 anchors.left: parent.left
                 height: bar.height
                 property int maxWidth: bar.width
-                width: (maxWidth * fillLevel) / 100
+                width: (maxWidth * item.fillLevel) / 100
                 radius: 8
                 color: "#FA6800"
             }

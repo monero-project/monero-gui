@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -16,7 +16,7 @@ Text {
     property alias tooltipLeft: tooltip.tooltipLeft
     property alias tooltipIconVisible: tooltip.tooltipIconVisible
     property alias tooltipPopup: tooltip.tooltipPopup
-    font.family: MoneroComponents.Style.fontMedium.name
+    font.family: MoneroComponents.Style.fontMediumName
     font.bold: false
     font.pixelSize: 14
     textFormat: Text.PlainText

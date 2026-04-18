@@ -32,6 +32,9 @@
 #include <vector>
 
 #include <gcrypt.h>
+#if defined(_WIN32)
+    #undef interface
+#endif
 
 #include <span.h>
 

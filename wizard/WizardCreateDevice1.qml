@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import moneroComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
@@ -105,7 +105,7 @@ Rectangle {
                     Layout.alignment: Qt.AlignTop
 
                     MoneroComponents.TextPlain {
-                         font.family: MoneroComponents.Style.fontRegular.name
+                         font.family: MoneroComponents.Style.fontRegularName
                          font.pixelSize: 14
                          color: MoneroComponents.Style.defaultFontColor
                          wrapMode: Text.Wrap
@@ -167,26 +167,26 @@ Rectangle {
                          Image {
                              Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                              source: {
-                                if (hardwareWalletType == "Trezor") {
-                                    if (trezorType == "Trezor Model T") {
+                                if (wizardCreateDevice1.hardwareWalletType == "Trezor") {
+                                    if (wizardCreateDevice1.trezorType == "Trezor Model T") {
                                         return "qrc:///images/trezorT.png";
-                                    } else if (trezorType == "Trezor Safe 3") {
+                                    } else if (wizardCreateDevice1.trezorType == "Trezor Safe 3") {
                                         return "qrc:///images/trezor3.png";
-                                    } else if (trezorType == "Trezor Safe 5") {
+                                    } else if (wizardCreateDevice1.trezorType == "Trezor Safe 5") {
                                         return "qrc:///images/trezor5.png";
                                     }
-                                } else if (hardwareWalletType == "Ledger") {
-                                    if (ledgerType == "Ledger Nano S") {
+                                } else if (wizardCreateDevice1.hardwareWalletType == "Ledger") {
+                                    if (wizardCreateDevice1.ledgerType == "Ledger Nano S") {
                                         return "qrc:///images/ledgerNanoS.png";
-                                    } else if (ledgerType == "Ledger Nano S Plus") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano S Plus") {
                                         return "qrc:///images/ledgerNanoSPlus.png";
-                                    } else if (ledgerType == "Ledger Nano X") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano X") {
                                         return "qrc:///images/ledgerNanoX.png";
-                                    } else if (ledgerType == "Ledger Nano Gen5") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Nano Gen5") {
                                         return "qrc:///images/ledgerNanoGen5.png";
-                                    } else if (ledgerType == "Ledger Stax") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Stax") {
                                         return "qrc:///images/ledgerStax.png";
-                                    } else if (ledgerType == "Ledger Flex") {
+                                    } else if (wizardCreateDevice1.ledgerType == "Ledger Flex") {
                                         return "qrc:///images/ledgerFlex.png";
                                     }
                                 }
@@ -214,8 +214,8 @@ Rectangle {
                     labelFontSize: 14
                     placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
-                    validator: RegExpValidator {
-                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "1"
                 }
@@ -235,7 +235,7 @@ Rectangle {
                     labelFontSize: 14
                     placeholderText: "<major>:<minor>"
                     placeholderFontSize: 16
-                    validator: RegExpValidator { regExp: /(\d+):(\d+)?$/ }
+                    validator: RegularExpressionValidator { regularExpression: /(\d+):(\d+)?$/ }
                 }
             }
 
@@ -244,7 +244,7 @@ Rectangle {
                 text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
                 visible: errorMsg.text !== ""
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
 

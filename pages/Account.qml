@@ -26,11 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import FontAwesome 1.0
 
 import "../components" as MoneroComponents
@@ -79,7 +78,7 @@ Rectangle {
 
         ColumnLayout {
             id: balanceRow
-            visible: !selectAndSend
+            visible: !pageAccount.selectAndSend
             spacing: 0
 
             MoneroComponents.LabelSubheader {
@@ -97,14 +96,14 @@ Rectangle {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 16
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
                     Layout.rightMargin: 87
-                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.family: MoneroComponents.Style.fontMonoRegularName;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -132,14 +131,14 @@ Rectangle {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 16
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegularName
                     themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
                     Layout.rightMargin: 87
-                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.family: MoneroComponents.Style.fontMonoRegularName;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -176,7 +175,7 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: createNewAccountButton
-                    visible: !selectAndSend
+                    visible: !pageAccount.selectAndSend
                     small: true
                     text: qsTr("Create new account") + translationManager.emptyString
                     fontSize: 13
@@ -224,7 +223,7 @@ Rectangle {
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false
-                    currentIndex: currentAccountIndex
+                    currentIndex: pageAccount.currentAccountIndex
 
                     delegate: Rectangle {
                         id: tableItem2
@@ -294,7 +293,7 @@ Rectangle {
                                 anchors.left: balanceNumberLabel.left
                                 anchors.leftMargin: -addressLabel.width - 30
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
                                 themeTransition: false
                             }
@@ -306,7 +305,7 @@ Rectangle {
                                 anchors.left: parent.right
                                 anchors.leftMargin: -balanceNumberLabel.width
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: MoneroComponents.Style.fontMonoRegularName;
                                 text: balance + " XMR"
                                 elide: Text.ElideRight
                                 textWidth: 180

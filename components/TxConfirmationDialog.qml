@@ -26,10 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4 as QtQuickControls1
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import "../js/Utils.js" as Utils
@@ -189,7 +188,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 71
 
-            QtQuickControls1.BusyIndicator {
+            BusyIndicator {
                 id: txAmountBusyIndicator
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -217,7 +216,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 20
                 color: MoneroComponents.Style.buttonSecondaryTextColor
-                text: showFiatConversion(transactionAmount) + translationManager.emptyString
+                text: showFiatConversion(root.transactionAmount) + translationManager.emptyString
             }
         }
 
@@ -278,7 +277,7 @@ Rectangle {
                 id: flickable
                 property int linesInMultipleRecipientsMode: 7
                 Layout.fillWidth: true
-                Layout.preferredHeight: recipients.length > 1
+                Layout.preferredHeight: root.recipients.length > 1
                     ? linesInMultipleRecipientsMode * (recipientsArea.contentHeight / recipientsArea.lineCount)
                     : recipientsArea.contentHeight
                 boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
@@ -287,7 +286,7 @@ Rectangle {
                 TextArea.flickable: TextArea {
                     id : recipientsArea
                     color: MoneroComponents.Style.defaultFontColor
-                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.family: MoneroComponents.Style.fontMonoRegularName
                     font.pixelSize: 14
                     topPadding: 0
                     bottomPadding: 0
@@ -299,6 +298,9 @@ Rectangle {
                     selectionColor: MoneroComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     wrapMode: TextEdit.Wrap
+                    background: Rectangle {
+                        color: "transparent"
+                    }
                     text: {
                         return recipients.map(function (recipient, index) {
                             var addressBookName = null;
@@ -380,7 +382,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
 
-                QtQuickControls1.BusyIndicator {
+                BusyIndicator {
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5

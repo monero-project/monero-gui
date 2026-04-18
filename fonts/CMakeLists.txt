@@ -1,1 +1,1 @@
-qt5_add_resources(RESOURCE_FILES *.otf)
+qt_add_resources(RESOURCE_FILES *.otf)

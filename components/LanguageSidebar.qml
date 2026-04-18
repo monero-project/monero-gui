@@ -28,10 +28,10 @@
 
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
-import QtQuick.XmlListModel 2.0
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQml.XmlListModel
+import QtQuick.Layouts
+import QtQuick.Controls
 
 
 Drawer {
@@ -92,6 +92,9 @@ Drawer {
                     persistentSettings.locale = locale;
                     persistentSettings.language = display_name;
                     persistentSettings.language_wallet = wallet_language;
+
+                    // set current index to update the UI
+                    languagesListView.currentIndex = index
 
                     appWindow.showStatusMessage(qsTr("Language changed."), 3);
                     appWindow.toggleLanguageView();
@@ -173,28 +176,33 @@ Drawer {
     //Flags model
     XmlListModel {
         id: langModel
-        source: "/lang/languages.xml"
+        source: "qrc:///lang/languages.xml"
         query: "/languages/language"
 
-        XmlRole { name: "display_name"; query: "@display_name/string()" }
-        XmlRole { name: "locale"; query: "@locale/string()" }
-        XmlRole { name: "wallet_language"; query: "@wallet_language/string()" }
-        XmlRole { name: "flag"; query: "@flag/string()" }
+        XmlListModelRole { name: "display_name"; attributeName: "display_name" }
+        XmlListModelRole { name: "locale"; attributeName: "locale" }
+        XmlListModelRole { name: "wallet_language"; attributeName: "wallet_language" }
+        XmlListModelRole { name: "flag"; attributeName: "flag" }
         // TODO: XmlListModel is read only, we should store current language somewhere else
         // and set current language accordingly
-        XmlRole { name: "isCurrent"; query: "@enabled/string()" }
+        XmlListModelRole { name: "isCurrent"; attributeName: "enabled" }
 
         onStatusChanged: {
-            if(status === XmlListModel.Ready){
-                console.log("languages available: ",count);
+            if (status === XmlListModel.Ready) {
+                console.log("languages available: ", count);
             }
         }
     }
 
-    function selectCurrentLanguage() {
-        for (var i = 0; i < langModel.count; ++i) {
-            if (langModel.get(i).display_name === persistentSettings.language)  {
-                languagesListView.currentIndex = i;
+    // the get function does not exist in XmlListModel anymore so this is necessary now
+    // TODO: review please, this is really hacky
+    Repeater {
+        model: langModel
+        delegate: Item {
+            Component.onCompleted: {
+                if (model.display_name === persistentSettings.language) {
+                    languagesListView.currentIndex = index;
+                }
             }
         }
     }

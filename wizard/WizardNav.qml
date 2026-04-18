@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -86,14 +86,14 @@ RowLayout {
             }
             Accessible.role: Accessible.Button
             Accessible.name: text
-            KeyNavigation.up: btnPrevKeyNavigationBackTab
-            KeyNavigation.backtab: btnPrevKeyNavigationBackTab
+            KeyNavigation.up: menuNav.btnPrevKeyNavigationBackTab
+            KeyNavigation.backtab: menuNav.btnPrevKeyNavigationBackTab
             KeyNavigation.down: wizardProgress.visible ? wizardProgress
                                                        : btnNext.visible && btnNext.enabled ? btnNext
-                                                                                            : btnNextKeyNavigationTab
+                                                                                            : menuNav.btnNextKeyNavigationTab
             KeyNavigation.tab: wizardProgress.visible ? wizardProgress
                                                       : btnNext.visible && btnNext.enabled ? btnNext
-                                                                                           : btnNextKeyNavigationTab
+                                                                                           : menuNav.btnNextKeyNavigationTab
         }
     }
 
@@ -153,8 +153,8 @@ RowLayout {
             Accessible.name: text
             KeyNavigation.up: wizardProgress.visible ? wizardProgress : btnPrev
             KeyNavigation.backtab: wizardProgress.visible ? wizardProgress : btnPrev
-            KeyNavigation.down: btnNextKeyNavigationTab
-            KeyNavigation.tab: btnNextKeyNavigationTab
+            KeyNavigation.down: menuNav.btnNextKeyNavigationTab
+            KeyNavigation.tab: menuNav.btnNextKeyNavigationTab
         }
     }
 }

@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Controls
 
 import "." as MoneroComponents
 
@@ -9,7 +9,7 @@ TextArea {
     property string colorWhiteTheme: ""
     property string colorBlackTheme: ""
     color: MoneroComponents.Style.defaultFontColor
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegularName
     font.pixelSize: 14
     selectByMouse: false
     wrapMode: Text.WordWrap;

@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2024, The Monero Project
-// 
+// Copyright (c) 2014-2026, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -47,6 +47,7 @@ GridLayout {
     property bool rowLayout: true
     property var walletNameKeyNavigationBackTab: browseButton
     property var browseButtonKeyNavigationTab: walletName
+    property var wizardNav: null
 
     columnSpacing: rowLayout ? 20 : 0
     rowSpacing: rowLayout ? 0 : 20
@@ -106,10 +107,10 @@ GridLayout {
 
             Accessible.role: Accessible.EditableText
             Accessible.name: labelText + text
-            KeyNavigation.up: walletNameKeyNavigationBackTab
-            KeyNavigation.backtab: walletNameKeyNavigationBackTab
-            KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
-            KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
+            KeyNavigation.up: grid.walletNameKeyNavigationBackTab
+            KeyNavigation.backtab: grid.walletNameKeyNavigationBackTab
+            KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav ? wizardNav.btnPrev : null
+            KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav ? wizardNav.btnPrev : null
         }
 
         RowLayout {
@@ -128,7 +129,7 @@ GridLayout {
             MoneroComponents.TextPlain {
                 id: errorMessageWalletName
                 textFormat: Text.PlainText
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: "#FF0000"
                 themeTransition: false
@@ -194,8 +195,8 @@ GridLayout {
                 Accessible.name: qsTr("Browse") + translationManager.emptyString
                 KeyNavigation.up: walletLocation
                 KeyNavigation.backtab: walletLocation
-                KeyNavigation.down: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
-                KeyNavigation.tab: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : browseButtonKeyNavigationTab
+                KeyNavigation.down: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : grid.browseButtonKeyNavigationTab
+                KeyNavigation.tab: errorMessageWalletLocation.text != "" ? errorMessageWalletLocation : grid.browseButtonKeyNavigationTab
             }
         }
 
@@ -215,7 +216,7 @@ GridLayout {
             MoneroComponents.TextPlain {
                 id: errorMessageWalletLocation
                 textFormat: Text.PlainText
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: "#FF0000"
                 themeTransition: false
@@ -223,16 +224,14 @@ GridLayout {
                 Accessible.name: text
                 KeyNavigation.up: browseButton
                 KeyNavigation.backtab: browseButton
-                KeyNavigation.down: browseButtonKeyNavigationTab
-                KeyNavigation.tab: browseButtonKeyNavigationTab
+                KeyNavigation.down: grid.browseButtonKeyNavigationTab
+                KeyNavigation.tab: grid.browseButtonKeyNavigationTab
             }
         }
     }
 
-    FileDialog {
+    FolderDialog {
         id: fileWalletDialog
-        selectMultiple: false
-        selectFolder: true
         title: qsTr("Please choose a directory")  + translationManager.emptyString
         onAccepted: {
             walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.folder);

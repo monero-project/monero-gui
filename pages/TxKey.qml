@@ -26,10 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
@@ -68,7 +67,7 @@ Rectangle {
                 text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
                            "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + qsTr("\nFor reserve proofs you don't need to specify tx id or address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -125,8 +124,8 @@ Rectangle {
                         }
                         error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
                     }
-                    validator: RegExpValidator {
-                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                 }
             }
 
@@ -174,7 +173,7 @@ Rectangle {
                            "For the case with Spend Proof, you don't need to specify the recipient address.") + "\n" + qsTr("Transaction is not needed for reserve proof.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }
@@ -252,7 +251,7 @@ Rectangle {
                 text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegularName
                 font.pixelSize: 14
                 color: MoneroComponents.Style.defaultFontColor
             }
