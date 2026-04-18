@@ -180,7 +180,7 @@ Rectangle {
                         consoleArea.append(msg);
                     }
                     function logMessage(msg){
-                        msg = msg.trim();
+                        msg = Utils.htmlEscape(msg.trim());
                         var color = MoneroComponents.Style.defaultFontColor;
                         if(msg.toLowerCase().indexOf('error') >= 0){
                             color = MoneroComponents.Style.errorColor;

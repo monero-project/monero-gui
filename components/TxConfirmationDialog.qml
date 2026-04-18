@@ -32,6 +32,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
+import "../js/Utils.js" as Utils
 import FontAwesome 1.0
 
 Rectangle {
@@ -306,7 +307,7 @@ Rectangle {
                             }
                             var title;
                             if (addressBookName) {
-                                title = FontAwesome.addressBook + " " + addressBookName;
+                                title = FontAwesome.addressBook + " " + Utils.htmlEscape(addressBookName);
                             } else {
                                 title = qsTr("Monero address") + translationManager.emptyString;
                             }
