@@ -26,64 +26,61 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef P2POOLMANAGER_H
-#define P2POOLMANAGER_H
+#ifndef P2POOLSTATSPROVIDER_H
+#define P2POOLSTATSPROVIDER_H
 
-#include <memory>
-
-#include <QMutex>
+#include <QDateTime>
 #include <QObject>
-#include <QUrl>
-#include <QProcess>
-#include "NetworkType.h"
-#include "qt/FutureScheduler.h"
+#include <QString>
+#include <QVariantMap>
 
-#include "P2PoolStatsProvider.h"
 
-class P2PoolManager : public QObject
+class P2PoolStatsProvider : public QObject
 {
-    Q_OBJECT
+     Q_OBJECT
 
 public:
-    explicit P2PoolManager(QObject *parent = 0);
-    ~P2PoolManager();
+     explicit P2PoolStatsProvider(
+          const bool &started,
+          const QString &p2poolPath,
+          QObject *parent = 0
+     );
 
-    Q_PROPERTY(P2PoolStatsProvider* p2poolStats READ getP2PoolStats CONSTANT)
+     Q_INVOKABLE void update();
+     Q_INVOKABLE void clear();
 
-    Q_INVOKABLE P2PoolStatsProvider* getP2PoolStats() const;
+     QVariantMap fetchLocal();
+     QVariantMap fetchPool();
+     QVariantMap fetchNetwork();
 
-    Q_INVOKABLE bool start(const QString &flags, const QString &address, const QString &chain, const QString &threads);
-    Q_INVOKABLE void exit();
-    Q_INVOKABLE bool isInstalled();
-    Q_INVOKABLE void getStatus();
-    Q_INVOKABLE void download();
-
-    enum DownloadError {
-	BinaryNotAvailable,
-	ConnectionIssue,
-	HashVerificationFailed,
-	InstallationFailed,
-    };
-    Q_ENUM(DownloadError)
-
-private:
-
-    bool running(NetworkType::Type nettype) const;
 signals:
-    void p2poolStartFailure() const;
-    void p2poolStatus(bool isMining, QVariant hashrate) const;
-    void p2poolDownloadFailure(int errorCode) const;
-    void p2poolDownloadSuccess() const;
+     void p2poolUpdateStats(
+          QVariantMap local,
+          QVariantMap pool,
+          QVariantMap network,
+          QVariantMap raw
+     ) const;
 
 private:
-    std::unique_ptr<P2PoolStatsProvider> m_p2poolStats;
-    std::unique_ptr<QProcess> m_p2poold;
-    QMutex m_p2poolMutex;
-    QString m_p2pool;
-    QString m_p2poolPath;
-    bool started = false;
+     const bool &m_started;
+     const QString &m_p2poolPath;
 
-    mutable FutureScheduler m_scheduler;
+     QVariantMap fetch(const QString &path);
+     QVariantMap fetchRaw();
+
+     bool isSidechainReady();
+     bool isNetworkReady();
+
+     QDateTime m_lastUpdate;
+
+     QVariant m_hashrate_ema15m;
+     QVariant m_hashrate_ema1h;
+     QVariant m_hashrate_ema24h;
+
+     QVariant m_shares_found;
+     QVariant m_round_hashes;
+     QVariant m_effort;
+     QVariant m_effort_ema;
 };
 
-#endif // P2POOLMANAGER_H
+#endif // P2POOLSTATSPROVIDER_H
