@@ -146,7 +146,7 @@ void DaemonManager::stopAsync(NetworkType::Type nettype, const QString &dataDir,
 {
     const auto feature = m_scheduler.run([this, nettype, dataDir] {
         QString message;
-        sendCommand({"exit"}, nettype, dataDir, message);
+        sendCommand({"exit"}, nettype, dataDir, message, /* no timeout */ -1);
 
         return QJSValueList({stopWatcher(nettype, dataDir)});
     }, callback);
@@ -239,9 +239,21 @@ void DaemonManager::printError()
 bool DaemonManager::running(NetworkType::Type nettype, const QString &dataDir) const
 { 
     QString status;
-    sendCommand({"sync_info"}, nettype, dataDir, status);
+    bool started = sendCommand(
+        {"sync_info"},
+        nettype,
+        dataDir,
+        status,
+        // milliseconds before the command
+        // timesout and returns `false`.
+        5000
+    );
+
     qDebug() << status;
-    return status.contains("Height:");
+
+    // Did `monerod` start successfully
+	// and print out its height?
+    return started && status.contains("Height:");
 }
 
 bool DaemonManager::noSync() const noexcept
@@ -256,7 +268,12 @@ void DaemonManager::runningAsync(NetworkType::Type nettype, const QString &dataD
     }, callback);
 }
 
-bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, QString &message) const
+// If launching `monerod` takes longer
+// than `ms_timeout` amount of milliseconds,
+// this function will fail and return `false`.
+//
+// Providing `-1` as the timeout means no timeout.
+bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, const QString &dataDir, QString &message, const int ms_timeout) const
 {
     QProcess p;
     QStringList external_cmd(cmd);
@@ -277,7 +294,14 @@ bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettyp
 
     p.start(m_monerod, external_cmd);
 
-    bool started = p.waitForFinished(-1);
+    bool started = p.waitForFinished(ms_timeout);
+
+    // `monerod` either failed to start or
+    // took longer than `ms_timeout` to start.
+    if (!started) {
+        return false;
+    }
+
     message = p.readAllStandardOutput();
     emit daemonConsoleUpdated(message);
     return started;
@@ -287,7 +311,7 @@ void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type n
 {
     m_scheduler.run([this, cmd, nettype, dataDir] {
         QString message;
-        return QJSValueList({sendCommand(cmd, nettype, dataDir, message)});
+        return QJSValueList({sendCommand(cmd, nettype, dataDir, message, /* no timeout */ -1)});
     }, callback);
 }
 
