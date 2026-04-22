@@ -81,6 +81,19 @@ Rectangle {
     }
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property bool paymentIdBlocked: paymentIdCheckbox.checked || warningLongPidDescription
+    property bool hasTransferWarnings: warningContent !== "" || paymentIdBlocked
+    property bool hasValidTransferInfo: !recipientModel.hasEmptyAddress()
+                                     && !recipientModel.hasEmptyAmount()
+                                     && !recipientModel.hasInvalidAddress()
+                                     && recipientModel.getAmountTotal() <= appWindow.getUnlockedBalance()
+    property bool canSendTransaction: !sendButtonWarningBox.visible
+                                   && !hasTransferWarnings
+                                   && hasValidTransferInfo
+    property bool canCreateOfflineTx: appWindow.viewOnly
+                                   && appWindow.daemonSynced
+                                   && !hasTransferWarnings
+                                   && hasValidTransferInfo
 
     Clipboard { id: clipboard }
 
@@ -819,7 +832,7 @@ Rectangle {
           text: qsTr("Long payment IDs are obsolete. \
           Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
           If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: paymentIdCheckbox.checked || warningLongPidDescription
+          visible: root.paymentIdBlocked
       }
 
       MoneroComponents.WarningBox {
@@ -834,7 +847,7 @@ Rectangle {
               rightIcon: "qrc:///images/rightArrow.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
+              enabled: root.canSendTransaction
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -844,13 +857,6 @@ Rectangle {
               }
           }
       }
-
-      function checkInformation() {
-        return !recipientModel.hasEmptyAmount() &&
-            recipientModel.getAmountTotal() <= appWindow.getUnlockedBalance() &&
-            !recipientModel.hasInvalidAddress();
-      }
-
     } // pageRoot
 
     ColumnLayout {
@@ -934,7 +940,7 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
             button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation() && appWindow.daemonSynced
+            button1.enabled: root.canCreateOfflineTx
             button1.onClicked: {
                 console.log("Transfer: saveTx Clicked")
                 var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -956,7 +962,7 @@ Rectangle {
             }
             tooltip: {
                 var errorMessage = "";
-                if (appWindow.viewOnly && !pageRoot.checkInformation()) {
+                if (appWindow.viewOnly && !root.hasValidTransferInfo) {
                     errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
                 }
                 var header = qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString;
