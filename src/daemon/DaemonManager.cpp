@@ -59,10 +59,10 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // prepare command line arguments and pass to monerod
     QStringList arguments;
 
-    // Start daemon with --detach flag on non-windows platforms
-#ifndef Q_OS_WIN
-    arguments << "--detach";
-#endif
+    // Run monerod in the foreground and supervise it via QProcess (below).
+    // --non-interactive is passed unconditionally further down so monerod
+    // will not try to read from stdin. This mirrors a Type=simple systemd
+    // unit and lets us capture stdout/stderr and observe process state.
 
     if (nettype == NetworkType::TESTNET)
         arguments << "--testnet";
@@ -113,15 +113,21 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     m_daemon.reset(new QProcess());
 
-    // Connect output slots
+    // Connect output and state slots before starting so we don't miss any
+    // early signals emitted between start() and waitForStarted().
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
-
-    // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
-
-    // add state changed listener
     connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
+
+    // Start monerod as a supervised (non-detached) child process. We
+    // previously used startDetached() together with --detach on *nix, which
+    // meant the QProcess object was never attached to the real monerod
+    // process: readyReadStandardOutput/readyReadStandardError/stateChanged
+    // never fired and graceful shutdown had to fall back to pkill/taskkill.
+    m_daemon->setProgram(m_monerod);
+    m_daemon->setArguments(arguments);
+    m_daemon->start();
+    const bool started = m_daemon->waitForStarted();
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
@@ -186,11 +192,14 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
-#ifdef Q_OS_WIN
-                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
-#else
-                QProcess::execute("pkill", {"monerod"});
-#endif
+                // Only kill the monerod instance we own. Previously this
+                // used pkill/taskkill which would also terminate unrelated
+                // monerod processes (e.g. a separate systemd-managed node)
+                // running on the same machine.
+                QMutexLocker locker(&m_daemonMutex);
+                if (m_daemon) {
+                    m_daemon->kill();
+                }
             }
 
         } else
