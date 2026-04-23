@@ -36,6 +36,8 @@ class Subaddress;
 class SubaddressModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int loadedCount READ getLoadedCount NOTIFY loadedCountChanged)
+    Q_PROPERTY(int totalCount READ getTotalCount NOTIFY totalCountChanged)
 
 public:
     enum SubaddressRowRole {
@@ -50,6 +52,18 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const  override;
+    
+    bool canFetchMore(const QModelIndex &parent) const override;
+    void fetchMore(const QModelIndex &parent) override;
+    
+    Q_INVOKABLE bool shouldPreload(int firstVisible, int lastVisible) const;
+    
+    int getLoadedCount() const { return m_loadedCount; }
+    int getTotalCount() const;
+
+signals:
+    void loadedCountChanged();
+    void totalCountChanged();
 
 public slots:
     void startReset();
@@ -57,6 +71,10 @@ public slots:
 
 private:
     Subaddress *m_subaddress;
+    
+    mutable int m_loadedCount;
+    mutable int m_pageSize;
+    mutable bool m_fetchingMore;
 };
 
 #endif // SUBADDRESSMODEL_H
