@@ -104,6 +104,7 @@ ColumnLayout {
 
         RowLayout {
             id: pruningOptionRow
+            spacing: 200
             MoneroComponents.CheckBox {
                 id: pruneBlockchainCheckBox
                 checked: !existingDbWarning.visible ? persistentSettings.pruneBlockchain : false
