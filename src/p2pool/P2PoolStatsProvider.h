@@ -71,7 +71,7 @@ private:
      bool isSidechainReady();
      bool isNetworkReady();
 
-     QDateTime m_lastUpdate;
+     QDateTime m_lastEMAUpdate;
 
      QVariant m_hashrate_ema15m;
      QVariant m_hashrate_ema1h;
