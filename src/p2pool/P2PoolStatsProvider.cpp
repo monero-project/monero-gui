@@ -138,9 +138,10 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
      if (isSidechainReady() && hashrate != 0) {
           map.insert("hashrate", formatHashrate(hashrate));
 
-          if (m_lastUpdate.isValid() && m_hashrate_ema15m.isValid() && m_hashrate_ema1h.isValid() && m_hashrate_ema24h.isValid()) {
+          QDateTime now = QDateTime::currentDateTime();
+          if (m_lastEMAUpdate.isValid() && m_hashrate_ema15m.isValid() && m_hashrate_ema1h.isValid() && m_hashrate_ema24h.isValid()) {
                int secs =
-                    m_lastUpdate.secsTo(QDateTime::currentDateTime());
+                    m_lastEMAUpdate.secsTo(now);
 
                auto alpha = [&](int mins, qint64 secs) {
                     return 1.0 - std::exp(-static_cast<double>(secs) / static_cast<double>((mins * 60) / 3));
@@ -158,6 +159,7 @@ QVariantMap P2PoolStatsProvider::fetchLocal()
           } else {
                m_hashrate_ema15m = m_hashrate_ema1h = m_hashrate_ema24h = hashrate;
           }
+          m_lastEMAUpdate = now;
 
           if (uptime < (15 * 60)) {
                map.insert("hashrate_ema15m", "waiting...");
@@ -326,16 +328,13 @@ void P2PoolStatsProvider::update()
      QVariantMap raw =
           fetchRaw();
 
-     m_lastUpdate =
-          QDateTime::currentDateTime();
-
      emit p2poolUpdateStats(local, pool, network, raw);
 }
 
 void P2PoolStatsProvider::clear()
 {
-     /* invalidate lastUpdate timestamp */
-     m_lastUpdate = QDateTime();
+     /* invalidate lastEMAUpdate timestamp */
+     m_lastEMAUpdate = QDateTime();
 
      /* invalidate hashrate aggregates */
      m_hashrate_ema15m = QVariant();
