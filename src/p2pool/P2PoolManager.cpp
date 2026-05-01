@@ -208,8 +208,11 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     m_p2poold->setArguments(arguments);
     m_p2poold->setWorkingDirectory(m_p2poolPath);
 
-    // Start p2pool
-    started = m_p2poold->startDetached();
+    // Start p2pool as a supervised (non-detached) child so exit() can stop
+    // only our own instance instead of every p2pool process on the system
+    // via pkill/taskkill.
+    m_p2poold->start();
+    started = m_p2poold->waitForStarted();
 
     if (!started) {
         qDebug() << "P2Pool start error: " + m_p2poold->errorString();
@@ -224,11 +227,19 @@ void P2PoolManager::exit()
 {
     qDebug("P2PoolManager: exit()");
     if (started) {
-    #ifdef Q_OS_WIN
-        QProcess::execute("taskkill",  {"/F", "/IM", "p2pool.exe"});
-    #else
-        QProcess::execute("pkill", {"p2pool"});
-    #endif
+        // Stop only the p2pool instance we spawned. Previously this used
+        // pkill/taskkill which indiscriminately killed every p2pool process
+        // on the system.
+        {
+            QMutexLocker locker(&m_p2poolMutex);
+            if (m_p2poold) {
+                m_p2poold->terminate();
+                if (!m_p2poold->waitForFinished(5000)) {
+                    m_p2poold->kill();
+                    m_p2poold->waitForFinished(2000);
+                }
+            }
+        }
         started = false;
         QString dirName = m_p2poolPath + "/stats/";
         QDir dir(dirName);
