@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -227,7 +227,14 @@ Rectangle {
                 Layout.maximumWidth: 100
                 labelText: qsTr("Currency") + translationManager.emptyString
                 labelFontSize: 14
-                currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
+                currentIndex: (function() {
+                    switch (persistentSettings.fiatPriceCurrency) {
+                        case "xmrusd": return 0
+                        case "xmreur": return 1
+                        case "xmrgbp": return 2
+                        case "xmrcad": return 3
+                    }
+                })()
                 dataModel: fiatPriceCurrencyModel
                 onChanged: {
                     var obj = dataModel.get(currentIndex);
@@ -321,6 +328,14 @@ Rectangle {
         ListElement {
             data: "xmreur"
             column1: "EUR"
+        }
+        ListElement {
+            data: "xmrgbp"
+            column1: "GBP"
+        }
+        ListElement {
+            data: "xmrcad"
+            column1: "CAD"
         }
     }
 
