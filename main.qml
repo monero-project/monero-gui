@@ -49,6 +49,7 @@ import "components" as MoneroComponents
 import "components/effects" as MoneroEffects
 import "pages/merchant" as MoneroMerchant
 import "wizard"
+import "js/RemoteNodes.js" as RemoteNodes
 import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 import "version.js" as Version
@@ -79,7 +80,7 @@ ApplicationWindow {
     property bool daemonSynced: false
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
-    property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
+    property bool daemonRunning: walletMode >= 2 && !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
     property alias toolTip: toolTip
     property string walletName
@@ -97,6 +98,9 @@ ApplicationWindow {
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
+    property int simpleModeIndex: 0
+    property var simpleModeAddresses: []
+    property var failedSimpleModeAddresses: ({})
     property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 110 : 270 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
@@ -349,6 +353,14 @@ ApplicationWindow {
             persistentSettings.nettype = currentWallet.nettype;
         }
 
+        // The bundled public nodes only serve mainnet.
+        if (appWindow.walletMode == 0 && currentWallet.nettype != NetworkType.MAINNET) {
+            changeWalletMode(2);
+        }
+        if (appWindow.walletMode == 0) {
+            initializeSimpleMode();
+        }
+
         // connect handlers
         currentWallet.heightRefreshed.connect(onHeightRefreshed);
         currentWallet.refreshed.connect(onWalletRefresh)
@@ -377,7 +389,10 @@ ApplicationWindow {
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
-        if (persistentSettings.useRemoteNode) {
+        if (appWindow.walletMode == 0) {
+            currentDaemonAddress = currentSimpleModeAddress();
+            currentWallet.setDaemonLogin("", "");
+        } else if (persistentSettings.useRemoteNode) {
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
@@ -386,6 +401,10 @@ ApplicationWindow {
         }
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
+        disconnectedEpoch = Utils.epoch();
+        if (appWindow.walletMode >= 2) {
+            walletManager.setDaemonAddressAsync(currentDaemonAddress);
+        }
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -401,6 +420,81 @@ ApplicationWindow {
 
     function isTrustedDaemon() {
         return appWindow.walletMode >= 2 && (!persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted);
+    }
+
+    function currentSimpleModeAddress() {
+        return simpleModeAddresses[simpleModeIndex] || "";
+    }
+
+    function initializeSimpleMode() {
+        daemonSynced = false;
+        // Shuffle alternatives, but prefer the last node that connected successfully.
+        var addresses = [];
+        for (var i = 0; i < RemoteNodes.addresses.length; ++i) {
+            var node = RemoteNodes.addresses[i];
+            if (node.indexOf(":") == -1) {
+                node += ":" + getDefaultDaemonRpcPort(NetworkType.MAINNET);
+            }
+            if (addresses.indexOf(node) == -1) {
+                addresses.push(node);
+            }
+        }
+        for (var index = addresses.length - 1; index > 0; --index) {
+            const other = Math.floor(Math.random() * (index + 1));
+            const address = addresses[index];
+            addresses[index] = addresses[other];
+            addresses[other] = address;
+        }
+        simpleModeAddresses = addresses;
+        var lastWorkingAddress = persistentSettings.lastWorkingSimpleModeAddress;
+        if (lastWorkingAddress && lastWorkingAddress.indexOf(":") == -1) {
+            lastWorkingAddress += ":" + getDefaultDaemonRpcPort(NetworkType.MAINNET);
+        }
+        simpleModeIndex = Math.max(0, addresses.indexOf(lastWorkingAddress));
+        if (failedSimpleModeAddresses[currentSimpleModeAddress()]) {
+            simpleModeIndex = nextSimpleModeIndex();
+        }
+    }
+
+    function nextSimpleModeIndex() {
+        if (simpleModeAddresses.length < 2) {
+            return 0;
+        }
+        for (var offset = 1; offset < simpleModeAddresses.length; ++offset) {
+            const index = (simpleModeIndex + offset) % simpleModeAddresses.length;
+            if (!failedSimpleModeAddresses[simpleModeAddresses[index]]) {
+                return index;
+            }
+        }
+        // All alternatives failed. Clear the failures and try again.
+        failedSimpleModeAddresses = ({});
+        return (simpleModeIndex + 1) % simpleModeAddresses.length;
+    }
+
+    function switchSimpleModeNode(penalizeCurrent) {
+        if (appWindow.walletMode != 0 || !currentWallet || currentWallet.initializing || simpleModeAddresses.length < 2) {
+            return false;
+        }
+
+        if (penalizeCurrent !== false) {
+            failedSimpleModeAddresses[currentDaemonAddress] = true;
+        }
+        simpleModeIndex = nextSimpleModeIndex();
+        currentDaemonAddress = currentSimpleModeAddress();
+        disconnectedEpoch = Utils.epoch();
+        daemonSynced = false;
+        firstBlockSeen = 0;
+        console.log("Switching public node to", currentDaemonAddress);
+        currentWallet.setDaemonLogin("", "");
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            false,
+            0,
+            false,
+            false,
+            0,
+            persistentSettings.getWalletProxyAddress());
+        return true;
     }
 
     function usefulName(path) {
@@ -484,7 +578,7 @@ ApplicationWindow {
             walletInitialized = true
 
             // check if daemon was already mining and add mining logo if true
-            if (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining) {
+            if (appWindow.walletMode >= 2 && (!persistentSettings.useRemoteNode || persistentSettings.allowRemoteNodeMining)) {
                 middlePanel.advancedView.miningView.update();
             }
         }
@@ -677,12 +771,18 @@ ApplicationWindow {
     }
 
     function connectRemoteNode() {
+        if (!currentWallet || currentWallet.initializing)
+            return;
+
         console.log("connecting remote node");
 
         p2poolManager.exit();
         p2poolManager.getStatus();
 
         const callback = function() {
+            if (!currentWallet || currentWallet.initializing)
+                return;
+
             persistentSettings.useRemoteNode = true;
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
@@ -706,7 +806,7 @@ ApplicationWindow {
     }
 
     function disconnectRemoteNode() {
-        if (typeof currentWallet === "undefined" || currentWallet === null)
+        if (!currentWallet || currentWallet.initializing)
             return;
 
         console.log("disconnecting remote node");
@@ -730,13 +830,16 @@ ApplicationWindow {
     }
 
     function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
+        if (!currentWallet || currentWallet.initializing)
+            return;
+
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
         if (firstBlockSeen == 0 && dTargetBlock != 1) {
             firstBlockSeen = dCurrentBlock;
         }
-        daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
+        daemonSynced = dTargetBlock > 1 && dCurrentBlock >= dTargetBlock
         walletSynced = bcHeight >= dTargetBlock
 
         // Update progress bars
@@ -788,9 +891,7 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        const noSync = appWindow.walletMode === 0;
-        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -816,8 +917,6 @@ ApplicationWindow {
             // resume refresh
             currentWallet.startRefresh();
         }
-        // resume simplemode connection timer
-        appWindow.disconnectedEpoch = Utils.epoch();
     }
     function onDaemonStopped(){
         if (currentWallet) {
@@ -1529,6 +1628,7 @@ ApplicationWindow {
                     : [],
             })
         property string bootstrapNodeAddress: ""
+        property string lastWorkingSimpleModeAddress: ""
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
@@ -1565,20 +1665,25 @@ ApplicationWindow {
             return "socks5://" + proxyAddress;
         }
         function getWalletProxyAddress() {
+            if (appWindow.walletMode == 0) {
+                return getProxyAddress();
+            }
             if (!useRemoteNode) {
                 return "";
-            } else {
-                const remoteAddress = remoteNodesModel.currentRemoteNode().address;
-                // skip proxy when using localhost remote node
-                if (/^(127\.0\.0\.1|localhost):[0-9]+$/i.test(remoteAddress)) {
-                    return "";
-                } else {
-                    return getProxyAddress();
-                }
             }
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            const remoteAddress = remoteNode ? remoteNode.address : "";
+            // skip proxy when using localhost remote node
+            if (/^(127\.0\.0\.1|localhost):[0-9]+$/i.test(remoteAddress)) {
+                return "";
+            }
+            return getProxyAddress();
         }
 
         Component.onCompleted: {
+            if (persistentSettings.walletMode == 1) {
+                persistentSettings.walletMode = 0;
+            }
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }
     }
@@ -1629,6 +1734,9 @@ ApplicationWindow {
         }
 
         function applyRemoteNode(index) {
+            if (currentWallet && currentWallet.initializing)
+                return;
+
             selected = index;
             persistentSettings.useRemoteNode = true;
             if (currentWallet) {
@@ -2132,42 +2240,16 @@ ApplicationWindow {
         onTriggered: appWindow.themeTransition = true;
     }
 
-    function checkNoSyncFlag() {
-        if (!appWindow.daemonRunning) {
-            return true;
-        }
-        if (appWindow.walletMode == 0 && !daemonManager.noSync()) {
-            return false;
-        }
-        if (appWindow.walletMode == 1 && daemonManager.noSync()) {
-            return false;
-        }
-        return true;
-    }
-
-    function checkSimpleModeConnection(){
-        const disconnectedTimeoutSec = 30;
-        const firstCheckDelaySec = 2;
-
-        const firstRun = appWindow.disconnectedEpoch == 0;
-        if (firstRun) {
-            appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
-        } else if (!disconnected) {
-            appWindow.disconnectedEpoch = Utils.epoch();
-        }
-
-        const sinceLastConnect = Utils.epoch() - appWindow.disconnectedEpoch;
-        if (sinceLastConnect < disconnectedTimeoutSec && checkNoSyncFlag()) {
-            return;
-        }
-
-        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16 --no-igd";
-        if (appWindow.daemonRunning) {
-            appWindow.stopDaemon(function() {
-                appWindow.startDaemon(simpleModeFlags)
-            });
-        } else {
-            appWindow.startDaemon(simpleModeFlags);
+    function checkSimpleModeConnection() {
+        const now = Utils.epoch();
+        const connectionStatus = currentWallet.connected();
+        if (connectionStatus == Wallet.ConnectionStatus_Connected && daemonSynced) {
+            disconnectedEpoch = now;
+            persistentSettings.lastWorkingSimpleModeAddress = currentDaemonAddress;
+        } else if (connectionStatus == Wallet.ConnectionStatus_Disconnected ||
+                   connectionStatus == Wallet.ConnectionStatus_WrongVersion ||
+                   now - disconnectedEpoch >= 30) {
+            switchSimpleModeNode();
         }
     }
 
@@ -2175,7 +2257,7 @@ ApplicationWindow {
         // Simple mode connection check timer
         id: simpleModeConnectionTimer
         interval: 2000
-        running: appWindow.walletMode < 2 && currentWallet != undefined && daemonStartStopInProgress == 0
+        running: appWindow.walletMode == 0 && currentWallet != undefined
         repeat: true
         onTriggered: appWindow.checkSimpleModeConnection()
     }
@@ -2250,10 +2332,8 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(daemonManager == undefined || persistentSettings.useRemoteNode) {
+        if(daemonManager == undefined || persistentSettings.useRemoteNode || appWindow.walletMode == 0) {
             closeAccepted();
-        } else if (appWindow.walletMode == 0) {
-            stopDaemon(closeAccepted, true);
         } else {
             showProcessingSplash(qsTr("Checking local node status..."));
             const handler = function(running) {
@@ -2422,7 +2502,7 @@ ApplicationWindow {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"
             }
         }
-        console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
+        console.log("walletMode: " + (mode === 0 ? "simple" : "Advanced"));
     }
 
     Rectangle {

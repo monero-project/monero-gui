@@ -222,8 +222,8 @@
         <file>wizard/WizardSummaryItem.qml</file>
         <file>wizard/WizardModeSelection.qml</file>
         <file>wizard/WizardModeRemoteNodeWarning.qml</file>
-        <file>wizard/WizardModeBootstrap.qml</file>
         <file>wizard/WizardMenuItem.qml</file>
+        <file>js/RemoteNodes.js</file>
         <file>js/Wizard.js</file>
         <file>components/LanguageSidebar.qml</file>
         <file>images/world-flags-globe.png</file>

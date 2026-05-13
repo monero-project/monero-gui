@@ -68,11 +68,11 @@ Rectangle {
                 id: wizardNav
                 Layout.topMargin: 24
                 btnNextText: qsTr("Create wallet") + translationManager.emptyString
-                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
-                progress: appWindow.walletMode <= 1 ? 3 : 4
+                progressSteps: appWindow.walletMode === 0 ? 4 : 5
+                progress: appWindow.walletMode === 0 ? 3 : 4
 
                 onPrevClicked: {
-                    if (appWindow.walletMode <= 1){
+                    if (appWindow.walletMode === 0){
                         wizardStateView.state = "wizardCreateWallet1";
                     } else {
                         wizardStateView.state = "wizardCreateWallet4";
