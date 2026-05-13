@@ -118,6 +118,16 @@ NetworkType::Type Wallet::nettype() const
 void Wallet::updateConnectionStatusAsync()
 {
     m_scheduler.run([this] {
+        QMutexLocker locker(&m_connectionStatusMutex);
+        const auto cleanup = sg::make_scope_guard([this]() noexcept {
+            m_connectionStatusRunning = false;
+            m_connectionStatusTime.restart();
+        });
+        if (m_initializing || !m_initialized)
+        {
+            return;
+        }
+
         qDebug() << "updateConnectionStatusAsync current status:" << m_connectionStatus;
         if (m_connectionStatus == Wallet::ConnectionStatus_Disconnected)
         {
@@ -125,6 +135,10 @@ void Wallet::updateConnectionStatusAsync()
         }
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
         qDebug() << "Newest wallet status:" << newStatus;
+        if (m_initializing)
+        {
+            return;
+        }
         if (m_connectionStatus != newStatus)
         {
             setConnectionStatus(newStatus);
@@ -133,17 +147,18 @@ void Wallet::updateConnectionStatusAsync()
                 startRefresh();
             }
         }
-        // Release lock
-        m_connectionStatusRunning = false;
-        m_connectionStatusTime.restart();
     });
 }
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
-    if (!m_initialized || m_initializing)
+    if (m_initializing)
     {
         return ConnectionStatus_Connecting;
+    }
+    if (!m_initialized)
+    {
+        return ConnectionStatus_Disconnected;
     }
 
     // cache connection status
@@ -159,6 +174,11 @@ Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 bool Wallet::disconnected() const
 {
     return m_disconnected;
+}
+
+bool Wallet::initializing() const
+{
+    return m_initializing;
 }
 
 bool Wallet::refreshing() const
@@ -305,20 +325,43 @@ void Wallet::initAsync(
     const QString &proxyAddress /* = "" */)
 {
     qDebug() << "initAsync: " + daemonAddress;
-    m_initializing = true;
+    if (m_initializing.exchange(true))
+    {
+        return;
+    }
+    emit initializingChanged();
     pauseRefresh();
+    setConnectionStatus(Wallet::ConnectionStatus_Connecting);
     const auto future = m_scheduler.run([this, daemonAddress, daemonUsername = m_daemonUsername, daemonPassword = m_daemonPassword, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
-        m_initialized = init(
-            daemonAddress,
-            daemonUsername,
-            daemonPassword,
-            trustedDaemon,
-            upperTransactionLimit,
-            isRecovering,
-            isRecoveringFromDevice,
-            restoreHeight,
-            proxyAddress);
+        m_initialized = false;
+        try
+        {
+            QMutexLocker refreshLocker(&m_asyncMutex);
+            QMutexLocker connectionLocker(&m_connectionStatusMutex);
+            // Wait for any previous refresh or connection check before changing daemons.
+            pauseRefresh();
+            setConnectionStatus(Wallet::ConnectionStatus_Connecting);
+            m_initialized = init(
+                daemonAddress,
+                daemonUsername,
+                daemonPassword,
+                trustedDaemon,
+                upperTransactionLimit,
+                isRecovering,
+                isRecoveringFromDevice,
+                restoreHeight,
+                proxyAddress);
+        }
+        catch (const std::exception &exception)
+        {
+            qCritical() << "Failed to initialize the wallet:" << exception.what();
+        }
+        if (!m_initialized)
+        {
+            setConnectionStatus(Wallet::ConnectionStatus_Disconnected);
+        }
         m_initializing = false;
+        emit initializingChanged();
         if (m_initialized)
         {
             emit walletCreationHeightChanged();
@@ -330,9 +373,12 @@ void Wallet::initAsync(
             qCritical() << "Failed to initialize the wallet";
         }
     });
-    if (future.first)
+    if (!future.first)
     {
-        setConnectionStatus(Wallet::ConnectionStatus_Connecting);
+        m_initialized = false;
+        setConnectionStatus(Wallet::ConnectionStatus_Disconnected);
+        m_initializing = false;
+        emit initializingChanged();
     }
 }
 
@@ -620,6 +666,11 @@ bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 
     {
         QMutexLocker locker(&m_asyncMutex);
+
+        if (m_initializing)
+        {
+            return false;
+        }
 
         bool result = m_walletImpl->refresh();
         if (historyAndSubaddresses)
