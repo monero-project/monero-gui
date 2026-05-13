@@ -219,9 +219,9 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 5.12 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
 
- The recommended way is to install 5.9.7 from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
+ The recommended way is to install 5.12 or newer from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
 The following instructions will fetch Qt from your distribution's repositories instead. Take note of what version it installs. Your mileage may vary.
 
@@ -277,7 +277,7 @@ The executable can be found in the build/release/bin folder.
 
 4. Install Qt:
 
-  `brew install qt5`  (or download QT 5.9.7+ from [qt.io](https://www.qt.io/download-open-source/))
+  `brew install qt5`  (or download QT 5.12+ from [qt.io](https://www.qt.io/download-open-source/))
 
 5. Grab an up-to-date copy of the monero-gui repository
 
