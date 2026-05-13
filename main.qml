@@ -49,6 +49,7 @@ import "components" as MoneroComponents
 import "components/effects" as MoneroEffects
 import "pages/merchant" as MoneroMerchant
 import "wizard"
+import "js/RemoteNodes.js" as RemoteNodes
 import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 import "version.js" as Version
@@ -76,7 +77,7 @@ ApplicationWindow {
     property bool daemonSynced: false
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
-    property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
+    property bool daemonRunning: walletMode >= 2 && !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
     property alias toolTip: toolTip
     property string walletName
@@ -94,6 +95,9 @@ ApplicationWindow {
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
+    property int simpleModeIndex: 0
+    property var failedSimpleModeAddresses: ({})
+    readonly property var simpleModeAddresses: RemoteNodes.addresses
     property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 110 : 270 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
@@ -380,7 +384,10 @@ ApplicationWindow {
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
-        if (persistentSettings.useRemoteNode) {
+        if (appWindow.walletMode == 0) {
+            currentDaemonAddress = currentSimpleModeAddress();
+            currentWallet.setDaemonLogin("", "");
+        } else if (persistentSettings.useRemoteNode) {
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
@@ -389,6 +396,7 @@ ApplicationWindow {
         }
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -396,7 +404,7 @@ ApplicationWindow {
             persistentSettings.is_recovering,
             persistentSettings.is_recovering_from_device,
             persistentSettings.restore_height,
-            persistentSettings.getWalletProxyAddress());
+            persistentSettings.getWalletProxyAddressFor(currentDaemonAddress, appWindow.walletMode == 0 || persistentSettings.useRemoteNode));
 
         // save wallet keys in case wallet settings have been changed in the init
         currentWallet.setPassword(walletPassword);
@@ -404,6 +412,92 @@ ApplicationWindow {
 
     function isTrustedDaemon() {
         return appWindow.walletMode >= 2 && (!persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted);
+    }
+
+    function currentSimpleModeAddress() {
+        if (simpleModeAddresses.length == 0) {
+            return "";
+        }
+        return simpleModeAddresses[simpleModeIndex % simpleModeAddresses.length];
+    }
+
+    function simpleModeIndexByAddress(address) {
+        for (var index = 0; index < simpleModeAddresses.length; ++index) {
+            if (simpleModeAddresses[index] == address) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    function initializeSimpleMode() {
+        const lastWorkingIndex = simpleModeIndexByAddress(persistentSettings.lastWorkingSimpleModeAddress);
+        if (lastWorkingIndex >= 0) {
+            simpleModeIndex = lastWorkingIndex;
+        } else if (simpleModeAddresses.length > 0) {
+            simpleModeIndex = Math.floor(Math.random() * simpleModeAddresses.length);
+        }
+    }
+
+    function markSimpleModeAddressFailed(address) {
+        if (!address) {
+            return;
+        }
+
+        failedSimpleModeAddresses[address] = true;
+    }
+
+    function clearFailedSimpleModeAddresses() {
+        failedSimpleModeAddresses = ({});
+    }
+
+    function nextSimpleModeIndex() {
+        if (simpleModeAddresses.length < 2) {
+            return 0;
+        }
+
+        for (var offset = 1; offset < simpleModeAddresses.length; ++offset) {
+            const candidateIndex = (simpleModeIndex + offset) % simpleModeAddresses.length;
+            if (!failedSimpleModeAddresses[simpleModeAddresses[candidateIndex]]) {
+                return candidateIndex;
+            }
+        }
+
+        clearFailedSimpleModeAddresses();
+        return (simpleModeIndex + 1) % simpleModeAddresses.length;
+    }
+
+    function recordSimpleModeSuccess() {
+        if (appWindow.walletMode != 0 || !currentDaemonAddress) {
+            return;
+        }
+
+        persistentSettings.lastWorkingSimpleModeAddress = currentDaemonAddress;
+    }
+
+    function switchSimpleModeNode(penalizeCurrent) {
+        if (appWindow.walletMode != 0 || !currentWallet || simpleModeAddresses.length < 2) {
+            return false;
+        }
+
+        if (penalizeCurrent !== false) {
+            markSimpleModeAddressFailed(currentSimpleModeAddress());
+        }
+
+        simpleModeIndex = nextSimpleModeIndex();
+        currentDaemonAddress = currentSimpleModeAddress();
+        currentWallet.setDaemonLogin("", "");
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            false,
+            0,
+            persistentSettings.is_recovering,
+            persistentSettings.is_recovering_from_device,
+            persistentSettings.restore_height,
+            persistentSettings.getWalletProxyAddressFor(currentDaemonAddress, true));
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
+        appWindow.disconnectedEpoch = Utils.epoch();
+        return true;
     }
 
     function usefulName(path) {
@@ -471,6 +565,8 @@ ApplicationWindow {
         leftPanel.networkStatus.connected = status
         if (status == Wallet.ConnectionStatus_Disconnected) {
             firstBlockSeen = 0;
+        } else if (status == Wallet.ConnectionStatus_Connected) {
+            recordSimpleModeSuccess();
         }
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
@@ -785,8 +881,8 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        const noSync = appWindow.walletMode === 0;
-        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
+        const noSync = false;
+        const bootstrapNodeAddress = appWindow.walletMode >= 2 ? persistentSettings.bootstrapNodeAddress : "";
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
@@ -1498,6 +1594,7 @@ ApplicationWindow {
                     : [],
             })
         property string bootstrapNodeAddress: ""
+        property string lastWorkingSimpleModeAddress: ""
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
@@ -1531,21 +1628,32 @@ ApplicationWindow {
             }
             return proxyAddressSetOrForced;
         }
+        function getWalletProxyAddressFor(remoteAddress, useProxy) {
+            if (!useProxy) {
+                return "";
+            }
+            // skip proxy when using localhost remote node
+            if (remoteAddress.startsWith("127.0.0.1:") || remoteAddress.startsWith("localhost:")) {
+                return "";
+            }
+            return getProxyAddress();
+        }
         function getWalletProxyAddress() {
+            if (appWindow.walletMode == 0) {
+                return getWalletProxyAddressFor(appWindow.currentSimpleModeAddress(), true);
+            }
             if (!useRemoteNode) {
                 return "";
-            } else {
-                const remoteAddress = remoteNodesModel.currentRemoteNode().address;
-                // skip proxy when using localhost remote node
-                if (remoteAddress.startsWith("127.0.0.1:") || remoteAddress.startsWith("localhost:")) {
-                    return "";
-                } else {
-                    return getProxyAddress();
-                }
             }
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            return getWalletProxyAddressFor(remoteNode ? remoteNode.address : "", true);
         }
 
         Component.onCompleted: {
+            if (persistentSettings.walletMode == 1) {
+                persistentSettings.walletMode = 0;
+            }
+            appWindow.initializeSimpleMode();
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }
     }
@@ -2101,50 +2209,33 @@ ApplicationWindow {
         onTriggered: appWindow.themeTransition = true;
     }
 
-    function checkNoSyncFlag() {
-        if (!appWindow.daemonRunning) {
-            return true;
-        }
-        if (appWindow.walletMode == 0 && !daemonManager.noSync()) {
-            return false;
-        }
-        if (appWindow.walletMode == 1 && daemonManager.noSync()) {
-            return false;
-        }
-        return true;
-    }
-
     function checkSimpleModeConnection(){
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
+        const connectionStatus = currentWallet.connected();
+        const connectionFailed = connectionStatus == Wallet.ConnectionStatus_Disconnected ||
+            connectionStatus == Wallet.ConnectionStatus_WrongVersion;
 
         const firstRun = appWindow.disconnectedEpoch == 0;
         if (firstRun) {
             appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
-        } else if (!disconnected) {
+        } else if (!connectionFailed) {
             appWindow.disconnectedEpoch = Utils.epoch();
         }
 
         const sinceLastConnect = Utils.epoch() - appWindow.disconnectedEpoch;
-        if (sinceLastConnect < disconnectedTimeoutSec && checkNoSyncFlag()) {
+        if (sinceLastConnect < disconnectedTimeoutSec) {
             return;
         }
 
-        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16 --no-igd";
-        if (appWindow.daemonRunning) {
-            appWindow.stopDaemon(function() {
-                appWindow.startDaemon(simpleModeFlags)
-            });
-        } else {
-            appWindow.startDaemon(simpleModeFlags);
-        }
+        switchSimpleModeNode();
     }
 
     Timer {
         // Simple mode connection check timer
         id: simpleModeConnectionTimer
         interval: 2000
-        running: appWindow.walletMode < 2 && currentWallet != undefined && daemonStartStopInProgress == 0
+        running: appWindow.walletMode == 0 && currentWallet != undefined && daemonStartStopInProgress == 0
         repeat: true
         onTriggered: appWindow.checkSimpleModeConnection()
     }
@@ -2219,10 +2310,8 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(daemonManager == undefined || persistentSettings.useRemoteNode) {
+        if(daemonManager == undefined || persistentSettings.useRemoteNode || appWindow.walletMode == 0) {
             closeAccepted();
-        } else if (appWindow.walletMode == 0) {
-            stopDaemon(closeAccepted, true);
         } else {
             showProcessingSplash(qsTr("Checking local node status..."));
             const handler = function(running) {
@@ -2383,7 +2472,7 @@ ApplicationWindow {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"
             }
         }
-        console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
+        console.log("walletMode: " + (mode === 0 ? "simple" : "Advanced"));
     }
 
     Rectangle {

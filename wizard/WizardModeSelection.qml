@@ -111,39 +111,6 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: simpleModeAvailable ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
-                bodyText: {
-                    if (isTails) {
-                        return qsTr("Not available on Tails.") + translationManager.emptyString;
-                    } else {
-                        if (appWindow.persistentSettings.nettype == 0) {
-                            return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
-                        } else {
-                            return qsTr("Available on mainnet.") + translationManager.emptyString;
-                        }
-                    }
-                }
-                imageIcon: "qrc:///images/local-node.png"
-
-                onMenuClicked: {
-                    if (simpleModeAvailable) {
-                        appWindow.persistentSettings.pruneBlockchain = true;
-                        applyWalletMode(1, 'wizardModeBootstrap');
-                    }
-                }
-            }
-
-            Rectangle {
-                Layout.preferredHeight: 1
-                Layout.topMargin: 5
-                Layout.bottomMargin: 10
-                Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
-            }
-
-            WizardMenuItem {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"

@@ -66,7 +66,7 @@ Rectangle {
             }
 
             WizardNav {
-                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                progressSteps: appWindow.walletMode === 0 ? 3 : 4
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
@@ -75,7 +75,7 @@ Rectangle {
                 onNextClicked: {
                     wizardController.walletOptionsPassword = passwordFields.password;
 
-                    if(appWindow.walletMode === 0 || appWindow.walletMode === 1){
+                    if(appWindow.walletMode === 0){
                         wizardStateView.state = "wizardRestoreWallet4";
                     } else {
                         wizardStateView.state = "wizardRestoreWallet3";
