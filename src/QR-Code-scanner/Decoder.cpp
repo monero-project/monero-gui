@@ -28,6 +28,7 @@
 
 #include "Decoder.h"
 
+#include <cstring>
 #include <limits>
 
 #include "quirc.h"
@@ -67,11 +68,14 @@ std::vector<std::string> QrDecoder::decodeGrayscale8(const QImage &image)
     {
         throw std::runtime_error("QUIRC: failed to get image buffer");
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    std::copy(image.constBits(), image.constBits() + image.sizeInBytes(), rawImage);
-#else
-    std::copy(image.constBits(), image.constBits() + image.byteCount(), rawImage);
-#endif
+
+    const int width = image.width();
+    const int height = image.height();
+    for (int y = 0; y < height; ++y)
+    {
+        std::memcpy(rawImage + y * width, image.constScanLine(y), width);
+    }
+
     quirc_end(m_qr);
 
     const int count = quirc_count(m_qr);
