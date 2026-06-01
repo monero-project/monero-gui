@@ -16,7 +16,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm libsodium miniupnpc expat libunwind-headers protobuf qt5 pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libsodium miniupnpc unbound libunwind-headers protobuf qt5 pkg-config
     - name: build
       run: DEV_MODE=ON make release -j3
     - name: test qml
@@ -78,7 +78,7 @@ jobs:
       with:
         submodules: recursive
     - name: install dependencies
-      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq libpgm miniupnpc expat libunwind-headers protobuf pkg-config
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi openssl zmq miniupnpc unbound libunwind-headers protobuf pkg-config
     - name: clone qt repo
       run: git clone -b "${QT_TAG}" --recursive --depth 1 --shallow-submodules https://github.com/qt/qt5
     - name: build qt from source
