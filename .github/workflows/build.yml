@@ -57,8 +57,10 @@ jobs:
         submodules: recursive
     - uses: eine/setup-msys2@v2
       with:
+        msystem: ucrt64
         update: true
-        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-pcre mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-unbound git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-angleproject
+        install: make
+        pacboy: toolchain:p pcre:p cmake:p boost:p openssl:p zeromq:p libsodium:p hidapi:p protobuf-c:p libusb:p unbound:p git qt5:p libgcrypt:p angleproject:p
     - name: add qmake.exe and windeployqt.exe
       run: |
         cp -f "$MSYSTEM_PREFIX/bin/qmake-qt5.exe" "$MSYSTEM_PREFIX/bin/qmake.exe"
