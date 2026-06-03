@@ -536,7 +536,7 @@ void Wallet::setupBackgroundSync(const Wallet::BackgroundSyncType background_syn
     pauseRefresh();
 
     // run inside scheduler because of lag when stopping/starting refresh
-    m_scheduler.run([this, refreshEnabled, background_sync_type, &wallet_password] {
+    m_scheduler.run([this, refreshEnabled, background_sync_type, wallet_password] {
         m_walletImpl->setupBackgroundSync(
             static_cast<Monero::Wallet::BackgroundSyncType>(background_sync_type),
             wallet_password.toStdString(),
