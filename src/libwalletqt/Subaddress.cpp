@@ -30,8 +30,9 @@
 #include <QDebug>
 
 Subaddress::Subaddress(Monero::Subaddress *subaddressImpl, QObject *parent)
-  : QObject(parent), m_subaddressImpl(subaddressImpl)
+  : QObject(parent), m_subaddressImpl(subaddressImpl), m_totalCount(0), m_totalCountCached(false)
 {
+    m_pageCache.setMaxCost(50);
     getAll();
 }
 
@@ -42,10 +43,20 @@ void Subaddress::getAll() const
     {
         QWriteLocker locker(&m_lock);
 
+        if (!m_rows.isEmpty() && m_totalCountCached) {
+            emit refreshFinished();
+            return;
+        }
+
+        auto allRows = m_subaddressImpl->getAll();
         m_rows.clear();
-        for (auto &row: m_subaddressImpl->getAll()) {
+        
+        for (auto &row: allRows) {
             m_rows.append(row);
         }
+        
+        m_totalCount = allRows.size();
+        m_totalCountCached = true;
     }
 
     emit refreshFinished();
@@ -67,12 +78,14 @@ bool Subaddress::getRow(int index, std::function<void (Monero::SubaddressRow &ro
 void Subaddress::addRow(quint32 accountIndex, const QString &label) const
 {
     m_subaddressImpl->addRow(accountIndex, label.toStdString());
+    clearCache();
     getAll();
 }
 
 void Subaddress::setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const
 {
     m_subaddressImpl->setLabel(accountIndex, addressIndex, label.toStdString());
+    clearCache();
     getAll();
 }
 
@@ -86,6 +99,7 @@ void Subaddress::refresh(quint32 accountIndex) const
     {
         qCritical() << "Failed to refresh account" << accountIndex << "subaddresses:" << e.what();
     }
+    clearCache();
     getAll();
 }
 
@@ -94,4 +108,87 @@ quint64 Subaddress::count() const
     QReadLocker locker(&m_lock);
 
     return m_rows.size();
+}
+
+void Subaddress::getPage(int offset, int limit) const
+{
+    emit refreshStarted();
+
+    {
+        QWriteLocker locker(&m_lock);
+
+        int pageKey = offset / limit;
+        
+        if (m_pageCache.contains(pageKey)) {
+            emit refreshFinished();
+            return;
+        }
+
+        if (m_rows.isEmpty()) {
+            for (auto &row: m_subaddressImpl->getAll()) {
+                m_rows.append(row);
+            }
+        }
+
+        QList<Monero::SubaddressRow*> page;
+        int endIndex = qMin(offset + limit, static_cast<int>(m_rows.size()));
+        
+        for (int i = offset; i < endIndex; ++i) {
+            page.append(m_rows[i]);
+        }
+
+        m_pageCache.insert(pageKey, new QList<Monero::SubaddressRow*>(page), 1);
+    }
+
+    emit refreshFinished();
+}
+
+void Subaddress::getPageSilent(int offset, int limit) const
+{
+    QWriteLocker locker(&m_lock);
+
+    int pageKey = offset / limit;
+    
+    if (m_pageCache.contains(pageKey)) {
+        return;
+    }
+
+    if (m_rows.isEmpty()) {
+        for (auto &row: m_subaddressImpl->getAll()) {
+            m_rows.append(row);
+        }
+    }
+
+    QList<Monero::SubaddressRow*> page;
+    int endIndex = qMin(offset + limit, static_cast<int>(m_rows.size()));
+    
+    for (int i = offset; i < endIndex; ++i) {
+        page.append(m_rows[i]);
+    }
+
+    m_pageCache.insert(pageKey, new QList<Monero::SubaddressRow*>(page), 1);
+}
+
+quint64 Subaddress::getTotalCount() const
+{
+    QReadLocker locker(&m_lock);
+    
+    if (!m_totalCountCached) {
+        m_totalCount = m_rows.size();
+        if (m_totalCount == 0) {
+            const_cast<Subaddress*>(this)->getAll();
+            m_totalCount = m_rows.size();
+        }
+        m_totalCountCached = true;
+    }
+    
+    return m_totalCount;
+}
+
+void Subaddress::clearCache() const
+{
+    QWriteLocker locker(&m_lock);
+    m_pageCache.clear();
+    m_totalCountCached = false;
+    m_totalCount = 0;
 }
