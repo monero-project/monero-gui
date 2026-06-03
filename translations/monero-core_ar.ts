@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="346"/>
         <source>Edit account label</source>
-        <translation type="unfinished"></translation>
+        <translation>عدِّل تسمية الحساب</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="361"/>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="232"/>
         <source>Send to this address</source>
-        <translation type="unfinished"></translation>
+        <translation>أرسل إلى هذا العنوان</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="246"/>
