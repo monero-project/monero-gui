@@ -100,7 +100,6 @@ Rectangle {
     property string walletOptionsRecoverSpendkey: ''
     property string walletOptionsBackup: ''
     property int    walletOptionsRestoreHeight: 0
-    property string walletOptionsBootstrapAddress: persistentSettings.bootstrapNodeAddress
     property bool   walletOptionsRestoringFromDevice: false
     property bool   walletOptionsIsRecovering: false
     property bool   walletOptionsIsRecoveringFromDevice: false
@@ -149,7 +148,6 @@ Rectangle {
         property WizardOpenWallet1 wizardOpenWallet1View: WizardOpenWallet1 { }
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
-        property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
         anchors.fill: parent
 
         color: "transparent"
@@ -241,10 +239,6 @@ Rectangle {
                 name: "wizardModeRemoteNodeWarning"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeRemoteNodeWarningView }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeRemoteNodeWarningView.pageHeight + 80 }
-            }, State {
-                name: "wizardModeBootstrap"
-                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.pageHeight + 80 }
             }
         ]
 

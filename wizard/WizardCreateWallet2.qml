@@ -407,7 +407,7 @@ Rectangle {
 
             WizardNav {
                 id: navigation
-                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
+                progressSteps: appWindow.walletMode === 0 ? 4 : 5
                 progress: 1
                 onPrevClicked: {
                     wizardStateView.state = "wizardCreateWallet1";

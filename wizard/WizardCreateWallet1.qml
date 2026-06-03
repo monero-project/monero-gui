@@ -87,7 +87,7 @@ Rectangle {
 
             WizardNav {
                 id: wizardNav
-                progressSteps: appWindow.walletMode <= 1 ? 4 : 5
+                progressSteps: appWindow.walletMode === 0 ? 4 : 5
                 progress: 0
                 btnNext.enabled: walletInput.verify();
                 btnPrev.text: appWindow.width <= 506 ? "<" : qsTr("Back to menu") + translationManager.emptyString
