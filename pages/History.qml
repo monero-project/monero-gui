@@ -838,6 +838,25 @@ Rectangle {
                                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
                                     }
                                 }
+
+                                MoneroComponents.TextPlain {
+                                    visible: isout && address && !addressBookName
+                                    anchors.left: addressField.right
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 16
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    text: "  " + FontAwesome.addressBook + "+" + "  ";
+                                    themeTransition: false
+
+                                    MouseArea {
+                                        state: "add_to_addressbook"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.opacity = 0.4
+                                        onExited: parent.opacity = 0.75
+                                        cursorShape: Qt.PointingHandCursor
+                                    }
+                                }
                             }
 
                             Rectangle {
@@ -1276,6 +1295,27 @@ Rectangle {
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note, root.txPage);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                if(res[i].state === 'add_to_addressbook') {
+                                        inputDialog.labelText = qsTr("Add %1 to Address Book").arg(TxUtils.addressTruncate(address, 8)) + ":" + translationManager.emptyString;
+                                        inputDialog.onAcceptedCallback = function() {
+                                            if (!currentWallet.addressBook.addRow(address.trim(),"", inputDialog.inputText)) {
+                                                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                                                // TODO: check currentWallet.addressBook.errorString() instead.
+                                                if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                                                     informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                                                else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                                                     informationPopup.text  = currentWallet.addressBook.errorString()
+                                                else
+                                                     informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
+
+                                                informationPopup.onCloseCallback = null
+                                                informationPopup.open();
+                                            }
+                                            root.refresh();
+                                        }
+                                        inputDialog.onRejectedCallback = null;
+                                        inputDialog.open();
+                                }
                                 doCollapse = false;
                                 break;
                             }
