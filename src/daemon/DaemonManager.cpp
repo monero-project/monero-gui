@@ -59,11 +59,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // prepare command line arguments and pass to monerod
     QStringList arguments;
 
-    // Start daemon with --detach flag on non-windows platforms
-#ifndef Q_OS_WIN
-    arguments << "--detach";
-#endif
-
     if (nettype == NetworkType::TESTNET)
         arguments << "--testnet";
     else if (nettype == NetworkType::STAGENET)
@@ -113,15 +108,16 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     m_daemon.reset(new QProcess());
 
-    // Connect output slots
+    // Connect output and state slots
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
+    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
 
     // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
-
-    // add state changed listener
-    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
+    m_daemon->setProgram(m_monerod);
+    m_daemon->setArguments(arguments);
+    m_daemon->start();
+    const bool started = m_daemon->waitForStarted();
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
@@ -186,11 +182,10 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
-#ifdef Q_OS_WIN
-                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
-#else
-                QProcess::execute("pkill", {"monerod"});
-#endif
+                QMutexLocker locker(&m_daemonMutex);
+                if (m_daemon) {
+                    m_daemon->kill();
+                }
             }
 
         } else
