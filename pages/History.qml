@@ -1440,16 +1440,15 @@ Rectangle {
         // applying filters
         root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
 
-        const timezoneOffset = new Date().getTimezoneOffset() * 60;
-        var fromDate = Math.floor(fromDatePicker.currentDate.getTime() / 86400000) * 86400 + timezoneOffset;
-        var toDate = (Math.floor(toDatePicker.currentDate.getTime() / 86400000) + 1) * 86400 + timezoneOffset;
+        var fromDate = fromDatePicker.currentDate.setHours(0, 0, 0, 0);
+        var toDate = toDatePicker.currentDate.setHours(23, 59, 59, 999);
 
         var txs = [];
         for (var i = 0; i < root.txData.length; i++){
             var item = root.txData[i];
 
             // daterange filtering
-            if(item.timestamp < fromDate || item.timestamp > toDate){
+            if(item.timestamp * 1000 < fromDate || item.timestamp * 1000 > toDate){
                 continue;
             }
 
