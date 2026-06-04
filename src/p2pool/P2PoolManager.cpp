@@ -73,6 +73,18 @@ void P2PoolManager::download() {
         #endif
         QFile file(fileName);
         epee::net_utils::http::http_simple_client http_client;
+        QString proxyAddress;
+        {
+            QMutexLocker locker(&m_proxyMutex);
+            proxyAddress = m_proxyAddress;
+        }
+
+        if (!proxyAddress.isEmpty() && !http_client.set_proxy(proxyAddress.toStdString())) {
+            qCritical() << "Failed to set p2pool download proxy address" << proxyAddress;
+            emit p2poolDownloadFailure(ConnectionIssue);
+            return;
+        }
+
         const epee::net_utils::http::http_response_info* response = NULL;
         std::string userAgent = randomUserAgent().toStdString();
         std::chrono::milliseconds timeout = std::chrono::seconds(10);
@@ -218,6 +230,25 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     }
 
     return true;
+}
+
+QString P2PoolManager::proxyAddress() const
+{
+    QMutexLocker locker(&m_proxyMutex);
+    return m_proxyAddress;
+}
+
+void P2PoolManager::setProxyAddress(QString address)
+{
+    {
+        QMutexLocker locker(&m_proxyMutex);
+        if (m_proxyAddress == address) {
+            return;
+        }
+        m_proxyAddress = address;
+    }
+
+    emit proxyAddressChanged();
 }
 
 void P2PoolManager::exit()

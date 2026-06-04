@@ -309,6 +309,7 @@ Rectangle {
                                         confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                                         confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                                         confirmationDialog.onAcceptedCallback = function() {
+                                            p2poolManager.proxyAddress = persistentSettings.getProxyAddress();
                                             p2poolManager.download();
                                             statusMessageText.text = "Downloading P2Pool...";
                                             statusMessage.visible = true
