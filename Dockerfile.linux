@@ -213,7 +213,7 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
     -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
     -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools \
-    -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview \
+    -skip qtvirtualkeyboard -skip qtwebchannel -skip qtwebengine -skip qtwebsockets -skip qtwebview \
     -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine \
     -nomake examples -nomake tests -nomake tools && \
     make -j$THREADS && \
