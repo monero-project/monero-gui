@@ -33,6 +33,7 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.2
 import FontAwesome 1.0
+import moneroComponents.TransactionHistoryModel 1.0
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -45,6 +46,11 @@ Item {
     property color backgroundColor : MoneroComponents.Style.appWindowBorderColor
     property color errorColor : "red"
     property bool error: false
+    property bool isFromDatePicker: false
+    property bool isCalendarDisplayingMinimumDate: calendar.visibleMonth == calendar.minimumDate.getMonth() && calendar.visibleYear == calendar.minimumDate.getFullYear()
+    property bool isCalendarDisplayingMaximumDate: calendar.visibleMonth == calendar.maximumDate.getMonth() && calendar.visibleYear == calendar.maximumDate.getFullYear()
+    property alias minimumDate: calendar.minimumDate
+    property alias maximumDate: calendar.maximumDate
     property alias inputLabel: inputLabel
 
     signal dateChanged();
@@ -264,7 +270,7 @@ Item {
             color: MoneroComponents.Style.middlePanelBackgroundColor
             border.width: 1
             border.color: MoneroComponents.Style.appWindowBorderColor
-            height: datePicker.expanded ? calendar.height + 2 : 0
+            height: datePicker.expanded ? calendar.height + todayLabel.height + 2 : 0
             clip: true
 
             Behavior on height {
@@ -275,8 +281,8 @@ Item {
                 anchors.fill: parent
                 scrollGestureEnabled: false
                 onWheel: {
-                    if (wheel.angleDelta.y > 0) return calendar.showPreviousMonth();
-                    if (wheel.angleDelta.y < 0) return calendar.showNextMonth();
+                    if (wheel.angleDelta.y > 0 && !isCalendarDisplayingMinimumDate) return calendar.showPreviousMonth();
+                    if (wheel.angleDelta.y < 0 && !isCalendarDisplayingMaximumDate) return calendar.showNextMonth();
                 }
             }
 
@@ -299,6 +305,7 @@ Item {
                 anchors.bottomMargin: 10
                 height: 220
                 frameVisible: false
+                selectedDate: currentDate
 
                 style: CalendarStyle {
                     gridVisible: false
@@ -416,6 +423,7 @@ Item {
                                 id: prevMonthIcon
                                 anchors.centerIn: parent
                                 image: "qrc:///images/prevMonth.png"
+                                visible: !isCalendarDisplayingMinimumDate
                                 height: 8
                                 width: 12
                                 fontAwesomeFallbackIcon: FontAwesome.arrowLeft
@@ -424,6 +432,7 @@ Item {
                             }
 
                             MouseArea {
+                                visible: !isCalendarDisplayingMinimumDate
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
@@ -442,6 +451,7 @@ Item {
                                 id: nextMonthIcon
                                 anchors.centerIn: parent
                                 image: "qrc:///images/prevMonth.png"
+                                visible: !isCalendarDisplayingMaximumDate
                                 height: 8
                                 width: 12
                                 rotation: 180
@@ -451,12 +461,64 @@ Item {
                             }
 
                             MouseArea {
+                                visible: !isCalendarDisplayingMaximumDate
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 onClicked: calendar.showNextMonth()
                             }
                         }
+                    }
+                }
+            }
+
+            MoneroComponents.TextPlain {
+                anchors.top: calendar.bottom
+                anchors.topMargin: -4
+                anchors.left: calendar.left
+                anchors.leftMargin: 5
+                font.family: MoneroComponents.Style.fontMonoRegular.name
+                font.pixelSize: 13
+                color: firstTransactionMouseArea.containsMouse ? MoneroComponents.Style.buttonBackgroundColorHover : MoneroComponents.Style.buttonBackgroundColor
+                themeTransition: false
+                visible: isFromDatePicker && typeof root.model !== 'undefined' && root.model != null && root.model.rowCount() > 0
+                text: qsTr("First transaction") + translationManager.emptyString
+
+                MouseArea {
+                    id: firstTransactionMouseArea
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    anchors.fill: parent
+                    onClicked: {
+                        if (appWindow.currentWallet != null && typeof root.model !== 'undefined' && root.model != null) {
+                            datePicker.currentDate = root.model.data(root.model.index((root.model.rowCount() - 1), 0), TransactionHistoryModel.TransactionDateRole);
+                        }
+                        popup.close()
+                    }
+                }
+            }
+
+            MoneroComponents.TextPlain {
+                id: todayLabel
+                anchors.top: calendar.bottom
+                anchors.topMargin: -4
+                anchors.right: calendar.right
+                anchors.rightMargin: 5
+                font.family: MoneroComponents.Style.fontMonoRegular.name
+                font.pixelSize: 13
+                color: todayLabelMouseArea.containsMouse ? MoneroComponents.Style.buttonBackgroundColorHover : MoneroComponents.Style.buttonBackgroundColor
+                themeTransition: false
+                visible: !isFromDatePicker
+                text: qsTr("Today") + translationManager.emptyString
+
+                MouseArea {
+                    id: todayLabelMouseArea
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    anchors.fill: parent
+                    onClicked: {
+                        datePicker.currentDate = new Date();
+                        popup.close()
                     }
                 }
             }
