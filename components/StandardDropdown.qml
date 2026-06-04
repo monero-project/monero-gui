@@ -68,6 +68,39 @@ ColumnLayout {
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
 
+    Accessible.role: Accessible.ComboBox
+    Accessible.name: dropdownLabel.text + " " + dropdownText.text
+
+    function selectPreviousItem() {
+        if (columnid.currentIndex !== 0) {
+            repeater.itemAt(--columnid.currentIndex).forceActiveFocus();
+            changed();
+        }
+    }
+
+    function selectNextItem() {
+        if (columnid.currentIndex + 1 !== repeater.count) {
+            repeater.itemAt(++columnid.currentIndex).forceActiveFocus();
+            changed();
+        }
+    }
+
+    function closePopupAndFocusOnDropdown() {
+        popup.close();
+        dropdown.forceActiveFocus();
+    }
+
+    Keys.onReturnPressed: {
+        popup.open();
+        repeater.itemAt(columnid.currentIndex).forceActiveFocus();
+    }
+    Keys.onEnterPressed: {
+        popup.open();
+        repeater.itemAt(columnid.currentIndex).forceActiveFocus();
+    }
+    Keys.onUpPressed: selectPreviousItem()
+    Keys.onDownPressed: selectNextItem()
+
     spacing: 0
     Rectangle {
         id: dropdownLabelRect
@@ -90,7 +123,7 @@ ColumnLayout {
 
     Rectangle {
         id: head
-        color: dropArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+        color: dropArea.containsMouse || dropdown.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
         border.width: dropdown.headerBorder ? 1 : 0
         border.color: dropdown.colorBorder
         radius: 4
@@ -98,6 +131,7 @@ ColumnLayout {
         Layout.preferredHeight: dropdownHeight
 
         MoneroComponents.TextPlain {
+            id: dropdownText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10
@@ -135,7 +169,14 @@ ColumnLayout {
         MouseArea {
             id: dropArea
             anchors.fill: parent
-            onClicked: dropdown.expanded ? popup.close() : popup.open()
+            onClicked: {
+                if (dropdown.expanded) {
+                    popup.close();
+                } else {
+                    popup.open();
+                    repeater.itemAt(columnid.currentIndex).forceActiveFocus();
+                }
+            }
             hoverEnabled: true
             cursorShape: Qt.ArrowCursor
         }
@@ -183,6 +224,17 @@ ColumnLayout {
                         //radius: index === repeater.count - 1 ? 4 : 0
                         color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
+                        Accessible.role: Accessible.ListItem
+                        Accessible.name: col1Text.text
+
+                        Keys.onUpPressed: selectPreviousItem()
+                        Keys.onDownPressed: selectNextItem()
+                        Keys.onEnterPressed: closePopupAndFocusOnDropdown()
+                        Keys.onReturnPressed: closePopupAndFocusOnDropdown()
+                        Keys.onEscapePressed: closePopupAndFocusOnDropdown()
+                        Keys.onTabPressed: closePopupAndFocusOnDropdown()
+                        Keys.onBacktabPressed: closePopupAndFocusOnDropdown()
+
                         MoneroComponents.TextPlain {
                             id: col1Text
                             anchors.verticalCenter: parent.verticalCenter
@@ -218,6 +270,8 @@ ColumnLayout {
                                 popup.close()
                                 columnid.currentIndex = index
                                 changed();
+                                dropdown.forceActiveFocus();
+                                dropdown.Accessible.name = dropdownLabel.text + " " + dropdownText.text;
                             }
                         }
                     }
