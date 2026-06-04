@@ -216,17 +216,17 @@
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Probar/verificar</translation>
+        <translation>Verificar/Comprobar</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">RingDB compartido</translation>
+        <translation>RingDB compartido</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="68"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Firmar/verificar</translation>
+        <translation>Firmar/verificar</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="63"/>
@@ -249,7 +249,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="69"/>
         <source>Delete</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
@@ -280,12 +280,12 @@
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="44"/>
         <source>Hardware wallet</source>
-        <translation>Monedero físico</translation>
+        <translation>Cartera física</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="45"/>
         <source>Computer</source>
-        <translation>Computadora</translation>
+        <translation>Ordenador</translation>
     </message>
     <message>
         <location filename="../components/DevicePassphraseDialog.qml" line="67"/>
@@ -430,7 +430,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/History.qml" line="809"/>
         <source>Unknown recipient</source>
-        <translation>Receptor desconocido</translation>
+        <translation>Destinatario desconocido</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1378"/>
@@ -529,7 +529,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/History.qml" line="1724"/>
         <source>Payment proof</source>
-        <translation type="unfinished">Prueba de pago</translation>
+        <translation>Prueba de pago</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1725"/>
@@ -666,19 +666,19 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/Keys.qml" line="197"/>
         <source>Export wallet</source>
-        <translation>Exportar monedero</translation>
+        <translation>Exportar cartera</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="212"/>
         <location filename="../pages/Keys.qml" line="254"/>
         <source>Spendable Wallet</source>
-        <translation>Monedero gastable</translation>
+        <translation>Cartera gastable</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="222"/>
         <location filename="../pages/Keys.qml" line="254"/>
         <source>View Only Wallet</source>
-        <translation>Monedero de sólo visualización</translation>
+        <translation>Cartera de Solo Visualización</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="260"/>
@@ -693,12 +693,12 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/Keys.qml" line="291"/>
         <source>(View Only Wallet - No mnemonic seed available)</source>
-        <translation>(Monedero de solo visualización - No hay semilla mnemónica disponible)</translation>
+        <translation>(Cartera de solo visualización - No hay semilla mnemónica disponible)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="292"/>
         <source>(View Only Wallet - No secret spend key available)</source>
-        <translation>(Monedero de solo visualización - No hay clave secreta de gasto disponible)</translation>
+        <translation>(Cartera de solo visualización - No hay clave secreta de gasto disponible)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="299"/>
@@ -807,7 +807,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../LeftPanel.qml" line="530"/>
         <source>Wallet</source>
-        <translation>Monedero</translation>
+        <translation>Cartera</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="539"/>
@@ -835,7 +835,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../components/LineEdit.qml" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished">Pegar</translation>
+        <translation>Pegar</translation>
     </message>
 </context>
 <context>
@@ -861,12 +861,12 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../components/MenuBar.qml" line="34"/>
         <source>File</source>
-        <translation type="unfinished">Archivo</translation>
+        <translation>Archivo</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="37"/>
         <source>Close Wallet</source>
-        <translation>Cerrar monedero</translation>
+        <translation>Cerrar Cartera</translation>
     </message>
     <message>
         <location filename="../components/MenuBar.qml" line="42"/>
@@ -1063,7 +1063,7 @@ Es recomendable escribirla en la billetera física para mayor seguridad.</transl
     <message>
         <location filename="../pages/Mining.qml" line="58"/>
         <source>Mining</source>
-        <translation type="unfinished">Minería</translation>
+        <translation>Minería</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -1122,7 +1122,7 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Mining.qml" line="307"/>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="308"/>
@@ -1142,37 +1142,38 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Mining.qml" line="395"/>
         <source>Chain</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="401"/>
         <source>Use the mini chain if you have a low hashrate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa la mini cadena si tu hashrate de minado es bajo.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="441"/>
         <source>Flags</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Bandera es una traducción literal y el termino común es el inglés &quot;Flags&quot;</translatorcomment>
+        <translation>Flags</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="498"/>
         <source>P2Pool startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Flags de inicio P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="499"/>
         <source>(optional)</source>
-        <translation type="unfinished">(opcional)</translation>
+        <translation>(opcional)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="516"/>
         <source>Starting P2Pool</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrancando P2Pool</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="519"/>
         <source>Mining with P2Pool, at %1 H/s</source>
-        <translation type="unfinished"></translation>
+        <translation>Minando con P2Pool, a %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="566"/>
@@ -1182,27 +1183,27 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Mining.qml" line="622"/>
         <source>P2Pool Installation Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalación de P2Pool falló</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>P2Pool installation failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalación de P2Pool falló.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="623"/>
         <source>Try starting the program with administrator privileges.</source>
-        <translation type="unfinished"></translation>
+        <translation>Intenta arrancar el programa con permisos de administrador.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="631"/>
         <source>P2Pool Installation Succeeded</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalación de P2Pool exitosa</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="632"/>
         <source>P2Pool has successfully installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>P2Pool se instaló con éxito.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="328"/>
@@ -1311,7 +1312,7 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="175"/>
         <source>Switch to another public remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar a otro nodo público</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="194"/>
@@ -1334,17 +1335,17 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../components/PasswordDialog.qml" line="163"/>
         <source>Please enter new wallet password</source>
-        <translation>Ingrese la nueva contraseña del monedero</translation>
+        <translation>Ingrese la nueva contraseña de la cartera</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="165"/>
         <source>wallet password</source>
-        <translation>contraseña de monedero</translation>
+        <translation>contraseña de la cartera</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="165"/>
         <source>wallet device passphrase</source>
-        <translation>frase de contraseña del dispositivo del monedero</translation>
+        <translation>frase de contraseña del dispositivo de la cartera</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="166"/>
@@ -1374,7 +1375,7 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../components/PasswordDialog.qml" line="242"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation>Confirme la frase de contraseña del dispositivo del monedero</translation>
+        <translation>Confirme la frase de contraseña del dispositivo de la cartera</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="287"/>
@@ -1446,102 +1447,102 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Receive.qml" line="100"/>
         <source>Address</source>
-        <translation type="unfinished">Dirección</translation>
+        <translation>Dirección</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="106"/>
         <source>Payment request</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitud de pago</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
         <source>QR code copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Código QR copiado al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copiar al portapapeles</translation>
+        <translation>Copiar al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="164"/>
         <source>Save as Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar como Imagen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="171"/>
         <source>Left click: copy QR code to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clic izquierdo: copiar el código QR al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="171"/>
         <source>Right click: save QR code as image file</source>
-        <translation type="unfinished"></translation>
+        <translation>Clic derecho: Guardar el código QR como imagen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="187"/>
         <source>Copy payment request to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar solicitud de pago al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="199"/>
         <source>Payment request copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitud de pago copiada al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="220"/>
         <location filename="../pages/Receive.qml" line="281"/>
         <source>Amount</source>
-        <translation type="unfinished">Cantidad</translation>
+        <translation>Cantidad</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="340"/>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>What is being payed for (a product, service, donation) (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lo que se está pagando (un producto, servicio, donación) (opcional)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="358"/>
         <location filename="../pages/Receive.qml" line="396"/>
         <source>Visible to the sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Visible para el remitente</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="379"/>
         <source>Your name</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu nombre</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="380"/>
         <source>Your name, company or website (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu nombre, compañía o website (opcional)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="422"/>
         <source>Address #</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección #</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="439"/>
         <location filename="../pages/Receive.qml" line="722"/>
         <source>no label</source>
-        <translation type="unfinished"></translation>
+        <translation>sin etiqueta</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="446"/>
         <location filename="../pages/Receive.qml" line="683"/>
         <source>Edit address label</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar la etiqueta de dirección</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="475"/>
         <location filename="../pages/Receive.qml" line="700"/>
         <source>Copy address to clipboard</source>
-        <translation type="unfinished">Copiar dirección al portapapeles</translation>
+        <translation>Copiar dirección al portapapeles</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="485"/>
@@ -1557,12 +1558,12 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Receive.qml" line="667"/>
         <source>See transactions</source>
-        <translation type="unfinished">Ver transacciones</translation>
+        <translation>Ver transacciones</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="718"/>
         <source>Primary address</source>
-        <translation type="unfinished">Dirección principal</translation>
+        <translation>Dirección principal</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="758"/>
@@ -1577,7 +1578,7 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/Receive.qml" line="763"/>
         <source>QR code saved to </source>
-        <translation type="unfinished"></translation>
+        <translation>Código QR guardado en </translation>
     </message>
 </context>
 <context>
@@ -1585,57 +1586,57 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar nodo remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="37"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir nodo remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="97"/>
         <source>Address</source>
-        <translation type="unfinished">Dirección</translation>
+        <translation>Dirección</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="98"/>
         <source>Port</source>
-        <translation type="unfinished">Puerto</translation>
+        <translation>Puerto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="114"/>
         <source>Daemon username</source>
-        <translation type="unfinished">Usuario de Daemon</translation>
+        <translation>Usuario de Daemon</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="115"/>
         <source>(optional)</source>
-        <translation type="unfinished">(opcional)</translation>
+        <translation>(opcional)</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="125"/>
         <source>Daemon password</source>
-        <translation type="unfinished">Contraseña de Daemon</translation>
+        <translation>Contraseña de Daemon</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="126"/>
         <source>Password</source>
-        <translation type="unfinished">Contraseña</translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="142"/>
         <source>Mark as Trusted Daemon</source>
-        <translation type="unfinished">Marcar como daemon de confianza</translation>
+        <translation>Marcar como Daemon de Confianza</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="153"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeDialog.qml" line="162"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1656,22 +1657,22 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../components/RemoteNodeList.qml" line="48"/>
         <source>Add remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir nodo remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="120"/>
         <source>Trusted daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon de Confianza</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="144"/>
         <source>Edit remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar nodo remoto</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeList.qml" line="159"/>
         <source>Remove remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar nodo remoto</translation>
     </message>
 </context>
 <context>
@@ -1679,27 +1680,28 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/settings/Settings.qml" line="59"/>
         <source>Wallet</source>
-        <translation type="unfinished">Monedero</translation>
+        <translation>Cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="64"/>
         <source>Interface</source>
-        <translation type="unfinished">interfaz</translation>
+        <translation>Interfaz</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="69"/>
         <source>Node</source>
-        <translation type="unfinished">Nodo</translation>
+        <translation>Nodo</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="75"/>
         <source>Log</source>
-        <translation type="unfinished">Registro</translation>
+        <translatorcomment>In software Log is a better word than &quot;Registro&quot;</translatorcomment>
+        <translation>Log</translation>
     </message>
     <message>
         <location filename="../pages/settings/Settings.qml" line="80"/>
         <source>Info</source>
-        <translation type="unfinished">Información</translation>
+        <translation>Información</translation>
     </message>
 </context>
 <context>
@@ -1728,7 +1730,7 @@ Minar también te da una posibilidad pequeña de ganar algo de Monero. Tu ordena
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="132"/>
         <source>Wallet path: </source>
-        <translation>Dirección de monedero: </translation>
+        <translation>Dirección de la cartera: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="190"/>
@@ -1745,7 +1747,7 @@ Puede ingresar una altura de bloque o una fecha (AAAA-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="203"/>
         <source>Rescan wallet cache</source>
-        <translation>Re-explorar caché del monedero</translation>
+        <translation>Re-explorar caché de la cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="51"/>
@@ -1760,7 +1762,7 @@ Puede ingresar una altura de bloque o una fecha (AAAA-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="53"/>
         <source>portable</source>
-        <translation type="unfinished"></translation>
+        <translation>portable</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
@@ -1782,29 +1784,29 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation>¿Seguro que deseas reconstruir el caché del monedero?
+        <translation>¿Seguro que deseas reconstruir la caché de la cartera?
 La siguiente información será eliminada
 - Direcciones de destinatarios
 - Claves de transacciones
 - Descripciones de transacciones
 
-El archivo de caché anterior del monedero será renombrado y puede ser posteriormente restaurado.
+El archivo de caché anterior de la cartera será renombrado y puede ser posteriormente restaurado.
 </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="260"/>
         <source>Wallet log path: </source>
-        <translation>Dirección de registro del monedero: </translation>
+        <translation>Dirección de registro de la cartera: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="303"/>
         <source>Wallet mode: </source>
-        <translation>Modo monedero: </translation>
+        <translation>Modo cartera: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="334"/>
         <source>Graphics mode: </source>
-        <translation>Modo de librería gráfica </translation>
+        <translation>Modo de gráficos: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="368"/>
@@ -1839,7 +1841,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="412"/>
         <source>Donation to Monero Core Team</source>
-        <translation type="unfinished"></translation>
+        <translation>Donación al Equipo Core de Monero</translation>
     </message>
 </context>
 <context>
@@ -1857,7 +1859,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="139"/>
         <source>Lock wallet on inactivity</source>
-        <translation>Bloquear monedero si se detecta inactividad</translation>
+        <translation>Bloquear cartera si se detecta inactividad</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
@@ -1872,7 +1874,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="72"/>
         <source>Display wallet name in title bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el nombre de la cartera en la barra de título</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="97"/>
@@ -1917,7 +1919,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="161"/>
         <source>Ask to stop local node during program exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Preguntar si se debe detener el nodo local al salir del programa</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="168"/>
@@ -1990,7 +1992,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="236"/>
         <source>Type a command (e.g &apos;%1&apos; or &apos;%2&apos;) and press Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribe un comando (ej. &apos;%1&apos; o &apos;%2&apos;) y presiona Enter</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="259"/>
@@ -2008,7 +2010,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="131"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>La blockchain se está descargando a tu computadora. Provee mayor seguridad y requiere más almacenamiento local.</translation>
+        <translation>La blockchain se está descargando a tu ordenador. Provee mayor seguridad y requiere más almacenamiento local.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="208"/>
@@ -2019,7 +2021,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
         <location filename="../pages/settings/SettingsNode.qml" line="224"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
         <translatorcomment>Easier is &quot;fácil&quot; but it sounds different using the literal translation, so &quot;sencillo&quot; it&apos;s a good synonym to use here.</translatorcomment>
-        <translation>Utiliza un servidor de un tercero para conectarse a la red de Monero. Es menos seguro, pero más sencillo para tu computadora.</translation>
+        <translation>Utiliza un servidor de un tercero para conectarse a la red de Monero. Es menos seguro, pero más sencillo para tu ordenador.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="253"/>
@@ -2082,22 +2084,22 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="64"/>
         <source>Close this wallet</source>
-        <translation>Cerrar este monedero</translation>
+        <translation>Cerrar esta cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="63"/>
         <source>Logs out of this wallet.</source>
-        <translation>Cerrar sesión en este monedero.</translation>
+        <translation>Cerrar sesión en esta cartera.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="72"/>
         <source>Create a view-only wallet</source>
-        <translation>Crear un monedero de sólo visualización</translation>
+        <translation>Crear una cartera de sólo visualización</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="71"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation>Crea un nuevo monedero que sólo puede ver e iniciar transacciones, pero requiere un monedero de gasto para firmar transacciones antes de enviarlas.</translation>
+        <translation>Crea una nueva cartera que sólo puede ver e iniciar transacciones, pero requiere una cartera de gasto para firmar transacciones antes de enviarlas.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="79"/>
@@ -2109,9 +2111,9 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
-        <translation>El monedero de solo visualización ha sido creado con la misma contraseña del monedero actual. Puedes abrirlo cerrando el monedero actual, haciendo clic en la opción &quot;Abrir monedero desde archivo&quot; y seleccionando el monedero de visualización en: 
+        <translation>La cartera de solo visualización ha sido creado con la misma contraseña de la cartera actual. Puedes abrirlo cerrando la cartera actual, haciendo clic en la opción &quot;Abrir cartera desde archivo&quot; y seleccionando la cartera de visualización en: 
 %1
-Puedes cambiar la contraseña en las opciones del monedero.</translation>
+Puedes cambiar la contraseña en las opciones de la cartera.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
@@ -2121,12 +2123,12 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="93"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Guarda esta información de forma segura para recuperar tu monedero en el futuro.</translation>
+        <translation>Guarda esta información de forma segura para recuperar tu cartera en el futuro.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="105"/>
         <source>Rescan wallet balance</source>
-        <translation>Re-explorar balance del monedero</translation>
+        <translation>Re-explorar balance de la cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="104"/>
@@ -2136,17 +2138,17 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="55"/>
         <source>Locks the wallet on demand.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloqueo manual de la cartera.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="56"/>
         <source>Lock this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear esta cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="57"/>
         <source>Ctrl+</source>
-        <translation type="unfinished">Ctrl+</translation>
+        <translation>Ctrl+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="84"/>
@@ -2164,7 +2166,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="113"/>
         <source>Rescan spent can only be used with a trusted remote node. If you trust the current node you are connected to (%1), you can mark it as trusted in Settings &gt; Node page.</source>
-        <translation type="unfinished"></translation>
+        <translation>El reescaneo de gastos solo puede usarse con un nodo remoto de confianza. Si confías en el nodo al que estás conectado actualmente (%1), puedes marcarlo como de confianza en Ajustes &gt; Nodo.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="121"/>
@@ -2179,32 +2181,32 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="133"/>
         <source>Use this feature if a transaction is missing in your wallet history. This will expose the transaction ID to the remote node, which can harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa esta función si falta una transacción en el historial de tu cartera. Esto expondrá el ID de la transacción al nodo remoto, lo que puede perjudicar tu privacidad.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="134"/>
         <source>Scan transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear transacción</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="137"/>
         <source>Enter a transaction ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduce un ID de transacción:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="141"/>
         <source>Transaction successfully scanned</source>
-        <translation type="unfinished"></translation>
+        <translation>Transacción escaneada con éxito</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
         <source>Failed to scan transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo escanear la transacción</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="154"/>
         <source>Change wallet password</source>
-        <translation>Cambiar contraseña del monedero</translation>
+        <translation>Cambiar contraseña de la cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="177"/>
@@ -2219,7 +2221,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="153"/>
         <source>Change the password of your wallet.</source>
-        <translation>Cambia la contraseña de tu monedero.</translation>
+        <translation>Cambia la contraseña de tu cartera.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="162"/>
@@ -2237,7 +2239,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="103"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Esta página permite interactuar con la base de datos de las firmas circulares compartidas. Esta base de datos es para uso de los monederos de Monero como también por los monederos de los clones de Monero que han reusado las claves.</translation>
+        <translation>Esta página permite interactuar con la base de datos de las firmas circulares compartidas. Esta base de datos es para uso de las carteras de Monero como también por las carteras de los clones de Monero que han reusado las claves.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="115"/>
@@ -2624,7 +2626,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="146"/>
         <source>View progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver progreso</translation>
     </message>
     <message>
         <location filename="../components/SuccessfulTxDialog.qml" line="160"/>
@@ -2642,27 +2644,27 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../components/TitleBar.qml" line="118"/>
         <source>Lock this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear esta cartera</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="159"/>
         <source>Close this wallet and return to main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar esta cartera y volver al menú principal</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="199"/>
         <source>Change language</source>
-        <translation type="unfinished">Cambiar el lenguaje</translation>
+        <translation>Cambiar el idioma</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="238"/>
         <source>Switch to light theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar al tema claro</translation>
     </message>
     <message>
         <location filename="../components/TitleBar.qml" line="238"/>
         <source>Switch to dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar al tema oscuro</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2692,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="59"/>
         <source>Wallet is view-only and sends are only possible by using offline transaction signing. Unless key images are imported, the balance reflects only incoming but not outgoing transactions.</source>
-        <translation>El monedero está en solo-lectura y los envios solo son posibles usando firmas de transacciones fuera de línea. A menos que la claves sean importadas, el balance será reflejado solo en los entrantes pero no en las transacciones salientes.</translation>
+        <translation>La cartera está en solo-lectura y los envios solo son posibles usando firmas de transacciones fuera de línea. A menos que la claves sean importadas, el balance será reflejado solo en los entrantes pero no en las transacciones salientes.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="436"/>
@@ -2721,7 +2723,7 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
         <source>Saved to local wallet history</source>
-        <translation>Guardado en el historial del monedero</translation>
+        <translation>Guardado en el historial de la cartera</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="82"/>
@@ -2754,7 +2756,9 @@ Puedes cambiar la contraseña en las opciones del monedero.</translation>
         <source>
 Confirmation message:
  </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Mensaje de confirmación:
+ </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1070"/>
@@ -2787,7 +2791,7 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="76"/>
         <source>Enter an amount.</source>
-        <translation>Introduce una cantidad</translation>
+        <translation>Introduce una cantidad.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="169"/>
@@ -2854,7 +2858,7 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="946"/>
         <source>Required for view-only wallets to display the real balance</source>
-        <translation>Requerido para monederos de solo-lectura para mostrar el balance real</translation>
+        <translation>Necesario para carteras de solo-lectura para mostrar el balance real</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="944"/>
@@ -2864,12 +2868,12 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="950"/>
         <source>1. Using cold wallet, export the key images into a file</source>
-        <translation>1. Usando monederos frios, exportar la imagen de la clave a un archivo</translation>
+        <translation>1. Usando carteras frías, exportar la imagen de la clave a un archivo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="951"/>
         <source>2. Using view-only wallet, import the key images file</source>
-        <translation>2. Usando monederos de solo-lectura, importar la clave de archivo</translation>
+        <translation>2. Usando carteras de solo-lectura, importar la clave de archivo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="958"/>
@@ -2904,68 +2908,68 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="279"/>
         <source>Grab QR code from screen</source>
-        <translation type="unfinished">Tomar el código QR de la pantalla</translation>
+        <translation>Capturar el código QR de la pantalla</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Scan QR code</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear el código QR</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="311"/>
         <source>Import from address book</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar desde libreta de direcciones</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="342"/>
         <source>Send all unlocked balance of this account</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar todo el saldo desbloqueado de esta cuenta</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="519"/>
         <source>Remove recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar destinatario</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="576"/>
         <source>Add recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir destinatario</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Total</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="756"/>
         <source>fee</source>
-        <translation type="unfinished"></translation>
+        <translation>comisión</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="800"/>
         <source>only visible to you</source>
-        <translation type="unfinished"></translation>
+        <translation>solo visible para ti</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="902"/>
         <source>Outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Salidas</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="916"/>
         <source>Required for cold wallets to sign their corresponding key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Necesario para que las carteras frías firmen sus imágenes de clave correspondientes</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="920"/>
         <location filename="../pages/Transfer.qml" line="989"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
-        <translation>1. Usando el monedero de solo-lectura, exportar las salidas a un archivo</translation>
+        <translation>1. Usando la cartera de solo-lectura, exportar las salidas a un archivo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="921"/>
         <source>2. Using cold wallet, import the outputs file</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Usando cartera fría, importa el fichero de salidas</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="990"/>
@@ -2975,17 +2979,17 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="991"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
-        <translation>3. Usando el monedero de solo lectura, importe el archivo de imágenes clave y cree un archivo de transacción</translation>
+        <translation>3. Usando la cartera de solo-lectura, importe el archivo de imágenes clave y cree un archivo de transacción</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="993"/>
         <source>4. Using cold wallet, sign your transaction file</source>
-        <translation>4. Usando el monedero frío, firme su archivo de transacción</translation>
+        <translation>4. Usando la cartera fría, firme su archivo de transacción</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="994"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
-        <translation>5. Usando el monedero de solo-lectura, envíe su transacción firmada</translation>
+        <translation>5. Usando la cartera de solo-lectura, envíe su transacción firmada</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1000"/>
@@ -3025,27 +3029,27 @@ Confirmation message:
     <message>
         <location filename="../pages/Transfer.qml" line="1090"/>
         <source>Outputs successfully exported to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Salidas exportadas a fichero con éxito</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1108"/>
         <source>Outputs successfully imported to wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Salidas importadas a cartera con éxito</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1126"/>
         <source>Key images successfully exported to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Imágenes de clave exportadas a fichero con éxito</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1145"/>
         <source>Key images successfully imported to wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Imágenes de clave importadas a la cartera con éxito</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1188"/>
         <source>Wallet is connecting to daemon.</source>
-        <translation>El monedero se esta conectando al deamon.</translation>
+        <translation>La cartera se esta conectando al deamon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="1194"/>
@@ -3057,7 +3061,7 @@ Actualiza o conectate a otro deamon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="1172"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>El monedero no está conectado al daemon.</translation>
+        <translation>La cartera no está conectada al daemon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -3165,29 +3169,30 @@ Actualiza o conectate a otro deamon</translation>
         <location filename="../pages/TxKey.qml" line="63"/>
         <location filename="../pages/TxKey.qml" line="169"/>
         <source>Reserve</source>
-        <translation type="unfinished"></translation>
+        <translation>Reservar</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="69"/>
         <source>
 For reserve proofs you don&apos;t need to specify tx id or address.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Para las pruebas de reserva no necesitas especificar el ID de la transacción ni la dirección.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="96"/>
         <location filename="../pages/TxKey.qml" line="201"/>
         <source>Recipient&apos;s wallet address</source>
-        <translation>Dirección del monedero del receptor</translation>
+        <translation>Dirección de la cartera del destinatario</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
         <source>Amount</source>
-        <translation type="unfinished">Cantidad</translation>
+        <translation>Cantidad</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="109"/>
         <source>Paste amount of XMR (reserve proof only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegar la cantidad de XMR (prueba de reservas solo)</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="138"/>
@@ -3221,7 +3226,7 @@ Para el caso de comprobación de un gasto, no necesitas especificar la direcció
     <message>
         <location filename="../pages/TxKey.qml" line="174"/>
         <source>Transaction is not needed for reserve proof.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transacción no necesaria para prueba de reservas.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="223"/>
@@ -3260,7 +3265,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../pages/TxKey.qml" line="225"/>
         <source>reserve proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Prueba de reserva</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="233"/>
@@ -3431,7 +3436,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="89"/>
         <source>Give your wallet a password</source>
-        <translation>Da una contraseña a tu monedero</translation>
+        <translation>Da una contraseña a tu cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -3446,7 +3451,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>hardware wallet</source>
-        <translation>monedero de hardware</translation>
+        <translation>cartera de hardware</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="94"/>
@@ -3471,12 +3476,12 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="200"/>
         <source>Passwords match!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Las contraseñas coinciden!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="200"/>
         <source>Passwords do not match</source>
-        <translation type="unfinished"></translation>
+        <translation>Las contraseñas no coinciden</translation>
     </message>
 </context>
 <context>
@@ -3489,7 +3494,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardController.qml" line="351"/>
         <source>Failed to store the wallet</source>
-        <translation>Error al guardar el monedero</translation>
+        <translation>Error al guardar la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="434"/>
@@ -3510,7 +3515,7 @@ your input may be required.</source>
         <translation>
 
 Por favor revise su billetera de hardware -
-su entrada puede ser requerida</translation>
+su entrada puede ser requerida.</translation>
     </message>
 </context>
 <context>
@@ -3518,22 +3523,24 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="53"/>
         <source>Choose your hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Elige tu cartera fría</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
         <source>Create a new wallet</source>
-        <translation>Crear un nuevo monedero</translation>
+        <translation>Crear una nueva cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
         <source>stagenet</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Technical term - Transaltion N/A</translatorcomment>
+        <translation>stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>testnet</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Technical term - Transaltion N/A</translatorcomment>
+        <translation>testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="83"/>
@@ -3543,22 +3550,22 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="107"/>
         <source>Hardware wallet model</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelo de cartera fría</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="121"/>
         <source>Create a new wallet from device.</source>
-        <translation>Crea un nuevo monedero desde un dispositivo.</translation>
+        <translation>Crea una nueva cartera desde un dispositivo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation>Restaura el monedero desde un dispositivo. Usa esta opción si has usado tu monedero desde el dispositivo hardware anteriormente.</translation>
+        <translation>Restaura la cartera desde un dispositivo. Usa esta opción si has usado tu cartera desde el dispositivo hardware anteriormente.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation>Creación del monedero desde &apos;MM-DD-AAAA&apos; o altura de restauración</translation>
+        <translation>Creación de la cartera desde &apos;MM-DD-AAAA&apos; o altura de restauración</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
@@ -3579,7 +3586,7 @@ su entrada puede ser requerida</translation>
         <location filename="../wizard/WizardCreateDevice1.qml" line="226"/>
         <location filename="../wizard/WizardCreateDevice1.qml" line="287"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
-        <translation>Error al copiar el monedero desde el dispositivo hardware. Revisar los registros de la aplicación.</translation>
+        <translation>Error al copiar la cartera desde el dispositivo hardware. Revisar los registros de la aplicación.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="243"/>
@@ -3589,12 +3596,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Create wallet</source>
-        <translation>Crear monedero</translation>
+        <translation>Crear cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Restaurar monedero</translation>
+        <translation>Restaurar cartera</translation>
     </message>
 </context>
 <context>
@@ -3602,22 +3609,22 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
         <source>Create a new wallet</source>
-        <translation>Crear un nuevo monedero</translation>
+        <translation>Crear una nueva cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
         <source>stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="66"/>
         <source>testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
         <source>Creates a new wallet on this computer.</source>
-        <translation>Crear un nuevo monedero en este computador.</translation>
+        <translation>Crear una nueva cartera en este ordenador.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="97"/>
@@ -3627,12 +3634,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Es &lt;b&gt;muy&lt;/b&gt; importante escribir y mantener esta semilla en secreto. Es todo lo que necesitas para restaurar tu monedero.</translation>
+        <translation>Es &lt;b&gt;muy&lt;/b&gt; importante escribir y mantener esta semilla en secreto. Es todo lo que necesitas para restaurar tu cartera.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
         <source>Wallet restore height</source>
-        <translation>Altura de restauración de monedero</translation>
+        <translation>Altura de restauración de la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
@@ -3655,7 +3662,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Para comunicarse con la red de Monero tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.</translation>
+        <translation>Para comunicarse con la red de Monero tu cartera debe estar conectada a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.</translation>
     </message>
 </context>
 <context>
@@ -3668,12 +3675,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="62"/>
         <source>New wallet details:</source>
-        <translation>Detalles del nuevo monedero:</translation>
+        <translation>Detalles de la nueva cartera:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="70"/>
         <source>Create wallet</source>
-        <translation>Crear monedero</translation>
+        <translation>Crear cartera</translation>
     </message>
 </context>
 <context>
@@ -3691,7 +3698,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished">Reiniciar</translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="88"/>
@@ -3706,7 +3713,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="115"/>
         <source>Prune blockchain</source>
-        <translation type="unfinished"></translation>
+        <translation>Podar la blockchain</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="132"/>
@@ -3734,19 +3741,19 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
         <source>Create a new wallet</source>
-        <translation>Crear un nuevo monedero</translation>
+        <translation>Crear una nueva cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
         <location filename="../wizard/WizardHome.qml" line="104"/>
         <source>stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="79"/>
         <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="82"/>
@@ -3756,37 +3763,37 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="104"/>
         <source>Create a new wallet from hardware</source>
-        <translation>Crear un nuevo monedero desde un dispositivo hardware</translation>
+        <translation>Crear una nueva cartera desde un dispositivo hardware</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="108"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>Conecta tu dispositivo hardware para crear un nuevo monedero de Monero.</translation>
+        <translation>Conecta tu dispositivo hardware para crear una nueva cartera de Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="127"/>
         <source>Open a wallet from file</source>
-        <translation>Abrir un monedero desde un archivo</translation>
+        <translation>Abrir una cartera desde un archivo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="128"/>
         <source>Import an existing .keys wallet file from your computer.</source>
-        <translation>Importar un archivo existente con las claves del monedero desde tu computador.</translation>
+        <translation>Importar un archivo existente con las claves de la cartera desde tu ordenador.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="147"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Restaurar monedero desde claves o semilla mnemónica</translation>
+        <translation>Restaurar cartera desde claves o semilla mnemónica</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="148"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
-        <translation>Ingresa tus claves privadas o la semilla mnemónica de 25 palabras para restaurar tu monedero.</translation>
+        <translation>Ingresa tus claves privadas o la semilla mnemónica de 25 palabras para restaurar tu cartera.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="164"/>
         <source>Change wallet mode</source>
-        <translation>Cambiar el modo del monedero</translation>
+        <translation>Cambiar el modo de la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="179"/>
@@ -3796,7 +3803,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardHome.qml" line="202"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="224"/>
@@ -3895,7 +3902,7 @@ su entrada puede ser requerida</translation>
         <location filename="../wizard/WizardModeSelection.qml" line="85"/>
         <location filename="../wizard/WizardModeSelection.qml" line="118"/>
         <source>Not available on Tails.</source>
-        <translation type="unfinished"></translation>
+        <translation>No disponible en Tails.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="88"/>
@@ -3906,12 +3913,12 @@ su entrada puede ser requerida</translation>
         <location filename="../wizard/WizardModeSelection.qml" line="90"/>
         <location filename="../wizard/WizardModeSelection.qml" line="123"/>
         <source>Available on mainnet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible en mainnet.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="121"/>
         <source>Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.</source>
-        <translation>Fácil acceso a enviar, recibir y funciones básicas. La blockchain es descargada a tu computador.</translation>
+        <translation>Fácil acceso a enviar, recibir y funciones básicas. La blockchain es descargada a tu ordenador.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="147"/>
@@ -3921,7 +3928,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="148"/>
         <source>Includes extra features like mining and message verification. The blockchain is downloaded to your computer.</source>
-        <translation>Incluye herramientas extras como minería y verificación de mensajes. La blockchain es descargada a tu computador.</translation>
+        <translation>Incluye herramientas extras como minería y verificación de mensajes. La blockchain es descargada a tu ordenador.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="159"/>
@@ -3941,7 +3948,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="166"/>
         <source>Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea carteras portátiles y úsalas en cualquier PC. Activa esta opción si instalaste Monero en una memoria USB, un disco externo o cualquier otro medio de almacenamiento portátil.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="175"/>
@@ -3964,7 +3971,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardNav.qml" line="118"/>
         <source>Step (%1) of (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Paso (%1) of (%2)</translation>
     </message>
 </context>
 <context>
@@ -3972,12 +3979,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="75"/>
         <source>Open a wallet from file</source>
-        <translation>Abrir un monedero desde un archivo</translation>
+        <translation>Abrir una cartera desde un archivo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
         <source>Import an existing .keys wallet file from your computer.</source>
-        <translation>Importar un archivo existente con las claves del monedero desde tu computador.</translation>
+        <translation>Importar un archivo existente con las claves de la cartera desde tu ordenador.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
@@ -4002,17 +4009,17 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
         <source>Mainnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartera mainnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Testnet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartera testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Stagenet wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartera stagenet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
@@ -4030,12 +4037,12 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="105"/>
         <source>Restore wallet</source>
-        <translation>Restaurar monedero</translation>
+        <translation>Restaurar cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="106"/>
         <source>Restore wallet from keys or mnemonic seed.</source>
-        <translation>Restaurar monedero desde claves o semilla mnemónica.</translation>
+        <translation>Restaurar cartera desde claves o semilla mnemónica.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="120"/>
@@ -4090,7 +4097,7 @@ su entrada puede ser requerida</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="273"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation>Creación del monedero desde &apos;MM-DD-AAAA&apos; o altura de restauración</translation>
+        <translation>Creación de la cartera desde &apos;MM-DD-AAAA&apos; o altura de restauración</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="276"/>
@@ -4115,7 +4122,7 @@ su entrada puede ser requerida</translation>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Para comunicarse con la red de Monero tu monedero debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.
+        <translation>Para comunicarse con la red de Monero tu cartera debe estar conectado a un nodo. Para una mejor privacidad se recomienda ejecutar tu propio nodo.
 
 Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectarse a nodo remoto.</translation>
     </message>
@@ -4130,12 +4137,12 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="62"/>
         <source>New wallet details:</source>
-        <translation>Detalles del nuevo monedero:</translation>
+        <translation>Detalles de la nueva cartera:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="70"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Crear monedero</translation>
+        <translation>Crear cartera</translation>
     </message>
 </context>
 <context>
@@ -4143,17 +4150,17 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../wizard/WizardSummary.qml" line="44"/>
         <source>Wallet name</source>
-        <translation>Nombre del monedero</translation>
+        <translation>Nombre de la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation>Ruta al monedero</translation>
+        <translation>Ruta a la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Mnemonic seed language</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma de semilla mnemónica</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
@@ -4181,32 +4188,32 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="70"/>
         <source>Wallet name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre de la cartera está vacío</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="74"/>
         <source>Wallet name is invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de cartera inválido</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="80"/>
         <source>Wallet already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>La cartera ya existe</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="88"/>
         <source>Wallet name</source>
-        <translation>Nombre del monedero</translation>
+        <translation>Nombre de la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Wallet location is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La ubicación de cartera está vacía</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="113"/>
         <source>Wallet location</source>
-        <translation>Ubicación del monedero</translation>
+        <translation>Ubicación de la cartera</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="131"/>
@@ -4231,7 +4238,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="540"/>
         <source>Couldn&apos;t open wallet: </source>
-        <translation>No se pudo abrir el monedero: </translation>
+        <translation>No se pudo abrir la cartera: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="714"/>
@@ -4281,7 +4288,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="309"/>
         <source>Closing wallet...</source>
-        <translation>Cerrando monedero...</translation>
+        <translation>Cerrando cartera...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="494"/>
@@ -4302,12 +4309,12 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="519"/>
         <source>Opening wallet ...</source>
-        <translation>Abriendo monedero...</translation>
+        <translation>Abriendo cartera...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="535"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
-        <translation>Reparación de caché de monedero incompatible. Resincronizando monedero.</translation>
+        <translation>Reparación de caché de cartera incompatible. Resincronizando cartera.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="661"/>
@@ -4322,7 +4329,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="665"/>
         <source>Wallet is synchronized</source>
-        <translation>Monedero sincronizado</translation>
+        <translation>Cartera sincronizada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="748"/>
@@ -4332,7 +4339,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="749"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Compruebe si hay errores en los registros de su monedero y del daemon. También puede probar a arrancar %1 manualmente.</translation>
+        <translation>Compruebe si hay errores en los registros de su cartera y del daemon. También puede probar a arrancar %1 manualmente.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
@@ -4367,7 +4374,7 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="973"/>
         <source>Failed to store the wallet</source>
-        <translation>Fallo al guardar el monedero</translation>
+        <translation>Fallo al guardar la cartera</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1011"/>
@@ -4394,17 +4401,17 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1070"/>
         <source>Reserve proof check</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificación de prueba de reserva</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1072"/>
         <source>Good signature on %1 total and %2 spent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Firma correcta en %1 total and %2 gastado.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1344"/>
         <source>Desktop entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada de escritorio</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1345"/>
@@ -4439,12 +4446,12 @@ Si no tienes la opción de ejecutar tu propio nodo, hay una opción de conectars
     <message>
         <location filename="../main.qml" line="1974"/>
         <source>Autosaved the wallet</source>
-        <translation>Autoguardó el monedero</translation>
+        <translation>Autoguardó la cartera</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1976"/>
         <source>Failed to autosave the wallet</source>
-        <translation>Falló de autoguardar el monedero</translation>
+        <translation>Falló de autoguardar la cartera</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2092"/>
