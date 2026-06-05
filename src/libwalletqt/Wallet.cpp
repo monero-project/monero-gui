@@ -620,6 +620,19 @@ void Wallet::startRefresh()
     qDebug() << "Starting refresh";
     m_refreshEnabled = true;
     m_refreshNow = true;
+
+    if (!m_refreshThreadStarted.exchange(true))
+    {
+        try
+        {
+            startRefreshThread();
+        }
+        catch (...)
+        {
+            m_refreshThreadStarted.store(false);
+            throw;
+        }
+    }
 }
 
 void Wallet::pauseRefresh()
@@ -1182,6 +1195,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_refreshNow(false)
     , m_refreshEnabled(false)
     , m_refreshing(false)
+    , m_refreshThreadStarted(false)
     , m_scheduler(this)
 {
     m_walletListener = new WalletListenerImpl(this);
@@ -1195,7 +1209,6 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_daemonUsername = "";
     m_daemonPassword = "";
 
-    startRefreshThread();
 }
 
 Wallet::~Wallet()
