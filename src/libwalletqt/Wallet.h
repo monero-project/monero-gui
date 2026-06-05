@@ -493,6 +493,7 @@ private:
     std::atomic<bool> m_refreshNow;
     std::atomic<bool> m_refreshEnabled;
     std::atomic<bool> m_refreshing;
+    std::atomic<bool> m_refreshThreadStarted;
     WalletListenerImpl *m_walletListener;
     FutureScheduler m_scheduler;
 };
