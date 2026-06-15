@@ -94,9 +94,31 @@ Wallet *WalletManager::createWallet(const QString &path, const QString &password
     if (m_currentWallet) {
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
         delete m_currentWallet;
+        m_currentWallet = nullptr;
     }
-    Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
-                                                  language.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds);
+    std::string polyseedLanguage = "English";
+    const QString requestedLanguage = language.trimmed();
+    for (const auto &candidate : Monero::Wallet::getPolyseedLanguages()) {
+        const QString englishName = QString::fromStdString(candidate.first);
+        const QString localName = QString::fromStdString(candidate.second);
+        if (requestedLanguage.compare(englishName, Qt::CaseInsensitive) == 0 ||
+            requestedLanguage.compare(localName, Qt::CaseInsensitive) == 0) {
+            polyseedLanguage = candidate.first;
+            break;
+        }
+    }
+    if (requestedLanguage.startsWith(QStringLiteral("简体中文"))) {
+        polyseedLanguage = "Chinese (Simplified)";
+    }
+
+    std::string seed;
+    std::string error;
+    if (!Monero::Wallet::createPolyseed(seed, error, polyseedLanguage)) {
+        qWarning() << "Failed to create Polyseed:" << QString::fromStdString(error);
+        return nullptr;
+    }
+    Monero::Wallet * w = m_pimpl->createWalletFromPolyseed(path.toStdString(), password.toStdString(),
+                                             static_cast<Monero::NetworkType>(nettype), seed, "", true, 0, kdfRounds);
     m_currentWallet  = new Wallet(w);
     return m_currentWallet;
 }
@@ -149,7 +171,9 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &passwo
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
         delete m_currentWallet;
     }
-    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), password.toStdString(), seed.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds, seed_offset.toStdString());
+    const QString normalizedSeed = seed.simplified();
+    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), password.toStdString(), normalizedSeed.toStdString(),
+                                                static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds, seed_offset.toStdString());
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
 }

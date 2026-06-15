@@ -54,7 +54,7 @@ ColumnLayout {
     WizardSummaryItem {
         Layout.fillWidth: true
         header: qsTr("Mnemonic seed language") + translationManager.emptyString
-        value: persistentSettings.language_wallet
+        value: wizardController.walletOptionsSeedLanguage || persistentSettings.language_wallet
         visible: wizardStateView.state === "wizardCreateWallet5" && !wizardController.walletOptionsIsRecoveringFromDevice
     }
 
@@ -62,7 +62,10 @@ ColumnLayout {
         Layout.fillWidth: true
         header: qsTr("Restore height") + translationManager.emptyString
         value: wizardController.walletOptionsRestoreHeight
-        visible: wizardStateView.state === "wizardRestoreWallet4" || wizardController.walletOptionsIsRecoveringFromDevice
+        visible: (wizardStateView.state === "wizardRestoreWallet4" || wizardController.walletOptionsIsRecoveringFromDevice) &&
+                 !(wizardController.walletRestoreMode === "seed" &&
+                   wizardController.walletOptionsRestoreHeight === 0 &&
+                   Wizard.isPolyseed(wizardController.walletOptionsSeed))
     }
 
     WizardSummaryItem {

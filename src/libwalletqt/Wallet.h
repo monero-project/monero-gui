@@ -77,6 +77,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
     Q_PROPERTY(bool refreshing READ refreshing NOTIFY refreshingChanged)
     Q_PROPERTY(QString seed READ getSeed)
+    Q_PROPERTY(bool polyseed READ isPolyseed CONSTANT)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(NetworkType::Type nettype READ nettype)
@@ -132,6 +133,9 @@ public:
 
     //! returns mnemonic seed
     QString getSeed() const;
+
+    //! returns whether the wallet uses a Polyseed recovery phrase
+    bool isPolyseed() const;
 
     //! returns seed language
     QString getSeedLanguage() const;
@@ -477,6 +481,7 @@ private:
     friend class WalletListenerImpl;
     //! libwallet's
     Monero::Wallet * m_walletImpl;
+    const bool m_polyseed;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     // Used for UI history view

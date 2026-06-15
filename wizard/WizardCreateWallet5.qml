@@ -73,7 +73,8 @@ Rectangle {
 
                 onPrevClicked: {
                     if (appWindow.walletMode <= 1){
-                        wizardStateView.state = "wizardCreateWallet1";
+                        wizardStateView.state = wizardController.walletOptionsIsRecoveringFromDevice
+                                ? "wizardCreateDevice1" : "wizardCreateWallet1";
                     } else {
                         wizardStateView.state = "wizardCreateWallet4";
                     }
