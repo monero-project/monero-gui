@@ -242,6 +242,7 @@ Rectangle {
                     Layout.fillWidth: true
                     font.pixelSize: 15
                     color: MoneroComponents.Style.defaultFontColor
+                    textFormat: Text.RichText
                     text: {
                         if (currentWallet) {
                             var walletTitle = function() {
@@ -257,9 +258,9 @@ Rectangle {
                             if (appWindow.currentWallet.numSubaddressAccounts() > 1) {
                                 var currentSubaddressAccount = currentWallet.currentSubaddressAccount;
                                 var currentAccountLabel =  currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
-                                return walletTitle() + " (" + walletName + ")" + "<br>" + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + currentAccountLabel + ")" : "") + translationManager.emptyString;
+                                return walletTitle() + " (" + Utils.htmlEscape(walletName) + ")" + "<br>" + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + Utils.htmlEscape(currentAccountLabel) + ")" : "") + translationManager.emptyString;
                             } else {
-                                return walletTitle() + " (" + walletName + ")" + translationManager.emptyString;
+                                return walletTitle() + " (" + Utils.htmlEscape(walletName) + ")" + translationManager.emptyString;
                             }
                         } else {
                             return "";
