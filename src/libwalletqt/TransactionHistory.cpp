@@ -36,6 +36,31 @@
 #include <QWriteLocker>
 #include <QtGlobal>
 
+namespace {
+    QString sanitizeCSVField(QString field)
+    {
+        field.remove(QChar('"'));
+
+        if (field.isEmpty()) {
+            return field;
+        }
+
+        const QChar first = field.at(0);
+        const bool needsPrefix =
+            first == QChar('=') ||
+            first == QChar('+') ||
+            first == QChar('-') ||
+            first == QChar('@') ||
+            first.isSpace() ||
+            first.category() == QChar::Other_Control;
+
+        if (needsPrefix) {
+            field.prepend(QChar('\''));
+        }
+
+        return field;
+    }
+}
 
 bool TransactionHistory::transaction(int index, std::function<void (TransactionInfo &)> callback)
 {
@@ -196,10 +221,8 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
         else {
             continue;  // skip TransactionInfo::Direction_Both
         }
-        QString label = info.label();
-        label.remove(QChar('"'));  // reserved
-        QString description = info.description();
-        description.remove(QChar('"')); // reserved
+        QString label = sanitizeCSVField(info.label());
+        QString description = sanitizeCSVField(info.description());
         quint64 blockHeight = info.blockHeight();
         QDateTime timeStamp = info.timestamp();
         QString date = info.date() + " " + info.time();
