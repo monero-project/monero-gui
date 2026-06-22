@@ -56,7 +56,7 @@ RUN wget -q https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zl
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
+RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
     && cd qt5 \
     && perl init-repository --module-subset=default,-qtwebengine \
     && PATH=${HOST_PATH} ./configure -v -developer-build -release \
@@ -90,7 +90,7 @@ RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
 
 ARG ICONV_VERSION=1.16
 ARG ICONV_HASH=e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04
-RUN wget -q http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz \
+RUN wget -q https://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz \
     && echo "${ICONV_HASH}  libiconv-${ICONV_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf libiconv-${ICONV_VERSION}.tar.gz \
     && rm -f libiconv-${ICONV_VERSION}.tar.gz \
@@ -179,7 +179,7 @@ RUN set -ex \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.41 --depth 1 git://git.gnupg.org/libgpg-error.git \
+RUN git clone -b libgpg-error-1.41 --depth 1 https://dev.gnupg.org/source/libgpg-error.git \
     && cd libgpg-error \
     && git reset --hard 98032624ae89a67ee6fe3b1db5d95032e681d163 \
     && ./autogen.sh \
@@ -188,7 +188,7 @@ RUN git clone -b libgpg-error-1.41 --depth 1 git://git.gnupg.org/libgpg-error.gi
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.10.1 --depth 1 git://git.gnupg.org/libgcrypt.git \
+RUN git clone -b libgcrypt-1.10.1 --depth 1 https://dev.gnupg.org/source/libgcrypt.git \
     && cd libgcrypt \
     && git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 \
     && ./autogen.sh \
