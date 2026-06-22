@@ -142,7 +142,7 @@ Rectangle {
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
                     </style>\
-                    <a href='#'>%1</a>".arg(walletPath)
+                    <a href='#'>%1</a>".arg(Utils.htmlEscape(walletPath))
                 textFormat: Text.RichText
                 onLinkActivated: oshelper.openContainingFolder(walletPath)
 

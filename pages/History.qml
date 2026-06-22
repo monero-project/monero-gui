@@ -1746,7 +1746,7 @@ Rectangle {
             + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
             + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + integratedAddress + trEnd : "")
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
-            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
+            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + Utils.htmlEscape(tx_note) + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
             + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
             + "</table>"
