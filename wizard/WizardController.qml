@@ -71,6 +71,7 @@ Rectangle {
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
+        var tmpFilename = wizardController.tmpWalletFilename;
         wizardController.tmpWalletFilename = '';
         wizardController.walletOptionsSubaddressLookahead = '';
         disconnect();
@@ -78,6 +79,10 @@ Rectangle {
         if (typeof wizardController.m_wallet !== 'undefined'){
             walletManager.closeWallet();
             wizardController.m_wallet = undefined;
+        }
+
+        if (tmpFilename !== '') {
+            oshelper.removeTemporaryWallet(tmpFilename);
         }
     }
 
