@@ -58,6 +58,7 @@ RUN wget -q https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zl
 
 RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
     && cd qt5 \
+    && git reset --hard dc2ac680fa9d0ef7b0d9520859593d13951bedea \
     && perl init-repository --module-subset=default,-qtwebengine \
     && PATH=${HOST_PATH} ./configure -v -developer-build -release \
     -xplatform android-clang \
