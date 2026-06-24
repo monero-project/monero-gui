@@ -71,7 +71,7 @@ GridLayout {
     ColumnLayout {
         MoneroComponents.LineEdit {
             id: walletName
-            Layout.preferredWidth: grid.width/5
+            Layout.fillWidth: true
 
             function verify(){
                 if (walletName.text === "") {
@@ -113,7 +113,7 @@ GridLayout {
         }
 
         RowLayout {
-            Layout.preferredWidth: grid.width/5
+            Layout.fillWidth: true
 
             MoneroComponents.TextPlain {
                 visible: errorMessageWalletName.text != ""
@@ -147,7 +147,7 @@ GridLayout {
 
         MoneroComponents.LineEdit {
             id: walletLocation
-            Layout.preferredWidth: grid.width/3
+            Layout.fillWidth: true
 
             function verify() {
                 if (walletLocation.text == "") {
@@ -200,7 +200,7 @@ GridLayout {
         }
 
         RowLayout {
-            Layout.preferredWidth: grid.width/3
+            Layout.fillWidth: true
 
             MoneroComponents.TextPlain {
                 visible: errorMessageWalletLocation.text != ""
