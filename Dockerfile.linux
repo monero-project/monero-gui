@@ -124,10 +124,11 @@ RUN git clone -b v1.3 --depth 1 https://github.com/madler/zlib && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b VER-2-10-2 --depth 1 https://gitlab.freedesktop.org/freetype/freetype.git && \
-    cd freetype && \
-    git reset --hard 132f19b779828b194b3fede187cee719785db4d8 && \
-    ./autogen.sh && \
+RUN wget https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.xz && \
+    echo "1543d61025d2e6312e0a1c563652555f17378a204a61e99928c9fcef030a2d8b freetype-2.10.2.tar.xz" | sha256sum -c && \
+    tar -xf freetype-2.10.2.tar.xz && \
+    rm freetype-2.10.2.tar.xz && \
+    cd freetype-2.10.2 && \
     ./configure --disable-shared --enable-static --with-zlib=no && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -143,10 +144,12 @@ RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fontconfig && \
-    cd fontconfig && \
-    git reset --hard b1df1101a643ae16cdfa1d83b939de2497b1bf27 && \
-    ./autogen.sh --disable-shared --enable-static --sysconfdir=/etc --localstatedir=/var && \
+RUN wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.92.tar.xz && \
+    echo "506e61283878c1726550bc94f2af26168f1e9f2106eac77eaaf0b2cdfad66e4e fontconfig-2.13.92.tar.xz" | sha256sum -c && \
+    tar -xf fontconfig-2.13.92.tar.xz && \
+    rm fontconfig-2.13.92.tar.xz && \
+    cd fontconfig-2.13.92 && \
+    ./configure --disable-shared --enable-static --sysconfdir=/etc --localstatedir=/var && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
