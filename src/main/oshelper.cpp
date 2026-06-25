@@ -104,7 +104,17 @@ void showWindows(const std::unordered_set<QWindow *> &windows)
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 bool isWayland()
 {
-    return QGuiApplication::platformName().contains("wayland", Qt::CaseInsensitive);
+    if (QGuiApplication::platformName().contains("wayland", Qt::CaseInsensitive))
+    {
+        return true;
+    }
+
+    if (!qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY"))
+    {
+        return true;
+    }
+
+    return QString::fromLocal8Bit(qgetenv("XDG_SESSION_TYPE")).compare(QStringLiteral("wayland"), Qt::CaseInsensitive) == 0;
 }
 
 QVariant unwrapDbusVariant(const QVariant &value)
