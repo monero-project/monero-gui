@@ -13,94 +13,97 @@ RUN apt update && \
     libdbus-1-dev libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
-RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
-    cd xorgproto && \
-    git reset --hard c62e8203402cafafa5ba0357b6d1c019156c9f36 && \
-    ./autogen.sh && \
+RUN wget https://xorg.freedesktop.org/releases/individual/proto/xorgproto-2020.1.tar.bz2 && \
+    echo "54a153f139035a376c075845dd058049177212da94d7a9707cf9468367b699d2 xorgproto-2020.1.tar.bz2" | sha256sum -c && \
+    tar -xf xorgproto-2020.1.tar.bz2 && \
+    rm xorgproto-2020.1.tar.bz2 && \
+    cd xorgproto-2020.1 && \
+    ./configure && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xcbproto && \
-    cd xcbproto && \
-    git reset --hard 6398e42131eedddde0d98759067dde933191f049 && \
-    ./autogen.sh && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-proto-1.12.tar.bz2 && \
+    echo "5922aba4c664ab7899a29d92ea91a87aa4c1fc7eb5ee550325c3216c480a4906 xcb-proto-1.12.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-proto-1.12.tar.bz2 && \
+    rm xcb-proto-1.12.tar.bz2 && \
+    cd xcb-proto-1.12 && \
+    ./configure && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxau && \
-    cd libxau && \
-    git reset --hard d9443b2c57b512cfb250b35707378654d86c7dea && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/lib/libXau-1.0.9.tar.bz2 && \
+    echo "ccf8cbf0dbf676faa2ea0a6d64bcc3b6746064722b606c8c52917ed00dcb73ec libXau-1.0.9.tar.bz2" | sha256sum -c && \
+    tar -xf libXau-1.0.9.tar.bz2 && \
+    rm libXau-1.0.9.tar.bz2 && \
+    cd libXau-1.0.9 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
-    cd libxcb && \
-    git reset --hard d34785a34f28fa6a00f8ce00d87e3132ff0f6467 && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/libxcb-1.12.tar.bz2 && \
+    echo "4adfb1b7c67e99bc9c2ccb110b2f175686576d2f792c8a71b9c8b19014057b5b libxcb-1.12.tar.bz2" | sha256sum -c && \
+    tar -xf libxcb-1.12.tar.bz2 && \
+    rm libxcb-1.12.tar.bz2 && \
+    cd libxcb-1.12 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     make -j$THREADS clean && \
     rm /usr/local/lib/libxcb-xinerama.so && \
-    ./autogen.sh --disable-shared --enable-static && \
+    ./configure --disable-shared --enable-static && \
     make -j$THREADS && \
     cp src/.libs/libxcb-xinerama.a /usr/local/lib/ && \
     rm -rf $(pwd)
 
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-util && \
-    cd libxcb-util && \
-    git reset --hard acf790d7752f36e450d476ad79807d4012ec863b && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-util-0.4.0.tar.bz2 && \
+    echo "46e49469cb3b594af1d33176cd7565def2be3fa8be4371d62271fabb5eae50e9 xcb-util-0.4.0.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-util-0.4.0.tar.bz2 && \
+    rm xcb-util-0.4.0.tar.bz2 && \
+    cd xcb-util-0.4.0 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-image && \
-    cd libxcb-image && \
-    git reset --hard d882052fb2ce439c6483fce944ba8f16f7294639 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-util-image-0.4.0.tar.bz2 && \
+    echo "2db96a37d78831d643538dd1b595d7d712e04bdccf8896a5e18ce0f398ea2ffc xcb-util-image-0.4.0.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-util-image-0.4.0.tar.bz2 && \
+    rm xcb-util-image-0.4.0.tar.bz2 && \
+    cd xcb-util-image-0.4.0 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-keysyms && \
-    cd libxcb-keysyms && \
-    git reset --hard 0e51ee5570a6a80bdf98770b975dfe8a57f4eeb1 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-util-keysyms-0.4.0.tar.bz2 && \
+    echo "0ef8490ff1dede52b7de533158547f8b454b241aa3e4dcca369507f66f216dd9 xcb-util-keysyms-0.4.0.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-util-keysyms-0.4.0.tar.bz2 && \
+    rm xcb-util-keysyms-0.4.0.tar.bz2 && \
+    cd xcb-util-keysyms-0.4.0 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-render-util && \
-    cd libxcb-render-util && \
-    git reset --hard 0317caf63de532fd7a0493ed6afa871a67253747 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-util-renderutil-0.3.9.tar.bz2 && \
+    echo "c6e97e48fb1286d6394dddb1c1732f00227c70bd1bedb7d1acabefdd340bea5b xcb-util-renderutil-0.3.9.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-util-renderutil-0.3.9.tar.bz2 && \
+    rm xcb-util-renderutil-0.3.9.tar.bz2 && \
+    cd xcb-util-renderutil-0.3.9 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-wm && \
-    cd libxcb-wm && \
-    git reset --hard 24eb17df2e1245885e72c9d4bbb0a0f69f0700f2 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+RUN wget https://xorg.freedesktop.org/releases/individual/xcb/xcb-util-wm-0.4.1.tar.bz2 && \
+    echo "28bf8179640eaa89276d2b0f1ce4285103d136be6c98262b6151aaee1d3c2a3f xcb-util-wm-0.4.1.tar.bz2" | sha256sum -c && \
+    tar -xf xcb-util-wm-0.4.1.tar.bz2 && \
+    rm xcb-util-wm-0.4.1.tar.bz2 && \
+    cd xcb-util-wm-0.4.1 && \
+    ./configure --enable-shared --disable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
