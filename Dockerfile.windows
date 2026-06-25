@@ -6,7 +6,7 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool pkg-config \
-    python && \
+    python wget && \
     rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
@@ -58,25 +58,27 @@ RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd ../../../.. && \
     rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.38 --depth 1 https://dev.gnupg.org/source/libgpg-error.git && \
-    cd libgpg-error && \
-    git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 && \
-    ./autogen.sh && \
+RUN wget https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.38.tar.bz2 && \
+    echo "d8988275aa69d7149f931c10442e9e34c0242674249e171592b430ff7b3afd02 libgpg-error-1.38.tar.bz2" | sha256sum -c && \
+    tar -xf libgpg-error-1.38.tar.bz2 && \
+    rm libgpg-error-1.38.tar.bz2 && \
+    cd libgpg-error-1.38 && \
     ./configure --disable-shared --enable-static --disable-doc --disable-tests \
     --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 && \
     make -j$THREADS && \
     make -j$THREADS install && \
     cd .. && \
-    rm -rf libgpg-error
+    rm -rf libgpg-error-1.38
 
-RUN git clone -b libgcrypt-1.8.5 --depth 1 https://dev.gnupg.org/source/libgcrypt.git && \
-    cd libgcrypt && \
-    git reset --hard 56606331bc2a80536db9fc11ad53695126007298 && \
-    ./autogen.sh && \
+RUN wget https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.8.5.tar.bz2 && \
+    echo "3b4a2a94cb637eff5bdebbcaf46f4d95c4f25206f459809339cdada0eb577ac3 libgcrypt-1.8.5.tar.bz2" | sha256sum -c && \
+    tar -xf libgcrypt-1.8.5.tar.bz2 && \
+    rm libgcrypt-1.8.5.tar.bz2 && \
+    cd libgcrypt-1.8.5 && \
     ./configure --disable-shared --enable-static --disable-doc \
     --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 \
     --with-gpg-error-prefix=/depends/x86_64-w64-mingw32 && \
     make -j$THREADS && \
     make -j$THREADS install && \
     cd .. && \
-    rm -rf libgcrypt
+    rm -rf libgcrypt-1.8.5

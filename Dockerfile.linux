@@ -10,7 +10,7 @@ ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
     apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
-    libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
+    libdbus-1-dev libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
@@ -208,7 +208,7 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
     ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
     -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
-    -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
+    -dbus-linked -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
     -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
     -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
@@ -251,19 +251,21 @@ RUN git clone -b v4.3.4 --depth 1 https://github.com/zeromq/libzmq && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.45 --depth 1 https://dev.gnupg.org/source/libgpg-error.git && \
-    cd libgpg-error && \
-    git reset --hard dbac537e5e865fb6f3aa8596d213aa8c47a9dea1 && \
-    ./autogen.sh && \
+RUN wget https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.45.tar.bz2 && \
+    echo "570f8ee4fb4bff7b7495cff920c275002aea2147e9a1d220c068213267f80a26 libgpg-error-1.45.tar.bz2" | sha256sum -c && \
+    tar -xf libgpg-error-1.45.tar.bz2 && \
+    rm libgpg-error-1.45.tar.bz2 && \
+    cd libgpg-error-1.45 && \
     ./configure --disable-shared --enable-static --disable-doc --disable-tests && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.10.1 --depth 1 https://dev.gnupg.org/source/libgcrypt.git && \
-    cd libgcrypt && \
-    git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 && \
-    ./autogen.sh && \
+RUN wget https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.10.1.tar.bz2 && \
+    echo "ef14ae546b0084cd84259f61a55e07a38c3b53afc0f546bffcef2f01baffe9de libgcrypt-1.10.1.tar.bz2" | sha256sum -c && \
+    tar -xf libgcrypt-1.10.1.tar.bz2 && \
+    rm libgcrypt-1.10.1.tar.bz2 && \
+    cd libgcrypt-1.10.1 && \
     ./configure --disable-shared --enable-static --disable-doc && \
     make -j$THREADS && \
     make -j$THREADS install && \
