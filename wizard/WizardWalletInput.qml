@@ -154,6 +154,10 @@ GridLayout {
                     errorMessageWalletLocation.text = qsTr("Wallet location is empty") + translationManager.emptyString;
                     return false;
                 }
+                if (!oshelper.isWritableDirectory(walletLocation.text)) {
+                    errorMessageWalletLocation.text = qsTr("Wallet location does not exist or is not writable") + translationManager.emptyString;
+                    return false;
+                }
                 errorMessageWalletLocation.text = "";
                 return true;
             }

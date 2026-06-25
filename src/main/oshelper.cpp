@@ -412,6 +412,12 @@ QString OSHelper::temporaryPath() const
     return QDir::tempPath();
 }
 
+bool OSHelper::isWritableDirectory(const QString &path) const
+{
+    const QFileInfo info(path);
+    return info.exists() && info.isDir() && info.isWritable();
+}
+
 QString OSHelper::randomPassword(int numBytes) const
 {
     numBytes = qBound(16, numBytes, 128);
