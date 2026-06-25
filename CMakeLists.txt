@@ -131,6 +131,10 @@ set(QT5_LIBRARIES
   Qt5Xml
 )
 
+if(LINUX AND NOT ANDROID)
+  list(APPEND QT5_LIBRARIES Qt5DBus)
+endif()
+
 if(WITH_SCANNER)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
