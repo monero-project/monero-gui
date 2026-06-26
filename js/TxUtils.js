@@ -100,6 +100,7 @@ function handleOpenAliasResolution(address, descriptionText) {
         if (isAddressValid) {
             return {
                 address: resolvedAddress,
+                confirm: true,
                 message: qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"),
             };
         } else {

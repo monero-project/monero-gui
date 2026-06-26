@@ -105,6 +105,20 @@ Rectangle {
       oaPopup.open()
     }
 
+    function oa_confirm(openAlias, resolvedAddress, onAccepted) {
+      confirmationDialog.title = qsTr("OpenAlias warning") + translationManager.emptyString
+      confirmationDialog.text = qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed.") + "\n\n" +
+                                qsTr("OpenAlias: ") + openAlias + "\n\n" +
+                                qsTr("Resolved address: ") + resolvedAddress + "\n\n" +
+                                qsTr("Only use this address if you trust this OpenAlias result.") + translationManager.emptyString
+      confirmationDialog.icon = StandardIcon.Question
+      confirmationDialog.cancelText = qsTr("Cancel") + translationManager.emptyString
+      confirmationDialog.okText = qsTr("Use address") + translationManager.emptyString
+      confirmationDialog.onAcceptedCallback = onAccepted
+      confirmationDialog.onRejectedCallback = null
+      confirmationDialog.open()
+    }
+
     function fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name) {
         if (recipientModel.count > 0) {
             const last = recipientModel.count - 1;
@@ -428,8 +442,21 @@ Rectangle {
                                     text: qsTr("Resolve") + translationManager.emptyString
                                     visible: TxUtils.isValidOpenAliasAddress(address)
                                     onClicked: {
+                                        const openAlias = address;
                                         const response = TxUtils.handleOpenAliasResolution(address, descriptionLine.text);
                                         if (response) {
+                                            if (response.confirm && response.address) {
+                                                const resolvedAddress = response.address;
+                                                const resolvedDescription = response.description;
+                                                oa_confirm(openAlias, resolvedAddress, function() {
+                                                    recipientRepeater.itemAt(index).children[1].children[0].text = resolvedAddress;
+                                                    if (resolvedDescription) {
+                                                        descriptionLine.text = resolvedDescription;
+                                                        descriptionCheckbox.checked = true;
+                                                    }
+                                                });
+                                                return;
+                                            }
                                             if (response.message) {
                                                 oa_message(response.message);
                                             }
