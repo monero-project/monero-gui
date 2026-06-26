@@ -58,7 +58,7 @@ RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd ../../../.. && \
     rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.38 --depth 1 https://dev.gnupg.org/source/libgpg-error.git && \
+RUN git clone -b libgpg-error-1.38 --depth 1 https://github.com/gpg/libgpg-error && \
     cd libgpg-error && \
     git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 && \
     ./autogen.sh && \
@@ -69,7 +69,7 @@ RUN git clone -b libgpg-error-1.38 --depth 1 https://dev.gnupg.org/source/libgpg
     cd .. && \
     rm -rf libgpg-error
 
-RUN git clone -b libgcrypt-1.8.5 --depth 1 https://dev.gnupg.org/source/libgcrypt.git && \
+RUN git clone -b libgcrypt-1.8.5 --depth 1 https://github.com/gpg/libgcrypt && \
     cd libgcrypt && \
     git reset --hard 56606331bc2a80536db9fc11ad53695126007298 && \
     ./autogen.sh && \

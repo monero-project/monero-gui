@@ -179,7 +179,7 @@ RUN set -ex \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.41 --depth 1 https://dev.gnupg.org/source/libgpg-error.git \
+RUN git clone -b libgpg-error-1.41 --depth 1 https://github.com/gpg/libgpg-error \
     && cd libgpg-error \
     && git reset --hard 98032624ae89a67ee6fe3b1db5d95032e681d163 \
     && ./autogen.sh \
@@ -188,7 +188,7 @@ RUN git clone -b libgpg-error-1.41 --depth 1 https://dev.gnupg.org/source/libgpg
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.10.1 --depth 1 https://dev.gnupg.org/source/libgcrypt.git \
+RUN git clone -b libgcrypt-1.10.1 --depth 1 https://github.com/gpg/libgcrypt \
     && cd libgcrypt \
     && git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 \
     && ./autogen.sh \

@@ -251,7 +251,7 @@ RUN git clone -b v4.3.4 --depth 1 https://github.com/zeromq/libzmq && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgpg-error-1.45 --depth 1 https://dev.gnupg.org/source/libgpg-error.git && \
+RUN git clone -b libgpg-error-1.45 --depth 1 https://github.com/gpg/libgpg-error && \
     cd libgpg-error && \
     git reset --hard dbac537e5e865fb6f3aa8596d213aa8c47a9dea1 && \
     ./autogen.sh && \
@@ -260,7 +260,7 @@ RUN git clone -b libgpg-error-1.45 --depth 1 https://dev.gnupg.org/source/libgpg
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b libgcrypt-1.10.1 --depth 1 https://dev.gnupg.org/source/libgcrypt.git && \
+RUN git clone -b libgcrypt-1.10.1 --depth 1 https://github.com/gpg/libgcrypt && \
     cd libgcrypt && \
     git reset --hard ae0e567820c37f9640440b3cff77d7c185aa6742 && \
     ./autogen.sh && \
