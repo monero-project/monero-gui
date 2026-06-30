@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Monero GUI
-GenericName=Monero-GUI
+GenericName=Cryptocurrency wallet
 Comment=Monero GUI
 Exec=monero-wallet-gui
 Type=Application
