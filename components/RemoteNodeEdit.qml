@@ -84,7 +84,8 @@ GridLayout {
 
     MoneroComponents.LineEdit {
         id: daemonAddr
-        Layout.preferredWidth: root.width/3
+        Layout.fillWidth: true
+        Layout.minimumWidth: 220
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
@@ -106,7 +107,8 @@ GridLayout {
 
     MoneroComponents.LineEdit {
         id: daemonPort
-        Layout.preferredWidth: root.width/3
+        Layout.fillWidth: true
+        Layout.minimumWidth: 120
         placeholderText: qsTr("Port") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
