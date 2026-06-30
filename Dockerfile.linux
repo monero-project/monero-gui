@@ -9,7 +9,7 @@ ENV CXXFLAGS="-fPIC"
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
-    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
+    apt install -y autoconf-archive automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
     libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
@@ -136,6 +136,15 @@ RUN wget https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.
     rm expat-2.4.8.tar.bz2 && \
     cd expat-2.4.8 && \
     ./configure --enable-static --disable-shared --prefix=/usr && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
+
+RUN git clone -b dbus-1.12.2 --depth 1 https://gitlab.freedesktop.org/dbus/dbus.git && \
+    cd dbus && \
+    git reset --hard 0f0968336b9711349023e1d41f075b2bccf7c20b && \
+    ./autogen.sh && \
+    ./configure --disable-shared --enable-static --disable-systemd --disable-launchd --disable-selinux --disable-apparmor --disable-libaudit --disable-xml-docs --disable-doxygen-docs --disable-ducktype-docs --disable-modular-tests --disable-embedded-tests --disable-x11-autolaunch --without-x --with-systemdsystemunitdir=no --with-systemduserunitdir=no && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
