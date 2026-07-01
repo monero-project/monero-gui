@@ -28,13 +28,16 @@
 
 #include "QmlTestHarness.h"
 
+#include <QCoreApplication>
 #include <QDir>
+#include <QFile>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QSettings>
 #include <QTemporaryDir>
 #include <QVector>
 #include <QtQml>
-#include <QtQuickTest/quicktest.h>
+#include <QtQuickTest>
 
 #include "TranslationManager.h"
 #include "libwalletqt/Wallet.h"
@@ -42,13 +45,42 @@
 #include "main/clipboardAdapter.h"
 #include "main/oshelper.h"
 #include "qt/KeysFiles.h"
+#include "qt/PortableSettings.h"
 
 class QmlTestSetup : public QObject
 {
     Q_OBJECT
 
 public:
-    QmlTestSetup() : m_accountsDir(QDir::tempPath() + QStringLiteral("/monero-gui-qml-test-XXXXXX")) {}
+    QmlTestSetup() : m_accountsDir(QDir::tempPath() + QStringLiteral("/monero-gui-qml-test-XXXXXX"))
+    {
+        QDir::setCurrent(m_accountsDir.path());
+    }
+
+    Q_INVOKABLE bool writeSetting(const QString &path, const QString &key, const QVariant &value)
+    {
+        QSettings settings(path, QSettings::IniFormat);
+        settings.setValue(key, value);
+        settings.sync();
+        return settings.status() == QSettings::NoError;
+    }
+
+    Q_INVOKABLE QVariant readSetting(const QString &path, const QString &key)
+    {
+        QSettings settings(path, QSettings::IniFormat);
+        return settings.value(key);
+    }
+
+    Q_INVOKABLE bool containsSetting(const QString &path, const QString &key)
+    {
+        QSettings settings(path, QSettings::IniFormat);
+        return settings.contains(key);
+    }
+
+    Q_INVOKABLE bool fileExists(const QString &path)
+    {
+        return QFile::exists(path);
+    }
 
 public slots:
     void qmlEngineAvailable(QQmlEngine *engine)
@@ -56,15 +88,21 @@ public slots:
         qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
         qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
         qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
+        qmlRegisterType<PortableSettings>("moneroComponents.Settings", 1, 0, "PortableSettings");
         qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
         qmlRegisterType<NetworkType>("moneroComponents.NetworkType", 1, 0, "NetworkType");
 
         engine->addImportPath(QStringLiteral(":/fonts"));
+#ifdef Q_OS_WIN
+        engine->addImportPath(QCoreApplication::applicationDirPath() + QStringLiteral("/qml"));
+#endif
         engine->rootContext()->setContextProperty(QStringLiteral("translationManager"), TranslationManager::instance());
         engine->rootContext()->setContextProperty(QStringLiteral("oshelper"), &m_osHelper);
         engine->rootContext()->setContextProperty(
             QStringLiteral("moneroAccountsDir"),
             QDir(m_accountsDir.path()).filePath(QStringLiteral("Monero/wallets")));
+        engine->rootContext()->setContextProperty(QStringLiteral("moneroTestRoot"), m_accountsDir.path());
+        engine->rootContext()->setContextProperty(QStringLiteral("settingsTestHelper"), this);
         engine->rootContext()->setContextProperty(QStringLiteral("defaultAccountName"), QStringLiteral("qml-test-wallet"));
         engine->rootContext()->setContextProperty(QStringLiteral("isAndroid"), false);
         engine->rootContext()->setContextProperty(QStringLiteral("isIOS"), false);
@@ -72,7 +110,6 @@ public slots:
         engine->rootContext()->setContextProperty(QStringLiteral("isMac"), false);
         engine->rootContext()->setContextProperty(QStringLiteral("isWindows"), false);
         engine->rootContext()->setContextProperty(QStringLiteral("isTails"), false);
-        engine->rootContext()->setContextProperty(QStringLiteral("isOpenGL"), false);
         engine->rootContext()->setContextProperty(QStringLiteral("qtRuntimeVersion"), QString::fromLatin1(qVersion()));
     }
 
@@ -97,6 +134,9 @@ bool runQmlTestsIfRequested(int argc, char *argv[], int &result)
 
     if (!requested)
         return false;
+
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+        qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 
     int testArgc = testArgv.size();
     QmlTestSetup setup;

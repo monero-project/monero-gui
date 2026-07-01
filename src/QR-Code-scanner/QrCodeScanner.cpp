@@ -27,8 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "QrCodeScanner.h"
-#include <QVideoProbe>
 #include <QCamera>
+#include <QDebug>
+#include <QMediaCaptureSession>
+#include <QVideoSink>
 
 QrCodeScanner::QrCodeScanner(QObject *parent)
     : QObject(parent)
@@ -36,16 +38,43 @@ QrCodeScanner::QrCodeScanner(QObject *parent)
     , m_processInterval(750)
     , m_enabled(true)
 {
-    m_probe = new QVideoProbe(this);
+    m_captureSession = new QMediaCaptureSession(this);
+    m_sink = nullptr;
     m_thread = new QrScanThread(this);
     m_thread->start();
-    QObject::connect(m_thread, SIGNAL(decoded(QString)), this, SIGNAL(decoded(QString)));
-    QObject::connect(m_thread, SIGNAL(notifyError(const QString &, bool)), this, SIGNAL(notifyError(const QString &, bool)));
-    connect(m_probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));
+    connect(m_thread, &QrScanThread::decoded, this, &QrCodeScanner::decoded);
+    connect(m_thread, &QrScanThread::notifyError, this, &QrCodeScanner::notifyError);
 }
-void QrCodeScanner::setSource(QCamera *camera)
+
+bool QrCodeScanner::setSource(QObject *camera)
 {
-    m_probe->setSource(camera);
+    QCamera *qmlCamera = qobject_cast<QCamera *>(camera);
+    if (!qmlCamera) {
+        qWarning() << "QrCodeScanner: source is not a QCamera";
+        m_captureSession->setCamera(nullptr);
+        return false;
+    }
+    m_captureSession->setCamera(qmlCamera);
+    return true;
+}
+bool QrCodeScanner::setVideoOutput(QObject *videoOutput)
+{
+    m_captureSession->setVideoOutput(videoOutput);
+    QVideoSink *sink = m_captureSession->videoSink();
+    if (!sink) {
+        qWarning() << "QrCodeScanner: video output has no QVideoSink";
+        m_captureSession->setVideoOutput(nullptr);
+        m_sink = nullptr;
+        return false;
+    }
+    if (m_sink == sink)
+        return true;
+    if (m_sink)
+        disconnect(m_sink, &QVideoSink::videoFrameChanged, this, &QrCodeScanner::processFrame);
+    m_sink = sink;
+    if (m_sink)
+        connect(m_sink, &QVideoSink::videoFrameChanged, this, &QrCodeScanner::processFrame);
+    return true;
 }
 void QrCodeScanner::processFrame(QVideoFrame frame)
 {

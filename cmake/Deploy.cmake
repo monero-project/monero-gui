@@ -1,6 +1,6 @@
 if(APPLE OR (WIN32 AND NOT STATIC))
     add_custom_target(deploy)
-    get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
+    get_target_property(_qmake_executable Qt6::qmake IMPORTED_LOCATION)
     get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 
     if(APPLE AND NOT IOS)
@@ -10,21 +10,6 @@ if(APPLE OR (WIN32 AND NOT STATIC))
                            COMMAND "${MACDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE_DIR:monero-wallet-gui>/../.." -always-overwrite -qmldir="${CMAKE_SOURCE_DIR}"
                            COMMENT "Running macdeployqt..."
         )
-
-        # workaround for a Qt bug that requires manually adding libqsvg.dylib to bundle
-        find_file(_qt_svg_dylib "libqsvg.dylib" PATHS "${CMAKE_PREFIX_PATH}/plugins/imageformats" NO_DEFAULT_PATH)
-        if(_qt_svg_dylib)
-            add_custom_command(TARGET deploy
-                               POST_BUILD
-                               COMMAND ${CMAKE_COMMAND} -E copy ${_qt_svg_dylib} $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtGui.framework/Versions/5/QtGui" "@executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtWidgets.framework/Versions/5/QtWidgets" "@executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtSvg.framework/Versions/5/QtSvg" "@executable_path/../Frameworks/QtSvg.framework/Versions/5/QtSvg" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMAND ${CMAKE_INSTALL_NAME_TOOL} -change "${CMAKE_PREFIX_PATH}/lib/QtCore.framework/Versions/5/QtCore" "@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore" $<TARGET_FILE_DIR:monero-wallet-gui>/../PlugIns/imageformats/libqsvg.dylib
-                               COMMENT "Copying libqsvg.dylib, running install_name_tool"
-
-            )
-        endif()
 
         # Copy Boost dylibs that macdeployqt doesn't pick up
         find_package(Boost QUIET COMPONENTS atomic container date_time)
@@ -40,6 +25,71 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             endif()
         endforeach()
 
+        # Copy Abseil runtime libraries used by Protobuf's utf8_range libraries.
+        # Homebrew's libutf8_validity.dylib links against libabsl_*.dylib, and
+        # macdeployqt does not deploy these because the utf8_range libraries are copied manually.
+        find_package(Protobuf QUIET)
+
+        if(TARGET protobuf::libprotobuf)
+            get_target_property(_protobuf_dylib protobuf::libprotobuf IMPORTED_LOCATION)
+
+            if(_protobuf_dylib)
+                get_filename_component(_protobuf_lib_dir "${_protobuf_dylib}" DIRECTORY)
+
+                file(GLOB _protobuf_utf8_dylibs
+                    "${_protobuf_lib_dir}/libutf8_*.dylib"
+                )
+
+                foreach(_dylib IN LISTS _protobuf_utf8_dylibs)
+                    add_custom_command(TARGET deploy POST_BUILD
+                        COMMAND ${CMAKE_COMMAND} -E copy
+                        "${_dylib}"
+                        "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
+                        COMMENT "Copying ${_dylib}"
+                    )
+                endforeach()
+
+                find_file(_abseil_strings_dylib
+                    NAMES libabsl_strings.dylib
+                    PATHS
+                    /opt/homebrew/opt/abseil/lib
+                    /usr/local/opt/abseil/lib
+                    "${_protobuf_lib_dir}"
+                    NO_DEFAULT_PATH
+                )
+
+                if(_abseil_strings_dylib)
+                    get_filename_component(_abseil_lib_dir "${_abseil_strings_dylib}" DIRECTORY)
+
+                    file(GLOB _protobuf_abseil_dylibs
+                        "${_abseil_lib_dir}/libabsl_*.dylib"
+                    )
+
+                    foreach(_dylib IN LISTS _protobuf_abseil_dylibs)
+                        add_custom_command(TARGET deploy POST_BUILD
+                            COMMAND ${CMAKE_COMMAND} -E copy
+                            "${_dylib}"
+                            "$<TARGET_FILE_DIR:monero-wallet-gui>/../Frameworks/"
+                            COMMENT "Copying ${_dylib}"
+                        )
+                    endforeach()
+                else()
+                    message(WARNING "Abseil dylibs not found; libutf8_validity may still reference Homebrew")
+                endif()
+            endif()
+        endif()
+
+        # Remove Homebrew rpaths from the executable.
+        # These can make the app load local Homebrew libraries instead of bundled libraries.
+        add_custom_command(TARGET deploy
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND}
+            -DEXECUTABLE=$<TARGET_FILE:monero-wallet-gui>
+            -DINSTALL_NAME_TOOL=${CMAKE_INSTALL_NAME_TOOL}
+            -P ${CMAKE_SOURCE_DIR}/cmake/DeleteHomebrewRpaths.cmake
+            COMMENT "Removing Homebrew rpaths from app executable"
+        )
+
         # Apple Silicon requires all binaries to be codesigned
         find_program(CODESIGN_EXECUTABLE NAMES codesign)
         if(CODESIGN_EXECUTABLE)
@@ -53,11 +103,22 @@ if(APPLE OR (WIN32 AND NOT STATIC))
     elseif(WIN32)
         find_program(QMAKE_EXECUTABLE qmake HINTS "${_qt_bin_dir}")
         find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
-        if(NOT QMAKE_EXECUTABLE OR NOT WINDEPLOYQT_EXECUTABLE)
-            message(WARNING "Deploy requires qmake.exe and windeployqt.exe (no -qt5 suffix) in ${_qt_bin_dir}")
+        set(QMLIMPORTSCANNER_EXECUTABLE "${_qt_bin_dir}/qmlimportscanner${CMAKE_EXECUTABLE_SUFFIX}")
+        if(NOT QMAKE_EXECUTABLE OR NOT WINDEPLOYQT_EXECUTABLE OR
+                NOT EXISTS "${QMLIMPORTSCANNER_EXECUTABLE}")
+            message(WARNING "Deploy requires qmake, windeployqt, and qmlimportscanner in ${_qt_bin_dir}")
+         endif()
+
+        execute_process(
+            COMMAND "${QMAKE_EXECUTABLE}" -query QT_INSTALL_QML
+            OUTPUT_VARIABLE _qt_qml_dir
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+        if(NOT IS_DIRECTORY "${_qt_qml_dir}")
+            message(WARNING "Qt QML import directory does not exist: ${_qt_qml_dir}")
         endif()
         add_custom_command(TARGET deploy POST_BUILD
-                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}"
+                           COMMAND "${CMAKE_COMMAND}" -E env PATH="${_qt_bin_dir}" "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:monero-wallet-gui>" -no-translations -qmldir="${CMAKE_SOURCE_DIR}" -qmlimport="${_qt_qml_dir}"
                            COMMENT "Running windeployqt..."
         )
         set(WIN_DEPLOY_DLLS
@@ -74,14 +135,11 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             zlib1.dll
             libzstd.dll
             libwinpthread-1.dll
-            libtiff-6.dll
             libstdc++-6.dll
             libpng16-16.dll
             libpcre16-0.dll
             libpcre-1.dll
-            libmng-2.dll
             liblzma-5.dll
-            liblcms2-2.dll
             libjpeg-8.dll
             libintl-8.dll
             libiconv-2.dll

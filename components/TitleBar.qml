@@ -26,12 +26,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Window
+import QtQuick.Layouts
 
-import FontAwesome 1.0
+import FontAwesome
+
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
 
@@ -281,17 +282,17 @@ Rectangle {
 
                 source: MoneroComponents.Style.titleBarLogoSource
                 visible: {
-                    if(!isOpenGL) return true;
+                    if(GraphicsInfo.api === GraphicsInfo.Software) return true;
                     if(!MoneroComponents.Style.blackTheme) return true;
                     return false;
                 }
             }
 
-            Colorize {
-                visible: isOpenGL && MoneroComponents.Style.blackTheme
+            MultiEffect {
+                visible: GraphicsInfo.api !== GraphicsInfo.Software && MoneroComponents.Style.blackTheme
                 anchors.fill: imgLogo
                 source: imgLogo
-                saturation: 0.0
+                saturation: -1.0
             }
         }
 
@@ -421,21 +422,9 @@ Rectangle {
 
     MouseArea {
         enabled: persistentSettings.customDecorations
-        property var previousPosition
         anchors.fill: parent
         propagateComposedEvents: true
-        onPressed: previousPosition = globalCursor.getPosition()
+        onPressed: appWindow.startSystemMove()
         onDoubleClicked: root.maximizeClicked()
-        onPositionChanged: {
-            if (pressedButtons == Qt.LeftButton) {
-                var pos = globalCursor.getPosition()
-                var dx = pos.x - previousPosition.x
-                var dy = pos.y - previousPosition.y
-
-                appWindow.x += dx
-                appWindow.y += dy
-                previousPosition = pos
-            }
-        }
     }
 }
