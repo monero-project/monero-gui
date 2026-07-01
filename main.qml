@@ -26,15 +26,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls.Styles 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import QtQml.Models
+import QtCore
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Dialogs
 
-import FontAwesome 1.0
+
+import FontAwesome
 
 import moneroComponents.Network 1.0
 import moneroComponents.Wallet 1.0
@@ -68,7 +69,7 @@ ApplicationWindow {
     property bool hideBalanceForced: false
     property bool ctrlPressed: false
     property alias persistentSettings : persistentSettings
-    property string accountsDir: !persistentSettings.portable ? moneroAccountsDir : persistentSettings.portableFolderName + "/wallets"
+    property string accountsDir: !portableSettings.portable ? moneroAccountsDir : portableSettings.portableFolderName + "/wallets"
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
@@ -838,7 +839,6 @@ ApplicationWindow {
             middlePanel.advancedView.miningView.update()
             informationPopup.text += qsTr("\n\nExiting p2pool. Please check that port 18083 is available.") + translationManager.emptyString;
         }
-        informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
     }
@@ -1000,8 +1000,8 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" + appWindow.accountsDir
-        selectExisting: false;
+        currentFolder: "file://" + appWindow.accountsDir
+        fileMode: FileDialog.SaveFile
 
         onAccepted: {
             handleTransactionConfirmed()
@@ -1046,12 +1046,12 @@ ApplicationWindow {
         // View only wallet - we save the tx
         if(viewOnly){
             // No file specified - abort
-            if(!saveTxDialog.fileUrl) {
+            if(!saveTxDialog.selectedFile.toString()) {
                 rejectPendingTransaction()
                 return;
             }
 
-            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            var path = walletManager.urlToLocalPath(saveTxDialog.selectedFile)
 
             // Store to file
             transaction.setFilename(path);
@@ -1068,7 +1068,6 @@ ApplicationWindow {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         } else {
@@ -1125,10 +1124,8 @@ ApplicationWindow {
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Critical;
         } else {
             informationPopup.text  = result;
-            informationPopup.icon = StandardIcon.Critical;
         }
     }
 
@@ -1159,10 +1156,8 @@ ApplicationWindow {
             var confirmations = results[4];
 
             informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = StandardIcon.Information
             if (!good) {
                 informationPopup.text = qsTr("Bad signature");
-                informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
                 if (in_pool) {
                     informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
@@ -1178,19 +1173,16 @@ ApplicationWindow {
         else if (results.length == 2 && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
         } 
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
             informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = currentWallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
@@ -1404,7 +1396,7 @@ ApplicationWindow {
     function fiatApiUpdateBalance(balance){
         // update balance card
         var bFiat = "?.??"
-        if (!hideBalanceForced && !persistentSettings.hideBalance) {
+        if (!hideBalanceForced && !persistentSettings.hideBalance && appWindow.fiatPrice > 0) {
             bFiat = fiatApiConvertToFiat(balance);
         }
         leftPanel.balanceFiatString = bFiat;
@@ -1415,7 +1407,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        logger.resetLogFilePath(persistentSettings.portable);
+        logger.resetLogFilePath(portableSettings.portable);
         if (persistentSettings.logLevel == 5)
             walletManager.setLogCategories(persistentSettings.logCategories)
         else
@@ -1450,16 +1442,14 @@ ApplicationWindow {
         mainApp.closing.connect(appWindow.close);
 
         if( appWindow.qrScannerEnabled ){
-            console.log("qrScannerEnabled : load component QRCodeScanner");
             var component = Qt.createComponent("components/QRCodeScanner.qml");
             if (component.status == Component.Ready) {
-                console.log("Camera component ready");
                 cameraUi = component.createObject(appWindow);
             } else {
-                console.log("component not READY !!!");
+                console.error("QR scanner component not ready:", component.errorString());
                 appWindow.qrScannerEnabled = false;
             }
-        } else console.log("qrScannerEnabled disabled");
+        }
 
         if(!walletsFound()) {
             wizard.wizardState = "wizardLanguage";
@@ -1471,7 +1461,7 @@ ApplicationWindow {
         }
 
         const desktopEntryEnabled = (typeof builtWithDesktopEntry != "undefined") && builtWithDesktopEntry;
-        if (persistentSettings.askDesktopShortcut && !persistentSettings.portable && desktopEntryEnabled) {
+        if (persistentSettings.askDesktopShortcut && !portableSettings.portable && desktopEntryEnabled) {
             persistentSettings.askDesktopShortcut = false;
 
             if (isTails) {
@@ -1479,7 +1469,6 @@ ApplicationWindow {
             } else if (isLinux) {
                 confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
                 confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
-                confirmationDialog.icon = StandardIcon.Question;
                 confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                 confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = function() {
@@ -1493,13 +1482,19 @@ ApplicationWindow {
         remoteNodesModel.initialize();
     }
 
-    MoneroSettings {
-        id: persistentSettings
-        fileName: {
+    PortableSettings {
+        id: portableSettings
+        settings: persistentSettings
+        unportableFileName: {
             if(isTails && tailsUsePersistence)
                 return homePath + "/Persistent/Monero/monero-core.conf";
             return "";
         }
+    }
+
+    Settings {
+        id: persistentSettings
+        location: portableSettings.location
 
         property bool askDesktopShortcut: isLinux
         property bool askStopLocalNode: true
@@ -1603,6 +1598,7 @@ ApplicationWindow {
                 fiatPriceProvider = "kraken";
                 fiatPriceEnabled = false;
             }
+            Utils.finishSettingsLoad(persistentSettings)
         }
     }
 
@@ -1771,18 +1767,17 @@ ApplicationWindow {
     }
 
     // Choose blockchain folder
-    FileDialog {
+    FolderDialog {
         id: blockchainFileDialog
         property string directory: ""
         signal changed();
 
         title: "Please choose a folder"
-        selectFolder: true
-        folder: "file://" + persistentSettings.blockchainDataDir
+        currentFolder: "file://" + persistentSettings.blockchainDataDir
 
         onRejected: console.log("data dir selection canceled")
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.selectedFolder)
             var validator = daemonManager.validateDataDir(dataDir, estimatedBlockchainSize);
             if(validator.valid) {
                 persistentSettings.blockchainDataDir = dataDir;
@@ -1798,8 +1793,6 @@ ApplicationWindow {
                 if(!validator.lmdbExists)
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
 
-                confirmationDialog.icon = StandardIcon.Question
-
                 // Continue
                 confirmationDialog.onAcceptedCallback = function() {
                     persistentSettings.blockchainDataDir = dataDir
@@ -1810,7 +1803,7 @@ ApplicationWindow {
                 confirmationDialog.open()
             }
 
-            blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
+            blockchainFileDialog.directory = blockchainFileDialog.selectedFolder;
             delete validator;
         }
     }
@@ -1835,11 +1828,9 @@ ApplicationWindow {
                 appWindow.walletPassword = passwordDialog.password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
-                informationPopup.icon  = StandardIcon.Information;
             } else {
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Error: ") + currentWallet.errorString;
-                informationPopup.icon  = StandardIcon.Critical;
             }
             informationPopup.onCloseCallback = null;
             informationPopup.open();
@@ -1995,11 +1986,14 @@ ApplicationWindow {
             }
         }
 
-        FastBlur {
+        MultiEffect {
             id: blur
             anchors.fill: blurredArea
             source: blurredArea
-            radius: 64
+            blurEnabled: true
+            blurMax: 64
+            blur: 1.0
+            autoPaddingEnabled: false
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
                 devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
                 remoteNodeDialog.visible
@@ -2241,7 +2235,6 @@ ApplicationWindow {
         // Show confirmation dialog
         confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
         confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
-        confirmationDialog.icon = StandardIcon.Question;
         confirmationDialog.cancelText = qsTr("Force stop") + translationManager.emptyString;
         confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
         confirmationDialog.onAcceptedCallback = function() {
@@ -2253,7 +2246,7 @@ ApplicationWindow {
         confirmationDialog.open();
     }
 
-    onClosing: {
+    onClosing: function(close) {
         close.accepted = false;
         console.log("blocking close event");
         if(isAndroid) {
@@ -2454,7 +2447,7 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.topMargin: titleBar.height
         color: MoneroComponents.Style.blackTheme ? "black" : "white"
-        opacity: isOpenGL ? 0.3 : inputDialog.visible || splash.visible ? 0.7 : 1.0
+        opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.3 : inputDialog.visible || splash.visible ? 0.7 : 1.0
 
         MoneroEffects.ColorTransition {
             targetObj: parent

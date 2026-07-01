@@ -38,7 +38,7 @@
 #include <easylogging++.h>
 #include <wallet/api/wallet2_api.h>
 
-#include "qt/MoneroSettings.h"
+#include "qt/PortableSettings.h"
 #include "qt/TailsOS.h"
 
 // default log path by OS (should be writable)
@@ -77,7 +77,7 @@ const QString getLogPath(const QString &userDefinedLogFilePath, bool portable)
 
     if (portable)
     {
-        return QDir(MoneroSettings::portableFolderName()).filePath(defaultLogName);
+        return QDir(PortableSettings::portableFolderName()).filePath(defaultLogName);
     }
 
     if(TailsOS::detect() && TailsOS::usePersistence)

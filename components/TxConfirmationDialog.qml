@@ -26,14 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4 as QtQuickControls1
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 import "../js/Utils.js" as Utils
-import FontAwesome 1.0
 
 Rectangle {
     id: root
@@ -189,7 +189,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 71
 
-            QtQuickControls1.BusyIndicator {
+            BusyIndicator {
                 id: txAmountBusyIndicator
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -326,6 +326,8 @@ Rectangle {
 
                 ScrollBar.vertical: ScrollBar {
                     policy: recipientsArea.contentHeight > flickable.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
+                    palette.mid: "#8E8E93"
+                    palette.dark: "#B8B8BD"
                 }
             }
 
@@ -381,7 +383,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
 
-                QtQuickControls1.BusyIndicator {
+                BusyIndicator {
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5

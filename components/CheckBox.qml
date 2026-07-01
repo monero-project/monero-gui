@@ -26,9 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Layouts
+
+import FontAwesome
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -57,8 +58,8 @@ Item {
     opacity: enabled ? 1 : 0.7
 
     Keys.onEnterPressed: toggle()
-    Keys.onReturnPressed: Keys.onEnterPressed(event)
-    Keys.onSpacePressed: Keys.onEnterPressed(event)
+    Keys.onReturnPressed: toggle()
+    Keys.onSpacePressed: toggle()
 
     function toggle(){
         if (checkBox.toggleOnClick) {

@@ -28,9 +28,9 @@
 
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 
 
 Rectangle {

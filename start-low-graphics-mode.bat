@@ -1,5 +1,5 @@
 @echo off
 
-set QMLSCENE_DEVICE=softwarecontext
+set QT_QUICK_BACKEND=software
 
 start /b monero-wallet-gui.exe
