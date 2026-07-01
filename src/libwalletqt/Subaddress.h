@@ -36,12 +36,17 @@
 #include <QObject>
 #include <QList>
 #include <QDateTime>
+#include <QCache>
+#include <QPair>
 
 class Subaddress : public QObject
 {
     Q_OBJECT
 public:
     Q_INVOKABLE void getAll() const;
+    Q_INVOKABLE void getPage(int offset, int limit) const;
+    void getPageSilent(int offset, int limit) const;
+    Q_INVOKABLE quint64 getTotalCount() const;
     Q_INVOKABLE bool getRow(int index, std::function<void (Monero::SubaddressRow &row)> callback) const;
     Q_INVOKABLE void addRow(quint32 accountIndex, const QString &label) const;
     Q_INVOKABLE void setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const;
@@ -60,6 +65,11 @@ private:
     mutable QReadWriteLock m_lock;
     Monero::Subaddress * m_subaddressImpl;
     mutable QList<Monero::SubaddressRow*> m_rows;
+    
+    mutable QCache<int, QList<Monero::SubaddressRow*>> m_pageCache;
+    mutable quint64 m_totalCount;
+    mutable bool m_totalCountCached;
+    void clearCache() const;
 };
 
 #endif // SUBADDRESS_H
