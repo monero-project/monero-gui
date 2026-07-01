@@ -387,8 +387,20 @@ Rectangle {
                 visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
                 enabled : visible
                 onClicked: {
+                    const openAlias = addressLine.text;
                     const response = TxUtils.handleOpenAliasResolution(addressLine.text, descriptionLine.text);
                     if (response) {
+                        if (response.confirm && response.address) {
+                            const resolvedAddress = response.address;
+                            const resolvedDescription = response.description;
+                            oa_confirm(openAlias, resolvedAddress, function() {
+                                addressLine.text = resolvedAddress;
+                                if (resolvedDescription) {
+                                    descriptionLine.text = resolvedDescription;
+                                }
+                            });
+                            return;
+                        }
                         if (response.message) {
                             oa_message(response.message);
                         }
@@ -530,6 +542,20 @@ Rectangle {
       oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
+    }
+
+    function oa_confirm(openAlias, resolvedAddress, onAccepted) {
+      confirmationDialog.title = qsTr("OpenAlias warning") + translationManager.emptyString
+      confirmationDialog.text = qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed.") + "\n\n" +
+                                qsTr("OpenAlias: ") + openAlias + "\n\n" +
+                                qsTr("Resolved address: ") + resolvedAddress + "\n\n" +
+                                qsTr("Only use this address if you trust this OpenAlias result.") + translationManager.emptyString
+      confirmationDialog.icon = StandardIcon.Question
+      confirmationDialog.cancelText = qsTr("Cancel") + translationManager.emptyString
+      confirmationDialog.okText = qsTr("Use address") + translationManager.emptyString
+      confirmationDialog.onAcceptedCallback = onAccepted
+      confirmationDialog.onRejectedCallback = null
+      confirmationDialog.open()
     }
 
     MoneroComponents.StandardDialog {
