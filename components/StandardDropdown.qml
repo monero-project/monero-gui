@@ -146,78 +146,105 @@ ColumnLayout {
         padding: 0
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
-        Rectangle {
-            id: droplist
-            anchors.left: parent.left
-            width: dropdown.width
-            y: head.y + head.height
+        Flickable {
+            id: flickable
+            flickableDirection: Flickable.VerticalFlick 
             clip: true
-            height: dropdown.expanded ? columnid.height : 0
-            color: dropdown.pressedColor
-
-            Behavior on height {
-                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            boundsBehavior: Flickable.StopAtBounds
+            contentHeight: contentItem.childrenRect.height
+            contentWidth: contentItem.childrenRect.width
+            width: dropdown.width
+            height: 240
+            y: head.height + head.y
+            flickDeceleration: 35000
+            onAtYEndChanged: {
+                if (flickable.atYEnd) {
+                    // hack for getting that last item Flickable seems to hate showing
+                }
             }
-
-            Column {
-                id: columnid
+            // put a mouse area on the flickable since we don't have access to the previous one
+            MouseArea {
+                id: dropArea2
+                anchors.fill: parent
+                onClicked: dropdown.expanded ? popup.close() : popup.open()
+                hoverEnabled: true
+                cursorShape: Qt.ArrowCursor
+                onPressed: flickable.interactive = false
+                onReleased: flickable.interactive = true
+            }
+            ScrollBar.vertical: ScrollBar {}
+            Rectangle {
+                id: droplist
                 anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                property int currentIndex: 0
+                width: dropdown.width
+                clip: true
+                height: dropdown.expanded ? columnid.height : 0
+                color: dropdown.pressedColor
 
-                Repeater {
-                    id: repeater
+                Behavior on height {
+                    NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+                }
 
-                    // Workaround for translations in listElements. All translated strings needs to be listed in this file.
-                    property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
-                    property string stringSlow: qsTr("Slow (x0.2 fee)") + translationManager.emptyString
-                    property string stringNormal: qsTr("Normal (x1 fee)")  + translationManager.emptyString
-                    property string stringFast: qsTr("Fast (x5 fee)")  + translationManager.emptyString
-                    property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
+                Column {
+                    id: columnid
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    property int currentIndex: 0
 
-                    delegate: Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: (dropdown.dropdownHeight * 0.75)
-                        //radius: index === repeater.count - 1 ? 4 : 0
-                        color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+                    Repeater {
+                        id: repeater
 
-                        MoneroComponents.TextPlain {
-                            id: col1Text
-                            anchors.verticalCenter: parent.verticalCenter
+                        // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+                        property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
+                        property string stringSlow: qsTr("Slow (x0.2 fee)") + translationManager.emptyString
+                        property string stringNormal: qsTr("Normal (x1 fee)")  + translationManager.emptyString
+                        property string stringFast: qsTr("Fast (x5 fee)")  + translationManager.emptyString
+                        property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
+
+                        delegate: Rectangle {
                             anchors.left: parent.left
-                            anchors.right: col2Text.left
-                            anchors.leftMargin: 12
-                            anchors.rightMargin: 0
-                            font.family: MoneroComponents.Style.fontRegular.name
-                            font.bold: false
-                            font.pixelSize: fontItemSize
-                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
-                            text: qsTr(column1) + translationManager.emptyString
-                        }
-
-                        MoneroComponents.TextPlain {
-                            id: col2Text
-                            anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 45
-                            font.family: MoneroComponents.Style.fontRegular.name
-                            font.pixelSize: 14
-                            color: "#FFFFFF"
-                            text: ""
-                        }
+                            height: (dropdown.dropdownHeight * 0.75)
+                            //radius: index === repeater.count - 1 ? 4 : 0
+                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
-                        MouseArea {
-                            id: itemArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.ArrowCursor
+                            MoneroComponents.TextPlain {
+                                id: col1Text
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.right: col2Text.left
+                                anchors.leftMargin: 12
+                                anchors.rightMargin: 0
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.bold: false
+                                font.pixelSize: fontItemSize
+                                color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
+                                text: qsTr(column1) + translationManager.emptyString
+                            }
 
-                            onClicked: {
-                                popup.close()
-                                columnid.currentIndex = index
-                                changed();
+                            MoneroComponents.TextPlain {
+                                id: col2Text
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.right: parent.right
+                                anchors.rightMargin: 45
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 14
+                                color: "#FFFFFF"
+                                text: ""
+                            }
+
+                            MouseArea {
+                                id: itemArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.ArrowCursor
+
+                                onClicked: {
+                                    popup.close()
+                                    columnid.currentIndex = index
+                                    changed();
+                                }
                             }
                         }
                     }
