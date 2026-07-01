@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Dialogs
 
 import "../../js/Wizard.js" as Wizard
 import "../../js/Utils.js" as Utils
@@ -41,6 +41,16 @@ Rectangle {
     color: "transparent"
     Layout.fillWidth: true
     property alias infoHeight: infoLayout.height
+    readonly property string rendererName: ({
+        [GraphicsInfo.OpenGL]: "OpenGL",
+        [GraphicsInfo.Vulkan]: "Vulkan",
+        [GraphicsInfo.Metal]: "Metal",
+        [GraphicsInfo.Direct3D11]: "Direct3D 11",
+        [GraphicsInfo.Direct3D12]: "Direct3D 12",
+        [GraphicsInfo.OpenVG]: "OpenVG",
+        [GraphicsInfo.Software]: "Software",
+        [GraphicsInfo.Null]: "Null"
+    })[GraphicsInfo.api] ?? "Unknown"
     property string walletModeString: {
         var modeStr;
         if(appWindow.walletMode === 0){
@@ -50,7 +60,7 @@ Rectangle {
         } else if(appWindow.walletMode === 2){
           modeStr = "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
         }
-        return modeStr + (persistentSettings.portable ? ", %1".arg(qsTr("portable")) : "");
+        return modeStr + (portableSettings.portable ? ", %1".arg(qsTr("portable")) : "");
     }
 
     ColumnLayout {
@@ -208,7 +218,6 @@ Rectangle {
                                                                 + "- Tx descriptions\n\n"
                                                                 + "The old wallet cache file will be renamed and can be restored later.\n"
                                                                 );
-                                confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.onAcceptedCallback = function() {
                                     appWindow.closeWallet(function() {
                                         walletManager.clearWalletCache(persistentSettings.wallet_path);
@@ -338,7 +347,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: isOpenGL ? "OpenGL" : "Low graphics mode"
+                text: rendererName
             }
 
             Rectangle {
@@ -395,7 +404,7 @@ Rectangle {
 
                     data += "\nWallet log path: " + logger.logFilePath;
                     data += "\nWallet mode: " + walletModeString;
-                    data += "\nGraphics mode: " + (isOpenGL ? "OpenGL" : "Low graphics mode");
+                    data += "\nGraphics mode: " + rendererName;
                     if (isTails)
                         data += "\nTails: " + (tailsUsePersistence ? "persistent" : "persistence disabled");
 

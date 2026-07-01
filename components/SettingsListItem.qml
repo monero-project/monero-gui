@@ -1,6 +1,7 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Layouts
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 
@@ -11,7 +12,6 @@ ColumnLayout {
     property alias description: area.text
     property alias title: header.text
     property bool isLast: false
-    property bool enabled: true
     signal clicked()
 
     Layout.fillWidth: true

@@ -30,6 +30,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Modified for Monero GUI.
+ */
+
 /* Through the QQmlNetworkAccessManagerFactory below, all network requests
  * created via QML will be passed to this object; including, for example,
  * <img> tags parsed in rich Text items.
@@ -39,18 +43,22 @@
  * and assert if appropriate.
  */
 #include <QDebug>
+#include <QIODevice>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QQmlNetworkAccessManagerFactory>
 
 class BlockedNetworkAccessManager : public QNetworkAccessManager
 {
 public:
-    BlockedNetworkAccessManager(QObject *parent)
+    explicit BlockedNetworkAccessManager(QObject *parent)
         : QNetworkAccessManager(parent)
     {
-        setProxy(QNetworkProxy(QNetworkProxy::Socks5Proxy, QLatin1String("0.0.0.0"), 0));
     }
 
 protected:
-    virtual QNetworkReply *createRequest(Operation op, const QNetworkRequest &req, QIODevice *outgoingData = 0)
+    QNetworkReply *createRequest(Operation op, const QNetworkRequest &req, QIODevice *outgoingData = nullptr) override
     {
         qCritical() << "QML attempted to load a network resource from" << req.url() << " - this is potentially an input sanitization flaw.";
         return QNetworkAccessManager::createRequest(op, QNetworkRequest(), outgoingData);
@@ -60,7 +68,7 @@ protected:
 class NetworkAccessBlockingFactory : public QQmlNetworkAccessManagerFactory
 {
 public:
-    virtual QNetworkAccessManager *create(QObject *parent)
+    QNetworkAccessManager *create(QObject *parent) override
     {
         return new BlockedNetworkAccessManager(parent);
     }

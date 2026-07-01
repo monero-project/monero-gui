@@ -26,12 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Dialogs
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0
@@ -206,16 +205,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
                 source: tracker
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 1.0
+                blurMax: 8
+                shadowColor: "#20000000"
             }
 
             Rectangle {
@@ -244,7 +242,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.RightButton
-                        onClicked: {
+                        onClicked: (mouse) => {
                             if (mouse.button == Qt.RightButton){
                                 qrMenu.x = this.mouseX;
                                 qrMenu.y = this.mouseY;
@@ -266,16 +264,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#30000000"
-                smooth: true
                 source: qrImg
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 1.0
+                blurMax: 8
+                shadowColor: "#30000000"
             }
         }
 
@@ -398,7 +395,6 @@ Item {
 //                                onClicked: {
 //                                    merchantPageDialog.title  = qsTr("Payment URL") + translationManager.emptyString;
 //                                    merchantPageDialog.text = qsTr("payment url explanation")
-//                                    merchantPageDialog.icon = StandardIcon.Information
 //                                    merchantPageDialog.open()
 //                                }
 //                            }
@@ -451,16 +447,15 @@ Item {
                 }
             }
 
-            DropShadow {
+            MultiEffect {
                 anchors.fill: source
-                cached: true
-                horizontalOffset: 3
-                verticalOffset: 3
-                radius: 8.0
-                samples: 16
-                color: "#20000000"
-                smooth: true
                 source: payment_url_container
+                shadowEnabled: true
+                shadowHorizontalOffset: 3
+                shadowVerticalOffset: 3
+                shadowBlur: 1.0
+                blurMax: 8
+                shadowColor: "#20000000"
             }
 
             Item {
@@ -513,8 +508,8 @@ Item {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
                             }
-                            validator: RegExpValidator {
-                                regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
                             }
                         }
                     }
@@ -653,7 +648,7 @@ Item {
                 var confirmations = 0;
                 var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
 
-                if (blockHeight === undefined) {
+                if (!blockHeight) {
                     in_txpool = true;
                 } else {
                     confirmations = model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
@@ -703,22 +698,20 @@ Item {
 
     MessageDialog {
         id: merchantPageDialog
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
     }
 
     FileDialog {
         id: qrFileDialog
         title: "Please choose a name"
-        folder: shortcuts.pictures
-        selectExisting: false
+        fileMode: FileDialog.SaveFile
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, amountToReceive.text), walletManager.urlToLocalPath(fileUrl))) {
-                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
-                receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                receivePageDialog.icon = StandardIcon.Error
-                receivePageDialog.open()
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, amountToReceive.text), walletManager.urlToLocalPath(selectedFile))) {
+                console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
+                merchantPageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
+                merchantPageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
+                merchantPageDialog.open()
             }
         }
     }

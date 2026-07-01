@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QObject>
-#include <QDesktopWidget>
 #include <QScreen>
 #include <QThread>
 
@@ -70,7 +69,7 @@
 #include "qt/utils.h"
 #include "qt/TailsOS.h"
 #include "qt/KeysFiles.h"
-#include "qt/MoneroSettings.h"
+#include "qt/PortableSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
 #ifdef QML_TESTS
 #include "QmlTestHarness.h"
@@ -85,9 +84,7 @@
 #include "p2pool/P2PoolManager.h"
 #endif
 
-#if defined(Q_OS_WIN)
-#include <QOpenGLContext>
-#elif defined(Q_OS_MACOS)
+#if defined(Q_OS_MACOS)
 #include "qt/macoshelper.h"
 #endif
 
@@ -104,7 +101,6 @@
   Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
 #elif defined(Q_OS_LINUX)
   Q_IMPORT_PLUGIN(QXcbIntegrationPlugin);
-  Q_IMPORT_PLUGIN(QXcbGlxIntegrationPlugin);
 #endif
 Q_IMPORT_PLUGIN(QSvgIconPlugin)
 Q_IMPORT_PLUGIN(QICNSPlugin)
@@ -115,39 +111,6 @@ Q_IMPORT_PLUGIN(QTgaPlugin)
 Q_IMPORT_PLUGIN(QTiffPlugin)
 Q_IMPORT_PLUGIN(QWbmpPlugin)
 Q_IMPORT_PLUGIN(QWebpPlugin)
-Q_IMPORT_PLUGIN(QQmlDebuggerServiceFactory)
-Q_IMPORT_PLUGIN(QQmlInspectorServiceFactory)
-Q_IMPORT_PLUGIN(QLocalClientConnectionFactory)
-Q_IMPORT_PLUGIN(QDebugMessageServiceFactory)
-Q_IMPORT_PLUGIN(QQmlNativeDebugConnectorFactory)
-Q_IMPORT_PLUGIN(QQmlNativeDebugServiceFactory)
-Q_IMPORT_PLUGIN(QQmlProfilerServiceFactory)
-Q_IMPORT_PLUGIN(QQuickProfilerAdapterFactory)
-Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
-Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
-Q_IMPORT_PLUGIN(QGenericEnginePlugin)
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-Q_IMPORT_PLUGIN(QtQmlPlugin)
-#endif
-Q_IMPORT_PLUGIN(QtQmlModelsPlugin)
-Q_IMPORT_PLUGIN(QtQuick2Plugin)
-Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
-Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
-Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
-Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
-Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
-Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
-Q_IMPORT_PLUGIN(QmlFolderListModelPlugin)
-Q_IMPORT_PLUGIN(QmlSettingsPlugin)
-Q_IMPORT_PLUGIN(QtLabsPlatformPlugin)
-Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
-Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
-Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
-Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
-#ifdef WITH_SCANNER
-Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
-#endif
 
 #endif
 
@@ -158,7 +121,6 @@ bool isMac = false;
 bool isLinux = false;
 bool isTails = false;
 bool isDesktop = false;
-bool isOpenGL = true;
 bool isARM = false;
 
 int main(int argc, char *argv[])
@@ -191,16 +153,14 @@ int main(int argc, char *argv[])
     bool isARM = true;
 #endif
 
-    // detect low graphics mode (start-low-graphics-mode.bat)
-    if(qgetenv("QMLSCENE_DEVICE") == "softwarecontext")
-        isOpenGL = false;
-
 #ifdef Q_OS_MAC
     // macOS window tabbing is not supported
     MacOSHelper::disableWindowTabbing();
 #endif
     // disable "QApplication: invalid style override passed" warning
-    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
+    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "Fusion");
+    if (isDesktop && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+        qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #ifdef Q_OS_LINUX
     // platform xcb by default
     if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "xcb");
@@ -226,17 +186,6 @@ int main(int argc, char *argv[])
     }
 
     MainApp app(argc, argv);
-
-#if defined(Q_OS_WIN)
-    if (isOpenGL)
-    {
-        QOpenGLContext ctx;
-        isOpenGL = ctx.create() && ctx.format().version() >= qMakePair(2, 1);
-        if (!isOpenGL) {
-            qputenv("QMLSCENE_DEVICE", "softwarecontext");
-        }
-    }
-#endif
 
     app.setApplicationName("monero-core");
     app.setDesktopFileName("org.getmonero.Monero");
@@ -394,8 +343,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<LanguageModel>("moneroComponents.LanguageModel", 1, 0, "LanguageModel");
     qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
 
-    // Temporary Qt.labs.settings replacement
-    qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
+    qmlRegisterType<PortableSettings>("moneroComponents.Settings", 1, 0, "PortableSettings");
 
     qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
@@ -457,15 +405,18 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QQmlApplicationEngine engine;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-    engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
+    engine.addImportPath(QStringLiteral(":/fonts"));
+
+#if defined(Q_OS_WIN) && !defined(MONERO_GUI_STATIC)
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
 #endif
+
+    engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
-    engine.addImportPath(":/fonts");
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
 
@@ -496,7 +447,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("isLinux", isLinux);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
-    engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
     engine.rootContext()->setContextProperty("isTails", isTails);
     engine.rootContext()->setContextProperty("isARM", isARM);
 
@@ -532,6 +482,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #ifdef WITH_SCANNER
     builtWithScanner = true;
 #endif
+    qInfo() << "QR scanner: compiled in:" << builtWithScanner;
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
     bool builtWithDesktopEntry = false;
@@ -559,19 +510,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // QML loaded successfully.
     if (parser.isSet(testQmlOption))
         return 0;
-
-#ifdef WITH_SCANNER
-    QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
-    if (qmlCamera)
-    {
-        qWarning() << "QrCodeScanner : object found";
-        QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
-        QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
-        qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
-    }
-    else
-        qCritical() << "QrCodeScanner : something went wrong !";
-#endif
 
     QObject::connect(eventFilter, &filter::quitRequested, rootObject, [rootObject]{ QMetaObject::invokeMethod(rootObject, "gracefulQuit", Qt::QueuedConnection); });
     QObject::connect(rootObject, SIGNAL(gracefulShutdownComplete()), eventFilter, SLOT(acceptQuit()));

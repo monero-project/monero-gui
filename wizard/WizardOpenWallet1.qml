@@ -26,15 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
-import QtGraphicalEffects 1.0
-import Qt.labs.folderlistmodel 2.1
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
+import Qt.labs.folderlistmodel
 import moneroComponents.NetworkType 1.0
 import moneroComponents.WalletKeysFilesModel 1.0
-import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -230,18 +229,18 @@ Rectangle {
                                         else if (networktype === 2) return "qrc:///images/open-wallet-from-file-stagenet.png";
                                     }
                                     visible: {
-                                        if(!isOpenGL) return true;
+                                        if(GraphicsInfo.api === GraphicsInfo.Software) return true;
                                         if(MoneroComponents.Style.blackTheme) return true;
                                         return false;
                                     }
                                 }
 
-                                Colorize {
-                                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                                MultiEffect {
+                                    visible: GraphicsInfo.api !== GraphicsInfo.Software && !MoneroComponents.Style.blackTheme
                                     anchors.fill: icon
                                     source: icon
-                                    lightness: 0.65 // +65%
-                                    saturation: 0.0
+                                    brightness: 0.65
+                                    saturation: -1.0
                                 }
                             }
 

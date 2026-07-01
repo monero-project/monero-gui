@@ -26,13 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.2
-import QtQuick.Controls 2.2 as QtQuickControls2
-import QtQuick.Layouts 1.2
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.2
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
+
+import FontAwesome
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -47,7 +45,7 @@ Item {
     property bool error: false
     property alias inputLabel: inputLabel
 
-    signal dateChanged();
+    signal dateChanged()
 
     height: 50
 
@@ -246,10 +244,10 @@ Item {
         }
     }
 
-    QtQuickControls2.Popup {
+    Controls.Popup {
         id: popup
         padding: 0
-        closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
+        closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
         onOpened: {
             calendar.visibleMonth = currentDate.getMonth();
             calendar.visibleYear = currentDate.getFullYear();
@@ -290,7 +288,7 @@ Item {
                 height: 1
             }
 
-            Calendar {
+            MoneroComponents.MoneroCalendar {
                 id: calendar
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -298,166 +296,11 @@ Item {
                 anchors.margins: 1
                 anchors.bottomMargin: 10
                 height: 220
-                frameVisible: false
-
-                style: CalendarStyle {
-                    gridVisible: false
-                    background: Rectangle { color: MoneroComponents.Style.middlePanelBackgroundColor }
-                    dayDelegate: Item {
-                        z: parent.z + 1
-                        implicitHeight: implicitWidth
-                        implicitWidth: calendar.width / 7
-
-                        Rectangle {
-                            id: dayRect
-                            anchors.fill: parent
-                            radius: parent.implicitHeight / 2
-                        }
-
-                        MoneroComponents.TextPlain {
-                            id: dayText
-                            anchors.centerIn: parent
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
-                            font.pixelSize: {
-                                if(!styleData.visibleMonth) return 12
-                                return 14
-                            }
-                            font.bold: {
-                                if(dayArea.pressed || styleData.visibleMonth) return true;
-                                return false;
-                            }
-                            text: styleData.date.getDate()
-                            themeTransition: false
-                            color: {
-                              if (currentDate.toDateString() === styleData.date.toDateString()) {
-                                  if (dayArea.containsMouse) {
-                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColorHover;
-                                  } else {
-                                      dayRect.color = MoneroComponents.Style.buttonBackgroundColor;
-                                  }
-                              } else {
-                                  if (dayArea.containsMouse) {
-                                      dayRect.color = MoneroComponents.Style.blackTheme ? "#20FFFFFF" : "#10000000"
-                                  } else {
-                                      dayRect.color = "transparent";
-                                  }
-                              }
-                              if(!styleData.valid) return "transparent"
-                              if(styleData.date.toDateString() === (new Date()).toDateString()) return "#FFFF00"
-                              if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
-                              if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
-                              return MoneroComponents.Style.defaultFontColor
-                            }
-                        }
-
-                        MouseArea {
-                            id: dayArea
-                            anchors.fill: parent
-                            visible: styleData.valid
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                if(styleData.visibleMonth) {
-                                    currentDate = styleData.date
-                                    popup.close()
-                                } else {
-                                    var date = styleData.date
-                                    if(date.getMonth() > calendar.visibleMonth)
-                                        calendar.showNextMonth()
-                                    else calendar.showPreviousMonth()
-                                }
-
-                                datePicker.dateChanged();
-                            }
-                        }
-                    }
-
-                    dayOfWeekDelegate: Item {
-                        implicitHeight: 20
-                        implicitWidth: calendar.width / 7
-
-                        MoneroComponents.TextPlain {
-                            anchors.centerIn: parent
-                            elide: Text.ElideRight
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
-                            font.pixelSize: 12
-                            color: MoneroComponents.Style.lightGreyFontColor
-                            themeTransition: false
-                            text: {
-                                var locale = Qt.locale()
-                                return locale.dayName(styleData.dayOfWeek, Locale.ShortFormat)
-                            }
-                        }
-                    }
-
-                    navigationBar: Rectangle {
-                        color: MoneroComponents.Style.middlePanelBackgroundColor
-                        implicitWidth: calendar.width
-                        implicitHeight: 30
-
-                        MoneroComponents.TextPlain {
-                            anchors.centerIn: parent
-                            font.family: MoneroComponents.Style.fontMonoRegular.name
-                            font.pixelSize: 14
-                            color: MoneroComponents.Style.dimmedFontColor
-                            themeTransition: false
-                            text: styleData.title
-                        }
-
-
-                        Item {
-                            anchors.left: parent.left
-                            anchors.leftMargin: 4
-                            anchors.top: parent.top
-                            anchors.bottom: parent.bottom
-                            width: height
-
-                            MoneroEffects.ImageMask {
-                                id: prevMonthIcon
-                                anchors.centerIn: parent
-                                image: "qrc:///images/prevMonth.png"
-                                height: 8
-                                width: 12
-                                fontAwesomeFallbackIcon: FontAwesome.arrowLeft
-                                fontAwesomeFallbackSize: 14
-                                color: MoneroComponents.Style.defaultFontColor
-                            }
-
-                            MouseArea {
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                anchors.fill: parent
-                                onClicked: calendar.showPreviousMonth()
-                            }
-                        }
-
-                        Item {
-                            anchors.right: parent.right
-                            anchors.rightMargin: 4
-                            anchors.top: parent.top
-                            anchors.bottom: parent.bottom
-                            width: height
-
-                            MoneroEffects.ImageMask {
-                                id: nextMonthIcon
-                                anchors.centerIn: parent
-                                image: "qrc:///images/prevMonth.png"
-                                height: 8
-                                width: 12
-                                rotation: 180
-                                fontAwesomeFallbackIcon: FontAwesome.arrowLeft
-                                fontAwesomeFallbackSize: 14
-                                color: MoneroComponents.Style.defaultFontColor
-                            }
-
-                            MouseArea {
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                anchors.fill: parent
-                                onClicked: calendar.showNextMonth()
-                            }
-                        }
-                    }
+                selectedDate: datePicker.currentDate
+                onDateSelected: function(selectedDate) {
+                    datePicker.currentDate = selectedDate
+                    popup.close()
+                    datePicker.dateChanged()
                 }
             }
         }

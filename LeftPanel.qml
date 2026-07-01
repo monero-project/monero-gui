@@ -26,13 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Effects
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
-import FontAwesome 1.0
 
 import "components" as MoneroComponents
 import "components/effects/" as MoneroEffects
@@ -106,6 +104,9 @@ Rectangle {
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
         Item {
+            width: parent.width
+            height: parent.height
+
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
@@ -116,23 +117,23 @@ Rectangle {
 
                 Image {
                     id: card
-                    visible: !isOpenGL || MoneroComponents.Style.blackTheme
+                    visible: GraphicsInfo.api === GraphicsInfo.Software || MoneroComponents.Style.blackTheme
                     width: 260
                     height: 135
                     fillMode: Image.PreserveAspectFit
                     source: MoneroComponents.Style.blackTheme ? "qrc:///images/card-background-black" + (currentAccountIndex % MoneroComponents.Style.accountColors.length) + ".png" : "qrc:///images/card-background-white.png"
                 }
 
-                DropShadow {
-                    visible: isOpenGL && !MoneroComponents.Style.blackTheme
+                MultiEffect {
+                    visible: GraphicsInfo.api !== GraphicsInfo.Software && !MoneroComponents.Style.blackTheme
                     anchors.fill: card
-                    horizontalOffset: 3
-                    verticalOffset: 3
-                    radius: 10.0
-                    samples: 15
-                    color: "#3B000000"
                     source: card
-                    cached: true
+                    shadowEnabled: true
+                    shadowHorizontalOffset: 3
+                    shadowVerticalOffset: 3
+                    shadowBlur: 0.625
+                    blurMax: 16
+                    shadowColor: "#3B000000"
                 }
 
                 MoneroComponents.TextPlain {
@@ -308,7 +309,7 @@ Rectangle {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: balancePart1MouseArea.clicked(mouse)
+                        onClicked: (mouse) => balancePart1MouseArea.clicked(mouse)
                     }
                 }
 

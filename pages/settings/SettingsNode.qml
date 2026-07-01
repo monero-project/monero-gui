@@ -26,10 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.0
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+
+import FontAwesome
 
 import "../../components" as MoneroComponents
 import "../../components/effects" as MoneroEffects
@@ -299,7 +300,7 @@ Rectangle{
                     onInputLabelLinkActivated: {
                         //mouse.accepted = false
                         if(persistentSettings.blockchainDataDir !== ""){
-                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                            blockchainFileDialog.currentFolder = "file://" + persistentSettings.blockchainDataDir;
                         }
                         blockchainFileDialog.open();
                         blockchainFolder.focus = true;
