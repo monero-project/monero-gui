@@ -56,6 +56,7 @@ ColumnLayout {
     property bool showingHeader: dropdownLabel.text !== ""
     property int labelFontSize: 14
     property bool labelFontBold: false
+    property bool dropdownFillWidth: true
     property int dropdownHeight: 39
     property int fontSize: 14
     property int fontItemSize: 14
@@ -94,7 +95,15 @@ ColumnLayout {
         border.width: dropdown.headerBorder ? 1 : 0
         border.color: dropdown.colorBorder
         radius: 4
-        Layout.fillWidth: true
+        Layout.fillWidth: {
+            if (dropdown.dropdownFillWidth) {
+                return true;
+            } else {
+                dropdown.Layout.maximumWidth = repeater.implicitWidth;
+                head.Layout.preferredWidth = repeater.implicitWidth;
+                return false;
+            }
+        }
         Layout.preferredHeight: dropdownHeight
 
         MoneroComponents.TextPlain {
@@ -149,7 +158,7 @@ ColumnLayout {
         Rectangle {
             id: droplist
             anchors.left: parent.left
-            width: dropdown.width
+            width: dropdown.dropdownFillWidth ? dropdown.width : repeater.implicitWidth
             y: head.y + head.height
             clip: true
             height: dropdown.expanded ? columnid.height : 0
@@ -168,6 +177,7 @@ ColumnLayout {
 
                 Repeater {
                     id: repeater
+                    implicitWidth: getMaximumWidth()
 
                     // Workaround for translations in listElements. All translated strings needs to be listed in this file.
                     property string stringAutomatic: qsTr("Automatic") + translationManager.emptyString
@@ -175,6 +185,17 @@ ColumnLayout {
                     property string stringNormal: qsTr("Normal (x1 fee)")  + translationManager.emptyString
                     property string stringFast: qsTr("Fast (x5 fee)")  + translationManager.emptyString
                     property string stringFastest: qsTr("Fastest (x200 fee)") + translationManager.emptyString
+
+                    function getMaximumWidth() {
+                        var maximumWidthInList = 0;
+                        for (var i = 0; i < repeater.count; i++) {
+                            var listItemWidth = repeater.itemAt(i).children[0].contentWidth
+                            if (listItemWidth > maximumWidthInList) {
+                                maximumWidthInList = listItemWidth;
+                            }
+                        }
+                        return 12 + maximumWidthInList + 12 + 24;
+                    }
 
                     delegate: Rectangle {
                         anchors.left: parent.left
@@ -186,6 +207,7 @@ ColumnLayout {
                         MoneroComponents.TextPlain {
                             id: col1Text
                             anchors.verticalCenter: parent.verticalCenter
+                            width: 12 + col1Text.contentWidth + 12 + 24
                             anchors.left: parent.left
                             anchors.right: col2Text.left
                             anchors.leftMargin: 12
