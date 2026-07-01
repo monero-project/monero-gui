@@ -26,10 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -39,7 +41,6 @@ import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 import moneroComponents.Clipboard 1.0
 import moneroComponents.NetworkType 1.0
-import FontAwesome 1.0
 
 Rectangle {
     id: root
@@ -223,7 +224,7 @@ Rectangle {
                                 id: sendToButton
                                 image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.arrowRight
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5
@@ -252,7 +253,7 @@ Rectangle {
                                 id: editEntryButton
                                 image: "qrc:///images/edit.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5
@@ -270,7 +271,7 @@ Rectangle {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5
@@ -539,7 +540,6 @@ Rectangle {
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
       oaPopup.text = text
-      oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
     }
@@ -550,7 +550,6 @@ Rectangle {
                                 qsTr("OpenAlias: ") + openAlias + "\n\n" +
                                 qsTr("Resolved address: ") + resolvedAddress + "\n\n" +
                                 qsTr("Only use this address if you trust this OpenAlias result.") + translationManager.emptyString
-      confirmationDialog.icon = StandardIcon.Question
       confirmationDialog.cancelText = qsTr("Cancel") + translationManager.emptyString
       confirmationDialog.okText = qsTr("Use address") + translationManager.emptyString
       confirmationDialog.onAcceptedCallback = onAccepted

@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Shapes
 
 import "../" as MoneroComponents
 
@@ -49,34 +49,49 @@ Item {
 
     // background software renderer
     Rectangle {
-        visible: !isOpenGL
+        visible: GraphicsInfo.api === GraphicsInfo.Software
         anchors.fill: parent
         color: root.fallBackColor
     }
 
-    // background opengl
-    LinearGradient {
-        visible: isOpenGL
+    // accelerated background
+    Shape {
+        id: gradientShape
+        visible: GraphicsInfo.api !== GraphicsInfo.Software
         anchors.fill: parent
-        start: root.start
-        end: root.end
-        gradient: Gradient {
-            GradientStop {
-                id: gradientStart
-                position: root.posStart
-                color: root.initialStartColor
+
+        ShapePath {
+            strokeWidth: -1
+            fillGradient: LinearGradient {
+                x1: root.start.x
+                y1: root.start.y
+                x2: root.end.x
+                y2: root.end.y
+
+                GradientStop {
+                    id: gradientStart
+                    position: root.posStart
+                    color: root.initialStartColor
+                }
+                GradientStop {
+                    id: gradientStop
+                    position: root.posStop
+                    color: root.initialStopColor
+                }
             }
-            GradientStop {
-                id: gradientStop
-                position: root.posStop
-                color: root.initialStopColor
-            }
+
+            startX: 0
+            startY: 0
+            PathLine { x: gradientShape.width; y: 0 }
+            PathLine { x: gradientShape.width; y: gradientShape.height }
+            PathLine { x: 0; y: gradientShape.height }
+            PathLine { x: 0; y: 0 }
         }
 
         states: [
             State {
                 name: "black";
-                when: isOpenGL && MoneroComponents.Style.blackTheme
+                when: GraphicsInfo.api !== GraphicsInfo.Software && MoneroComponents.Style.blackTheme
                 PropertyChanges {
                     target: gradientStart
                     color: root.blackColorStart
@@ -87,7 +102,7 @@ Item {
                 }
             }, State {
                 name: "white";
-                when: isOpenGL && !MoneroComponents.Style.blackTheme
+                when: GraphicsInfo.api !== GraphicsInfo.Software && !MoneroComponents.Style.blackTheme
                 PropertyChanges {
                     target: gradientStart
                     color: root.whiteColorStart

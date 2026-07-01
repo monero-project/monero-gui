@@ -26,11 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
+
+import FontAwesome
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -188,7 +189,7 @@ GridLayout {
                 tooltip: qsTr("Browse") + translationManager.emptyString
                 tooltipLeft: true
                 onClicked: {
-                    fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
+                    fileWalletDialog.currentFolder = walletManager.localPathToUrl(walletLocation.text)
                     fileWalletDialog.open()
                     walletLocation.focus = true
                 }
@@ -231,13 +232,11 @@ GridLayout {
         }
     }
 
-    FileDialog {
+    FolderDialog {
         id: fileWalletDialog
-        selectMultiple: false
-        selectFolder: true
         title: qsTr("Please choose a directory")  + translationManager.emptyString
         onAccepted: {
-            walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.folder);
+            walletLocation.text = walletManager.urlToLocalPath(fileWalletDialog.selectedFolder);
             fileWalletDialog.visible = false;
             walletName.error = !walletName.verify();
         }

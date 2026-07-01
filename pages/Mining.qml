@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml.Models 2.2
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQml.Models
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 import moneroComponents.P2PoolManager 1.0
@@ -305,7 +305,6 @@ Rectangle {
                                     else {
                                         confirmationDialog.title = qsTr("P2Pool installation") + translationManager.emptyString;
                                         confirmationDialog.text  = qsTr("P2Pool will be installed at %1. Proceed?").arg(applicationDirectory) + translationManager.emptyString;
-                                        confirmationDialog.icon = StandardIcon.Question;
                                         confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                                         confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                                         confirmationDialog.onAcceptedCallback = function() {
@@ -586,7 +585,6 @@ Rectangle {
         errorPopup.text = message
         if (persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining)
             errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
-        errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
     }
 
@@ -681,7 +679,6 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
             default:
                 errorPopup.text = qsTr("Unknown error.") + translationManager.emptyString;
         }
-        errorPopup.icon = StandardIcon.Critical
         errorPopup.open()
         update()
     }
@@ -690,7 +687,6 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
         statusMessage.visible = false
         informationPopup.title  = qsTr("P2Pool Installation Succeeded") + translationManager.emptyString;
         informationPopup.text = qsTr("P2Pool has successfully installed.");
-        informationPopup.icon = StandardIcon.Critical
         informationPopup.open()
         update()
     }

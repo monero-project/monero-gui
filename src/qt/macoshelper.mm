@@ -30,7 +30,6 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QtMac>
 #include "macoshelper.h"
 
 #import <Foundation/Foundation.h>
@@ -80,5 +79,5 @@ QString MacOSHelper::bundlePath()
     {
         return {};
     }
-    return QString::fromCFString(reinterpret_cast<const CFStringRef>(bundlePathString));
+    return QString::fromNSString(bundlePathString);
 }

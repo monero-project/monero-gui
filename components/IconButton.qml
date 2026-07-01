@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
+import QtQuick
 import "../components" as MoneroComponents
 import "../components/effects" as MoneroEffects
 
@@ -62,6 +62,6 @@ MoneroEffects.ImageMask {
             button.height = button.height - 2
         }
 
-        onClicked: button.clicked(mouse)
+        onClicked: (mouse) => button.clicked(mouse)
     }
 }

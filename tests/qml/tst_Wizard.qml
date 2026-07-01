@@ -26,10 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtTest 1.2
+import QtQuick
+import QtCore
+import QtTest
 
 import moneroComponents.NetworkType 1.0
+import moneroComponents.Settings 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 
@@ -42,6 +44,7 @@ Item {
     height: 800
 
     property alias persistentSettings: persistentSettings
+    property alias portableSettings: diskPortableSettings
     property alias wizard: wizardController
     property string accountsDir: moneroAccountsDir
     property int walletMode: persistentSettings.walletMode
@@ -56,6 +59,9 @@ Item {
     property bool qrScannerEnabled: false
     property bool hideBalanceForced: false
     property bool active: true
+    property string testSettingsPath: moneroTestRoot + "/settings.ini"
+    property string portableTestSettingsPath: moneroTestRoot + "/monero-storage/settings.ini"
+    property string portableMarkerTestPath: moneroTestRoot + "/monero-storage/.portable"
 
     function updateBalance() {}
 
@@ -63,12 +69,17 @@ Item {
 
     function releaseFocus() {}
 
+    function changeWalletMode(mode) {
+        persistentSettings.walletMode = mode
+    }
+
     function openWallet() {
         passwordDialog.open(persistentSettings.wallet_path)
     }
 
-    QtObject {
+    Settings {
         id: persistentSettings
+        location: diskPortableSettings.location
         property int walletMode: 2
         property int nettype: NetworkType.MAINNET
         property int kdfRounds: 1
@@ -83,11 +94,20 @@ Item {
         property bool allow_background_mining: false
         property bool is_recovering: false
         property bool is_recovering_from_device: false
-        property bool portable: false
         property bool pruneBlockchain: false
         property bool useRemoteNode: false
-        function setPortable() { return true }
-        function setWritable() { return true }
+        Component.onCompleted: wallet_pathChanged()
+    }
+
+    QtObject {
+        id: logger
+        function resetLogFilePath() {}
+    }
+
+    PortableSettings {
+        id: diskPortableSettings
+        settings: persistentSettings
+        unportableFileName: appWindow.testSettingsPath
     }
 
     QtObject {
@@ -265,6 +285,7 @@ Item {
 
             var openWalletView = wizardController.wizardStateView.wizardOpenWallet1View
             tryVerify(function() { return openWalletView.walletCount > 0 })
+            verify(waitForPolish(openWalletView))
             var recentWallet = null
             for (var i = 0; i < openWalletView.recentWallets.count; ++i) {
                 var candidate = openWalletView.recentWallets.itemAt(i)
@@ -293,6 +314,7 @@ Item {
         }
 
         function init() {
+            failOnWarning(/.?/)
             appWindow.ctrlPressed = false
             appWindow.walletCreated = false
             appWindow.walletOpenRequested = false
@@ -309,6 +331,61 @@ Item {
                 passwordDialog.onCancel()
             wizardController.restart()
             showWizardHome()
+        }
+
+        function test_portable_mode_through_wizard() {
+            verify(!diskPortableSettings.portable)
+            persistentSettings.language = "English (US)"
+            persistentSettings.walletMode = 2
+            persistentSettings.pruneBlockchain = false
+            tryVerify(function() {
+                return String(persistentSettings.value("pruneBlockchain")) === "false"
+            })
+            verify(settingsTestHelper.writeSetting(
+                appWindow.portableTestSettingsPath, "obsolete", "must be removed"))
+
+            var wizardHome = wizardController.wizardStateView.wizardHomeView
+            wizardHome.changeWalletModeButton.doClick()
+            tryCompare(wizardController, "wizardState", "wizardModeSelection")
+
+            var modeSelection = wizardController.wizardStateView.wizardModeSelectionView
+            modeSelection.portableModeButton.menuClicked()
+            compare(modeSelection.portable, true)
+            modeSelection.advancedModeButton.menuClicked()
+            tryCompare(wizardController, "wizardState", "wizardHome")
+
+            verify(diskPortableSettings.portable)
+            verify(persistentSettings.pruneBlockchain)
+            verify(settingsTestHelper.fileExists(appWindow.portableMarkerTestPath))
+            compare(settingsTestHelper.readSetting(
+                        appWindow.portableTestSettingsPath, "language"), "English (US)")
+            compare(Number(settingsTestHelper.readSetting(
+                        appWindow.portableTestSettingsPath, "walletMode")), 2)
+            verify(!settingsTestHelper.containsSetting(
+                appWindow.portableTestSettingsPath, "obsolete"))
+
+            verify(settingsTestHelper.writeSetting(
+                appWindow.testSettingsPath, "obsolete", "must be removed"))
+
+            wizardHome = wizardController.wizardStateView.wizardHomeView
+            wizardHome.changeWalletModeButton.doClick()
+            tryCompare(wizardController, "wizardState", "wizardModeSelection")
+
+            modeSelection = wizardController.wizardStateView.wizardModeSelectionView
+            modeSelection.portableModeButton.menuClicked()
+            compare(modeSelection.portable, false)
+            modeSelection.advancedModeButton.menuClicked()
+            tryCompare(wizardController, "wizardState", "wizardHome")
+
+            verify(!diskPortableSettings.portable)
+            compare(settingsTestHelper.readSetting(
+                        appWindow.testSettingsPath, "language"), "English (US)")
+            compare(Number(settingsTestHelper.readSetting(
+                        appWindow.testSettingsPath, "walletMode")), 2)
+            verify(!settingsTestHelper.containsSetting(
+                appWindow.testSettingsPath, "obsolete"))
+            compare(settingsTestHelper.readFile(appWindow.portableMarkerTestPath), "disabled\n")
+            verify(settingsTestHelper.fileExists(appWindow.portableTestSettingsPath))
         }
 
         function test_create_password_wallet_and_open_it() {

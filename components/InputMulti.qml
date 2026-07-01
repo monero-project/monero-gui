@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 2.0
-import QtQuick 2.9
+import QtQuick.Controls
+import QtQuick
 
 import "../js/TxUtils.js" as TxUtils
 import "../components" as MoneroComponents
@@ -51,12 +51,16 @@ TextArea {
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
 
+    background: Rectangle {
+        color: "transparent"
+    }
+
     property int minimumHeight: 100
     height: contentHeight > minimumHeight ? contentHeight : minimumHeight
 
     onTextChanged: {
         if(addressValidation){
-            // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
+            // js replacement for `RegularExpressionValidator { regularExpression: /[0-9A-Fa-f]{95}/g }`
             if (textArea.text.startsWith("monero:")) {
                 error = false;
                 return;

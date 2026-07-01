@@ -28,6 +28,12 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+function finishSettingsLoad(settings) {
+    // Qt may save defaults over existing settings when a new setting is added.
+    // Refresh the pending save after all settings have loaded.
+    settings.wallet_pathChanged();
+}
+
 function showSeedPage() {
     // Shows `Settings->Seed & keys`. Prompts a password dialog.
     passwordDialog.onAcceptedCallback = function() {

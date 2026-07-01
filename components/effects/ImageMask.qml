@@ -26,15 +26,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Effects
+
+import FontAwesome
 
 import "../" as MoneroComponents
-import FontAwesome 1.0
 
 Item {
     // Use this component to color+opacity change images with transparency (svg/png)
-    // Does not work in low graphics mode, use fontAwesome fallback option.
+    // Does not work with the software renderer, use the FontAwesome fallback.
 
     id: root
     property string image: ""
@@ -63,12 +64,13 @@ Item {
         visible: false
     }
 
-    ColorOverlay {
+    MultiEffect {
         id: imgMockColor
         anchors.fill: root
         source: svgMask
-        color: root.color
-        visible: image && isOpenGL
+        colorization: 1.0
+        colorizationColor: root.color
+        visible: image && GraphicsInfo.api !== GraphicsInfo.Software
     }
 
     Text {

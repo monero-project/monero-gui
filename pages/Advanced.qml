@@ -26,10 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import "../components" as MoneroComponents
 import "."
 
@@ -94,7 +93,13 @@ ColumnLayout {
             }
             previousView = currentView
             if (currentView) {
-                stackView.replace(currentView)
+                if (stackView.currentItem !== currentView) {
+                    if (stackView.depth > 0) {
+                        stackView.replace(currentView)
+                    } else {
+                        stackView.push(currentView)
+                    }
+                }
                 if (typeof currentView.onPageCompleted === "function") {
                     currentView.onPageCompleted();
                 }
@@ -127,26 +132,6 @@ ColumnLayout {
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
-            delegate: StackViewDelegate {
-                pushTransition: StackViewTransition {
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * - target.width
-                        to: 0
-                        duration: 300
-                        easing.type: Easing.OutCubic
-                    }
-                    PropertyAnimation {
-                        target: exitItem
-                        property: "x"
-                        from: 0
-                        to: (navbarId.currentIndex < navbarId.previousIndex ? 1 : -1) * target.width
-                        duration: 300
-                        easing.type: Easing.OutCubic
-                    }
-                }
-            }
         }
     }
 
