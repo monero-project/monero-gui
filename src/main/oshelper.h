@@ -30,8 +30,12 @@
 #define OSHELPER_H
 
 #include <QList>
+#include <QImage>
 #include <QObject>
 #include <QString>
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+#include <QVariantMap>
+#endif
 /**
  * @brief The OSHelper class - exports to QML some OS-related functions
  */
@@ -45,7 +49,7 @@ public:
 
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
-    Q_INVOKABLE QList<QString> grabQrCodesFromScreen() const;
+    Q_INVOKABLE QList<QString> grabQrCodesFromScreen();
     Q_INVOKABLE bool openFile(const QString &filePath) const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;
     Q_INVOKABLE QString openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const;
@@ -61,10 +65,25 @@ public:
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
 private:
+    QImage screenshot();
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    QImage screenshotPortal();
+    void resetScreenshotPortalResponse();
+
+    bool m_screenshotPortalResponseReceived = false;
+    uint m_screenshotPortalResponse = 1;
+    QVariantMap m_screenshotPortalResults;
+#endif
 
 signals:
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    void screenshotPortalResponseReceived();
+#endif
 
-public slots:
+private slots:
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    void handleScreenshotPortalResponse(uint responseCode, const QVariantMap &responseResults);
+#endif
 };
 
 #endif // OSHELPER_H
