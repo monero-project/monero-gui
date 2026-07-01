@@ -16,6 +16,7 @@ Text {
     property alias tooltipLeft: tooltip.tooltipLeft
     property alias tooltipIconVisible: tooltip.tooltipIconVisible
     property alias tooltipPopup: tooltip.tooltipPopup
+    property alias tooltipWrapMode: tooltip.tooltipWrapMode
     font.family: MoneroComponents.Style.fontMedium.name
     font.bold: false
     font.pixelSize: 14

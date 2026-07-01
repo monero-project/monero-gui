@@ -36,6 +36,7 @@ import "." as MoneroComponents
 Rectangle {
     property alias text: tooltip.text
     property alias tooltipPopup: popup
+    property alias tooltipWrapMode: tooltip.wrapMode
     property bool tooltipIconVisible: false
     property bool tooltipLeft: false
     property bool tooltipBottom: tooltipIconVisible ? false : true
