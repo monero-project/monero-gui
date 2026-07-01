@@ -35,8 +35,9 @@ Rectangle {
     id: item
     property int fillLevel: 0
     property string syncType // Wallet or Daemon
-    property string syncText: qsTr("%1 blocks remaining: ").arg(syncType)
-    visible: false
+    property alias bar: bar
+    property bool isSynchronizing: true
+    height: progressText.height + (bar.visible ? 20 : 0)
     color: "transparent"
 
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
@@ -46,43 +47,76 @@ Rectangle {
             fillLevel = progressLevel
             if(typeof statusTxt != "undefined" && statusTxt != "") {
                 progressText.text = statusTxt;
-                progressTextValue.text = "";
+                bar.visible = false;
+                item.isSynchronizing = false;
             } else {
-                progressText.text = syncText;
-                progressTextValue.text = remaining.toFixed(0);
+                progressText.text = qsTr("%1: synchronizing. Blocks remaining: %2").arg(syncType).arg(remaining.toFixed(0));
+                bar.visible = true;
+                item.isSynchronizing = true;
             }
         }
     }
 
-    Item {
-        anchors.top: item.top
-        anchors.topMargin: 10
+    Rectangle {
+        anchors.topMargin: 0
+        anchors.bottomMargin: 0
         anchors.leftMargin: 15
         anchors.rightMargin: 15
         anchors.fill: parent
+        color: "transparent"
 
         MoneroComponents.TextPlain {
             id: progressText
             anchors.top: parent.top
-            anchors.topMargin: 6
+            anchors.topMargin: 0
             font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 13
-            font.bold: MoneroComponents.Style.progressBarProgressTextBold
-            color: MoneroComponents.Style.defaultFontColor
-            text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
+            font.pixelSize: 12
+            color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
+            opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.75
+            text: qsTr("%1: synchronizing").arg(syncType) + translationManager.emptyString
             height: 18
-        }
+            tooltip: {
+                if (syncType == qsTr("Node")) {
+                    if (persistentSettings.useRemoteNode) {
+                        if (item.isSynchronizing) {
+                            return qsTr("Checking remote node synchronization") + translationManager.emptyString;
+                        } else if (!item.isSynchronizing && appWindow.currentBlockHeight != 0) {
+                            return qsTr("The remote node is synchronized and the last block received was block #") + appWindow.currentBlockHeight + translationManager.emptyString;
+                        } else if (!item.isSynchronizing) {
+                            return qsTr("Your wallet is connected to a remote node that is synchronized") + translationManager.emptyString;
+                        }
+                    } else if (!persistentSettings.useRemoteNode) {
+                        if (item.isSynchronizing) {
+                            return qsTr("Your local node is downloading the blockchain") + translationManager.emptyString;
+                        } else if (!item.isSynchronizing && appWindow.currentBlockHeight != 0) {
+                            return qsTr("Your local node is synchronized and the last block received was block #") + appWindow.currentBlockHeight + translationManager.emptyString;
+                        } else if (!item.isSynchronizing) {
+                            return qsTr("Your local node is synchronized") + translationManager.emptyString;
+                        }
+                    }
+                } else {
+                    if (item.isSynchronizing) {
+                        return qsTr("Currently scanning the blockchain for transactions that occured after block #") + (currentWallet ? currentWallet.walletCreationHeight.toFixed(0) : "") + "<br>" +
+                               qsTr("After scanning is complete, your balance should be correct.") + translationManager.emptyString;
+                    } else {
+                        return qsTr("The wallet has finished scanning the blockchain for transactions that occured after block #") + (currentWallet ? currentWallet.walletCreationHeight.toFixed(0) : "") + "<br>" +
+                               qsTr("If you have received a transaction in a block before this block height, go to Settings > Info page") + "<br>" +
+                               qsTr("and change the 'Wallet restore height' to the block height of your first transaction.") + translationManager.emptyString;
+                    }
+                }
+            }
 
-        MoneroComponents.TextPlain {
-            id: progressTextValue
-            anchors.top: parent.top
-            anchors.topMargin: 6
-            anchors.right: parent.right
-            font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 13
-            font.bold: MoneroComponents.Style.progressBarProgressTextBold
-            color: MoneroComponents.Style.defaultFontColor
-            height:18
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onEntered: parent.tooltipPopup.open()
+                onExited: parent.tooltipPopup.close()
+                onClicked: {
+                    middlePanel.settingsView.settingsStateViewState = "Info";
+                    appWindow.showPageRequest("Settings");
+                }
+            }
         }
 
         Rectangle {
@@ -94,6 +128,7 @@ Rectangle {
             height: 8
             radius: 8
             color: MoneroComponents.Style.progressBarBackgroundColor
+            visible: fillRect.width != 0
 
             states: [
                 State {
