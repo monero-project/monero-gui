@@ -61,6 +61,14 @@
 #undef FocusOut
 // #undef those Xlib #defines that conflict with QEvent::Type enum
 #include "qt/utils.h"
+#include <QDBusConnection>
+#include <QDBusError>
+#include <QDBusInterface>
+#include <QDBusObjectPath>
+#include <QDBusPendingReply>
+#include <QDBusVariant>
+#include <QEventLoop>
+#include <QTimer>
 #endif
 
 #include "QR-Code-scanner/Decoder.h"
@@ -70,7 +78,7 @@
 namespace
 {
 
-QPixmap screenshot()
+std::unordered_set<QWindow *> hideVisibleWindows()
 {
     std::unordered_set<QWindow *> hidden;
     const QWindowList windows = QGuiApplication::allWindows();
@@ -82,15 +90,42 @@ QPixmap screenshot()
             window->hide();
         }
     }
-    const auto unhide = sg::make_scope_guard([&hidden]() {
-        for (QWindow *window : hidden)
-        {
-            window->show();
-        }
-    });
-
-    return QGuiApplication::primaryScreen()->grabWindow(0);
+    return hidden;
 }
+
+void showWindows(const std::unordered_set<QWindow *> &windows)
+{
+    for (QWindow *window : windows)
+    {
+        window->show();
+    }
+}
+
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+bool isWayland()
+{
+    if (QGuiApplication::platformName().contains("wayland", Qt::CaseInsensitive))
+    {
+        return true;
+    }
+
+    if (!qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY"))
+    {
+        return true;
+    }
+
+    return QString::fromLocal8Bit(qgetenv("XDG_SESSION_TYPE")).compare(QStringLiteral("wayland"), Qt::CaseInsensitive) == 0;
+}
+
+QVariant unwrapDbusVariant(const QVariant &value)
+{
+    if (value.canConvert<QDBusVariant>())
+    {
+        return value.value<QDBusVariant>().variant();
+    }
+    return value;
+}
+#endif
 
 } // namespace
 
@@ -126,6 +161,129 @@ OSHelper::OSHelper(QObject *parent) : QObject(parent)
 
 }
 
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+void OSHelper::resetScreenshotPortalResponse()
+{
+    m_screenshotPortalResponseReceived = false;
+    m_screenshotPortalResponse = 1;
+    m_screenshotPortalResults.clear();
+}
+
+void OSHelper::handleScreenshotPortalResponse(uint responseCode, const QVariantMap &responseResults)
+{
+    m_screenshotPortalResponseReceived = true;
+    m_screenshotPortalResponse = responseCode;
+    m_screenshotPortalResults = responseResults;
+    emit screenshotPortalResponseReceived();
+}
+
+QImage OSHelper::screenshotPortal()
+{
+    QDBusInterface portal(
+        QStringLiteral("org.freedesktop.portal.Desktop"),
+        QStringLiteral("/org/freedesktop/portal/desktop"),
+        QStringLiteral("org.freedesktop.portal.Screenshot"),
+        QDBusConnection::sessionBus());
+    if (!portal.isValid())
+    {
+        qWarning() << "XDG screenshot portal is unavailable:" << QDBusConnection::sessionBus().lastError().message();
+        return QImage();
+    }
+
+    QVariantMap options;
+    options.insert(QStringLiteral("interactive"), true);
+    options.insert(QStringLiteral("modal"), true);
+
+    QDBusPendingReply<QDBusObjectPath> reply = portal.asyncCallWithArgumentList(
+        QStringLiteral("Screenshot"),
+        QVariantList{QString(), options});
+    reply.waitForFinished();
+    if (reply.isError())
+    {
+        qWarning() << "XDG screenshot portal request failed:" << reply.error().message();
+        return QImage();
+    }
+
+    resetScreenshotPortalResponse();
+
+    const QDBusObjectPath requestPath = reply.value();
+    if (!QDBusConnection::sessionBus().connect(
+            QStringLiteral("org.freedesktop.portal.Desktop"),
+            requestPath.path(),
+            QStringLiteral("org.freedesktop.portal.Request"),
+            QStringLiteral("Response"),
+            this,
+            SLOT(handleScreenshotPortalResponse(uint,QVariantMap))))
+    {
+        qWarning() << "Failed to connect to XDG screenshot portal response";
+        return QImage();
+    }
+
+    QEventLoop loop;
+    QTimer timer;
+    timer.setSingleShot(true);
+    QObject::connect(this, SIGNAL(screenshotPortalResponseReceived()), &loop, SLOT(quit()));
+    QObject::connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+    timer.start(60000);
+
+    if (!m_screenshotPortalResponseReceived)
+    {
+        loop.exec();
+    }
+
+    QDBusConnection::sessionBus().disconnect(
+        QStringLiteral("org.freedesktop.portal.Desktop"),
+        requestPath.path(),
+        QStringLiteral("org.freedesktop.portal.Request"),
+        QStringLiteral("Response"),
+        this,
+        SLOT(handleScreenshotPortalResponse(uint,QVariantMap)));
+
+    if (!m_screenshotPortalResponseReceived)
+    {
+        qWarning() << "Timed out waiting for XDG screenshot portal response";
+        return QImage();
+    }
+    if (m_screenshotPortalResponse != 0)
+    {
+        qWarning() << "XDG screenshot portal request was not approved:" << m_screenshotPortalResponse;
+        return QImage();
+    }
+
+    const QVariant uriValue = unwrapDbusVariant(m_screenshotPortalResults.value(QStringLiteral("uri")));
+    const QUrl uri(uriValue.toString());
+    if (!uri.isLocalFile())
+    {
+        qWarning() << "XDG screenshot portal returned an unsupported URI:" << uri;
+        return QImage();
+    }
+
+    QImage image(uri.toLocalFile());
+    if (image.isNull())
+    {
+        qWarning() << "Failed to load XDG screenshot portal image:" << uri;
+    }
+    return image;
+}
+#endif
+
+QImage OSHelper::screenshot()
+{
+    const std::unordered_set<QWindow *> hidden = hideVisibleWindows();
+    const auto unhide = sg::make_scope_guard([&hidden]() {
+        showWindows(hidden);
+    });
+
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    if (isWayland())
+    {
+        return screenshotPortal();
+    }
+#endif
+
+    return QGuiApplication::primaryScreen()->grabWindow(0).toImage();
+}
+
 void OSHelper::createDesktopEntry() const
 {
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
@@ -138,13 +296,18 @@ QString OSHelper::downloadLocation() const
     return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
 }
 
-QList<QString> OSHelper::grabQrCodesFromScreen() const
+QList<QString> OSHelper::grabQrCodesFromScreen()
 {
     QList<QString> codes;
 
     try
     {
-        const QImage image = screenshot().toImage();
+        const QImage image = screenshot();
+        if (image.isNull())
+        {
+            return codes;
+        }
+
         const std::vector<std::string> decoded = QrDecoder().decode(image);
         std::for_each(decoded.begin(), decoded.end(), [&codes](const std::string &code) {
             codes.push_back(QString::fromStdString(code));
