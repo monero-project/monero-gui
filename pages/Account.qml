@@ -26,12 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import FontAwesome 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -339,7 +339,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
@@ -354,7 +354,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21

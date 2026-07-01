@@ -26,12 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Window 2.0
-import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.2
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
 
-import FontAwesome 1.0
 import "../../components/" as MoneroComponents
 import "../../components/effects/" as MoneroEffects
 
@@ -178,20 +176,8 @@ Rectangle {
 
     MouseArea {
         enabled: persistentSettings.customDecorations
-        property var previousPosition
         anchors.fill: parent
         propagateComposedEvents: true
-        onPressed: previousPosition = globalCursor.getPosition()
-        onPositionChanged: {
-            if (pressedButtons == Qt.LeftButton) {
-                var pos = globalCursor.getPosition()
-                var dx = pos.x - previousPosition.x
-                var dy = pos.y - previousPosition.y
-
-                appWindow.x += dx
-                appWindow.y += dy
-                previousPosition = pos
-            }
-        }
+        onPressed: appWindow.startSystemMove()
     }
 }

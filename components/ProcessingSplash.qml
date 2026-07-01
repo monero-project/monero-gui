@@ -26,11 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Window 2.1
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 
@@ -73,25 +72,24 @@ Rectangle {
                 id: imgLogo
                 width: 60
                 height: 60
+                sourceSize: Qt.size(width, height)
                 anchors.centerIn: parent
                 source: "qrc:///images/monero-vector.svg"
                 mipmap: true
             }
 
             BusyIndicator {
-                running: parent.visible
+                running: root.visible
                 anchors.centerIn: imgLogo
-                style: BusyIndicatorStyle {
-                    indicator: Image {
-                        visible: control.running
-                        source: "qrc:///images/busy-indicator.png"
-                        RotationAnimator on rotation {
-                            running: control.running
-                            loops: Animation.Infinite
-                            duration: 1000
-                            from: 0
-                            to: 360
-                        }
+                contentItem: Image {
+                    visible: parent.running
+                    source: "qrc:///images/busy-indicator.png"
+                    RotationAnimator on rotation {
+                        running: root.visible
+                        loops: Animation.Infinite
+                        duration: 1000
+                        from: 0
+                        to: 360
                     }
                 }
             }

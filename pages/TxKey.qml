@@ -26,10 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
@@ -125,8 +124,8 @@ Rectangle {
                         }
                         error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
                     }
-                    validator: RegExpValidator {
-                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                 }
             }
 

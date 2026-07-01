@@ -8,6 +8,9 @@
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
 
+  <key>NSCameraUsageDescription</key>
+  <string>The camera is used to scan Monero QR codes.</string>
+
   <key>CFBundleIconFile</key>
   <string>appicon.icns</string>
 

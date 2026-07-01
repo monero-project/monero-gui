@@ -39,6 +39,8 @@
 
 class TransactionHistory;
 
+Q_MOC_INCLUDE("TransactionHistory.h")
+
 class TransactionHistorySortFilterModel: public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -101,6 +103,8 @@ protected:
 
 
 private:
+    void invalidateRowFilter();
+
     enum ScopeIndex {
         From = 0,
         To   = 1
