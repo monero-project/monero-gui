@@ -76,16 +76,17 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
         var path = accountsDir + filename;
     else
         var path = directory + filename + "/" + filename;
+        var path2 = directory + filename;
 
-    if (walletManager.walletExists(path))
+    if (walletManager.walletExists(path) || walletManager.walletExists(path2))
         return true;
     return false;
 }
 
-function unusedWalletName(directory, filename, walletManager) {
+function unusedWalletName(directory, filename, isIOS, walletManager) {
     for (var i = 0; i < 100; i++) {
         var walletName = filename + (i > 0 ? "_" + i : "");
-        if (!walletManager.walletExists(directory + "/" + walletName + "/" + walletName)) {
+        if (!walletPathExists(directory, directory, walletName, isIOS, walletManager)) {
             return walletName;
         }
     }
