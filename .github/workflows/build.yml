@@ -190,9 +190,8 @@ jobs:
         pip install git-archive-all
         export VERSION="monero-gui-$(git describe)"
         export OUTPUT="$VERSION.tar"
-        echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
         /home/runner/.local/bin/git-archive-all --prefix "$VERSION/" --force-submodules "$OUTPUT"
     - uses: actions/upload-artifact@v5
       with:
-        name: ${{ env.OUTPUT }}
-        path: /home/runner/work/monero-gui/monero-gui/${{ env.OUTPUT }}
+        name: source-archive
+        path: /home/runner/work/monero-gui/monero-gui/*.tar
