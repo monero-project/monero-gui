@@ -230,6 +230,7 @@ int main(int argc, char *argv[])
 #endif
 
     app.setApplicationName("monero-core");
+    app.setDesktopFileName("org.getmonero.Monero");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
 
