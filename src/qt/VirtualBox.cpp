@@ -22,7 +22,7 @@ bool VirtualBox::detect()
     }
 
     QProcess process;
-    process.start(detectVirtPath, {"--vm"});
+    process.start(detectVirtPath, QStringList() << "--vm");
     if (!process.waitForFinished(2000)) {
         m_detected = false;
         m_cachedDetected = true;
@@ -59,7 +59,7 @@ bool VirtualBox::detect3DAcceleration()
     }
 
     QProcess process;
-    process.start(glxInfoPath, {});
+    process.start(glxInfoPath, QStringList());
     if (!process.waitForFinished(3000)) {
         m_detected3D = false;
         m_cachedDetected3D = true;
