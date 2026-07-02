@@ -1707,7 +1707,7 @@ ApplicationWindow {
     MoneroComponents.UpdateDialog {
         id: updateDialog
 
-        allowed: !passwordDialog.visible && !inputDialog.visible && !splash.visible
+        allowed: !passwordDialog.visible && !inputDialog.visible && !splash.visible && !devicePassphraseDialog.visible
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
     }
