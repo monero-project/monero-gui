@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "P2PoolManager.h"
-#include "net/http_client.h"
+#include "net/http.h"
 #include "common/util.h"
 #include "main/oshelper.h"
 #include "qt/utils.h"
@@ -72,11 +72,26 @@ void P2PoolManager::download() {
             validHash = "64657dd2ae954d41880aef98193124d1d08dfa2e991f755a9d089a35f96def13";
         #endif
         QFile file(fileName);
-        epee::net_utils::http::http_simple_client http_client;
+        net::http::client http_client;
+        QString proxyAddress;
+        {
+            QMutexLocker locker(&m_proxyMutex);
+            proxyAddress = m_proxyAddress;
+        }
+
+        if (!proxyAddress.isEmpty() && !http_client.set_proxy(proxyAddress.toStdString())) {
+            qCritical() << "Failed to set p2pool download proxy address" << proxyAddress;
+            emit p2poolDownloadFailure(ConnectionIssue);
+            return;
+        }
+
         const epee::net_utils::http::http_response_info* response = NULL;
         std::string userAgent = randomUserAgent().toStdString();
         std::chrono::milliseconds timeout = std::chrono::seconds(10);
-        http_client.set_server(url.host().toStdString(), "443", {});
+        const epee::net_utils::ssl_options_t sslOptions{
+            epee::net_utils::ssl_support_t::e_ssl_support_enabled
+        };
+        http_client.set_server(url.host().toStdString(), "443", {}, sslOptions);
         bool success = http_client.invoke_get(url.path().toStdString(), timeout, {}, std::addressof(response), {{"User-Agent", userAgent}});
         if (success && response->m_response_code == 404) {
             emit p2poolDownloadFailure(BinaryNotAvailable);
@@ -86,9 +101,11 @@ void P2PoolManager::download() {
             for (std::pair<std::string, std::string> i : fields) {
                 if (i.first == "Location") {
                     url = QString::fromStdString(i.second);
-                    http_client.set_server(url.host().toStdString(), "443", {});
-                    std::string query = url.query(QUrl::FullyEncoded).toStdString();
-                    std::string path = url.path().toStdString() + "?" + query;
+                    http_client.set_server(url.host().toStdString(), "443", {}, sslOptions);
+                    std::string path = url.path().toStdString();
+                    if (url.hasQuery()) {
+                        path += "?" + url.query(QUrl::FullyEncoded).toStdString();
+                    }
                     http_client.wipe_response();
                     success = http_client.invoke_get(path, timeout, {}, std::addressof(response), {{"User-Agent", userAgent}});
                 }
@@ -196,6 +213,15 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
         arguments << "--wallet" << address;
     }
 
+    {
+        QMutexLocker locker(&m_proxyMutex);
+        if (!m_proxyAddress.isEmpty()) {
+            if (!arguments.contains("--socks5")) {
+                arguments << "--socks5" << m_proxyAddress;
+            }
+        }
+    }
+
     qDebug() << "starting p2pool " + m_p2pool;
     qDebug() << "With command line arguments " << arguments;
 
@@ -218,6 +244,25 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
     }
 
     return true;
+}
+
+QString P2PoolManager::proxyAddress() const
+{
+    QMutexLocker locker(&m_proxyMutex);
+    return m_proxyAddress;
+}
+
+void P2PoolManager::setProxyAddress(QString address)
+{
+    {
+        QMutexLocker locker(&m_proxyMutex);
+        if (m_proxyAddress == address) {
+            return;
+        }
+        m_proxyAddress = address;
+    }
+
+    emit proxyAddressChanged();
 }
 
 void P2PoolManager::exit()
