@@ -24,7 +24,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y ant automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
-    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-11-jdk-headless openjdk-11-jre-headless pkg-config python3 \
+    libssl-dev libstdc++6 libtinfo5 libtool libz1 ninja-build openjdk-11-jdk-headless openjdk-11-jre-headless pkg-config python3 \
     unzip wget
 
 RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
@@ -217,7 +217,7 @@ CMD set -ex \
     && cd /monero-gui \
     && mkdir -p build/Android/release \
     && cd build/Android/release \
-    && cmake \
+    && cmake -G Ninja \
     -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" \
     -DCMAKE_PREFIX_PATH="${PREFIX}" \
     -DCMAKE_FIND_ROOT_PATH="${PREFIX}" \
@@ -233,8 +233,7 @@ CMD set -ex \
     -DWITH_SCANNER=ON \
     -DWITH_DESKTOP_ENTRY=OFF \
     ../../.. \
-    && PATH=${HOST_PATH} make generate_translations_header \
-    && sed -i -e "s#../monero/external/randomx/librandomx.a##" src/CMakeFiles/monero-wallet-gui.dir/link.txt \
-    && sed -i -e "s#-lm#-lm ../monero/external/randomx/librandomx.a#" src/CMakeFiles/monero-wallet-gui.dir/link.txt \
-    && make -j${THREADS} -C src \
-    && make -j${THREADS} apk
+    && PATH=${HOST_PATH} cmake --build . --target generate_translations_header \
+    && sed -i -e "/^build .*monero-wallet-gui.*:.*LINKER/,/^$/ { s#monero/external/randomx/librandomx.a##; s#-lm#-lm monero/external/randomx/librandomx.a#; }" build.ninja \
+    && cmake --build . --target monero-wallet-gui \
+    && cmake --build . --target apk

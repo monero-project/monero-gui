@@ -98,6 +98,8 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
 
+*Note*: The convenience targets in the project Makefile require the Ninja build system. Other CMake generators can still be used by invoking CMake directly. Ninja builds in parallel by default. To limit or set the number of parallel build jobs, set `CMAKE_BUILD_PARALLEL_LEVEL`, for example `CMAKE_BUILD_PARALLEL_LEVEL=4 make release`.
+
 ### Building Reproducible Windows static binaries with Docker (any OS)
 
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
@@ -115,10 +117,10 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j4'
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
-   \* `4` - number of CPU threads to use
+   \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. add `-e CMAKE_BUILD_PARALLEL_LEVEL=4` to the `docker run` command
 5. Monero GUI Windows static binaries will be placed in  `monero-gui/build/x86_64-w64-mingw32/release/bin` directory
 
 ### Building Reproducible Linux static binaries with Docker (any OS)
@@ -138,10 +140,10 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static -j4'
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
-   \* `4` - number of CPU threads to use
+   \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. add `-e CMAKE_BUILD_PARALLEL_LEVEL=4` to the `docker run` command
 5. Monero GUI Linux static binary will be placed in  `monero-gui/build/release/bin` directory
 6. (*Note*) This process is only for building `monero-wallet-gui`, `monerod` has to be built separately according to the instructions in the `monero` repository.
 7. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
@@ -167,10 +169,10 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -e THREADS=4 monero:build-env-android
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui monero:build-env-android
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
-   \* `4` - number of CPU threads to use
+   \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. add `-e CMAKE_BUILD_PARALLEL_LEVEL=4` to the `docker run` command
 5. Monero GUI APK will be placed in  `monero-gui/build/Android/release/android-build` directory
 6. Deploy
    * Using ADB (Android debugger bridge)
@@ -207,15 +209,15 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-	`sudo apt install build-essential cmake libunbound-dev graphviz doxygen pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler libgcrypt20-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev`
+	`sudo apt install build-essential cmake ninja-build libunbound-dev graphviz doxygen pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler libgcrypt20-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev`
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/zeromq dev-libs/libsodium dev-libs/hidapi dev-libs/libgcrypt`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-build/ninja dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/zeromq dev-libs/libsodium dev-libs/hidapi dev-libs/libgcrypt`
 
   - For Fedora
 
-	`sudo dnf install make automake cmake gcc-c++ boost-devel graphviz doxygen unbound-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel libgcrypt-devel`
+	`sudo dnf install make automake cmake ninja gcc-c++ boost-devel graphviz doxygen unbound-devel pkgconfig openssl-devel libcurl-devel hidapi-devel libusb-devel zeromq-devel libgcrypt-devel`
 
 2. Install Qt:
 
@@ -257,11 +259,11 @@ The following instructions will fetch Qt from your distribution's repositories i
 4. Build
 
     ```
-    make release -j4
+    make release
     ```
 
-    \* `4` - number of CPU threads to use  
-    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release -j4`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release`
+    \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. `CMAKE_BUILD_PARALLEL_LEVEL=4 make release`
 
 The executable can be found in the build/release/bin folder.
 
@@ -273,7 +275,7 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install cmake pkg-config openssl boost unbound hidapi zmq libpgm libsodium expat protobuf libgcrypt`
+  `brew install cmake ninja pkg-config openssl boost unbound hidapi zmq libpgm libsodium expat protobuf libgcrypt`
 
 4. Install Qt:
 
@@ -289,10 +291,10 @@ The executable can be found in the build/release/bin folder.
 6. Start the build
 
     ```
-    make release -j4
+    make release
     ```
-    \* `4` - number of CPU threads to use  
-    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release -j4`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release`
+    \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. `CMAKE_BUILD_PARALLEL_LEVEL=4 make release`
 
 The executable can be found in the `build/release/bin` folder.
 
@@ -309,7 +311,7 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 3. Install MSYS2 packages for Monero dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-unbound mingw-w64-x86_64-pcre mingw-w64-x86_64-angleproject
+    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-unbound mingw-w64-x86_64-pcre mingw-w64-x86_64-angleproject
     ```
 
     You find more details about those dependencies in the [Monero documentation](https://github.com/monero-project/monero). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
@@ -338,10 +340,10 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 7. Build
 
     ```
-    make release-win64 -j4
+    make release-win64
     cd build/release
-    make deploy
+    cmake --build . --target deploy
     ```
-    \* `4` - number of CPU threads to use
+    \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. `CMAKE_BUILD_PARALLEL_LEVEL=4 make release-win64`
 
 The executable can be found in the `.\bin` directory.

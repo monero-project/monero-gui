@@ -9,7 +9,7 @@ ENV CXXFLAGS="-fPIC"
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
-    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
+    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev ninja-build \
     libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
 
