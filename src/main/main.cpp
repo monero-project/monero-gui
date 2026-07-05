@@ -54,6 +54,7 @@
 #include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
+#include "model/LanguageModel.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
 #include "Subaddress.h"
@@ -141,7 +142,6 @@ Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
 Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
 Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
 Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
-Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
 #ifdef WITH_SCANNER
 Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
 #endif
@@ -382,6 +382,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
     qmlRegisterType<Network>("moneroComponents.Network", 1, 0, "Network");
     qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
+    qmlRegisterType<LanguageModel>("moneroComponents.LanguageModel", 1, 0, "LanguageModel");
     qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
 
     // Temporary Qt.labs.settings replacement

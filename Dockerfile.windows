@@ -24,7 +24,7 @@ RUN make -j$THREADS -C /depends HOST=x86_64-w64-mingw32 NO_QT=1
 RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
     cd qt5 && \
     git reset --hard dc2ac680fa9d0ef7b0d9520859593d13951bedea && \
-    git submodule update --init --depth 1 qtbase qtdeclarative qtgraphicaleffects qtimageformats qtmultimedia qtquickcontrols qtquickcontrols2 qtsvg qttools qttranslations qtxmlpatterns && \
+    git submodule update --init --depth 1 qtbase qtdeclarative qtgraphicaleffects qtimageformats qtmultimedia qtquickcontrols qtquickcontrols2 qtsvg qttools qttranslations && \
     ./configure --prefix=/depends/x86_64-w64-mingw32 -xplatform win32-g++ \
     -device-option CROSS_COMPILE=/usr/bin/x86_64-w64-mingw32- \
     -I $(pwd)/qtbase/src/3rdparty/angle/include \
