@@ -45,9 +45,8 @@ Window {
     signal started();
 
     function open() {
-        show()
         countDown = 10;
-        timer.start();
+        timer.restart();
     }
 
     // TODO: implement without hardcoding sizes
@@ -81,12 +80,18 @@ Window {
                 repeat: true
                 onTriggered: {
                     if (currentWallet.connected() == Wallet.ConnectionStatus_Connected) {
-                        running = false;
+                        timer.stop();
                         root.close();
+                        return;
                     }
+
+                    if (!root.visible) {
+                        root.show();
+                    }
+
                     countDown--;
-                    if(countDown < 0){
-                        running = false;
+                    if (countDown < 0) {
+                        timer.stop();
                         // Start daemon
                         root.close()
                         appWindow.startDaemon(persistentSettings.daemonFlags);
