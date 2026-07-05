@@ -104,7 +104,6 @@ target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/model
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
 	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
-    ${X11_INCLUDE_DIR}
 )
 
 target_compile_definitions(monero-wallet-gui
@@ -137,10 +136,6 @@ target_link_libraries(monero-wallet-gui
     translations
     zxcvbn
 )
-
-if(X11_FOUND)
-    target_link_libraries(monero-wallet-gui ${X11_LIBRARIES})
-endif()
 
 if(WITH_SCANNER)
     target_link_libraries(monero-wallet-gui qrscanner)
