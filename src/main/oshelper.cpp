@@ -53,13 +53,6 @@
 #include <windows.h>
 #endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
-#include <X11/XKBlib.h>
-#undef Bool
-#undef KeyPress
-#undef KeyRelease
-#undef FocusIn
-#undef FocusOut
-// #undef those Xlib #defines that conflict with QEvent::Type enum
 #include "qt/utils.h"
 #endif
 
@@ -221,26 +214,15 @@ bool OSHelper::removeTemporaryWallet(const QString &fileName) const
     return cache_deleted && address_deleted && keys_deleted;
 }
 
-// https://stackoverflow.com/a/3006934
 bool OSHelper::isCapsLock() const
 {
-    // platform dependent method of determining if CAPS LOCK is on
-#if defined(Q_OS_WIN) // MS Windows version
-    return GetKeyState(VK_CAPITAL) == 1;
-#elif defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID) // X11 version
-    Display * d = XOpenDisplay((char*)0);
-    bool caps_state = false;
-    if (d) {
-        unsigned n;
-        XkbGetIndicatorState(d, XkbUseCoreKbd, &n);
-        caps_state = (n & 0x01) == 1;
-        XCloseDisplay(d);
-    }
-    return caps_state;
+#if defined(Q_OS_WIN)
+    return (GetKeyState(VK_CAPITAL) & 0x0001) != 0;
 #elif defined(Q_OS_MAC)
     return MacOSHelper::isCapsLock();
-#endif
+#else
     return false;
+#endif
 }
 
 QString OSHelper::temporaryPath() const
