@@ -37,11 +37,15 @@ class filter : public QObject
 private:
     bool m_tabPressed;
     bool m_backtabPressed;
+    bool m_acceptQuit;
 public:
     explicit filter(QObject *parent = 0);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
+
+public slots:
+    void acceptQuit();
 
 signals:
     void quitRequested();
