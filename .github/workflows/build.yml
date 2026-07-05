@@ -180,7 +180,7 @@ jobs:
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
 
   source-archive:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-slim
     steps:
     - uses: actions/checkout@v1
       with:
