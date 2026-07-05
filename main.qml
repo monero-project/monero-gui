@@ -2478,7 +2478,10 @@ ApplicationWindow {
         onClosed: { if (previousActiveFocusItem) previousActiveFocusItem.forceActiveFocus() }
     }
 
-    MoneroComponents.MenuBar { }
+    Loader {
+        active: isMac
+        sourceComponent: MoneroComponents.MenuBar {}
+    }
 
     Network {
         id: network
