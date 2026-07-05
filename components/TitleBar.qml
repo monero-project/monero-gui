@@ -130,7 +130,7 @@ Rectangle {
                     parent.color = "transparent"
                     btnLockWalletTooltip.tooltipPopup.close()
                 }
-                onClicked: root.lockWalletClicked(leftPanel.visible)
+                onClicked: root.lockWalletClicked()
             }
         }
 
@@ -171,7 +171,7 @@ Rectangle {
                     parent.color = "transparent"
                     btnCloseWalletTooltip.tooltipPopup.close()
                 }
-                onClicked: root.closeWalletClicked(leftPanel.visible)
+                onClicked: root.closeWalletClicked()
             }
         }
 
