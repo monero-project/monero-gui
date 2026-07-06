@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "filter.h"
+#include <QCoreApplication>
 #include <QKeyEvent>
 #include <QDebug>
 
@@ -35,10 +36,14 @@ filter::filter(QObject *parent) :
 {
     m_tabPressed = false;
     m_backtabPressed = false;
+    m_acceptQuit = false;
 }
 
 bool filter::eventFilter(QObject *obj, QEvent *ev) {
     if (ev->type() == QEvent::Quit) {
+        if (m_acceptQuit)
+            return QObject::eventFilter(obj, ev);
+
         emit quitRequested();
         return true;
     }
@@ -134,4 +139,10 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
     }
 
     return QObject::eventFilter(obj, ev);
+}
+
+void filter::acceptQuit()
+{
+    m_acceptQuit = true;
+    QCoreApplication::quit();
 }

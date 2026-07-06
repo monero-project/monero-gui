@@ -55,6 +55,7 @@ import "version.js" as Version
 
 ApplicationWindow {
     id: appWindow
+    signal gracefulShutdownComplete()
     title: "Monero" +
         (persistentSettings.displayWalletNameInTitleBar && walletName
         ? " - " + walletName
@@ -288,7 +289,7 @@ ApplicationWindow {
             return;
         isQuitting = true;
         closeWallet(function() {
-            Qt.quit();
+            gracefulShutdownComplete();
         })
     }
 
@@ -2243,11 +2244,16 @@ ApplicationWindow {
     }
 
     function closeAccepted(){
+        if (isQuitting)
+            return;
+        isQuitting = true;
         console.log("close accepted");
-        // Close wallet non async on exit
         daemonManager.exit();
         p2poolManager.exit();
-        closeWallet(Qt.quit);
+        closeWallet(function() {
+            console.log("wallet closed, requesting final application quit");
+            gracefulShutdownComplete();
+        });
     }
 
     function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {
