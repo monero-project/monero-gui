@@ -29,9 +29,9 @@
 import "../components" as MoneroComponents
 
 import QtQuick 2.9
-import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import moneroComponents.LanguageModel 1.0
 
 
 Drawer {
@@ -171,24 +171,8 @@ Drawer {
     }
 
     //Flags model
-    XmlListModel {
+    LanguageModel {
         id: langModel
-        source: "/lang/languages.xml"
-        query: "/languages/language"
-
-        XmlRole { name: "display_name"; query: "@display_name/string()" }
-        XmlRole { name: "locale"; query: "@locale/string()" }
-        XmlRole { name: "wallet_language"; query: "@wallet_language/string()" }
-        XmlRole { name: "flag"; query: "@flag/string()" }
-        // TODO: XmlListModel is read only, we should store current language somewhere else
-        // and set current language accordingly
-        XmlRole { name: "isCurrent"; query: "@enabled/string()" }
-
-        onStatusChanged: {
-            if(status === XmlListModel.Ready){
-                console.log("languages available: ",count);
-            }
-        }
     }
 
     function selectCurrentLanguage() {

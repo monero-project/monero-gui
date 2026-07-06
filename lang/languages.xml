@@ -42,7 +42,7 @@ Lojban
         <language display_name="עברית" locale="he_HE" wallet_language="English" flag="/lang/flags/il.png" qs="none"/>
         <language display_name="한국어" locale="ko_KO" wallet_language="English" flag="/lang/flags/kr.png" qs="none"/>
         <language display_name="Română" locale="ro_RO" wallet_language="English" flag="/lang/flags/ro.png" qs="none"/>
-        <language display_name="Dansk" locale="da_DK" wallet-language="English" flag="/lang/flags/dk.png" qs="none"/>
+        <language display_name="Dansk" locale="da_DK" wallet_language="English" flag="/lang/flags/dk.png" qs="none"/>
         <language display_name="Česky" locale="cs_CZ" wallet_language="English" flag="/lang/flags/cz.png" qs="none"/>
         <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/sk.png" qs="none"/>
         <language display_name="العربية" locale="ar_AR" wallet_language="English" flag="/lang/flags/eg.png" qs="none"/>

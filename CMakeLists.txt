@@ -151,11 +151,6 @@ if(Qt5QmlModels_PKG_CONFIG_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
-find_package(Qt5XmlPatterns QUIET)
-if(Qt5XmlPatterns_FOUND)
-  list(APPEND QT5_LIBRARIES Qt5XmlPatterns)
-endif()
-
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} ${QT_MIN_VERSION} REQUIRED)
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
@@ -225,7 +220,6 @@ if(STATIC)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/PrivateWidgets)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Templates.2)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Window.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/XmlListModel)
 
   set(QT5_EXTRA_LIBRARIES_LIST
     qtquicktemplates2plugin
@@ -237,7 +231,6 @@ if(STATIC)
     qmlfolderlistmodelplugin
     qmlsettingsplugin
     qtlabsplatformplugin
-    qmlxmllistmodelplugin
     qquicklayoutsplugin
     modelsplugin
   )
