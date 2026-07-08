@@ -426,10 +426,10 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
         {
             for (const QString &item : unknown_parameters)
             {
-                const auto parsed_item = item.splitRef("=");
+                const auto parsed_item = item.split('=');
                 if (parsed_item.size() == 2)
                 {
-                    extra_parameters.insert(parsed_item[0].toString(), parsed_item[1].toString());
+                    extra_parameters.insert(parsed_item[0], parsed_item[1]);
                 }
             }
         }

@@ -124,7 +124,7 @@ QByteArray Updater::getHash(const void *data, size_t size) const
 
 QByteArray Updater::parseShasumOutput(const QString &message, const QString &filename) const
 {
-    for (const auto &line : message.splitRef("\n"))
+    for (const auto &line : message.split('\n'))
     {
         const auto trimmed = line.trimmed();
         if (trimmed.endsWith(filename))
