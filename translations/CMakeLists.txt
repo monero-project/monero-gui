@@ -26,11 +26,7 @@ endforeach()
 string(APPEND QRC_CONTENTS "</qresource></RCC>")
 
 set(TRANSLATIONS_QRC ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
-add_custom_command(
-  OUTPUT ${TRANSLATIONS_QRC}
-  COMMAND echo ${QRC_CONTENTS} > ${TRANSLATIONS_QRC}
-  VERBATIM
-)
+file(WRITE "${TRANSLATIONS_QRC}" "${QRC_CONTENTS}")
 set_source_files_properties(${TRANSLATIONS_QRC} PROPERTIES SKIP_AUTORCC ON)
 
 set(TRANSLATIONS_CPP ${CMAKE_CURRENT_BINARY_DIR}/qrc_translations.cpp)

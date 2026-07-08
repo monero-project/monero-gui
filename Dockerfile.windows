@@ -5,7 +5,7 @@ ARG QT_VERSION=v5.15.19-lts-lgpl
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool pkg-config \
+    DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool ninja-build pkg-config \
     python && \
     rm -rf /var/lib/apt/lists/*
 
