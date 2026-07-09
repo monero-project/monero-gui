@@ -222,6 +222,8 @@ Rectangle {
                     id: kdfRoundsText
                     Layout.maximumWidth: 180
 
+                    property bool kdfWarningShown: false
+
                     labelText: qsTr("Number of KDF rounds:") + translationManager.emptyString
                     labelFontSize: 14
                     fontSize: 16
@@ -230,7 +232,25 @@ Rectangle {
                     validator: IntValidator { bottom: 1 }
                     text: persistentSettings.kdfRounds ? persistentSettings.kdfRounds : "1"
                     onTextChanged: {
-                        persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
+                        var wasDefault = persistentSettings.kdfRounds === 1;
+                        var newValue = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
+                        persistentSettings.kdfRounds = newValue;
+
+                        if (newValue === 1) {
+                            kdfRoundsText.kdfWarningShown = false;
+                        } else if (wasDefault && !kdfRoundsText.kdfWarningShown) {
+                            kdfRoundsText.kdfWarningShown = true;
+                            confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                            confirmationDialog.text = qsTr("You have selected a non-standard number of KDF rounds.\n\nThis value is set globally and is not stored in the wallet file. It must be remembered and re-entered every time this wallet is opened; otherwise, the wallet will not open due to the password being incorrect.\n\nHigher values make opening and saving the wallet significantly slower.") + translationManager.emptyString;
+                            confirmationDialog.icon = StandardIcon.Warning;
+                            confirmationDialog.onAcceptedCallback = null;
+                            confirmationDialog.onRejectedCallback = function() {
+                                kdfRoundsText.text = "1";
+                            }
+                            confirmationDialog.cancelText = qsTr("Reset to 1") + translationManager.emptyString;
+                            confirmationDialog.okText = qsTr("Keep") + translationManager.emptyString;
+                            confirmationDialog.open();
+                        }
                     }
                 }
 
