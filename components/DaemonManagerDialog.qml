@@ -38,7 +38,7 @@ import "../components" as MoneroComponents
 
 Window {
     id: root
-    modality: Qt.ApplicationModal
+    modality: Qt.NonModal
     flags: Qt.Window | Qt.FramelessWindowHint
     property int countDown: 10;
     signal rejected()
