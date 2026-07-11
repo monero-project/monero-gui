@@ -9,9 +9,18 @@ ENV CXXFLAGS="-fPIC"
 ENV SOURCE_DATE_EPOCH=1397818193
 
 RUN apt update && \
-    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev ninja-build \
+    apt install -y autoconf-archive automake autopoint bison gettext git gperf libexpat1-dev libgl1-mesa-dev libglib2.0-dev ninja-build \
     libpng-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
     pkg-config python wget xutils-dev
+
+RUN git clone -b dbus-1.12.2 --depth 1 https://gitlab.freedesktop.org/dbus/dbus.git && \
+    cd dbus && \
+    git reset --hard 0f0968336b9711349023e1d41f075b2bccf7c20b && \
+    ./autogen.sh && \
+    ./configure --disable-shared --enable-static --disable-systemd --disable-launchd --disable-selinux --disable-apparmor --disable-libaudit --disable-xml-docs --disable-doxygen-docs --disable-ducktype-docs --disable-modular-tests --disable-embedded-tests --disable-x11-autolaunch --without-x --with-systemdsystemunitdir=no --with-systemduserunitdir=no && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && \
@@ -198,7 +207,7 @@ RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
     ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
     -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
-    -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
+    -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
     -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
     -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
