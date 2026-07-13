@@ -1072,7 +1072,7 @@ ApplicationWindow {
     // called on "getProof"
     function handleGetProof(txid, address, message, amount) {
         if (amount !== null && amount.length > 0) {
-            var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, walletManager.amountFromString(amount), message)
+            var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, amount, message)
             txProofComputed(null, result)
         } else {
             console.log("Getting payment proof: ")

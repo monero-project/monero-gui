@@ -945,10 +945,11 @@ Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &
     return QString::fromStdString(result);
 }
 
-Q_INVOKABLE QString Wallet::getReserveProof(bool all, quint32 account_index, quint64 amount, const QString &message) const
+Q_INVOKABLE QString Wallet::getReserveProof(bool all, quint32 account_index, const QString &amount, const QString &message) const
 {
     qDebug("Generating reserve proof");
-    std::string result = m_walletImpl->getReserveProof(all, account_index, amount, message.toStdString());
+    const quint64 amountAtomic = Monero::Wallet::amountFromString(amount.toStdString());
+    std::string result = m_walletImpl->getReserveProof(all, account_index, amountAtomic, message.toStdString());
     if (result.empty())
         result = "error|" + m_walletImpl->errorString();
     return QString::fromStdString(result);
@@ -1053,10 +1054,11 @@ bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id
    return res;
 }
 
-QString Wallet::make_uri(const QString &address, const quint64 &amount, const QString &tx_description, const QString &recipient_name) const
+QString Wallet::make_uri(const QString &address, const QString &amount, const QString &tx_description, const QString &recipient_name) const
 {
     std::string error;
-    return QString::fromStdString(m_walletImpl->make_uri(address.toStdString(), "", amount, tx_description.toStdString(), recipient_name.toStdString(), error));
+    const quint64 amountAtomic = Monero::Wallet::amountFromString(amount.toStdString());
+    return QString::fromStdString(m_walletImpl->make_uri(address.toStdString(), "", amountAtomic, tx_description.toStdString(), recipient_name.toStdString(), error));
 }
 
 bool Wallet::rescanSpent()
