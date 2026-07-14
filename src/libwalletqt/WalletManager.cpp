@@ -42,7 +42,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
-#include <QTcpSocket>
+#include "net/net_helper.h"
 
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
@@ -382,11 +382,13 @@ bool WalletManager::stopMining()
 void WalletManager::checkI2PSamAsync(const QString &host, int port, const QJSValue &callback)
 {
     m_scheduler.run([host, port] {
-        QTcpSocket socket;
-        socket.connectToHost(host, static_cast<quint16>(port));
-        bool reachable = socket.waitForConnected(2000);
-        if (reachable) socket.disconnectFromHost();
-        return QJSValueList({reachable});
+        epee::net_utils::blocked_mode_client client;
+        client.set_ssl(epee::net_utils::ssl_support_t::e_ssl_support_disabled);
+        const bool reachable = client.connect(
+            host.toStdString(),
+            std::to_string(port),
+            std::chrono::milliseconds{2000});
+        return QJSValueList{reachable};
     }, callback);
 }
 
