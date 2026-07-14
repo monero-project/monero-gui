@@ -69,6 +69,14 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: trayIconEnabledCheckBox
+            visible: !isMac
+            checked: persistentSettings.trayIconEnabled
+            onClicked: persistentSettings.trayIconEnabled = !persistentSettings.trayIconEnabled
+            text: qsTr("Show tray icon") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             checked: persistentSettings.displayWalletNameInTitleBar
             onClicked: persistentSettings.displayWalletNameInTitleBar = !persistentSettings.displayWalletNameInTitleBar
             text: qsTr("Display wallet name in title bar") + translationManager.emptyString
