@@ -1180,7 +1180,7 @@ Rectangle {
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
-        if(appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
+        if(appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += " " + root.startLinkText;
         pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
             root.warningContent = messageNotConnected;
