@@ -22,10 +22,6 @@ ifeq ($(USE_SINGLE_BUILDDIR), OFF)
     builddir := $(builddir)/$(branch)
     topdir := $(topdir)/..
   endif
-
-  deldirs := $(builddir)
-else
-  deldirs := $(builddir)/debug $(builddir)/release $(builddir)/fuzz
 endif
 
 default:
