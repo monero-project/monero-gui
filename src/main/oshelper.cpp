@@ -71,7 +71,8 @@ QPixmap screenshot()
     const QWindowList windows = QGuiApplication::allWindows();
     for (QWindow *window : windows)
     {
-        if (window->isVisible())
+        // Qt never re-maps a hidden XEmbed tray icon window
+        if (window->isVisible() && window->objectName() != QLatin1String("QSystemTrayIconSysWindow"))
         {
             hidden.emplace(window);
             window->hide();

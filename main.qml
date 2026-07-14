@@ -33,6 +33,7 @@ import QtQuick.Effects
 import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Dialogs
+import Qt.labs.platform as PlatformLabs
 
 
 import FontAwesome
@@ -1552,6 +1553,7 @@ ApplicationWindow {
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: MoneroComponents.Style.blackTheme
         property bool checkForUpdates: true
+        property bool trayIconEnabled: false
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
@@ -2546,5 +2548,75 @@ ApplicationWindow {
     WalletManager {
         id: walletManager
         proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    Loader {
+        active: persistentSettings.trayIconEnabled
+        sourceComponent: PlatformLabs.SystemTrayIcon {
+            id: trayIcon
+            property int restoredVisibility: Window.Windowed
+            property int windowVisibility: appWindow.visibility
+            onWindowVisibilityChanged: rememberVisibility()
+            Component.onCompleted: rememberVisibility()
+
+            function rememberVisibility() {
+                if (appWindow.visibility === Window.Windowed || appWindow.visibility === Window.Maximized)
+                    restoredVisibility = appWindow.visibility;
+            }
+
+            function windowShown() {
+                return appWindow.visibility !== Window.Hidden && appWindow.visibility !== Window.Minimized;
+            }
+
+            function showWindow() {
+                if (restoredVisibility === Window.Maximized)
+                    appWindow.showMaximized();
+                else
+                    appWindow.showNormal();
+                appWindow.raise();
+                appWindow.requestActivate();
+            }
+
+            function hideWindow() {
+                appWindow.hide();
+            }
+
+            function toggleWindow() {
+                if (windowShown()) {
+                    hideWindow();
+                } else {
+                    showWindow();
+                }
+            }
+
+            visible: true
+            icon.source: "qrc:///images/appicon.ico"
+            tooltip: appWindow.title
+
+            onActivated: function(reason) {
+                if (isMac) return;
+                if (reason !== PlatformLabs.SystemTrayIcon.Trigger) return;
+                trayIcon.toggleWindow();
+            }
+
+            menu: PlatformLabs.Menu {
+                // defaults to true, which pops the menu up on launch on KDE
+                visible: false
+
+                PlatformLabs.MenuItem {
+                    text: (trayIcon.windowShown() ? qsTr("Hide") : qsTr("Show")) + translationManager.emptyString
+                    onTriggered: trayIcon.toggleWindow()
+                }
+
+                PlatformLabs.MenuItem {
+                    text: qsTr("Quit") + translationManager.emptyString
+                    onTriggered: {
+                        if (!trayIcon.windowShown())
+                            trayIcon.showWindow();
+                        appWindow.close();
+                    }
+                }
+            }
+        }
     }
 }
