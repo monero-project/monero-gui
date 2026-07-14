@@ -526,7 +526,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: daemonProgressBar.top
-            height: 48
+            height: 66
             syncType: qsTr("Wallet") + translationManager.emptyString
             visible: !appWindow.disconnected
         }
@@ -538,7 +538,7 @@ Rectangle {
             anchors.bottom: networkStatus.top
             syncType: qsTr("Daemon") + translationManager.emptyString
             visible: !appWindow.disconnected
-            height: 62
+            height: 80
         }
         
         MoneroComponents.NetworkStatusItem {
