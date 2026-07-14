@@ -71,13 +71,24 @@ Rectangle {
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
-        wizardController.tmpWalletFilename = '';
         wizardController.walletOptionsSubaddressLookahead = '';
-        disconnect();
+        if (!wizardController.deviceWalletCreationInProgress) {
+            disconnect();
+        }
+        closeTemporaryWallet();
+    }
 
-        if (typeof wizardController.m_wallet !== 'undefined'){
-            walletManager.closeWallet();
-            wizardController.m_wallet = undefined;
+    function closeTemporaryWallet() {
+        if (typeof wizardController.m_wallet === 'undefined') {
+            return;
+        }
+        walletManager.closeWallet();
+        wizardController.m_wallet = undefined;
+
+        if (wizardController.tmpWalletFilename !== '') {
+            console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
+            oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename);
+            wizardController.tmpWalletFilename = '';
         }
     }
 
@@ -108,6 +119,7 @@ Rectangle {
     property string walletOptionsDeviceName: ''
     property bool   walletOptionsDeviceIsRestore: false
     property string tmpWalletFilename: ''
+    property bool deviceWalletCreationInProgress: false
 
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
@@ -335,11 +347,8 @@ Rectangle {
     function createWallet() {
         // Creates wallet in a temp. location
 
-        // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting wallet")
-        }
+        // Always delete the wallet before creating new - we could be stepping back from recovering wallet
+        closeTemporaryWallet();
 
         var tmp_wallet_filename = oshelper.temporaryFilename();
         console.log("Creating temporary wallet", tmp_wallet_filename)
@@ -374,10 +383,6 @@ Rectangle {
                 wizardStateView.wizardCreateWallet2View.seedListGrid.destroy();
             }
 
-            // make sure temporary wallet files are deleted
-            console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
-            oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
-
             // save to persistent settings
             persistentSettings.account_name = wizardController.walletOptionsName
             persistentSettings.wallet_path = wizardController.m_wallet.path;
@@ -407,11 +412,9 @@ Rectangle {
         var tmp_wallet_filename = oshelper.temporaryFilename()
         console.log("Creating temporary wallet", tmp_wallet_filename)
 
-        // delete the temporary wallet object before creating new
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting temporary wallet")
-        }
+        // delete the temporary wallet before creating new
+        closeTemporaryWallet();
+
         var wallet = ''
         // From seed or keys
         if(wizardController.walletRestoreMode === 'seed')
@@ -430,6 +433,7 @@ Rectangle {
             console.log(wallet.errorString)
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
             walletManager.closeWallet();
+            oshelper.removeTemporaryWallet(tmp_wallet_filename);
         }
         return success;
     }
@@ -459,14 +463,8 @@ Rectangle {
     }
 
     function createWalletFromDevice() {
-        // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
-        // page submitted or b) delete it when program closed before reaching final page
-
-        // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting wallet")
-        }
+        // Always delete the wallet before creating new - we could be stepping back from recovering wallet
+        closeTemporaryWallet();
 
         tmpWalletFilename = oshelper.temporaryFilename();
         console.log("Creating temporary wallet", tmpWalletFilename)
@@ -477,11 +475,15 @@ Rectangle {
         var deviceName = wizardController.walletOptionsDeviceName;
 
         connect();
+        wizardController.deviceWalletCreationInProgress = true;
+        wizardController.enabled = false;
         walletManager.createWalletFromDeviceAsync(tmpWalletFilename, oshelper.randomPassword(), nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
         creatingWalletDeviceSplash();
     }
 
     function onWalletCreated(wallet) {
+        wizardController.deviceWalletCreationInProgress = false;
+        wizardController.enabled = true;
         splash.close()
 
         var success = wallet.status === Wallet.Status_Ok;
@@ -494,9 +496,13 @@ Rectangle {
             }
         } else {
             console.log(wallet.errorString)
+            var tmpFilename = wizardController.tmpWalletFilename;
             wizardController.tmpWalletFilename = '';
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
             walletManager.closeWallet();
+            if (tmpFilename !== '') {
+                oshelper.removeTemporaryWallet(tmpFilename);
+            }
         }
 
         disconnect();

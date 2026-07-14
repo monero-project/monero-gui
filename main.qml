@@ -288,6 +288,7 @@ ApplicationWindow {
         if (isQuitting)
             return;
         isQuitting = true;
+        wizard.restart();
         closeWallet(function() {
             gracefulShutdownComplete();
         })
@@ -2250,6 +2251,7 @@ ApplicationWindow {
         console.log("close accepted");
         daemonManager.exit();
         p2poolManager.exit();
+        wizard.restart();
         closeWallet(function() {
             console.log("wallet closed, requesting final application quit");
             gracefulShutdownComplete();
