@@ -558,7 +558,11 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         qWarning() << "QrCodeScanner : object found";
         QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
         QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
-        qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
+        QrCodeScanner *qrCodeScanner = qobject_cast<QrCodeScanner*>(qmlFinder);
+        if (qrCodeScanner)
+            qrCodeScanner->setSource(camera_);
+        else
+            qCritical() << "QrCodeScanner : QrFinder object not found";
     }
     else
         qCritical() << "QrCodeScanner : something went wrong !";
