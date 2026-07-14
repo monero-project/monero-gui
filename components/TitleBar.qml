@@ -359,7 +359,7 @@ Rectangle {
                 smooth: true
                 mipmap: true
                 opacity: 0.75
-                rotation: appWindow.visibility === Window.FullScreen ? 180 : 0
+                rotation: appWindow.visibility === Window.Maximized ? 180 : 0
             }
 
             MouseArea {
