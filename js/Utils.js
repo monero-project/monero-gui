@@ -65,6 +65,10 @@ function ago(epoch) {
         return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400))
 }
 
+function formatThousands(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
 function netTypeToString(){
     // 0: mainnet, 1: testnet, 2: stagenet
     var nettype = appWindow.persistentSettings.nettype;
