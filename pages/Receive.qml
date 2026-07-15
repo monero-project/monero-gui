@@ -61,6 +61,24 @@ Rectangle {
         inputDialog.open(appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index))
     }
 
+    function updateSelectedAddressDisplay() {
+        appWindow.current_subaddress_table_index = subaddressListView.currentIndex;
+        appWindow.current_address = appWindow.currentWallet.address(
+            appWindow.currentWallet.currentSubaddressAccount,
+            subaddressListView.currentIndex
+        );
+        if (subaddressListView.currentIndex == 0) {
+            selectedAddressDrescription.text = qsTr("Primary address") + translationManager.emptyString;
+        } else {
+            var selectedAddressLabel = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
+            if (selectedAddressLabel == "") {
+                selectedAddressDrescription.text = "(" + qsTr("no label") + ")" + translationManager.emptyString
+            } else {
+                selectedAddressDrescription.text = selectedAddressLabel
+            }
+        }
+    }
+
     function generateQRCodeString() {
         if (pageReceive.state == "PaymentRequest") {
             return walletManager.make_uri(appWindow.current_address,
@@ -708,24 +726,7 @@ Rectangle {
                             }
                         }
                     }
-                    onCurrentItemChanged: {
-                        // reset global vars
-                        appWindow.current_subaddress_table_index = subaddressListView.currentIndex;
-                        appWindow.current_address = appWindow.currentWallet.address(
-                            appWindow.currentWallet.currentSubaddressAccount,
-                            subaddressListView.currentIndex
-                        );
-                        if (subaddressListView.currentIndex == 0) {
-                            selectedAddressDrescription.text = qsTr("Primary address") + translationManager.emptyString;
-                        } else {
-                            var selectedAddressLabel = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
-                            if (selectedAddressLabel == "") {
-                                selectedAddressDrescription.text = "(" + qsTr("no label") + ")" + translationManager.emptyString
-                            } else {
-                                selectedAddressDrescription.text = selectedAddressLabel
-                            }
-                        }
-                    }
+                    onCurrentItemChanged: updateSelectedAddressDisplay()
                 }
             }
 
@@ -773,11 +774,12 @@ Rectangle {
         subaddressListView.model = appWindow.currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
-            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
-            if (subaddressListView.currentIndex == -1) {
+            var numSubaddresses = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount);
+            if (subaddressListView.currentIndex == -1 || subaddressListView.currentIndex >= numSubaddresses) {
                 subaddressListView.currentIndex = 0;
             }
+            updateSelectedAddressDisplay();
         }
     }
 
