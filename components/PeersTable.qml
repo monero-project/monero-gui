@@ -42,7 +42,9 @@ ColumnLayout {
     property bool loading: model ? model.loading : false
     property int hoveredIndex: -1
 
-    Clipboard { id: clipboard }
+    Clipboard {
+        id: clipboard
+    }
 
     function formatBytes(bytes) {
         if (bytes < 1024)
@@ -58,14 +60,70 @@ ColumnLayout {
         columnSpacing: 24
         rowSpacing: 6
 
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 0; font.bold: true; text: qsTr("Direction") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 1; Layout.maximumWidth: 220; font.bold: true; text: qsTr("Address") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 2; font.bold: true; text: qsTr("Network") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 3; font.bold: true; text: qsTr("Block height") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 4; font.bold: true; text: qsTr("Connected since") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 5; font.bold: true; text: qsTr("Time connected") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 6; font.bold: true; text: qsTr("Sent") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
-        MoneroComponents.TextPlain { Layout.row: 0; Layout.column: 7; font.bold: true; text: qsTr("Received") + translationManager.emptyString; color: MoneroComponents.Style.dimmedFontColor }
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 0
+            font.bold: true
+            text: qsTr("Direction") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 1
+            Layout.maximumWidth: 220
+            font.bold: true
+            text: qsTr("Address") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 2
+            font.bold: true
+            text: qsTr("Network") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 3
+            font.bold: true
+            text: qsTr("Block height") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 4
+            font.bold: true
+            text: qsTr("Connected since") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 5
+            font.bold: true
+            text: qsTr("Time connected") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 6
+            font.bold: true
+            text: qsTr("Sent") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            Layout.row: 0
+            Layout.column: 7
+            font.bold: true
+            text: qsTr("Received") + translationManager.emptyString
+            color: MoneroComponents.Style.dimmedFontColor
+        }
 
         Rectangle {
             Layout.row: 1
@@ -107,35 +165,77 @@ ColumnLayout {
         Repeater {
             id: peersRepeater
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 0; text: incoming ? qsTr("Inbound") : qsTr("Outbound"); color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 0
+                text: incoming ? qsTr("Inbound") : qsTr("Outbound")
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 1; Layout.maximumWidth: 220; text: address; elide: Text.ElideMiddle; color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 1
+                Layout.maximumWidth: 220
+                text: address
+                elide: Text.ElideMiddle
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 2; text: addressType; color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 2
+                text: addressType
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 3; text: blockHeight; color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 3
+                text: blockHeight
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 4; text: Qt.formatDateTime(new Date((Date.now() / 1000 - liveTime) * 1000), "yyyy-MM-dd hh:mm"); color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 4
+                text: Qt.formatDateTime(new Date((Date.now() / 1000 - liveTime) * 1000), "yyyy-MM-dd hh:mm")
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 5; text: Utils.ago(Date.now() / 1000 - liveTime); color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 5
+                text: Utils.ago(Date.now() / 1000 - liveTime)
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 6; text: peersTable.formatBytes(sendCount); color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 6
+                text: peersTable.formatBytes(sendCount)
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
         Repeater {
             model: peersTable.model
-            MoneroComponents.TextPlain { Layout.row: index + 2; Layout.column: 7; text: peersTable.formatBytes(recvCount); color: MoneroComponents.Style.defaultFontColor }
+            MoneroComponents.TextPlain {
+                Layout.row: index + 2
+                Layout.column: 7
+                text: peersTable.formatBytes(recvCount)
+                color: MoneroComponents.Style.defaultFontColor
+            }
         }
     }
 
