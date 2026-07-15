@@ -43,7 +43,7 @@ QString UnsignedTransaction::errorString() const
 quint64 UnsignedTransaction::amount(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->amount();
-    if(index > arr.size() - 1)
+    if(index >= arr.size())
         return 0;
     return arr[index];
 }
@@ -51,7 +51,7 @@ quint64 UnsignedTransaction::amount(size_t index) const
 quint64 UnsignedTransaction::fee(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->fee();
-    if(index > arr.size() - 1)
+    if(index >= arr.size())
         return 0;
     return arr[index];
 }
@@ -59,7 +59,7 @@ quint64 UnsignedTransaction::fee(size_t index) const
 quint64 UnsignedTransaction::mixin(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->mixin();
-    if(index > arr.size() - 1)
+    if(index >= arr.size())
         return 0;
     return arr[index];
 }
