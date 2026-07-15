@@ -178,6 +178,12 @@ Rectangle {
                     function logCommand(msg){
                         msg = log_color(msg, MoneroComponents.Style.blackTheme ? "lime" : "green");
                         consoleArea.append(msg);
+                        trimExcess();
+                    }
+                    function trimExcess(){
+                        if (consoleArea.length > 100000) {
+                            consoleArea.remove(0, consoleArea.length - 75000);
+                        }
                     }
                     function logMessage(msg){
                         msg = Utils.htmlEscape(msg.trim());
@@ -208,6 +214,7 @@ Rectangle {
                         var _timestamp = log_color("[" + timestamp + "]", MoneroComponents.Style.defaultFontColor);
                         var _msg = log_color(msg, color);
                         consoleArea.append(_timestamp + " " + _msg);
+                        trimExcess();
 
                         // scroll to bottom
                         //if(flickable.contentHeight > content.height){

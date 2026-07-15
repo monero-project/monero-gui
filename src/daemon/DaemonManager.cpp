@@ -44,8 +44,23 @@
 #include <QVariant>
 #include <QMap>
 
+#ifdef Q_OS_UNIX
+#include <unistd.h>
+#endif
+
 namespace {
     static const int DAEMON_START_TIMEOUT_SECONDS = 120;
+
+#ifdef Q_OS_UNIX
+    class SessionProcess : public QProcess
+    {
+    protected:
+        void setupChildProcess() override
+        {
+            setsid();
+        }
+    };
+#endif
 }
 
 bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/)
@@ -58,11 +73,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     // prepare command line arguments and pass to monerod
     QStringList arguments;
-
-    // Start daemon with --detach flag on non-windows platforms
-#ifndef Q_OS_WIN
-    arguments << "--detach";
-#endif
 
     if (nettype == NetworkType::TESTNET)
         arguments << "--testnet";
@@ -111,17 +121,28 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     QMutexLocker locker(&m_daemonMutex);
 
-    m_daemon.reset(new QProcess());
+    if (m_daemon && m_daemon->state() != QProcess::NotRunning) {
+        emit daemonStartFailure(tr("Previous local node instance is still running"));
+        return false;
+    }
 
-    // Connect output slots
+    m_daemonWasRunning = false;
+#ifdef Q_OS_UNIX
+    m_daemon.reset(new SessionProcess());
+#else
+    m_daemon.reset(new QProcess());
+#endif
+
+    // Connect output and state slots
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
+    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
 
     // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
-
-    // add state changed listener
-    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
+    m_daemon->setProgram(m_monerod);
+    m_daemon->setArguments(arguments);
+    m_daemon->start();
+    const bool started = m_daemon->waitForStarted();
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
@@ -177,7 +198,8 @@ bool DaemonManager::startWatcher(NetworkType::Type nettype, const QString &dataD
 
 bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDir) const
 {
-    // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
+    // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds, give up
+    // after 20; once the RPC is down, wait for the owned process to exit before reporting success
     int counter = 0;
     while(true && !m_app_exit) {
         QThread::sleep(2);
@@ -186,15 +208,32 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
+                QMutexLocker locker(&m_daemonMutex);
+                if (m_daemon) {
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
+                    m_daemon->kill();
 #else
-                QProcess::execute("pkill", {"monerod"});
+                    if (counter >= 8) {
+                        m_daemon->kill();
+                    } else {
+                        m_daemon->terminate();
+                    }
 #endif
+                }
+            }
+            if(counter >= 10) {
+                return false;
             }
 
-        } else
-            return true;
+        } else {
+            QMutexLocker locker(&m_daemonMutex);
+            if (!m_daemon || m_daemon->state() == QProcess::NotRunning) {
+                return true;
+            }
+            if(counter >= 60) {
+                return false;
+            }
+        }
     }
     return false;
 }
@@ -203,7 +242,10 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
 void DaemonManager::stateChanged(QProcess::ProcessState state)
 {
     qDebug() << "STATE CHANGED: " << state;
-    if (state == QProcess::NotRunning) {
+    if (state == QProcess::Running) {
+        m_daemonWasRunning = true;
+    } else if (state == QProcess::NotRunning && m_daemonWasRunning) {
+        m_daemonWasRunning = false;
         emit daemonStopped();
     }
 }
@@ -217,8 +259,9 @@ void DaemonManager::printOutput()
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
+        if (line.isEmpty())
+            continue;
         emit daemonConsoleUpdated(line);
-        qDebug() << "Daemon: " + line;
     }
 }
 
@@ -231,6 +274,8 @@ void DaemonManager::printError()
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
+        if (line.isEmpty())
+            continue;
         emit daemonConsoleUpdated(line);
         qDebug() << "Daemon ERROR: " + line;
     }
@@ -412,4 +457,10 @@ DaemonManager::DaemonManager(QObject *parent)
 DaemonManager::~DaemonManager()
 {
     m_scheduler.shutdownWaitForFinished();
+
+    QMutexLocker locker(&m_daemonMutex);
+    if (m_daemon && m_daemon->state() != QProcess::NotRunning) {
+        m_daemon->disconnect(this);
+        m_daemon.release();
+    }
 }
