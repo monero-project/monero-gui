@@ -372,7 +372,7 @@ Rectangle{
 
             MoneroComponents.Label {
                 id: soloTitleLabel
-                fontSize: 24
+                fontSize: 18
                 text: qsTr("Anonymity network") + translationManager.emptyString
             }
 
@@ -382,42 +382,13 @@ Rectangle{
                 id: networkColumn
                 z: parent.z + 1
 
-                ColumnLayout {
-                    spacing: 10
-
-                    MoneroComponents.RadioButton {
-                        id: noneRadioButton
-                        text: qsTr("None") + translationManager.emptyString
-                        fontSize: 16
-                        checked: appWindow.persistentSettings.anonymityNetworkType === 0
-                        onClicked: {
-                            checked = true;
-                            i2pRadioButton.checked = false;
-                            appWindow.persistentSettings.anonymityNetworkType = 0;
-                        }
-                    }
-
-                    RowLayout {
-                        spacing: 8
-
-                        MoneroComponents.RadioButton {
-                            id: i2pRadioButton
-                            text: qsTr("I2P") + translationManager.emptyString
-                            fontSize: 16
-                            checked: appWindow.persistentSettings.anonymityNetworkType === 1
-                            onClicked: {
-                                checked = true;
-                                noneRadioButton.checked = false;
-                                appWindow.persistentSettings.anonymityNetworkType = 1;
-                            }
-                        }
-
-                        Image {
-                            source: "../../images/itoopie.svg"
-                            sourceSize.width: 22
-                            sourceSize.height: 22
-                            fillMode: Image.PreserveAspectFit
-                        }
+                MoneroComponents.StandardDropdown {
+                    id: anonymityNetworkDropdown
+                    Layout.maximumWidth: 200
+                    dataModel: anonymityNetworkModel
+                    currentIndex: appWindow.persistentSettings.anonymityNetworkType
+                    onChanged: {
+                        appWindow.persistentSettings.anonymityNetworkType = currentIndex;
                     }
                 }
 
@@ -479,6 +450,16 @@ Rectangle{
                         font.pixelSize: 14
                         text: "<span style='color: #fa6800;'>" + qsTr("Checking router status...") + "</span>"
                     }
+                }
+            }
+
+            ListModel {
+                id: anonymityNetworkModel
+                ListElement {
+                    column1: "None"
+                }
+                ListElement {
+                    column1: "I2P"
                 }
             }
         }
