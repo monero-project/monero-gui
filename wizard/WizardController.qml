@@ -52,7 +52,7 @@ Rectangle {
 
     function restart(generatingNewSeed) {
         // Clear up any state, including `m_wallet`, which
-        // is the temp. wallet object whilst creating new wallets.
+        // is the in-memory wallet object whilst creating new wallets.
         // This function is called automatically by navigating to `wizardHome`.
         if(!generatingNewSeed) {
             wizardController.walletOptionsName = defaultAccountName;
@@ -71,11 +71,14 @@ Rectangle {
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
-        wizardController.tmpWalletFilename = '';
         wizardController.walletOptionsSubaddressLookahead = '';
         disconnect();
 
-        if (typeof wizardController.m_wallet !== 'undefined'){
+        closeWizardWallet();
+    }
+
+    function closeWizardWallet() {
+        if (typeof wizardController.m_wallet !== 'undefined') {
             walletManager.closeWallet();
             wizardController.m_wallet = undefined;
         }
@@ -107,7 +110,7 @@ Rectangle {
     property string walletOptionsSubaddressLookahead: ''
     property string walletOptionsDeviceName: ''
     property bool   walletOptionsDeviceIsRestore: false
-    property string tmpWalletFilename: ''
+    property bool deviceWalletCreationInProgress: false
 
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
@@ -333,26 +336,19 @@ Rectangle {
     }
 
     function createWallet() {
-        // Creates wallet in a temp. location
+        // Always close the in-memory wallet before creating a new one. We could
+        // be stepping back from recovering a wallet or generating a new seed.
+        closeWizardWallet();
 
-        // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting wallet")
-        }
-
-        var tmp_wallet_filename = oshelper.temporaryFilename();
-        console.log("Creating temporary wallet", tmp_wallet_filename)
+        console.log("Creating in-memory wallet")
         var nettype = appWindow.persistentSettings.nettype;
         var kdfRounds = appWindow.persistentSettings.kdfRounds;
-        var wallet = walletManager.createWallet(tmp_wallet_filename, oshelper.randomPassword(), persistentSettings.language_wallet, nettype, kdfRounds)
+        var wallet = walletManager.createWallet('', oshelper.randomPassword(), persistentSettings.language_wallet, nettype, kdfRounds)
 
         wizardController.walletOptionsSeed = wallet.seed
 
-        // saving wallet in "global" object
-        // @TODO: wallet should have a property pointing to the file where it stored or loaded from
+        // Keep the wallet in memory until the user chooses its final path.
         wizardController.m_wallet = wallet;
-        wizardController.tmpWalletFilename = tmp_wallet_filename
     }
 
     function writeWallet(onSuccess) {
@@ -373,10 +369,6 @@ Rectangle {
             if (wizardStateView.wizardCreateWallet2View.seedListGrid) {
                 wizardStateView.wizardCreateWallet2View.seedListGrid.destroy();
             }
-
-            // make sure temporary wallet files are deleted
-            console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
-            oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
 
             // save to persistent settings
             persistentSettings.account_name = wizardController.walletOptionsName
@@ -404,20 +396,17 @@ Rectangle {
         var nettype = persistentSettings.nettype;
         var kdfRounds = persistentSettings.kdfRounds;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
-        var tmp_wallet_filename = oshelper.temporaryFilename()
-        console.log("Creating temporary wallet", tmp_wallet_filename)
 
-        // delete the temporary wallet object before creating new
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting temporary wallet")
-        }
+        // Close any previous in-memory wallet before restoring a new one.
+        closeWizardWallet();
+
+        console.log("Creating in-memory recovery wallet")
         var wallet = ''
         // From seed or keys
         if(wizardController.walletRestoreMode === 'seed')
-            wallet = walletManager.recoveryWallet(tmp_wallet_filename, wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
+            wallet = walletManager.recoveryWallet('', wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
         else
-            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, persistentSettings.language_wallet, nettype,
+            wallet = walletManager.createWalletFromKeys('', persistentSettings.language_wallet, nettype,
                                                             wizardController.walletOptionsRecoverAddress, wizardController.walletOptionsRecoverViewkey,
                                                             wizardController.walletOptionsRecoverSpendkey, restoreHeight, kdfRounds)
 
@@ -425,7 +414,6 @@ Rectangle {
         if (success) {
             wizardController.m_wallet = wallet;
             wizardController.walletOptionsIsRecovering = true;
-            wizardController.tmpWalletFilename = tmp_wallet_filename
         } else {
             console.log(wallet.errorString)
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
@@ -459,17 +447,11 @@ Rectangle {
     }
 
     function createWalletFromDevice() {
-        // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
-        // page submitted or b) delete it when program closed before reaching final page
+        // Always close the in-memory wallet before creating a new one. We could
+        // be stepping back from recovering a wallet.
+        closeWizardWallet();
 
-        // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
-        if (typeof wizardController.m_wallet !== 'undefined') {
-            walletManager.closeWallet()
-            console.log("deleting wallet")
-        }
-
-        tmpWalletFilename = oshelper.temporaryFilename();
-        console.log("Creating temporary wallet", tmpWalletFilename)
+        console.log("Creating in-memory wallet from device")
         var nettype = persistentSettings.nettype;
         var kdfRounds = persistentSettings.kdfRounds;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
@@ -477,11 +459,15 @@ Rectangle {
         var deviceName = wizardController.walletOptionsDeviceName;
 
         connect();
-        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, oshelper.randomPassword(), nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
+        wizardController.deviceWalletCreationInProgress = true;
+        wizardController.enabled = false;
+        walletManager.createWalletFromDeviceAsync('', oshelper.randomPassword(), nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
         creatingWalletDeviceSplash();
     }
 
     function onWalletCreated(wallet) {
+        wizardController.deviceWalletCreationInProgress = false;
+        wizardController.enabled = true;
         splash.close()
 
         var success = wallet.status === Wallet.Status_Ok;
@@ -494,7 +480,6 @@ Rectangle {
             }
         } else {
             console.log(wallet.errorString)
-            wizardController.tmpWalletFilename = '';
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
             walletManager.closeWallet();
         }
