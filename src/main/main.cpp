@@ -79,6 +79,7 @@
 // IOS exclusions
 #ifndef Q_OS_IOS
 #include "daemon/DaemonManager.h"
+#include "daemon/PeersModel.h"
 #include "p2pool/P2PoolManager.h"
 #endif
 
@@ -416,6 +417,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
                                                    "DaemonManager can't be instantiated directly");
     qmlRegisterUncreatableType<P2PoolManager>("moneroComponents.P2PoolManager", 1, 0, "P2PoolManager",
                                                    "P2PoolManager can't be instantiated directly");
+    qmlRegisterType<PeersModel>("moneroComponents.PeersModel", 1, 0, "PeersModel");
 #endif
     qmlRegisterUncreatableType<AddressBookModel>("moneroComponents.AddressBookModel", 1, 0, "AddressBookModel",
                                                         "AddressBookModel can't be instantiated directly");
