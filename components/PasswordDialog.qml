@@ -43,6 +43,7 @@ FocusScope {
     visible: false
 
     property alias password: passwordInput1.text
+    property alias acceptButton: okButton
     property string walletName
     property var okButtonText
     property string okButtonIcon

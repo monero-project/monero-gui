@@ -38,6 +38,9 @@ Rectangle {
     id: wizardHome
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias createWalletButton: createWalletButton
+    property alias openWalletButton: openWalletButton
+    property alias restoreWalletButton: restoreWalletButton
     property string viewName: "wizardHome"
 
     ColumnLayout {
@@ -73,6 +76,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: createWalletButton
                 headerText: {
                     var nettype = persistentSettings.nettype;
                     return qsTr("Create a new wallet") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
@@ -125,6 +129,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: openWalletButton
                 headerText: qsTr("Open a wallet from file") + translationManager.emptyString
                 bodyText: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/open-wallet-from-file.png"
@@ -145,6 +150,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: restoreWalletButton
                 headerText: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
                 bodyText: qsTr("Enter your private keys or 25-word mnemonic seed to restore your wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet.png"

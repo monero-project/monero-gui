@@ -72,6 +72,9 @@
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#ifdef QML_TESTS
+#include "QmlTestHarness.h"
+#endif
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -161,6 +164,12 @@ bool isARM = false;
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(translations);
+
+#ifdef QML_TESTS
+    int qmlTestResult;
+    if (runQmlTestsIfRequested(argc, argv, qmlTestResult))
+        return qmlTestResult;
+#endif
 
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)

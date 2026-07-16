@@ -43,6 +43,9 @@ file(GLOB SOURCE_FILES
     "qt/*.h"
     "qt/*.cpp"
 )
+if(QML_TESTS)
+    list(APPEND SOURCE_FILES "${CMAKE_SOURCE_DIR}/tests/qml/QmlTestHarness.cpp")
+endif()
 if(APPLE)
     list(APPEND SOURCE_FILES "qt/macoshelper.mm")
 endif()
@@ -111,6 +114,14 @@ target_compile_definitions(monero-wallet-gui
 	${Qt5Widgets_DEFINITIONS}
     ${Qt5Qml_DEFINITIONS}
 )
+
+if(QML_TESTS)
+    target_include_directories(monero-wallet-gui PRIVATE "${CMAKE_SOURCE_DIR}/tests/qml")
+    target_compile_definitions(monero-wallet-gui PRIVATE
+        QML_TESTS
+        QML_TEST_SOURCE_DIR="${CMAKE_SOURCE_DIR}/tests/qml"
+    )
+endif()
 
 if(APPLE)
     if(NOT ICU_ROOT)

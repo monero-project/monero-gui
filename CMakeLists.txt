@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(monero-gui)
 
+include(CMakeDependentOption)
+
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
 set(VERSION_MAJOR "18")
@@ -15,6 +17,7 @@ option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
+cmake_dependent_option(QML_TESTS "Build QML tests" ON "NOT STATIC;NOT ANDROID;NOT IOS" OFF)
 
 if(DEV_MODE)
   # DEV_MODE checks out the monero submodule to master, which requires C++17.
@@ -121,6 +124,10 @@ set(QT5_LIBRARIES
   Qt5Svg
   Qt5Xml
 )
+
+if(QML_TESTS)
+  list(APPEND QT5_LIBRARIES Qt5QuickTest Qt5Test)
+endif()
 
 if(WITH_SCANNER)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
