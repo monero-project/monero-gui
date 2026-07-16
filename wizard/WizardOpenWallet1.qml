@@ -47,6 +47,7 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property alias pageRoot: pageRoot
+    property alias recentWallets: recentList
     property string viewName: "wizardOpenWallet1"
     property int walletCount: walletKeysFilesModel.rowCount()
 
@@ -158,6 +159,7 @@ Rectangle {
                         // index, fileName, modified, accessed, path, networktype, address
                         id: item
                         height: flow.itemHeight
+                        property string walletFileName: fileName
                         width: {
                             if(wizardController.layoutScale <= 1)
                                 return parent.width / 2

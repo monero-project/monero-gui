@@ -39,6 +39,10 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias walletInput: wizardWalletInput
+    property alias seedInput: seedInput
+    property alias restoreHeight: restoreHeight
+    property alias wizardNav: nav
     property string viewName: "wizardRestoreWallet1"
 
     function verify() {

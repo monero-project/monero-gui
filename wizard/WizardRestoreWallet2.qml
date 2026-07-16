@@ -43,6 +43,7 @@ Rectangle {
     property int recoveryMode: 1
     property alias pwField: passwordFields.password
     property alias pwConfirmField: passwordFields.passwordConfirm
+    property alias wizardNav: wizardNav
 
 
     ColumnLayout {
@@ -66,6 +67,7 @@ Rectangle {
             }
 
             WizardNav {
+                id: wizardNav
                 progressSteps: appWindow.walletMode <= 1 ? 3 : 4
                 progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();

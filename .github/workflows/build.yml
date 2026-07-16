@@ -40,7 +40,7 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake ninja-build libboost-all-dev libunbound-dev graphviz doxygen pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev libprotobuf-dev protobuf-compiler
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
+      run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qml-module-qttest qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
     - name: build
       run: DEV_MODE=ON make release
     - name: test qml
@@ -71,7 +71,7 @@ jobs:
       run: cmake --build . --target deploy
       working-directory: build/release
     - name: test qml
-      run: build/release/bin/monero-wallet-gui --test-qml
+      run: build/release/bin/monero-wallet-gui --test-qml -o test.log,txt || { rc=$?; cat test.log; exit "$rc"; }
 
   macos-bundle:
     runs-on: macos-15

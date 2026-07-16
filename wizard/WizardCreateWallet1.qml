@@ -41,6 +41,8 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property alias pageRoot: pageRoot
+    property alias walletInput: walletInput
+    property alias wizardNav: wizardNav
     property string viewName: "wizardCreateWallet1"
 
     ColumnLayout {

@@ -39,6 +39,7 @@ Rectangle {
     
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias wizardNav: wizardNav
     property string viewName: "wizardRestoreWallet3"
     property int recoveryMode: 1
 
@@ -68,6 +69,7 @@ Rectangle {
             }
 
             WizardNav {
+                id: wizardNav
                 progressSteps: 4
                 progress: 2
                 onPrevClicked: {

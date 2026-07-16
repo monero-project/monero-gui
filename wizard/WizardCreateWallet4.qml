@@ -37,6 +37,7 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias wizardNav: wizardNav
     property string viewName: "wizardCreateWallet4"
 
     ColumnLayout {
@@ -65,6 +66,7 @@ Rectangle {
             }
 
             WizardNav {
+                id: wizardNav
                 progressSteps: 5
                 progress: 3
                 onPrevClicked: {

@@ -42,6 +42,7 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property alias pageRoot: pageRoot
+    property alias wizardNav: navigation
     property string viewName: "wizardCreateWallet2"
     property var seedArray: wizardController.walletOptionsSeed.split(" ")
     property var seedListGrid: ""

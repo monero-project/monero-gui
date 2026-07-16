@@ -40,6 +40,7 @@ Rectangle {
     property string viewName: "wizardCreateWallet3"
     property alias pwField: passwordFields.password
     property alias pwConfirmField: passwordFields.passwordConfirm
+    property alias wizardNav: wizardNav
 
     ColumnLayout {
         id: pageRoot
@@ -62,6 +63,7 @@ Rectangle {
             }
 
             WizardNav {
+                id: wizardNav
                 progressSteps: appWindow.walletMode <= 1 ? 4 : 5
                 progress: 2
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
