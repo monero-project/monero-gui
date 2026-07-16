@@ -49,11 +49,9 @@ public:
     Q_INVOKABLE bool openFile(const QString &filePath) const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;
     Q_INVOKABLE QString openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const;
-    Q_INVOKABLE QString temporaryFilename() const;
     Q_INVOKABLE QString temporaryPath() const;
     Q_INVOKABLE bool isWritableDirectory(const QString &path) const;
     Q_INVOKABLE QString randomPassword(int numBytes = 32) const;
-    Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;
     Q_INVOKABLE bool isCapsLock() const;
     Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath) const;
     Q_INVOKABLE void openSeedTemplate() const;

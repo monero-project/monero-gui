@@ -110,7 +110,7 @@ FocusScope {
     function close() {
         leftPanel.enabled = true
         middlePanel.enabled = true
-        wizard.enabled = true
+        wizard.enabled = !wizard.deviceWalletCreationInProgress
         if (rootItem.state == "wizard") {
             titleBar.state = "essentials"
         } else {

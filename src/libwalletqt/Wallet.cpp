@@ -1220,7 +1220,9 @@ Wallet::~Wallet()
     m_scheduler.shutdownWaitForFinished();
 
     //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
-    if(status() == Status_Critical)
+    if (m_walletImpl->path().empty())
+        qDebug("Discarding unsaved in-memory wallet");
+    else if(status() == Status_Critical)
         qDebug("Not storing wallet cache");
     else if( m_walletImpl->store(""))
         qDebug("Wallet cache stored successfully");
