@@ -108,8 +108,8 @@ GridLayout {
             Accessible.name: labelText + text
             KeyNavigation.up: walletNameKeyNavigationBackTab
             KeyNavigation.backtab: walletNameKeyNavigationBackTab
-            KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
-            KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : appWindow.walletMode >= 2 ? walletLocation : wizardNav.btnPrev
+            KeyNavigation.down: errorMessageWalletName.text != "" ? errorMessageWalletName : walletLocation
+            KeyNavigation.tab: errorMessageWalletName.text != "" ? errorMessageWalletName : walletLocation
         }
 
         RowLayout {
@@ -143,8 +143,6 @@ GridLayout {
     }
 
     ColumnLayout {
-        visible: appWindow.walletMode >= 2
-
         MoneroComponents.LineEdit {
             id: walletLocation
             Layout.fillWidth: true
@@ -154,7 +152,7 @@ GridLayout {
                     errorMessageWalletLocation.text = qsTr("Wallet location is empty") + translationManager.emptyString;
                     return false;
                 }
-                if (!oshelper.isWritableDirectory(walletLocation.text)) {
+                if (walletLocation.text !== appWindow.accountsDir && !oshelper.isWritableDirectory(walletLocation.text)) {
                     errorMessageWalletLocation.text = qsTr("Wallet location does not exist or is not writable") + translationManager.emptyString;
                     return false;
                 }
@@ -168,7 +166,7 @@ GridLayout {
             placeholderText: ""
             placeholderFontSize: 16
             errorWhenEmpty: true
-            text: appWindow.accountsDir + "/"
+            text: appWindow.accountsDir
             onTextChanged: {
                 walletLocation.error = !walletLocation.verify();
                 walletName.error = !walletName.verify();

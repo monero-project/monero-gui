@@ -103,7 +103,7 @@ Rectangle {
                 btnNextKeyNavigationTab: createWalletHeader
                 onNextClicked: {
                     wizardController.walletOptionsName = walletInput.walletName.text;
-                    wizardController.walletOptionsLocation = appWindow.walletMode >= 2 ? walletInput.walletLocation.text : appWindow.accountsDir;
+                    wizardController.walletOptionsLocation = walletInput.walletLocation.text;
                     wizardStateView.state = "wizardCreateWallet2";
                     wizardStateView.wizardCreateWallet2View.pageRoot.forceActiveFocus();
                 }
