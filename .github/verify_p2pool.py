@@ -1,6 +1,6 @@
-import requests
+import json
 import subprocess
-from urllib.request import urlretrieve
+from urllib.request import urlopen, urlretrieve
 import difflib
 
 sech_key = "https://p2pool.io/SChernykh.asc"
@@ -32,7 +32,8 @@ def get_hash(fname):
 def main():
     global p2pool_files, sech_key, sech_key_backup, sech_key_fp
     p2pool_tag_api = "https://api.github.com/repos/SChernykh/p2pool/releases/latest"
-    data = requests.get(p2pool_tag_api).json()
+    with urlopen(p2pool_tag_api) as response:
+        data = json.load(response)
     tag = data["tag_name"]
     head = f"p2pool-{tag}-"
     url = f"https://github.com/SChernykh/p2pool/releases/download/{tag}/"
