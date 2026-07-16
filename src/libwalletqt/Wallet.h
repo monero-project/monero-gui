@@ -323,7 +323,7 @@ public:
     //! Parse URI
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
     //! Make URI
-    Q_INVOKABLE QString make_uri(const QString &address, const quint64 &amount = 0, const QString &tx_description = "", const QString &recipient_name = "") const;
+    Q_INVOKABLE QString make_uri(const QString &address, const QString &amount = "", const QString &tx_description = "", const QString &recipient_name = "") const;
 
     //! Namespace your cacheAttribute keys to avoid collisions
     Q_INVOKABLE bool setCacheAttribute(const QString &key, const QString &val);
@@ -340,7 +340,7 @@ public:
     Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
     Q_INVOKABLE void getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &callback);
     Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
-    Q_INVOKABLE QString getReserveProof(bool all, quint32 account_index, quint64 amount, const QString &message) const;
+    Q_INVOKABLE QString getReserveProof(bool all, quint32 account_index, const QString &amount, const QString &message) const;
     Q_INVOKABLE QString checkReserveProof(const QString &address, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();

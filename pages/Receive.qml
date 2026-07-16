@@ -82,7 +82,7 @@ Rectangle {
     function generateQRCodeString() {
         if (pageReceive.state == "PaymentRequest") {
             return walletManager.make_uri(appWindow.current_address,
-                walletManager.amountFromString(amountToReceiveXMR.text),
+                amountToReceiveXMR.text,
                 txDescriptionInput.text, receiverNameInput.text);
         } else {
             return walletManager.make_uri(appWindow.current_address);

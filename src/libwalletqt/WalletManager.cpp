@@ -441,7 +441,7 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
     return result;
 }
 
-QString WalletManager::make_uri(const QString &address, const quint64 &amount, const QString &tx_description, const QString &recipient_name) const
+QString WalletManager::make_uri(const QString &address, const QString &amount, const QString &tx_description, const QString &recipient_name) const
 {
     QMutexLocker locker(&m_mutex);
     if (m_currentWallet)
