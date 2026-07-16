@@ -46,7 +46,7 @@ Rectangle {
         if(appWindow.walletMode === 0){
           modeStr = qsTr("Simple mode") + translationManager.emptyString;
         } else if(appWindow.walletMode === 1){
-          modeStr = qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
+          modeStr = qsTr("Simple mode") + translationManager.emptyString;
         } else if(appWindow.walletMode === 2){
           modeStr = "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
         }
@@ -331,6 +331,37 @@ Rectangle {
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 font.pixelSize: 14
+                text: qsTr("Node address: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
+                text: appWindow.currentDaemonAddress || ""
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14
                 text: qsTr("Graphics mode: ") + translationManager.emptyString
             }
 
@@ -395,6 +426,7 @@ Rectangle {
 
                     data += "\nWallet log path: " + logger.logFilePath;
                     data += "\nWallet mode: " + walletModeString;
+                    data += "\nNode address: " + (appWindow.currentDaemonAddress || "");
                     data += "\nGraphics mode: " + (isOpenGL ? "OpenGL" : "Low graphics mode");
                     if (isTails)
                         data += "\nTails: " + (tailsUsePersistence ? "persistent" : "persistence disabled");
