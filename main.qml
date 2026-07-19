@@ -244,12 +244,6 @@ ApplicationWindow {
     function initialize() {
         console.log("initializing..")
 
-        // Use stored log level
-        if (persistentSettings.logLevel == 5)
-          walletManager.setLogCategories(persistentSettings.logCategories)
-        else
-          walletManager.setLogLevel(persistentSettings.logLevel)
-
         // Reload transfer page with translations enabled
         middlePanel.transferView.onPageCompleted();
 
@@ -1374,6 +1368,12 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        logger.resetLogFilePath(persistentSettings.portable);
+        if (persistentSettings.logLevel == 5)
+            walletManager.setLogCategories(persistentSettings.logCategories)
+        else
+            walletManager.setLogLevel(persistentSettings.logLevel)
+
         if (screenAvailableWidth > width) {
             x = (screenAvailableWidth - width) / 2;
         }
@@ -1420,7 +1420,6 @@ ApplicationWindow {
         } else {
             wizard.wizardState = "wizardHome";
             rootItem.state = "normal"
-            logger.resetLogFilePath(persistentSettings.portable);
             openWallet("wizard");
         }
 
