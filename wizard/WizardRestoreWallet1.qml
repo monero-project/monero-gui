@@ -60,6 +60,23 @@ Rectangle {
         return false;
     }
 
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
+        // the key fields are only visible in 'keys' mode
+        seedRadioButton.checked = false;
+        keysRadioButton.checked = true;
+        qrRadioButton.checked = false;
+        wizardController.walletRestoreMode = 'keys';
+
+        // extra_parameters is null when a bare address was scanned
+        var params = extra_parameters || {};
+        addressLine.text = address;
+        viewKeyLine.text = typeof params.secret_view_key != "undefined" ? params.secret_view_key : "";
+        spendKeyLine.text = typeof params.secret_spend_key != "undefined" ? params.secret_spend_key : "";
+        restoreHeight.text = typeof params.restore_height != "undefined" ? params.restore_height : "";
+
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
+    }
+
     function verifyFromKeys() {
         var result = Wizard.restoreWalletCheckViewSpendAddress(
             walletManager,
@@ -156,7 +173,7 @@ Rectangle {
                         keysRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'qr';
                         cameraUi.state = "Capture";
-                        cameraUi.qrcode_decoded.connect(Wizard.updateFromQrCode);
+                        cameraUi.qrcode_decoded.connect(updateFromQrCode);
                     }
                 }
             }

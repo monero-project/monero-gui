@@ -1,29 +1,5 @@
 .pragma library
 
-function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
-    // Switch to recover from keys
-    recoverFromSeedMode = false
-    spendKeyLine.text = ""
-    viewKeyLine.text = ""
-    restoreHeight.text = ""
-
-    if(typeof extra_parameters.secret_view_key != "undefined") {
-        viewKeyLine.text = extra_parameters.secret_view_key
-    }
-    if(typeof extra_parameters.secret_spend_key != "undefined") {
-        spendKeyLine.text = extra_parameters.secret_spend_key
-    }
-    if(typeof extra_parameters.restore_height != "undefined") {
-        restoreHeight.text = extra_parameters.restore_height
-    }
-    addressLine.text = address
-
-    cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
-
-    // Check if keys are correct
-    checkNextButton();
-}
-
 function switchPage(next) {
     // Android focus workaround
     releaseFocus();
