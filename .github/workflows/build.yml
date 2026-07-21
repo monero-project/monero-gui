@@ -12,7 +12,7 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: install dependencies
@@ -25,7 +25,7 @@ jobs:
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: remove bundled boost
@@ -52,7 +52,7 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - uses: eine/setup-msys2@v2
@@ -76,7 +76,7 @@ jobs:
   macos-bundle:
     runs-on: macos-15
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: install dependencies
@@ -111,7 +111,7 @@ jobs:
     - name: create .tar
       run: tar -cf monero-wallet-gui.tar monero-wallet-gui.app
       working-directory: build/bin
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}
         path: build/bin/monero-wallet-gui.tar
@@ -119,7 +119,7 @@ jobs:
   docker-linux-static:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: install dependencies
@@ -134,7 +134,7 @@ jobs:
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui
     - name: test qml
       run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui --test-qml
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}
         path: |
@@ -144,7 +144,7 @@ jobs:
   docker-windows-static:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: free up diskspace
@@ -155,7 +155,7 @@ jobs:
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64'
     - name: sha256sum
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/x86_64-w64-mingw32/release/bin/monero-wallet-gui.exe
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}
         path: |
@@ -165,7 +165,7 @@ jobs:
   docker-android:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: free up diskspace
@@ -174,7 +174,7 @@ jobs:
       run: docker build --tag monero:build-env-android --build-arg THREADS=3 --file Dockerfile.android .
     - name: build
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui monero:build-env-android
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
@@ -182,7 +182,7 @@ jobs:
   source-archive:
     runs-on: ubuntu-slim
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: archive
@@ -192,7 +192,7 @@ jobs:
         export OUTPUT="$VERSION.tar"
         echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
         /home/runner/.local/bin/git-archive-all --prefix "$VERSION/" --force-submodules "$OUTPUT"
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: ${{ env.OUTPUT }}
         path: /home/runner/work/monero-gui/monero-gui/${{ env.OUTPUT }}
