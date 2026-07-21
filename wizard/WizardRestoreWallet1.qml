@@ -75,6 +75,7 @@ Rectangle {
         restoreHeight.text = typeof params.restore_height != "undefined" ? params.restore_height : "";
 
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
+        cameraUi.walletRestoreMode = false;
     }
 
     function verifyFromKeys() {
@@ -172,8 +173,10 @@ Rectangle {
                         seedRadioButton.checked = false;
                         keysRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'qr';
-                        cameraUi.state = "Capture";
+                        cameraUi.walletRestoreMode = true;
+                        cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
                         cameraUi.qrcode_decoded.connect(updateFromQrCode);
+                        cameraUi.state = "Capture";
                     }
                 }
             }
