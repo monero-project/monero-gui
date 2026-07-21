@@ -45,6 +45,41 @@ Rectangle {
     state: "Stopped"
 
     signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name, var extra_parameters)
+    property bool walletRestoreMode: false
+
+    function parseWalletRestoreUri(data) {
+        var prefix = ""
+        if (data.indexOf("monero-wallet:") === 0)
+            prefix = "monero-wallet:"
+        else if (data.indexOf("monero_wallet:") === 0)
+            prefix = "monero_wallet:"
+        else
+            return null
+
+        var queryOffset = data.indexOf("?")
+        var address = data.substring(prefix.length, queryOffset < 0 ? data.length : queryOffset)
+        if (!walletManager.addressValid(address, appWindow.persistentSettings.nettype))
+            return null
+
+        var params = {}
+        if (queryOffset >= 0) {
+            var items = data.substring(queryOffset + 1).split("&")
+            for (var index = 0; index < items.length; ++index) {
+                var separator = items[index].indexOf("=")
+                if (separator < 0)
+                    continue
+                var name = decodeURIComponent(items[index].substring(0, separator))
+                var value = decodeURIComponent(items[index].substring(separator + 1))
+                if (name === "view_key")
+                    params.secret_view_key = value
+                else if (name === "spend_key")
+                    params.secret_spend_key = value
+                else if (name === "height")
+                    params.restore_height = value
+            }
+        }
+        return { "address": address, "extra_parameters": params }
+    }
 
     states: [
         State {
@@ -67,6 +102,7 @@ Rectangle {
 		    root.visible = false
                     finder.enabled = false
                     camera.cameraState = Camera.UnloadedState
+                    root.walletRestoreMode = false
                 }
             }
         }
@@ -86,6 +122,12 @@ Rectangle {
         id : finder
         objectName: "QrFinder"
         onDecoded : {
+            var walletRestore = root.walletRestoreMode ? root.parseWalletRestoreUri(data) : null
+            if (walletRestore !== null) {
+                root.qrcode_decoded(walletRestore.address, "", "", "", "", walletRestore.extra_parameters)
+                root.state = "Stopped"
+                return
+            }
             const parsed = walletManager.parse_uri_to_object(data);
             if (!parsed.error) {
                 root.qrcode_decoded(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name, parsed.extra_parameters);
