@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
@@ -64,7 +65,6 @@ Rectangle {
         // the key fields are only visible in 'keys' mode
         seedRadioButton.checked = false;
         keysRadioButton.checked = true;
-        qrRadioButton.checked = false;
         wizardController.walletRestoreMode = 'keys';
 
         // extra_parameters is null when a bare address was scanned
@@ -132,7 +132,7 @@ Rectangle {
 
             RowLayout {
                 Layout.topMargin: -10
-                spacing: 200
+                spacing: 0
                 Layout.fillWidth: true
 
                 MoneroComponents.RadioButton {
@@ -140,10 +140,10 @@ Rectangle {
                     text: qsTr("Restore from seed") + translationManager.emptyString
                     fontSize: 16
                     checked: true
+                    Layout.fillWidth: true
                     onClicked: {
                         checked = true;
                         keysRadioButton.checked = false;
-                        qrRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'seed';
                     }
                 }
@@ -153,28 +153,28 @@ Rectangle {
                     text: qsTr("Restore from keys") + translationManager.emptyString
                     fontSize: 16
                     checked: false
+                    Layout.fillWidth: true
                     onClicked: {
                         checked = true;
                         seedRadioButton.checked = false;
-                        qrRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'keys';
                     }
                 }
 
-                MoneroComponents.RadioButton {
-                    id: qrRadioButton
-                    text: qsTr("Restore from QR Code") + translationManager.emptyString
-                    fontSize: 16
+                MoneroComponents.InlineButton {
+                    id: scanWalletQrButton
                     visible: appWindow.qrScannerEnabled
-                    checked: false
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontStyleName: "Solid"
+                    text: FontAwesome.qrcode
+                    tooltip: qsTr("Scan wallet QR code") + translationManager.emptyString
                     onClicked: {
-                        checked = true;
-                        seedRadioButton.checked = false;
-                        keysRadioButton.checked = false;
-                        wizardController.walletRestoreMode = 'qr';
-                        cameraUi.state = "Capture";
+                        cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
                         cameraUi.qrcode_decoded.connect(updateFromQrCode);
+                        cameraUi.state = "Capture";
                     }
+                    Accessible.role: Accessible.Button
+                    Accessible.name: tooltip
                 }
             }
 
@@ -352,7 +352,6 @@ Rectangle {
             wizardWalletInput.reset();
             seedRadioButton.checked = true;
             keysRadioButton.checked = false;
-            qrRadioButton.checked = false;
             seedInput.text = "";
             seedOffsetCheckbox.checked = false;
             seedOffset.text = "";
