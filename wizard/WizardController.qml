@@ -26,14 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQml 2.0
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.2
+import QtQml
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import moneroComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard
@@ -169,8 +166,13 @@ Rectangle {
                 wizardController.restart();
 
             if (currentView) {
-                stackView.replace(currentView)
-                // Calls when view is opened
+                if (stackView.currentItem !== currentView) {
+                    if (stackView.depth > 0) {
+                        stackView.replace(currentView);
+                    } else {
+                        stackView.push(currentView);
+                    }
+                }
                 if (typeof currentView.onPageCompleted === "function") {
                     currentView.onPageCompleted(previousView);
                 }
@@ -292,24 +294,23 @@ Rectangle {
                 anchors.fill: parent
                 clip: true
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
-                         PropertyAnimation {
-                             target: enterItem
-                             property: "x"
-                             from: stackView.backTransition ? -target.width : target.width
-                             to: 0
-                             duration: 300
-                             easing.type: Easing.OutCubic
-                         }
-                         PropertyAnimation {
-                             target: exitItem
-                             property: "x"
-                             from: 0
-                             to: stackView.backTransition ? target.width : -target.width
-                             duration: 300
-                             easing.type: Easing.OutCubic
-                         }
+                replaceEnter: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: stackView.backTransition ? -stackView.width : stackView.width
+                        to: 0
+                        duration: 300
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                replaceExit: Transition {
+                    PropertyAnimation {
+                        property: "x"
+                        from: 0
+                        to: stackView.backTransition ? stackView.width : -stackView.width
+                        duration: 300
+                        easing.type: Easing.OutCubic
                     }
                 }
             }
@@ -320,12 +321,11 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + appWindow.accountsDir
+        currentFolder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
-        sidebarVisible: false
 
         onAccepted: {
-            var keysPath = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            var keysPath = walletManager.urlToLocalPath(fileDialog.selectedFile)
             persistentSettings.nettype = oshelper.getNetworkTypeFromFile(keysPath);
             wizardController.openWalletFile(keysPath);
         }

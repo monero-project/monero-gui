@@ -26,12 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import FontAwesome 1.0
+pragma ComponentBehavior: Bound
+
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -47,9 +49,8 @@ Rectangle {
     id: pageAccount
     color: "transparent"
     property var model
-    property alias accountHeight: mainLayout.height
-    property alias balanceAllText: balanceAll.text
-    property alias unlockedBalanceAllText: unlockedBalanceAll.text
+    property string balanceAllText
+    property string unlockedBalanceAllText
     property bool selectAndSend: false
     property int currentAccountIndex
 
@@ -65,17 +66,38 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-    /* main layout */
-    ColumnLayout {
-        id: mainLayout
+    ListView {
+        id: subaddressAccountListView
         anchors.margins: 20
         anchors.topMargin: 40
+        anchors.fill: parent
+        clip: true
+        boundsBehavior: ListView.StopAtBounds
+        reuseItems: true
+        cacheBuffer: 100
+        currentIndex: currentAccountIndex
+        headerPositioning: ListView.InlineHeader
 
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
+        ScrollBar.vertical: ScrollBar {
+            id: subaddressAccountScrollBar
+            policy: ScrollBar.AsNeeded
+            parent: pageAccount
+            anchors.top: parent.top
+            anchors.topMargin: 40
+            anchors.right: parent.right
+            anchors.rightMargin: 6
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            active: !isMac || subaddressAccountListView.moving || hovered || pressed
+            z: 2
+            palette.mid: "#8E8E93"
+            palette.dark: "#B8B8BD"
+        }
 
-        spacing: 20
+        header: ColumnLayout {
+            id: mainLayout
+            width: subaddressAccountListView.width
+            spacing: 20
 
         ColumnLayout {
             id: balanceRow
@@ -103,6 +125,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
+                    text: pageAccount.balanceAllText
                     Layout.rightMargin: 87
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
@@ -138,6 +161,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
+                    text: pageAccount.unlockedBalanceAllText
                     Layout.rightMargin: 87
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
@@ -162,12 +186,13 @@ Rectangle {
 
         ColumnLayout {
             id: addressRow
+            Layout.fillWidth: true
             spacing: 0
 
             RowLayout {
                 spacing: 0
 
-                MoneroComponents.LabelSubheader {
+                MoneroComponents.Label {
                     Layout.fillWidth: true
                     fontSize: 24
                     textFormat: Text.RichText
@@ -191,46 +216,34 @@ Rectangle {
                         inputDialog.open()
                     }
 
-                    Rectangle {
-                        anchors.top: createNewAccountButton.bottom
-                        anchors.topMargin: 8
-                        anchors.left: createNewAccountButton.left
-                        anchors.right: createNewAccountButton.right
-                        height: 2
-                        color: MoneroComponents.Style.appWindowBorderColor
-
-                        MoneroEffects.ColorTransition {
-                            targetObj: parent
-                            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                        }
-                    }
                 }
             }
 
-            ColumnLayout {
-                id: subaddressAccountListRow
-                property int subaddressAccountListItemHeight: 50
-                Layout.topMargin: 6
+            Rectangle {
                 Layout.fillWidth: true
-                Layout.minimumWidth: 240
-                Layout.preferredHeight: subaddressAccountListItemHeight * subaddressAccountListView.count
-                visible: subaddressAccountListView.count >= 1
+                Layout.topMargin: 8
+                Layout.preferredHeight: 2
+                color: MoneroComponents.Style.appWindowBorderColor
 
-                ListView {
-                    id: subaddressAccountListView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    clip: true
-                    boundsBehavior: ListView.StopAtBounds
-                    interactive: false
-                    currentIndex: currentAccountIndex
+                MoneroEffects.ColorTransition {
+                    targetObj: parent
+                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                }
+            }
 
-                    delegate: Rectangle {
+        }
+
+        }
+
+        delegate: Rectangle {
                         id: tableItem2
-                        height: subaddressAccountListRow.subaddressAccountListItemHeight
-                        width: parent ? parent.width : undefined
-                        Layout.fillWidth: true
+                        required property int index
+                        required property string address
+                        required property string balance
+                        required property string label
+                        height: 50
+                        width: subaddressAccountListView.width
                         color: itemMouseArea.containsMouse || index === currentAccountIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle {
@@ -295,7 +308,7 @@ Rectangle {
                                 anchors.leftMargin: -addressLabel.width - 30
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
+                                text: TxUtils.addressTruncatePretty(address, subaddressAccountListView.width < 740 ? 1 : (subaddressAccountListView.width < 900 ? 2 : 3))
                                 themeTransition: false
                             }
 
@@ -339,7 +352,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
@@ -354,7 +367,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
@@ -369,22 +382,19 @@ Rectangle {
                         }
                     }
 
-                    onCurrentIndexChanged: {
-                        appWindow.onWalletUpdate();
-                    }
-                }
-            }
+        onCurrentIndexChanged: {
+            appWindow.onWalletUpdate();
+        }
 
-            Rectangle {
-                color: MoneroComponents.Style.appWindowBorderColor
-                Layout.fillWidth: true
-                height: 1
+        footer: Rectangle {
+            width: subaddressAccountListView.width
+            height: 1
+            color: MoneroComponents.Style.appWindowBorderColor
 
-                MoneroEffects.ColorTransition {
-                    targetObj: parent
-                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                }
+            MoneroEffects.ColorTransition {
+                targetObj: parent
+                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
             }
         }
     }
@@ -396,8 +406,8 @@ Rectangle {
             subaddressAccountListView.model = appWindow.currentWallet.subaddressAccountModel;
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
 
-            balanceAll.text = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR"
-            unlockedBalanceAll.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR"
+            balanceAllText = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR"
+            unlockedBalanceAllText = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR"
         }
     }
 

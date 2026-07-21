@@ -26,12 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import FontAwesome 1.0
+pragma ComponentBehavior: Bound
+
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+
+import FontAwesome
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -49,8 +51,8 @@ Rectangle {
     id: pageReceive
     color: "transparent"
     property var model
-    property alias receiveHeight: mainLayout.height
     property var state: "Address"
+    property string selectedAddressDescription: "(" + qsTr("no label") + ")" + translationManager.emptyString
 
     function renameSubaddressLabel(_index){
         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
@@ -62,46 +64,82 @@ Rectangle {
     }
 
     function updateSelectedAddressDisplay() {
+        if (!appWindow.currentWallet || subaddressListView.currentIndex < 0) {
+            return;
+        }
+
         appWindow.current_subaddress_table_index = subaddressListView.currentIndex;
         appWindow.current_address = appWindow.currentWallet.address(
             appWindow.currentWallet.currentSubaddressAccount,
             subaddressListView.currentIndex
         );
         if (subaddressListView.currentIndex == 0) {
-            selectedAddressDrescription.text = qsTr("Primary address") + translationManager.emptyString;
+            selectedAddressDescription = qsTr("Primary address") + translationManager.emptyString;
         } else {
             var selectedAddressLabel = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
             if (selectedAddressLabel == "") {
-                selectedAddressDrescription.text = "(" + qsTr("no label") + ")" + translationManager.emptyString
+                selectedAddressDescription = "(" + qsTr("no label") + ")" + translationManager.emptyString
             } else {
-                selectedAddressDrescription.text = selectedAddressLabel
+                selectedAddressDescription = selectedAddressLabel
             }
         }
     }
 
     function generateQRCodeString() {
-        if (pageReceive.state == "PaymentRequest") {
-            return walletManager.make_uri(appWindow.current_address,
-                amountToReceiveXMR.text,
-                txDescriptionInput.text, receiverNameInput.text);
-        } else {
-            return walletManager.make_uri(appWindow.current_address);
-        }
+        return subaddressListView.headerItem
+            ? subaddressListView.headerItem.generateQRCodeString()
+            : walletManager.make_uri(appWindow.current_address);
     }
 
     Clipboard { id: clipboard }
 
-    /* main layout */
-    ColumnLayout {
-        id: mainLayout
+    ListView {
+        id: subaddressListView
         anchors.margins: 20
         anchors.topMargin: 40
+        anchors.fill: parent
+        clip: true
+        boundsBehavior: ListView.StopAtBounds
+        reuseItems: true
+        cacheBuffer: 100
+        headerPositioning: ListView.InlineHeader
 
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
+        ScrollBar.vertical: ScrollBar {
+            id: subaddressScrollBar
+            policy: ScrollBar.AsNeeded
+            parent: pageReceive
+            anchors.top: parent.top
+            anchors.topMargin: 40
+            anchors.right: parent.right
+            anchors.rightMargin: 6
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            active: !isMac || subaddressListView.moving || hovered || pressed
+            z: 2
+            palette.mid: "#8E8E93"
+            palette.dark: "#B8B8BD"
+        }
 
-        spacing: 15
+        header: ColumnLayout {
+            id: mainLayout
+            width: subaddressListView.width
+            spacing: 15
+
+            function clearFields() {
+                amountToReceiveFiat.text = "";
+                amountToReceiveXMR.text = "";
+                txDescriptionInput.text = "";
+                receiverNameInput.text = "";
+            }
+
+            function generateQRCodeString() {
+                if (pageReceive.state == "PaymentRequest") {
+                    return walletManager.make_uri(appWindow.current_address,
+                        amountToReceiveXMR.text,
+                        txDescriptionInput.text, receiverNameInput.text);
+                }
+                return walletManager.make_uri(appWindow.current_address);
+            }
 
         ColumnLayout {
             id: selectedAddressDetailsColumn
@@ -114,16 +152,16 @@ Rectangle {
                 Layout.bottomMargin: 10
 
                 MoneroComponents.NavbarItem {
-                    active: state == "Address"
+                    active: pageReceive.state == "Address"
                     text: qsTr("Address") + translationManager.emptyString
-                    onSelected: state = "Address"
+                    onSelected: pageReceive.state = "Address"
                 }
 
                 MoneroComponents.NavbarItem {
-                    active: state == "PaymentRequest"
+                    active: pageReceive.state == "PaymentRequest"
                     text: qsTr("Payment request") + translationManager.emptyString
                     onSelected: {
-                        state = "PaymentRequest";
+                        pageReceive.state = "PaymentRequest";
                         qrCodeTextMouseArea.hoverEnabled = true;
                     }
                 }
@@ -144,7 +182,7 @@ Rectangle {
                     anchors.margins: 1
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + generateQRCodeString();
+                    source: "image://qrcode/" + mainLayout.generateQRCodeString();
 
                     MouseArea {
                         anchors.fill: parent
@@ -153,7 +191,7 @@ Rectangle {
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onEntered: qrCodeTooltip.tooltipPopup.open()
                         onExited: qrCodeTooltip.tooltipPopup.close()
-                        onClicked: {
+                        onClicked: (mouse) => {
                             if (mouse.button == Qt.LeftButton){
                                 walletManager.saveQrCodeToClipboard(generateQRCodeString());
                                 appWindow.showStatusMessage(qsTr("QR code copied to clipboard") + translationManager.emptyString, 3);
@@ -279,8 +317,8 @@ Rectangle {
                             amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,2})?\s*$/
                     }
                 }
 
@@ -339,8 +377,8 @@ Rectangle {
                             amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
                         }
                     }
-                    validator: RegExpValidator {
-                        regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    validator: RegularExpressionValidator {
+                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                     }
                 }
 
@@ -454,7 +492,7 @@ Rectangle {
                 Layout.topMargin: 10
                 visible: pageReceive.state == "Address"
                 horizontalAlignment: Text.AlignHCenter
-                text: "(" + qsTr("no label") + ")" + translationManager.emptyString
+                text: pageReceive.selectedAddressDescription
                 wrapMode: Text.WordWrap
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 17
@@ -524,12 +562,13 @@ Rectangle {
 
         ColumnLayout {
             id: addressRow
+            Layout.fillWidth: true
             spacing: 0
 
             RowLayout {
                 spacing: 0
 
-                MoneroComponents.LabelSubheader {
+                MoneroComponents.Label {
                     Layout.fillWidth: true
                     fontSize: 24
                     textFormat: Text.RichText
@@ -552,45 +591,33 @@ Rectangle {
                         inputDialog.open()
                     }
 
-                    Rectangle {
-                        anchors.top: createAddressButton.bottom
-                        anchors.topMargin: 8
-                        anchors.left: createAddressButton.left
-                        anchors.right: createAddressButton.right
-                        height: 2
-                        color: MoneroComponents.Style.appWindowBorderColor
-
-                        MoneroEffects.ColorTransition {
-                            targetObj: parent
-                            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                        }
-                    }
                 }
             }
 
-            ColumnLayout {
-                id: subaddressListRow
-                property int subaddressListItemHeight: 50
-                Layout.topMargin: 6
+            Rectangle {
                 Layout.fillWidth: true
-                Layout.minimumWidth: 240
-                Layout.preferredHeight: subaddressListItemHeight * subaddressListView.count
-                visible: subaddressListView.count >= 1
+                Layout.topMargin: 8
+                Layout.preferredHeight: 2
+                color: MoneroComponents.Style.appWindowBorderColor
 
-                ListView {
-                    id: subaddressListView
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    clip: true
-                    boundsBehavior: ListView.StopAtBounds
-                    interactive: false
+                MoneroEffects.ColorTransition {
+                    targetObj: parent
+                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                }
+            }
 
-                    delegate: Rectangle {
+        }
+
+        }
+
+        delegate: Rectangle {
                         id: tableItem2
-                        height: subaddressListRow.subaddressListItemHeight
-                        width: parent ? parent.width : undefined
-                        Layout.fillWidth: true
+                        required property int index
+                        required property string address
+                        required property string label
+                        height: 50
+                        width: subaddressListView.width
                         color: itemMouseArea.containsMouse || index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle {
@@ -656,7 +683,7 @@ Rectangle {
                                 anchors.leftMargin: -addressLabel.width - 5
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
+                                text: TxUtils.addressTruncatePretty(address, subaddressListView.width < 520 ? 1 : (subaddressListView.width < 650 ? 2 : 3))
                                 themeTransition: false
                             }
 
@@ -694,7 +721,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
@@ -712,7 +739,7 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: isOpenGL ? 0.5 : 1
+                                opacity: GraphicsInfo.api !== GraphicsInfo.Software ? 0.5 : 1
                                 fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
@@ -726,54 +753,50 @@ Rectangle {
                             }
                         }
                     }
-                    onCurrentItemChanged: updateSelectedAddressDisplay()
-                }
-            }
 
-            Rectangle {
-                color: MoneroComponents.Style.appWindowBorderColor
-                Layout.fillWidth: true
-                height: 1
+        onCurrentItemChanged: updateSelectedAddressDisplay()
 
-                MoneroEffects.ColorTransition {
-                    targetObj: parent
-                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                }
+        footer: Rectangle {
+            width: subaddressListView.width
+            height: 1
+            color: MoneroComponents.Style.appWindowBorderColor
+
+            MoneroEffects.ColorTransition {
+                targetObj: parent
+                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
             }
         }
+    }
 
-        MessageDialog {
+    MessageDialog {
             id: receivePageDialog
-            standardButtons: StandardButton.Ok
+            buttons: MessageDialog.Ok
         }
 
-        FileDialog {
+    FileDialog {
             id: qrFileDialog
             title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
-            selectExisting: false
+            fileMode: FileDialog.SaveFile
             nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
-                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                if(!walletManager.saveQrCode(generateQRCodeString(), walletManager.urlToLocalPath(selectedFile))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                     receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                    receivePageDialog.icon = StandardIcon.Error
+                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;
                     receivePageDialog.open()
                 } else {
-                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString, 3);
+                    appWindow.showStatusMessage(qsTr("QR code saved to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString, 3);
                 }
             }
-        }
     }
 
     function onPageCompleted() {
         console.log("Receive page loaded");
         pageReceive.clearFields();
-        subaddressListView.model = appWindow.currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
+            subaddressListView.model = appWindow.currentWallet.subaddressModel;
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
             var numSubaddresses = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount);
             if (subaddressListView.currentIndex == -1 || subaddressListView.currentIndex >= numSubaddresses) {
@@ -784,10 +807,9 @@ Rectangle {
     }
 
     function clearFields() {
-        amountToReceiveFiat.text = "";
-        amountToReceiveXMR.text = "";
-        txDescriptionInput.text = "";
-        receiverNameInput.text = "";
+        if (subaddressListView.headerItem) {
+            subaddressListView.headerItem.clearFields();
+        }
     }
 
     function onPageClosed() {

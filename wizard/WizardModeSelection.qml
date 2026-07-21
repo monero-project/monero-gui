@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -40,11 +40,14 @@ Rectangle {
 
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardModeSelection1"
-    property bool portable: persistentSettings.portable
+    property bool portable: portableSettings.portable
+    property alias advancedModeButton: advancedModeButton
+    property alias portableModeButton: portableModeButton
     property bool simpleModeAvailable: !isTails && appWindow.persistentSettings.nettype == 0 && !isAndroid
 
     function applyWalletMode(mode, wizardState) {
-        if (!persistentSettings.setPortable(portable)) {
+        persistentSettings.sync();
+        if (!portableSettings.setPortable(portable)) {
             appWindow.showStatusMessage(qsTr("Failed to configure portable mode"), 3);
             return;
         }
@@ -144,6 +147,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: advancedModeButton
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
@@ -161,6 +165,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: portableModeButton
                 Layout.topMargin: 20
                 headerText: qsTr("Portable mode") + translationManager.emptyString
                 bodyText: qsTr("Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.") + translationManager.emptyString

@@ -26,12 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -49,8 +46,6 @@ Rectangle {
     property alias okText: okButton.text
     property alias cancelText: cancelButton.text
     property alias closeVisible: closeButton.visible
-
-    property var icon
 
     // same signals as Dialog has
     signal accepted()
@@ -145,6 +140,7 @@ Rectangle {
                     selectByMouse: false
                     wrapMode: TextEdit.Wrap
                     color: MoneroComponents.Style.defaultFontColor
+                    background: null
 
                     MouseArea {
                         anchors.fill: parent

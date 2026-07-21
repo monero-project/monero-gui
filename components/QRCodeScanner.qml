@@ -26,9 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtMultimedia 5.4
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtCore
+import QtMultimedia
+import QtQuick.Dialogs
 import moneroComponents.QRCodeScanner 1.0
 
 Rectangle {
@@ -45,17 +46,56 @@ Rectangle {
     state: "Stopped"
 
     signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name, var extra_parameters)
+    property bool sessionConfigured: false
+
+    function showDecodeError(error, warning) {
+        if (!warning)
+            root.state = "Stopped"
+        messageDialog.text = error
+        messageDialog.visible = true
+    }
+
+    function startCamera() {
+        if (mediaDevices.videoInputs.length === 0) {
+            appWindow.qrScannerEnabled = false
+            root.state = "Stopped"
+            return
+        }
+        if (!sessionConfigured) {
+            if (!finder.setSource(camera) || !finder.setVideoOutput(viewfinder)) {
+                appWindow.qrScannerEnabled = false
+                root.state = "Stopped"
+                return
+            }
+            sessionConfigured = true
+        }
+        camera.start()
+    }
+
+    CameraPermission {
+        id: cameraPermission
+    }
+
+    MediaDevices {
+        id: mediaDevices
+
+        onVideoInputsChanged: {
+            appWindow.qrScannerEnabled = videoInputs.length > 0
+            if (videoInputs.length === 0 && root.state === "Capture")
+                root.state = "Stopped"
+        }
+    }
 
     states: [
         State {
             name: "Capture"
             StateChangeScript {
                 script: {
-		    root.visible = true
-                    camera.captureMode = Camera.CaptureStillImage
-                    camera.cameraState = Camera.ActiveState
-                    camera.start()
-                    finder.enabled = true
+                    if (cameraPermission.status !== Qt.PermissionStatus.Granted) {
+                        cameraPermission.request()
+                        return
+                    }
+                    startCamera()
                 }
             }
         },
@@ -66,7 +106,6 @@ Rectangle {
                     camera.stop()
 		    root.visible = false
                     finder.enabled = false
-                    camera.cameraState = Camera.UnloadedState
                 }
             }
         }
@@ -75,17 +114,32 @@ Rectangle {
     Camera {
         id: camera
         objectName: "qrCameraQML"
-        captureMode: Camera.CaptureStillImage
-        cameraState: Camera.UnloadedState
+        cameraDevice: mediaDevices.defaultVideoInput
 
-        focus {
-            focusMode: Camera.FocusContinuous
+        onActiveChanged: {
+            if (camera.active && root.state === "Capture") {
+                root.visible = true
+                finder.enabled = true
+            } else if (!camera.active) {
+                root.visible = false
+                finder.enabled = false
+            }
         }
+        onErrorOccurred: function(error, errorString) {
+            console.error("QR scanner camera error:", error, errorString)
+            if (root.state === "Capture") {
+                root.state = "Stopped"
+                messageDialog.text = errorString
+                messageDialog.visible = true
+            }
+        }
+        focusMode: Camera.FocusModeAuto
     }
+
     QRCodeScanner {
         id : finder
         objectName: "QrFinder"
-        onDecoded : {
+        onDecoded : (data) => {
             const parsed = walletManager.parse_uri_to_object(data);
             if (!parsed.error) {
                 root.qrcode_decoded(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name, parsed.extra_parameters);
@@ -94,24 +148,17 @@ Rectangle {
                 root.qrcode_decoded(data, "", "", "", "", null);
                 root.state = "Stopped";
             } else {
-                onNotifyError(parsed.error);
+                root.showDecodeError(parsed.error, false)
             }
         }
-        onNotifyError : {
-            if( warning )
-                messageDialog.icon = StandardIcon.Critical
-            else {
-                messageDialog.icon = StandardIcon.Warning
-                root.state = "Stopped"
-            }
-            messageDialog.text = error
-            messageDialog.visible = true
+        onNotifyError : (error, warning) => {
+            root.showDecodeError(error, warning)
         }
     }
 
     VideoOutput {
         id: viewfinder
-        visible: root.state == "Capture"
+        visible: camera.active
 
         x: 0
         y: 0
@@ -119,16 +166,9 @@ Rectangle {
         width: parent.width
         height: parent.height
 
-        source: camera
-        autoOrientation: true
-
         MouseArea {
             anchors.fill: parent
             propagateComposedEvents: true
-            onPressAndHold: {
-                if (camera.lockStatus == Camera.locked)camera.unlock()
-                camera.searchAndLock()
-            }
             onDoubleClicked: {
                 root.state = "Stopped"
             }
@@ -137,16 +177,26 @@ Rectangle {
 
     MessageDialog {
         id: messageDialog
-        title: qsTr("QrCode Scanned")  + translationManager.emptyString
+        title: qsTr("QR Scanner")  + translationManager.emptyString
         onAccepted: {
             root.state = "Stopped"
         }
     }
 
-    Component.onCompleted: {
-        if( QtMultimedia.availableCameras.length == 0) {
-            console.log("No camera available. Disable qrScannerEnabled");
-            appWindow.qrScannerEnabled = false;
+    Connections {
+        target: cameraPermission
+        function onStatusChanged() {
+            if (cameraPermission.status === Qt.PermissionStatus.Granted && root.state === "Capture") {
+                startCamera()
+            } else if (cameraPermission.status === Qt.PermissionStatus.Denied && root.state === "Capture") {
+                root.state = "Stopped"
+                messageDialog.text = qsTr("Camera permission was denied.") + translationManager.emptyString
+                messageDialog.visible = true
+            }
         }
+    }
+
+    Component.onCompleted: {
+        appWindow.qrScannerEnabled = mediaDevices.videoInputs.length > 0
     }
 }

@@ -26,14 +26,16 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
 
-import FontAwesome 1.0
+
+import FontAwesome
 
 import "." as MoneroComponents
 import "./effects/" as MoneroEffects
+
+import QtQuick.Effects
 
 Item {
     id: inlineButton
@@ -42,9 +44,9 @@ Item {
     property string textColor: MoneroComponents.Style.inlineButtonTextColor
     property alias text: inlineText.text
     property alias fontPixelSize: inlineText.font.pixelSize
-    property alias fontFamily: inlineText.font.family
-    property alias fontStyleName: inlineText.font.styleName
-    property bool isFontAwesomeIcon: fontFamily == FontAwesome.fontFamily || fontFamily == FontAwesome.fontFamilySolid
+    property string fontFamily: MoneroComponents.Style.fontBold.name
+    property string fontStyleName: ""
+    property bool isFontAwesomeIcon: fontStyleName === "Solid" || fontFamily === FontAwesome.fontFamily || fontFamily === FontAwesome.fontFamilySolid
     property alias buttonColor: rect.color
     property alias tooltip: tooltip.text
     property alias tooltipLeft: tooltip.tooltipLeft
@@ -70,8 +72,9 @@ Item {
 
         MoneroComponents.TextPlain {
             id: inlineText
-            font.family: MoneroComponents.Style.fontBold.name
-            font.bold: true
+            font.family: inlineButton.fontStyleName === "Solid" ? FontAwesome.fontFamilySolid : inlineButton.fontFamily
+            font.styleName: inlineButton.fontStyleName
+            font.bold: !inlineButton.isFontAwesomeIcon
             font.pixelSize: inlineButton.isFontAwesomeIcon ? 22 : inlineButton.small ? 14 : 16
             color: inlineButton.textColor
             anchors.verticalCenter: parent.verticalCenter
@@ -108,20 +111,20 @@ Item {
         }
     }
 
-    DropShadow {
-        visible: !MoneroComponents.Style.blackTheme
+    MultiEffect {
+        visible: !MoneroComponents.Style.blackTheme && GraphicsInfo.api !== GraphicsInfo.Software
         anchors.fill: rect
-        horizontalOffset: 2
-        verticalOffset: 2
-        radius: 7.0
-        samples: 10
-        color: "#1B000000"
-        cached: true
         source: rect
+        shadowEnabled: true
+        shadowHorizontalOffset: 2
+        shadowVerticalOffset: 2
+        shadowBlur: 0.875
+        blurMax: 16
+        shadowColor: "#1B000000"
     }
 
     Keys.enabled: inlineButton.visible
     Keys.onSpacePressed: doClick()
-    Keys.onEnterPressed: Keys.onReturnPressed(event)
+    Keys.onEnterPressed: doClick()
     Keys.onReturnPressed: doClick()
 }

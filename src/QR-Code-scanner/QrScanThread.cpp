@@ -27,12 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "QrScanThread.h"
-#include <QtGlobal>
 #include <QDebug>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-extern QImage qt_imageFromVideoFrame(const QVideoFrame &f);
-#endif
 
 QrScanThread::QrScanThread(QObject *parent)
       : QThread(parent)
@@ -56,11 +51,7 @@ void QrScanThread::processQImage(const QImage &qimg)
 
 void QrScanThread::processVideoFrame(const QVideoFrame &frame)
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    processQImage( qt_imageFromVideoFrame(frame) );
-#else
-    processQImage(frame.image());
-#endif
+    processQImage(frame.toImage());
 }
 
 void QrScanThread::stop()

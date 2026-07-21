@@ -1,31 +1,38 @@
-FROM ubuntu:20.04
+FROM debian:bookworm
 
 ARG THREADS=1
-ARG ANDROID_NDK_REVISION=23c
-ARG ANDROID_NDK_HASH=e5053c126a47e84726d9f7173a04686a71f9a67a
-ARG ANDROID_SDK_REVISION=7302050_latest
-ARG ANDROID_SDK_HASH=7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
-ARG QT_VERSION=v5.15.19-lts-lgpl
+ARG QT_VERSION=v6.8.3
+ARG QT_COMMIT=bab1fecd556ea561c4a89686293116741acfa1b4
+ARG ANDROID_NDK_REVISION=26d
+ARG ANDROID_NDK_HASH=eefeafe7ccf177de7cc57158da585e7af119bb7504a63604ad719e4b2a328b54
+ARG ANDROID_SDK_REVISION=11076708_latest
+ARG ANDROID_SDK_HASH=2d2d50857e4eb553af5a6dc3ad507a17adf43d115264b1afc116f95c92e5e258
+ARG QT_HOST_VERSION=6.8.3
+ARG QT_HOST_SHA256=8bbea76f5298021048f54c3e2934d7a73e2e6498ebc5a0cb30de16e24a66d847
 
 WORKDIR /opt/android
 ENV WORKDIR=/opt/android
 
-ENV ANDROID_NATIVE_API_LEVEL=31
+ENV ANDROID_NATIVE_API_LEVEL=34
 ENV ANDROID_API=android-${ANDROID_NATIVE_API_LEVEL}
 ENV ANDROID_CLANG=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang
 ENV ANDROID_CLANGPP=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}-clang++
 ENV ANDROID_NDK_ROOT=${WORKDIR}/android-ndk-r${ANDROID_NDK_REVISION}
 ENV ANDROID_SDK_ROOT=${WORKDIR}/cmdline-tools
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-ENV PATH=${JAVA_HOME}/bin:${PATH}
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH=${WORKDIR}/qt-host/bin:${WORKDIR}/qt-host/libexec:${JAVA_HOME}/bin:${PATH}
 ENV PREFIX=${WORKDIR}/prefix
+ENV QT_HOST_PREFIX=${WORKDIR}/qt-host
+ENV LD_LIBRARY_PATH=${QT_HOST_PREFIX}/lib:${QT_HOST_PREFIX}
 ENV TOOLCHAIN_DIR=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install -y ant automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
-    libssl-dev libstdc++6 libtinfo5 libtool libz1 ninja-build openjdk-11-jdk-headless openjdk-11-jre-headless pkg-config python3 \
-    unzip wget
+    && apt-get install -y ant aria2 automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
+    libdbus-1-3 libegl1 libfontconfig1 libfreetype6 libgl1 libglib2.0-0 libgssapi-krb5-2 libssl-dev \
+    libstdc++6 libtinfo5 libtool libx11-6 libxkbcommon0 libz1 libzstd1 libarchive-tools ninja-build openjdk-17-jdk-headless \
+    openjdk-17-jre-headless pkg-config python3 unzip wget \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
     && wget -q https://dl.google.com/android/repository/${PACKAGE_NAME} \
@@ -35,14 +42,41 @@ RUN PACKAGE_NAME=commandlinetools-linux-${ANDROID_SDK_REVISION}.zip \
 
 RUN PACKAGE_NAME=android-ndk-r${ANDROID_NDK_REVISION}-linux.zip \
     && wget -q https://dl.google.com/android/repository/${PACKAGE_NAME} \
-    && echo "${ANDROID_NDK_HASH}  ${PACKAGE_NAME}" | sha1sum -c \
+    && echo "${ANDROID_NDK_HASH}  ${PACKAGE_NAME}" | sha256sum -c \
     && unzip -q ${PACKAGE_NAME} \
     && rm -f ${PACKAGE_NAME}
 
-RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;28.0.3" "platforms;${ANDROID_API}" "tools" > /dev/null
+RUN yes | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} \
+    "build-tools;35.0.1" "platforms;${ANDROID_API}" > /dev/null
+
+# Qt 6 requires CMake 3.21 or newer. Keep the version in sync with the other
+# reproducible Docker builds.
+RUN git clone -b v4.3.3 --depth 1 https://github.com/Kitware/CMake \
+    && cd CMake \
+    && git reset --hard 06cc1d04d8d5a4e13abdadfe20f6937787b1968e \
+    && ./bootstrap --parallel=${THREADS} -- -DCMAKE_USE_OPENSSL=OFF \
+    && make -j${THREADS} \
+    && make install \
+    && cd .. \
+    && rm -rf CMake
 
 ENV HOST_PATH=${PATH}
 ENV PATH=${TOOLCHAIN_DIR}/aarch64-linux-android/bin:${TOOLCHAIN_DIR}/bin:${PATH}
+
+COPY .github/qt_helper.py /tmp/qt_helper.py
+
+RUN mkdir -p "${QT_HOST_PREFIX}" \
+    && cd "${QT_HOST_PREFIX}" \
+    && python3 /tmp/qt_helper.py linux_x64 desktop "${QT_HOST_VERSION}" linux_gcc_64 "${QT_HOST_SHA256}" \
+        --add-package addons.qtshadertools \
+        --archive 'qtbase-*.7z' \
+        --archive 'qtdeclarative-*.7z' \
+        --archive 'qttools-*.7z' \
+        --archive 'icu-*.7z' \
+        --archive 'qtshadertools-*.7z' \
+    && rm /tmp/qt_helper.py \
+    && printf '%s\n%s\n' "${QT_HOST_PREFIX}/lib" "${QT_HOST_PREFIX}" > /etc/ld.so.conf.d/qt-host.conf \
+    && ldconfig
 
 ARG ZLIB_VERSION=1.3.1
 ARG ZLIB_HASH=9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23
@@ -56,41 +90,61 @@ RUN wget -q https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zl
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
-    && cd qt5 \
-    && git reset --hard dc2ac680fa9d0ef7b0d9520859593d13951bedea \
-    && perl init-repository --module-subset=default,-qtwebengine \
-    && PATH=${HOST_PATH} ./configure -v -developer-build -release \
-    -xplatform android-clang \
-    -android-ndk-platform ${ANDROID_API} \
-    -android-ndk ${ANDROID_NDK_ROOT} \
-    -android-sdk ${ANDROID_SDK_ROOT} \
-    -android-ndk-host linux-x86_64 \
-    -no-dbus \
-    -opengl es2 \
-    -no-use-gold-linker \
-    -no-sql-mysql \
-    -opensource -confirm-license \
-    -android-arch arm64-v8a \
-    -prefix ${PREFIX} \
-    -nomake tools -nomake tests -nomake examples \
-    -skip qtwebengine \
-    -skip qtserialport \
-    -skip qtconnectivity \
-    -skip qttranslations \
-    -skip qtpurchasing \
-    -skip qtgamepad -skip qtscript -skip qtdoc \
-    -no-warnings-are-errors \
-    && PATH=${HOST_PATH} make -j${THREADS} \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && cd qttools/src/linguist/lrelease \
-    && ../../../../qtbase/bin/qmake \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && cd ../../../.. \
-    && rm -rf $(pwd)
+RUN git clone https://github.com/qt/qt5.git -b ${QT_VERSION} --depth 1 qt-sources \
+    && git -C qt-sources reset --hard ${QT_COMMIT} \
+    && mkdir qt-build-android \
+    && cd qt-build-android \
+    && PATH=${HOST_PATH} ../qt-sources/configure -init-submodules \
+        -submodules qtbase,qtdeclarative,qtshadertools,qtsvg,qttools \
+        -prefix ${PREFIX} \
+        -qt-host-path ${QT_HOST_PREFIX} \
+        -android-ndk ${ANDROID_NDK_ROOT} \
+        -android-sdk ${ANDROID_SDK_ROOT} \
+        -android-abis arm64-v8a \
+        -android-ndk-platform ${ANDROID_API} \
+        -opensource -confirm-license -release \
+        -opengl es2 -no-dbus -no-openssl -no-sql-mysql -no-sql-sqlite \
+        -skip qtactiveqt \
+        -skip qtlanguageserver \
+        -skip qtquicktimeline \
+        -no-feature-http \
+        -no-feature-ssl \
+        -no-feature-dtls \
+        -no-feature-ocsp \
+        -no-feature-networkproxy \
+        -no-feature-socks5 \
+        -no-feature-networkdiskcache \
+        -no-feature-brotli \
+        -no-feature-dnslookup \
+        -no-feature-topleveldomain \
+        -no-feature-udpsocket \
+        -no-feature-system-proxies \
+        -no-feature-sctp \
+        -no-feature-qml-worker-script \
+        -no-feature-printsupport \
+        -no-feature-pdf \
+        -no-feature-vulkan \
+        -no-feature-sessionmanager \
+        -no-feature-assistant \
+        -no-feature-designer \
+        -no-feature-qdoc \
+        -no-feature-clang \
+        -no-feature-clangcpp \
+        -no-feature-distancefieldgenerator \
+        -no-feature-pixeltool \
+        -no-feature-qdbus \
+        -no-feature-qev \
+        -no-feature-qtattributionsscanner \
+        -no-feature-qtdiag \
+        -no-feature-qtplugininfo \
+        -nomake examples -nomake tests \
+    && PATH=${HOST_PATH} cmake --build . --parallel ${THREADS} \
+    && PATH=${HOST_PATH} cmake --install . \
+    && cd .. \
+    && rm -rf qt-build-android qt-sources
 
-ARG ICONV_VERSION=1.16
-ARG ICONV_HASH=e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04
+ARG ICONV_VERSION=1.18
+ARG ICONV_HASH=3b08f5f4f9b4eb82f151a7040bfd6fe6c6fb922efe4b1659c66ea933276965e8
 RUN wget -q https://ftp.gnu.org/pub/gnu/libiconv/libiconv-${ICONV_VERSION}.tar.gz \
     && echo "${ICONV_HASH}  libiconv-${ICONV_VERSION}.tar.gz" | sha256sum -c \
     && tar -xzf libiconv-${ICONV_VERSION}.tar.gz \
@@ -198,42 +252,38 @@ RUN git clone -b libgcrypt-1.10.1 --depth 1 https://github.com/gpg/libgcrypt \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone -b v3.31.4 --depth 1 https://github.com/Kitware/CMake \
-    && cd CMake \
-    && git reset --hard 569b821a138a4d3f7f4cc42c0cf5ae5e68d56f96 \
-    && PATH=${HOST_PATH} ./bootstrap \
-    && PATH=${HOST_PATH} make -j${THREADS} \
-    && PATH=${HOST_PATH} make -j${THREADS} install \
-    && rm -rf $(pwd)
-
-# Workaround
+# Keep only the SDK components required by androiddeployqt. Moving these out
+# of cmdline-tools also avoids sdkmanager treating its own directory as the
+# SDK root during deployment.
 ENV NEW_SDK_ROOT=${WORKDIR}/sdk
 RUN mkdir ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/licenses ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/platforms ${NEW_SDK_ROOT} \
-    && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT}
+    && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT} \
+    && rm -rf ${ANDROID_SDK_ROOT} \
+    && mv ${NEW_SDK_ROOT} ${ANDROID_SDK_ROOT}
 
 CMD set -ex \
+    && git config --global --add safe.directory '*' \
     && cd /monero-gui \
     && mkdir -p build/Android/release \
     && cd build/Android/release \
-    && cmake -G Ninja \
-    -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" \
+    && cmake \
+    -G Ninja \
+    -DCMAKE_TOOLCHAIN_FILE="${PREFIX}/lib/cmake/Qt6/qt.toolchain.cmake" \
     -DCMAKE_PREFIX_PATH="${PREFIX}" \
     -DCMAKE_FIND_ROOT_PATH="${PREFIX}" \
     -DCMAKE_BUILD_TYPE=Release \
     -DARCH="armv8-a" \
     -DANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL} \
+    -DANDROID_PLATFORM=${ANDROID_API} \
     -DANDROID_ABI="arm64-v8a" \
     -DANDROID_TOOLCHAIN=clang \
     -DBoost_USE_STATIC_RUNTIME=ON \
-    -DLRELEASE_PATH="${PREFIX}/bin" \
-    -DQT_ANDROID_APPLICATION_BINARY="monero-wallet-gui" \
-    -DANDROID_SDK="${NEW_SDK_ROOT}" \
-    -DWITH_SCANNER=ON \
+    -DANDROID_SDK="${ANDROID_SDK_ROOT}" \
+    -DWITH_SCANNER=OFF \
     -DWITH_DESKTOP_ENTRY=OFF \
     ../../.. \
-    && PATH=${HOST_PATH} cmake --build . --target generate_translations_header \
     && sed -i -e "/^build .*monero-wallet-gui.*:.*LINKER/,/^$/ { s#monero/external/randomx/librandomx.a##; s#-lm#-lm monero/external/randomx/librandomx.a#; }" build.ninja \
     && cmake --build . --target monero-wallet-gui \
     && cmake --build . --target apk
