@@ -33,6 +33,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import Qt.labs.platform 1.1 as PlatformLabs
 
 import FontAwesome 1.0
 
@@ -1511,6 +1512,7 @@ ApplicationWindow {
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: MoneroComponents.Style.blackTheme
         property bool checkForUpdates: true
+        property bool trayIconEnabled: false
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
@@ -2497,5 +2499,57 @@ ApplicationWindow {
     WalletManager {
         id: walletManager
         proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    PlatformLabs.SystemTrayIcon {
+        id: trayIcon
+        property int restoredVisibility: Window.Windowed
+
+        function showWindow() {
+            appWindow.visibility = restoredVisibility;
+            appWindow.raise();
+            appWindow.requestActivate();
+        }
+
+        function hideWindow() {
+            restoredVisibility = appWindow.visibility;
+            appWindow.hide();
+        }
+
+        function toggleWindow() {
+            if (appWindow.visibility === Window.Hidden) {
+                showWindow();
+            } else {
+                hideWindow();
+            }
+        }
+
+        visible: persistentSettings.trayIconEnabled
+        icon.source: "qrc:///images/appicon.ico"
+        tooltip: appWindow.title
+
+        onVisibleChanged: {
+            if (!visible && appWindow.visibility === Window.Hidden) {
+                showWindow();
+            }
+        }
+
+        onActivated: {
+            if (Qt.platform.os === "osx") return;
+            if (reason !== PlatformLabs.SystemTrayIcon.Trigger) return;
+            trayIcon.toggleWindow();
+        }
+
+        menu: PlatformLabs.Menu {
+            PlatformLabs.MenuItem {
+                text: appWindow.visibility === Window.Hidden ? qsTr("Show") : qsTr("Hide")
+                onTriggered: trayIcon.toggleWindow()
+            }
+
+            PlatformLabs.MenuItem {
+                text: qsTr("Quit")
+                onTriggered: closeAccepted()
+            }
+        }
     }
 }
