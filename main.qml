@@ -788,7 +788,13 @@ ApplicationWindow {
 
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+
+        var allFlags = flags;
+        if (persistentSettings.anonymityNetworkType === 1) {
+            allFlags = (allFlags + " --i2p-sam " + persistentSettings.i2pRouterAddress + ":" + persistentSettings.i2pSamPort).trim();
+        }
+
+        daemonManager.start(allFlags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -1514,6 +1520,10 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+
+        property int anonymityNetworkType: 0
+        property string i2pRouterAddress: "127.0.0.1"
+        property string i2pSamPort: "7656"
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
