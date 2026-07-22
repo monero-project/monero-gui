@@ -140,6 +140,8 @@ public:
     Q_INVOKABLE static QString amountsSumFromStrings(const QVector<QString> &amounts);
     Q_INVOKABLE static quint64 maximumAllowedAmount();
 
+    Q_INVOKABLE static QString getHumanReadableTimespan(quint64 seconds);
+
     // QML JS engine doesn't support unsigned integers
     Q_INVOKABLE QString maximumAllowedAmountAsString() const;
 
