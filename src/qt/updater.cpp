@@ -42,7 +42,6 @@
 Updater::Updater()
 {
     m_maintainers.emplace_back(fileGetContents(":/monero/utils/gpg_keys/binaryfate.asc").toStdString());
-    m_maintainers.emplace_back(fileGetContents(":/monero/utils/gpg_keys/fluffypony.asc").toStdString());
     m_maintainers.emplace_back(fileGetContents(":/monero/utils/gpg_keys/luigi1111.asc").toStdString());
 }
 
