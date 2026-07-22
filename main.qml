@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -107,17 +107,23 @@ ApplicationWindow {
     property real fiatPrice: 0
     property var fiatPriceAPIs: {
         return {
-            "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
-            },
             "coingecko": {
                 "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
+                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur",
+                "xmrgbp": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=gbp",
+                "xmrcad": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=cad",
+                "xmraud": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=aud",
+                "xmrnzd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=nzd",
+                "xmrchf": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=chf"
             },
             "cryptocompare": {
                 "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
                 "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
+                "xmrgbp": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=GBP",
+                "xmrcad": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CAD",
+                "xmraud": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=AUD",
+                "xmrnzd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=NZD",
+                "xmrchf": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CHF"
             }
         }
     }
@@ -1233,26 +1239,29 @@ ApplicationWindow {
         triggeredOnStart: true
     }
 
+    function getKeyFromCurrency(currency) {
+        switch (currency) {
+            case "xmrusd": return "usd"
+            case "xmreur": return "eur"
+            case "xmrgbp": return "gbp"
+            case "xmrcad": return "cad"
+            case "xmraud": return "aud"
+            case "xmrnzd": return "nzd"
+            case "xmrchf": return "chf"
+        }
+    }
+
     function fiatApiParseTicker(url, resp, currency){
         // parse & validate incoming JSON
-        if(url.startsWith("https://api.kraken.com/0/")){
-            if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
-                appWindow.fiatApiError("Kraken API has error(s)");
-                return;
-            }
-
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["c"][0];
-            return ticker;
-        } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
+        if(url.startsWith("https://api.coingecko.com/api/v3/")){
+            var key = getKeyFromCurrency(currency)
             if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
             return resp["monero"][key];
         } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
+            var key = getKeyFromCurrency(currency)
             if(!resp.hasOwnProperty(key)){
                 appWindow.fiatApiError("cryptocompare API has error(s)");
                 return;
@@ -1336,6 +1345,16 @@ ApplicationWindow {
                 return "USD";
             case "xmreur":
                 return "EUR";
+            case "xmrgbp":
+                return "GBP";
+            case "xmrcad":
+                return "CAD";
+            case "xmraud":
+                return "AUD";
+            case "xmrnzd":
+                return "NZD";
+            case "xmrchf":
+                return "CHF";
             default:
                 console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
                 return "UNSUPPORTED";
@@ -1517,7 +1536,7 @@ ApplicationWindow {
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
-        property string fiatPriceProvider: "kraken"
+        property string fiatPriceProvider: "coingecko"
         property string fiatPriceCurrency: "xmrusd"
 
         property string proxyAddress: "127.0.0.1:9050"
