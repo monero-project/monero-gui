@@ -182,6 +182,7 @@ Rectangle {
         anchors.fill: parent
         propagateComposedEvents: true
         onPressed: previousPosition = globalCursor.getPosition()
+        onDoubleClicked: root.maximizeClicked()
         onPositionChanged: {
             if (pressedButtons == Qt.LeftButton) {
                 var pos = globalCursor.getPosition()
