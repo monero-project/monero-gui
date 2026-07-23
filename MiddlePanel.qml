@@ -27,12 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import QtQml 2.0
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import QtQml
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 import moneroComponents.Wallet 1.0
 
 import "./pages"
@@ -98,8 +96,13 @@ Rectangle {
         }
         previousView = currentView
         if (currentView) {
-            stackView.replace(currentView)
-            // Component.onCompleted is called before wallet is initilized
+            if (stackView.currentItem !== currentView) {
+                if (stackView.depth > 0) {
+                    stackView.replace(currentView)
+                } else {
+                    stackView.push(currentView)
+                }
+            }
             if (typeof currentView.onPageCompleted === "function") {
                 currentView.onPageCompleted();
             }
@@ -191,6 +194,8 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: persistentSettings.customDecorations ? 15 : 10
                 onActiveChanged: if (!active && !isMac) active = true
+                palette.mid: "#8E8E93"
+                palette.dark: "#B8B8BD"
             }
 
             onFlickingChanged: {
@@ -204,26 +209,6 @@ Rectangle {
                 anchors.fill:parent
                 clip: true // otherwise animation will affect left panel
 
-                delegate: StackViewDelegate {
-                    pushTransition: StackViewTransition {
-                        PropertyAnimation {
-                            target: enterItem
-                            property: "x"
-                            from: 0 - target.width
-                            to: 0
-                            duration: 300
-                            easing.type: Easing.OutCubic
-                        }
-                        PropertyAnimation {
-                            target: exitItem
-                            property: "x"
-                            from: 0
-                            to: target.width
-                            duration: 300
-                            easing.type: Easing.OutCubic
-                        }
-                    }
-                }
             }
 
         }// flickable

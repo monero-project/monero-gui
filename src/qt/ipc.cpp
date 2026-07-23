@@ -29,7 +29,6 @@
 #include <QCoreApplication>
 #include <QLocalSocket>
 #include <QLocalServer>
-#include <QtNetwork>
 #include <QDebug>
 
 #include "ipc.h"

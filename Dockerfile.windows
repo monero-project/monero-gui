@@ -1,16 +1,50 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 ARG THREADS=1
-ARG QT_VERSION=v5.15.19-lts-lgpl
+ARG QT_VERSION=6.8.3
+ARG QT_COMMIT=bab1fecd556ea561c4a89686293116741acfa1b4
+ARG QT_HOST_SHA256=8bbea76f5298021048f54c3e2934d7a73e2e6498ebc5a0cb30de16e24a66d847
+
 ENV SOURCE_DATE_EPOCH=1397818193
+ENV QT_HOST_PATH=/opt/qt-host
+ENV LD_LIBRARY_PATH=${QT_HOST_PATH}/lib:${QT_HOST_PATH}
+ENV QT_TARGET_PREFIX=/depends/x86_64-w64-mingw32
+ENV PATH=/opt/qt-host/bin:/opt/qt-host/libexec:${PATH}
 
 RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool ninja-build pkg-config \
-    python && \
+    DEBIAN_FRONTEND=noninteractive apt install -y \
+    autoconf \
+    automake \
+    aria2 \
+    autopoint \
+    bison \
+    build-essential \
+    ca-certificates \
+    cmake \
+    curl \
+    flex \
+    g++-mingw-w64 \
+    gettext \
+    git \
+    gperf \
+    libarchive-tools \
+    libdbus-1-3 \
+    libfontconfig1-dev \
+    libglib2.0-0 \
+    libgl1-mesa-dev \
+    libgssapi-krb5-2 \
+    libtool \
+    libxkbcommon0 \
+    ninja-build \
+    perl \
+    pkg-config \
+    python3 \
+    python-is-python3 \
+    xz-utils && \
     rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
-    update-alternatives --set x86_64-w64-mingw32-gcc $(which x86_64-w64-mingw32-gcc-posix)
+RUN update-alternatives --set x86_64-w64-mingw32-g++ "$(which x86_64-w64-mingw32-g++-posix)" && \
+    update-alternatives --set x86_64-w64-mingw32-gcc "$(which x86_64-w64-mingw32-gcc-posix)"
 
 RUN git clone -b v0.18.5.1 --depth 1 https://github.com/monero-project/monero && \
     cd monero && \
@@ -19,44 +53,108 @@ RUN git clone -b v0.18.5.1 --depth 1 https://github.com/monero-project/monero &&
     cd .. && \
     rm -rf monero
 
-RUN make -j$THREADS -C /depends HOST=x86_64-w64-mingw32 NO_QT=1
+RUN make -j"$THREADS" -C /depends HOST=x86_64-w64-mingw32
 
-RUN git clone https://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
-    cd qt5 && \
-    git reset --hard dc2ac680fa9d0ef7b0d9520859593d13951bedea && \
-    git submodule update --init --depth 1 qtbase qtdeclarative qtgraphicaleffects qtimageformats qtmultimedia qtquickcontrols qtquickcontrols2 qtsvg qttools qttranslations && \
-    ./configure --prefix=/depends/x86_64-w64-mingw32 -xplatform win32-g++ \
+COPY .github/qt_helper.py /tmp/qt_helper.py
+
+# Reuse Qt's matching Linux host tools instead of compiling them from source.
+RUN mkdir -p "${QT_HOST_PATH}" \
+    && cd "${QT_HOST_PATH}" \
+    && python3 /tmp/qt_helper.py linux_x64 desktop "${QT_VERSION}" linux_gcc_64 "${QT_HOST_SHA256}" \
+        --add-package addons.qtshadertools \
+        --archive 'qtbase-*.7z' \
+        --archive 'qtdeclarative-*.7z' \
+        --archive 'qttools-*.7z' \
+        --archive 'icu-*.7z' \
+        --archive 'qtshadertools-*.7z' \
+    && rm /tmp/qt_helper.py \
+    && printf '%s\n%s\n' "${QT_HOST_PATH}/lib" "${QT_HOST_PATH}" > /etc/ld.so.conf.d/qt-host.conf \
+    && ldconfig
+
+RUN git clone https://github.com/qt/qt5.git -b "v${QT_VERSION}" --depth 1 qt-sources && \
+    git -C qt-sources reset --hard "${QT_COMMIT}" && \
+    mkdir /qt-target-build && \
+    cd /qt-target-build && \
+    /qt-sources/configure -init-submodules \
+    -submodules qtbase,qtdeclarative,qtshadertools,qtsvg,qttools \
+    -skip qtactiveqt \
+    -skip qtlanguageserver \
+    -skip qtquicktimeline \
+    -prefix "${QT_TARGET_PREFIX}" \
+    -qt-host-path "${QT_HOST_PATH}" \
+    -xplatform win32-g++ \
     -device-option CROSS_COMPILE=/usr/bin/x86_64-w64-mingw32- \
-    -I $(pwd)/qtbase/src/3rdparty/angle/include \
-    -opensource -confirm-license -release -static -static-runtime -opengl dynamic -no-angle \
-    -no-avx -no-openssl -no-sql-sqlite \
-    -no-feature-qml-worker-script -no-openssl -no-sql-sqlite \
-    -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
-    -skip gamepad -skip location -skip qt3d -skip qtactiveqt -skip qtandroidextras \
-    -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc \
-    -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
-    -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport \
-    -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel \
-    -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras \
-    -skip serialbus -skip webengine \
-    -nomake examples -nomake tests -nomake tools && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd qttools/src/linguist/lrelease && \
-    ../../../../qtbase/bin/qmake && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    cd ../../../.. && \
-    rm -rf $(pwd)
+    -opensource \
+    -confirm-license \
+    -release \
+    -static \
+    -static-runtime \
+    -opengl dynamic \
+    -no-intelcet \
+    -no-stack-protector \
+    -no-stack-clash-protection \
+    -no-avx \
+    -no-openssl \
+    -no-sql-sqlite \
+    -no-feature-http \
+    -no-feature-ssl \
+    -no-feature-dtls \
+    -no-feature-ocsp \
+    -no-feature-networkproxy \
+    -no-feature-socks5 \
+    -no-feature-networkdiskcache \
+    -no-feature-brotli \
+    -no-feature-dnslookup \
+    -no-feature-topleveldomain \
+    -no-feature-udpsocket \
+    -no-feature-system-proxies \
+    -no-feature-sctp \
+    -no-feature-schannel \
+    -no-feature-qml-worker-script \
+    -no-feature-printsupport \
+    -no-feature-pdf \
+    -no-feature-vulkan \
+    -no-feature-sessionmanager \
+    -no-feature-assistant \
+    -no-feature-designer \
+    -no-feature-qdoc \
+    -no-feature-clang \
+    -no-feature-clangcpp \
+    -no-feature-distancefieldgenerator \
+    -no-feature-pixeltool \
+    -no-feature-qdbus \
+    -no-feature-qev \
+    -no-feature-qtattributionsscanner \
+    -no-feature-qtdiag \
+    -no-feature-qtplugininfo \
+    -qt-freetype \
+    -qt-harfbuzz \
+    -qt-libjpeg \
+    -qt-libpng \
+    -qt-pcre \
+    -qt-zlib \
+    -nomake examples \
+    -nomake tests \
+    -- \
+    -DCMAKE_TOOLCHAIN_FILE=/depends/x86_64-w64-mingw32/share/toolchain.cmake && \
+    cmake --build . --parallel "$THREADS" && \
+    cmake --install . && \
+    cd / && \
+    rm -rf qt-target-build qt-sources
 
 RUN git clone -b libgpg-error-1.38 --depth 1 https://github.com/gpg/libgpg-error && \
     cd libgpg-error && \
     git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 && \
     ./autogen.sh && \
-    ./configure --disable-shared --enable-static --disable-doc --disable-tests \
-    --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
+    ./configure \
+    --disable-shared \
+    --enable-static \
+    --disable-doc \
+    --disable-tests \
+    --host=x86_64-w64-mingw32 \
+    --prefix=/depends/x86_64-w64-mingw32 && \
+    make -j"$THREADS" && \
+    make -j"$THREADS" install && \
     cd .. && \
     rm -rf libgpg-error
 
@@ -64,10 +162,14 @@ RUN git clone -b libgcrypt-1.8.5 --depth 1 https://github.com/gpg/libgcrypt && \
     cd libgcrypt && \
     git reset --hard 56606331bc2a80536db9fc11ad53695126007298 && \
     ./autogen.sh && \
-    ./configure --disable-shared --enable-static --disable-doc \
-    --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 \
+    ./configure \
+    --disable-shared \
+    --enable-static \
+    --disable-doc \
+    --host=x86_64-w64-mingw32 \
+    --prefix=/depends/x86_64-w64-mingw32 \
     --with-gpg-error-prefix=/depends/x86_64-w64-mingw32 && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
+    make -j"$THREADS" && \
+    make -j"$THREADS" install && \
     cd .. && \
     rm -rf libgcrypt
