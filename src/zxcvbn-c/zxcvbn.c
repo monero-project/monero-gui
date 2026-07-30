@@ -1,69 +1,40 @@
-// Copyright (c) 2014-2024, The Monero Project
-//
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-//    conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-//    of conditions and the following disclaimer in the documentation and/or other
-//    materials provided with the distribution.
-//
-// 3. Neither the name of the copyright holder nor the names of its contributors may be
-//    used to endorse or promote products derived from this software without specific
-//    prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-// THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-// THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-/**********************************************************************************
+﻿/**********************************************************************************
  * C implementation of the zxcvbn password strength estimation method.
- * Copyright (c) 2015, Tony Evans
- * All rights reserved.
+ * Copyright (c) 2015-2017 Tony Evans
  *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * 1. Redistributions of source code must retain the above copyright notice, this list
- *    of conditions and the following disclaimer.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this
- *    list of conditions and the following disclaimer in the documentation and/or other
- *    materials provided with the distribution.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  *
- * 3. Neither the name of the copyright holder nor the names of its contributors may be
- *    used to endorse or promote products derived from this software without specific
- *    prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
- * DAMAGE.
- * 
  **********************************************************************************/
 
-#include "zxcvbn.h"
+#include <zxcvbn.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdint.h>
 #include <math.h>
 #include <float.h>
+
+/* printf */
+#ifdef __cplusplus
+#include <cstdio>
+#else
+#include <stdio.h>
+#endif
 
 #ifdef USE_DICT_FILE
 #if defined(USE_FILE_IO) || !defined(__cplusplus)
@@ -75,6 +46,11 @@
 
 /* Minimum number of characters in a incrementing/decrementing sequence match */
 #define MIN_SEQUENCE_LEN 3
+
+/* Maximum number of characters to perform full entropy calculation */
+#ifndef ZXCVBN_DETAIL_LEN
+#define ZXCVBN_DETAIL_LEN 100
+#endif
 
 /* Year range for data matching */
 #define MIN_YEAR 1901
@@ -466,7 +442,7 @@ int ZxcvbnInit(const char *Filename)
 /**********************************************************************************
  * Free the data allocated by ZxcvbnInit().
  */
-void ZxcvbnUnInit()
+void ZxcvbnUnInit(void)
 {
     if (DictNodes)
         FreeFn(DictNodes);
@@ -514,9 +490,8 @@ typedef struct
     uint8_t Leeted[sizeof L33TChr];
     uint8_t UnLeet[sizeof L33TChr];
     uint8_t LeetCnv[sizeof L33TCnv / LEET_NORM_MAP_SIZE + 1];
- /*   uint8_t LeetChr[3]; */
     uint8_t First;
-    uint8_t PossChars[49];
+    uint8_t PossChars[CHARSET_SIZE];
 } DictWork_t;
 
 /**********************************************************************************
@@ -959,24 +934,25 @@ typedef struct
     int Shifts;
 } SpatialMatchInfo_t;
 
-/* Shift mapping, characters in pairs: first is shifted, second un-shifted. */
-static const uint8_t UK_Shift[] = "!1\"2$4%5&7(9)0*8:;<,>.?/@'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz^6_-{[|\\}]~#\x80""4\xA3""3\xAC`";
+/* Shift mapping, characters in pairs: first is shifted, second un-shifted. Ordered for increasing shifted character code.*/
+/* Note: on a UK keyboard  \243 is the £ (Pound stirling),  \244 is the ¤ (Euro),  \254 is the ¬ (Not sign)  */
+static const uint8_t UK_Shift[] = "!1\"2$4%5&7(9)0*8:;<,>.?/@'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz^6_-{[|\\}]~#\2433\2444\254`";
 static const uint8_t US_Shift[] = "!1\"'#3$4%5&7(9)0*8:;<,>.?/@2AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz^6_-{[|\\}]~`";
 
 
-/* Neighour tables */
+/* Neighbour tables */
 static const uint8_t UK_Qwerty[48*7] =
 {
 /* key, left, up-left, up-right, right, down-right, down-left */
     '#', '\'',']',   0,   0,   0,   0,    '\'',';', '[', ']', '#',   0, '/',
-    ',', 'm', 'k', 'l', '.',   0,   0,    '-', '0',   0,   0, '-', 'p', 'o',
-    '.', ',', 'l', ';', '/',   0,   0,    '/', '.', ';', '\'',  0,   0,   0, 
-    '0', '9',   0,   0, '-', 'p', 'o',    '1', '`',   0,   0, '2', 'q',   0, 
+    ',', 'm', 'k', 'l', '.',   0,   0,    '-', '0',   0,   0, '=', '[', 'p',
+    '.', ',', 'l', ';', '/',   0,   0,    '/', '.', ';', '\'',  0,   0,   0,
+    '0', '9',   0,   0, '-', 'p', 'o',    '1', '`',   0,   0, '2', 'q',   0,
     '2', '1',   0,   0, '3', 'w', 'q',    '3', '2',   0,   0, '4', 'e', 'w',
     '4', '3',   0,   0, '5', 'r', 'e',    '5', '4',   0,   0, '6', 't', 'r',
     '6', '5',   0,   0, '7', 'y', 't',    '7', '6',   0,   0, '8', 'u', 'y',
     '8', '7',   0,   0, '9', 'i', 'u',    '9', '8',   0,   0, '0', 'o', 'i',
-    ';', 'l', 'o', 'p','\'', '/', '.',    '=', '-',   0,   0,   0, ']', '[',
+    ';', 'l', 'p', '[','\'', '/', '.',    '=', '-',   0,   0,   0, ']', '[',
     '[', 'p', '-', '=', ']', '\'',';',    '\\',  0,   0, 'a', 'z',   0,   0,
     ']', '[', '=',   0,   0, '#','\'',    '`',   0,   0,   0, '1',   0,   0,
     'a',   0, 'q', 'w', 's', 'z','\\',    'b', 'v', 'g', 'h', 'n',   0,   0,
@@ -1022,7 +998,7 @@ static const uint8_t US_Qwerty[47*7] =
     'x', 'z', 's', 'd', 'c',   0,   0,    'y', 't', '6', '7', 'u', 'h', 'g',
     'z',   0, 'a', 's', 'x',   0,   0,
 };
-static const uint8_t Dvorak[48*7] =
+static const uint8_t Dvorak[47*7] =
 {
     '\'',  0, '1', '2', ',', 'a',   0,    ',','\'', '2', '3', '.', 'o', 'a',
     '-', 's', '/', '=',   0,   0, 'z',    '.', ',', '3', '4', 'p', 'e', 'o',
@@ -1180,9 +1156,9 @@ static void SpatialMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start, 
     for(CurLen = MaxLen; CurLen >= MIN_SPATIAL_LEN;CurLen = Len - 1)
     {
         Len = 0;
-        memset(&Extra, 0, sizeof Extra);
         for(k = Keyboards, Indx = 0; Indx < (sizeof Keyboards / sizeof Keyboards[0]); ++Indx, ++k)
         {
+            memset(&Extra, 0, sizeof Extra);
             Len = DoSptlMatch(Passwd, CurLen, k, &Extra);
             if (Len > 0)
             {
@@ -1233,7 +1209,6 @@ static void SpatialMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start, 
                 p->Length = Len;
                 AddMatchRepeats(Result, p, Passwd, MaxLen);
                 AddResult(Result, p, MaxLen);
-                break;
             }
         }
     }
@@ -1248,7 +1223,7 @@ static void SpatialMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start, 
 
 /* The possible date formats ordered by length (d for day, m for month, */
 /*  y for year, ? for separator) */
-static const char *Formats[] =
+static const char * const Formats[] =
 {
     "yyyy",
     "d?m?yy",
@@ -1429,9 +1404,9 @@ static void RepeatMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start, i
             if (strncmp((const char *)Passwd, (const char *)Rpt, Len) == 0)
             {
                 /* Found a repeat */
-                int c = Cardinality(Passwd, Len);
+                int c1 = Cardinality(Passwd, Len);
                 ZxcMatch_t *p = AllocMatch();
-                p->Entrpy = log((double)c) * Len + log(RepeatCount);
+                p->Entrpy = log((double)c1) * Len + log(RepeatCount);
                 p->Type = (ZxcTypeMatch_t)(BRUTE_MATCH + MULTIPLE_MATCH);
                 p->Length = Len * RepeatCount;
                 p->Begin = Start;
@@ -1506,7 +1481,7 @@ static void SequenceMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start,
             Next = Passwd[0] + Dir;
             if (IsDigits && (Dir > 0) && (Next == ('9' + 1)) && (Passwd[1] == '0'))
             {
-                /* Incrementing digits, consider '0' to be same as a 'ten' character */ 
+                /* Incrementing digits, consider '0' to be same as a 'ten' character */
                 ++Len;
                 ++Passwd;
                 break;
@@ -1515,8 +1490,9 @@ static void SequenceMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start,
             {
                 ++Len;
                 ++Passwd;
+                break;
             }
-            else if ((Next > SetHigh) || (Next < SetLow) || (Passwd[1] != Next))
+            if ((Next > SetHigh) || (Next < SetLow) || (Passwd[1] != Next))
                 break;
             ++Len;
             ++Passwd;
@@ -1577,7 +1553,7 @@ static void SequenceMatch(ZxcMatch_t **Result, const uint8_t *Passwd, int Start,
  *
  * Dijkstra's algorithm finds the combination of these part matches (or paths)
  * which gives the lowest entropy (or smallest distance) from begining to end
- * of the password. 
+ * of the password.
  */
 
 /* Struct to hold the data of a node (imaginary point between password characters) */
@@ -1598,14 +1574,19 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
     ZxcMatch_t *Zp;
     Node_t *Np;
     double e;
-    int Len = strlen(Pwd);
+    int FullLen = strlen(Pwd);
+    int Len = FullLen;
     const uint8_t *Passwd = (const uint8_t *)Pwd;
     uint8_t *RevPwd;
     /* Create the paths */
-    Node_t *Nodes = MallocFn(Node_t, Len+1);
-    memset(Nodes, 0, (Len+1) * sizeof *Nodes);
+    Node_t *Nodes = MallocFn(Node_t, Len+2);
+    memset(Nodes, 0, (Len+2) * sizeof *Nodes);
     i = Cardinality(Passwd, Len);
     e = log((double)i);
+
+    /* Limit length used to full entropy estimation to prevent excessive calculation time */
+    if (Len > ZXCVBN_DETAIL_LEN)
+        Len = ZXCVBN_DETAIL_LEN;
 
     /* Do matching for all parts of the password */
     for(i = 0; i < Len; ++i)
@@ -1666,7 +1647,6 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
     for(i = 0; i < Len; ++i)
     {
         int MaxLen = Len - i;
-        int j;
         if (!RevPwd[i])
             continue;
         for(j = i+1; j <= Len; ++j)
@@ -1683,14 +1663,28 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
         }
     }
     FreeFn(RevPwd);
+    if (FullLen > Len)
+    {
+        /* Only the first MAX_DETAIL_LEN characters are used for full  entropy estimation, for */
+        /* very long passwords the remainding characters are treated as being a incrementing */
+        /* sequence. This will give a low (and safe) entropy value for them. */
+        Nodes[Len].Dist = DBL_MAX;
+        Zp = AllocMatch();
+        Zp->Type = LONG_PWD_MATCH;
+        Zp->Begin = Len;
+        /* Length is negative as only one extra node to represent many extra characters */
+        Zp->Length = Len - FullLen;
+        Zp->Entrpy = log(2 * (FullLen - Len));
+        AddResult(&(Nodes[i].Paths), Zp, FullLen - Len);
+        ++Len;
+    }
     /* End node has infinite distance/entropy, start node has 0 distance */
-    Nodes[i].Dist = DBL_MAX;
+    Nodes[Len].Dist = DBL_MAX;
     Nodes[0].Dist = 0.0;
 
     /* Reduce the paths using Dijkstra's algorithm */
     for(i = 0; i < Len; ++i)
     {
-        int j;
         double MinDist = DBL_MAX;
         int MinIdx = 0;
         /* Find the unvisited node with minimum distance or entropy */
@@ -1712,8 +1706,12 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
         /* update if the new distance is smaller. */
         for(Zp = Np->Paths; Zp; Zp = Zp->Next)
         {
-            Node_t *Ep = Np + Zp->Length;
+            Node_t *Ep;
             double d = e + Zp->MltEnpy;
+            if (Zp->Length >= 0)
+                Ep = Np + Zp->Length;
+            else
+                Ep = Np + 1;
             if (!Ep->Visit &&  (d < Ep->Dist))
             {
                 /* Update as lower dist, also remember the 'from' node */
@@ -1721,9 +1719,6 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
                 Ep->From = Zp;
             }
         }
-        /* If we got to the end node stop early */
-        /*if (Nodes[Len].Dist < DBL_MAX/2.0) */
-          /*  break; */
     }
     /* Make e hold entropy result and adjust to log base 2 */
     e = Nodes[Len].Dist / log(2.0);
@@ -1748,6 +1743,8 @@ double ZxcvbnMatch(const char *Pwd, const char *UserDict[], ZxcMatch_t **Info)
                     /* Adjust the entropy to log to base 2 */
                     Xp->Entrpy /= log(2.0);
                     Xp->MltEnpy /= log(2.0);
+                    if (Xp->Length < 0)
+                        Xp->Length = -Xp->Length;
 
                     /* Put previous part at head of info list */
                     Xp->Next = *Info;
