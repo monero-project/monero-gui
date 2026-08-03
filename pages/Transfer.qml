@@ -976,7 +976,7 @@ Rectangle {
                 root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
             }
             button2.text: qsTr("Sign (offline)") + translationManager.emptyString
-            button2.enabled: !appWindow.viewOnly
+            button2.enabled: !appWindow.viewOnly && !currentWallet.isHwBacked()
             button2.onClicked: {
                 console.log("Transfer: sign tx clicked")
                 signTxDialog.open();
