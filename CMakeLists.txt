@@ -158,6 +158,19 @@ if(Qt5QmlModels_PKG_CONFIG_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
+# Optional. Lets the "System" theme setting read the desktop colour-scheme preference
+# from xdg-desktop-portal. Without it we fall back to inspecting the Qt palette.
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+  find_package(Qt5DBus ${QT_MIN_VERSION} QUIET)
+  if(Qt5DBus_FOUND)
+    message(STATUS "Found Qt5DBus, system colour-scheme detection will use xdg-desktop-portal")
+    list(APPEND QT5_LIBRARIES Qt5DBus)
+    add_definitions(-DHAVE_QT_DBUS)
+  else()
+    message(STATUS "Qt5DBus not found, system colour-scheme detection will use the Qt palette")
+  endif()
+endif()
+
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} ${QT_MIN_VERSION} REQUIRED)
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})

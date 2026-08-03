@@ -1508,7 +1508,8 @@ ApplicationWindow {
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
-        property bool blackTheme: MoneroComponents.Style.blackTheme
+        property bool blackTheme: true  // legacy, superseded by `theme`; kept in sync for downgrades
+        property string theme: ""       // "system" | "light" | "dark"; empty means not migrated yet
         property bool checkForUpdates: true
         property bool autosave: true
         property int autosaveMinutes: 10
@@ -1546,8 +1547,28 @@ ApplicationWindow {
         }
 
         Component.onCompleted: {
-            MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+            // Migrate the pre-existing boolean setting to the tri-state theme selector.
+            if (persistentSettings.theme === "") {
+                persistentSettings.theme = persistentSettings.blackTheme ? "dark" : "light";
+            }
         }
+    }
+
+    Binding {
+        target: MoneroComponents.Style
+        property: "theme"
+        value: persistentSettings.theme
+        when: persistentSettings.theme !== ""
+    }
+
+    // Keep the legacy key current so downgrading to an older release preserves the choice.
+    // Held inactive until migration has run, so it cannot write Style's default over the
+    // stored blackTheme that the migration above depends on reading.
+    Binding {
+        target: persistentSettings
+        property: "blackTheme"
+        value: MoneroComponents.Style.blackTheme
+        when: persistentSettings.theme !== ""
     }
 
     ListModel {
@@ -2050,6 +2071,12 @@ ApplicationWindow {
                 color: "#FFFFFF"
             }
         }
+    }
+
+    // Quick toggle used by the title bar button and the View menu. Flips to the explicit
+    // theme opposite to whatever is currently showing, including when following the system.
+    function toggleTheme(){
+        persistentSettings.theme = MoneroComponents.Style.blackTheme ? "light" : "dark";
     }
 
     function toggleLanguageView(){
