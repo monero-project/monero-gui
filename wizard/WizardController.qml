@@ -35,6 +35,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.2
 import QtQuick.Dialogs 1.2
 import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Windows.js" as Windows
@@ -48,7 +49,7 @@ Rectangle {
     anchors.fill: parent
 
     signal useMoneroClicked()
-    signal walletCreatedFromDevice(bool success)
+    signal walletCreatedFromDevice(bool success, bool cancelled)
 
     function restart(generatingNewSeed) {
         // Clear up any state, including `m_wallet`, which
@@ -425,6 +426,7 @@ Rectangle {
     function disconnect(){
         walletManager.walletCreated.disconnect(onWalletCreated);
         walletManager.walletPassphraseNeeded.disconnect(onWalletPassphraseNeeded);
+        walletManager.walletPairingCodeNeeded.disconnect(onWalletPairingCodeNeeded);
         walletManager.deviceButtonRequest.disconnect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.disconnect(onDeviceButtonPressed);
     }
@@ -432,6 +434,7 @@ Rectangle {
     function connect(){
         walletManager.walletCreated.connect(onWalletCreated);
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
+        walletManager.walletPairingCodeNeeded.connect(onWalletPairingCodeNeeded);
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
     }
@@ -456,6 +459,9 @@ Rectangle {
         var kdfRounds = persistentSettings.kdfRounds;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
         var subaddressLookahead = wizardController.walletOptionsSubaddressLookahead;
+        // Device descriptor. The segment before the first ':' selects the
+        // device class, always "Trezor" here; an empty transport path
+        // matches every USB transport and the first one wins.
         var deviceName = wizardController.walletOptionsDeviceName;
 
         connect();
@@ -470,6 +476,7 @@ Rectangle {
         wizardController.enabled = true;
         splash.close()
 
+        var cancelled = false;
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             wizardController.m_wallet = wallet;
@@ -479,13 +486,59 @@ Rectangle {
                 wizardController.walletOptionsRestoreHeight = wizardController.m_wallet.walletCreationHeight;
             }
         } else {
+            // The wallet-create path hits the same Trezor error
+            // categories as wallet-open. The raw errorString is worth
+            // logging but is wallet2-internal phrasing that does not
+            // tell the user what to do.
             console.log(wallet.errorString)
-            appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
+            var es = wallet.errorString || "";
+            var trezorError = wallet.trezorError;
+            if (trezorError === Wallet.TrezorError_Unreachable) {
+                // Retry re-fires createWalletFromDevice with the same
+                // wizard options; they all persist on wizardController.
+                walletManager.closeWallet();
+                // Unwire the handlers first, otherwise the retry path's
+                // connect() double-binds onWalletCreated.
+                disconnect();
+                appWindow.showRetryableTrezorErrorSplash(
+                    qsTr("Couldn't reach your Trezor")
+                        + translationManager.emptyString,
+                    qsTr("Make sure your Trezor is connected and unlocked, then try again.")
+                        + translationManager.emptyString,
+                    function() { wizardController.createWalletFromDevice(); },
+                    function() { walletCreatedFromDevice(false, true); });
+                return;
+            } else if (trezorError === Wallet.TrezorError_PairingRejected) {
+                // The device rejected the pairing code the user just
+                // typed. Starting over makes it show a fresh code, and
+                // the pairing dialog re-prompts carrying the message.
+                walletManager.closeWallet();
+                disconnect();
+                devicePairingCodeDialog.errorText =
+                    qsTr("That code did not match. Check the code on your device and try again.")
+                        + translationManager.emptyString;
+                wizardController.createWalletFromDevice();
+                return;
+            } else if (trezorError === Wallet.TrezorError_Cancelled) {
+                appWindow.showStatusMessage(
+                    qsTr("Wallet creation cancelled.") + translationManager.emptyString,
+                    5);
+                cancelled = true;
+            } else if (trezorError === Wallet.TrezorError_FirmwareUnsupported) {
+                // Nothing to retry: the device needs different firmware
+                // before it can hold a Monero wallet.
+                appWindow.showStatusMessage(
+                    qsTr("This Trezor runs firmware that has no Monero support, such as the bitcoin-only build. Install the standard firmware with Trezor Suite, then try again.")
+                        + translationManager.emptyString,
+                    10);
+            } else {
+                appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
+            }
             walletManager.closeWallet();
         }
 
         disconnect();
-        walletCreatedFromDevice(success);
+        walletCreatedFromDevice(success, cancelled);
     }
 
     function onWalletPassphraseNeeded(on_device){
@@ -506,6 +559,22 @@ Rectangle {
         }
 
         devicePassphraseDialog.open(on_device)
+    }
+
+    function onWalletPairingCodeNeeded(){
+        splash.close()
+
+        console.log(">>> wallet pairing code needed: ");
+        devicePairingCodeDialog.onAcceptedCallback = function(code) {
+            walletManager.onPairingCodeEntered(code, false);
+            creatingWalletDeviceSplash();
+        }
+        devicePairingCodeDialog.onRejectedCallback = function() {
+            walletManager.onPairingCodeEntered("", true);
+            creatingWalletDeviceSplash();
+        }
+
+        devicePairingCodeDialog.open()
     }
 
     function onDeviceButtonRequest(code){

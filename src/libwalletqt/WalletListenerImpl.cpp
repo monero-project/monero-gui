@@ -32,6 +32,7 @@
 WalletListenerImpl::WalletListenerImpl(Wallet * w)
     : m_wallet(w)
     , m_phelper(w)
+    , m_pchelper(w)
 {
 
 }
@@ -94,4 +95,16 @@ Monero::optional<std::string> WalletListenerImpl::onDevicePassphraseRequest(bool
 {
     qDebug() << __FUNCTION__;
     return m_phelper.onDevicePassphraseRequest(on_device);
+}
+
+Monero::optional<std::string> WalletListenerImpl::onDevicePairingCodeRequest()
+{
+    qDebug() << __FUNCTION__;
+    return m_pchelper.onDevicePairingCodeRequest();
+}
+
+void WalletListenerImpl::onPairingCodeEntered(const QString &code, bool entry_abort)
+{
+    qDebug() << __FUNCTION__;
+    m_pchelper.onPairingCodeEntered(code, entry_abort);
 }

@@ -38,6 +38,7 @@
 #include <QWaitCondition>
 #include "qt/FutureScheduler.h"
 #include "NetworkType.h"
+#include "PairingCodeHelper.h"
 #include "PassphraseHelper.h"
 
 class Wallet;
@@ -45,7 +46,7 @@ namespace Monero {
 struct WalletManager;
 }
 
-class WalletManager : public QObject, public PassprasePrompter
+class WalletManager : public QObject, public PassprasePrompter, public PairingCodePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ connected)
@@ -195,6 +196,9 @@ public:
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
 
+    Q_INVOKABLE void onPairingCodeEntered(const QString &code, bool entry_abort=false);
+    virtual void onWalletPairingCodeNeeded() override;
+
     QString proxyAddress() const;
     void setProxyAddress(QString address);
 
@@ -203,6 +207,7 @@ signals:
     void walletOpened(Wallet * wallet);
     void walletCreated(Wallet * wallet);
     void walletPassphraseNeeded(bool onDevice);
+    void walletPairingCodeNeeded();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
     void checkUpdatesComplete(
@@ -226,6 +231,8 @@ private:
     QPointer<Wallet> m_currentWallet;
     PassphraseReceiver * m_passphraseReceiver;
     QMutex m_mutex_passphraseReceiver;
+    PairingCodeReceiver * m_pairingCodeReceiver = nullptr;
+    QMutex m_mutex_pairingCodeReceiver;
     QString m_proxyAddress;
     mutable QMutex m_proxyMutex;
     FutureScheduler m_scheduler;

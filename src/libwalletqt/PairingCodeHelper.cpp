@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,49 +26,40 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef MONERO_GUI_WALLETLISTENERIMPL_H
-#define MONERO_GUI_WALLETLISTENERIMPL_H
-
-#include "wallet/api/wallet2_api.h"
 #include "PairingCodeHelper.h"
-#include "PassphraseHelper.h"
+#include <QDebug>
+#include <QMutexLocker>
 
-class Wallet;
-
-class WalletListenerImpl : public Monero::WalletListener, public PassphraseReceiver, public PairingCodeReceiver
+Monero::optional<std::string> PairingCodeHelper::onDevicePairingCodeRequest()
 {
-public:
-    WalletListenerImpl(Wallet * w);
+    qDebug() << __FUNCTION__;
+    QMutexLocker locker(&m_mutex);
+    m_abort = false;
+    m_answered = false;
+    m_code.clear();
 
-    virtual void moneySpent(const std::string &txId, uint64_t amount) override;
+    if (m_prompter != nullptr) {
+        m_prompter->onWalletPairingCodeNeeded();
+    }
 
-    virtual void moneyReceived(const std::string &txId, uint64_t amount) override;
+    while (!m_answered) {
+        m_cond.wait(&m_mutex);
+    }
 
-    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override;
+    if (m_abort) {
+        return Monero::optional<std::string>(std::string{});
+    }
+    auto result = m_code.toStdString();
+    m_code.clear();
+    return Monero::optional<std::string>(result);
+}
 
-    virtual void newBlock(uint64_t height) override;
-
-    virtual void updated() override;
-
-    // called when wallet refreshed by background thread or explicitly
-    virtual void refreshed() override;
-
-    virtual void onDeviceButtonRequest(uint64_t code) override;
-
-    virtual void onDeviceButtonPressed() override;
-
-    virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override;
-
-    virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override;
-
-    virtual Monero::optional<std::string> onDevicePairingCodeRequest() override;
-
-    virtual void onPairingCodeEntered(const QString &code, bool entry_abort) override;
-
-private:
-    Wallet * m_wallet;
-    PassphraseHelper m_phelper;
-    PairingCodeHelper m_pchelper;
-};
-
-#endif //MONERO_GUI_WALLETLISTENERIMPL_H
+void PairingCodeHelper::onPairingCodeEntered(const QString &code, bool entry_abort)
+{
+    qDebug() << __FUNCTION__;
+    QMutexLocker locker(&m_mutex);
+    m_code = code;
+    m_abort = entry_abort;
+    m_answered = true;
+    m_cond.wakeAll();
+}
