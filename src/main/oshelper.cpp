@@ -44,6 +44,7 @@
 #include <QUrl>
 #include <QByteArray>
 #include <QRandomGenerator>
+#include <QUuid>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -304,6 +305,15 @@ quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath) const
 
 void OSHelper::openSeedTemplate() const
 {
-    QFile::copy(":/wizard/template.pdf", QDir::tempPath() + "/seed_template.pdf");
-    openFile(QDir::tempPath() + "/seed_template.pdf");
+    // Use an unpredictable temp file name and verify the copy actually
+    // succeeded. A fixed path could be pre-planted (or replaced with a
+    // symlink) by another local process, causing the user to open an
+    // attacker-controlled file with the default application.
+    const QString destPath = QDir::tempPath()
+        + "/monero_seed_template_" + QUuid::createUuid().toString(QUuid::WithoutBraces) + ".pdf";
+    if (!QFile::copy(":/wizard/template.pdf", destPath)) {
+        qWarning() << "Failed to copy seed template to" << destPath;
+        return;
+    }
+    openFile(destPath);
 }
