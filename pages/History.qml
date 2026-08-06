@@ -1719,7 +1719,6 @@ Rectangle {
             console.log('getProof: Error checking TxId and/or address');
         }
 
-        console.log("getProof: Generate clicked: txid " + hash + ", address " + address);
         middlePanel.getProofClicked(hash, address, '', null);
         informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
         informationPopup.text = qsTr("Generating payment proof") + "..." + translationManager.emptyString;
@@ -1738,17 +1737,21 @@ Rectangle {
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
 
+        // destinations may intentionally contain "<br>" separators inserted by the wallet backend;
+        // escape everything first, then restore the literal "<br>" so line breaks are preserved.
+        destinations = Utils.htmlEscape(destinations).replace(/&lt;br&gt;/g, '<br>');
+
         return '<table border="0">'
-            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
-            + (dateTime ? trStart + qsTr("Date") + ":" + trMiddle + dateTime + trEnd : "")
-            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + amount + trEnd : "")
-            + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
-            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
-            + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + integratedAddress + trEnd : "")
-            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
+            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + Utils.htmlEscape(tx_id) + trEnd : "")
+            + (dateTime ? trStart + qsTr("Date") + ":" + trMiddle + Utils.htmlEscape(dateTime) + trEnd : "")
+            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + Utils.htmlEscape(amount) + trEnd : "")
+            + (address ? trStart + qsTr("Address:") + trMiddle + Utils.htmlEscape(address) + trEnd : "")
+            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + Utils.htmlEscape(paymentId) + trEnd : "")
+            + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + Utils.htmlEscape(integratedAddress) + trEnd : "")
+            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + Utils.htmlEscape(tx_key) + trEnd : "")
             + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + Utils.htmlEscape(tx_note) + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
-            + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
+            + (rings ? trStart + qsTr("Rings:") + trMiddle + Utils.htmlEscape(rings) + trEnd : "")
             + "</table>"
             + translationManager.emptyString;
     }

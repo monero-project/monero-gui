@@ -151,7 +151,6 @@ Rectangle {
                         color: itemMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         function doSend() {
-                            console.log("Sending to: ", address +" "+ paymentId);
                             middlePanel.sendTo(address, paymentId);
                             leftPanel.selectItem(middlePanel.state)
                         }
