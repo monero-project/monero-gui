@@ -538,7 +538,13 @@ ApplicationWindow {
                 default:
                     // opening with password but password doesn't match
                     console.error("Error opening wallet with password: ", wallet.errorString);
-                    passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
+                    var errorMessage = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                    if (wallet.isLedger()) {
+                        errorMessage += "\n" + qsTr("Make sure your Ledger is connected and unlocked, and the Monero app is open.");
+                    } else if (wallet.isTrezor()) {
+                        errorMessage += "\n" + qsTr("Make sure your Trezor is connected and unlocked.");
+                    }
+                    passwordDialog.showError(errorMessage);
                     console.log("closing wallet async : " + wallet.address)
                     closeWallet();
                     return;
