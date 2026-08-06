@@ -933,12 +933,9 @@ ApplicationWindow {
 
     // called on "transfer"
     function handlePayment(recipients, paymentId, mixinCount, priority, description, createFile) {
-        console.log("Creating transaction: ")
-        console.log("\trecipients: ", recipients,
-                    ", payment_id: ", paymentId,
-                    ", mixins: ", mixinCount,
-                    ", priority: ", priority,
-                    ", description: ", description);
+        // Do not log recipient addresses, payment ids or descriptions; they are
+        // sensitive and would be readable by any process with access to the log.
+        console.log("Creating transaction")
 
         const recipientAll = recipients.find(function (recipient) {
             return recipient.amount == "(all)";
