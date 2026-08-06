@@ -26,11 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 
 import "../components" as MoneroComponents
 
@@ -60,22 +60,22 @@ RowLayout {
 
         Image {
             id: icon
-            visible: !rowlayout.checkbox && (!isOpenGL || MoneroComponents.Style.blackTheme)
+            visible: !rowlayout.checkbox && (GraphicsInfo.api === GraphicsInfo.Software || MoneroComponents.Style.blackTheme)
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             source: ""
         }
 
-        DropShadow {
-            visible: !rowlayout.checkbox && (isOpenGL && !MoneroComponents.Style.blackTheme)
+        MultiEffect {
+            visible: !rowlayout.checkbox && (GraphicsInfo.api !== GraphicsInfo.Software && !MoneroComponents.Style.blackTheme)
             anchors.fill: icon
-            horizontalOffset: 3
-            verticalOffset: 3
-            radius: 10.0
-            samples: 15
-            color: "#1E000000"
             source: icon
-            cached: true
+            shadowEnabled: true
+            shadowHorizontalOffset: 3
+            shadowVerticalOffset: 3
+            shadowBlur: 0.625
+            blurMax: 16
+            shadowColor: "#1E000000"
         }
 
         MouseArea {

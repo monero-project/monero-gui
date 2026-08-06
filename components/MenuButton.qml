@@ -26,8 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtGraphicalEffects 1.0
+import QtQuick
 
 import "../components" as MoneroComponents
 import "effects/" as MoneroEffects
@@ -61,26 +60,25 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44  : 38 ) : 0
 
-    LinearGradient {
-        visible: isOpenGL && (button.checked || buttonArea.containsMouse)
+    Rectangle {
+        visible: GraphicsInfo.api !== GraphicsInfo.Software && (button.checked || buttonArea.containsMouse)
         height: parent.height
         width: 260
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: -20
         anchors.leftMargin: parent.getOffset()
-        start: Qt.point(width, 0)
-        end: Qt.point(0, 0)
         gradient: Gradient {
-            GradientStop { position: 0.0; color: MoneroComponents.Style.menuButtonGradientStart }
-            GradientStop { position: 1.0; color: MoneroComponents.Style.menuButtonGradientStop }
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: MoneroComponents.Style.menuButtonGradientStop }
+            GradientStop { position: 1.0; color: MoneroComponents.Style.menuButtonGradientStart }
         }
         opacity: button.checked ? 1 : 0.3
     }
 
-    // fallback hover effect when opengl is not available
+    // fallback hover effect for the software renderer
     Rectangle {
-        visible: !isOpenGL && (button.checked || buttonArea.containsMouse)
+        visible: GraphicsInfo.api === GraphicsInfo.Software && (button.checked || buttonArea.containsMouse)
         anchors.fill: parent
         color: MoneroComponents.Style.menuButtonFallbackBackgroundColor
         opacity: button.checked ? 1 : 0.3

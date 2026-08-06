@@ -61,6 +61,15 @@ class SubaddressModel;
 class SubaddressAccount;
 class SubaddressAccountModel;
 
+Q_MOC_INCLUDE("TransactionHistory.h")
+Q_MOC_INCLUDE("model/TransactionHistorySortFilterModel.h")
+Q_MOC_INCLUDE("AddressBook.h")
+Q_MOC_INCLUDE("model/AddressBookModel.h")
+Q_MOC_INCLUDE("Subaddress.h")
+Q_MOC_INCLUDE("model/SubaddressModel.h")
+Q_MOC_INCLUDE("SubaddressAccount.h")
+Q_MOC_INCLUDE("model/SubaddressAccountModel.h")
+
 class Wallet : public QObject, public PassprasePrompter
 {
     Q_OBJECT

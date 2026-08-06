@@ -30,11 +30,12 @@
 #define QRCODESCANNER_H_
 
 #include <QImage>
+#include <QPointer>
 #include <QVideoFrame>
 #include "QrScanThread.h"
 
-class QVideoProbe;
-class QCamera;
+class QMediaCaptureSession;
+class QVideoSink;
 
 class QrCodeScanner : public QObject
 {
@@ -45,7 +46,8 @@ class QrCodeScanner : public QObject
 public:
     QrCodeScanner(QObject *parent = Q_NULLPTR);
     ~QrCodeScanner();
-    void setSource(QCamera*);
+    Q_INVOKABLE bool setSource(QObject *camera);
+    Q_INVOKABLE bool setVideoOutput(QObject *videoOutput);
 
     bool enabled() const;
     void setEnabled(bool enabled);
@@ -66,7 +68,8 @@ protected:
     int m_processInterval;
     int m_enabled;
     QVideoFrame m_curFrame;
-    QVideoProbe *m_probe;
+    QMediaCaptureSession *m_captureSession;
+    QPointer<QVideoSink> m_sink;
 };
 
 #endif

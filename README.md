@@ -94,7 +94,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling the Monero GUI from source
 
-*Note*: Qt 5.12 is the minimum version required to build the GUI.
+*Note*: Qt 6.8 is the minimum version required to build the GUI.
 
 *Note*: Official GUI releases use monero-wallet-gui from this process alongside the supporting binaries (monerod, etc) from the [CLI deterministic builds](https://github.com/monero-project/monero/blob/release-v0.18/contrib/gitian/README.md).
 
@@ -138,17 +138,22 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    \* `4` - number of CPU threads to use
 
+   The image builds the non-Qt dependencies with Monero's `contrib/depends`
+   system and installs Qt into the resulting `/depends/x86_64-linux-gnu`
+   prefix.
+
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static'
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make depends root=/depends target=x86_64-linux-gnu tag=linux-x64'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. add `-e CMAKE_BUILD_PARALLEL_LEVEL=4` to the `docker run` command
-5. Monero GUI Linux static binary will be placed in  `monero-gui/build/release/bin` directory
+
+5. Monero GUI Linux static binary will be placed in `monero-gui/build/x86_64-linux-gnu/release/bin` directory
 6. (*Note*) This process is only for building `monero-wallet-gui`, `monerod` has to be built separately according to the instructions in the `monero` repository.
 7. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'shasum -a 256 /monero-gui/build/release/bin/monero-wallet-gui'
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'shasum -a 256 /monero-gui/build/x86_64-linux-gnu/release/bin/monero-wallet-gui'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
 
@@ -203,8 +208,6 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ### Building on Linux
 
-(Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
-
 1. Install Monero dependencies
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
@@ -221,32 +224,32 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: The Qt 5.12 or newer requirement makes **some** distributions (mostly based on Debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 6.8 or newer requirement makes **some** distributions obsolete due to their repositories containing an older Qt version.
 
- The recommended way is to install 5.12 or newer from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
+ The recommended way is to install 6.8 or newer from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://doc.qt.io/qt-6/build-sources.html). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
 The following instructions will fetch Qt from your distribution's repositories instead. Take note of what version it installs. Your mileage may vary.
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-    `sudo apt install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+    `sudo apt install qt6-base-dev qt6-declarative-dev qt6-svg-dev qt6-tools-dev qt6-tools-dev-tools qml6-module-qtcore qml6-module-qtqml qml6-module-qtqml-models qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-dialogs qml6-module-qtquick-effects qml6-module-qtquick-layouts qml6-module-qtquick-shapes qml6-module-qtquick-window qml6-module-qt-labs-folderlistmodel qml6-module-qt-labs-platform`
 
   - For Gentoo
   
    
     The *qml* USE flag must be enabled.
 
-    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtquickcontrols:5 dev-qt/qtquickcontrols2:5 dev-qt/qtgraphicaleffects:5`
+    `sudo emerge dev-qt/qtbase:6 dev-qt/qtdeclarative:6 dev-qt/qtsvg:6 dev-qt/qttools:6`
 
   - Optional : To build the flag `WITH_SCANNER`
 
     - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-      `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia`
+      `sudo apt install qt6-multimedia-dev qml6-module-qtmultimedia`
 
     - For Gentoo      
 
-      `emerge dev-qt/qtmultimedia:5`
+      `emerge dev-qt/qtmultimedia:6`
 
 
 3. Clone repository
@@ -262,7 +265,7 @@ The following instructions will fetch Qt from your distribution's repositories i
     make release
     ```
 
-    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/6.8.3/gcc_64 make release`
     \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. `CMAKE_BUILD_PARALLEL_LEVEL=4 make release`
 
 The executable can be found in the build/release/bin folder.
@@ -279,7 +282,7 @@ The executable can be found in the build/release/bin folder.
 
 4. Install Qt:
 
-  `brew install qt5`  (or download QT 5.12+ from [qt.io](https://www.qt.io/download-open-source/))
+  `brew install qt`  (or download Qt 6.8+ from [qt.io](https://www.qt.io/download-open-source/))
 
 5. Grab an up-to-date copy of the monero-gui repository
 
@@ -293,7 +296,7 @@ The executable can be found in the build/release/bin folder.
     ```
     make release
     ```
-    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release`
+    \* Add `CMAKE_PREFIX_PATH` environment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/6.8.3/macos make release`
     \* Set `CMAKE_BUILD_PARALLEL_LEVEL` to control the number of parallel build jobs, e.g. `CMAKE_BUILD_PARALLEL_LEVEL=4 make release`
 
 The executable can be found in the `build/release/bin` folder.
@@ -316,10 +319,10 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 
     You find more details about those dependencies in the [Monero documentation](https://github.com/monero-project/monero). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
 
-4. Install Qt5
+4. Install Qt6
 
     ```
-    pacman -S mingw-w64-x86_64-qt5
+    pacman -S mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-declarative mingw-w64-x86_64-qt6-svg mingw-w64-x86_64-qt6-tools
     ```
 
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.

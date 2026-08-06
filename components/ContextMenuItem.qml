@@ -1,8 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import FontAwesome 1.0
+import FontAwesome
+
 import "../components" as MoneroComponents
 
 MenuItem {
