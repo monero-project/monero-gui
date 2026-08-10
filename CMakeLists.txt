@@ -18,6 +18,7 @@ option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 cmake_dependent_option(QML_TESTS "Build QML tests" ON "NOT STATIC;NOT ANDROID;NOT IOS" OFF)
+option(SKIP_OPTIONAL_MONERO_BINARIES "Don't build optional monero binaries" ON)
 
 if(DEV_MODE)
   # DEV_MODE checks out the monero submodule to master, which requires C++17.
@@ -64,6 +65,28 @@ if(NOT MANUAL_SUBMODULES)
 endif()
 
 add_subdirectory(monero)
+
+if(SKIP_OPTIONAL_MONERO_BINARIES)
+  foreach(_optional_monero_target
+      simplewallet
+      gen_multisig
+      gen_ssl_cert
+      wallet_rpc_server
+      blockchain_import
+      blockchain_export
+      blockchain_blackball
+      blockchain_usage
+      blockchain_ancestry
+      blockchain_depth
+      blockchain_stats
+      blockchain_prune_known_spent_data
+      blockchain_prune)
+    if(TARGET ${_optional_monero_target})
+      set_target_properties(${_optional_monero_target} PROPERTIES EXCLUDE_FROM_ALL TRUE)
+    endif()
+  endforeach()
+endif()
+
 add_subdirectory(external)
 
 set(CMAKE_AUTOMOC ON)
