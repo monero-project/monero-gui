@@ -231,6 +231,13 @@ FocusScope {
                 Keys.onReturnPressed: root.onOk()
                 Keys.onEscapePressed: root.onCancel()
             }
+            // Show password strength bar
+            MoneroComponents.PasswordStrengthBar {
+                id: passwordStrengthBar
+                Layout.fillWidth: true
+                password: passwordInput1.text
+                visible: newPasswordDialogMode && passwordStrengthBar.passwordStrengthAvailable
+            }
 
             // padding
             Rectangle {
