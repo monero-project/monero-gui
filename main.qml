@@ -1528,14 +1528,16 @@ ApplicationWindow {
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
         function getProxyAddress() {
-            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
+            if (socksProxyFlagSet) {
+                return socksProxyFlag;
+            }
+            if (!proxyEnabled) {
                 return "";
             }
-            var proxyAddressSetOrForced = socksProxyFlagSet ? socksProxyFlag : proxyAddress;
-            if (proxyAddressSetOrForced == "") {
+            if (proxyAddress == "") {
                 return "127.0.0.1:0";
             }
-            return proxyAddressSetOrForced;
+            return proxyAddress;
         }
         function getWalletProxyAddress() {
             if (!useRemoteNode) {
