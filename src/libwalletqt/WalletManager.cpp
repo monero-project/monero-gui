@@ -502,9 +502,10 @@ void WalletManager::checkUpdatesAsync(
     const QString &software,
     const QString &subdir,
     const QString &buildTag,
-    const QString &version)
+    const QString &version,
+    const QString &proxyAddress)
 {
-    m_scheduler.run([this, software, subdir, buildTag, version] {
+    m_scheduler.run([this, software, subdir, buildTag, version, proxyAddress] {
         const auto updateInfo = Monero::WalletManager::checkUpdates(
             software.toStdString(),
             subdir.toStdString(),
@@ -523,7 +524,8 @@ void WalletManager::checkUpdatesAsync(
         {
             const QString binaryFilename = QUrl(downloadUrl).fileName();
             QPair<QString, QString> signers;
-            const QString signedHash = Updater().fetchSignedHash(binaryFilename, hashFromDns, signers).toHex();
+            const QString signedHash =
+                Updater().fetchSignedHash(binaryFilename, hashFromDns, proxyAddress, signers).toHex();
 
             qInfo() << "Update found" << version << downloadUrl << "hash" << signedHash << "signed by" << signers;
             emit checkUpdatesComplete(version, downloadUrl, signedHash, signers.first, signers.second);

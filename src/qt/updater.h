@@ -40,6 +40,7 @@ public:
     QByteArray fetchSignedHash(
         const QString &binaryFilename,
         const QByteArray &hashFromDns,
+        const QString &proxyAddress,
         QPair<QString, QString> &signers) const;
     QByteArray getHash(const void *data, size_t size) const;
     QPair<QString, QString> verifySignaturesAndHashSum(

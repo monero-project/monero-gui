@@ -95,7 +95,13 @@ bool HttpClient::handle_target_data(std::string &piece_of_transfer)
 }
 
 Network::Network(QObject *parent)
+    : Network({}, parent)
+{
+}
+
+Network::Network(const QString &proxyAddress, QObject *parent)
     : QObject(parent)
+    , m_proxyAddress(proxyAddress)
     , m_scheduler(this)
 {
 }

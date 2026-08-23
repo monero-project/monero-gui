@@ -49,12 +49,13 @@ Updater::Updater()
 QByteArray Updater::fetchSignedHash(
     const QString &binaryFilename,
     const QByteArray &hashFromDns,
+    const QString &proxyAddress,
     QPair<QString, QString> &signers) const
 {
     static constexpr const char hashesTxtUrl[] = "https://web.getmonero.org/downloads/hashes.txt";
     static constexpr const char hashesTxtSigUrl[] = "https://web.getmonero.org/downloads/hashes.txt.sig";
 
-    const Network network;
+    const Network network(proxyAddress);
     std::string hashesTxt = network.get(hashesTxtUrl);
     std::string hashesTxtSig = network.get(hashesTxtSigUrl);
 
