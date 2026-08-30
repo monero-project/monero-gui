@@ -39,6 +39,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QDesktopServices>
+#include <QFile>
 #include <QFileInfo>
 #include <QString>
 #include <QUrl>
@@ -56,6 +57,7 @@
 #endif
 
 #include "QR-Code-scanner/Decoder.h"
+#include "crypto/crypto.h"
 #include "qt/ScopeGuard.h"
 #include "NetworkType.h"
 
@@ -206,6 +208,22 @@ bool OSHelper::isCapsLock() const
 QString OSHelper::temporaryPath() const
 {
     return QDir::tempPath();
+}
+
+bool OSHelper::addExtraEntropyFromFile(const QString &path) const
+{
+    static constexpr qint64 maxExtraEntropyBytes = 64 * 1024 * 1024;
+
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+
+    const QByteArray entropy = file.read(maxExtraEntropyBytes);
+    if (file.error() != QFileDevice::NoError || entropy.isEmpty())
+        return false;
+
+    crypto::add_extra_entropy_thread_safe(entropy.constData(), static_cast<size_t>(entropy.size()));
+    return true;
 }
 
 bool OSHelper::isWritableDirectory(const QString &path) const
