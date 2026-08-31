@@ -505,17 +505,9 @@ Rectangle {
                                 text: amount
                                 onTextChanged: {
                                     text = text.trim().replace(",", ".");
-                                    const match = text.match(/^0+(\d.*)/);
-                                    if (match) {
-                                        const cursorPosition = cursorPosition;
-                                        text = match[1];
-                                        cursorPosition = Math.max(cursorPosition, 1) - 1;
-                                    } else if(text.indexOf('.') === 0){
-                                        text = '0' + text;
-                                        if (text.length > 2) {
-                                            cursorPosition = 1;
-                                        }
-                                    }
+                                    const corrected = Utils.stripLeadingZeros(text, cursorPosition);
+                                    text = corrected.text;
+                                    cursorPosition = corrected.cursorPosition;
                                     error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
 
                                     amount = text;
