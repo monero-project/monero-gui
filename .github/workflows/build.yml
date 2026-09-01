@@ -60,7 +60,7 @@ jobs:
         msystem: ucrt64
         update: true
         install: make
-        pacboy: toolchain:p pcre:p cmake:p ninja:p boost:p openssl:p zeromq:p libsodium:p hidapi:p protobuf-c:p libusb:p unbound:p git qt5:p libgcrypt:p angleproject:p
+        pacboy: toolchain:p pcre:p cmake:p ninja:p boost:p openssl:p zeromq:p libsodium:p hidapi:p protobuf-c:p libusb:p unbound:p git qt5:p libgcrypt:p angleproject:p rust:p
     - name: add qmake.exe and windeployqt.exe
       run: |
         cp -f "$MSYSTEM_PREFIX/bin/qmake-qt5.exe" "$MSYSTEM_PREFIX/bin/qmake.exe"
