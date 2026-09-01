@@ -65,6 +65,23 @@ namespace {
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 
     static constexpr char ATTRIBUTE_SUBADDRESS_ACCOUNT[] ="gui.subaddress_account";
+
+    QVariantMap messageSignatureResultToVariantMap(const Monero::Wallet::MessageSignatureResult &result)
+    {
+        QString type = "invalid";
+        switch (result.type) {
+        case Monero::Wallet::MessageSignatureType_Spend: type = "spend"; break;
+        case Monero::Wallet::MessageSignatureType_View: type = "view"; break;
+        default: break;
+        }
+
+        return {
+            {"valid", result.valid},
+            {"version", result.version},
+            {"old", result.old},
+            {"type", type}
+        };
+    }
 }
 
 Wallet::Wallet(QObject * parent)
@@ -1003,37 +1020,42 @@ QString Wallet::signMessage(const QString &message, bool filename) const
 
 bool Wallet::verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename) const
 {
+  return verifySignedMessageWithDetails(message, address, signature, filename).value("valid").toBool();
+}
+
+QVariantMap Wallet::verifySignedMessageWithDetails(const QString &message, const QString &address, const QString &signature, bool filename) const
+{
   if (filename) {
     QFile file(message);
     uchar *data = NULL;
 
     try {
       if (!file.open(QIODevice::ReadOnly))
-        return false;
+        return messageSignatureResultToVariantMap({});
       quint64 size = file.size();
       if (size == 0) {
         file.close();
-        return m_walletImpl->verifySignedMessage(std::string(), address.toStdString(), signature.toStdString());
+        return messageSignatureResultToVariantMap(m_walletImpl->verifySignedMessageWithDetails(std::string(), address.toStdString(), signature.toStdString()));
       }
       data = file.map(0, size);
       if (!data) {
         file.close();
-        return false;
+        return messageSignatureResultToVariantMap({});
       }
-      bool ret = m_walletImpl->verifySignedMessage(std::string(reinterpret_cast<const char*>(data), size), address.toStdString(), signature.toStdString());
+      const QVariantMap result = messageSignatureResultToVariantMap(m_walletImpl->verifySignedMessageWithDetails(std::string(reinterpret_cast<const char*>(data), size), address.toStdString(), signature.toStdString()));
       file.unmap(data);
       file.close();
-      return ret;
+      return result;
     }
     catch (const std::exception &e) {
       if (data)
         file.unmap(data);
       file.close();
-      return false;
+      return messageSignatureResultToVariantMap({});
     }
   }
   else {
-    return m_walletImpl->verifySignedMessage(message.toStdString(), address.toStdString(), signature.toStdString());
+    return messageSignatureResultToVariantMap(m_walletImpl->verifySignedMessageWithDetails(message.toStdString(), address.toStdString(), signature.toStdString()));
   }
 }
 bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)

@@ -58,9 +58,20 @@ Rectangle {
     }
 
     function displayVerificationResult(result) {
-        if (result) {
+        if (result.valid) {
             signatureVerificationMessage.title = qsTr("Good signature") + translationManager.emptyString
-            signatureVerificationMessage.text  = qsTr("This is a good signature") + translationManager.emptyString
+            if (result.type === "spend") {
+                signatureVerificationMessage.text = qsTr("This is a good signature made with the spend key.") + translationManager.emptyString
+            }
+            else if (result.type === "view") {
+                signatureVerificationMessage.text = qsTr("This is a good signature made with the view key. It does not prove that the signer can spend funds.") + translationManager.emptyString
+            }
+            else {
+                signatureVerificationMessage.text = qsTr("This is a good signature made with an unknown key type.") + translationManager.emptyString
+            }
+            if (result.old) {
+                signatureVerificationMessage.text += "\n\n" + qsTr("This signature uses the old signing algorithm.") + translationManager.emptyString
+            }
             signatureVerificationMessage.icon = StandardIcon.Information
         }
         else {
@@ -379,8 +390,8 @@ Rectangle {
                     text: qsTr("Verify File") + translationManager.emptyString
                     enabled: verifyFileLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''
                     onClicked: {
-                      var verified = appWindow.currentWallet.verifySignedMessage(verifyFileLine.text, verifyAddressLine.text, verifySignatureLine.text, true)
-                      displayVerificationResult(verified)
+                      var result = appWindow.currentWallet.verifySignedMessageWithDetails(verifyFileLine.text, verifyAddressLine.text, verifySignatureLine.text, true)
+                      displayVerificationResult(result)
                     }
                 }
 
@@ -391,8 +402,8 @@ Rectangle {
                     text: qsTr("Verify Message") + translationManager.emptyString
                     enabled: verifyMessageLine.text !== '' && verifyAddressLine.text !== '' && verifySignatureLine.text !== ''
                     onClicked: {
-                      var verified = appWindow.currentWallet.verifySignedMessage(verifyMessageLine.text, verifyAddressLine.text, verifySignatureLine.text, false)
-                      displayVerificationResult(verified)
+                      var result = appWindow.currentWallet.verifySignedMessageWithDetails(verifyMessageLine.text, verifyAddressLine.text, verifySignatureLine.text, false)
+                      displayVerificationResult(result)
                     }
                 }
             }
