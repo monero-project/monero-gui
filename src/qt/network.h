@@ -74,6 +74,7 @@ class Network : public QObject
 
 public:
     Network(QObject *parent = nullptr);
+    Network(const QString &proxyAddress, QObject *parent = nullptr);
 
 public:
     Q_INVOKABLE void get(const QString &url, const QJSValue &callback, const QString &contentType = {}) const;

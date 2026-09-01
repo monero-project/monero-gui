@@ -2285,7 +2285,8 @@ ApplicationWindow {
     function checkUpdates() {
         const version = Version.GUI_VERSION.match(/\d+\.\d+\.\d+\.\d+/);
         if (version) {
-            walletManager.checkUpdatesAsync("monero-gui", "gui", getBuildTag(), version[0]);
+            walletManager.checkUpdatesAsync(
+                "monero-gui", "gui", getBuildTag(), version[0], persistentSettings.getProxyAddress());
         } else {
             console.error("failed to parse version number", Version.GUI_VERSION);
         }

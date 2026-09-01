@@ -186,7 +186,8 @@ public:
         const QString &software,
         const QString &subdir,
         const QString &buildTag,
-        const QString &version);
+        const QString &version,
+        const QString &proxyAddress);
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
     // clear/rename wallet cache
