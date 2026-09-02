@@ -72,6 +72,8 @@ ApplicationWindow {
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
+    property double transactionRequestId: 0
+    property double activeTransactionRequestId: 0
     property var walletPassword
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -895,8 +897,15 @@ ApplicationWindow {
         return false;
     }
 
-    function onTransactionCreated(pendingTransaction, addresses, paymentId, mixinCount) {
+    function onTransactionCreated(pendingTransaction, addresses, paymentId, mixinCount, requestId) {
         console.log("Transaction created");
+        if (requestId !== activeTransactionRequestId) {
+            console.log("Discarding stale transaction");
+            currentWallet.disposeTransaction(pendingTransaction);
+            return;
+        }
+
+        activeTransactionRequestId = 0;
         txConfirmationPopup.bottomText.text = "";
         transaction = pendingTransaction;
         // validate address;
@@ -909,12 +918,14 @@ ApplicationWindow {
             }
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
+            transaction = null;
 
         } else if (transaction.txCount == 0) {
             console.error("Can't create transaction: ", transaction.errorString);
             txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
+            transaction = null;
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
@@ -959,8 +970,11 @@ ApplicationWindow {
         txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.open();
 
+        const requestId = ++transactionRequestId;
+        activeTransactionRequestId = requestId;
+
         if (recipientAll) {
-            currentWallet.createTransactionAllAsync(recipientAll.address, paymentId, mixinCount, priority);
+            currentWallet.createTransactionAllAsync(recipientAll.address, paymentId, mixinCount, priority, requestId);
         } else {
             const addresses = recipients.map(function (recipient) {
                 return recipient.address;
@@ -968,7 +982,15 @@ ApplicationWindow {
             const amountsxmr = recipients.map(function (recipient) {
                 return recipient.amount;
             });
-            currentWallet.createTransactionAsync(addresses, paymentId, amountsxmr, mixinCount, priority);
+            currentWallet.createTransactionAsync(addresses, paymentId, amountsxmr, mixinCount, priority, requestId);
+        }
+    }
+
+    function rejectPendingTransaction() {
+        activeTransactionRequestId = 0;
+        if (transaction) {
+            currentWallet.disposeTransaction(transaction);
+            transaction = null;
         }
     }
 
@@ -983,8 +1005,7 @@ ApplicationWindow {
             handleTransactionConfirmed()
         }
         onRejected: {
-            // do nothing
-
+            rejectPendingTransaction()
         }
 
     }
@@ -1000,12 +1021,14 @@ ApplicationWindow {
             txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
+            transaction = null;
 
         } else if (transaction.txCount == 0) {
             console.error("No unmixable outputs to sweep");
             txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
+            transaction = null;
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
@@ -1022,7 +1045,7 @@ ApplicationWindow {
         if(viewOnly){
             // No file specified - abort
             if(!saveTxDialog.fileUrl) {
-                currentWallet.disposeTransaction(transaction)
+                rejectPendingTransaction()
                 return;
             }
 
@@ -1032,7 +1055,9 @@ ApplicationWindow {
             transaction.setFilename(path);
         }
         appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
-        currentWallet.commitTransactionAsync(transaction);
+        const pendingTransaction = transaction;
+        transaction = null;
+        currentWallet.commitTransactionAsync(pendingTransaction);
     }
 
     function onTransactionCommitted(success, transaction, txid) {
@@ -1677,7 +1702,7 @@ ApplicationWindow {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
-            passwordDialog.onRejectedCallback = null;
+            passwordDialog.onRejectedCallback = rejectPendingTransaction;
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
@@ -1688,6 +1713,7 @@ ApplicationWindow {
                     appWindow.viewOnly ? "" : FontAwesome.arrowCircleRight);
             }
         }
+        onRejected: rejectPendingTransaction()
     }
 
     // Transaction successfully sent popup
@@ -2346,9 +2372,11 @@ ApplicationWindow {
         if (inputDialogVisible) inputDialog.close()
         remoteNodeDialog.close();
         informationPopup.close()
-        txConfirmationPopup.close()
-        txConfirmationPopup.clearFields()
-        txConfirmationPopup.rejected()
+        if (txConfirmationPopup.visible) {
+            txConfirmationPopup.close()
+            txConfirmationPopup.clearFields()
+            txConfirmationPopup.rejected()
+        }
         successfulTxPopup.close();
 
         if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
