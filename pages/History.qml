@@ -800,10 +800,14 @@ Rectangle {
                                     id: addressField
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
+                                    anchors.left: parent.left
+                                    anchors.right: parent.right
+                                    elide: Text.ElideRight
+                                    tooltip: recipientTooltip
                                     text: {
                                         if (isout) {
                                             if (address) {
-                                                return (addressBookName ? FontAwesome.addressBook + " " + addressBookName : TxUtils.addressTruncate(address, 8));
+                                                return recipientText;
                                             }
                                             if (amount != 0) {
                                                 return qsTr("Unknown recipient") + translationManager.emptyString;
@@ -832,10 +836,22 @@ Rectangle {
 
                                     MouseArea {
                                         state: isout ? "copyable_address" : "copyable_receiving_address"
-                                        anchors.fill: parent
+                                        anchors.left: parent.left
+                                        anchors.top: parent.top
+                                        width: Math.min(parent.width, parent.paintedWidth)
+                                        height: parent.height
                                         hoverEnabled: true
-                                        onEntered: parent.color = MoneroComponents.Style.orange
-                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                        onEntered: {
+                                            parent.color = MoneroComponents.Style.orange;
+                                            if (recipientTooltip) {
+                                                parent.tooltipPopup.x = 0;
+                                                parent.tooltipPopup.open();
+                                            }
+                                        }
+                                        onExited: {
+                                            parent.color = MoneroComponents.Style.defaultFontColor;
+                                            parent.tooltipPopup.close();
+                                        }
                                     }
                                 }
                             }
@@ -1270,12 +1286,12 @@ Rectangle {
                         for(var i = 0; i < res.length; i+=1){
                             if(res[i].containsMouse === true){
                                 if(res[i].state === 'copyable' && res[i].parent.hasOwnProperty('text')) toClipboard(res[i].parent.text);
-                                if(res[i].state === 'copyable_address') (address ? root.toClipboard(address) : root.toClipboard(addressField.text));
+                                if(res[i].state === 'copyable_address') (recipientAddresses ? root.toClipboard(recipientAddresses) : root.toClipboard(addressField.text));
                                 if(res[i].state === 'copyable_receiving_address') root.toClipboard(currentWallet.address(subaddrAccount, subaddrIndex));
                                 if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note, root.txPage);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
-                                if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                if(res[i].state === 'proof') root.showTxProof(hash, paymentId, address);
                                 doCollapse = false;
                                 break;
                             }
@@ -1443,6 +1459,7 @@ Rectangle {
         const timezoneOffset = new Date().getTimezoneOffset() * 60;
         var fromDate = Math.floor(fromDatePicker.currentDate.getTime() / 86400000) * 86400 + timezoneOffset;
         var toDate = (Math.floor(toDatePicker.currentDate.getTime() / 86400000) + 1) * 86400 + timezoneOffset;
+        var recipientQuery = (root.sortSearchString || "").toLowerCase();
 
         var txs = [];
         for (var i = 0; i < root.txData.length; i++){
@@ -1462,13 +1479,15 @@ Rectangle {
             if(root.sortSearchString.length >= 1){
                 if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
                     txs.push(item);
-                } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                } else if(item.recipientAddresses.split("\n").some(function(address) {
+                    return address.toLowerCase().startsWith(recipientQuery);
+                })){
+                    txs.push(item);
+                } else if(item.recipientSearchNames.toLowerCase().indexOf(recipientQuery) !== -1){
                     txs.push(item);
                 } else if(item.receivingAddress !== "" && item.receivingAddress.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
                 } else if(item.receivingAddressLabel !== "" && item.receivingAddressLabel.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
-                    txs.push(item);
-                } else if(item.addressBookName !== "" && item.addressBookName.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
                 } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
@@ -1558,6 +1577,7 @@ Rectangle {
             var hash = _model.data(idx, TransactionHistoryModel.TransactionHashRole);
             var paymentId = _model.data(idx, TransactionHistoryModel.TransactionPaymentIdRole);
             var destinations = _model.data(idx, TransactionHistoryModel.TransactionDestinationsRole);
+            var destinationAddresses = _model.data(idx, TransactionHistoryModel.TransactionDestinationAddressesRole);
             var time = _model.data(idx, TransactionHistoryModel.TransactionTimeRole);
             var date = _model.data(idx, TransactionHistoryModel.TransactionDateRole);
             var blockheight = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
@@ -1578,13 +1598,40 @@ Rectangle {
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
-            var addressBookName = "";
+            var recipientAddresses = "";
+            var recipientSearchNames = "";
+            var recipientText = "";
+            var recipientTooltip = "";
             var receivingAddress = "";
             var receivingAddressLabel = "";
 
             if (isout) {
-                address = TxUtils.destinationsToAddress(destinations);
-                addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
+                var uniqueAddresses = [];
+                var recipientNames = [];
+                var recipientTooltipEntries = [];
+
+                for (var destinationIndex = 0; destinationIndex < destinationAddresses.length; ++destinationIndex) {
+                    var destinationAddress = destinationAddresses[destinationIndex];
+                    if (uniqueAddresses.indexOf(destinationAddress) !== -1)
+                        continue;
+
+                    uniqueAddresses.push(destinationAddress);
+                    var destinationName = currentWallet ? currentWallet.addressBook.getDescription(destinationAddress) : "";
+                    destinationName = destinationName || "";
+                    recipientNames.push(destinationName);
+                    var shortDestinationAddress = TxUtils.addressTruncate(destinationAddress, 8);
+                    recipientTooltipEntries.push(destinationName ? Utils.htmlEscape(destinationName) + " — " + shortDestinationAddress : shortDestinationAddress);
+                }
+
+                address = uniqueAddresses.length > 0 ? uniqueAddresses[0] : "";
+                recipientAddresses = uniqueAddresses.join("\n");
+                recipientSearchNames = recipientNames.join("\n");
+                recipientTooltip = uniqueAddresses.length > 1 ? recipientTooltipEntries.join("<br>") : "";
+                if (uniqueAddresses.length === 1) {
+                    recipientText = recipientNames[0] ? FontAwesome.addressBook + " " + recipientNames[0] : TxUtils.addressTruncate(address, 8);
+                } else if (uniqueAddresses.length > 1) {
+                    recipientText = qsTr("%1 recipients").arg(uniqueAddresses.length) + translationManager.emptyString;
+                }
             } else {
                 receivingAddress = currentWallet ? currentWallet.address(subaddrAccount, subaddrIndex) : null;
                 receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
@@ -1605,13 +1652,15 @@ Rectangle {
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
-                "addressBookName": addressBookName,
+                "recipientAddresses": recipientAddresses,
+                "recipientSearchNames": recipientSearchNames,
+                "recipientText": recipientText,
+                "recipientTooltip": recipientTooltip,
                 "destinations": destinations,
                 "tx_note": tx_note,
                 "dateHuman": dateHuman,
                 "dateTime": date + " " + time,
                 "blockheight": blockheight,
-                "address": address,
                 "timestamp": timestamp,
                 "fee": fee,
                 "confirmations": confirmations,
@@ -1707,9 +1756,8 @@ Rectangle {
         });
     }
 
-    function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
-        var address = TxUtils.destinationsToAddress(destinations);
-        if(address === undefined){
+    function showTxProof(hash, paymentId, address){
+        if(!address){
             console.log('getProof: Error fetching address')
             return;
         }
