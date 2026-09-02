@@ -44,6 +44,7 @@ import moneroComponents.TransactionHistoryModel 1.0
 import moneroComponents.Subaddress 1.0
 import moneroComponents.SubaddressModel 1.0
 import "../js/TxUtils.js" as TxUtils
+import "../js/Utils.js" as Utils
 
 Rectangle {
     id: pageReceive
@@ -262,17 +263,9 @@ Rectangle {
                     }
                     onTextEdited: {
                         text = text.trim().replace(",", ".");
-                        const match = text.match(/^0+(\d.*)/);
-                        if (match) {
-                            const cursorPosition = cursorPosition;
-                            text = match[1];
-                            cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0){
-                            text = '0' + text;
-                            if (text.length > 2) {
-                                cursorPosition = 1;
-                            }
-                        }
+                        const corrected = Utils.stripLeadingZeros(text, cursorPosition);
+                        text = corrected.text;
+                        cursorPosition = corrected.cursorPosition;
                         if (amountToReceiveFiat.text == "") {
                             amountToReceiveXMR.text = "";
                         } else {
@@ -322,17 +315,9 @@ Rectangle {
                     }
                     onTextEdited: {
                         text = text.trim().replace(",", ".");
-                        const match = text.match(/^0+(\d.*)/);
-                        if (match) {
-                            const cursorPosition = cursorPosition;
-                            text = match[1];
-                            cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0){
-                            text = '0' + text;
-                            if (text.length > 2) {
-                                cursorPosition = 1;
-                            }
-                        }
+                        const corrected = Utils.stripLeadingZeros(text, cursorPosition);
+                        text = corrected.text;
+                        cursorPosition = corrected.cursorPosition;
                         if (amountToReceiveXMR.text == "") {
                             amountToReceiveFiat.text = "";
                         } else {
