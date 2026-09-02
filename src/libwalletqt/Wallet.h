@@ -36,6 +36,7 @@
 #include <QMutex>
 #include <QList>
 #include <QJSValue>
+#include <QVariantMap>
 #include <QtConcurrent/QtConcurrent>
 
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
@@ -319,6 +320,9 @@ public:
 
     //! verify a signed message
     Q_INVOKABLE bool verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
+
+    //! verify a signed message and return the signature version and key type
+    Q_INVOKABLE QVariantMap verifySignedMessageWithDetails(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
 
     //! Parse URI
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
