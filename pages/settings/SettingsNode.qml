@@ -33,11 +33,37 @@ import FontAwesome 1.0
 
 import "../../components" as MoneroComponents
 import "../../components/effects" as MoneroEffects
+import moneroComponents.PeersModel 1.0
 
 Rectangle{
     color: "transparent"
     Layout.fillWidth: true
     property alias nodeHeight: root.height
+
+    property bool nodePageActive: false
+
+    function onPageCompleted() {
+        nodePageActive = true;
+        if (appWindow.daemonRunning) {
+            peersModel.refresh(appWindow.currentDaemonAddress);
+        }
+    }
+
+    function onPageClosed() {
+        nodePageActive = false;
+    }
+
+    PeersModel {
+        id: peersModel
+    }
+
+    Timer {
+        id: peersRefreshTimer
+        interval: 5000
+        repeat: true
+        running: nodePageActive && appWindow.daemonRunning
+        onTriggered: peersModel.refresh(appWindow.currentDaemonAddress)
+    }
 
     /* main layout */
     ColumnLayout {
@@ -351,6 +377,20 @@ Rectangle{
                         }
                     }
                 }
+            }
+
+            MoneroComponents.TextPlain {
+                Layout.topMargin: 20
+                font.pixelSize: 18
+                color: MoneroComponents.Style.defaultFontColor
+                visible: appWindow.daemonRunning
+                text: qsTr("Connected peers") + translationManager.emptyString
+            }
+
+            MoneroComponents.PeersTable {
+                Layout.fillWidth: true
+                visible: appWindow.daemonRunning
+                model: peersModel
             }
         }
     }
