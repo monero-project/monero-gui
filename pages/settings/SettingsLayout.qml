@@ -84,16 +84,59 @@ Rectangle {
             text: qsTr("Hide balance") + translationManager.emptyString
         }
 
-        MoneroComponents.CheckBox {
-            id: themeCheckbox
-            checked: !MoneroComponents.Style.blackTheme
-            text: qsTr("Light theme") + translationManager.emptyString
-            toggleOnClick: false
-            onClicked: {
-                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+        MoneroComponents.TextPlain {
+            Layout.topMargin: 6
+            text: qsTr("Theme") + translationManager.emptyString
+            color: MoneroComponents.Style.defaultFontColor
+        }
+
+        RowLayout {
+            Layout.leftMargin: 12
+            spacing: 24
+
+            // RadioButton.toggle() assigns `checked` directly, which would break a plain
+            // binding, so the selection is driven by Binding elements that re-assert.
+            MoneroComponents.RadioButton {
+                id: themeSystemButton
+                enabled: !themeSystemButton.checked
+                text: qsTr("System") + translationManager.emptyString
+                onClicked: persistentSettings.theme = "system"
+            }
+
+            MoneroComponents.RadioButton {
+                id: themeLightButton
+                enabled: !themeLightButton.checked
+                text: qsTr("Light") + translationManager.emptyString
+                onClicked: persistentSettings.theme = "light"
+            }
+
+            MoneroComponents.RadioButton {
+                id: themeDarkButton
+                enabled: !themeDarkButton.checked
+                text: qsTr("Dark") + translationManager.emptyString
+                onClicked: persistentSettings.theme = "dark"
+            }
+
+            Binding {
+                target: themeSystemButton
+                property: "checked"
+                value: persistentSettings.theme === "system"
+            }
+
+            Binding {
+                target: themeLightButton
+                property: "checked"
+                value: persistentSettings.theme === "light"
+            }
+
+            Binding {
+                target: themeDarkButton
+                property: "checked"
+                value: persistentSettings.theme === "dark"
             }
         }
-        
+
+
         MoneroComponents.CheckBox {
             checked: persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
