@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -130,7 +130,7 @@ Rectangle {
             stepSize: 1
             to: 60
             value: persistentSettings.autosaveMinutes
-            text: "%1 %2 %3".arg(qsTr("Every")).arg(value).arg(qsTr("minute(s)")) + translationManager.emptyString
+            text: qsTr("Every %n minute(s)", "", value) + translationManager.emptyString
             onMoved: persistentSettings.autosaveMinutes = value
         }
 
@@ -150,10 +150,7 @@ Rectangle {
             stepSize: 1
             to: 60
             value: persistentSettings.lockOnUserInActivityInterval
-            text: {
-                var minutes = value > 1 ? qsTr("minutes") : qsTr("minute");
-                return qsTr("After ") + value + " " + minutes + translationManager.emptyString;
-            }
+            text: qsTr("After %n minute(s)", "", value) + translationManager.emptyString
             onMoved: persistentSettings.lockOnUserInActivityInterval = value
         }
 
