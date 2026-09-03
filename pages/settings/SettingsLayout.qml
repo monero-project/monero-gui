@@ -275,7 +275,7 @@ Rectangle {
             }
             text: qsTr("Socks5 proxy (%1%2)")
                 .arg(appWindow.walletMode >= 2 ? qsTr("remote node connections, ") : "")
-                .arg(qsTr("updates downloading, fetching price sources")) + translationManager.emptyString
+                .arg(qsTr("updates downloading, fetching price sources, P2Pool")) + translationManager.emptyString
         }
 
         MoneroComponents.RemoteNodeEdit {
