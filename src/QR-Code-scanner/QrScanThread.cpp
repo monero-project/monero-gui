@@ -65,7 +65,12 @@ void QrScanThread::processVideoFrame(const QVideoFrame &frame)
 
 void QrScanThread::stop()
 {
-    m_running = false;
+    // Guard the flag and wake the worker under the same mutex so a wake-up is
+    // never lost between the predicate check and wait() in run().
+    {
+        QMutexLocker locker(&m_mutex);
+        m_running = false;
+    }
     m_waitCondition.wakeOne();
 }
 
@@ -79,10 +84,12 @@ void QrScanThread::addFrame(const QVideoFrame &frame)
 void QrScanThread::run()
 {
     QVideoFrame frame;
-    while(m_running) {
+    while(true) {
         QMutexLocker locker(&m_mutex);
         while(m_queue.isEmpty() && m_running)
             m_waitCondition.wait(&m_mutex);
+        if(!m_running)
+            break;
         if(!m_queue.isEmpty())
             processVideoFrame(m_queue.takeFirst());
     }

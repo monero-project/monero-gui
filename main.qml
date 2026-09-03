@@ -282,6 +282,8 @@ ApplicationWindow {
         if (isQuitting)
             return;
         isQuitting = true;
+        // Drop the password from memory before shutting down.
+        walletPassword = "";
         closeWallet(function() {
             gracefulShutdownComplete();
         })
@@ -937,12 +939,9 @@ ApplicationWindow {
 
     // called on "transfer"
     function handlePayment(recipients, paymentId, mixinCount, priority, description, createFile) {
-        console.log("Creating transaction: ")
-        console.log("\trecipients: ", recipients,
-                    ", payment_id: ", paymentId,
-                    ", mixins: ", mixinCount,
-                    ", priority: ", priority,
-                    ", description: ", description);
+        // Do not log recipient addresses, payment ids or descriptions; they are
+        // sensitive and would be readable by any process with access to the log.
+        console.log("Creating transaction")
 
         const recipientAll = recipients.find(function (recipient) {
             return recipient.amount == "(all)";
@@ -1483,8 +1482,6 @@ ApplicationWindow {
         property string p2poolFlags
         property int logLevel: 0
         property string logCategories: ""
-        property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
-        property string daemonPassword: "" // TODO: drop after v0.17.2.0 release
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
         property bool historyShowAdvanced: false
@@ -1497,8 +1494,8 @@ ApplicationWindow {
                 nodes: remoteNodeAddress != ""
                     ? [{
                         address: remoteNodeAddress,
-                        username: daemonUsername,
-                        password: daemonPassword,
+                        username: "",
+                        password: "",
                         trusted: is_trusted_daemon,
                     }]
                     : [],
@@ -1580,7 +1577,16 @@ ApplicationWindow {
             store.connect(function() {
                 var remoteNodes = [];
                 for (var index = 0; index < remoteNodesModel.count; ++index) {
-                    remoteNodes.push(remoteNodesModel.get(index));
+                    const node = remoteNodesModel.get(index);
+                    // Never persist daemon RPC passwords to disk. The credentials
+                    // stay in memory for the session and must be re-entered after
+                    // a restart.
+                    remoteNodes.push({
+                        address: node.address,
+                        username: node.username,
+                        password: "",
+                        trusted: node.trusted
+                    });
                 }
                 persistentSettings.remoteNodesSerialized = JSON.stringify({
                     selected: selected,
@@ -2257,6 +2263,8 @@ ApplicationWindow {
         console.log("close accepted");
         daemonManager.exit();
         p2poolManager.exit();
+        // Drop the password from memory before shutting down.
+        walletPassword = "";
         closeWallet(function() {
             console.log("wallet closed, requesting final application quit");
             gracefulShutdownComplete();

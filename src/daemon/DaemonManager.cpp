@@ -119,6 +119,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     // Start monerod
     bool started = m_daemon->startDetached(m_monerod, arguments);
+    m_daemonPid = m_daemon->processId();
 
     // add state changed listener
     connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
@@ -185,12 +186,20 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
         if(running(nettype, dataDir)) {
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
-                qDebug() << "Killing it! ";
+                // Only terminate the daemon instance this wallet started. Killing
+                // every monerod process on the system could silently shut down a
+                // remote node owned by the user or another application.
+                qint64 pid = m_daemonPid;
+                if(pid > 0) {
+                    qDebug() << "Killing monerod (pid " << pid << ")";
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
+                    QProcess::execute("taskkill",  {"/F", "/PID", QString::number(pid)});
 #else
-                QProcess::execute("pkill", {"monerod"});
+                    QProcess::execute("kill", {"-9", QString::number(pid)});
 #endif
+                } else {
+                    qDebug() << "No known monerod pid to kill, leaving running processes untouched";
+                }
             }
 
         } else
