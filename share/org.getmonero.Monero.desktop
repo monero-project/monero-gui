@@ -1,10 +1,10 @@
 [Desktop Entry]
 Name=Monero GUI
 GenericName=Cryptocurrency wallet
-Comment=Monero GUI
+Comment=The secure, private, untraceable cryptocurrency
 Exec=monero-wallet-gui
 Type=Application
 Terminal=false
-Categories=Network;Qt;Finance;Office;
+Categories=Network;Finance;Office;
 Icon=org.getmonero.Monero
 StartupNotify=true
