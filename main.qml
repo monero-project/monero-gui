@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -106,19 +106,18 @@ ApplicationWindow {
     // fiat price conversion
     property real fiatPrice: 0
     property var fiatPriceAPIs: {
+        const currencies = ["xmrusd", "xmreur", "xmrgbp", "xmrcad", "xmraud", "xmrnzd", "xmrchf"];
+        var coingecko = {};
+        var cryptocompare = {};
+        for (var i = 0; i < currencies.length; ++i) {
+            const currency = currencies[i];
+            const key = getKeyFromCurrency(currency);
+            coingecko[currency] = "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=" + key;
+            cryptocompare[currency] = "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=" + key.toUpperCase();
+        }
         return {
-            "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
-            },
-            "coingecko": {
-                "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
-            },
-            "cryptocompare": {
-                "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
-                "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
-            }
+            "coingecko": coingecko,
+            "cryptocompare": cryptocompare
         }
     }
 
@@ -1233,27 +1232,24 @@ ApplicationWindow {
         triggeredOnStart: true
     }
 
+    function getKeyFromCurrency(currency) {
+        if (currency.length !== 6 || currency.substring(0, 3) !== "xmr")
+            return undefined;
+        return currency.substring(3);
+    }
+
     function fiatApiParseTicker(url, resp, currency){
         // parse & validate incoming JSON
-        if(url.startsWith("https://api.kraken.com/0/")){
-            if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
-                appWindow.fiatApiError("Kraken API has error(s)");
-                return;
-            }
-
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["c"][0];
-            return ticker;
-        } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
-            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
+        if(url.startsWith("https://api.coingecko.com/api/v3/")){
+            var key = getKeyFromCurrency(currency)
+            if(key === undefined || !resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
             return resp["monero"][key];
         } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
-            if(!resp.hasOwnProperty(key)){
+            var key = getKeyFromCurrency(currency)
+            if(key === undefined || !resp.hasOwnProperty(key)){
                 appWindow.fiatApiError("cryptocompare API has error(s)");
                 return;
             }
@@ -1336,6 +1332,16 @@ ApplicationWindow {
                 return "USD";
             case "xmreur":
                 return "EUR";
+            case "xmrgbp":
+                return "GBP";
+            case "xmrcad":
+                return "CAD";
+            case "xmraud":
+                return "AUD";
+            case "xmrnzd":
+                return "NZD";
+            case "xmrchf":
+                return "CHF";
             default:
                 console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
                 return "UNSUPPORTED";
@@ -1522,7 +1528,7 @@ ApplicationWindow {
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
-        property string fiatPriceProvider: "kraken"
+        property string fiatPriceProvider: "coingecko"
         property string fiatPriceCurrency: "xmrusd"
 
         property string proxyAddress: "127.0.0.1:9050"
