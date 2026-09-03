@@ -98,6 +98,7 @@ ApplicationWindow {
     property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 110 : 270 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
+    property string prevSplashSubText;
     property bool splashDisplayedBeforeButtonRequest;
     property bool themeTransition: false
     property int backgroundSyncType: Wallet.BackgroundSync_Off;
@@ -282,6 +283,7 @@ ApplicationWindow {
         if (isQuitting)
             return;
         isQuitting = true;
+        devicePairingCodeDialog.onCancel();
         closeWallet(function() {
             gracefulShutdownComplete();
         })
@@ -312,6 +314,7 @@ ApplicationWindow {
         currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.disconnect(onWalletPassphraseNeededWallet);
+        currentWallet.walletPairingCodeNeeded.disconnect(onWalletPairingCodeNeededWallet);
         currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
@@ -363,6 +366,7 @@ ApplicationWindow {
         currentWallet.deviceButtonRequest.connect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
+        currentWallet.walletPairingCodeNeeded.connect(onWalletPairingCodeNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
         currentWallet.proxyAddress = Qt.binding(persistentSettings.getWalletProxyAddress);
         middlePanel.paymentClicked.connect(handlePayment);
@@ -498,7 +502,10 @@ ApplicationWindow {
             }
         } else {
             prevSplashText = splash.messageText;
+            prevSplashSubText = splash.subMessageText;
             splashDisplayedBeforeButtonRequest = splash.visible;
+            // showProcessingSplash clears the subtitle, so onDeviceButtonPressed
+            // puts prevSplashSubText back once the device input is done.
             appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
         }
     }
@@ -510,6 +517,7 @@ ApplicationWindow {
         } else {
             if (splashDisplayedBeforeButtonRequest){
                 appWindow.showProcessingSplash(prevSplashText);
+                splash.subMessageText = prevSplashSubText;
             } else {
                 hideProcessingSplash();
             }
@@ -536,6 +544,78 @@ ApplicationWindow {
                     appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
                     return;
                 default:
+                    // Trezor errors get categorical UX: friendly retry
+                    // hint, neutral cancel, a fresh pairing code, or a
+                    // red protocol error. The category comes from the
+                    // device exception the wallet API classified, not
+                    // from the text of the error.
+                    var es = wallet.errorString || "";
+                    var trezorError = wallet.trezorError;
+                    if (trezorError === Wallet.TrezorError_Cancelled) {
+                        // Deliberate user action, e.g. an on-device
+                        // dismiss: neutral status hint, no red error.
+                        console.log("Trezor open cancelled by user: " + es)
+                        appWindow.showStatusMessage(
+                            qsTr("Wallet open cancelled.") + translationManager.emptyString,
+                            5);
+                        closeWallet();
+                        // Back to the wizard. This matters for the
+                        // daemon-switch reopen flow, where rootItem.state
+                        // is already "normal" and the user would be left
+                        // in the wallet view with no wallet.
+                        if (rootItem.state !== "wizard") {
+                            rootItem.state = "wizard";
+                        }
+                        return;
+                    }
+                    if (trezorError === Wallet.TrezorError_Unreachable) {
+                        // The wallet password is still cached in
+                        // appWindow.walletPassword from the first attempt,
+                        // so Retry can re-fire openWalletAsync without
+                        // asking for it again.
+                        console.log("Trezor not reachable on wallet open: " + es)
+                        closeWallet();
+                        appWindow.showRetryableTrezorErrorSplash(
+                            qsTr("Couldn't reach your Trezor") + translationManager.emptyString,
+                            qsTr("Make sure your Trezor is connected and unlocked, then try again.")
+                                + translationManager.emptyString,
+                            function() {
+                                appWindow.initialize();
+                            },
+                            function() {
+                                if (rootItem.state !== "wizard") {
+                                    rootItem.state = "wizard";
+                                }
+                            });
+                        return;
+                    }
+                    if (trezorError === Wallet.TrezorError_PairingRejected) {
+                        // The device rejected the pairing code the user
+                        // typed. Reopening restarts pairing: the device
+                        // shows a fresh code and the pairing dialog
+                        // re-prompts, carrying the message below.
+                        console.log("Trezor pairing code rejected: " + es)
+                        devicePairingCodeDialog.errorText =
+                            qsTr("That code did not match. Check the code on your device and try again.")
+                                + translationManager.emptyString;
+                        appWindow.initialize();
+                        return;
+                    }
+                    if (trezorError === Wallet.TrezorError_FirmwareUnsupported) {
+                        // Nothing to retry: the device needs different
+                        // firmware before it can open a Monero wallet.
+                        console.error("Trezor firmware without Monero support: ", es)
+                        closeWallet();
+                        informationPopup.title = qsTr("Trezor firmware without Monero support") + translationManager.emptyString;
+                        informationPopup.text  = qsTr("This Trezor runs firmware that has no Monero support, such as the bitcoin-only build. Install the standard firmware with Trezor Suite, then open the wallet again.") + translationManager.emptyString;
+                        informationPopup.icon  = StandardIcon.Critical;
+                        informationPopup.onCloseCallback = null;
+                        informationPopup.open();
+                        if (rootItem.state !== "wizard") {
+                            rootItem.state = "wizard";
+                        }
+                        return;
+                    }
                     // opening with password but password doesn't match
                     console.error("Error opening wallet with password: ", wallet.errorString);
                     var errorMessage = qsTr("Couldn't open wallet: ") + wallet.errorString;
@@ -599,6 +679,34 @@ ApplicationWindow {
         }
 
         devicePassphraseDialog.open(on_device)
+    }
+
+    function onWalletPairingCodeNeededManager(){
+        // The wizard binds the same manager signal and prompts with its
+        // own splash wording while it creates a wallet from a device.
+        if (wizard.deviceWalletCreationInProgress) {
+            return;
+        }
+        onWalletPairingCodeNeeded(walletManager)
+    }
+
+    function onWalletPairingCodeNeededWallet(){
+        onWalletPairingCodeNeeded(currentWallet)
+    }
+
+    function onWalletPairingCodeNeeded(handler){
+        hideProcessingSplash();
+
+        console.log(">>> wallet pairing code needed: ");
+        devicePairingCodeDialog.onAcceptedCallback = function(code) {
+            handler.onPairingCodeEntered(code, false);
+            appWindow.onWalletOpening();
+        }
+        devicePairingCodeDialog.onRejectedCallback = function() {
+            handler.onPairingCodeEntered("", true);
+            appWindow.onWalletOpening();
+        }
+        devicePairingCodeDialog.open();
     }
 
     function onWalletUpdate(stoppedBackgroundSync) {
@@ -1032,6 +1140,11 @@ ApplicationWindow {
             transaction.setFilename(path);
         }
         appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+        // Signing on a hardware wallet takes one tap per input, which can
+        // run to tens of seconds with no other sign of progress.
+        if (currentWallet && currentWallet.isHwBacked()) {
+            splash.subMessageText = qsTr("Confirm each transaction step on your hardware wallet. Each input requires a tap on the device.") + translationManager.emptyString;
+        }
         currentWallet.commitTransactionAsync(transaction);
     }
 
@@ -1171,8 +1284,15 @@ ApplicationWindow {
 
     function showProcessingSplash(message) {
         console.log("Displaying processing splash")
+        // Drop any stale Retry/Cancel state so a regular splash never
+        // renders the action row of a previous error.
+        splash.showActionButtons = false;
+        splash.retryCallback = null;
+        splash.cancelCallback = null;
         if (typeof message != 'undefined') {
             splash.messageText = message
+            // Callers that want a subtitle assign it after this call.
+            splash.subMessageText = ""
         }
 
         leftPanel.enabled = false;
@@ -1183,6 +1303,7 @@ ApplicationWindow {
 
     function hideProcessingSplash() {
         console.log("Hiding processing splash")
+        splash.subMessageText = "";
         splash.close();
 
         if (!passwordDialog.visible) {
@@ -1190,6 +1311,32 @@ ApplicationWindow {
             middlePanel.enabled = true
             titleBar.enabled = true
         }
+    }
+
+    // Surface a retry-recoverable failure on the splash with a Retry /
+    // Cancel button row instead of bouncing the user back to the
+    // password dialog, so retrying after reconnecting the device does
+    // not require re-typing the wallet password.
+    //
+    // The splash is modal, so cancelling has to put the panels back.
+    // That happens here rather than in each caller's cancel callback:
+    // a caller that forgot would leave the app permanently disabled.
+    function showRetryableTrezorErrorSplash(title, subMessage, retryCallback, cancelCallback) {
+        splash.messageText = title;
+        splash.subMessageText = subMessage;
+        splash.retryCallback = retryCallback;
+        splash.cancelCallback = function() {
+            hideProcessingSplash();
+            if (cancelCallback) {
+                cancelCallback();
+            }
+        };
+        splash.showActionButtons = true;
+
+        leftPanel.enabled = false;
+        middlePanel.enabled = false;
+        titleBar.enabled = false;
+        splash.show();
     }
 
     // close wallet and show wizard
@@ -1397,6 +1544,7 @@ ApplicationWindow {
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeededManager);
+        walletManager.walletPairingCodeNeeded.connect(onWalletPairingCodeNeededManager);
         IPC.uriHandler.connect(onUriHandler);
 
         if(typeof daemonManager != "undefined") {
@@ -1811,6 +1959,13 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+    DevicePairingCodeDialog {
+        id: devicePairingCodeDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
+    }
+
     InputDialog {
         id: inputDialog
         visible: false
@@ -1840,7 +1995,10 @@ ApplicationWindow {
     ProcessingSplash {
         id: splash
         width: appWindow.width / 2
-        height: appWindow.height / 2.66
+        // The Retry/Cancel row needs more room than a plain splash.
+        height: showActionButtons
+            ? appWindow.height / 1.9
+            : appWindow.height / 2.66
         x: (appWindow.width - width) / 2
         y: (appWindow.height - height) / 2
         messageText: qsTr("Please wait...") + translationManager.emptyString
@@ -1955,7 +2113,7 @@ ApplicationWindow {
             source: blurredArea
             radius: 64
             visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
-                devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
+                devicePassphraseDialog.visible || devicePairingCodeDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
                 remoteNodeDialog.visible
         }
 
@@ -2163,10 +2321,13 @@ ApplicationWindow {
         visible: false
         property alias text: statusMessageText.text
         anchors.bottom: parent.bottom
-        width: statusMessageText.contentWidth + 20
+        // Cap the width so a long message wraps inside the toast instead
+        // of spilling off the right edge, and grow the height to match.
+        width: Math.min(statusMessageText.implicitWidth + 20,
+                        Math.max(appWindow.width - 80, 320))
+        height: statusMessageText.paintedHeight + 20
         anchors.horizontalCenter: parent.horizontalCenter
         color: MoneroComponents.Style.blackTheme ? "black" : "white"
-        height: 40
         MoneroComponents.TextPlain {
             id: statusMessageText
             anchors.fill: parent
@@ -2174,6 +2335,8 @@ ApplicationWindow {
             font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
             themeTransition: false
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
         }
     }
 
@@ -2225,6 +2388,10 @@ ApplicationWindow {
 
 
         }
+
+        // An unanswered pairing prompt holds a wallet pool thread, which
+        // would then never finish. Cancel it so the thread unwinds.
+        devicePairingCodeDialog.onCancel();
 
         // If daemon is running - prompt user before exiting
         if(daemonManager == undefined || persistentSettings.useRemoteNode) {

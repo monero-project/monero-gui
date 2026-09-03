@@ -92,6 +92,11 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
+Wallet::TrezorError Wallet::trezorError() const
+{
+    return static_cast<TrezorError>(m_walletImpl->trezorError());
+}
+
 NetworkType::Type Wallet::nettype() const
 {
     return static_cast<NetworkType::Type>(m_walletImpl->nettype());
@@ -1170,6 +1175,19 @@ void Wallet::onPassphraseEntered(const QString &passphrase, bool enter_on_device
     if (m_walletListener != nullptr)
     {
         m_walletListener->onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+    }
+}
+
+void Wallet::onWalletPairingCodeNeeded()
+{
+    emit this->walletPairingCodeNeeded();
+}
+
+void Wallet::onPairingCodeEntered(const QString &code, bool entry_abort)
+{
+    if (m_walletListener != nullptr)
+    {
+        m_walletListener->onPairingCodeEntered(code, entry_abort);
     }
 }
 

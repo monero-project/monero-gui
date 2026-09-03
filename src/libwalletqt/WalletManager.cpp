@@ -46,10 +46,10 @@
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
 
-class WalletPassphraseListenerImpl : public  Monero::WalletListener, public PassphraseReceiver
+class WalletPassphraseListenerImpl : public  Monero::WalletListener, public PassphraseReceiver, public PairingCodeReceiver
 {
 public:
-  WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr) {}
+  WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr), m_pchelper(mgr) {}
 
   virtual void moneySpent(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
   virtual void moneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
@@ -70,6 +70,18 @@ public:
       return m_phelper.onDevicePassphraseRequest(on_device);
   }
 
+  virtual void onPairingCodeEntered(const QString &code, bool entry_abort) override
+  {
+      qDebug() << __FUNCTION__;
+      m_pchelper.onPairingCodeEntered(code, entry_abort);
+  }
+
+  virtual Monero::optional<std::string> onDevicePairingCodeRequest() override
+  {
+      qDebug() << __FUNCTION__;
+      return m_pchelper.onDevicePairingCodeRequest();
+  }
+
   virtual void onDeviceButtonRequest(uint64_t code) override
   {
       qDebug() << __FUNCTION__;
@@ -85,6 +97,7 @@ public:
 private:
   WalletManager * m_mgr;
   PassphraseHelper m_phelper;
+  PairingCodeHelper m_pchelper;
 };
 
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
@@ -108,9 +121,14 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
     m_mutex_passphraseReceiver.lock();
     m_passphraseReceiver = &tmpListener;
     m_mutex_passphraseReceiver.unlock();
+    m_mutex_pairingCodeReceiver.lock();
+    m_pairingCodeReceiver = &tmpListener;
+    m_mutex_pairingCodeReceiver.unlock();
     const auto cleanup = sg::make_scope_guard([this]() noexcept {
         QMutexLocker passphrase_locker(&m_mutex_passphraseReceiver);
         this->m_passphraseReceiver = nullptr;
+        QMutexLocker pairing_locker(&m_mutex_pairingCodeReceiver);
+        this->m_pairingCodeReceiver = nullptr;
     });
 
     if (m_currentWallet) {
@@ -178,9 +196,14 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
     m_mutex_passphraseReceiver.lock();
     m_passphraseReceiver = &tmpListener;
     m_mutex_passphraseReceiver.unlock();
+    m_mutex_pairingCodeReceiver.lock();
+    m_pairingCodeReceiver = &tmpListener;
+    m_mutex_pairingCodeReceiver.unlock();
     const auto cleanup = sg::make_scope_guard([this]() noexcept {
         QMutexLocker passphrase_locker(&m_mutex_passphraseReceiver);
         this->m_passphraseReceiver = nullptr;
+        QMutexLocker pairing_locker(&m_mutex_pairingCodeReceiver);
+        this->m_pairingCodeReceiver = nullptr;
     });
 
     if (m_currentWallet) {
@@ -588,6 +611,20 @@ void WalletManager::onPassphraseEntered(const QString &passphrase, bool enter_on
     if (m_passphraseReceiver != nullptr)
     {
         m_passphraseReceiver->onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+    }
+}
+
+void WalletManager::onWalletPairingCodeNeeded()
+{
+    emit this->walletPairingCodeNeeded();
+}
+
+void WalletManager::onPairingCodeEntered(const QString &code, bool entry_abort)
+{
+    QMutexLocker locker(&m_mutex_pairingCodeReceiver);
+    if (m_pairingCodeReceiver != nullptr)
+    {
+        m_pairingCodeReceiver->onPairingCodeEntered(code, entry_abort);
     }
 }
 

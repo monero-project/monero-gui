@@ -43,6 +43,7 @@
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
+#include "PairingCodeHelper.h"
 #include "PassphraseHelper.h"
 #include "WalletListenerImpl.h"
 
@@ -61,7 +62,7 @@ class SubaddressModel;
 class SubaddressAccount;
 class SubaddressAccountModel;
 
-class Wallet : public QObject, public PassprasePrompter
+class Wallet : public QObject, public PassprasePrompter, public PairingCodePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
@@ -69,6 +70,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
+    Q_PROPERTY(TrezorError trezorError READ trezorError)
     Q_PROPERTY(NetworkType::Type nettype READ nettype)
 //    Q_PROPERTY(ConnectionStatus connected READ connected)
     Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount NOTIFY currentSubaddressAccountChanged)
@@ -120,6 +122,21 @@ public:
 
     Q_ENUM(BackgroundSyncType)
 
+    //! Category of the Trezor failure behind the last open or create, so
+    //! QML can offer the recovery that fits without matching the English
+    //! text of an error.
+    enum TrezorError {
+        TrezorError_None                = Monero::Wallet::TrezorError_None,
+        TrezorError_Unreachable         = Monero::Wallet::TrezorError_Unreachable,
+        TrezorError_Cancelled           = Monero::Wallet::TrezorError_Cancelled,
+        TrezorError_Protocol            = Monero::Wallet::TrezorError_Protocol,
+        TrezorError_Other               = Monero::Wallet::TrezorError_Other,
+        TrezorError_FirmwareUnsupported = Monero::Wallet::TrezorError_FirmwareUnsupported,
+        TrezorError_PairingRejected     = Monero::Wallet::TrezorError_PairingRejected
+    };
+
+    Q_ENUM(TrezorError)
+
     //! returns mnemonic seed
     QString getSeed() const;
 
@@ -131,6 +148,9 @@ public:
 
     //! returns last operation's status
     Status status() const;
+
+    //! returns the category of the Trezor failure behind the last status
+    TrezorError trezorError() const;
 
     //! returns network type of the wallet.
     NetworkType::Type nettype() const;
@@ -374,6 +394,10 @@ public:
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
 
+    // THP CodeEntry pairing code entry for Trezor Safe 7
+    Q_INVOKABLE void onPairingCodeEntered(const QString &code, bool entry_abort=false);
+    virtual void onWalletPairingCodeNeeded() override;
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
@@ -397,6 +421,7 @@ signals:
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
     void walletPassphraseNeeded(bool onDevice);
+    void walletPairingCodeNeeded();
     void transactionCommitted(bool status, PendingTransaction *t, const QStringList& txid);
     void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
     void deviceShowAddressShowed();

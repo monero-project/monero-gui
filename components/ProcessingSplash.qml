@@ -43,23 +43,74 @@ Rectangle {
     border.width: 1
     z: 11
     property alias messageText: messageTitle.text
+    property alias subMessageText: messageSub.text
+
+    // Optional Retry / Cancel row, shown instead of leaving the user
+    // stuck on a splash they can't dismiss.  To use it, set
+    // retryCallback and cancelCallback, set showActionButtons, then
+    // call show().  Leaving retryCallback null hides Retry.
+    property bool showActionButtons: false
+    property var retryCallback: null
+    property var cancelCallback: null
 
     width: 100
     height: 50
 
+    focus: visible && showActionButtons
+    Keys.onPressed: {
+        if (!root.showActionButtons) return;
+        if (event.key === Qt.Key_Escape) {
+            root.fireCancel();
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+            if (cancelButton.activeFocus || !retryButton.visible) {
+                root.fireCancel();
+            } else {
+                root.fireRetry();
+            }
+            event.accepted = true;
+        }
+    }
+
     function show() {
         root.visible = true;
+        if (root.showActionButtons) {
+            if (retryButton.visible) {
+                retryButton.forceActiveFocus();
+            } else {
+                cancelButton.forceActiveFocus();
+            }
+        }
     }
 
     function close() {
         root.visible = false;
+        root.showActionButtons = false;
+        root.retryCallback = null;
+        root.cancelCallback = null;
+    }
+
+    function fireRetry() {
+        var cb = root.retryCallback;
+        root.close();
+        if (cb) cb();
+    }
+
+    function fireCancel() {
+        var cb = root.cancelCallback;
+        root.close();
+        if (cb) cb();
     }
 
     ColumnLayout {
         id: rootLayout
 
-        anchors.centerIn: parent
-
+        // Anchor to the splash sides so a wrapping sub-message stays
+        // inside the box; anchors.centerIn leaves the layout width
+        // unconstrained and long messages spill outside.
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 30
         anchors.rightMargin: 30
 
@@ -79,7 +130,9 @@ Rectangle {
             }
 
             BusyIndicator {
-                running: parent.visible
+                // Nothing is in progress while the action row waits for
+                // the user, so the spinner stops.
+                running: parent.visible && !root.showActionButtons
                 anchors.centerIn: imgLogo
                 style: BusyIndicatorStyle {
                     indicator: Image {
@@ -107,6 +160,50 @@ Rectangle {
             Layout.fillWidth: true
             themeTransition: false
             color: MoneroComponents.Style.defaultFontColor
+        }
+
+        MoneroComponents.TextPlain {
+            id: messageSub
+            text: ""
+            visible: text.length > 0
+            font.pixelSize: 15
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.leftMargin: 10
+            Layout.rightMargin: 10
+            themeTransition: false
+            color: MoneroComponents.Style.dimmedFontColor
+        }
+
+        RowLayout {
+            id: actionRow
+            visible: root.showActionButtons
+            spacing: 16
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 4
+
+            MoneroComponents.StandardButton {
+                id: cancelButton
+                primary: !retryButton.visible
+                small: false
+                text: qsTr("Cancel") + translationManager.emptyString
+                onClicked: root.fireCancel()
+                KeyNavigation.tab: retryButton.visible ? retryButton : cancelButton
+                KeyNavigation.backtab: retryButton.visible ? retryButton : cancelButton
+            }
+
+            MoneroComponents.StandardButton {
+                id: retryButton
+                visible: root.retryCallback !== null
+                primary: true
+                small: false
+                text: qsTr("Try again") + translationManager.emptyString
+                onClicked: root.fireRetry()
+                KeyNavigation.tab: cancelButton
+                KeyNavigation.backtab: cancelButton
+            }
         }
     }
 }
