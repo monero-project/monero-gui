@@ -1373,6 +1373,7 @@ Rectangle {
             Layout.bottomMargin: 20
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
+            visible: root.txCount > 0
             checked: persistentSettings.historyShowAdvanced
             onClicked: persistentSettings.historyShowAdvanced = !persistentSettings.historyShowAdvanced
             text: qsTr("Advanced options") + translationManager.emptyString
