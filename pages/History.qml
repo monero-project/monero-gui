@@ -1494,6 +1494,14 @@ Rectangle {
         // applying sorts
         root.txOffset = 0;
         root.txData.sort(function(a, b) {
+            if (root.sortBy === "blockheight") {
+                var aPending = typeof a.blockheight === "undefined";
+                var bPending = typeof b.blockheight === "undefined";
+                if (aPending !== bPending)
+                    return aPending ? 1 : -1;
+                if (aPending)
+                    return a.timestamp - b.timestamp;
+            }
             return a[root.sortBy] - b[root.sortBy];
         });
 
