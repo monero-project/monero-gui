@@ -27,66 +27,54 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.15
 
 import "../components" as MoneroComponents
 
-Item {
-    id: radioButton
-    property alias text: label.text
-    property bool checked: false
-    property int fontSize: 14
-    property alias fontColor: label.color
-    signal clicked()
-    height: 26
-    width: layout.width
-    // legacy properties
-    property var checkedColor: MoneroComponents.Style.blackTheme ? "white" : "#666666"
-    property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+RadioButton {
+    id: control
+    checked: false
+    property var tooltip: ""
+    property bool tooltipIconVisible: true
+    property alias fontSize: control.font.pixelSize
 
-    function toggle(){
-        radioButton.checked = !radioButton.checked
-        radioButton.clicked()
-    }
+    font.pixelSize: 16
+    font.family: MoneroComponents.Style.fontRegular.name
 
-    RowLayout {
-        id: layout
+    indicator: Rectangle {
+        color: "transparent"
+        border.color: checked ? (MoneroComponents.Style.blackTheme ? "white" : "#666666") : MoneroComponents.Style.inputBorderColorInActive
+        height: 22
+        width: 22
+        radius: 22
 
         Rectangle {
-            id: button
-            color: "transparent"
-            border.color: borderColor
-            height: radioButton.height
-            width: radioButton.height
-            radius: radioButton.height
-
-            Rectangle {
-                visible: radioButton.checked
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                color: checkedColor
-                width: 10
-                height: 10
-                radius: 10
-                opacity: 0.8
-            }
-        }
-
-        MoneroComponents.TextPlain {
-            id: label
-            Layout.leftMargin: 10
-            color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: radioButton.fontSize
-            wrapMode: Text.Wrap
+            visible: control.checked
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            color: MoneroComponents.Style.blackTheme ? "white" : "#666666"
+            width: 10
+            height: 10
+            radius: 10
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            toggle()
+    contentItem: Text {
+        id: textContent
+        text: control.text
+        font: control.font
+        opacity: enabled ? 1.0 : 0.3
+        color: MoneroComponents.Style.defaultFontColor
+        anchors.bottom: indicator.bottom
+        anchors.bottomMargin: 1
+        leftPadding: control.indicator.width + (control.spacing / 2)
+
+        MoneroComponents.Tooltip {
+            id: tooltip
+            anchors.top: parent.top
+            anchors.left: parent.right
+            tooltipIconVisible: true
+            text: control.tooltip
         }
     }
 }
