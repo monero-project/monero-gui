@@ -65,7 +65,7 @@ GridLayout {
         walletName.error = !walletName.verify();
         walletLocation.error = !walletLocation.verify();
         walletLocation.text = appWindow.accountsDir;
-        walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, walletManager);
+        walletName.text = Wizard.unusedWalletName(appWindow.accountsDir, defaultAccountName, isIOS, walletManager);
     }
 
     ColumnLayout {
