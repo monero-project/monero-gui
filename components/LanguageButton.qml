@@ -36,6 +36,15 @@ import "../components" as MoneroComponents
 Item {
     implicitHeight: layout.height
     implicitWidth: layout.width
+    Keys.onReturnPressed: appWindow.toggleLanguageView()
+    Keys.onEnterPressed: appWindow.toggleLanguageView()
+
+    Rectangle {
+        width: parent.width * 1.25
+        height: parent.height
+        anchors.centerIn: parent
+        color: parent.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
 
     RowLayout {
         id: layout
