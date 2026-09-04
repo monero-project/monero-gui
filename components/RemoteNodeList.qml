@@ -117,7 +117,7 @@ ColumnLayout {
                         styleName: "Solid"
                         visible: trusted
                         text: FontAwesome.shieldAlt
-                        tooltip: qsTr("Trusted daemon") + translationManager.emptyString
+                        tooltip: qsTr("Trusted remote node") + translationManager.emptyString
                         themeTransition: false
                     }
 
