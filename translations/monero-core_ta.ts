@@ -114,32 +114,6 @@
         <translation>மீட்டமை</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="401"/>
-        <source>No valid address found at this OpenAlias address</source>
-        <translation>செல்லுபடியாகக் கூடிய முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் கிடைக்கவில்லை</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="406"/>
-        <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>முகவரி கிடைத்துவிட்டது, ஆனால் DNSSEC கையொப்பங்களைச் சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="408"/>
-        <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>சரியான முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் காணப்படவில்லை, DNSSEC கையொப்பத்தையும் சரிபார்க்க முடியவில்லை, எனவே இது ஒரு ஏமாற்று வேலையாக இருக்கலாம்</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="411"/>
-        <location filename="../pages/AddressBook.qml" line="414"/>
-        <source>Internal error</source>
-        <translation>உள் பிழை</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="417"/>
-        <source>No address found</source>
-        <translation>முகவரி எதுவும் கிடைக்கவில்லை</translation>
-    </message>
-    <message>
         <location filename="../pages/AddressBook.qml" line="323"/>
         <source>Address</source>
         <translation>முகவரி</translation>
@@ -156,52 +130,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="431"/>
+        <location filename="../pages/AddressBook.qml" line="414"/>
         <source>Description</source>
         <translation>விளக்கம்</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="432"/>
+        <location filename="../pages/AddressBook.qml" line="415"/>
         <source>Add a name...</source>
         <translation>பெயரைச் சேர்க்கவும்…</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="468"/>
+        <location filename="../pages/AddressBook.qml" line="451"/>
         <source>Add</source>
         <translation>சேர்</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="468"/>
+        <location filename="../pages/AddressBook.qml" line="451"/>
         <source>Save</source>
         <translation>சேமி</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="475"/>
+        <location filename="../pages/AddressBook.qml" line="458"/>
         <source>Error</source>
         <translation>பிழை</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="478"/>
+        <location filename="../pages/AddressBook.qml" line="461"/>
         <source>Invalid address</source>
         <translation>செல்லாத முகவரி</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="482"/>
+        <location filename="../pages/AddressBook.qml" line="465"/>
         <source>Can&apos;t create entry</source>
         <translation>பதிவை உருவாக்க முடியவில்லை</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="444"/>
+        <location filename="../pages/AddressBook.qml" line="427"/>
         <source>Cancel</source>
         <translation>ரத்துசெய்</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="455"/>
+        <location filename="../pages/AddressBook.qml" line="438"/>
         <source>Delete</source>
         <translation>நீக்கு</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="545"/>
+        <location filename="../pages/AddressBook.qml" line="528"/>
         <source>OpenAlias error</source>
         <translation>ஓப்பன் அளியாஸ் பிழை</translation>
     </message>
@@ -209,22 +183,22 @@
 <context>
     <name>Advanced</name>
     <message>
-        <location filename="../pages/Advanced.qml" line="53"/>
+        <location filename="../pages/Advanced.qml" line="55"/>
         <source>Mining</source>
         <translation>சுரங்கப்பணி</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="58"/>
+        <location filename="../pages/Advanced.qml" line="61"/>
         <source>Prove/check</source>
         <translation>நிருபி/சரிபார்</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="63"/>
+        <location filename="../pages/Advanced.qml" line="66"/>
         <source>Shared RingDB</source>
         <translation>பகிரப்பட்ட RingDB</translation>
     </message>
     <message>
-        <location filename="../pages/Advanced.qml" line="68"/>
+        <location filename="../pages/Advanced.qml" line="71"/>
         <source>Sign/verify</source>
         <translation>கையொப்பமிடு/சரிபார்</translation>
     </message>
@@ -597,12 +571,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
         <translation>கொசுறு: நீங்கள் விரும்பும் விரித்தாள் மென்பொருளைக் கொண்டு தொகுதி உயரத்தை வரிசைப்படுத்தலாம்.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1774"/>
+        <location filename="../pages/History.qml" line="1773"/>
+        <source>Open folder</source>
+        <translation type="unfinished">கோப்புறையைத் திற</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1780"/>
         <source>Error</source>
         <translation>பிழை</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1775"/>
+        <location filename="../pages/History.qml" line="1781"/>
         <source>Error exporting transaction data.</source>
         <translation>பரிமாற்ற தரவுகளைப் பதிவேற்றும் போது பிழை எற்பட்டுவிட்டது.</translation>
     </message>
@@ -821,17 +800,17 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="190"/>
+        <location filename="../components/LineEdit.qml" line="194"/>
         <source>Copy</source>
         <translation>நகலெடு</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="195"/>
+        <location filename="../components/LineEdit.qml" line="199"/>
         <source>Copied to clipboard</source>
         <translation>கிளிப்போர்டில் நகலெடுக்கப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="207"/>
+        <location filename="../components/LineEdit.qml" line="211"/>
         <source>Paste</source>
         <translation>ஒட்டு</translation>
     </message>
@@ -1014,230 +993,250 @@ It is recommended to enter passphrase on the hardware wallet for better security
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="70"/>
-        <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>சுரங்கப்பணி தொடங்கும் முன் மறைநிரலை ஒத்திசைக்கவும்</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="142"/>
-        <source>CPU threads</source>
-        <translation>CPU புரிகள்</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="64"/>
-        <source>Mining is only available on local daemons.</source>
-        <translation>சுரங்கப்பணி உள் மறைநிரல்களுக்கு மட்டுமே கிடைக்கும்.</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="88"/>
-        <source>Mining may reduce the performance of other running applications and processes.</source>
-        <translation>சுரங்கபணியின் போது இயங்கிக்கொண்டிருக்கும் மற்ற மென்பொருள் மற்றும் பணிகளின் செயல்திறன் குறைய கூடும்.</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="202"/>
-        <source>Set to use recommended # of threads</source>
-        <translation>பரிந்துரைக்கப்பட்ட புல எண்ணிக்கை களை பயன்படுத்த அமைக்கவும்</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="210"/>
-        <source>Use all threads</source>
-        <translation>அனைத்து புலங்களையும் பயன்படுத்து</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="214"/>
-        <source>Set to use all threads</source>
-        <translation>அனைத்து புலங்களையும் பயன்படுத்த அமைக்கவும்</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="258"/>
-        <source>Background mining (experimental)</source>
-        <translation>பின்னணி சுரங்கப்பணி (பரிசோதனைவழி)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="227"/>
-        <source>Enable mining when running on battery</source>
-        <translation>மின்கலத்தில் இயங்கும் போது சுரங்கப்பணியை இயக்கு</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="58"/>
+        <location filename="../pages/Mining.qml" line="59"/>
         <source>Mining</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="65"/>
+        <source>Mining is only available on local daemons.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="71"/>
+        <source>Your daemon must be synchronized before you can start mining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>Mining with your computer helps strengthen the Monero network. The more people mine, the harder it is for the network to be attacked, and every little bit helps.
 
 Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="76"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>P2Pool mining is a decentralized way to pool mine that pays out more frequently compared to solo mining, while also supporting the network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="100"/>
+        <location filename="../pages/Mining.qml" line="89"/>
+        <source>Mining may reduce the performance of other running applications and processes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="101"/>
         <source>Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="111"/>
+        <location filename="../pages/Mining.qml" line="112"/>
         <source>Mining mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="198"/>
+        <location filename="../pages/Mining.qml" line="143"/>
+        <source>CPU threads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="199"/>
         <source>Use half (recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="240"/>
+        <location filename="../pages/Mining.qml" line="203"/>
+        <source>Set to use recommended # of threads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="211"/>
+        <source>Use all threads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="215"/>
+        <source>Set to use all threads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="228"/>
+        <source>Enable mining when running on battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="241"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="269"/>
+        <location filename="../pages/Mining.qml" line="259"/>
+        <source>Background mining (experimental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="270"/>
         <source>Manage miner</source>
-        <translation>சுரங்க பணியாளர்களை நிர்வகி</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="286"/>
+        <location filename="../pages/Mining.qml" line="287"/>
         <source>Start mining</source>
-        <translation>சுரங்கப்பணியை துவங்கு</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="304"/>
+        <location filename="../pages/Mining.qml" line="306"/>
         <source>P2Pool installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="305"/>
+        <location filename="../pages/Mining.qml" line="307"/>
         <source>P2Pool will be installed at %1. Proceed?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="307"/>
+        <location filename="../pages/Mining.qml" line="309"/>
         <source>No</source>
         <translation type="unfinished">இல்லை</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="308"/>
+        <location filename="../pages/Mining.qml" line="310"/>
         <source>Yes</source>
         <translation type="unfinished">ஆம்</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="383"/>
+        <location filename="../pages/Mining.qml" line="330"/>
+        <location filename="../pages/Mining.qml" line="335"/>
+        <location filename="../pages/Mining.qml" line="624"/>
+        <location filename="../pages/Mining.qml" line="641"/>
+        <source>Couldn&apos;t start mining.&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="345"/>
+        <source>Stop mining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="362"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="374"/>
+        <location filename="../pages/Mining.qml" line="541"/>
+        <source>Not mining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="385"/>
         <source>Mini</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="384"/>
+        <location filename="../pages/Mining.qml" line="386"/>
         <source>Main</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="395"/>
+        <location filename="../pages/Mining.qml" line="397"/>
         <source>Chain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="401"/>
+        <location filename="../pages/Mining.qml" line="403"/>
         <source>Use the mini chain if you have a low hashrate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="441"/>
+        <location filename="../pages/Mining.qml" line="443"/>
         <source>Flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="498"/>
+        <location filename="../pages/Mining.qml" line="500"/>
         <source>P2Pool startup flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="499"/>
+        <location filename="../pages/Mining.qml" line="501"/>
         <source>(optional)</source>
         <translation type="unfinished">(விரும்பினால்)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="516"/>
+        <location filename="../pages/Mining.qml" line="518"/>
         <source>Starting P2Pool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="519"/>
+        <location filename="../pages/Mining.qml" line="521"/>
         <source>Mining with P2Pool, at %1 H/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="566"/>
-        <source>Error starting mining</source>
-        <translation>சுரங்கப்பணியை துவங்குவதில் சிக்கல் ஏற்பட்டுள்ளது</translation>
+        <location filename="../pages/Mining.qml" line="527"/>
+        <source>Mining temporarily suspended.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="622"/>
+        <location filename="../pages/Mining.qml" line="536"/>
+        <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="568"/>
+        <source>Error starting mining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="571"/>
+        <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="647"/>
         <source>P2Pool Installation Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="650"/>
+        <source>Hash verification failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="653"/>
+        <source>P2Pool download is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="656"/>
+        <source>P2Pool download failed due to a connection issue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="659"/>
         <source>P2Pool installation failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="623"/>
+        <location filename="../pages/Mining.qml" line="659"/>
         <source>Try starting the program with administrator privileges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="631"/>
+        <location filename="../pages/Mining.qml" line="662"/>
+        <source>Unknown error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="671"/>
         <source>P2Pool Installation Succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="632"/>
+        <location filename="../pages/Mining.qml" line="672"/>
         <source>P2Pool has successfully installed.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="328"/>
-        <location filename="../pages/Mining.qml" line="333"/>
-        <location filename="../pages/Mining.qml" line="599"/>
-        <location filename="../pages/Mining.qml" line="616"/>
-        <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>சுரங்கப்பணியை துவக்க இயலவில்லை.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="569"/>
-        <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>சுரங்கப்பணி உள் மறைநிரல்களில் மட்டுமே கிடைக்கும். சுரங்கப்பணி செய்ய உள் மறைநிரலை இயக்கு.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="343"/>
-        <source>Stop mining</source>
-        <translation>சுரங்கப்பணியை நிறுத்து</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="360"/>
-        <source>Status</source>
-        <translation>நிலை</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="525"/>
-        <source>Mining temporarily suspended.</source>
-        <translation>சுரங்கப்பணி தற்காலிகமாக இடைநீக்கம் செய்யப்பட்டது.</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="534"/>
-        <source>Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.</source>
-        <translation>%1 பு/வி வேகத்தில் சுரங்கப்பணி நடைபெறுகிறது. இதன்மூலம் %2 இல் 1 தொகுதியை தினசரி கண்டுபிடிக்க வாய்ப்புள்ளது.</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="372"/>
-        <location filename="../pages/Mining.qml" line="539"/>
-        <source>Not mining</source>
-        <translation>சுரங்கப்பணியில் ஈடுபடவில்லை</translation>
     </message>
 </context>
 <context>
@@ -1320,7 +1319,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>வேறோரு பொது கணுவிற்கு மாறும் செயல் தோல்வி அடைந்தது</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="207"/>
+        <location filename="../components/NetworkStatusItem.qml" line="208"/>
         <source>Switching to another public node</source>
         <translation>வேறொரு பொது கணுவிற்கு மாறுகிறது</translation>
     </message>
@@ -1430,7 +1429,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>சாதனத்தில் காண்பி</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="751"/>
+        <location filename="../pages/Receive.qml" line="752"/>
         <source>Please choose a name</source>
         <translation>ஒரு பெயரைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
@@ -1523,25 +1522,25 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="439"/>
-        <location filename="../pages/Receive.qml" line="722"/>
+        <location filename="../pages/Receive.qml" line="723"/>
         <source>no label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="446"/>
-        <location filename="../pages/Receive.qml" line="683"/>
+        <location filename="../pages/Receive.qml" line="684"/>
         <source>Edit address label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="475"/>
-        <location filename="../pages/Receive.qml" line="700"/>
+        <location filename="../pages/Receive.qml" line="701"/>
         <source>Copy address to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="485"/>
-        <location filename="../pages/Receive.qml" line="705"/>
+        <location filename="../pages/Receive.qml" line="706"/>
         <source>Address copied to clipboard</source>
         <translation>முகவரி கிளிப்போர்டில் நகலெடுக்கப்பட்டது</translation>
     </message>
@@ -1551,27 +1550,27 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>புதிய முகவரியை உருவாக்குக</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="667"/>
+        <location filename="../pages/Receive.qml" line="668"/>
         <source>See transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="718"/>
+        <location filename="../pages/Receive.qml" line="719"/>
         <source>Primary address</source>
         <translation>முதன்மை முகவரி</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="758"/>
+        <location filename="../pages/Receive.qml" line="759"/>
         <source>Save QrCode</source>
         <translation>QR குறியீட்டைச் சேமி</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="759"/>
+        <location filename="../pages/Receive.qml" line="760"/>
         <source>Failed to save QrCode to </source>
         <translation>QR குறியீட்டை இவ்விடத்தில் சேமிக்க முடியவில்லை </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="763"/>
+        <location filename="../pages/Receive.qml" line="764"/>
         <source>QR code saved to </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1671,6 +1670,30 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
 </context>
 <context>
+    <name>SeedListItem</name>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="22"/>
+        <source>Please enter the word number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="23"/>
+        <location filename="../wizard/SeedListItem.qml" line="27"/>
+        <source>Green check mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="24"/>
+        <source>Red exclamation mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/SeedListItem.qml" line="28"/>
+        <source>This word is spelled </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Settings</name>
     <message>
         <location filename="../pages/settings/Settings.qml" line="59"/>
@@ -1693,7 +1716,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>பதிவு</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Settings.qml" line="80"/>
+        <location filename="../pages/settings/Settings.qml" line="81"/>
         <source>Info</source>
         <translation>தெரிவல்</translation>
     </message>
@@ -1997,77 +2020,77 @@ The old wallet cache file will be renamed and can be restored later.
 <context>
     <name>SettingsNode</name>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="115"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="116"/>
         <source>Local node</source>
         <translation>உள் கணு</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="131"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
         <translation>கல்லேடு உங்கள் கணினியில் பதிவிறக்கம் செய்யப்பட உள்ளது. இதற்கு மேம்பட்ட பாதுகாப்பும், அதிக உள்ளகப் பதிவேட்டுத் திரட்படுத்தமும் தேவை.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="208"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="209"/>
         <source>Remote node</source>
         <translation>தொலைநிலை கணு</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="224"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="225"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
         <translation>மூன்றாந் தரப்பு சேவையகங்கள் மூலம் மோனேரோ வலையமைப்போடு இணைத்தல். குறைவான பாதுகாப்பு ஆனால் எளிதில் கணினியோடு இணைக்கலாம்.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="253"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="254"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation>தொலைநிலை கணுக்களுக்கு‌ உங்கள் விருப்பமான தேடு பொறியில் &apos;Monero remote note&apos; என் தேடவும். கணு நம்பத்தகுந்த மூன்றாம் தரப்பினர் மூலம் இயக்கப்படுகிறதா என்பதை உறுதிப் படுத்திக் கொள்ளவும்.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="318"/>
         <source>(optional)</source>
         <translation>(விரும்பினால்)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Change</source>
         <translation>மாற்று</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Start daemon</source>
         <translation>மறைநிரலை துவக்கு</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="271"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="272"/>
         <source>Stop daemon</source>
         <translation>மறைநிரலை நிறுத்து</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="290"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Blockchain location</source>
         <translation>கல்லேட்டின் இருப்பிடம்</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="291"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Reset</source>
         <translation>மீட்டமை</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="294"/>
         <source>(default)</source>
         <translation>(முன்னிருப்பு)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="316"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon startup flags</source>
         <translation>மறைநிரல் தொடக்க அளவுருக்கள்</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="340"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
         <source>Bootstrap Address</source>
         <translation>இயக்கத்தொடக்க முகவரி</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="341"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="342"/>
         <source>Bootstrap Port</source>
         <translation>இயக்கத்தொடக்க துறை</translation>
     </message>
@@ -2146,7 +2169,8 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="84"/>
         <location filename="../pages/settings/SettingsWallet.qml" line="111"/>
-        <location filename="../pages/settings/SettingsWallet.qml" line="161"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="146"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Error</source>
         <translation>பிழை</translation>
     </message>
@@ -2187,37 +2211,44 @@ You can change the password in the wallet settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="141"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="142"/>
         <source>Transaction successfully scanned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="143"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="147"/>
+        <source>The wallet has already seen 1 or more recent transactions than the scanned transaction.
+
+In order to rescan the transaction, you can re-sync your wallet by resetting the wallet restore height in the Settings &gt; Info page. Make sure to use a restore height from before your wallet&apos;s earliest transaction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsWallet.qml" line="152"/>
         <source>Failed to scan transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="154"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="164"/>
         <source>Change wallet password</source>
         <translation>பணப்பை கடவுச்சொல்லை மாற்று</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="177"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="187"/>
         <source>Receive Monero for your business, easily.</source>
         <translation>உங்கள் வணிகத்திற்காக மோனேரோவை பெறுங்கள், எளிதாக.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="178"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="188"/>
         <source>Enter merchant mode</source>
         <translation>வணிகர் பயன்முறையில் நுழையவும்</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="153"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="163"/>
         <source>Change the password of your wallet.</source>
         <translation>உங்கள் பணப்பையின் கடவுச்சொல்லை மாற்றவும்.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="162"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="172"/>
         <source>Wrong password</source>
         <translation>தவறான கடவுச்சொல்</translation>
     </message>
@@ -2225,152 +2256,82 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>SharedRingDB</name>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="99"/>
+        <location filename="../pages/SharedRingDB.qml" line="90"/>
         <source>Shared RingDB</source>
         <translation>பகிரப்பட்ட வளையத் தரவுத்தளம்</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="103"/>
+        <location filename="../pages/SharedRingDB.qml" line="94"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
         <translation>பகிரப்பட்ட வளையத் தரவுத்தளத்துடன் தொடர்பு கொள்ள இந்த பக்கம் உங்களை அனுமதிக்கிறது. இந்த தரவுத்தளம் மோனேரோ பணப்பைகள் மற்றும் மோனேரோ திறவுகோல்களை மீண்டும் பயன்படுத்தும் மோனேரோ நகலிகளின் பணப்பைகள் ஆகியவற்றால் பயன்படுத்தப்படுகிறது.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="115"/>
-        <source>Outputs marked as spent</source>
-        <translation>வெளியீடுகள் செலவிடப்பட்டதாகக் குறிக்கப்பட்டன</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="116"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>மோனேரோ பரிமாற்றங்களில் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதை மறைப்பதன் மூலம் மூன்றாம் தரப்பினர் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதைக் கூற முடியாத குழப்ப நிலையை அடைவர். இது மிகவும் அவசியம். ஏனென்றால் பரிமாற்றத்திற்குச் சம்பந்தமில்லாத மூன்றாம் தரப்பினர் ஒன்றைத் தவிர மற்ற எல்லா உள்ளீடுகளையும் கண்டுபிடித்து விட்டால், அவர்களால் அந்த பரிமாற்றத்தில் எந்தெந்த உள்ளீடுகள் செலவழிக்கப்பட்டன என்பதை அறிந்து கொள்ள முடியும், இதன்மூலம் மோனேரோ வழங்குகின்ற மூன்று முக்கிய பாதுகாப்பு அடுக்குகளில் ஒன்றான வளையக் கையொப்பம் தருகின்ற பாதுகாப்பு பயனற்று போகிறது.&lt;br&gt;இதனைத் தவிர்க்க, ஏற்கனவே உபயோகிக்கப்பட்ட உள்ளீடுகளை பட்டியலிட்டு புதிய பரிமாற்றங்கள் அவற்றை உபயோகிக்காமல் பார்த்து கொள்ளலாம். இவ்வகை பட்டியல்கள் &quot;Monero Project&quot; குழுவினரால் &quot;getmonero.org&quot; என்னும் இணையதளத்தில் பராமரிக்கப்பட்டு வருகிறது. இவற்றை காணலாம், பதிவிறக்கிக்கொள்ளலாம்.&lt;br&gt;மாற்றாக &quot;monero-blockchain-mark-spend-outputs tool&quot; இன்‌ உதவியோடு நீங்களே கல்லேடு (மற்றும் மோனேரோ நகலிகள் உபயோகிக்கும் கல்லேடு) ஆகியவற்றை வருடி கொள்ளலாம்.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="134"/>
-        <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>எந்த வெளியீடுகள் செலவழிக்கப்பட்டதாக கருத வேண்டும் என்பதை இது தீர்மானிக்கிறது. எனவே, இவற்றை வளைய கையொப்பத்தின் தனியுரிமை ஒதுக்கிடங்களாக பயன்படுத்த கூடாது. </translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="135"/>
-        <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation>நீங்கள் பட்டியலைப் புதுப்பிக்க விரும்பும் போது மட்டுமே கோப்புகளை ஏற்ற வேண்டும். கைமுறை சேர்த்தல்/நீக்குதல் வேண்டுமென்றால் உபயோகிக்கலாம்.</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="147"/>
-        <source>Please choose a file from which to load outputs to mark as spent</source>
-        <translation>செலவழித்ததைக் குறிக்க வெளியீடுகளை ஏற்ற ஒரு கோப்பைத் தேர்ந்தெடுக்கவும்</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="161"/>
-        <source>Path to file</source>
-        <translation>கோப்புக்கான பாதை</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="163"/>
-        <source>Filename with outputs to mark as spent</source>
-        <translation>செலவழித்ததைக் குறிக்க வெளியீட்டைக் கொண்ட கோப்பின் பெயர்</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Browse</source>
-        <translation>உலாவு</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="184"/>
-        <source>Load</source>
-        <translation>ஏற்று</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="201"/>
-        <source>Or manually mark a single output as spent/unspent:</source>
-        <translation>அல்லது கைமுறையாக ஒரு வெளியீட்டைச் செலவிட்ட/செலவிடாத தாக குறிக்கவும்:</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="203"/>
-        <source>Paste output amount</source>
-        <translation>வெளியீட்டுத் தொகையை ஒட்டு</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="215"/>
-        <source>Paste output offset</source>
-        <translation>வெளியீட்டு ஒதுக்கத்தை ஒட்டு</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="227"/>
-        <source>Mark as spent</source>
-        <translation>செலவிட்ட தாக குறி</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="235"/>
-        <source>Mark as unspent</source>
-        <translation>செலவிடாத தாக குறி</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="246"/>
+        <location filename="../pages/SharedRingDB.qml" line="107"/>
         <source>Rings</source>
         <translation>வளையங்கள்</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="247"/>
+        <location filename="../pages/SharedRingDB.qml" line="108"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
         <translation>மோனேரோவின் வளையக் கையொப்ப பாதுகாப்பு சுழியம் ஆகாமல் பாதுகாக்க, வெளியீடுகளை வெவ்வேறு வளையங்களைக் கொண்டு வெவ்வேறு கல்லேட்டில் செலவழிக்கக் கூடாது. பெரும்பாலும் இது கவனிக்கப் பட வேண்டிய ஒன்று இல்லை என்றாலும், திறவுகோல்களை மறுபயனீடு செய்யும் மோனேரோ நகலிகளில் பழைய வெளியீடுகளைக் கொண்டு செலவழிக்கும் ‌‌போது கவனம் பெறுகிறது. இந்த சமயத்தில் ‌‌இரண்டு சங்கிலிகளும் ஒரே வளையத்தை உபயோகிக்கின்றனவா என்பதை உறுதிப் படுத்திக் கொள்ளவும். &lt;br&gt; மோனேரோ‌ மற்றும் பல தனியுரிமையை மதிக்கும் மென்பொருட்கள் இதனை தானியக்கமாகச் செய்கிறது. &lt;br&gt; ஒருவேளை நீங்கள் இவ்வகை பாதுகாப்பு அம்சம் இல்லாத நகலிகளை பயன்படுத்தினால், முதலில் அந்த நகலியில் செலவழித்து பின்‌ கைமுறையாக அந்த வளையத்தை இந்த பக்கத்தில் சேர்க்கலாம். இதன் மூலம் நீங்கள் மோனேரோவை பாதுகாப்பாகச் செலவழிக்க ‌முடியும்.&lt;br&gt;ஒருவேளை நீங்கள் இவ்வகை பாதுகாப்பு அம்சம் இல்லாத நகலிகளை பயன்படுத்தவில்லை என்றால், எல்லாம் தானியக்கமாக நடைபெறும் என்பதால் கூடுதலாக எதுவும் செய்யத் தேவையில்லை.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="266"/>
+        <location filename="../pages/SharedRingDB.qml" line="127"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
         <translation>இது மோனேரோ வில் செலவிட்ட வெளியீடுகளின் வளையங்களை &quot;திறவுகோல் மறுபயனீடு சங்கிலி&quot; இல் சேமித்து வைத்து,‌‌‌ பின் இந்த வளையங்களைத் தனியுரிமையை பாதுகாக்க மீண்டும் பயன்படுத்துகிறது.</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="277"/>
+        <location filename="../pages/SharedRingDB.qml" line="138"/>
         <source>Key image</source>
         <translation>பரிமாற்ற திறவுகோல் படம்</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="279"/>
+        <location filename="../pages/SharedRingDB.qml" line="140"/>
         <source>Paste key image</source>
         <translation>பரிமாற்ற திறவுகோல் படத்தை ஒட்டு</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="296"/>
+        <location filename="../pages/SharedRingDB.qml" line="157"/>
         <source>Get ring</source>
         <translation>வளையத்தை பெறு</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="308"/>
+        <location filename="../pages/SharedRingDB.qml" line="169"/>
         <source>Get Ring</source>
         <translation>வளையத்தை பெறு</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="314"/>
+        <location filename="../pages/SharedRingDB.qml" line="175"/>
         <source>No ring found</source>
         <translation>வளையம் எதுவும் கிடைக்கவில்லை</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="332"/>
+        <location filename="../pages/SharedRingDB.qml" line="193"/>
         <source>Set ring</source>
         <translation>வளையத்தை அமை</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="344"/>
+        <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Set Ring</source>
         <translation>வளையத்தை அமை</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="363"/>
+        <location filename="../pages/SharedRingDB.qml" line="224"/>
         <source>I intend to spend on key-reusing fork(s)</source>
         <translation>நான் திறவுகோல்-மறுபயனீடு கவர்(களில்) செலவழிக்க உள்ளேன்</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="375"/>
+        <location filename="../pages/SharedRingDB.qml" line="236"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>நான் திறவுகோல்-மறுபயனீடு கவர்(களில்) செலவழிக்க விரும்பலாம்</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="387"/>
+        <location filename="../pages/SharedRingDB.qml" line="248"/>
         <source>Relative</source>
         <translation>சார்பு</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="405"/>
+        <location filename="../pages/SharedRingDB.qml" line="266"/>
         <source>Set segregation height:</source>
         <translation>பிரித்தல் உயரத்தை அமை:</translation>
     </message>
@@ -2663,7 +2624,7 @@ You can change the password in the wallet settings.</source>
         <translation>ஓப்பன் அளியாஸ் பிழை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="705"/>
+        <location filename="../pages/Transfer.qml" line="682"/>
         <source>Transaction priority</source>
         <translation>பரிமாற்ற முன்னுரிமை</translation>
     </message>
@@ -2673,7 +2634,7 @@ You can change the password in the wallet settings.</source>
         <translation>மீட்டமை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="689"/>
+        <location filename="../pages/Transfer.qml" line="666"/>
         <source>Automatic</source>
         <translation>தன்னியக்கமாக</translation>
     </message>
@@ -2703,12 +2664,12 @@ You can change the password in the wallet settings.</source>
         <translation>தொகை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="690"/>
+        <location filename="../pages/Transfer.qml" line="667"/>
         <source>Slow (x0.2 fee)</source>
         <translation>மெதுவான (x0.2 கட்டணம்)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="693"/>
+        <location filename="../pages/Transfer.qml" line="670"/>
         <source>Fastest (x200 fee)</source>
         <translation>வேகமான (x200 கட்டணம்)</translation>
     </message>
@@ -2718,74 +2679,48 @@ You can change the password in the wallet settings.</source>
         <translation>முகவரி</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="431"/>
-        <source>No valid address found at this OpenAlias address</source>
-        <translation>செல்லுபடியாகக் கூடிய முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் கிடைக்கவில்லை</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="436"/>
-        <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>முகவரி கிடைத்துவிட்டது, ஆனால் DNSSEC கையொப்பங்களைச் சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="440"/>
-        <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>செல்லுபடியாகக் கூடிய முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் காணப்படவில்லை, DNSSEC கையொப்பத்தையும் சரிபார்க்க முடியவில்லை, எனவே இது ஒரு ஏமாற்று வேலையாக இருக்கலாம்</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="444"/>
-        <location filename="../pages/Transfer.qml" line="448"/>
-        <source>Internal error</source>
-        <translation>உள் பிழை</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="452"/>
-        <source>No address found</source>
-        <translation>முகவரி எதுவும் கிடைக்கவில்லை</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="770"/>
+        <location filename="../pages/Transfer.qml" line="747"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
         <translation>விளக்கப்புலத்தில் உள்ள உள்ளடக்கங்கள் நீண்ட செலுத்தல் ID ஐ கொண்டுள்ளது. தயவு செய்து மிக நீண்ட செலுத்தல் ID களை விளக்கப்புலத்தில் ஒட்ட வேண்டாம். இவ்வாறு செய்வதால் உங்கள் காசுகளை இழக்க நேரிடும்.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="800"/>
+        <location filename="../pages/Transfer.qml" line="777"/>
         <source>Saved to local wallet history</source>
         <translation>உள் பணப்பை வரலாற்றில் சேமிக்கப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="842"/>
+        <location filename="../pages/Transfer.qml" line="819"/>
         <source>Long payment IDs are obsolete.           Long payment IDs were not encrypted on the blockchain and would harm your privacy.           If the party you&apos;re sending to still requires a long payment ID, please notify them.</source>
         <translation>நீண்ட செலுத்தல் ID கள் வழக்கொழிந்த ஒன்றாகும். இவை கல்லேடில் மறையாக்கம் செய்யப்படுவதில்லை. ஆகையால் இவை தனியுரிமைக்குக் குந்தகம் விளைவிக்க வாய்ப்புள்ளது. நீங்கள் காசு அனுப்ப விரும்புவோர்க்கு நீண்ட செலுத்தல் ID தேவைப்பட்டால் இத்தகவலை அவருக்கு தெரியப்படுத்தவும்.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="859"/>
+        <location filename="../pages/Transfer.qml" line="836"/>
         <source>Send</source>
         <translation>அனுப்பு</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1025"/>
-        <location filename="../pages/Transfer.qml" line="1064"/>
+        <location filename="../pages/Transfer.qml" line="1002"/>
+        <location filename="../pages/Transfer.qml" line="1041"/>
         <source>Error</source>
         <translation>பிழை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1033"/>
+        <location filename="../pages/Transfer.qml" line="1010"/>
         <source>
 Confirmation message:
  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1070"/>
+        <location filename="../pages/Transfer.qml" line="1047"/>
         <source>Information</source>
         <translation>தகவல்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1014"/>
-        <location filename="../pages/Transfer.qml" line="1058"/>
-        <location filename="../pages/Transfer.qml" line="1104"/>
-        <location filename="../pages/Transfer.qml" line="1141"/>
+        <location filename="../pages/Transfer.qml" line="991"/>
+        <location filename="../pages/Transfer.qml" line="1035"/>
+        <location filename="../pages/Transfer.qml" line="1081"/>
+        <location filename="../pages/Transfer.qml" line="1118"/>
         <source>Please choose a file</source>
         <translation>கோப்பு ஒன்றைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
@@ -2795,94 +2730,94 @@ Confirmation message:
         <translation>இந்த பணப்பை பார்க்க மட்டுமே. &quot;முடக்கலைப் பரிமாற்ற கையொப்பமிடும்&quot; ஐ உபயோகித்து மட்டுமே காசுகளை அனுப்ப முடியும். திறவுகோல் படங்களை இறக்குமதி செய்யாத வரை உள்வரு பரிமாற்றங்கள் அல்லாது வெளிச்செல்லும் பரிமாற்றங்கள் மட்டுமே இருப்பில் காண் முடியும்.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="691"/>
+        <location filename="../pages/Transfer.qml" line="668"/>
         <source>Normal (x1 fee)</source>
         <translation>இயல்பான (x1 கட்டணம்)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="788"/>
+        <location filename="../pages/Transfer.qml" line="765"/>
         <source>Add description</source>
         <translation>விளக்கத்தைச் சேர்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="817"/>
+        <location filename="../pages/Transfer.qml" line="794"/>
         <source>Add payment ID</source>
         <translation>செலுத்தல் ID ஐ சேர்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="829"/>
+        <location filename="../pages/Transfer.qml" line="806"/>
         <source>64 hexadecimal characters</source>
         <translation>64 பதினறும எழுத்துக்கள்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="896"/>
+        <location filename="../pages/Transfer.qml" line="873"/>
         <source>Advanced options</source>
         <translation>மேம்பட்ட விருப்பங்கள்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="928"/>
+        <location filename="../pages/Transfer.qml" line="905"/>
         <source>Key images</source>
         <translation>திறவுகோல் படங்களை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="903"/>
-        <location filename="../pages/Transfer.qml" line="929"/>
+        <location filename="../pages/Transfer.qml" line="880"/>
+        <location filename="../pages/Transfer.qml" line="906"/>
         <source>Export</source>
         <translation>ஏற்றுமதி</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="909"/>
-        <location filename="../pages/Transfer.qml" line="935"/>
+        <location filename="../pages/Transfer.qml" line="886"/>
+        <location filename="../pages/Transfer.qml" line="912"/>
         <source>Import</source>
         <translation>இறக்குமதி</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="946"/>
+        <location filename="../pages/Transfer.qml" line="923"/>
         <source>Required for view-only wallets to display the real balance</source>
         <translation>உண்மையான இருப்பு விவரத்தைக் காண்பிக்கப் பார்க்க-மட்டும் பணப்பைகளுக்கு இது தேவை</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="944"/>
+        <location filename="../pages/Transfer.qml" line="921"/>
         <source>* To import, you must connect to a local node or a trusted remote node</source>
         <translation>* இறக்குமதி செய்ய, நீங்கள் உள் கணு அல்லது நம்பத்தகுந்த தொலைநிலை கணுவோடு இணைக்க வேண்டும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="950"/>
+        <location filename="../pages/Transfer.qml" line="927"/>
         <source>1. Using cold wallet, export the key images into a file</source>
         <translation>1. குளிர்-பணப்பையை உபயோகித்து திறவுகோல் படங்களை ஏற்றுமதி செய்யவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="951"/>
+        <location filename="../pages/Transfer.qml" line="928"/>
         <source>2. Using view-only wallet, import the key images file</source>
         <translation>2. பார்க்க-மட்டும் பணப்பையை உபயோகித்து திறவுகோல் படங்களை இறக்குமதி செய்யவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="958"/>
+        <location filename="../pages/Transfer.qml" line="935"/>
         <source>Offline transaction signing</source>
         <translation>முடக்கலைப் பரிமாற்ற கையொப்பமிடுதல்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="959"/>
+        <location filename="../pages/Transfer.qml" line="936"/>
         <source>Create</source>
         <translation>உருவாக்கு</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="968"/>
+        <location filename="../pages/Transfer.qml" line="945"/>
         <source>Sign (offline)</source>
         <translation>கையொப்பமிடு (முடக்கலையில்)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="974"/>
+        <location filename="../pages/Transfer.qml" line="951"/>
         <source>Submit</source>
         <translation>சமர்ப்பி</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="985"/>
+        <location filename="../pages/Transfer.qml" line="962"/>
         <source>Spend XMR from a cold (offline) wallet</source>
         <translation>XMR காசுகளைக் குளிர் (முடக்கலை) பணப்பையிலிருந்து செலவழிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="983"/>
+        <location filename="../pages/Transfer.qml" line="960"/>
         <source>* To create a transaction file, please enter address and amount above</source>
         <translation>* பரிமாற்ற கோப்பு ஒன்றைத் தயாரிக்க, முகவரி மற்றும் தொகையை மேலே உள்ளிடவும்</translation>
     </message>
@@ -2907,145 +2842,145 @@ Confirmation message:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="519"/>
+        <location filename="../pages/Transfer.qml" line="496"/>
         <source>Remove recipient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="576"/>
+        <location filename="../pages/Transfer.qml" line="553"/>
         <source>Add recipient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
+        <location filename="../pages/Transfer.qml" line="566"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="756"/>
+        <location filename="../pages/Transfer.qml" line="733"/>
         <source>fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="800"/>
+        <location filename="../pages/Transfer.qml" line="777"/>
         <source>only visible to you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="902"/>
+        <location filename="../pages/Transfer.qml" line="879"/>
         <source>Outputs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="916"/>
+        <location filename="../pages/Transfer.qml" line="893"/>
         <source>Required for cold wallets to sign their corresponding key images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="920"/>
-        <location filename="../pages/Transfer.qml" line="989"/>
+        <location filename="../pages/Transfer.qml" line="897"/>
+        <location filename="../pages/Transfer.qml" line="966"/>
         <source>1. Using view-only wallet, export the outputs into a file</source>
         <translation>1. பார்க்க-மட்டும் பணப்பையை உபயோகித்து வெளியீடுகளை ஒரு‌ கோப்பில் ஏற்றுமதி செய்யவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="921"/>
+        <location filename="../pages/Transfer.qml" line="898"/>
         <source>2. Using cold wallet, import the outputs file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="990"/>
+        <location filename="../pages/Transfer.qml" line="967"/>
         <source>2. Using cold wallet, import the outputs file and export the key images</source>
         <translation>2. குளிர்-பணப்பையை உபயோகித்து, வெளியீடுகளை இறக்குமதியும், திறவுகோல் படங்களை ஏற்றுமதியும் செய்யவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="991"/>
+        <location filename="../pages/Transfer.qml" line="968"/>
         <source>3. Using view-only wallet, import the key images file and create a transaction file</source>
         <translation>3. பார்க்க-மட்டும் பணப்பையை உபயோகித்து, திறவுகோல் படங்களை இறக்குமதி செய்து பரிமாற்ற கோப்பு ஒன்றை உருவாக்கவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="993"/>
+        <location filename="../pages/Transfer.qml" line="970"/>
         <source>4. Using cold wallet, sign your transaction file</source>
         <translation>4. குளிர்-பணப்பையை‌ உபயோகித்து உங்கள் பரிமாற்ற கோப்பை கையொப்பமிடவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="994"/>
+        <location filename="../pages/Transfer.qml" line="971"/>
         <source>5. Using view-only wallet, submit your signed transaction</source>
         <translation>5. பார்க்க-மட்டும் பணப்பையை உபயோகித்துக் கையொப்பமிட்ட உங்கள் பரிமாற்றத்தைச் சமர்ப்பிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1000"/>
+        <location filename="../pages/Transfer.qml" line="977"/>
         <source>Unmixable outputs</source>
         <translation>கலக்க முடியாத வெளியீடுகள்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1001"/>
+        <location filename="../pages/Transfer.qml" line="978"/>
         <source>Sweep</source>
         <translation>துடைத்தல்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1007"/>
+        <location filename="../pages/Transfer.qml" line="984"/>
         <source>Create a transaction that spends old unmovable outputs</source>
         <translation>பழைய அசையா வெளியீடுகளைச் செலவிடும் பரிமாற்றத்தை உருவாக்கவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1026"/>
+        <location filename="../pages/Transfer.qml" line="1003"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>கையொப்பமிடாத பரிமாற்றத்தை ஏற்ற முடியவில்லை: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1037"/>
+        <location filename="../pages/Transfer.qml" line="1014"/>
         <source>Confirmation</source>
         <translation>உறுதிப்படுத்தல்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1065"/>
+        <location filename="../pages/Transfer.qml" line="1042"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>பரிமாற்றத்தைச் சமர்ப்பிக்க முடியவில்லை: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1071"/>
+        <location filename="../pages/Transfer.qml" line="1048"/>
         <source>Monero sent successfully</source>
         <translation>மோனேரோ வெற்றிகரமாக அனுப்பப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1090"/>
+        <location filename="../pages/Transfer.qml" line="1067"/>
         <source>Outputs successfully exported to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1108"/>
+        <location filename="../pages/Transfer.qml" line="1085"/>
         <source>Outputs successfully imported to wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1126"/>
+        <location filename="../pages/Transfer.qml" line="1103"/>
         <source>Key images successfully exported to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1145"/>
+        <location filename="../pages/Transfer.qml" line="1122"/>
         <source>Key images successfully imported to wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1172"/>
+        <location filename="../pages/Transfer.qml" line="1149"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>பணப்பை மறைநிரலோடு இணைக்கப்படவில்லை.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1188"/>
+        <location filename="../pages/Transfer.qml" line="1165"/>
         <source>Wallet is connecting to daemon.</source>
         <translation>பணப்பை மறைநிரலோடு இணைக்கப்படுகிறது.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1194"/>
+        <location filename="../pages/Transfer.qml" line="1171"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>இணைக்கப்பட்ட மறைநிரல் வரைகலைப் பணிச்சூழல் (GUI) யோடு ஒத்துப்போக வில்லை.
 தயவு செய்து மறைநிரலை புதுப்பிக்கவும் அல்லது வேறொரு மறைநிரலோடு இணைக்கவும்</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="1199"/>
+        <location filename="../pages/Transfer.qml" line="1176"/>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation>மறைநிரல் ஒத்திசைவு முடிவடையக் காத்திருக்கிறது.</translation>
     </message>
@@ -3060,7 +2995,7 @@ Please upgrade or connect to another daemon</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="692"/>
+        <location filename="../pages/Transfer.qml" line="669"/>
         <source>Fast (x5 fee)</source>
         <translation>வேகமாக (x5 கட்டணம்)</translation>
     </message>
@@ -3256,6 +3191,34 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../pages/TxKey.qml" line="233"/>
         <source>Check</source>
         <translation>சரிபார்</translation>
+    </message>
+</context>
+<context>
+    <name>TxUtils</name>
+    <message>
+        <location filename="../js/TxUtils.js" line="83"/>
+        <source>No address found</source>
+        <translation type="unfinished">முகவரி எதுவும் கிடைக்கவில்லை</translation>
+    </message>
+    <message>
+        <location filename="../js/TxUtils.js" line="95"/>
+        <source>No valid address found at this OpenAlias address</source>
+        <translation type="unfinished">செல்லுபடியாகக் கூடிய முகவரி எதுவும் இந்த ஓப்பன் அளியாஸ் முகவரியில் கிடைக்கவில்லை</translation>
+    </message>
+    <message>
+        <location filename="../js/TxUtils.js" line="101"/>
+        <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
+        <translation type="unfinished">முகவரி கிடைத்துவிட்டது, ஆனால் DNSSEC கையொப்பங்களைச் சரிபார்க்க முடியவில்லை, அதனால் இம்முகவரி ஏமாற்றப்பட வாய்ப்புள்ளது</translation>
+    </message>
+    <message>
+        <location filename="../js/TxUtils.js" line="104"/>
+        <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../js/TxUtils.js" line="107"/>
+        <source>Internal error</source>
+        <translation type="unfinished">உள் பிழை</translation>
     </message>
 </context>
 <context>
@@ -3472,27 +3435,27 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="305"/>
+        <location filename="../wizard/WizardController.qml" line="319"/>
         <source>Please choose a file</source>
         <translation>கோப்பு ஒன்றைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="351"/>
+        <location filename="../wizard/WizardController.qml" line="367"/>
         <source>Failed to store the wallet</source>
         <translation>பணப்பையை‌ச் சேமிக்க முடியவில்லை</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="434"/>
+        <location filename="../wizard/WizardController.qml" line="454"/>
         <source>Please proceed to the device...</source>
         <translation>வன்பொருள் சாதனத்தில் தொடரவும்...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="438"/>
+        <location filename="../wizard/WizardController.qml" line="458"/>
         <source>Creating wallet from device...</source>
         <translation>பணப்பை வன்பொருள் சாதனத்தில் இருந்து உருவாக்கப்படுகிறது...</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardController.qml" line="439"/>
+        <location filename="../wizard/WizardController.qml" line="459"/>
         <source>
 
 Please check your hardware wallet –
@@ -3511,78 +3474,78 @@ your input may be required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>Create a new wallet</source>
         <translation>புதிய பணப்பையை உருவாக்கு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
         <source>stagenet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="80"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="81"/>
         <source>testnet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="83"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="84"/>
         <source>Using a hardware device.</source>
         <translation>வன்பொருள் சாதனத்தைக் கொண்டு.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="107"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="108"/>
         <source>Hardware wallet model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="121"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="122"/>
         <source>Create a new wallet from device.</source>
         <translation>வன்பொருள் சாதனத்தில் இருந்து ஒரு புதிய பணப்பையை உருவாக்கு.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="135"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
         <translation>வன்பொருள் சாதனத்தில் இருந்து பணப்பையை மீட்டமை. நீங்கள் உங்கள் வன்பொருள் சாதன பணப்பையை முன்பு உபயோகித்து இருந்தால் இதைத் தேர்வு செய்யவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="195"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>பணப்பையை உருவாக்கிய தேதி (இந்த வடிவத்தில் = வருடம்-மாதம்-நாள்) அல்லது மீட்டமை உயரம்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="198"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="201"/>
         <source>Restore height</source>
         <translation>மீட்டமை உயரம்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="209"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="212"/>
         <source>Advanced options</source>
         <translation>மேம்பட்ட விருப்பங்கள்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="219"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>துணைமுகவரி முன்னோக்கி (விரும்பினால்)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="226"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="287"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="229"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="290"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>வன்பொருள் சாதனத்தில் இருந்து பணப்பையை எழுதும்போது தோல்வி அடைந்தது. பயன்பாடு பதிவுகளைச் சரிபார்க்கவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="243"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="246"/>
         <source>Back to menu</source>
         <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="247"/>
         <source>Create wallet</source>
         <translation>பணப்பையை உருவாக்கு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="244"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="247"/>
         <source>Restore wallet</source>
         <translation>பணப்பையை மீட்டமை</translation>
     </message>
@@ -3590,80 +3553,201 @@ your input may be required.</source>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>Create a new wallet</source>
         <translation>ஒரு புதிய பணப்பையை உருவாக்கு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="65"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="68"/>
         <source>stagenet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="66"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
         <source>testnet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="69"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="72"/>
         <source>Creates a new wallet on this computer.</source>
         <translation>ஒரு புதிய பணப்பையை இந்த கணினியில் உருவாக்குகிறது.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="97"/>
-        <source>Mnemonic seed</source>
-        <translation>நினைவி விதை</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
-        <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>இந்த விதை &lt;b&gt;மிகவும்&lt;/b&gt; முக்கியமானது. ஆகையால் இதை மறவாமல் ஒரு புத்தகத்திலோ அல்லது காகிதத்திலோ கைப்பட எழுதி இரகசியமாக வையுங்கள். உங்கள் பணப்பையை காப்புப்பிரதி எடுத்து மீட்டெடுக்க இதுதான் தேவை.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="157"/>
-        <source>Wallet restore height</source>
-        <translation>பணப்பை மீட்டமை உயரம்</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="192"/>
-        <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation>எதிர்காலத்தில் உங்கள் பணப்பையை மீட்டமைக்க வேண்டும் என்றால், இந்த தொகுதி எண்ணைக் குறிப்பிடுவது உங்கள் பணப்பையை விரைவாக மீட்டமைக்கும்.</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="200"/>
+        <location filename="../wizard/WizardCreateWallet1.qml" line="93"/>
         <source>Back to menu</source>
         <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
 </context>
 <context>
-    <name>WizardCreateWallet3</name>
+    <name>WizardCreateWallet2</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="59"/>
-        <source>Daemon settings</source>
-        <translation>மறைநிரல் அமைப்புக்கள்</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="59"/>
+        <source>Verify your recovery phrase</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet3.qml" line="60"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>மோனேரோ வலையமைப்போடு தொடர்பு கொள்ள வேண்டும் என்றால் முதலில் உங்கள் பணப்பை ஒரு மோனேரோ கணுவோடு இணைக்கப்பட்டிருக்க வேண்டும். சிறந்த தனியுரிமைக்கு உங்கள் சொந்த கணுவை இயக்க பரிந்துரைக்கப்படுகிறது.</translation>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="61"/>
+        <source>Please confirm that you have written down your recover phrase by filling in the five blank fields with the correct words. If you have not written down your recovery phrase on a piece of paper, click on the Previous button and write it down right now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="87"/>
+        <source>Print this paper, fill it out, and keep it in a safe location. Never share your recovery phrase with anybody, especially with strangers offering technical support.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="88"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="234"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="239"/>
+        <source>Recovery phrase (mnemonic seed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="89"/>
+        <source>These words are are a backup of your wallet. They are the only thing needed to access your funds and restore your Monero wallet, so keep this paper in a safe place and do not disclose it to anybody! It is strongly not recommended to store your recovery phrase digitally (in an email, online service, screenshot, photo, or any other type of computer file).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="90"/>
+        <source>Wallet creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="91"/>
+        <source>Wallet restore height</source>
+        <translation type="unfinished">பணப்பை மீட்டமை உயரம்</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="92"/>
+        <source>For instructions on how to restore this wallet, visit www.getmonero.org and go to Resources &gt; User Guides &gt; &quot;How to restore a wallet from mnemonic seed&quot;. Use only Monero wallets that are trusted and recommended by the Monero community (see a list of them in www.getmonero.org/downloads).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="117"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="119"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="202"/>
+        <source>Write down your recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="136"/>
+        <source>A pencil writing on a piece of paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="154"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="162"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="204"/>
+        <source>These words are a backup of your wallet. Write these words down now on a piece of paper in the same order displayed. Keep this paper in a safe place and do not disclose it to anybody! Do not store these words digitally, always use a paper!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="177"/>
+        <source>Display recovery phrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="182"/>
+        <source>The next page will display your recovery phrase, also known as mnemonic seed. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>These words encode your private spend key in a human readable format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="236"/>
+        <source>It is expected that some words may be repeated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="269"/>
+        <source>New seed generated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="281"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="290"/>
+        <source>Create new seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="302"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="308"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">கிளிப்போர்டில் நகலெடுக்கவும்</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="305"/>
+        <source>Recovery phrase copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="319"/>
+        <source>Print a template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="320"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="325"/>
+        <source>Print a template to write down your seed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="350"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="353"/>
+        <source>Creation date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="384"/>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="389"/>
+        <source>Restore height</source>
+        <translation type="unfinished">மீட்டமை உயரம்</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="385"/>
+        <source>Enter this number when restoring the wallet to make your initial wallet synchronization faster.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WizardCreateWallet4</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="61"/>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
+        <source>Daemon settings</source>
+        <translation type="unfinished">மறைநிரல் அமைப்புக்கள்</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateWallet4.qml" line="60"/>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation type="unfinished">மோனேரோ வலையமைப்போடு தொடர்பு கொள்ள வேண்டும் என்றால் முதலில் உங்கள் பணப்பை ஒரு மோனேரோ கணுவோடு இணைக்கப்பட்டிருக்க வேண்டும். சிறந்த தனியுரிமைக்கு உங்கள் சொந்த கணுவை இயக்க பரிந்துரைக்கப்படுகிறது.</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet5</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="61"/>
         <source>You&apos;re all set up!</source>
-        <translation>எல்லாவற்றையும் முடித்து விட்டீர்கள்!</translation>
+        <translation type="unfinished">எல்லாவற்றையும் முடித்து விட்டீர்கள்!</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="62"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="62"/>
         <source>New wallet details:</source>
-        <translation>புதிய பணப்பை விவரங்கள்:</translation>
+        <translation type="unfinished">புதிய பணப்பையின் விவரங்கள்:</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet4.qml" line="70"/>
+        <location filename="../wizard/WizardCreateWallet5.qml" line="70"/>
         <source>Create wallet</source>
-        <translation>பணப்பையை உருவாக்கு</translation>
+        <translation type="unfinished">பணப்பையை உருவாக்கு</translation>
     </message>
 </context>
 <context>
@@ -3728,13 +3812,13 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="78"/>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>stagenet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="79"/>
-        <location filename="../wizard/WizardHome.qml" line="105"/>
+        <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>testnet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3744,52 +3828,52 @@ your input may be required.</source>
         <translation>முதல் முறையாக நீங்கள் மோனேரோவை பயன்படுத்துகிறீர்கள் என்றால் இந்த விருப்பத்தைத் தேர்வு செய்யவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="104"/>
+        <location filename="../wizard/WizardHome.qml" line="105"/>
         <source>Create a new wallet from hardware</source>
         <translation>வன்பொருள் சாதனத்தில் இருந்து ஒரு புதிய பணப்பையை உருவாக்குக</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="108"/>
+        <location filename="../wizard/WizardHome.qml" line="109"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
         <translation>புதிய மோனேரோ பணப்பையை உருவாக்க உங்கள் வன்பொருள் சாதன பணப்பையை இணைக்கவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="127"/>
+        <location filename="../wizard/WizardHome.qml" line="128"/>
         <source>Open a wallet from file</source>
         <translation>கோப்பில் இருந்து ஒரு பணப்பையைத் திறக்கவும்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="128"/>
+        <location filename="../wizard/WizardHome.qml" line="129"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>கணினியில் இருந்து தற்போதுள்ள பணப்பை கோப்பு (.keys என முடியும் கோப்பு) ஐ இறக்குமதி செய்யவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="147"/>
+        <location filename="../wizard/WizardHome.qml" line="148"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>திறவுகோல் அல்லது நினைவி விதை கொண்டு பணப்பையை மீட்டமைக்கவும்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="148"/>
+        <location filename="../wizard/WizardHome.qml" line="149"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
         <translation>பணப்பையை மீட்டமைக்க தனிப்பட்ட திறவுகோல்கள் அல்லது 25 எழுத்துக்கள் உள்ள நினைவி விதையை உள்ளிடவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="164"/>
+        <location filename="../wizard/WizardHome.qml" line="165"/>
         <source>Change wallet mode</source>
         <translation>பணப்பை பயன்முறையை மாற்றுக</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="179"/>
+        <location filename="../wizard/WizardHome.qml" line="180"/>
         <source>Advanced options</source>
         <translation>மேம்பட்ட விருப்பங்கள்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="202"/>
+        <location filename="../wizard/WizardHome.qml" line="203"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="224"/>
+        <location filename="../wizard/WizardHome.qml" line="225"/>
         <source>Number of KDF rounds:</source>
         <translation>KDF சுற்றுகளில் எண்ணிக்கை:</translation>
     </message>
@@ -3942,17 +4026,17 @@ your input may be required.</source>
 <context>
     <name>WizardNav</name>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="46"/>
+        <location filename="../wizard/WizardNav.qml" line="47"/>
         <source>Previous</source>
         <translation>முந்தையது</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="47"/>
+        <location filename="../wizard/WizardNav.qml" line="48"/>
         <source>Next</source>
         <translation>அடுத்தது</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardNav.qml" line="118"/>
+        <location filename="../wizard/WizardNav.qml" line="121"/>
         <source>Step (%1) of (%2)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3960,57 +4044,62 @@ your input may be required.</source>
 <context>
     <name>WizardOpenWallet1</name>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="75"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
         <source>Open a wallet from file</source>
         <translation>பணப்பை ஒன்றைக் கோப்பில் இருந்து திற</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="76"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="77"/>
         <source>Import an existing .keys wallet file from your computer.</source>
         <translation>கணினியில் இருந்து தற்போதுள்ள பணப்பை கோப்பு (.keys என முடியும் கோப்பு) ஐ இறக்குமதி செய்யவும்.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="94"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="95"/>
         <source>Recently opened</source>
         <translation>சமீபத்தில் திறந்தவை</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="166"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
         <source>Mainnet</source>
         <translation>முதன்மை வலை</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="167"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
         <source>Testnet</source>
         <translation>சோதனை வலை</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="168"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="169"/>
         <source>Stagenet</source>
         <translation>படி வலை</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="177"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
         <source>Mainnet wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="178"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
         <source>Testnet wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="179"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="180"/>
         <source>Stagenet wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
         <source>Browse filesystem</source>
         <translation>கோப்பு முறைமையை உலாவு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOpenWallet1.qml" line="332"/>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="334"/>
+        <source>Browse</source>
+        <translation type="unfinished">உலாவு</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="333"/>
         <source>Back to menu</source>
         <translation>பட்டிக்குத் திரும்பு</translation>
     </message>
@@ -4146,22 +4235,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="62"/>
+        <location filename="../wizard/WizardSummary.qml" line="63"/>
         <source>Restore height</source>
         <translation>மீட்டமை உயரம்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="70"/>
+        <location filename="../wizard/WizardSummary.qml" line="71"/>
         <source>Daemon address</source>
         <translation>மறைநிரல் முகவரி</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="77"/>
+        <location filename="../wizard/WizardSummary.qml" line="78"/>
         <source>Bootstrap address</source>
         <translation>இயக்கத்தொடக்க முகவரி</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="83"/>
+        <location filename="../wizard/WizardSummary.qml" line="84"/>
         <source>Network Type</source>
         <translation>வலையமைப்பு விதம்</translation>
     </message>
@@ -4169,42 +4258,43 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="70"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="78"/>
         <source>Wallet name is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="74"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="82"/>
         <source>Wallet name is invalid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
         <source>Wallet already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="88"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="96"/>
         <source>Wallet name</source>
         <translation>பணப்பையின் பெயர்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="154"/>
         <source>Wallet location is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="113"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="161"/>
         <source>Wallet location</source>
         <translation>பணப்பையின் இருப்பிடம்</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="131"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="186"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="194"/>
         <source>Browse</source>
         <translation>உலாவு</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="145"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="236"/>
         <source>Please choose a directory</source>
         <translation>ஒரு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்</translation>
     </message>
@@ -4212,9 +4302,9 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="953"/>
-        <location filename="../main.qml" line="1075"/>
-        <location filename="../main.qml" line="1690"/>
+        <location filename="../main.qml" line="967"/>
+        <location filename="../main.qml" line="1089"/>
+        <location filename="../main.qml" line="1712"/>
         <source>Error</source>
         <translation>பிழை</translation>
     </message>
@@ -4224,34 +4314,34 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>பணப்பையைத் திறக்க முடியவில்லை: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="714"/>
+        <location filename="../main.qml" line="722"/>
         <source>Waiting for daemon to stop...</source>
         <translation>மறைநிரல் நிற்பதற்காக காத்திருக்கிறது…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="748"/>
+        <location filename="../main.qml" line="756"/>
         <source>Daemon failed to start</source>
         <translation>மறைநிரலை துவக்க முடியவில்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="749"/>
+        <location filename="../main.qml" line="757"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>பிழைகளுக்கு உங்கள் பணப்பையை மற்றும் மறைநிரல் பதிவைச் சரிபார்க்கவும். நீங்கள் %1 ஐ கைமுறையாகத் தொடங்கவும் முயற்சி செய்யலாம்.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="817"/>
+        <location filename="../main.qml" line="831"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>பரிமாற்றத்தை உருவாக்க முடியவில்லை: தவறான மறைநிரல் பதிப்பு: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="819"/>
-        <location filename="../main.qml" line="911"/>
+        <location filename="../main.qml" line="833"/>
+        <location filename="../main.qml" line="925"/>
         <source>Can&apos;t create transaction: </source>
         <translation>பரிமாற்றத்தை உருவாக்க முடியவில்லை: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="826"/>
-        <location filename="../main.qml" line="917"/>
+        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="931"/>
         <source>No unmixable outputs to sweep</source>
         <translation>துடைக்க எந்த கலக்க முடியாத வெளியீடுகளும் இல்லை</translation>
     </message>
@@ -4261,7 +4351,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>பணப்பையை மூடுகிறது…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="661"/>
+        <location filename="../main.qml" line="668"/>
         <source>Waiting for daemon to sync</source>
         <translation>மறைநிரல் ஒத்திசைவு நிறைவடையக் காத்திருக்கிறது</translation>
     </message>
@@ -4292,224 +4382,231 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>பொருந்தாத பணப்பை தேக்ககத்தைச் சரிசெய்கிறது. பணப்பையை மீண்டும் ஒத்திசைக்கிறது.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="663"/>
+        <location filename="../main.qml" line="670"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>மறைநிரல் ஒத்திசைந்துவிட்டது (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="665"/>
+        <location filename="../main.qml" line="672"/>
         <source>Wallet is synchronized</source>
         <translation>பணப்பை ஒத்திசைந்துவிட்டது</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="765"/>
+        <location filename="../main.qml" line="762"/>
+        <source>
+
+Exiting p2pool. Please check that port 18083 is available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="779"/>
         <source>Daemon is synchronized</source>
         <translation>மறைநிரல் ஒத்திசைந்துவிட்டது</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
+        <location filename="../main.qml" line="880"/>
         <source>Creating transaction...</source>
         <translation>பரிமாற்றத்தை உருவாக்குகிறது…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="945"/>
+        <location filename="../main.qml" line="959"/>
         <source>Sending transaction ...</source>
         <translation>பரிமாற்றத்தை அனுப்புகிறது…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="973"/>
+        <location filename="../main.qml" line="987"/>
         <source>Failed to store the wallet</source>
         <translation>பணப்பையைச் சேமிக்க முடியவில்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1011"/>
+        <location filename="../main.qml" line="1025"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>கீழுள்ள காரணங்களால் சான்றை உற்பத்தி செய்ய இயலவில்லை: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1045"/>
-        <location filename="../main.qml" line="1064"/>
+        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1078"/>
         <source>Payment proof check</source>
         <translation>செலுத்தல் சான்று சரிபார்த்தல்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1048"/>
-        <location filename="../main.qml" line="1066"/>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1062"/>
+        <location filename="../main.qml" line="1080"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Bad signature</source>
         <translation>செல்லுபடியாகாத கையொப்பம்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1055"/>
+        <location filename="../main.qml" line="1069"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>இந்த முகவரி %2 உறுதிப்படுத்தல்(கள்) மூலம் %1 மோனேரோ காசுகளைப் பெற்றுள்ளது.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1066"/>
+        <location filename="../main.qml" line="1080"/>
         <source>Good signature</source>
         <translation>செல்லுபடியாகும் கையொப்பம்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1070"/>
+        <location filename="../main.qml" line="1084"/>
         <source>Reserve proof check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1072"/>
+        <location filename="../main.qml" line="1086"/>
         <source>Good signature on %1 total and %2 spent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1344"/>
+        <location filename="../main.qml" line="1359"/>
         <source>Desktop entry</source>
         <translation>திரைப்பலக உள்ளீடு</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1345"/>
+        <location filename="../main.qml" line="1360"/>
         <source>Would you like to register Monero GUI Desktop entry?</source>
         <translation>மோனேரோ வரைகலைப் பணிச்சூழல் (GUI) திரைபலக உள்ளீட்டைப் பதிவு செய்ய விரும்புகிறீர்களா?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1347"/>
+        <location filename="../main.qml" line="1362"/>
         <source>No</source>
         <translation>இல்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1348"/>
+        <location filename="../main.qml" line="1363"/>
         <source>Yes</source>
         <translation>ஆம்</translation>
     </message>
     <message>
         <location filename="../main.qml" line="141"/>
-        <location filename="../main.qml" line="1573"/>
-        <location filename="../main.qml" line="2243"/>
+        <location filename="../main.qml" line="1595"/>
+        <location filename="../main.qml" line="2265"/>
         <source>Wrong password</source>
         <translation>தவறான கடவுச்சொல்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Save transaction file</source>
         <translation>பரிமாற்ற கோப்பை சேமிக்கவும்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1583"/>
+        <location filename="../main.qml" line="1605"/>
         <source>Send transaction</source>
         <translation>பரிமாற்றத்தை அனுப்பு</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1640"/>
+        <location filename="../main.qml" line="1662"/>
         <source>Warning</source>
         <translation>எச்சரிக்கை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1643"/>
+        <location filename="../main.qml" line="1665"/>
         <source>Error: Filesystem is read only</source>
         <translation>பிழை: கோப்பு முறைமை படிக்க மட்டுமே</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1645"/>
+        <location filename="../main.qml" line="1667"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>எச்சரிக்கை: சாதனத்தில்‌ %1 GB மட்டுமே இடம் உள்ளது. கல்லேடு தரவுகளுக்கு %2 GB இடம் தேவைப்படுகிறது.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1647"/>
+        <location filename="../main.qml" line="1669"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>குறிப்பு: சாதனத்தில்‌ %1 GB அளவிற்கு இடம் உள்ளது. கல்லேடு தரவுகளுக்கு %2 GB இடம் தேவைப்படுகிறது.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1649"/>
+        <location filename="../main.qml" line="1671"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>குறிப்பு: lmdb கோப்புறை கிடைக்கவில்லை. புதிய கோப்புறை உருவாக்கப்படும்.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1687"/>
+        <location filename="../main.qml" line="1709"/>
         <source>Password changed successfully</source>
         <translation>கடவுச்சொல் வெற்றிகரமாக மாற்றப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1691"/>
+        <location filename="../main.qml" line="1713"/>
         <source>Error: </source>
         <translation>பிழை: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1782"/>
+        <location filename="../main.qml" line="1804"/>
         <source>Primary account</source>
         <translation>முதன்மை கணக்கு</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1974"/>
+        <location filename="../main.qml" line="1996"/>
         <source>Autosaved the wallet</source>
         <translation>பணப்பை தன்னியக்கமாகச் சேமிக்கப்பட்டது</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1976"/>
+        <location filename="../main.qml" line="1998"/>
         <source>Failed to autosave the wallet</source>
         <translation>பணப்பையை தன்னியக்கமாக சேமிக்க இயலவில்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2092"/>
+        <location filename="../main.qml" line="2114"/>
         <source>Local node is running</source>
         <translation>உள் கணு இயங்கிக்கொண்டிருக்கிறது</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2093"/>
+        <location filename="../main.qml" line="2115"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation>நீங்கள் உள் கணுவை நிறுத்த விரும்புகிறீர்களா? அல்லது பின்னணியில் இயங்க விடவா?</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2095"/>
+        <location filename="../main.qml" line="2117"/>
         <source>Force stop</source>
         <translation>கட்டாய நிறுத்தம் செய்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2096"/>
+        <location filename="../main.qml" line="2118"/>
         <source>Keep it running</source>
         <translation>இயக்கத்தில் வைக்கவும்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2116"/>
+        <location filename="../main.qml" line="2138"/>
         <source>Tap again to close...</source>
         <translation>மூட மீண்டும் தட்டவும்…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2131"/>
+        <location filename="../main.qml" line="2153"/>
         <source>Checking local node status...</source>
         <translation>உள் கணு நிலையைச் சரிபார்க்கிறது…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Save as file</source>
         <translation>கோப்பாக சேமி</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="850"/>
         <source>Confirm</source>
         <translation>உறுதிசெய்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="954"/>
+        <location filename="../main.qml" line="968"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>காசுகளை அனுப்ப முடியவில்லை: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1686"/>
+        <location filename="../main.qml" line="1708"/>
         <source>Information</source>
         <translation>தகவல்</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1052"/>
+        <location filename="../main.qml" line="1066"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>இந்த முகவரி %1 மோனேரோ வை பெற்றுள்ளது. ஆனால் இந்த பரிமாற்றம் இன்னும் தோண்டப்படவில்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1073"/>
         <source>This address received nothing</source>
         <translation>இந்த முகவரி எதையும் பெறவில்லை</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1742"/>
+        <location filename="../main.qml" line="1764"/>
         <source>Please wait...</source>
         <translation>தயவு செய்து காத்திருக்கவும்…</translation>
     </message>
