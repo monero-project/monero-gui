@@ -122,6 +122,8 @@ QVariant TransactionHistoryModel::parseTransactionInfo(const TransactionInfo &tI
         return tInfo.time();
     case TransactionDestinationsRole:
         return tInfo.destinations_formatted();
+    case TransactionDestinationAddressesRole:
+        return tInfo.destinationAddresses();
     default:
     {
         qCritical() << "Unimplemented role" << role;
@@ -175,6 +177,7 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     roleNames.insert(TransactionDateRole, "date");
     roleNames.insert(TransactionTimeRole, "time");
     roleNames.insert(TransactionDestinationsRole, "destinations");
+    roleNames.insert(TransactionDestinationAddressesRole, "destinationAddresses");
     return roleNames;
 }
 

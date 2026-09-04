@@ -33,6 +33,7 @@
 #include <QObject>
 #include <QDateTime>
 #include <QSet>
+#include <QStringList>
 
 class Transfer;
 
@@ -60,6 +61,7 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString paymentId READ paymentId)
     Q_PROPERTY(QString description READ description)
     Q_PROPERTY(QString destinations_formatted READ destinations_formatted)
+    Q_PROPERTY(QStringList destinationAddresses READ destinationAddresses)
 
 public:
     enum Direction {
@@ -94,6 +96,8 @@ public:
     //! only applicable for output transactions
     //! used in tx details popup
     QString destinations_formatted() const;
+    //! only applicable for output transactions
+    QStringList destinationAddresses() const;
 private:
     explicit TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *parent = 0);
 private:
