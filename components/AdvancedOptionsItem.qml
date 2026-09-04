@@ -14,14 +14,14 @@ RowLayout {
 
     RowLayout {
         id: titlecolumn
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-        Layout.preferredWidth: 195
-        Layout.maximumWidth: 195
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+        property var language: persistentSettings.language
+        Layout.preferredWidth: language == "Deutsch" ? 280 : language == "Español" ? 250 : language == "Français" ? 235 : 220
+        Layout.maximumWidth: language == "Deutsch" ? 280 : language == "Español" ? 250 : language == "Français" ? 235 : 220
         Layout.leftMargin: 10
 
-        MoneroComponents.Label {
+        MoneroComponents.TextPlain {
             id: title
-            fontSize: 14
             tooltipIconVisible: true
         }
 
