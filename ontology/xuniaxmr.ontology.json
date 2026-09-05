@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0.0",
+  "ontology": {
+    "apiName": "xuniaXmr",
+    "displayName": "XUNIA XMR Operations",
+    "description": "Governed operational digital twin for XUNIA XMR engineering, defensive security, release assurance, and GPT-Doug-LLM recommendations.",
+    "classification": "internal-operational"
+  },
+  "policies": {
+    "prohibitedProperties": [
+      "walletSeed",
+      "privateKey",
+      "spendKey",
+      "viewKey",
+      "mnemonic",
+      "accessToken",
+      "clientSecret",
+      "rawTransaction"
+    ],
+    "dataMinimization": "Store identifiers, redacted telemetry, hashes, status, and governance metadata only.",
+    "humanApprovalRequired": [
+      "promoteRelease",
+      "acceptAgentRecommendation",
+      "closeSecurityFinding"
+    ]
+  },
+  "objectTypes": [
+    {
+      "apiName": "xuniaRepository",
+      "displayName": "Repository",
+      "primaryKey": "repositoryId",
+      "properties": {
+        "repositoryId": "string",
+        "name": "string",
+        "defaultBranch": "string",
+        "commitSha": "string",
+        "updatedAt": "timestamp",
+        "healthStatus": "string"
+      }
+    },
+    {
+      "apiName": "xuniaBuild",
+      "displayName": "Build",
+      "primaryKey": "buildId",
+      "properties": {
+        "buildId": "string",
+        "repositoryId": "string",
+        "commitSha": "string",
+        "platform": "string",
+        "status": "string",
+        "startedAt": "timestamp",
+        "completedAt": "timestamp",
+        "artifactSha256": "string"
+      }
+    },
+    {
+      "apiName": "xuniaRelease",
+      "displayName": "Release",
+      "primaryKey": "releaseId",
+      "properties": {
+        "releaseId": "string",
+        "buildId": "string",
+        "version": "string",
+        "channel": "string",
+        "status": "string",
+        "approvedBy": "string",
+        "publishedAt": "timestamp"
+      }
+    },
+    {
+      "apiName": "xuniaSecurityFinding",
+      "displayName": "Security Finding",
+      "primaryKey": "findingId",
+      "properties": {
+        "findingId": "string",
+        "repositoryId": "string",
+        "category": "string",
+        "severity": "string",
+        "status": "string",
+        "ruleId": "string",
+        "locationRedacted": "string",
+        "detectedAt": "timestamp",
+        "resolvedAt": "timestamp"
+      }
+    },
+    {
+      "apiName": "xuniaWalletHealth",
+      "displayName": "Wallet Health",
+      "primaryKey": "walletHealthId",
+      "properties": {
+        "walletHealthId": "string",
+        "walletAlias": "string",
+        "network": "string",
+        "syncHeight": "long",
+        "daemonHeight": "long",
+        "connectionStatus": "string",
+        "observedAt": "timestamp"
+      }
+    },
+    {
+      "apiName": "xuniaNodeHealth",
+      "displayName": "Node Health",
+      "primaryKey": "nodeHealthId",
+      "properties": {
+        "nodeHealthId": "string",
+        "nodeAlias": "string",
+        "network": "string",
+        "height": "long",
+        "peerCount": "integer",
+        "latencyMs": "integer",
+        "status": "string",
+        "observedAt": "timestamp"
+      }
+    },
+    {
+      "apiName": "xuniaAgentRun",
+      "displayName": "GPT Doug Agent Run",
+      "primaryKey": "agentRunId",
+      "properties": {
+        "agentRunId": "string",
+        "repositoryId": "string",
+        "taskType": "string",
+        "modelPolicy": "string",
+        "inputClassification": "string",
+        "status": "string",
+        "startedAt": "timestamp",
+        "completedAt": "timestamp",
+        "recommendationCount": "integer"
+      }
+    },
+    {
+      "apiName": "xuniaAgentRecommendation",
+      "displayName": "Agent Recommendation",
+      "primaryKey": "recommendationId",
+      "properties": {
+        "recommendationId": "string",
+        "agentRunId": "string",
+        "category": "string",
+        "summary": "string",
+        "riskLevel": "string",
+        "decision": "string",
+        "decidedBy": "string",
+        "decidedAt": "timestamp"
+      }
+    }
+  ],
+  "linkTypes": [
+    {
+      "apiName": "repositoryHasBuilds",
+      "from": "xuniaRepository",
+      "to": "xuniaBuild",
+      "cardinality": "ONE_TO_MANY",
+      "fromProperty": "repositoryId",
+      "toProperty": "repositoryId"
+    },
+    {
+      "apiName": "buildProducesRelease",
+      "from": "xuniaBuild",
+      "to": "xuniaRelease",
+      "cardinality": "ONE_TO_MANY",
+      "fromProperty": "buildId",
+      "toProperty": "buildId"
+    },
+    {
+      "apiName": "repositoryHasFindings",
+      "from": "xuniaRepository",
+      "to": "xuniaSecurityFinding",
+      "cardinality": "ONE_TO_MANY",
+      "fromProperty": "repositoryId",
+      "toProperty": "repositoryId"
+    },
+    {
+      "apiName": "repositoryHasAgentRuns",
+      "from": "xuniaRepository",
+      "to": "xuniaAgentRun",
+      "cardinality": "ONE_TO_MANY",
+      "fromProperty": "repositoryId",
+      "toProperty": "repositoryId"
+    },
+    {
+      "apiName": "agentRunProducesRecommendations",
+      "from": "xuniaAgentRun",
+      "to": "xuniaAgentRecommendation",
+      "cardinality": "ONE_TO_MANY",
+      "fromProperty": "agentRunId",
+      "toProperty": "agentRunId"
+    }
+  ],
+  "actionTypes": [
+    {
+      "apiName": "recordBuildResult",
+      "target": "xuniaBuild",
+      "effect": "CREATE_OR_UPDATE",
+      "approval": "AUTOMATED_CI"
+    },
+    {
+      "apiName": "recordSecurityFinding",
+      "target": "xuniaSecurityFinding",
+      "effect": "CREATE_OR_UPDATE",
+      "approval": "AUTOMATED_SCANNER"
+    },
+    {
+      "apiName": "promoteRelease",
+      "target": "xuniaRelease",
+      "effect": "UPDATE",
+      "approval": "HUMAN_REQUIRED"
+    },
+    {
+      "apiName": "recordHealthObservation",
+      "target": "xuniaNodeHealth",
+      "effect": "CREATE",
+      "approval": "AUTOMATED_MONITOR"
+    },
+    {
+      "apiName": "acceptAgentRecommendation",
+      "target": "xuniaAgentRecommendation",
+      "effect": "UPDATE",
+      "approval": "HUMAN_REQUIRED"
+    }
+  ]
+}
