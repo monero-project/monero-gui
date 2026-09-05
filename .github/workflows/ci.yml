@@ -1,0 +1,30 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ontology:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate ontology contract
+        run: python3 scripts/validate_ontology.py
+  cmake-configure:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install configure dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build pkg-config qtbase5-dev qtdeclarative5-dev libqt5svg5-dev libssl-dev libunbound-dev libzmq3-dev libsodium-dev libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libgcrypt20-dev libboost-all-dev
+      - name: Configure
+        run: cmake -S . -B build/ci -G Ninja -D CMAKE_BUILD_TYPE=Release -D QML_TESTS=OFF -D WITH_SCANNER=OFF -D MANUAL_SUBMODULES=OFF
+      - name: Build
+        run: cmake --build build/ci --parallel 2
