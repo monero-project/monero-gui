@@ -1,0 +1,39 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/validate_ontology.py
+  source-release:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Create reproducible source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME:-manual-${GITHUB_RUN_NUMBER}}"
+          git archive --format=tar.gz --prefix="xuniaxmr-${version}/" -o "xuniaxmr-${version}.tar.gz" HEAD
+          sha256sum "xuniaxmr-${version}.tar.gz" > "xuniaxmr-${version}.tar.gz.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xuniaxmr-source
+          path: |
+            xuniaxmr-*.tar.gz
+            xuniaxmr-*.sha256
+          if-no-files-found: error
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" xuniaxmr-*.tar.gz xuniaxmr-*.sha256 --generate-notes --verify-tag
