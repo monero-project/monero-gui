@@ -1,0 +1,31 @@
+name: Foundry Ontology Gate
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "ontology/**"
+      - "scripts/foundry_check.py"
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/validate_ontology.py
+  live-foundry:
+    needs: contract
+    runs-on: ubuntu-latest
+    environment: foundry-production
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify OAuth and live Ontology object types
+        env:
+          FOUNDRY_STACK_URL: ${{ vars.FOUNDRY_STACK_URL }}
+          FOUNDRY_ONTOLOGY: ${{ vars.FOUNDRY_ONTOLOGY }}
+          FOUNDRY_TOKEN_URL: ${{ vars.FOUNDRY_TOKEN_URL }}
+          FOUNDRY_CLIENT_ID: ${{ secrets.FOUNDRY_CLIENT_ID }}
+          FOUNDRY_CLIENT_SECRET: ${{ secrets.FOUNDRY_CLIENT_SECRET }}
+        run: python3 scripts/foundry_check.py
