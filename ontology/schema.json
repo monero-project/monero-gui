@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "XUNIA XMR Ontology Contract",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "ontology",
+    "policies",
+    "objectTypes",
+    "linkTypes",
+    "actionTypes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "ontology": {
+      "type": "object",
+      "required": [
+        "apiName",
+        "displayName",
+        "classification"
+      ]
+    },
+    "policies": {
+      "type": "object",
+      "required": [
+        "prohibitedProperties",
+        "humanApprovalRequired"
+      ]
+    },
+    "objectTypes": {
+      "type": "array",
+      "minItems": 1
+    },
+    "linkTypes": {
+      "type": "array"
+    },
+    "actionTypes": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": false
+}
