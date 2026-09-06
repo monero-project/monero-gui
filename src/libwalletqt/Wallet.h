@@ -65,6 +65,7 @@ class Wallet : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
+    Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
     Q_PROPERTY(bool refreshing READ refreshing NOTIFY refreshingChanged)
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
@@ -411,6 +412,7 @@ signals:
     void connectionStatusChanged(int status) const;
     void currentSubaddressAccountChanged() const;
     void disconnectedChanged() const;
+    void initializingChanged() const;
     void proxyAddressChanged() const;
     void refreshingChanged() const;
 
@@ -447,6 +449,7 @@ private:
         PendingTransaction::Priority priority);
 
     bool disconnected() const;
+    bool initializing() const;
     bool refreshing() const;
     void refreshingSet(bool value);
     void setConnectionStatus(ConnectionStatus value);

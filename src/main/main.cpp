@@ -294,7 +294,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QCommandLineOption disableCheckUpdatesOption("disable-check-updates", "Disable automatic check for updates.");
     parser.addOption(disableCheckUpdatesOption);
-    QCommandLineOption socksProxyOption("socks5-proxy", "Enable socks5 proxy. Used for remote node connection (advanced mode), updates downloading and fetching price sources.", "address:port");
+    QCommandLineOption socksProxyOption("socks5-proxy", "Enable socks5 proxy. Used for remote node connections, updates downloading and fetching price sources.", "address:port");
     parser.addOption(socksProxyOption);
     QCommandLineOption testQmlOption("test-qml");
     testQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);

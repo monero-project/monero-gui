@@ -37,6 +37,7 @@ import "../../components/effects" as MoneroEffects
 Rectangle{
     color: "transparent"
     Layout.fillWidth: true
+    enabled: !appWindow.currentWallet || !appWindow.currentWallet.initializing
     property alias nodeHeight: root.height
 
     /* main layout */
@@ -139,7 +140,6 @@ Rectangle{
                 anchors.fill: parent
                 enabled: persistentSettings.useRemoteNode
                 onClicked: {
-                    persistentSettings.useRemoteNode = false;
                     appWindow.disconnectRemoteNode();
                 }
             }

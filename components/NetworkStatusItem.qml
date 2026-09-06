@@ -54,13 +54,13 @@ Rectangle {
                     return qsTr("Synchronizing");
                 if (persistentSettings.useRemoteNode && persistentSettings.allowRemoteNodeMining && appWindow.isMining)
                     return qsTr("Remote node") + " + " + qsTr("Mining");
-                if (persistentSettings.useRemoteNode)
+                if (appWindow.walletMode === 0 || persistentSettings.useRemoteNode)
                     return qsTr("Remote node");
                 return appWindow.isMining ? qsTr("Connected") + " + " + qsTr("Mining"): qsTr("Connected");
             case Wallet.ConnectionStatus_WrongVersion:
                 return qsTr("Wrong version");
             case Wallet.ConnectionStatus_Disconnected:
-                if (appWindow.walletMode <= 1) {
+                if (appWindow.walletMode === 0) {
                     return qsTr("Searching node") + translationManager.emptyString;
                 }
                 return qsTr("Disconnected");
@@ -162,6 +162,7 @@ Rectangle {
             }
 
             MoneroComponents.TextPlain {
+                id: switchNodeIcon
                 anchors.left: statusTextVal.right
                 anchors.leftMargin: 16
                 anchors.verticalCenter: parent.verticalCenter
@@ -169,15 +170,17 @@ Rectangle {
                 font.family: FontAwesome.fontFamilySolid
                 font.pixelSize: 24
                 font.styleName: "Solid"
-                opacity: 0.85
                 text: FontAwesome.random
                 themeTransition: false
                 tooltip: qsTr("Switch to another public remote node") + translationManager.emptyString;
                 visible: (
-                    !appWindow.disconnected &&
-                    !persistentSettings.useRemoteNode &&
-                    (persistentSettings.bootstrapNodeAddress == "auto" || persistentSettings.walletMode < 2)
+                    (appWindow.walletMode === 0 && appWindow.currentWallet != undefined) ||
+                    (!appWindow.disconnected && !persistentSettings.useRemoteNode &&
+                     appWindow.walletMode >= 2 && persistentSettings.bootstrapNodeAddress == "auto")
                 )
+
+                enabled: appWindow.walletMode !== 0 || (appWindow.currentWallet != undefined && !appWindow.currentWallet.initializing)
+                opacity: enabled ? 0.85 : 0.5
 
                 MouseArea {
                     id: refreshMouseArea
@@ -188,6 +191,13 @@ Rectangle {
                     onEntered: parent.tooltipPopup.open()
                     onExited: parent.tooltipPopup.close()
                     onClicked: {
+                        if (appWindow.walletMode === 0) {
+                            if (appWindow.switchSimpleModeNode(false)) {
+                                appWindow.showStatusMessage(qsTr("Switching to another public node") + "…", 3);
+                            }
+                            return;
+                        }
+
                         const callback = function(result) {
                             refreshMouseArea.visible = true;
                             if (result) {

@@ -274,7 +274,7 @@ Rectangle {
                 persistentSettings.proxyEnabled = !persistentSettings.proxyEnabled;
             }
             text: qsTr("Socks5 proxy (%1%2)")
-                .arg(appWindow.walletMode >= 2 ? qsTr("remote node connections, ") : "")
+                .arg(qsTr("remote node connections, "))
                 .arg(qsTr("updates downloading, fetching price sources")) + translationManager.emptyString
         }
 
