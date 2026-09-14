@@ -1605,11 +1605,8 @@ ApplicationWindow {
 
         function applyRemoteNode(index) {
             selected = index;
-            const remoteNode = currentRemoteNode();
             persistentSettings.useRemoteNode = true;
             if (currentWallet) {
-                currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
-                currentWallet.setTrustedDaemon(remoteNode.trusted);
                 appWindow.connectRemoteNode();
             }
         }

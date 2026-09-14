@@ -432,6 +432,8 @@ private:
     //! initializes wallet
     bool init(
         const QString &daemonAddress,
+        const QString &daemonUsername,
+        const QString &daemonPassword,
         bool trustedDaemon,
         quint64 upperTransactionLimit,
         bool isRecovering,
