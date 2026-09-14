@@ -225,6 +225,10 @@ signature_rsa signature_rsa::from_buffer(const epee::span<const uint8_t> input)
   }
 
   const auto hash_algorithm = buffer.read_big_endian<uint8_t>();
+  if (hash_algorithm != openpgp::hash::algorithm::sha256)
+  {
+    throw std::runtime_error("unsupported signature hash algorithm");
+  }
 
   const auto hashed_data_length = buffer.read_big_endian<uint16_t>();
   std::vector<uint8_t> hashed_data = buffer.read(hashed_data_length);
@@ -294,6 +298,10 @@ std::vector<uint8_t> signature_rsa::hash_asn_object_id() const
   if (gcry_md_algo_info(m_hash_algorithm, GCRYCTL_GET_ASNOID, nullptr, &size) != GPG_ERR_NO_ERROR)
   {
     throw std::runtime_error("failed to get ASN.1 Object Identifier (OID) size");
+  }
+  if (size == 0)
+  {
+    throw std::runtime_error("hash algorithm has no ASN.1 Object Identifier (OID)");
   }
 
   std::vector<uint8_t> asn_object_id(size);
