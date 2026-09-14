@@ -1545,7 +1545,7 @@ ApplicationWindow {
             } else {
                 const remoteAddress = remoteNodesModel.currentRemoteNode().address;
                 // skip proxy when using localhost remote node
-                if (remoteAddress.startsWith("127.0.0.1:") || remoteAddress.startsWith("localhost:")) {
+                if (/^(127\.0\.0\.1|localhost):[0-9]+$/i.test(remoteAddress)) {
                     return "";
                 } else {
                     return getProxyAddress();
