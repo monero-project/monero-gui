@@ -44,7 +44,10 @@ file(GLOB SOURCE_FILES
     "qt/*.cpp"
 )
 if(APPLE)
-    list(APPEND SOURCE_FILES "qt/macoshelper.mm")
+    list(APPEND SOURCE_FILES "qt/macoshelper.mm" "qt/macostrayicon.mm")
+    set_source_files_properties("qt/macostrayicon.mm" PROPERTIES COMPILE_FLAGS "-fobjc-arc")
+else()
+    list(FILTER SOURCE_FILES EXCLUDE REGEX "qt/macostrayicon\\.h$")
 endif()
 
 set(EXECUTABLE_FLAG)

@@ -74,6 +74,7 @@
 #include "qt/NetworkAccessBlockingFactory.h"
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
+#include "qt/macostrayicon.h"
 #endif
 
 // IOS exclusions
@@ -455,6 +456,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
+#ifdef Q_OS_MAC
+    MacOSTrayIcon macOSTrayIcon;
+    engine.rootContext()->setContextProperty("macOSTrayIcon", &macOSTrayIcon);
+#endif
 
     engine.addImportPath(":/fonts");
 
