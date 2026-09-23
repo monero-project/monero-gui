@@ -66,7 +66,7 @@ Rectangle {
                 id: wizardNav
                 progressSteps: appWindow.walletMode <= 1 ? 4 : 5
                 progress: 2
-                btnNext.enabled: passwordFields.calcStrengthAndVerify();
+                btnNext.enabled: passwordFields.passwordsMatch();
                 onPrevClicked: {
                     if(wizardController.walletOptionsIsRecoveringFromDevice){
                         wizardStateView.state = "wizardCreateDevice1";

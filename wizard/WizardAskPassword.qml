@@ -39,48 +39,15 @@ ColumnLayout {
     Layout.fillWidth: true
     property alias password: passwordInput.text
     property alias passwordConfirm: passwordInputConfirm.text
-    property int passwordFill: 0
-    property string passwordStrengthText: qsTr("Strength: ") + translationManager.emptyString
+    property alias passwordFill: passwordStrengthBar.passwordFill
+    property alias passwordStrengthText: passwordStrengthBar.passwordStrengthText
 
-    function calcStrengthAndVerify(){
-        calcPasswordStrength();
+    function passwordsMatch(){
         return passwordInput.text === passwordInputConfirm.text;
     }
 
     function calcPasswordStrength() {
-        if(!progressLayout.visible) return;
-        if(passwordInput.text.length <= 1){
-            root.passwordFill = 0;
-            progressText.text = passwordStrengthText + qsTr("Low") + translationManager.emptyString;
-        }
-
-        // scorePassword returns value from 0 to... lots
-        var strength = walletManager.getPasswordStrength(passwordInput.text);
-        // consider anything below 10 bits as dire
-        strength -= 10
-        if (strength < 0)
-          strength = 0;
-        // use a slight parabola to discourage short passwords
-        strength = strength ^ 1.2 / 3
-        strength += 20;
-        if (strength > 100)
-          strength = 100;
-
-        root.passwordFill = strength;
-
-        var strengthString;
-        if(strength <= 33){
-            strengthString = qsTr("Low");
-            fillRect.color = "#FF0000";
-        } else if(strength <= 66){
-            strengthString = qsTr("Medium");
-            fillRect.color = (MoneroComponents.Style.blackTheme ? "#FFFF00" : "#FFCC00");
-        } else {
-            strengthString = qsTr("High");
-            fillRect.color = (MoneroComponents.Style.blackTheme ? "#00FF00" : "#008000");
-        }
-
-        progressText.text = passwordStrengthText + strengthString + translationManager.emptyString;
+        passwordStrengthBar.calcPasswordStrength();
     }
 
     spacing: 20
@@ -106,52 +73,11 @@ ColumnLayout {
             labelText: qsTr("Password") + translationManager.emptyString
         }
 
-        ColumnLayout {
-            id: progressLayout
-            spacing: 0
-            visible: !isAndroid && walletManager.getPasswordStrength !== undefined
+        MoneroComponents.PasswordStrengthBar {
+            id: passwordStrengthBar
             Layout.fillWidth: true
             Layout.topMargin: 0
-
-            TextInput {
-                id: progressText
-                Layout.topMargin: 6
-                Layout.bottomMargin: 6
-                font.family: MoneroComponents.Style.fontMedium.name
-                font.pixelSize: 14
-                font.bold: false
-                color: MoneroComponents.Style.defaultFontColor
-                height: 18
-                passwordCharacter: "*"
-            }
-
-            Rectangle {
-                id: bar
-                Layout.fillWidth: true
-                Layout.preferredHeight: 8
-
-                radius: 8
-                color: MoneroComponents.Style.progressBarBackgroundColor
-
-                Rectangle {
-                    id: fillRect
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    height: bar.height
-                    property int maxWidth: bar.width
-                    width: (maxWidth * root.passwordFill) / 100
-                    radius: 8
-                    color: "#FF0000"
-                }
-
-                Rectangle {
-                    color: MoneroComponents.Style.defaultFontColor
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.leftMargin: 8
-                }
-            }
+            password: passwordInput.text
         }
     }
 
