@@ -47,6 +47,22 @@ Rectangle {
     property var seedArray: wizardController.walletOptionsSeed.split(" ")
     property var seedListGrid: ""
     property var hiddenWords: [0, 5, 10, 15, 20]
+    //Expose the regenerate function so other pages can use it
+    property var regenerateSeed: function() {
+        wizardController.restart(true);
+        wizardController.createWallet();
+        wizardCreateWallet2.seedArray = wizardController.walletOptionsSeed.split(" ");
+
+        var oldSeedListGrid = wizardCreateWallet2.seedListGrid;
+        wizardCreateWallet2.seedListGrid = null;
+        if (oldSeedListGrid) {
+            oldSeedListGrid.destroy();
+        }
+        //Do not call the timer in other pages to avoid some edge case UI bug
+        if (wizardStateView.state === "wizardCreateWallet2") {
+            checkSeedListGridDestruction.start();
+        }
+    }
 
     Clipboard { id: clipboard }
 
@@ -264,13 +280,16 @@ Rectangle {
                     id: checkSeedListGridDestruction
                     interval: 100; running: false; repeat: true
                     onTriggered: {
-                        if (!wizardCreateWallet2.seedListGrid) {
-                            var newSeedListGrid = Qt.createComponent("SeedListGrid.qml");
-                            wizardCreateWallet2.seedListGrid = newSeedListGrid.createObject(seedListGridColumn);
-                            appWindow.showStatusMessage(qsTr("New seed generated"),3);
-                            pageRoot.forceActiveFocus();
+                        if (wizardStateView.state !== "wizardCreateWallet2" || wizardCreateWallet2.seedListGrid) {
                             checkSeedListGridDestruction.stop();
+                            return;
                         }
+
+                        var newSeedListGrid = Qt.createComponent("SeedListGrid.qml");
+                        wizardCreateWallet2.seedListGrid = newSeedListGrid.createObject(seedListGridColumn);
+                        appWindow.showStatusMessage(qsTr("New seed generated"),3);
+                        pageRoot.forceActiveFocus();
+                        checkSeedListGridDestruction.stop();
                     }
                 }
 
@@ -280,13 +299,7 @@ Rectangle {
                     small: true
                     primary: false
                     text: qsTr("Create new seed") + translationManager.emptyString
-                    onClicked: {
-                        wizardController.restart(true);
-                        wizardController.createWallet();
-                        wizardCreateWallet2.seedArray = wizardController.walletOptionsSeed.split(" ")
-                        wizardCreateWallet2.seedListGrid.destroy();
-                        checkSeedListGridDestruction.start();
-                    }
+                    onClicked: wizardCreateWallet2.regenerateSeed()
                     Accessible.role: Accessible.Button
                     Accessible.name: qsTr("Create new seed") + translationManager.emptyString
                     KeyNavigation.up: (wizardCreateWallet2.seedListGrid && seedListGridColumn.children[0]) ? seedListGridColumn.children[0].children[24] : recoveryPhraseLabel
