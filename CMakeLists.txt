@@ -17,7 +17,7 @@ option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(WITH_DESKTOP_ENTRY "Ask to install desktop entry on first startup" ON)
 option(WITH_UPDATER "Regularly check for new updates" ON)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
-cmake_dependent_option(QML_TESTS "Build QML tests" ON "NOT STATIC;NOT ANDROID;NOT IOS" OFF)
+cmake_dependent_option(QML_TESTS "Build QML tests" OFF "NOT STATIC;NOT ANDROID;NOT IOS" OFF)
 option(SKIP_OPTIONAL_MONERO_BINARIES "Don't build optional monero binaries" ON)
 
 if(DEV_MODE)

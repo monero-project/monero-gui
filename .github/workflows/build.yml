@@ -18,7 +18,7 @@ jobs:
     - name: install dependencies
       run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi ninja openssl zmq libsodium unbound protobuf qt5 pkg-config
     - name: build
-      run: DEV_MODE=ON make release
+      run: DEV_MODE=ON QML_TESTS=ON make release
     - name: test qml
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
@@ -42,7 +42,7 @@ jobs:
     - name: install monero gui dependencies
       run: sudo apt -y install qtbase5-dev qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qml-module-qttest qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
     - name: build
-      run: DEV_MODE=ON make release
+      run: DEV_MODE=ON QML_TESTS=ON make release
     - name: test qml
       run: xvfb-run -a build/release/bin/monero-wallet-gui --test-qml
 
@@ -66,7 +66,7 @@ jobs:
         cp -f "$MSYSTEM_PREFIX/bin/qmake-qt5.exe" "$MSYSTEM_PREFIX/bin/qmake.exe"
         cp -f "$MSYSTEM_PREFIX/bin/windeployqt-qt5.exe" "$MSYSTEM_PREFIX/bin/windeployqt.exe"
     - name: build
-      run: DEV_MODE=ON make release-win64
+      run: DEV_MODE=ON QML_TESTS=ON make release-win64
     - name: deploy
       run: cmake --build . --target deploy
       working-directory: build/release
@@ -106,8 +106,8 @@ jobs:
     - name: deploy
       run: cmake --build . --target deploy
       working-directory: build
-    - name: test qml
-      run: build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
+    - name: check qml startup
+      run: build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --check-qml
     - name: create .tar
       run: tar -cf monero-wallet-gui.tar monero-wallet-gui.app
       working-directory: build/bin
@@ -132,8 +132,8 @@ jobs:
       run: docker run --rm -v /home/runner/work/monero-gui/monero-gui:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static'
     - name: sha256sum
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui
-    - name: test qml
-      run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui --test-qml
+    - name: check qml startup
+      run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/release/bin/monero-wallet-gui --check-qml
     - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}

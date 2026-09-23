@@ -296,10 +296,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     parser.addOption(disableCheckUpdatesOption);
     QCommandLineOption socksProxyOption("socks5-proxy", "Enable socks5 proxy. Used for remote node connection (advanced mode), updates downloading and fetching price sources.", "address:port");
     parser.addOption(socksProxyOption);
-    QCommandLineOption testQmlOption("test-qml");
-    testQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);
+    QCommandLineOption checkQmlOption("check-qml");
+    checkQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser.addOption(logPathOption);
-    parser.addOption(testQmlOption);
+    parser.addOption(checkQmlOption);
     parser.addHelpOption();
     parser.process(app);
 
@@ -557,7 +557,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     }
 
     // QML loaded successfully.
-    if (parser.isSet(testQmlOption))
+    if (parser.isSet(checkQmlOption))
         return 0;
 
 #ifdef WITH_SCANNER
