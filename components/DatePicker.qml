@@ -327,6 +327,7 @@ Item {
                                 if(dayArea.pressed || styleData.visibleMonth) return true;
                                 return false;
                             }
+                            font.underline: styleData.date.toDateString() === (new Date()).toDateString()
                             text: styleData.date.getDate()
                             themeTransition: false
                             color: {
@@ -344,7 +345,6 @@ Item {
                                   }
                               }
                               if(!styleData.valid) return "transparent"
-                              if(styleData.date.toDateString() === (new Date()).toDateString()) return "#FFFF00"
                               if(!styleData.visibleMonth) return MoneroComponents.Style.lightGreyFontColor
                               if(dayArea.pressed) return MoneroComponents.Style.defaultFontColor
                               return MoneroComponents.Style.defaultFontColor
