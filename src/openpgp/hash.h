@@ -28,6 +28,7 @@
 
 #pragma once
 
+#include <stdexcept>
 #include <vector>
 
 #include <gcrypt.h>
@@ -51,6 +52,11 @@ public:
     : algo(algorithm)
     , consumed(0)
   {
+    if (gcry_md_test_algo(algo) != GPG_ERR_NO_ERROR)
+    {
+      throw std::runtime_error("unsupported hash algorithm");
+    }
+
     if (gcry_md_open(&md, algo, 0) != GPG_ERR_NO_ERROR)
     {
       throw std::runtime_error("failed to create message digest object");
