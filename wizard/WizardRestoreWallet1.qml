@@ -75,6 +75,7 @@ Rectangle {
         restoreHeight.text = typeof params.restore_height != "undefined" ? params.restore_height : "";
 
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
+        cameraUi.walletRestoreMode = false;
     }
 
     function verifyFromKeys() {
@@ -169,6 +170,7 @@ Rectangle {
                     text: FontAwesome.qrcode
                     tooltip: qsTr("Scan wallet QR code") + translationManager.emptyString
                     onClicked: {
+                        cameraUi.walletRestoreMode = true;
                         cameraUi.qrcode_decoded.disconnect(updateFromQrCode);
                         cameraUi.qrcode_decoded.connect(updateFromQrCode);
                         cameraUi.state = "Capture";
