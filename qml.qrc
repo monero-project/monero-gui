@@ -119,6 +119,8 @@
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
         <file>images/appicon.ico</file>
+        <file>images/trayIconTemplate.png</file>
+        <file>images/trayIconTemplate@2x.png</file>
         <file>images/card-background-black0.png</file>
         <file>images/card-background-black1.png</file>
         <file>images/card-background-black2.png</file>

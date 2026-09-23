@@ -33,6 +33,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import Qt.labs.platform 1.0 as PlatformLabs
 
 import FontAwesome 1.0
 
@@ -1541,6 +1542,7 @@ ApplicationWindow {
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: MoneroComponents.Style.blackTheme
         property bool checkForUpdates: true
+        property bool trayIconEnabled: false
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
@@ -2530,5 +2532,88 @@ ApplicationWindow {
     WalletManager {
         id: walletManager
         proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    PlatformLabs.SystemTrayIcon {
+        id: trayIcon
+        property int restoredVisibility: Window.Windowed
+
+        function showWindow() {
+            appWindow.visibility = restoredVisibility;
+            appWindow.raise();
+            appWindow.requestActivate();
+        }
+
+        function hideWindow() {
+            appWindow.hide();
+        }
+
+        function toggleWindow() {
+            if (appWindow.visibility === Window.Hidden || appWindow.visibility === Window.Minimized) {
+                showWindow();
+            } else {
+                hideWindow();
+            }
+        }
+
+        visible: !isMac && persistentSettings.trayIconEnabled
+        iconSource: "qrc:///images/appicon.ico"
+        tooltip: appWindow.title
+
+        onVisibleChanged: {
+            if (!visible && appWindow.visibility === Window.Hidden) {
+                showWindow();
+            }
+        }
+
+        onActivated: {
+            if (reason !== PlatformLabs.SystemTrayIcon.Trigger) return;
+            trayIcon.toggleWindow();
+        }
+
+        menu: PlatformLabs.Menu {
+            PlatformLabs.MenuItem {
+                text: (appWindow.visibility === Window.Hidden || appWindow.visibility === Window.Minimized
+                       ? qsTr("Show") : qsTr("Hide")) + translationManager.emptyString
+                onTriggered: trayIcon.toggleWindow()
+            }
+
+            PlatformLabs.MenuItem {
+                text: qsTr("Quit") + translationManager.emptyString
+                onTriggered: {
+                    trayIcon.showWindow();
+                    appWindow.close();
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: appWindow
+        onVisibilityChanged: {
+            if (appWindow.visibility === Window.Windowed
+                    || appWindow.visibility === Window.Maximized
+                    || appWindow.visibility === Window.FullScreen) {
+                trayIcon.restoredVisibility = appWindow.visibility;
+            }
+        }
+    }
+
+    Loader {
+        active: isMac
+        sourceComponent: Component {
+            Item {
+                Binding { target: macOSTrayIcon; property: "visible"; value: persistentSettings.trayIconEnabled }
+                Binding { target: macOSTrayIcon; property: "toolTip"; value: appWindow.title }
+                Binding { target: macOSTrayIcon; property: "showText"; value: qsTr("Show Monero GUI") + translationManager.emptyString }
+                Binding { target: macOSTrayIcon; property: "hideText"; value: qsTr("Hide Monero GUI") + translationManager.emptyString }
+                Binding { target: macOSTrayIcon; property: "quitText"; value: qsTr("Quit Monero GUI") + translationManager.emptyString }
+
+                Connections {
+                    target: macOSTrayIcon
+                    onQuitRequested: appWindow.close()
+                }
+            }
+        }
     }
 }
