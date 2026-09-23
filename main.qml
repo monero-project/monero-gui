@@ -1554,15 +1554,15 @@ ApplicationWindow {
         property bool proxyEnabled: isTails
         function getProxyAddress() {
             if (socksProxyFlagSet) {
-                return socksProxyFlag;
+                return socksProxyFlag == "" ? "" : "socks5://" + socksProxyFlag;
             }
             if (!proxyEnabled) {
                 return "";
             }
             if (proxyAddress == "") {
-                return "127.0.0.1:0";
+                return "socks5://127.0.0.1:0";
             }
-            return proxyAddress;
+            return "socks5://" + proxyAddress;
         }
         function getWalletProxyAddress() {
             if (!useRemoteNode) {
