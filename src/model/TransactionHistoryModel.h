@@ -67,7 +67,8 @@ public:
         TransactionTimeRole,
         TransactionAtomicAmountRole,
         // only for outgoing
-        TransactionDestinationsRole
+        TransactionDestinationsRole,
+        TransactionDestinationAddressesRole
     };
     Q_ENUM(TransactionInfoRole)
 

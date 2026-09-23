@@ -146,6 +146,16 @@ QString TransactionInfo::destinations_formatted() const
     return destinations;
 }
 
+QStringList TransactionInfo::destinationAddresses() const
+{
+    QStringList addresses;
+    addresses.reserve(m_transfers.size());
+    for (const auto *transfer : m_transfers) {
+        addresses.append(transfer->address());
+    }
+    return addresses;
+}
+
 TransactionInfo::TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *parent)
     : QObject(parent)
     , m_amount(pimpl->amount())
