@@ -1,6 +1,6 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.0 as QtQuickControls
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls as QtQuickControls
+import QtQuick.Layouts
 
 import "../components" as MoneroComponents
 

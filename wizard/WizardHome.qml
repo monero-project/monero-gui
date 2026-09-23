@@ -26,10 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
 import moneroComponents.NetworkType 1.0
 
 import "../components" as MoneroComponents
@@ -41,6 +41,7 @@ Rectangle {
     property alias createWalletButton: createWalletButton
     property alias openWalletButton: openWalletButton
     property alias restoreWalletButton: restoreWalletButton
+    property alias changeWalletModeButton: changeWalletModeButton
     property string viewName: "wizardHome"
 
     ColumnLayout {
@@ -167,6 +168,7 @@ Rectangle {
                 spacing: 20
 
                 MoneroComponents.StandardButton {
+                    id: changeWalletModeButton
                     small: true
                     text: qsTr("Change wallet mode") + translationManager.emptyString
 
@@ -248,7 +250,6 @@ Rectangle {
                             kdfRoundsText.kdfWarningShown = true;
                             confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
                             confirmationDialog.text = qsTr("You have selected a non-standard number of KDF rounds.\n\nThis value is set globally and is not stored in the wallet file. It must be remembered and re-entered every time this wallet is opened; otherwise, the wallet will not open due to the password being incorrect.\n\nHigher values make opening and saving the wallet significantly slower.") + translationManager.emptyString;
-                            confirmationDialog.icon = StandardIcon.Warning;
                             confirmationDialog.onAcceptedCallback = null;
                             confirmationDialog.onRejectedCallback = function() {
                                 kdfRoundsText.text = "1";

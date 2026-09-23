@@ -26,11 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs
 
 import moneroComponents.Clipboard 1.0
 import moneroComponents.WalletManager 1.0
@@ -49,7 +47,7 @@ Rectangle {
         // dynamically change onclose handler
         property var onCloseCallback
         id: signatureVerificationMessage
-        standardButtons: StandardButton.Ok
+        buttons: MessageDialog.Ok
         onAccepted:  {
             if (onCloseCallback) {
                 onCloseCallback()
@@ -61,12 +59,10 @@ Rectangle {
         if (result) {
             signatureVerificationMessage.title = qsTr("Good signature") + translationManager.emptyString
             signatureVerificationMessage.text  = qsTr("This is a good signature") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Information
         }
         else {
             signatureVerificationMessage.title = qsTr("Bad signature") + translationManager.emptyString
             signatureVerificationMessage.text  = qsTr("This signature did not verify") + translationManager.emptyString
-            signatureVerificationMessage.icon = StandardIcon.Critical
         }
         signatureVerificationMessage.open()
     }
@@ -401,22 +397,22 @@ Rectangle {
         FileDialog {
             id: signFileDialog
             title: qsTr("Please choose a file to sign") + translationManager.emptyString;
-            folder: "file://"
+            currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {
-                signFileLine.text = walletManager.urlToLocalPath(signFileDialog.fileUrl)
+                signFileLine.text = walletManager.urlToLocalPath(signFileDialog.selectedFile)
             }
         }
 
         FileDialog {
             id: verifyFileDialog
             title: qsTr("Please choose a file to verify") + translationManager.emptyString;
-            folder: "file://"
+            currentFolder: "file://"
             nameFilters: [ "*"]
 
             onAccepted: {
-                verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.fileUrl)
+                verifyFileLine.text = walletManager.urlToLocalPath(verifyFileDialog.selectedFile)
             }
         }
     }

@@ -28,10 +28,10 @@
 
 import "../components" as MoneroComponents
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.0
-import moneroComponents.LanguageModel 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import moneroComponents.LanguageModel 1.0 as LanguageModels
 
 
 Drawer {
@@ -85,7 +85,6 @@ Drawer {
                     var locale_spl = locale.split("_");
 
                     // reload active translations
-                    console.log(locale_spl[0]);
                     translationManager.setLanguage(locale_spl[0]);
 
                     // set wizard language settings
@@ -166,12 +165,13 @@ Drawer {
 
             ScrollBar.vertical: ScrollBar {
                 onActiveChanged: if (!active && !isMac) active = true
+                palette.mid: "#8E8E93"
+                palette.dark: "#B8B8BD"
             }
         }
     }
 
-    //Flags model
-    LanguageModel {
+    LanguageModels.LanguageModel {
         id: langModel
     }
 
