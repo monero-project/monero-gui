@@ -674,11 +674,12 @@ void Wallet::createTransactionAsync(
     const QString &payment_id,
     const QVector<QString> &destinationAmounts,
     quint32 mixin_count,
-    PendingTransaction::Priority priority)
+    PendingTransaction::Priority priority,
+    quint64 requestId)
 {
-    m_scheduler.run([this, destinationAddresses, payment_id, destinationAmounts, mixin_count, priority] {
+    m_scheduler.run([this, destinationAddresses, payment_id, destinationAmounts, mixin_count, priority, requestId] {
         PendingTransaction *tx = createTransaction(destinationAddresses, payment_id, destinationAmounts, mixin_count, priority);
-        emit transactionCreated(tx, destinationAddresses, payment_id, mixin_count);
+        emit transactionCreated(tx, destinationAddresses, payment_id, mixin_count, requestId);
     });
 }
 
@@ -695,11 +696,12 @@ PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const 
 
 void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &payment_id,
                                quint32 mixin_count,
-                               PendingTransaction::Priority priority)
+                               PendingTransaction::Priority priority,
+                               quint64 requestId)
 {
-    m_scheduler.run([this, dst_addr, payment_id, mixin_count, priority] {
+    m_scheduler.run([this, dst_addr, payment_id, mixin_count, priority, requestId] {
         PendingTransaction *tx = createTransactionAll(dst_addr, payment_id, mixin_count, priority);
-        emit transactionCreated(tx, {dst_addr}, payment_id, mixin_count);
+        emit transactionCreated(tx, {dst_addr}, payment_id, mixin_count, requestId);
     });
 }
 
@@ -710,11 +712,11 @@ PendingTransaction *Wallet::createSweepUnmixableTransaction()
     return result;
 }
 
-void Wallet::createSweepUnmixableTransactionAsync()
+void Wallet::createSweepUnmixableTransactionAsync(quint64 requestId)
 {
-    m_scheduler.run([this] {
+    m_scheduler.run([this, requestId] {
         PendingTransaction *tx = createSweepUnmixableTransaction();
-        emit transactionCreated(tx, {""}, "", 0);
+        emit transactionCreated(tx, {""}, "", 0, requestId);
     });
 }
 

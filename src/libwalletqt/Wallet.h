@@ -247,7 +247,8 @@ public:
         const QString &payment_id,
         const QVector<QString> &destinationAmounts,
         quint32 mixin_count,
-        PendingTransaction::Priority priority);
+        PendingTransaction::Priority priority,
+        quint64 requestId);
 
     //! creates transaction with all outputs
     Q_INVOKABLE PendingTransaction * createTransactionAll(const QString &dst_addr, const QString &payment_id,
@@ -255,13 +256,14 @@ public:
 
     //! creates async transaction with all outputs
     Q_INVOKABLE void createTransactionAllAsync(const QString &dst_addr, const QString &payment_id,
-                                               quint32 mixin_count, PendingTransaction::Priority priority);
+                                               quint32 mixin_count, PendingTransaction::Priority priority,
+                                               quint64 requestId);
 
     //! creates sweep unmixable transaction
     Q_INVOKABLE PendingTransaction * createSweepUnmixableTransaction();
 
     //! creates async sweep unmixable transaction
-    Q_INVOKABLE void createSweepUnmixableTransactionAsync();
+    Q_INVOKABLE void createSweepUnmixableTransactionAsync(quint64 requestId);
 
     //! Sign a transfer from file
     Q_INVOKABLE UnsignedTransaction * loadTxFile(const QString &fileName);
@@ -406,7 +408,8 @@ signals:
         PendingTransaction *transaction,
         const QVector<QString> &addresses,
         const QString &paymentId,
-        quint32 mixinCount);
+        quint32 mixinCount,
+        quint64 requestId);
 
     void connectionStatusChanged(int status) const;
     void currentSubaddressAccountChanged() const;
