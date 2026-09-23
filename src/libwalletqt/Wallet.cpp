@@ -239,7 +239,7 @@ void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */
     }
 }
 
-bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight, const QString& proxyAddress)
+bool Wallet::init(const QString &daemonAddress, const QString &daemonUsername, const QString &daemonPassword, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight, const QString& proxyAddress)
 {
     qDebug() << "init non async";
     if (isRecovering){
@@ -257,7 +257,7 @@ bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 uppe
     {
         QMutexLocker locker(&m_proxyMutex);
 
-        if (!m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), false, false, proxyAddress.toStdString()))
+        if (!m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, daemonUsername.toStdString(), daemonPassword.toStdString(), false, false, proxyAddress.toStdString()))
         {
             return false;
         }
@@ -290,9 +290,11 @@ void Wallet::initAsync(
     qDebug() << "initAsync: " + daemonAddress;
     m_initializing = true;
     pauseRefresh();
-    const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
+    const auto future = m_scheduler.run([this, daemonAddress, daemonUsername = m_daemonUsername, daemonPassword = m_daemonPassword, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
         m_initialized = init(
             daemonAddress,
+            daemonUsername,
+            daemonPassword,
             trustedDaemon,
             upperTransactionLimit,
             isRecovering,
