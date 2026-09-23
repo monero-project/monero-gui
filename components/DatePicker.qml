@@ -249,6 +249,7 @@ Item {
     QtQuickControls2.Popup {
         id: popup
         padding: 0
+        focus: true
         closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
         onOpened: {
             calendar.visibleMonth = currentDate.getMonth();
