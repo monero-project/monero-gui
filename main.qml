@@ -107,20 +107,20 @@ ApplicationWindow {
 
     // fiat price conversion
     property real fiatPrice: 0
+    property real fiatPriceUSD: 0
+    property var fiatRates: ({"USD": 1}) // units of each currency per 1 USD
+    property real fiatRatesTimestamp: 0
+    readonly property real fiatRatesMaxAge: 60 * 60 * 1000
+    readonly property string fiatRatesAPI: "https://api.frankfurter.dev/v1/latest?base=USD"
+    readonly property var fiatCurrencies: [
+        "USD", "EUR", "GBP", "AUD", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK",
+        "HKD", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW", "MXN", "MYR",
+        "NOK", "NZD", "PHP", "PLN", "RON", "SEK", "SGD", "THB", "TRY", "ZAR"
+    ]
     property var fiatPriceAPIs: {
         return {
-            "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
-            },
-            "coingecko": {
-                "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
-            },
-            "cryptocompare": {
-                "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
-                "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
-            }
+            "kraken": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
+            "coingecko": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd"
         }
     }
 
@@ -1258,48 +1258,30 @@ ApplicationWindow {
         triggeredOnStart: true
     }
 
-    function fiatApiParseTicker(url, resp, currency){
-        // parse & validate incoming JSON
+    function getKeyFromCurrency(currency) {
+        if (currency.length !== 6 || currency.substring(0, 3) !== "xmr") return undefined;
+        return currency.substring(3);
+    }
+
+    function fiatApiParseTicker(url, resp){
         if(url.startsWith("https://api.kraken.com/0/")){
             if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
                 appWindow.fiatApiError("Kraken API has error(s)");
                 return;
             }
 
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["c"][0];
-            return ticker;
+            var key = "XXMRZUSD";
+            if(!resp.result.hasOwnProperty(key)){
+                appWindow.fiatApiError("Kraken API has error(s)");
+                return;
+            }
+            return parseFloat(resp.result[key]["c"][0]);
         } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
-            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
+            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty("usd")){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
-            return resp["monero"][key];
-        } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
-            if(!resp.hasOwnProperty(key)){
-                appWindow.fiatApiError("cryptocompare API has error(s)");
-                return;
-            }
-            return resp[key];
-        }
-    }
-
-    function fiatApiGetCurrency(url) {
-        var apis = appWindow.fiatPriceAPIs;
-        for (var api in apis){
-            if (!apis.hasOwnProperty(api))
-               continue;
-
-            for (var cur in apis[api]){
-                if(!apis[api].hasOwnProperty(cur))
-                    continue;
-
-                if (apis[api][cur] === url) {
-                    return cur;
-                }
-            }
+            return resp["monero"]["usd"];
         }
     }
 
@@ -1316,20 +1298,52 @@ ApplicationWindow {
             return;
         }
 
-        // handle incoming JSON, set ticker
-        var currency = appWindow.fiatApiGetCurrency(url);
-        if(typeof currency == "undefined"){
-            appWindow.fiatApiError("could not get currency");
-            return;
-        }
-
-        var ticker = appWindow.fiatApiParseTicker(url, resp, currency);
-        if(ticker <= 0){
+        var ticker = appWindow.fiatApiParseTicker(url, resp);
+        if(!(ticker > 0)){
             appWindow.fiatApiError("could not get ticker");
             return;
         }
 
-        appWindow.fiatPrice = ticker;
+        appWindow.fiatPriceUSD = ticker;
+        appWindow.fiatApiUpdatePrice();
+    }
+
+    function fiatApiRatesReceived(url, resp, error) {
+        if (error) {
+            appWindow.fiatApiError(error);
+            return;
+        }
+
+        try {
+            resp = JSON.parse(resp);
+        } catch (e) {
+            appWindow.fiatApiError("bad JSON: " + e);
+            return;
+        }
+
+        if(resp.base !== "USD" || typeof resp.rates !== "object" || resp.rates === null){
+            appWindow.fiatApiError("fiat rates API has error(s)");
+            return;
+        }
+
+        var rates = {"USD": 1};
+        for (var code in resp.rates){
+            if (!resp.rates.hasOwnProperty(code)) continue;
+
+            const rate = Number(resp.rates[code]);
+            if (isFinite(rate) && rate > 0)
+                rates[code] = rate;
+        }
+
+        appWindow.fiatRates = rates;
+        appWindow.fiatRatesTimestamp = Date.now();
+        appWindow.fiatApiUpdatePrice();
+    }
+
+    function fiatApiUpdatePrice() {
+        const symbol = appWindow.fiatApiCurrencySymbol();
+        const rate = appWindow.fiatRates.hasOwnProperty(symbol) ? appWindow.fiatRates[symbol] : 0;
+        appWindow.fiatPrice = (appWindow.fiatPriceUSD > 0 && rate > 0) ? appWindow.fiatPriceUSD * rate : 0;
 
         appWindow.updateBalance();
     }
@@ -1345,26 +1359,26 @@ ApplicationWindow {
             return;
         }
 
-        var provider = appWindow.fiatPriceAPIs[userProvider];
-        var userCurrency = persistentSettings.fiatPriceCurrency;
-        if(!provider.hasOwnProperty(userCurrency)){
-            appWindow.fiatApiError("currency \"" + userCurrency + "\" not implemented");
-        }
+        network.getJSON(appWindow.fiatPriceAPIs[userProvider], fiatApiJsonReceived);
 
-        var url = provider[userCurrency];
-        network.getJSON(url, fiatApiJsonReceived);
+        if(appWindow.fiatApiCurrencySymbol() !== "USD"){
+            if(!persistentSettings.fiatRatesConsentGiven){
+                appWindow.fiatApiError("exchange rate provider consent not given for non-USD currency");
+                return;
+            }
+
+            if(Date.now() - appWindow.fiatRatesTimestamp > appWindow.fiatRatesMaxAge)
+                network.getJSON(appWindow.fiatRatesAPI, fiatApiRatesReceived);
+        }
     }
 
     function fiatApiCurrencySymbol() {
-        switch (persistentSettings.fiatPriceCurrency) {
-            case "xmrusd":
-                return "USD";
-            case "xmreur":
-                return "EUR";
-            default:
-                console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
-                return "UNSUPPORTED";
+        const key = getKeyFromCurrency(persistentSettings.fiatPriceCurrency);
+        if (key === undefined) {
+            console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
+            return "UNSUPPORTED";
         }
+        return key.toUpperCase();
     }
 
     function fiatApiConvertToFiat(amount) {
@@ -1549,6 +1563,7 @@ ApplicationWindow {
         property bool fiatPriceToggle: false
         property string fiatPriceProvider: "kraken"
         property string fiatPriceCurrency: "xmrusd"
+        property bool fiatRatesConsentGiven: false
 
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
@@ -1580,6 +1595,12 @@ ApplicationWindow {
 
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+
+            if (!appWindow.fiatPriceAPIs.hasOwnProperty(fiatPriceProvider)) {
+                console.warn("unsupported fiat price provider \"" + fiatPriceProvider + "\", resetting");
+                fiatPriceProvider = "kraken";
+                fiatPriceEnabled = false;
+            }
         }
     }
 
