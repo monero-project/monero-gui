@@ -28,6 +28,7 @@
 
 #include "oshelper.h"
 
+#include <algorithm>
 #include <unordered_set>
 
 #include <QCoreApplication>
@@ -45,6 +46,8 @@
 #include <QByteArray>
 #include <QRandomGenerator>
 #ifdef Q_OS_MAC
+#include <QEventLoop>
+#include <QThread>
 #include "qt/macoshelper.h"
 #endif
 #ifdef Q_OS_WIN
@@ -74,6 +77,14 @@ QPixmap screenshot()
             window->hide();
         }
     }
+
+#if defined(Q_OS_MAC)
+    // Let Qt submit the native hide operations before blocking the GUI thread.
+    QGuiApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+    // Give WindowServer time to finish removing the window.
+    QThread::msleep(100);
+#endif
+
     const auto unhide = sg::make_scope_guard([&hidden]() {
         for (QWindow *window : hidden)
         {
@@ -144,7 +155,7 @@ QList<QString> OSHelper::grabQrCodesFromScreen() const
     }
     catch (const std::exception &e)
     {
-        qWarning() << e.what();
+        qWarning() << "QR screen capture: decoder exception:" << e.what();
     }
 
     return codes;
