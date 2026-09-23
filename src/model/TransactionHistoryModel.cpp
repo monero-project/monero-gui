@@ -79,13 +79,14 @@ QVariant TransactionHistoryModel::parseTransactionInfo(const TransactionInfo &tI
         return tInfo.fee();
     case TransactionBlockHeightRole:
     {
-        // Use NULL QVariant for transactions without height.
-        // Forces them to be displayed at top when sorted by blockHeight.
-        if (tInfo.blockHeight() != 0)
+        // Use NULL QVariant for pending transactions without height.
+        // Forces them to be displayed at top when sorted by blockHeight,
+        // without also promoting failed transactions.
+        if (tInfo.blockHeight() == 0 && tInfo.isPending() && !tInfo.isFailed())
         {
-            return tInfo.blockHeight();
+            return QVariant();
         }
-        return QVariant();
+        return tInfo.blockHeight();
     }
     case TransactionSubaddrIndexRole:
     {
