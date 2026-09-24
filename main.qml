@@ -547,7 +547,6 @@ ApplicationWindow {
                         errorMessage += "\n" + qsTr("Make sure your Trezor is connected and unlocked.");
                     }
                     passwordDialog.showError(errorMessage);
-                    console.log("closing wallet async : " + wallet.address)
                     closeWallet();
                     return;
             }
@@ -1100,10 +1099,8 @@ ApplicationWindow {
             var result = currentWallet.getReserveProof(false, currentWallet.currentSubaddressAccount, amount, message)
             txProofComputed(null, result)
         } else {
-            console.log("Getting payment proof: ")
-            console.log("\ttxid: ", txid,
-                        ", address: ", address,
-                        ", message: ", message);
+            // Don't log txid/address/message; payment-proof signatures are
+            // sensitive and must not end up in the logs.
             function spendProofFallback(txid, result){
                 if (!result || result.indexOf("error|") === 0) {
                     currentWallet.getSpendProofAsync(txid, message, txProofComputed);
@@ -1132,11 +1129,8 @@ ApplicationWindow {
 
     // called on "checkProof"
     function handleCheckProof(txid, address, message, signature) {
-        console.log("Checking payment proof: ")
-        console.log("\ttxid: ", txid,
-                    ", address: ", address,
-                    ", message: ", message,
-                    ", signature: ", signature);
+        // Don't log txid/address/message/signature; payment-proof signatures
+        // are sensitive and must not end up in the logs.
 
         var result;
         var isReserveProof = signature.indexOf("ReserveProofV") === 0;
