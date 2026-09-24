@@ -26,6 +26,7 @@
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
         <file>pages/Mining.qml</file>
+        <file>pages/MiningDashboard.qml</file>
         <file>components/ContextMenu.qml</file>
         <file>components/ContextMenuItem.qml</file>
         <file>components/NetworkStatusItem.qml</file>
