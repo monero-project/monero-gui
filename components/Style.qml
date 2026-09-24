@@ -3,7 +3,16 @@ pragma Singleton
 import QtQuick 2.5
 
 QtObject {
-    property bool blackTheme: true
+    // Theme selection: "system" follows the OS preference, "light" and "dark" force one.
+    property string theme: "dark"
+
+    // Reported by the ColorScheme helper; only consulted when theme is "system".
+    property bool systemPrefersDark: typeof colorScheme !== "undefined" ? colorScheme.prefersDark : true
+
+    // Derived, read-only. Every existing Style.blackTheme reference keeps working unchanged.
+    readonly property bool blackTheme: theme === "light" ? false :
+                                       theme === "dark" ? true :
+                                       systemPrefersDark
     property QtObject fontMedium: FontLoader { id: _fontMedium; source: "qrc:/fonts/Roboto-Medium.ttf"; }
     property QtObject fontBold: FontLoader { id: _fontBold; source: "qrc:/fonts/Roboto-Bold.ttf"; }
     property QtObject fontLight: FontLoader { id: _fontLight; source: "qrc:/fonts/Roboto-Light.ttf"; }

@@ -41,6 +41,7 @@
 #include <version.h>
 
 #include "clipboardAdapter.h"
+#include "ColorScheme.h"
 #include "filter.h"
 #include "oscursor.h"
 #include "oshelper.h"
@@ -464,6 +465,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
+    ColorScheme colorScheme;
+    engine.rootContext()->setContextProperty("colorScheme", &colorScheme);
 
     engine.addImportPath(":/fonts");
 

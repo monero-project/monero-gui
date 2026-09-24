@@ -26,30 +26,49 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import Qt.labs.platform 1.0 as PlatformLabs
-import "." as MoneroComponents
+#ifndef COLORSCHEME_H
+#define COLORSCHEME_H
 
-PlatformLabs.MenuBar {
-    PlatformLabs.Menu {
-        title: qsTr("File")
-        PlatformLabs.MenuItem {
-            enabled: appWindow.viewState === "normal"
-            text: qsTr("Close Wallet")
-            onTriggered: appWindow.showWizard()
-        }
-    }
-    PlatformLabs.Menu {
-        title: qsTr("View")
-        PlatformLabs.MenuItem {
-            text: MoneroComponents.Style.blackTheme ? qsTr("Light Theme") : qsTr("Dark Theme")
-            onTriggered: {
-                appWindow.toggleTheme();
-            }
-        }
-        PlatformLabs.MenuItem {
-            text: qsTr("Change Language")
-            onTriggered: appWindow.toggleLanguageView();
-        }
-    }
-}
+#include <QObject>
 
+#ifdef HAVE_QT_DBUS
+#include <QDBusVariant>
+#endif
+
+class QEvent;
+
+/**
+ * @brief The ColorScheme class - exports the OS light/dark preference to QML
+ *
+ * Consulted by MoneroComponents.Style when the theme setting is "system".
+ */
+class ColorScheme : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(bool prefersDark READ prefersDark NOTIFY prefersDarkChanged)
+
+public:
+    explicit ColorScheme(QObject *parent = nullptr);
+
+    bool prefersDark() const;
+
+signals:
+    void prefersDarkChanged();
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
+private slots:
+    void refresh();
+
+#ifdef HAVE_QT_DBUS
+    void portalSettingChanged(const QString &group, const QString &key, const QDBusVariant &value);
+#endif
+
+private:
+    bool detect() const;
+
+    bool m_prefersDark;
+};
+
+#endif // COLORSCHEME_H
