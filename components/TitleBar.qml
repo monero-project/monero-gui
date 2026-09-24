@@ -43,6 +43,7 @@ Rectangle {
     property bool showMaximizeButton: true
     property bool showCloseButton: true
     property string walletName: ""
+    property bool actionsDisabled: false
 
     height: {
         if(!persistentSettings.customDecorations) return 0;
@@ -120,6 +121,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
+                enabled: !root.actionsDisabled
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onEntered: {
@@ -161,6 +163,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
+                enabled: !root.actionsDisabled
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onEntered: {
@@ -201,6 +204,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
+                enabled: !root.actionsDisabled
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onEntered: {
@@ -240,6 +244,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
+                enabled: !root.actionsDisabled
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onEntered: {
