@@ -55,9 +55,14 @@ signals:
     void uriHandler(QString uriString);
 
 private:
+    bool writeTokenFile();
+    bool readTokenFile(QString &token) const;
+
     QLocalServer *m_server;
     QString m_queuedCmd;
+    QString m_token;
     QFileInfo m_socketFile = QFileInfo(QString(QDir::tempPath() + "/xmr-gui_%2.sock").arg(getAccountName()));
+    QFileInfo m_tokenFile = QFileInfo(QString(QDir::tempPath() + "/xmr-gui_%2.token").arg(getAccountName()));
 };
 
 #endif // IPC_H

@@ -550,8 +550,10 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
 {
 
     QString fileName = wallet_path;
-    // Make sure wallet file is not .keys
-    fileName.replace(".keys","");
+    // Make sure wallet file is not .keys; only strip a trailing extension so
+    // directories containing ".keys" in their name are left untouched.
+    if (fileName.endsWith(".keys"))
+        fileName.chop(5);
     QFile walletCache(fileName);
     QString suffix = ".old_cache";
     QString newFileName = fileName + suffix;
