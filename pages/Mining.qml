@@ -309,6 +309,7 @@ Rectangle {
                                         confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
                                         confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
                                         confirmationDialog.onAcceptedCallback = function() {
+                                            p2poolManager.proxyAddress = persistentSettings.getProxyAddress();
                                             p2poolManager.download();
                                             statusMessageText.text = "Downloading P2Pool...";
                                             statusMessage.visible = true
@@ -652,6 +653,7 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
             chain = "nano"
         }
         var p2poolArgs = persistentSettings.p2poolFlags;
+        p2poolManager.proxyAddress = persistentSettings.getProxyAddress();
         var success = p2poolManager.start(p2poolArgs, address, chain, threads);
         if (success) 
         {
