@@ -72,6 +72,8 @@ Rectangle {
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
         wizardController.walletOptionsSubaddressLookahead = '';
+        wizardController.multisigTotal = 0;
+        wizardController.multisigThreshold = 0;
         disconnect();
 
         closeWizardWallet();
@@ -115,6 +117,11 @@ Rectangle {
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
 
+    // multisig wallet creation (round 1: prepare + make_multisig)
+    property int multisigTotal: 0
+    property int multisigThreshold: 0
+    readonly property string multisigKexAttributeKey: "gui.multisig_pending_kex_msg"
+
 
     property int layoutScale: {
         if (appWindow.width < 506) {
@@ -144,6 +151,8 @@ Rectangle {
         property WizardCreateWallet3 wizardCreateWallet3View: WizardCreateWallet3 { }
         property WizardCreateWallet4 wizardCreateWallet4View: WizardCreateWallet4 { }
         property WizardCreateWallet5 wizardCreateWallet5View: WizardCreateWallet5 { }
+        property WizardCreateMultisig1 wizardCreateMultisig1View: WizardCreateMultisig1 { }
+        property WizardCreateMultisig2 wizardCreateMultisig2View: WizardCreateMultisig2 { }
         property WizardRestoreWallet1 wizardRestoreWallet1View: WizardRestoreWallet1 { }
         property WizardRestoreWallet2 wizardRestoreWallet2View: WizardRestoreWallet2 { }
         property WizardRestoreWallet3 wizardRestoreWallet3View: WizardRestoreWallet3 { }
@@ -212,6 +221,14 @@ Rectangle {
                 name: "wizardCreateWallet5"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet5View }
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet5View.pageHeight + 80 }
+            }, State {
+                name: "wizardCreateMultisig1"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig1View.pageHeight + 80 }
+            }, State {
+                name: "wizardCreateMultisig2"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateMultisig2View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateMultisig2View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet1View }
@@ -390,6 +407,61 @@ Rectangle {
         console.log("saving new wallet to", new_wallet_filename);
         wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
         wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
+    }
+
+    function createMultisigWallet() {
+        closeWizardWallet();
+
+        console.log("Creating in-memory multisig wallet")
+        var nettype = appWindow.persistentSettings.nettype;
+        var kdfRounds = appWindow.persistentSettings.kdfRounds;
+        var wallet = walletManager.createWallet('', wizardController.walletOptionsPassword, persistentSettings.language_wallet, nettype, kdfRounds)
+
+        wizardController.walletOptionsSeed = wallet.seed
+        wizardController.m_wallet = wallet;
+    }
+
+    function finishMultisigSetup(otherParticipantsInfo, onSuccess, onError) {
+        var wallet = wizardController.m_wallet;
+        var extraInfo;
+
+        if (wallet.multisigInfo().isMultisig) {
+            extraInfo = wallet.getCacheAttribute(wizardController.multisigKexAttributeKey);
+        } else {
+            extraInfo = wallet.makeMultisig(otherParticipantsInfo, wizardController.multisigThreshold);
+
+            if (wallet.status !== Wallet.Status_Ok) {
+                onError(wallet.errorString);
+                return;
+            }
+
+            wallet.setCacheAttribute(wizardController.multisigKexAttributeKey, extraInfo || "");
+        }
+
+        var new_wallet_filename = Wizard.createWalletPath(
+            isIOS,
+            wizardController.walletOptionsLocation,
+            wizardController.walletOptionsName);
+        if (isIOS) {
+            new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
+        }
+
+        wallet.storeAsync(function(success) {
+            if (!success) {
+                onError(qsTr("Failed to store the wallet"));
+                return;
+            }
+
+            persistentSettings.account_name = wizardController.walletOptionsName;
+            persistentSettings.wallet_path = wallet.path;
+            persistentSettings.restore_height = 0;
+            persistentSettings.allow_background_mining = false;
+            persistentSettings.is_recovering = false;
+            persistentSettings.is_recovering_from_device = false;
+
+            restart();
+            onSuccess(extraInfo);
+        }, new_wallet_filename);
     }
 
     function recoveryWallet() {

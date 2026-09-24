@@ -513,6 +513,95 @@ bool Wallet::importKeyImages(const QString& path)
     return m_walletImpl->importKeyImages(path.toStdString());
 }
 
+QVariantMap Wallet::multisigInfo() const
+{
+    Monero::MultisigState state = m_walletImpl->multisig();
+    QVariantMap result;
+    result["isMultisig"] = state.isMultisig;
+    result["isReady"] = state.isReady;
+    result["threshold"] = state.threshold;
+    result["total"] = state.total;
+    return result;
+}
+
+QString Wallet::getMultisigInfo() const
+{
+    return QString::fromStdString(m_walletImpl->getMultisigInfo());
+}
+
+QString Wallet::makeMultisig(const QVector<QString> &info, quint32 threshold)
+{
+    std::vector<std::string> infoStd;
+    for (const auto &i : info) {
+        infoStd.push_back(i.toStdString());
+    }
+    QString result = QString::fromStdString(m_walletImpl->makeMultisig(infoStd, threshold));
+    emit multisigStateChanged();
+    return result;
+}
+
+QString Wallet::exchangeMultisigKeys(const QVector<QString> &info, bool forceUpdate)
+{
+    std::vector<std::string> infoStd;
+    for (const auto &i : info) {
+        infoStd.push_back(i.toStdString());
+    }
+    QString result = QString::fromStdString(m_walletImpl->exchangeMultisigKeys(infoStd, forceUpdate));
+    emit multisigStateChanged();
+    return result;
+}
+
+QString Wallet::exportMultisigImages()
+{
+    std::string images;
+    if (!m_walletImpl->exportMultisigImages(images)) {
+        return "";
+    }
+    return QString::fromStdString(images);
+}
+
+qint64 Wallet::importMultisigImages(const QVector<QString> &images)
+{
+    std::vector<std::string> imagesStd;
+    for (const auto &i : images) {
+        imagesStd.push_back(i.toStdString());
+    }
+    size_t numImported = m_walletImpl->importMultisigImages(imagesStd);
+    if (status() != Status_Ok) {
+        return -1;
+    }
+    emit multisigStateChanged();
+    return static_cast<qint64>(numImported);
+}
+
+bool Wallet::hasMultisigPartialKeyImages() const
+{
+    return m_walletImpl->hasMultisigPartialKeyImages();
+}
+
+QString Wallet::publicMultisigSignerKey() const
+{
+    return QString::fromStdString(m_walletImpl->publicMultisigSignerKey());
+}
+
+QString Wallet::getMultisigSeed(const QString &passphrase) const
+{
+    std::string seed;
+    if (!m_walletImpl->getMultisigSeed(seed, passphrase.toStdString())) {
+        return "";
+    }
+    return QString::fromStdString(seed);
+}
+
+PendingTransaction * Wallet::restoreMultisigTransaction(const QString &signData)
+{
+    Monero::PendingTransaction *ptImpl = m_walletImpl->restoreMultisigTransaction(signData.toStdString());
+    if (!ptImpl) {
+        return nullptr;
+    }
+    return new PendingTransaction(ptImpl, this);
+}
+
 bool Wallet::exportOutputs(const QString& path, bool all) {
     return m_walletImpl->exportOutputs(path.toStdString(), all);
 }
