@@ -69,7 +69,16 @@ GridLayout {
     onActiveFocusChanged: activeFocus && daemonAddr.forceActiveFocus()
 
     function isValid() {
-        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
+        var parsed = root.parseAddress(daemonAddr.text);
+        var host = parsed.host.trim();
+        if (host.length === 0) {
+            return false;
+        }
+        if (parsed.port !== "") {
+            var portNumber = parseInt(parsed.port, 10);
+            return portNumber >= 1 && portNumber <= 65535;
+        }
+        return daemonPort.acceptableInput;
     }
 
     function getAddress() {
@@ -77,9 +86,46 @@ GridLayout {
             return "";
         }
 
-        var addr = daemonAddr.text.trim();
-        var port = daemonPort.text.trim();
-        return addr + ":" + port;
+        var parsed = root.parseAddress(daemonAddr.text);
+        var host = parsed.host.trim();
+        var port = parsed.port !== "" ? parsed.port : daemonPort.text.trim();
+        return host + ":" + port;
+    }
+
+    function parseAddress(input) {
+        input = input.trim();
+
+        // strip URI scheme, e.g. "https://" (scheme is optional for "//host:port")
+        input = input.replace(/^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\//, "");
+
+        // strip any path, query or fragment
+        var pathIndex = input.search(/[\/\?#]/);
+        if (pathIndex !== -1) {
+            input = input.substring(0, pathIndex);
+        }
+
+        var port = "";
+
+        if (input.indexOf("[") === 0) {
+            // bracketed IPv6, e.g. "[::1]:18081", "[::ffff:1.2.3.4]" or "[fe80::1%eth0]:18081"
+            var bracketMatch = input.match(/^(\[[^\]]+\])(?::(\d+))?$/);
+            if (bracketMatch) {
+                input = bracketMatch[1];
+                port = bracketMatch[2] || "";
+            }
+        } else if (ipv6Regex.test(input)) {
+            // bare IPv6, e.g. "::1" -> "[::1]"
+            input = "[" + input + "]";
+        } else {
+            // hostname or IPv4, optionally followed by a port
+            var hostPortMatch = input.match(/^([^:]+):(\d+)$/);
+            if (hostPortMatch) {
+                input = hostPortMatch[1];
+                port = hostPortMatch[2];
+            }
+        }
+
+        return { host: input, port: port };
     }
 
     MoneroComponents.LineEdit {
@@ -98,7 +144,12 @@ GridLayout {
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
         onEditingFinished: {
-            text = text.replace(ipv6Regex, "[$1]");
+            var parsed = root.parseAddress(text);
+            var portNumber = parseInt(parsed.port, 10);
+            if (portNumber >= 1 && portNumber <= 65535) {
+                daemonPort.text = parsed.port;
+            }
+            text = parsed.host;
             root.editingFinished();
         }
         onTextChanged: root.textChanged()
