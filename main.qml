@@ -988,6 +988,8 @@ ApplicationWindow {
 
     function rejectPendingTransaction() {
         activeTransactionRequestId = 0;
+        txConfirmationPopup.bottomTextAnimation.running = false;
+        txConfirmationPopup.bottomText.text = "";
         if (transaction) {
             currentWallet.disposeTransaction(transaction);
             transaction = null;
@@ -1016,6 +1018,7 @@ ApplicationWindow {
 
         txConfirmationPopup.sweepUnmixable = true;
         transaction = currentWallet.createSweepUnmixableTransaction();
+        txConfirmationPopup.open();
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
             txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
@@ -1036,7 +1039,6 @@ ApplicationWindow {
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             // committing transaction
         }
-        txConfirmationPopup.open();
     }
 
     // called after user confirms transaction
