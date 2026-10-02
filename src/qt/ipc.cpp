@@ -31,14 +31,28 @@
 #include <QLocalServer>
 #include <QtNetwork>
 #include <QDebug>
+#include <QDir>
+#include <QRandomGenerator>
+#include <QFile>
 
 #include "ipc.h"
 #include "utils.h"
 
+// Max size of an IPC command in bytes. Payment URIs are short; anything larger
+// is treated as invalid to avoid unbounded reads from local clients.
+static const int IPC_MAX_CMD_SIZE = 4096;
+
 // Start listening for incoming IPC commands on UDS (Unix) or named pipe (Windows)
 void IPC::bind(){
     QString path = QString(this->m_socketFile.absoluteFilePath());
-    qDebug() << path;
+
+    // Generate a fresh shared secret so only processes that know it (i.e. other
+    // instances started by the same user) can submit commands to this server.
+    if (!writeTokenFile()) {
+        qWarning() << "IPC: unable to write token file, commands will be rejected";
+        m_token.clear();
+    }
+    qDebug() << "IPC socket:" << path;
 
     this->m_server = new QLocalServer(this);
     this->m_server->setSocketOptions(QLocalServer::UserAccessOption);
@@ -72,22 +86,35 @@ void IPC::bind(){
 // when queued, false if sent to another instance, at which point we can
 // kill the current process.
 bool IPC::saveCommand(QString cmdString){
-    qDebug() << QString("saveCommand called: %1").arg(cmdString);
+    if (cmdString.length() > IPC_MAX_CMD_SIZE) {
+        qWarning() << "saveCommand: command too large, ignoring";
+        return true;
+    }
+
+    // The server only accepts commands that carry the shared token.
+    QString token;
+    if (!readTokenFile(token) || token.isEmpty()) {
+        qWarning() << "saveCommand: no IPC token available, queueing command";
+        this->SetQueuedCmd(cmdString);
+        return true;
+    }
 
     QLocalSocket ls;
     QByteArray buffer;
-    buffer = buffer.append(cmdString.toUtf8());
+    buffer.append(token.toUtf8());
+    buffer.append('\n');
+    buffer.append(cmdString.toUtf8());
     QString socketFilePath = this->socketFile().filePath();
 
     ls.connectToServer(socketFilePath, QIODevice::WriteOnly);
     if(ls.waitForConnected(1000)){
         ls.write(buffer);
         if (!ls.waitForBytesWritten(1000)){
-            qDebug() << QString("Could not send command \"%1\" over IPC %2: \"%3\"").arg(cmdString, socketFilePath, ls.errorString());
+            qDebug() << QString("Could not send command over IPC %1: \"%2\"").arg(socketFilePath, ls.errorString());
             return false;
         }
 
-        qDebug() << QString("Sent command \"%1\" over IPC \"%2\"").arg(cmdString, socketFilePath);
+        qDebug() << "Sent command over IPC" << socketFilePath;
         return false;
     }
 
@@ -109,9 +136,32 @@ void IPC::handleConnection(){
             clientConnection, &QLocalSocket::deleteLater);
 
     clientConnection->waitForReadyRead(2);
-    QString cmdString = QString(clientConnection->readAll());
-    qDebug() << cmdString;
+    QByteArray data = clientConnection->readAll();
 
+    // Reject oversized or empty payloads.
+    if (data.isEmpty() || data.size() > IPC_MAX_CMD_SIZE + 1 + 64) {
+        clientConnection->close();
+        delete clientConnection;
+        return;
+    }
+
+    // The payload must start with the shared token followed by a newline.
+    int sep = data.indexOf('\n');
+    if (sep <= 0) {
+        clientConnection->close();
+        delete clientConnection;
+        return;
+    }
+
+    QString receivedToken = QString::fromUtf8(data.left(sep));
+    if (receivedToken != m_token) {
+        qWarning() << "IPC: rejecting command with invalid token";
+        clientConnection->close();
+        delete clientConnection;
+        return;
+    }
+
+    QString cmdString = QString::fromUtf8(data.mid(sep + 1));
     this->parseCommand(cmdString);
 
     clientConnection->close();
@@ -130,4 +180,35 @@ void IPC::parseCommand(QString cmdString){
 
 void IPC::emitUriHandler(QString uriString){
     emit uriHandler(uriString);
+}
+
+bool IPC::writeTokenFile()
+{
+    // 32 random bytes, hex-encoded (64 chars). The token is regenerated on
+    // every bind() so an attacker cannot predict it across runs.
+    QByteArray random;
+    for (int i = 0; i < 8; ++i)
+        random.append(QRandomGenerator::system()->generate());
+    m_token = QString::fromLatin1(random.toHex());
+
+    QFile f(m_tokenFile.absoluteFilePath());
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+        return false;
+    f.write(m_token.toUtf8());
+    f.close();
+#ifdef Q_OS_UNIX
+    QFile::setPermissions(m_tokenFile.absoluteFilePath(),
+                          QFile::ReadOwner | QFile::WriteOwner);
+#endif
+    return true;
+}
+
+bool IPC::readTokenFile(QString &token) const
+{
+    QFile f(m_tokenFile.absoluteFilePath());
+    if (!f.open(QIODevice::ReadOnly))
+        return false;
+    token = QString::fromUtf8(f.readAll()).trimmed();
+    f.close();
+    return !token.isEmpty();
 }
