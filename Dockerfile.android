@@ -39,7 +39,7 @@ RUN PACKAGE_NAME=android-ndk-r${ANDROID_NDK_REVISION}-linux.zip \
     && unzip -q ${PACKAGE_NAME} \
     && rm -f ${PACKAGE_NAME}
 
-RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;28.0.3" "platforms;${ANDROID_API}" "tools" > /dev/null
+RUN echo y | ${ANDROID_SDK_ROOT}/bin/sdkmanager --sdk_root=${ANDROID_SDK_ROOT} "build-tools;28.0.3" "platforms;${ANDROID_API}" > /dev/null
 
 ENV HOST_PATH=${PATH}
 ENV PATH=${TOOLCHAIN_DIR}/aarch64-linux-android/bin:${TOOLCHAIN_DIR}/bin:${PATH}
