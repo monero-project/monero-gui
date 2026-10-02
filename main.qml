@@ -1688,8 +1688,6 @@ ApplicationWindow {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
-        anchors.fill: parent
-        z: parent.z + 1
         cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
@@ -1741,9 +1739,7 @@ ApplicationWindow {
     }
 
     StandardDialog {
-        z: parent.z + 1
         id: confirmationDialog
-        anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
         onAccepted:  {

@@ -159,6 +159,7 @@ Rectangle {
         // dynamically change onclose handler
         property var onCloseCallback
         id: oaPopup
+        aboveLockScreen: false
         cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {

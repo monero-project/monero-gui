@@ -64,6 +64,7 @@ Item {
 
     StandardDialog {
         id: entryChooserDialog
+        aboveLockScreen: false
         title: qsTr("Hardware wallet passphrase") + translationManager.emptyString
         text: qsTr("Please select where you want to enter passphrase.\nIt is recommended to enter passphrase on the hardware wallet for better security.") + translationManager.emptyString
 

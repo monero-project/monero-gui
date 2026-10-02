@@ -592,6 +592,7 @@ Rectangle {
 
     MoneroComponents.StandardDialog {
         id: errorPopup
+        aboveLockScreen: false
         cancelVisible: false
     }
 
