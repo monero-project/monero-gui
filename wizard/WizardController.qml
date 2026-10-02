@@ -388,7 +388,12 @@ Rectangle {
             new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
         }
         console.log("saving new wallet to", new_wallet_filename);
-        wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
+        if (!wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword)) {
+            appWindow.showStatusMessage(qsTr("Failed to set the wallet password"), 3);
+            wizardStateView.wizardRestoreWallet4View.wizardNav.btnNext.enabled = true;
+            wizardStateView.wizardCreateWallet4View.wizardNav.btnNext.enabled = true;
+            return;
+        }
         wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
     }
 
@@ -404,9 +409,9 @@ Rectangle {
         var wallet = ''
         // From seed or keys
         if(wizardController.walletRestoreMode === 'seed')
-            wallet = walletManager.recoveryWallet('', wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
+            wallet = walletManager.recoveryWallet('', oshelper.randomPassword(), wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
         else
-            wallet = walletManager.createWalletFromKeys('', persistentSettings.language_wallet, nettype,
+            wallet = walletManager.createWalletFromKeys('', oshelper.randomPassword(), persistentSettings.language_wallet, nettype,
                                                             wizardController.walletOptionsRecoverAddress, wizardController.walletOptionsRecoverViewkey,
                                                             wizardController.walletOptionsRecoverSpendkey, restoreHeight, kdfRounds)
 
