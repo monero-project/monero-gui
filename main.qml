@@ -1518,7 +1518,14 @@ ApplicationWindow {
         property bool   is_recovering : false
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
-        property string daemonFlags
+        property string daemonFlags: {
+            if (isWhonix && walletMode >= 2) {
+                return "--proxy socks5://127.0.0.1:9050 "
+                     + "--tor-stream-isolation "
+                     + "--tx-proxy tor,socks5://127.0.0.1:9050";
+            }
+            return "";
+        }
         property string p2poolFlags
         property int logLevel: 0
         property string logCategories: ""
@@ -1565,8 +1572,13 @@ ApplicationWindow {
         property string fiatPriceCurrency: "xmrusd"
         property bool fiatRatesConsentGiven: false
 
-        property string proxyAddress: "127.0.0.1:9050"
-        property bool proxyEnabled: isTails
+        property string proxyAddress: {
+            if (isWhonix) {
+                return whonixGatewayAddress === "" ? "" : whonixGatewayAddress + ":9160";
+            }
+            return "127.0.0.1:9050";
+        }
+        property bool proxyEnabled: isTails || isWhonix
         function getProxyAddress() {
             if (socksProxyFlagSet) {
                 return socksProxyFlag == "" ? "" : "socks5://" + socksProxyFlag;
