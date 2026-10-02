@@ -186,6 +186,8 @@ Rectangle {
         }
 
         //! Manage pricing
+        readonly property bool fiatRatesConsentNeeded: persistentSettings.fiatPriceCurrency !== "xmrusd" && !persistentSettings.fiatRatesConsentGiven
+
         RowLayout {
             MoneroComponents.CheckBox {
                 id: enableConvertCurrency
@@ -227,14 +229,16 @@ Rectangle {
                 Layout.maximumWidth: 100
                 labelText: qsTr("Currency") + translationManager.emptyString
                 labelFontSize: 14
-                currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
+                maxDropdownItems: 8
                 dataModel: fiatPriceCurrencyModel
                 onChanged: {
                     var obj = dataModel.get(currentIndex);
                     persistentSettings.fiatPriceCurrency = obj.data;
 
-                    if(persistentSettings.fiatPriceEnabled)
+                    if(persistentSettings.fiatPriceEnabled) {
+                        appWindow.fiatApiUpdatePrice();
                         appWindow.fiatApiRefresh();
+                    }
                 }
             }
 
@@ -243,24 +247,30 @@ Rectangle {
 
         ColumnLayout {
             // Feature needs to be double enabled for security purposes (miss-clicks)
-            visible: enableConvertCurrency.checked && !persistentSettings.fiatPriceEnabled
+            visible: enableConvertCurrency.checked && (!persistentSettings.fiatPriceEnabled || settingsUI.fiatRatesConsentNeeded)
             spacing: 0
             Layout.topMargin: 5
             Layout.leftMargin: 36
 
             MoneroComponents.WarningBox {
-                text: qsTr("Enabling price conversion exposes your IP address to the selected price source.") + translationManager.emptyString;
+                text: !persistentSettings.fiatPriceEnabled
+                    ? qsTr("Enabling price conversion exposes your IP address to the selected price source, and for currencies other than USD, to the exchange rate provider (frankfurter.dev).") + translationManager.emptyString
+                    : qsTr("Using a non-USD currency exposes your IP address to the exchange rate provider (frankfurter.dev).") + translationManager.emptyString;
             }
 
             MoneroComponents.StandardButton {
                 Layout.topMargin: 10
                 Layout.bottomMargin: 10
                 small: true
-                text: qsTr("Confirm and enable") + translationManager.emptyString
+                text: !persistentSettings.fiatPriceEnabled
+                    ? qsTr("Confirm and enable") + translationManager.emptyString
+                    : qsTr("Confirm") + translationManager.emptyString
 
                 onClicked: {
-                    console.log("Enabled price conversion");
+                    console.log(persistentSettings.fiatPriceEnabled ? "Confirmed exchange rate provider consent" : "Enabled price conversion");
                     persistentSettings.fiatPriceEnabled = true;
+                    persistentSettings.fiatRatesConsentGiven = true;
+                    appWindow.fiatApiRefresh();
                 }
             }
         }
@@ -314,14 +324,6 @@ Rectangle {
 
     ListModel {
         id: fiatPriceCurrencyModel
-        ListElement {
-            data: "xmrusd"
-            column1: "USD"
-        }
-        ListElement {
-            data: "xmreur"
-            column1: "EUR"
-        }
     }
 
     Component.onCompleted: {
@@ -339,6 +341,17 @@ Rectangle {
             if(api === persistentSettings.fiatPriceProvider)
                 fiatPriceProviderDropDown.currentIndex = i;
             i += 1;
+        }
+
+        var currencies = appWindow.fiatCurrencies;
+        fiatPriceCurrencyModel.clear();
+
+        for (var j = 0; j < currencies.length; ++j) {
+            const key = "xmr" + currencies[j].toLowerCase();
+            fiatPriceCurrencyModel.append({"column1": currencies[j], "data": key});
+
+            if(key === persistentSettings.fiatPriceCurrency)
+                fiatPriceCurrencyDropdown.currentIndex = j;
         }
 
         console.log('SettingsLayout loaded');
