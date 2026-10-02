@@ -230,7 +230,7 @@ Rectangle {
             inputPaddingBottom: 0
             property var lastCommands: []
             property int currentCommandIndex
-            enabled: !persistentSettings.useRemoteNode
+            enabled: appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode
             fontBold: false
             fontSize: 16
             placeholderText: qsTr("Type a command (e.g '%1' or '%2') and press Enter").arg("help").arg("status") + translationManager.emptyString

@@ -47,10 +47,9 @@ public:
     explicit DaemonManager(QObject *parent = 0);
     ~DaemonManager();
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false);
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool pruneBlockchain = false);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback);
 
-    Q_INVOKABLE bool noSync() const noexcept;
     // return true if daemon process is started
     Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const;
     // Send daemon command from qml and prints output in console window.
@@ -82,7 +81,6 @@ private:
     QMutex m_daemonMutex;
     QString m_monerod;
     bool m_app_exit = false;
-    bool m_noSync = false;
     QString args = "";
 
     mutable FutureScheduler m_scheduler;
