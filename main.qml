@@ -922,7 +922,9 @@ ApplicationWindow {
 
         } else if (transaction.txCount == 0) {
             console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            txConfirmationPopup.errorText.text = currentWallet.multisigInfo().isMultisig
+                ? qsTr("No transaction could be created. If other participants sent or received funds, make sure key images have been exported and imported by everyone first.") + translationManager.emptyString
+                : qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
             transaction = null;
@@ -1041,6 +1043,29 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
+        if (currentWallet.multisigInfo().isMultisig) {
+            if (transaction.signersKeys().length >= currentWallet.multisigInfo().threshold) {
+                appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+                currentWallet.commitTransactionAsync(transaction);
+            } else {
+                var signData = transaction.multisigSignData();
+                if (signData === "") {
+                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text = qsTr("Couldn't export multisig transaction data: ") + transaction.errorString;
+                    informationPopup.icon = StandardIcon.Critical;
+                    informationPopup.onCloseCallback = null;
+                    informationPopup.open();
+                    currentWallet.disposeTransaction(transaction);
+                    return;
+                }
+                persistentSettings.transferShowAdvanced = true;
+                middlePanel.transferView.multisigExportBlob = signData;
+                currentWallet.disposeTransaction(transaction);
+                appWindow.showStatusMessage(qsTr("Signed. Send the export string shown below on this page to the next participant."), 8);
+            }
+            return;
+        }
+
         // View only wallet - we save the tx
         if(viewOnly){
             // No file specified - abort

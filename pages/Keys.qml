@@ -62,6 +62,11 @@ Rectangle {
             text: qsTr("WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString;
         }
 
+        MoneroComponents.WarningBox {
+            visible: typeof currentWallet !== "undefined" && currentWallet && currentWallet.multisigInfo().isMultisig
+            text: qsTr("This is a multisig wallet. The seed and secret spend key below are only your personal key share and are NOT sufficient by themselves to restore this wallet's spending ability. Go to Advanced options > Multisig for the correct seed backup and key exchange procedure.") + translationManager.emptyString
+        }
+
         //! Manage wallet
         ColumnLayout {
             Layout.fillWidth: true
@@ -297,6 +302,15 @@ Rectangle {
                 viewOnlyQRCode.visible = true
                 showViewOnlyQr.visible = false
                 secretSpendKey.text = qsTr("(Hardware Device Wallet - No secret spend key available)") + translationManager.emptyString
+            }
+
+            // multisig wallet
+            if(currentWallet.multisigInfo().isMultisig) {
+                showFullQr.visible = false
+                viewOnlyQRCode.visible = true
+                showViewOnlyQr.visible = false
+                seedText.text = qsTr("(Multisig Wallet; see Advanced options > Multisig for seed backup)") + translationManager.emptyString
+                secretSpendKey.text = qsTr("(Multisig Wallet; this is only your personal key share, see Advanced options > Multisig for the correct backup procedure)") + translationManager.emptyString
             }
         }
     }

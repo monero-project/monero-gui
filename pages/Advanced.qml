@@ -42,6 +42,7 @@ ColumnLayout {
     property alias miningView: stateView.miningView
     property alias signView: stateView.signView
     property alias prooveView: stateView.prooveView
+    property alias multisigView: stateView.multisigView
     property alias state: stateView.state
 
     MoneroComponents.Navbar {
@@ -71,6 +72,12 @@ ColumnLayout {
             text: qsTr("Sign/verify") + translationManager.emptyString
             onSelected: state = "Sign"
         }
+        MoneroComponents.NavbarItem {
+            active: state == "Multisig"
+            text: qsTr("Multisig") + translationManager.emptyString
+            onSelected: state = "Multisig"
+            visible: typeof appWindow.currentWallet !== "undefined" && appWindow.currentWallet && appWindow.currentWallet.multisigInfo().isMultisig
+        }
     }
 
     Rectangle{
@@ -81,6 +88,7 @@ ColumnLayout {
         property TxKey prooveView: TxKey { }
         property SharedRingDB sharedRingDBView: SharedRingDB { }
         property Sign signView: Sign { }
+        property Multisig multisigView: Multisig { }
         Layout.fillWidth: true
         Layout.preferredHeight: panelHeight
         color: "transparent"
@@ -118,6 +126,10 @@ ColumnLayout {
                 name: "Sign"
                 PropertyChanges { target: stateView; currentView: stateView.signView }
                 PropertyChanges { target: root; panelHeight: stateView.signView.signHeight + 140 }
+            }, State {
+                name: "Multisig"
+                PropertyChanges { target: stateView; currentView: stateView.multisigView }
+                PropertyChanges { target: root; panelHeight: stateView.multisigView.panelHeight + 140 }
             }
         ]
 
@@ -153,6 +165,7 @@ ColumnLayout {
     function clearFields() {
         signView.clearFields();
         prooveView.clearFields();
+        multisigView.clearFields();
     }
     
 }

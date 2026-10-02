@@ -39,6 +39,25 @@ QString PendingTransaction::errorString() const
     return QString::fromStdString(m_pimpl->errorString());
 }
 
+QString PendingTransaction::multisigSignData()
+{
+    return QString::fromStdString(m_pimpl->multisigSignData());
+}
+
+void PendingTransaction::signMultisigTx()
+{
+    m_pimpl->signMultisigTx();
+}
+
+QStringList PendingTransaction::signersKeys() const
+{
+    QStringList result;
+    for (const auto &key : m_pimpl->signersKeys()) {
+        result << QString::fromStdString(key);
+    }
+    return result;
+}
+
 bool PendingTransaction::commit()
 {
     // Save transaction to file if fileName is set.

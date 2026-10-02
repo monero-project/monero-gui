@@ -36,6 +36,7 @@
 #include <QMutex>
 #include <QList>
 #include <QJSValue>
+#include <QVariantMap>
 #include <QtConcurrent/QtConcurrent>
 
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
@@ -215,6 +216,28 @@ public:
     //! export/import key images
     Q_INVOKABLE bool exportKeyImages(const QString& path, bool all = false);
     Q_INVOKABLE bool importKeyImages(const QString& path);
+
+    //! multisig
+    //! returns {isMultisig: bool, isReady: bool, threshold: uint, total: uint}
+    Q_INVOKABLE QVariantMap multisigInfo() const;
+    //! returns this participant's multisig kex info for the current round (prepare_multisig on round 1)
+    Q_INVOKABLE QString getMultisigInfo() const;
+    //! switches wallet into multisig state; returns extra info string if more kex rounds are required, else empty
+    Q_INVOKABLE QString makeMultisig(const QVector<QString> &info, quint32 threshold);
+    //! additional kex round; returns new info string if more rounds required, else empty once ready
+    Q_INVOKABLE QString exchangeMultisigKeys(const QVector<QString> &info, bool forceUpdate = false);
+    //! exports this wallet's key images for other participants to import; empty string on failure
+    Q_INVOKABLE QString exportMultisigImages();
+    //! imports other participants' key images; returns number of images imported, -1 on failure
+    Q_INVOKABLE qint64 importMultisigImages(const QVector<QString> &images);
+    //! true if this wallet still needs multisig key images imported from other participants
+    Q_INVOKABLE bool hasMultisigPartialKeyImages() const;
+    //! this participant's public multisig signer key, or empty string if not multisig
+    Q_INVOKABLE QString publicMultisigSignerKey() const;
+    //! this participant's multisig seed (does not alone allow restoring spend capability)
+    Q_INVOKABLE QString getMultisigSeed(const QString &passphrase = "") const;
+    //! reconstructs a PendingTransaction from a multisig sign-data blob obtained from another participant
+    Q_INVOKABLE PendingTransaction * restoreMultisigTransaction(const QString &signData);
 
     //! export/import outputs
     Q_INVOKABLE bool exportOutputs(const QString& path, bool all = false);
@@ -416,6 +439,7 @@ signals:
     void disconnectedChanged() const;
     void proxyAddressChanged() const;
     void refreshingChanged() const;
+    void multisigStateChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);

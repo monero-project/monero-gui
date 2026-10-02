@@ -112,6 +112,7 @@
         <file>components/StandardDialog.qml</file>
         <file>components/DevicePassphraseDialog.qml</file>
         <file>pages/Sign.qml</file>
+        <file>pages/Multisig.qml</file>
         <file>components/DaemonManagerDialog.qml</file>
         <file>version.js</file>
         <file>components/QRCodeScanner.qml</file>
@@ -207,6 +208,8 @@
         <file>wizard/WizardCreateWallet3.qml</file>
         <file>wizard/WizardCreateWallet4.qml</file>
         <file>wizard/WizardCreateWallet5.qml</file>
+        <file>wizard/WizardCreateMultisig1.qml</file>
+        <file>wizard/WizardCreateMultisig2.qml</file>
         <file>wizard/WizardCreateDevice1.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>wizard/WizardHeader.qml</file>

@@ -78,6 +78,14 @@ public:
     QList<QVariant> subaddrIndices() const;
     Q_INVOKABLE void setFilename(const QString &fileName);
 
+    //! multisig: exports this tx (plus signatures collected so far) to hand to the next signer
+    Q_INVOKABLE QString multisigSignData();
+    //! multisig: adds this participant's partial signature
+    Q_INVOKABLE void signMultisigTx();
+    //! multisig: base58-encoded public keys of participants who have signed so far;
+    //! compare .length() against Wallet::multisigInfo().threshold to know if ready to commit()
+    Q_INVOKABLE QStringList signersKeys() const;
+
 private:
     explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
 

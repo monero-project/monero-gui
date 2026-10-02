@@ -129,6 +129,29 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: createMultisigWalletButton
+                visible: appWindow.walletMode >= 2
+                headerText: qsTr("Create a multisig wallet") + translationManager.emptyString
+                bodyText: qsTr("Create a new M-of-N multisig wallet shared between several participants.") + translationManager.emptyString
+                imageIcon: "qrc:///images/create-wallet.png"
+
+                onMenuClicked: {
+                    wizardController.restart();
+                    wizardStateView.state = "wizardCreateMultisig1"
+                }
+            }
+
+            Rectangle {
+                visible: appWindow.walletMode >= 2
+                Layout.preferredHeight: 1
+                Layout.topMargin: 3
+                Layout.bottomMargin: 3
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            WizardMenuItem {
                 id: openWalletButton
                 headerText: qsTr("Open a wallet from file") + translationManager.emptyString
                 bodyText: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString

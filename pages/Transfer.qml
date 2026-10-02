@@ -94,6 +94,8 @@ Rectangle {
                                    && appWindow.daemonSynced
                                    && !hasTransferWarnings
                                    && hasValidTransferInfo
+    property bool isMultisigWallet: typeof appWindow.currentWallet !== "undefined" && appWindow.currentWallet && appWindow.currentWallet.multisigInfo().isMultisig
+    property string multisigExportBlob: ""
 
     Clipboard { id: clipboard }
 
@@ -152,6 +154,8 @@ Rectangle {
         recipientModel.clear();
         fillPaymentDetails("", "", "", "", "");
         priorityDropdown.currentIndex = 0
+        multisigImportInput.text = "";
+        root.multisigExportBlob = "";
     }
 
     // Information dialog
@@ -1002,6 +1006,122 @@ Rectangle {
                        errorMessage +
                        "<p>" + qsTr("4. Using cold wallet, sign your transaction file") + "</p>" +
                        "<p>" + qsTr("5. Using view-only wallet, submit your signed transaction") + "</p>" + translationManager.emptyString
+            }
+        }
+
+        ColumnLayout {
+            visible: root.isMultisigWallet && persistentSettings.transferShowAdvanced
+            Layout.fillWidth: true
+            Layout.topMargin: 10
+            spacing: 10
+
+            MoneroComponents.Label {
+                fontSize: 14
+                text: qsTr("Multisig transaction signing") + translationManager.emptyString
+                tooltipIconVisible: true
+                tooltip: root.isMultisigWallet ? qsTr("This wallet needs %1 of %2 participants to sign each transaction. Use \"Send\" above to propose a transaction or add your signature to one you already started; it will be signed automatically and, if more signatures are needed, an export string will appear below to pass along to the next participant. To continue someone else's transaction, paste what was sent below and click \"Import and sign\".").arg(appWindow.currentWallet.multisigInfo().threshold).arg(appWindow.currentWallet.multisigInfo().total) + translationManager.emptyString : ""
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: multisigExportLine
+                visible: root.multisigExportBlob !== ""
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Send this to the next participant") + translationManager.emptyString
+                text: root.multisigExportBlob
+                readOnly: true
+                copyButton: true
+                wrapMode: Text.WrapAnywhere
+            }
+
+            MoneroComponents.LabelSubheader {
+                Layout.fillWidth: true
+                textFormat: Text.RichText
+                text: qsTr("Paste a transaction another participant sent you") + translationManager.emptyString
+            }
+
+            Rectangle {
+                color: "transparent"
+                radius: 4
+                Layout.preferredHeight: 90
+                Layout.fillWidth: true
+                border.width: 1
+                border.color: multisigImportInput.activeFocus ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+
+                MoneroComponents.InputMulti {
+                    id: multisigImportInput
+                    width: parent.width
+                    height: parent.height
+                    wrapMode: TextInput.Wrap
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 13
+                    selectByMouse: true
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight
+
+                MoneroComponents.StandardButton {
+                    small: true
+                    text: qsTr("Import and sign") + translationManager.emptyString
+                    enabled: multisigImportInput.text.trim() !== ""
+                    onClicked: {
+                        var tx = currentWallet.restoreMultisigTransaction(multisigImportInput.text.trim());
+                        if (!tx || tx.status !== PendingTransaction.Status_Ok) {
+                            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                            informationPopup.text = qsTr("Can't load multisig transaction: ") + (tx ? tx.errorString : currentWallet.errorString);
+                            informationPopup.icon = StandardIcon.Critical;
+                            informationPopup.onCloseCallback = null;
+                            informationPopup.open();
+                            if (tx) tx.destroy();
+                            return;
+                        }
+
+                        confirmationDialog.title = qsTr("Confirm signing") + translationManager.emptyString;
+                        confirmationDialog.text = qsTr("Amount: %1 XMR\nFee: %2 XMR\n\nAdd signature to this transaction?")
+                            .arg(Utils.removeTrailingZeros(walletManager.displayAmount(tx.amount)))
+                            .arg(Utils.removeTrailingZeros(walletManager.displayAmount(tx.fee)));
+                        confirmationDialog.icon = StandardIcon.Question;
+                        confirmationDialog.onAcceptedCallback = function() {
+                            tx.signMultisigTx();
+                            if (tx.status !== PendingTransaction.Status_Ok) {
+                                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                                informationPopup.text = qsTr("Couldn't sign multisig transaction: ") + tx.errorString;
+                                informationPopup.icon = StandardIcon.Critical;
+                                informationPopup.onCloseCallback = null;
+                                informationPopup.open();
+                                currentWallet.disposeTransaction(tx);
+                                return;
+                            }
+                            multisigImportInput.text = "";
+
+                            if (tx.signersKeys().length >= currentWallet.multisigInfo().threshold) {
+                                root.multisigExportBlob = "";
+                                appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+                                currentWallet.commitTransactionAsync(tx);
+                            } else {
+                                var signData = tx.multisigSignData();
+                                if (signData === "") {
+                                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                                    informationPopup.text = qsTr("Couldn't export multisig transaction data: ") + tx.errorString;
+                                    informationPopup.icon = StandardIcon.Critical;
+                                    informationPopup.onCloseCallback = null;
+                                    informationPopup.open();
+                                    currentWallet.disposeTransaction(tx);
+                                    return;
+                                }
+                                root.multisigExportBlob = signData;
+                                currentWallet.disposeTransaction(tx);
+                                appWindow.showStatusMessage(qsTr("Signed. Send the export string above to the next participant."), 8);
+                            }
+                        };
+                        confirmationDialog.onRejectedCallback = function() { tx.destroy(); };
+                        confirmationDialog.open();
+                    }
+                }
             }
         }
 
