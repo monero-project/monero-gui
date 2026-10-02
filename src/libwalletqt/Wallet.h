@@ -172,6 +172,8 @@ public:
     // Set daemon rpc user/pass
     Q_INVOKABLE void setDaemonLogin(const QString &daemonUsername = "", const QString &daemonPassword = "");
 
+    Q_INVOKABLE void checkDaemonNettypeAsync(const QString &daemonAddress, const QString &proxyAddress = "");
+
     //! create a view only wallet
     Q_INVOKABLE bool createViewOnly(const QString &path, const QString &password) const;
 
@@ -416,6 +418,8 @@ signals:
     void disconnectedChanged() const;
     void proxyAddressChanged() const;
     void refreshingChanged() const;
+
+    void daemonNettypeMismatch(int daemonNettype) const;
 
 private:
     Wallet(QObject * parent = nullptr);

@@ -57,6 +57,10 @@
 #include <QVector>
 #include <QMutexLocker>
 
+#include "net/http.h"
+#include "storages/http_abstract_invoke.h"
+#include "rpc/core_rpc_server_commands_defs.h"
+
 #include "qt/ScopeGuard.h"
 
 namespace {
@@ -317,6 +321,39 @@ void Wallet::initAsync(
     {
         setConnectionStatus(Wallet::ConnectionStatus_Connecting);
     }
+}
+
+void Wallet::checkDaemonNettypeAsync(const QString &daemonAddress, const QString &proxyAddress /* = "" */)
+{
+    const NetworkType::Type walletNettype = nettype();
+    const std::string daemon_address = daemonAddress.toStdString();
+    const std::string proxy_address = proxyAddress.toStdString();
+    m_scheduler.run([daemon_address, proxy_address, walletNettype, this] {
+        net::http::client client;
+        if (!client.set_server(daemon_address, boost::none)) return;
+        if (!proxy_address.empty())
+            client.set_proxy(proxy_address);
+
+        cryptonote::COMMAND_RPC_GET_INFO::request req = AUTO_VAL_INIT(req);
+        cryptonote::COMMAND_RPC_GET_INFO::response res = AUTO_VAL_INIT(res);
+        const bool r = epee::net_utils::invoke_http_json_rpc("/json_rpc", "get_info", req, res, client, std::chrono::seconds(8));
+        client.disconnect();
+
+        if (!r || res.status != CORE_RPC_STATUS_OK) return;
+
+        NetworkType::Type daemonNettype;
+        if (res.mainnet)
+            daemonNettype = NetworkType::MAINNET;
+        else if (res.testnet)
+            daemonNettype = NetworkType::TESTNET;
+        else if (res.stagenet)
+            daemonNettype = NetworkType::STAGENET;
+        else
+            return;
+
+        if (daemonNettype != walletNettype)
+            emit daemonNettypeMismatch(static_cast<int>(daemonNettype));
+    });
 }
 
 bool Wallet::isHwBacked() const
