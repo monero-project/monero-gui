@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
@@ -43,7 +44,11 @@ Rectangle {
     property alias pageRoot: pageRoot
     property alias walletInput: walletInput
     property alias wizardNav: wizardNav
+    property alias fileEntropyCheckBox: fileEntropyCheckBox
+    property alias entropyFileInput: entropyFileInput
+    property alias entropyFileSelector: entropyFileInput
     property string viewName: "wizardCreateWallet1"
+    property bool addEntropySuccess: false
 
     ColumnLayout {
         id: pageRoot
@@ -84,14 +89,89 @@ Rectangle {
                 id: walletInput
                 rowLayout: false
                 walletNameKeyNavigationBackTab: createWalletHeader
-                browseButtonKeyNavigationTab: wizardNav.btnPrev
+                browseButtonKeyNavigationTab: fileEntropyCheckBox
+            }
+            //Selecting file as extra entropy source
+            MoneroComponents.CheckBox{
+                id: fileEntropyCheckBox
+                text: qsTr("Provide extra entropy for wallet generation by file") + translationManager.emptyString
+                tooltip: qsTr("Uses data from a file to add more randomness when creating your wallet. Only the first 64 MB of the selected file will be used. This option does not provide additional security if your operating system already provides sufficient randomness.") + translationManager.emptyString
+                tooltipIconVisible: true
+                fontSize: walletInput.walletName.labelFontSize
+                checked: false
+                activeFocusOnTab: true
+                onCheckedChanged: {
+                    if (!checked) {
+                        wizardCreateWallet1.addEntropySuccess = false
+                        entropyFileInput.text = ""
+                        entropyFileWarning.text = ""
+                    }
+                }
+                KeyNavigation.up: walletInput.browseButton
+                KeyNavigation.backtab: walletInput.browseButton
+                KeyNavigation.down: checked ? entropyFileInput : wizardNav.btnPrev
+                KeyNavigation.tab: checked ? entropyFileInput : wizardNav.btnPrev
+            }
+
+            MoneroComponents.LineEdit {
+                id: entropyFileInput
+                Layout.fillWidth: true
+                visible: fileEntropyCheckBox.checked
+                labelText: qsTr("Entropy file") + translationManager.emptyString
+                labelFontSize: walletInput.walletName.labelFontSize
+                fontSize: walletInput.walletName.fontSize
+                placeholderText: qsTr("Choose a file") + translationManager.emptyString
+                placeholderFontSize: walletInput.walletName.placeholderFontSize
+                readOnly: true
+                Accessible.role: Accessible.EditableText
+                Accessible.name: labelText + " " + text
+                KeyNavigation.up: fileEntropyCheckBox
+                KeyNavigation.backtab: fileEntropyCheckBox
+                KeyNavigation.down: entropyFileBrowseButton
+                KeyNavigation.tab: entropyFileBrowseButton
+
+                MoneroComponents.InlineButton {
+                    id: entropyFileBrowseButton
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontStyleName: "Solid"
+                    fontPixelSize: 18
+                    text: FontAwesome.folderOpen
+                    tooltip: qsTr("Browse") + translationManager.emptyString
+                    tooltipLeft: true
+                    onClicked: {
+                        entropyFileDialog.open()
+                        entropyFileInput.focus = true
+                    }
+                    Accessible.role: Accessible.Button
+                    Accessible.name: qsTr("Browse") + translationManager.emptyString
+                    KeyNavigation.up: entropyFileInput
+                    KeyNavigation.backtab: entropyFileInput
+                    KeyNavigation.down: wizardNav.btnPrev
+                    KeyNavigation.tab: wizardNav.btnPrev
+                }
+            }
+            //Displaying the entropy adding result
+            MoneroComponents.TextPlain {
+                id: entropyFileWarning
+                Layout.fillWidth: true
+                visible: fileEntropyCheckBox.checked && text !== ""
+                textFormat: Text.PlainText
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 14
+                color: wizardCreateWallet1.addEntropySuccess
+                       ? (MoneroComponents.Style.blackTheme ? "#00FF00" : "#008000")
+                       : "#FF0000"
+                themeTransition: false
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
             }
 
             WizardNav {
                 id: wizardNav
                 progressSteps: appWindow.walletMode <= 1 ? 4 : 5
                 progress: 0
-                btnNext.enabled: walletInput.verify();
+                btnNext.enabled: walletInput.verify()
+                                 && (!fileEntropyCheckBox.checked || wizardCreateWallet1.addEntropySuccess)
                 btnPrev.text: appWindow.width <= 506 ? "<" : qsTr("Back to menu") + translationManager.emptyString
                 onPrevClicked: {
                     if (wizardStateView.wizardCreateWallet2View.seedListGrid) {
@@ -101,7 +181,7 @@ Rectangle {
                     wizardController.wizardStateView.wizardCreateWallet3View.pwConfirmField = "";
                     wizardStateView.state = "wizardHome";
                 }
-                btnPrevKeyNavigationBackTab: walletInput.errorMessageWalletLocation.text != "" ? walletInput.errorMessageWalletLocation : walletInput.browseButton
+                btnPrevKeyNavigationBackTab: entropyFileInput.visible ? entropyFileBrowseButton : fileEntropyCheckBox
                 btnNextKeyNavigationTab: createWalletHeader
                 onNextClicked: {
                     wizardController.walletOptionsName = walletInput.walletName.text;
@@ -113,9 +193,39 @@ Rectangle {
         }
     }
 
+    FileDialog {
+        id: entropyFileDialog
+        title: qsTr("Please choose a file as extra entropy source") + translationManager.emptyString
+        folder: shortcuts.home
+        nameFilters: [qsTr("All files (*)") + translationManager.emptyString]
+        selectExisting: true
+        selectFolder: false
+        selectMultiple: false
+
+        onAccepted: {
+            var path = walletManager.urlToLocalPath(entropyFileDialog.fileUrl)
+            wizardCreateWallet1.addEntropySuccess = false
+            entropyFileInput.text = ""
+
+            if (oshelper.addExtraEntropyFromFile(path)) {
+                entropyFileInput.text = path
+                //regenerate the seed using new entropy
+                wizardStateView.wizardCreateWallet2View.regenerateSeed()
+                wizardCreateWallet1.addEntropySuccess = true
+                entropyFileWarning.text = qsTr("Extra entropy was added successfully") + translationManager.emptyString
+            } else {
+                entropyFileWarning.text = qsTr("The selected file could not be opened for reading") + translationManager.emptyString
+            }
+        }
+    }
+
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
             walletInput.reset();
+            fileEntropyCheckBox.checked = false;
+            entropyFileInput.text = "";
+            entropyFileWarning.text = "";
+            wizardCreateWallet1.addEntropySuccess = false;
         }
     }
 }
