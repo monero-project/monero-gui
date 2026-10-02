@@ -1854,23 +1854,32 @@ Rectangle {
     }
 
     function onPageCompleted() {
-        // setup date filter scope according to real transactions
         if(appWindow.currentWallet != null){
             root.model = appWindow.currentWallet.historyModel;
             root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
             root.model.sort(0, Qt.DescendingOrder);
+        }
+
+        root.reset();
+        root.refresh();
+
+        // Block height order does not imply date order, especially for failed transactions.
+        if(appWindow.currentWallet != null){
             var count = root.model.rowCount()
             if (count > 0) {
-                //date of the first transaction
-                fromDatePicker.currentDate = root.model.data(root.model.index((count - 1), 0), TransactionHistoryModel.TransactionDateRole);
+                var firstDate = root.model.data(root.model.index(0, 0), TransactionHistoryModel.TransactionDateRole);
+                for (var i = 1; i < count; ++i) {
+                    var date = root.model.data(root.model.index(i, 0), TransactionHistoryModel.TransactionDateRole);
+                    if (date < firstDate)
+                        firstDate = date;
+                }
+                fromDatePicker.currentDate = firstDate;
             } else {
                 //date of monero birth (2014-04-18)
                 fromDatePicker.currentDate = model.transactionHistory.firstDateTime
             }
         }
 
-        root.reset();
-        root.refresh();
         root.initialized = true;
         root.updateFilter();
     }
