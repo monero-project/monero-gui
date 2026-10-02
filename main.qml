@@ -1183,7 +1183,7 @@ ApplicationWindow {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
             informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
-            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(results[2]).arg(results[3]) : qsTr("Bad signature");
+            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
