@@ -2054,6 +2054,9 @@ ApplicationWindow {
             id: titleBar
             visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
             walletName: persistentSettings.displayWalletNameInTitleBar && rootItem.state != "wizard" ? appWindow.walletName : ""
+            actionsDisabled: informationPopup.visible || confirmationDialog.visible || txConfirmationPopup.visible ||
+                              successfulTxPopup.visible || passwordDialog.visible || devicePassphraseDialog.visible ||
+                              inputDialog.visible || updateDialog.visible || remoteNodeDialog.visible
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
