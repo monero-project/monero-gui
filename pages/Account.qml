@@ -42,6 +42,7 @@ import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import "../js/TxUtils.js" as TxUtils
+import "../js/Utils.js" as Utils
 
 Rectangle {
     id: pageAccount
@@ -396,8 +397,8 @@ Rectangle {
             subaddressAccountListView.model = appWindow.currentWallet.subaddressAccountModel;
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
 
-            balanceAll.text = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR"
-            unlockedBalanceAll.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR"
+            balanceAll.text = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.balanceAll())) + " " + Utils.denominationUnit()
+            unlockedBalanceAll.text = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll())) + " " + Utils.denominationUnit()
         }
     }
 

@@ -36,6 +36,7 @@ import FontAwesome 1.0
 
 import "components" as MoneroComponents
 import "components/effects/" as MoneroEffects
+import "js/Utils.js" as Utils
 
 Rectangle {
     id: panel
@@ -230,7 +231,7 @@ Rectangle {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return appWindow.fiatApiCurrencySymbol();
                         } else {
-                            return "XMR"
+                            return Utils.denominationUnit()
                         }
                     }
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
@@ -252,8 +253,8 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     id: balancePart1
                     themeTransition: false
-                    anchors.left: parent.left
-                    anchors.leftMargin: 58
+                    anchors.left: currencyLabel.right
+                    anchors.leftMargin: 8
                     anchors.baseline: currencyLabel.baseline
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
                     Binding on color {
@@ -264,12 +265,13 @@ Rectangle {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[0] + "."
                         } else {
-                            return balanceString.split('.')[0] + "."
+                            var parts = balanceString.split('.');
+                            return parts[0] + (parts.length > 1 ? "." : "");
                         }
                     }
                     font.pixelSize: {
                         var defaultSize = 29;
-                        var digits = (balancePart1.text.length - 1)
+                        var digits = balancePart1.text.replace(/[^0-9]/g, '').length
                         if (digits > 2 && !(persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle)) {
                             return defaultSize - 1.1 * digits
                         } else {
@@ -299,7 +301,8 @@ Rectangle {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[1]
                         } else {
-                            return balanceString.split('.')[1]
+                            var parts = balanceString.split('.');
+                            return parts.length > 1 ? parts[1] : "";
                         }
                     }
                     font.pixelSize: 16
