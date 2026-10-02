@@ -1602,7 +1602,7 @@ Rectangle {
                 // has the correct amount, so we try to fetch it from that instead.
                 amount = Number(TxUtils.destinationsToAmount(destinations));
             }
-            var displayAmount = Utils.removeTrailingZeros(amount.toFixed(12)) + " XMR";
+            var displayAmount = Utils.removeTrailingZeros(Utils.denominate(amount.toFixed(12))) + " " + Utils.denominationUnit();
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
