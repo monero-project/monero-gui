@@ -338,6 +338,8 @@ ApplicationWindow {
     function connectWallet(wallet) {
         currentWallet = wallet
 
+        leftPanel.progressBar.reset();
+
         walletName = usefulName(wallet.path)
 
         viewOnly = currentWallet.viewOnly;
@@ -373,6 +375,7 @@ ApplicationWindow {
         middlePanel.checkProofClicked.connect(handleCheckProof);
 
         persistentSettings.restore_height = currentWallet.walletCreationHeight;
+        leftPanel.progressBar.restoreHeight = persistentSettings.restore_height;
 
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
