@@ -304,13 +304,14 @@ std::pair<quint8, QString> OSHelper::getNetworkTypeAndAddressFromFile(const QStr
     return std::make_pair(networkType, address);
 }
 
-quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath) const
+quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath, quint8 fallbackNetworkType) const
 {
     QString walletPath = keysPath;
     if(keysPath.endsWith(".keys")){
         walletPath = keysPath.mid(0,keysPath.length()-5);
     }
-    return getNetworkTypeAndAddressFromFile(walletPath).first;
+    const auto networkTypeAndAddress = getNetworkTypeAndAddressFromFile(walletPath);
+    return networkTypeAndAddress.second.isEmpty() ? fallbackNetworkType : networkTypeAndAddress.first;
 }
 
 void OSHelper::openSeedTemplate() const
