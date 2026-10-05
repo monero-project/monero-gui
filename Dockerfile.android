@@ -213,6 +213,9 @@ RUN mkdir ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/platforms ${NEW_SDK_ROOT} \
     && cp -r ${ANDROID_SDK_ROOT}/build-tools ${NEW_SDK_ROOT}
 
+COPY docker.gitconfig /etc/monero-gui.gitconfig
+RUN git config --system --add include.path /etc/monero-gui.gitconfig
+
 CMD set -ex \
     && cd /monero-gui \
     && mkdir -p build/Android/release \
