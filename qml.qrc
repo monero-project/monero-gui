@@ -10,6 +10,7 @@
         <file>components/NavbarItem.qml</file>
         <file>components/RemoteNodeDialog.qml</file>
         <file>components/RemoteNodeList.qml</file>
+        <file>components/PeersTable.qml</file>
         <file>components/SettingsListItem.qml</file>
         <file>components/Slider.qml</file>
         <file>components/Tooltip.qml</file>
