@@ -26,8 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#if defined(_WIN32) && !defined(MONERO_GUI_STATIC)
-    #include <Winsock2.h>
+#if defined(_WIN32)
+    #include <winsock2.h>
+    #undef interface
 #endif
 
 #include "updater.h"

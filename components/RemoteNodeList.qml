@@ -26,10 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import FontAwesome 1.0
+
+import FontAwesome
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -138,7 +139,8 @@ ColumnLayout {
 
                     MoneroComponents.InlineButton {
                         buttonColor: "transparent"
-                        fontFamily: FontAwesome.fontFamily
+                        fontFamily: FontAwesome.fontFamilySolid
+                        fontStyleName: "Solid"
                         fontPixelSize: 18
                         text: FontAwesome.edit
                         tooltip: qsTr("Edit remote node") + translationManager.emptyString
@@ -153,7 +155,8 @@ ColumnLayout {
 
                     MoneroComponents.InlineButton {
                         buttonColor: "transparent"
-                        fontFamily: FontAwesome.fontFamily
+                        fontFamily: FontAwesome.fontFamilySolid
+                        fontStyleName: "Solid"
                         text: FontAwesome.times
                         visible: remoteNodesModel.count > 1
                         tooltip: qsTr("Remove remote node") + translationManager.emptyString

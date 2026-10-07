@@ -1,6 +1,6 @@
 # macOS:
 
-Use macOS 10.12 - 10.13 for better backwards compability.
+Use macOS 12 for better backwards compability.
 
 1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm libsodium expat protobuf@21 libgcrypt hidapi libusb cmake pkg-config && brew link protobuf@21`
 
@@ -12,9 +12,9 @@ Use macOS 10.12 - 10.13 for better backwards compability.
 
 ```bash
 mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release -D ARCH=default -D CMAKE_PREFIX_PATH=/path/to/Qt5.12.8/5.12.8/clang_64 ..
-make
-make deploy
+cmake -S . -B build -G Ninja -D ARCH=default -D CMAKE_PREFIX_PATH=/path/to/Qt6.8.3/
+cmake --build build
+cmake --build build --target deploy
 ```
 
 5. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
@@ -45,31 +45,3 @@ You can check if this step worked by using `codesign -dvvv monero-wallet-gui.app
 5. `xcrun notarytool info aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee --apple-id email@address.org --team-id XXXXXXXXXX`
 
 6. `xcrun stapler staple -v monero-gui-mac-x64-v0.X.Y.Z.dmg`
-
-## Compile Qt for Apple Silicon
-
-Qt does not offer pre-built binaries for Apple Silicon, they have to be manually compiled.
-
-```bash
-git clone https://github.com/qt/qt5.git
-cd qt5
-git checkout v5.15.9-lts-lgpl
-./init-repository
-mkdir build
-cd build
-../configure -prefix /path/to/qt-build-dir/ -opensource -confirm-license -release -nomake examples -nomake tests -no-rpath -skip qtwebengine -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtnetworkauth -skip qtpurchasing -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras -skip gamepad -skip serialbus -skip location -skip webengine
-make
-make install
-cd ../qttools/src/linguist/lrelease
-../../../../build/qtbase/bin/qmake
-make
-make install
-cd ../../../../qttools/src/macdeployqt/macdeployqt/
-../../../../build/qtbase/bin/qmake
-make
-make install
-```
-
-For compilation with Xcode 15 the following patch has to be applied: https://raw.githubusercontent.com/Homebrew/formula-patches/086e8cf/qt5/qt5-qmake-xcode15.patch
-
-The `CMAKE_PREFIX_PATH` has to be set to `/path/to/qt-build-dir/` during monero-gui compilation.

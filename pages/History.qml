@@ -26,17 +26,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import FontAwesome
+
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionInfo 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import moneroComponents.Clipboard 1.0
-import FontAwesome 1.0
 
 import "../components/effects/" as MoneroEffects
 import "../components" as MoneroComponents
@@ -1514,8 +1514,8 @@ Rectangle {
         root.txOffset = 0;
         root.txData.sort(function(a, b) {
             if (root.sortBy === "blockheight") {
-                var aPending = typeof a.blockheight === "undefined";
-                var bPending = typeof b.blockheight === "undefined";
+                var aPending = a.blockheight === "";
+                var bPending = b.blockheight === "";
                 if (aPending !== bPending)
                     return aPending ? 1 : -1;
                 if (aPending)
@@ -1588,7 +1588,8 @@ Rectangle {
             var destinationAddresses = _model.data(idx, TransactionHistoryModel.TransactionDestinationAddressesRole);
             var time = _model.data(idx, TransactionHistoryModel.TransactionTimeRole);
             var date = _model.data(idx, TransactionHistoryModel.TransactionDateRole);
-            var blockheight = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+            var blockheightValue = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+            var blockheight = blockheightValue == null ? "" : blockheightValue.toString();
             var confirmations = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
             var confirmationsRequired = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRequiredRole);
             var fee = _model.data(idx, TransactionHistoryModel.TransactionFeeRole);
@@ -1809,15 +1810,14 @@ Rectangle {
             + translationManager.emptyString;
     }
 
-    FileDialog {
+    FolderDialog {
         id: writeCSVFileDialog
         title: qsTr("Please choose a folder") + translationManager.emptyString
-        selectFolder: true
         onRejected: {
             console.log("csv write canceled")
         }
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
+            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.selectedFolder);
             var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
 
             if(written !== ""){
@@ -1825,7 +1825,6 @@ Rectangle {
                 var text = qsTr("CSV file written to: %1").arg(written) + "\n\n"
                 text += qsTr("Tip: Use your favorite spreadsheet software to sort on blockheight.") + "\n\n" + translationManager.emptyString;
                 confirmationDialog.text = text;
-                confirmationDialog.icon = StandardIcon.Information;
                 confirmationDialog.cancelText = qsTr("Open folder") + translationManager.emptyString;
                 confirmationDialog.onAcceptedCallback = null;
                 confirmationDialog.onRejectedCallback = function() {
@@ -1835,7 +1834,6 @@ Rectangle {
             } else {
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Error exporting transaction data.") + "\n\n" + translationManager.emptyString;
-                informationPopup.icon = StandardIcon.Critical;
                 informationPopup.onCloseCallback = null;
                 informationPopup.open();
 
@@ -1848,7 +1846,7 @@ Rectangle {
             }
             catch(err) {}
             finally {
-                writeCSVFileDialog.folder = _folder;
+                writeCSVFileDialog.currentFolder = _folder;
             }
         }
     }

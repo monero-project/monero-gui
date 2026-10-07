@@ -26,9 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import moneroComponents.Clipboard 1.0
 import "../components" as MoneroComponents
@@ -54,14 +54,16 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-    property var transactionID;
+    property string transactionID: ""
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
 
-    function open(txid) {
-        root.transactionID = txid;
+    function open(txids) {
+        root.transactionID = !txids ? ""
+                                   : typeof txids === "string" ? txids
+                                   : txids.join("\n");
         root.visible = true;
     }
 
@@ -128,7 +130,7 @@ Rectangle {
             readOnly: true
             wrapMode: Text.Wrap
             labelText: qsTr("Transaction file location:") + translationManager.emptyString
-            text: walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+            text: walletManager.urlToLocalPath(saveTxDialog.selectedFile)
             fontSize: 16
         }
 
@@ -161,7 +163,7 @@ Rectangle {
                 width: 200
                 KeyNavigation.tab: doneButton
                 onClicked: {
-                    oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.fileUrl))
+                    oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.selectedFile))
                 }
             }
 

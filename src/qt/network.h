@@ -29,7 +29,6 @@
 #pragma once
 
 #include <QCoreApplication>
-#include <QtNetwork>
 
 // TODO: wallet_merged - epee library triggers the warnings
 #pragma GCC diagnostic push
@@ -48,6 +47,11 @@ class HttpClient : public QObject, public net::http::client
 
 public:
     HttpClient(QObject *parent = nullptr);
+
+    // Prevent Qt's metatype comparison detection from selecting the generic
+    // network_address operators inherited through net::http::client.
+    bool operator==(const HttpClient &) const = delete;
+    bool operator<(const HttpClient &) const = delete;
 
     void cancel();
     quint64 contentLength() const;

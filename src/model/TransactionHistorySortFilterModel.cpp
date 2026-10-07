@@ -71,6 +71,22 @@ TransactionHistorySortFilterModel::TransactionHistorySortFilterModel(QObject *pa
     setDynamicSortFilter(true);
 }
 
+void TransactionHistorySortFilterModel::beginRowFilterChange()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    beginFilterChange();
+#endif
+}
+
+void TransactionHistorySortFilterModel::endRowFilterChange()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
+    invalidateFilter();
+#endif
+}
+
 QString TransactionHistorySortFilterModel::searchFilter() const
 {
     return m_searchString;
@@ -79,9 +95,10 @@ QString TransactionHistorySortFilterModel::searchFilter() const
 void TransactionHistorySortFilterModel::setSearchFilter(const QString &arg)
 {
     if (searchFilter() != arg) {
+        beginRowFilterChange();
         m_searchString = arg;
+        endRowFilterChange();
         emit searchFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -93,9 +110,10 @@ QString TransactionHistorySortFilterModel::paymentIdFilter() const
 void TransactionHistorySortFilterModel::setPaymentIdFilter(const QString &arg)
 {
     if (paymentIdFilter() != arg) {
+        beginRowFilterChange();
         m_filterValues[TransactionHistoryModel::TransactionPaymentIdRole] = arg;
+        endRowFilterChange();
         emit paymentIdFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -107,9 +125,10 @@ QDate TransactionHistorySortFilterModel::dateFromFilter() const
 void TransactionHistorySortFilterModel::setDateFromFilter(const QDate &date)
 {
     if (date != dateFromFilter()) {
+        beginRowFilterChange();
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::From, date);
+        endRowFilterChange();
         emit dateFromFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -121,9 +140,10 @@ QDate TransactionHistorySortFilterModel::dateToFilter() const
 void TransactionHistorySortFilterModel::setDateToFilter(const QDate &date)
 {
     if (date != dateToFilter()) {
+        beginRowFilterChange();
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::To, date);
+        endRowFilterChange();
         emit dateToFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -135,9 +155,10 @@ double TransactionHistorySortFilterModel::amountFromFilter() const
 void TransactionHistorySortFilterModel::setAmountFromFilter(double value)
 {
     if (value != amountFromFilter()) {
+        beginRowFilterChange();
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::From, value);
+        endRowFilterChange();
         emit amountFromFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -149,9 +170,10 @@ double TransactionHistorySortFilterModel::amountToFilter() const
 void TransactionHistorySortFilterModel::setAmountToFilter(double value)
 {
     if (value != amountToFilter()) {
+        beginRowFilterChange();
         setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::To, value);
+        endRowFilterChange();
         emit amountToFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -163,9 +185,10 @@ int TransactionHistorySortFilterModel::directionFilter() const
 void TransactionHistorySortFilterModel::setDirectionFilter(int value)
 {
     if (value != directionFilter()) {
+        beginRowFilterChange();
         m_filterValues[TransactionHistoryModel::TransactionDirectionRole] = QVariant::fromValue(value);
+        endRowFilterChange();
         emit directionFilterChanged();
-        invalidateFilter();
     }
 }
 
@@ -205,14 +228,8 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
                 break;
             case TransactionHistoryModel::TransactionTimeStampRole:
             {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
                 QDateTime from = dateFromFilter().startOfDay();
                 QDateTime to = dateToFilter().endOfDay();
-#else
-                QDateTime from = QDateTime(dateFromFilter());
-                QDateTime to   = QDateTime(dateToFilter());
-                to = to.addDays(1); // including upperbound
-#endif
                 QDateTime timestamp = data.toDateTime();
                 bool matchFrom = from.isNull() || timestamp.isNull() || timestamp >= from;
                 bool matchTo = to.isNull() || timestamp.isNull() || timestamp <= to;
