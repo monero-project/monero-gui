@@ -34,6 +34,7 @@ import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
 
 import "../js/TxUtils.js" as TxUtils
+import "../js/Utils.js" as Utils
 
 Rectangle {
     color: "transparent"
@@ -111,19 +112,11 @@ Rectangle {
                 enabled: getProofAddressLine.text.length === 0 && getProofTxIdLine.text.length === 0
                 onTextChanged: {
                     text = text.trim().replace(",", ".");
-                    const match = text.match(/^0+(\d.*)/);
-                    if (match) {
-                        const cursorPosition = cursorPosition;
-                        text = match[1];
-                        cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(text.indexOf('.') === 0) {
-                            text = '0' + text;
-                            if (text.length > 2) {
-                                cursorPosition = 1;
-                            }
-                        }
-                        error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
-                    }
+                    const corrected = Utils.stripLeadingZeros(text, cursorPosition);
+                    text = corrected.text;
+                    cursorPosition = corrected.cursorPosition;
+                    error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
+                }
                     validator: RegularExpressionValidator {
                     regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                 }
