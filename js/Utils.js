@@ -71,6 +71,10 @@ function ago(epoch) {
         return qsTr("%n day(s) ago", "0", Math.floor(delta / 86400))
 }
 
+function formatThousands(num) {
+    return Number(num).toLocaleString(Qt.locale("en_US"), "f", 0);
+}
+
 function netTypeToString(){
     // 0: mainnet, 1: testnet, 2: stagenet
     var nettype = appWindow.persistentSettings.nettype;

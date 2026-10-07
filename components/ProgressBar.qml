@@ -30,6 +30,7 @@ import QtQuick
 import moneroComponents.Wallet 1.0
 
 import "../components" as MoneroComponents
+import "../js/Utils.js" as Utils
 
 Rectangle {
     id: item
@@ -39,6 +40,19 @@ Rectangle {
     visible: false
     color: "transparent"
 
+    property double syncStartTime: 0
+    property double syncStartBlock: -1
+    property int restoreHeight: -1
+    property bool restoreHeightPassed: false
+
+    function reset() {
+        fillLevel = 0;
+        syncStartBlock = -1;
+        syncStartTime = 0;
+        restoreHeight = -1;
+        restoreHeightPassed = false;
+    }
+
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
         if(targetBlock > 0) {
             var remaining = (currentBlock < targetBlock) ? targetBlock - currentBlock : 0
@@ -47,9 +61,34 @@ Rectangle {
             if(typeof statusTxt != "undefined" && statusTxt != "") {
                 progressText.text = statusTxt;
                 progressTextValue.text = "";
+                progressTextEta.text = "";
+                syncStartBlock = -1;
             } else {
                 progressText.text = syncText;
-                progressTextValue.text = remaining.toFixed(0);
+
+                if(syncStartBlock < 0) {
+                    syncStartBlock = currentBlock;
+                    syncStartTime = Date.now();
+                    restoreHeightPassed = false;
+                }
+
+                if(!restoreHeightPassed && restoreHeight >= 0 && currentBlock >= restoreHeight) {
+                    syncStartBlock = currentBlock;
+                    syncStartTime = Date.now();
+                    restoreHeightPassed = true;
+                }
+
+                progressTextValue.text = Utils.formatThousands(remaining);
+
+                var elapsed = (Date.now() - syncStartTime) / 1000;
+                var syncedBlocks = currentBlock - syncStartBlock;
+                if(remaining > 0 && syncedBlocks > 0 && elapsed > 0) {
+                    var blocksPerSecond = syncedBlocks / elapsed;
+                    var etaSeconds = Math.round(remaining / blocksPerSecond);
+                    progressTextEta.text = qsTr("%1 left").arg(walletManager.getHumanReadableTimespan(etaSeconds));
+                } else {
+                    progressTextEta.text = "";
+                }
             }
         }
     }
@@ -62,9 +101,21 @@ Rectangle {
         anchors.fill: parent
 
         MoneroComponents.TextPlain {
-            id: progressText
+            id: progressTextEta
             anchors.top: parent.top
             anchors.topMargin: 6
+            anchors.right: parent.right
+            horizontalAlignment: Text.AlignRight
+            font.family: MoneroComponents.Style.fontMedium.name
+            font.pixelSize: 13
+            font.bold: MoneroComponents.Style.progressBarProgressTextBold
+            color: MoneroComponents.Style.defaultFontColor
+            height: 18
+        }
+
+        MoneroComponents.TextPlain {
+            id: progressText
+            anchors.top: progressTextEta.bottom
             font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
@@ -75,8 +126,7 @@ Rectangle {
 
         MoneroComponents.TextPlain {
             id: progressTextValue
-            anchors.top: parent.top
-            anchors.topMargin: 6
+            anchors.top: progressTextEta.bottom
             anchors.right: parent.right
             font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13
