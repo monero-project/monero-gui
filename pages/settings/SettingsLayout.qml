@@ -84,6 +84,19 @@ Rectangle {
             text: qsTr("Hide balance") + translationManager.emptyString
         }
 
+        MoneroComponents.StandardDropdown {
+            id: denominationDropDown
+            Layout.maximumWidth: 150
+            labelText: qsTr("Denomination") + translationManager.emptyString
+            labelFontSize: 14
+            dataModel: denominationModel
+            onChanged: {
+                var obj = dataModel.get(currentIndex);
+                persistentSettings.displayDenomination = obj.data;
+                appWindow.updateBalance();
+            }
+        }
+
         MoneroComponents.CheckBox {
             id: themeCheckbox
             checked: !MoneroComponents.Style.blackTheme
@@ -326,7 +339,24 @@ Rectangle {
         id: fiatPriceCurrencyModel
     }
 
+    ListModel {
+        id: denominationModel
+    }
+
     Component.onCompleted: {
+        // Fill the denomination dropdown
+        var denominations = [
+            {"column1": qsTr("XMR"), "data": "xmr"},
+            {"column1": qsTr("mXMR"), "data": "mxmr"},
+            {"column1": qsTr("Atomic units"), "data": "atomic"},
+        ];
+        denominationModel.clear();
+        for (var d = 0; d < denominations.length; ++d) {
+            denominationModel.append(denominations[d]);
+            if (denominations[d].data === persistentSettings.displayDenomination)
+                denominationDropDown.currentIndex = d;
+        }
+
         // Dynamically fill fiatPrice dropdown based on `appWindow.fiatPriceAPIs`
         var apis = appWindow.fiatPriceAPIs;
         fiatPriceProvidersModel.clear();
