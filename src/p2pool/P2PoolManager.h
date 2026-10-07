@@ -41,6 +41,7 @@
 class P2PoolManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString proxyAddress READ proxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
 
 public:
     explicit P2PoolManager(QObject *parent = 0);
@@ -63,17 +64,22 @@ public:
 private:
 
     bool running(NetworkType::Type nettype) const;
+    QString proxyAddress() const;
+    void setProxyAddress(QString address);
 signals:
     void p2poolStartFailure() const;
     void p2poolStatus(bool isMining, int hashrate) const;
     void p2poolDownloadFailure(int errorCode) const;
     void p2poolDownloadSuccess() const;
+    void proxyAddressChanged() const;
 
 private:
     std::unique_ptr<QProcess> m_p2poold;
     QMutex m_p2poolMutex;
     QString m_p2pool;
     QString m_p2poolPath;
+    QString m_proxyAddress;
+    mutable QMutex m_proxyMutex;
     bool started = false;
 
     mutable FutureScheduler m_scheduler;
