@@ -249,3 +249,6 @@ RUN git clone -b libgcrypt-1.10.1 --depth 1 https://github.com/gpg/libgcrypt && 
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
+
+COPY docker.gitconfig /etc/monero-gui.gitconfig
+RUN git config --system --add include.path /etc/monero-gui.gitconfig
