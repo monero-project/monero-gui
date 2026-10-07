@@ -48,7 +48,7 @@ namespace {
     static const int DAEMON_START_TIMEOUT_SECONDS = 120;
 }
 
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool pruneBlockchain /* = false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
     {
@@ -92,10 +92,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         }
     }
 
-    if (noSync) {
-        arguments << "--no-sync";
-    }
-
     arguments << "--check-updates" << "disabled";
     arguments << "--non-interactive";
 
@@ -130,10 +126,9 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     // Start start watcher
-    m_scheduler.run([this, nettype, dataDir, noSync] {
+    m_scheduler.run([this, nettype, dataDir] {
         if (startWatcher(nettype, dataDir)) {
             emit daemonStarted();
-            m_noSync = noSync;
         } else {
             emit daemonStartFailure(tr("Timed out, local node is not responding after %1 seconds").arg(DAEMON_START_TIMEOUT_SECONDS));
         }
@@ -242,11 +237,6 @@ bool DaemonManager::running(NetworkType::Type nettype, const QString &dataDir) c
     sendCommand({"sync_info"}, nettype, dataDir, status);
     qDebug() << status;
     return status.contains("Height:");
-}
-
-bool DaemonManager::noSync() const noexcept
-{
-    return m_noSync;
 }
 
 void DaemonManager::runningAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback) const
