@@ -50,6 +50,14 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
+    // The recovery phrase is sensitive. Clear it from the clipboard shortly
+    // after it is copied so it does not linger where any process can read it.
+    Timer {
+        id: seedClipboardTimer
+        interval: 60000
+        onTriggered: clipboard.setText("")
+    }
+
     state: "default"
     states: [
         State {
@@ -303,6 +311,7 @@ Rectangle {
                     text: qsTr("Copy to clipboard") + translationManager.emptyString
                     onClicked: {
                         clipboard.setText(wizardController.walletOptionsSeed);
+                        seedClipboardTimer.restart();
                         appWindow.showStatusMessage(qsTr("Recovery phrase copied to clipboard"),3);
                     }
                     Accessible.role: Accessible.Button
