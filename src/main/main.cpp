@@ -68,6 +68,7 @@
 #include "qt/updater.h"
 #include "qt/utils.h"
 #include "qt/TailsOS.h"
+#include "qt/WhonixOS.h"
 #include "qt/KeysFiles.h"
 #include "qt/PortableSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
@@ -120,6 +121,9 @@ bool isWindows = false;
 bool isMac = false;
 bool isLinux = false;
 bool isTails = false;
+bool isWhonix = false;
+bool isWhonixQubes = false;
+QString whonixGatewayAddress;
 bool isDesktop = false;
 bool isARM = false;
 
@@ -146,6 +150,9 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_LINUX)
     bool isLinux = true;
     bool isTails = TailsOS::detect();
+    bool isWhonix = WhonixOS::detect();
+    bool isWhonixQubes = isWhonix && WhonixOS::detectQubes();
+    QString whonixGatewayAddress = isWhonix ? WhonixOS::gatewayAddress(isWhonixQubes) : QString();
 #elif defined(Q_OS_MAC)
     bool isMac = true;
 #endif
@@ -448,6 +455,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
     engine.rootContext()->setContextProperty("isTails", isTails);
+    engine.rootContext()->setContextProperty("isWhonix", isWhonix);
+    engine.rootContext()->setContextProperty("isWhonixQubes", isWhonixQubes);
+    engine.rootContext()->setContextProperty("whonixGatewayAddress", whonixGatewayAddress);
     engine.rootContext()->setContextProperty("isARM", isARM);
 
     engine.rootContext()->setContextProperty("screenAvailableWidth", screenAvailableSize.width());
