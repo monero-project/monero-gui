@@ -7,6 +7,7 @@ Copyright (c) 2014-2024, The Monero Project
   * [Vulnerability response](#vulnerability-response)
   * [Introduction](#introduction)
   * [About this project](#about-this-project)
+  * [Screenshots](#screenshots)
   * [Supporting the project](#supporting-the-project)
   * [License](#license)
   * [Translations](#translations)
@@ -48,6 +49,14 @@ Monero is a private, secure, untraceable, decentralised digital currency. You ar
 This is the GUI for the [core Monero implementation](https://github.com/monero-project/monero). It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Monero that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
+
+## Screenshots
+
+The following screenshots show the Monero GUI wallet creation and local-node interfaces.
+
+<img src="images/create-wallet.png" alt="Monero GUI wallet creation screen" width="600">
+
+<img src="images/local-node-full.png" alt="Monero GUI local node screen" width="600">
 
 ## Supporting the project
 
