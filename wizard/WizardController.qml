@@ -57,6 +57,7 @@ Rectangle {
         }
         wizardController.walletOptionsPassword = '';
         wizardController.walletOptionsSeed = '';
+        wizardController.walletOptionsSeedLanguage = '';
         wizardController.walletOptionsSeedOffset = '';
         wizardController.walletOptionsRecoverAddress = ''
         wizardController.walletOptionsRecoverViewkey = ''
@@ -94,6 +95,7 @@ Rectangle {
     property string walletOptionsLocation: ''
     property string walletOptionsPassword: ''
     property string walletOptionsSeed: ''
+    property string walletOptionsSeedLanguage: ''
     property string walletOptionsSeedOffset: ''
     property string walletOptionsRecoverAddress: ''
     property string walletOptionsRecoverViewkey: ''
@@ -115,16 +117,16 @@ Rectangle {
 
     property int layoutScale: {
         if (appWindow.width < 506) {
-            //mobile (25 word mnemonic seed displayed in 2 columns)
+            // mobile (recovery phrase displayed in 2 columns)
             return 4;
         } else if (appWindow.width < 660) {
-            //tablet (25 word mnemonic seed displayed in 3 columns)
+            // tablet (recovery phrase displayed in 3 columns)
             return 3;
         } else if (appWindow.width < 842) {
-            //tablet (25 word mnemonic seed displayed in 4 columns)
+            // tablet (recovery phrase displayed in 4 columns)
             return 2;
         } else if (appWindow.width >= 842) {
-            //desktop (25 word mnemonic seed displayed in 5 columns)
+            // desktop (recovery phrase displayed in 5 columns)
             return 1;
         }
     }
@@ -347,10 +349,20 @@ Rectangle {
         var kdfRounds = appWindow.persistentSettings.kdfRounds;
         var wallet = walletManager.createWallet('', oshelper.randomPassword(), persistentSettings.language_wallet, nettype, kdfRounds)
 
+        if (!wallet || wallet.status !== Wallet.Status_Ok) {
+            appWindow.showStatusMessage(wallet ? wallet.errorString : qsTr("Failed to create Polyseed"), 5);
+            if (wallet)
+                walletManager.closeWallet();
+            wizardController.m_wallet = undefined;
+            return false;
+        }
+
         wizardController.walletOptionsSeed = wallet.seed
+        wizardController.walletOptionsSeedLanguage = wallet.seedLanguage
 
         // Keep the wallet in memory until the user chooses its final path.
         wizardController.m_wallet = wallet;
+        return true;
     }
 
     function writeWallet(onSuccess) {
@@ -419,12 +431,14 @@ Rectangle {
 
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
+            wizardController.walletOptionsRestoreHeight = wallet.walletCreationHeight;
             wizardController.m_wallet = wallet;
             wizardController.walletOptionsIsRecovering = true;
         } else {
             console.log(wallet.errorString)
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
             walletManager.closeWallet();
+            wizardController.m_wallet = undefined;
         }
         return success;
     }

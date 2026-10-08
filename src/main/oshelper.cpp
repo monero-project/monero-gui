@@ -315,6 +315,15 @@ quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath) const
 
 void OSHelper::openSeedTemplate() const
 {
-    QFile::copy(":/wizard/template.pdf", QDir::tempPath() + "/seed_template.pdf");
-    openFile(QDir::tempPath() + "/seed_template.pdf");
+    const QString destination = QDir::tempPath() + "/seed_template.pdf";
+    const auto permissions = QFile::ReadOwner | QFile::WriteOwner;
+    if (QFile::exists(destination) && !QFile::remove(destination)) {
+        // Resource copies are read-only, which prevents their removal on Windows.
+        if (!QFile::setPermissions(destination, permissions) || !QFile::remove(destination))
+            return;
+    }
+    if (QFile::copy(":/wizard/template.pdf", destination)) {
+        QFile::setPermissions(destination, permissions);
+        openFile(destination);
+    }
 }

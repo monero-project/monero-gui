@@ -45,6 +45,7 @@
 #include "model/AddressBookModel.h"
 #include "model/SubaddressModel.h"
 #include "model/SubaddressAccountModel.h"
+#include "memwipe.h"
 #include "wallet/api/wallet2_api.h"
 
 #include <QFile>
@@ -65,6 +66,23 @@ namespace {
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 
     static constexpr char ATTRIBUTE_SUBADDRESS_ACCOUNT[] ="gui.subaddress_account";
+
+    bool walletUsesPolyseed(Monero::Wallet *wallet)
+    {
+        // getPolyseed() clears the wallet status, so only query it once after a
+        // successful create/open, before the wallet starts background refresh.
+        if (!wallet || wallet->status() != Monero::Wallet::Status_Ok) {
+            return false;
+        }
+
+        std::string seed;
+        const auto cleanup = sg::make_scope_guard([&seed]() noexcept {
+            memwipe(seed.data(), seed.size());
+        });
+        uint64_t birthday = 0;
+        bool encrypted = false;
+        return wallet->getPolyseed(seed, birthday, encrypted);
+    }
 
     QVariantMap messageSignatureResultToVariantMap(const Monero::Wallet::MessageSignatureResult &result)
     {
@@ -91,7 +109,22 @@ Wallet::Wallet(QObject * parent)
 
 QString Wallet::getSeed() const
 {
+    if (status() == Status_Critical) {
+        return {};
+    }
+
+    std::string seed;
+    uint64_t birthday = 0;
+    bool encrypted = false;
+    if (m_walletImpl->getPolyseed(seed, birthday, encrypted)) {
+        return QString::fromStdString(seed);
+    }
     return QString::fromStdString(m_walletImpl->seed());
+}
+
+bool Wallet::isPolyseed() const
+{
+    return m_polyseed;
 }
 
 QString Wallet::getSeedLanguage() const
@@ -1202,6 +1235,7 @@ void Wallet::onPassphraseEntered(const QString &passphrase, bool enter_on_device
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
+    , m_polyseed(walletUsesPolyseed(w))
     , m_history(new TransactionHistory(m_walletImpl->history(), this))
     , m_historyModel(nullptr)
     , m_addressBook(new AddressBook(m_walletImpl->addressBook(), this))

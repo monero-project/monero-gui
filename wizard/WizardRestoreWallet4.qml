@@ -83,7 +83,10 @@ Rectangle {
                     btnNext.enabled = false;
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwField = "";
                     wizardController.wizardStateView.wizardRestoreWallet2View.pwConfirmField = "";
-                    wizardController.recoveryWallet();
+                    if (!wizardController.recoveryWallet()) {
+                        btnNext.enabled = true;
+                        return;
+                    }
                     wizardController.writeWallet(function() {
                         wizardController.useMoneroClicked();
                         btnNext.enabled = true;
