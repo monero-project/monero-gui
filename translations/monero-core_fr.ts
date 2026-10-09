@@ -137,7 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="417"/>
         <source>No address found</source>
-        <translation>Aucune adresse trouvée</translation>
+        <translation>Pas d&apos;adresse trouvée</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="323"/>
@@ -148,12 +148,12 @@
         <location filename="../pages/AddressBook.qml" line="261"/>
         <location filename="../pages/AddressBook.qml" line="313"/>
         <source>Edit entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer l&apos;élément</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="351"/>
         <source>Grab QR code from screen</source>
-        <translation>Obtenir le code QR à l&apos;écran</translation>
+        <translation>Obtenir le code QR depuis l&apos;écran</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="431"/>
@@ -211,22 +211,22 @@
     <message>
         <location filename="../pages/Advanced.qml" line="53"/>
         <source>Mining</source>
-        <translation type="unfinished">Mine</translation>
+        <translation>Minage en cours</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="58"/>
         <source>Prove/check</source>
-        <translation type="unfinished">Prouver/Vérifier</translation>
+        <translation>Prouver/vérifier</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="63"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished">Base de données partagée de cercles</translation>
+        <translation>Base de données partagée RingDB</translation>
     </message>
     <message>
         <location filename="../pages/Advanced.qml" line="68"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Signer/vérifier</translation>
+        <translation>Signer/vérifier</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="57"/>
         <source>Copy</source>
-        <translation type="unfinished">Copier</translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="63"/>
@@ -249,7 +249,7 @@
     <message>
         <location filename="../components/ContextMenu.qml" line="69"/>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="../components/ContextMenu.qml" line="75"/>
