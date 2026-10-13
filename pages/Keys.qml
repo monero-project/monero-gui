@@ -267,7 +267,7 @@ Rectangle {
         console.log("keys page loaded");
 
         primaryAddress.text = currentWallet.address(0, 0)
-        walletCreationHeight.text = currentWallet.walletCreationHeight
+        walletCreationHeight.text = currentWallet.walletCreationHeight.toFixed(0)
         secretViewKey.text = currentWallet.secretViewKey
         publicViewKey.text = currentWallet.publicViewKey
         secretSpendKey.text = (!currentWallet.viewOnly) ? currentWallet.secretSpendKey : ""
