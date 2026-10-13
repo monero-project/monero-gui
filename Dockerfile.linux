@@ -29,7 +29,9 @@ RUN git clone -b v0.18.5.1 --depth 1 https://github.com/monero-project/monero &&
     cd .. && \
     rm -rf monero
 
-RUN make -j"$THREADS" -C /depends HOST=x86_64-linux-gnu
+# TODO: Remove this workaround once a better solution is found.
+RUN sed -i 's|--openssldir=$(host_prefix)/etc/openssl|--openssldir=/etc/ssl|' /depends/packages/openssl.mk && \
+    make -j"$THREADS" -C /depends HOST=x86_64-linux-gnu
 
 # Use the pinned upstream CMake binary without changing the compiler or glibc
 # baseline. The Linux x86_64 binaries require glibc 2.17 or newer.
