@@ -933,8 +933,6 @@ ApplicationWindow {
             // here we update txConfirmationPopup
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
-            txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
         }
     }
 
@@ -962,6 +960,7 @@ ApplicationWindow {
             throw "Sending all requires one destination address";
         }
 
+        txConfirmationPopup.clearFields();
         txConfirmationPopup.bottomTextAnimation.running = false;
         txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
         txConfirmationPopup.recipients = recipients;
@@ -1016,6 +1015,7 @@ ApplicationWindow {
     function handleSweepUnmixable() {
         console.log("Creating transaction: ")
 
+        txConfirmationPopup.clearFields();
         txConfirmationPopup.sweepUnmixable = true;
         transaction = currentWallet.createSweepUnmixableTransaction();
         txConfirmationPopup.open();
@@ -1701,6 +1701,8 @@ ApplicationWindow {
         // dynamically change onclose handler
         id: txConfirmationPopup
         z: parent.z + 1
+        confirmButton.text: (viewOnly ? qsTr("Save as file") : qsTr("Confirm")) + translationManager.emptyString
+        confirmButton.rightIcon: viewOnly ? "" : "qrc:///images/rightArrow.png"
         onAccepted: {
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
