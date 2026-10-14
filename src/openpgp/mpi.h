@@ -28,6 +28,10 @@
 
 #pragma once
 
+#include <cstddef>
+#include <stdexcept>
+#include <type_traits>
+
 #include <gcrypt.h>
 
 namespace openpgp
@@ -39,7 +43,7 @@ public:
   mpi(const mpi &) = delete;
   mpi &operator=(const mpi &) = delete;
 
-  mpi(mpi &&other)
+  mpi(mpi &&other) noexcept
     : data(other.data)
   {
     other.data = nullptr;
@@ -48,12 +52,13 @@ public:
   template <
     typename byte_container,
     typename = typename std::enable_if<(sizeof(typename byte_container::value_type) == 1)>::type>
-  mpi(const byte_container &buffer, gcry_mpi_format format = GCRYMPI_FMT_USG)
-    : mpi(&buffer[0], buffer.size(), format)
+  explicit mpi(const byte_container &buffer, gcry_mpi_format format = GCRYMPI_FMT_USG)
+    : mpi(buffer.data(), buffer.size(), format)
   {
   }
 
   mpi(const void *buffer, size_t size, gcry_mpi_format format = GCRYMPI_FMT_USG)
+    : data(nullptr)
   {
     if (gcry_mpi_scan(&data, format, buffer, size, nullptr) != GPG_ERR_NO_ERROR)
     {

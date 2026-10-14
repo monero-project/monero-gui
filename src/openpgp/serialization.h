@@ -28,29 +28,23 @@
 
 #pragma once
 
+#include <cstddef>
+#include <cstdint>
+#include <stdexcept>
+#include <type_traits>
+#include <vector>
+
+#include <span.h>
+
 #include "mpi.h"
 
 namespace openpgp
 {
 
-size_t bits_to_bytes(size_t bits)
+inline size_t bits_to_bytes(size_t bits)
 {
   constexpr const uint16_t bits_in_byte = 8;
   return (bits + bits_in_byte - 1) / bits_in_byte;
-}
-
-std::string strip_line_breaks(const std::string &string)
-{
-  std::string result;
-  result.reserve(string.size());
-  for (const auto &character : string)
-  {
-    if (character != '\r' && character != '\n')
-    {
-      result.push_back(character);
-    }
-  }
-  return result;
 }
 
 struct packet_tag
@@ -88,11 +82,37 @@ public:
   {
     const auto tag = read_big_endian<uint8_t>();
 
-    constexpr const uint8_t format_mask = 0b11000000;
-    constexpr const uint8_t format_old_tag = 0b10000000;
-    if ((tag & format_mask) != format_old_tag)
+    constexpr const uint8_t tag_bit = 0b10000000;
+    constexpr const uint8_t format_new_bit = 0b01000000;
+    if ((tag & tag_bit) == 0)
     {
       throw std::runtime_error("invalid packet tag");
+    }
+
+    if ((tag & format_new_bit) != 0)
+    {
+      const packet_tag::type packet_type = static_cast<packet_tag::type>(tag & 0b00111111);
+
+      size_t length;
+      const size_t first_octet = read_big_endian<uint8_t>();
+      if (first_octet < 192)
+      {
+        length = first_octet;
+      }
+      else if (first_octet < 224)
+      {
+        length = ((first_octet - 192) << 8) + read_big_endian<uint8_t>() + 192;
+      }
+      else if (first_octet == 255)
+      {
+        length = read_big_endian<uint32_t>();
+      }
+      else
+      {
+        throw std::runtime_error("unsupported partial body length");
+      }
+
+      return {packet_type, length};
     }
 
     const packet_tag::type packet_type = static_cast<packet_tag::type>((tag & 0b00111100) >> 2);
@@ -117,6 +137,20 @@ public:
     return {packet_type, length};
   }
 
+  size_t read_subpacket_length()
+  {
+    const size_t first_octet = read_big_endian<uint8_t>();
+    if (first_octet < 192)
+    {
+      return first_octet;
+    }
+    if (first_octet < 255)
+    {
+      return ((first_octet - 192) << 8) + read_big_endian<uint8_t>() + 192;
+    }
+    return read_big_endian<uint32_t>();
+  }
+
   mpi read_mpi()
   {
     const size_t bit_length = read_big_endian<uint16_t>();
@@ -125,15 +159,8 @@ public:
 
   std::vector<uint8_t> read(size_t size)
   {
-    if (buffer.size() - cursor < size)
-    {
-      throw std::runtime_error("insufficient buffer size");
-    }
-
-    const size_t offset = cursor;
-    cursor += size;
-
-    return {&buffer[offset], &buffer[cursor]};
+    const epee::span<const uint8_t> span = read_span(size);
+    return {span.data(), span.data() + span.size()};
   }
 
   template <typename T, typename = typename std::enable_if<std::is_integral<T>::value>::type>
@@ -161,7 +188,7 @@ public:
     const size_t offset = cursor;
     cursor += size;
 
-    return {reinterpret_cast<const uint8_t *>(&buffer[offset]), size};
+    return {reinterpret_cast<const uint8_t *>(buffer.data()) + offset, size};
   }
 
 private:
