@@ -28,6 +28,8 @@
 
 #pragma once
 
+#include <cstdint>
+#include <cstring>
 #include <stdexcept>
 #include <vector>
 
@@ -48,9 +50,8 @@ public:
   hash(const hash &) = delete;
   hash &operator=(const hash &) = delete;
 
-  hash(uint8_t algorithm)
+  explicit hash(uint8_t algorithm)
     : algo(algorithm)
-    , consumed(0)
   {
     if (gcry_md_test_algo(algo) != GPG_ERR_NO_ERROR)
     {
@@ -68,17 +69,9 @@ public:
     gcry_md_close(md);
   }
 
-  hash &operator<<(uint8_t byte)
-  {
-    gcry_md_putc(md, byte);
-    ++consumed;
-    return *this;
-  }
-
   hash &operator<<(const epee::span<const uint8_t> &bytes)
   {
-    gcry_md_write(md, &bytes[0], bytes.size());
-    consumed += bytes.size();
+    gcry_md_write(md, bytes.data(), bytes.size());
     return *this;
   }
 
@@ -95,19 +88,13 @@ public:
     {
       throw std::runtime_error("failed to read the digest");
     }
-    memcpy(&result[0], digest, result.size());
+    std::memcpy(result.data(), digest, result.size());
     return result;
-  }
-
-  size_t consumed_bytes() const
-  {
-    return consumed;
   }
 
 private:
   const uint8_t algo;
   gcry_md_hd_t md;
-  size_t consumed;
 };
 
-}
+} // namespace openpgp

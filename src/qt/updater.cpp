@@ -33,9 +33,9 @@
 
 #include "updater.h"
 
-#include <common/util.h>
+#include <QRegularExpression>
 
-#include <openpgp/hash.h>
+#include <common/util.h>
 
 #include "network.h"
 #include "utils.h"
@@ -60,7 +60,7 @@ QByteArray Updater::fetchSignedHash(
     std::string hashesTxt = network.get(hashesTxtUrl);
     std::string hashesTxtSig = network.get(hashesTxtSigUrl);
 
-    const QByteArray signedHash = verifyParseSignedHahes(
+    const QByteArray signedHash = verifyParseSignedHashes(
         QByteArray(&hashesTxt[0], hashesTxt.size()),
         QByteArray(&hashesTxtSig[0], hashesTxtSig.size()),
         binaryFilename,
@@ -74,7 +74,7 @@ QByteArray Updater::fetchSignedHash(
     return signedHash;
 }
 
-QByteArray Updater::verifyParseSignedHahes(
+QByteArray Updater::verifyParseSignedHashes(
     const QByteArray &armoredSignedHashes,
     const QByteArray &secondDetachedSignature,
     const QString &binaryFilename,
@@ -107,7 +107,7 @@ QPair<QString, QString> Updater::verifySignaturesAndHashSum(
 {
     QPair<QString, QString> signers;
     const QByteArray signedHash =
-        verifyParseSignedHahes(armoredSignedHashes, secondDetachedSignature, binaryFilename, signers);
+        verifyParseSignedHashes(armoredSignedHashes, secondDetachedSignature, binaryFilename, signers);
     const QByteArray calculatedHash = getHash(binaryData, binarySize);
     if (signedHash != calculatedHash)
     {
@@ -120,30 +120,43 @@ QPair<QString, QString> Updater::verifySignaturesAndHashSum(
 QByteArray Updater::getHash(const void *data, size_t size) const
 {
     QByteArray hash(sizeof(crypto::hash), 0);
-    tools::sha256sum(static_cast<const uint8_t *>(data), size, *reinterpret_cast<crypto::hash *>(hash.data()));
+    if (!tools::sha256sum(static_cast<const uint8_t *>(data), size, *reinterpret_cast<crypto::hash *>(hash.data())))
+    {
+        throw std::runtime_error("failed to calculate hash sum");
+    }
     return hash;
 }
 
 QByteArray Updater::parseShasumOutput(const QString &message, const QString &filename) const
 {
+    static const QRegularExpression whitespace("\\s+");
     for (const auto &line : message.split('\n'))
     {
-        const auto trimmed = line.trimmed();
-        if (trimmed.endsWith(filename))
+        const QStringList fields = line.split(whitespace, Qt::SkipEmptyParts);
+        if (fields.size() != 2)
         {
-            const int pos = trimmed.indexOf(' ');
-            if (pos != -1)
-            {
-                return QByteArray::fromHex(trimmed.left(pos).toUtf8());
-            }
+            continue;
         }
-        else if (trimmed.startsWith(filename))
+
+        // "<hash> <filename>" or "<filename> <hash>"
+        QString hash;
+        if (fields[1] == filename || fields[1] == '*' + filename)
         {
-            const int pos = trimmed.lastIndexOf(' ');
-            if (pos != -1)
-            {
-                return QByteArray::fromHex(trimmed.right(trimmed.size() - pos).toUtf8());
-            }
+            hash = fields[0];
+        }
+        else if (fields[0] == filename || fields[0] == filename + ',' || fields[0] == filename + ':')
+        {
+            hash = fields[1];
+        }
+        else
+        {
+            continue;
+        }
+
+        const QByteArray decoded = QByteArray::fromHex(hash.toUtf8());
+        if (decoded.size() == static_cast<qsizetype>(sizeof(crypto::hash)) && decoded.toHex() == hash.toLower().toUtf8())
+        {
+            return decoded;
         }
     }
 
