@@ -166,7 +166,7 @@ QString Network::get(
     const http_response_info *pri = NULL;
     constexpr std::chrono::milliseconds timeout = std::chrono::seconds(15);
 
-    fields_list headers({{"User-Agent", randomUserAgent().toStdString()}});
+    fields_list headers({{"User-Agent", browserUserAgent().toStdString()}});
     if (!contentType.isEmpty())
     {
         headers.push_back({"Content-Type", contentType.toStdString()});
