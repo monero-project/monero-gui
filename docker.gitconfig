@@ -1,0 +1,11 @@
+# Keep this exact list in sync with the submodules.
+[safe]
+	directory = /monero-gui
+	directory = /monero-gui/monero
+	directory = /monero-gui/external/quirc
+	directory = /monero-gui/monero/external/rapidjson
+	directory = /monero-gui/monero/external/rapidjson/thirdparty/gtest
+	directory = /monero-gui/monero/external/trezor-common
+	directory = /monero-gui/monero/external/trezor-common/defs/ethereum/tokens
+	directory = /monero-gui/monero/external/randomx
+	directory = /monero-gui/monero/external/supercop

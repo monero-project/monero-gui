@@ -275,3 +275,6 @@ RUN git clone -b v3.24.0 --depth 1 https://github.com/Kitware/CMake && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
+
+COPY docker.gitconfig /etc/monero-gui.gitconfig
+RUN git config --system --add include.path /etc/monero-gui.gitconfig
