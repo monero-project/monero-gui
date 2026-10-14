@@ -328,7 +328,6 @@ Rectangle {
 
         onAccepted: {
             var keysPath = walletManager.urlToLocalPath(fileDialog.selectedFile)
-            persistentSettings.nettype = oshelper.getNetworkTypeFromFile(keysPath);
             wizardController.openWalletFile(keysPath);
         }
         onRejected: {
@@ -543,6 +542,8 @@ Rectangle {
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fn);
         else
             persistentSettings.wallet_path = fn;
+
+        persistentSettings.nettype = oshelper.getNetworkTypeFromFile(persistentSettings.wallet_path, persistentSettings.nettype);
 
         if(isIOS)
             persistentSettings.wallet_path = persistentSettings.wallet_path.replace(appWindow.accountsDir, "");

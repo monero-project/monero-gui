@@ -148,8 +148,7 @@ Rectangle {
                         }
                     }
 
-                    function openSelectedWalletFile(networktype, path) {
-                        persistentSettings.nettype = parseInt(networktype);
+                    function openSelectedWalletFile(path) {
                         wizardController.openWalletFile(path);
                     }
 
@@ -186,8 +185,8 @@ Rectangle {
                         Keys.onBacktabPressed: recentList.moveUp(index);
                         Keys.onDownPressed: recentList.moveDown(index);
                         Keys.onTabPressed: recentList.moveDown(index);
-                        Keys.onEnterPressed: recentList.openSelectedWalletFile(networktype, path);
-                        Keys.onReturnPressed: recentList.openSelectedWalletFile(networktype, path);
+                        Keys.onEnterPressed: recentList.openSelectedWalletFile(path);
+                        Keys.onReturnPressed: recentList.openSelectedWalletFile(path);
 
                         Rectangle {
                             height: 1
@@ -317,7 +316,7 @@ Rectangle {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: recentList.openSelectedWalletFile(networktype, path);
+                            onClicked: recentList.openSelectedWalletFile(path);
                         }
                     }
                 }
