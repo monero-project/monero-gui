@@ -22,9 +22,9 @@ RUN apt update && \
     ninja-build pkg-config python3 python-is-python3 wget xutils-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone -b v0.18.5.1 --depth 1 https://github.com/monero-project/monero && \
+RUN git clone -b v0.18.5.4 --depth 1 https://github.com/monero-project/monero && \
     cd monero && \
-    git reset --hard 4f92268d7c16741cfb41e5bbe2aa46cc260a9ea5 && \
+    git reset --hard 85f036ba7019cd36f08e8a38a27c37ea7b522618 && \
     cp -a contrib/depends / && \
     cd .. && \
     rm -rf monero
