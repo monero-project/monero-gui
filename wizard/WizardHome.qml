@@ -89,7 +89,8 @@ Rectangle {
 
                 onMenuClicked: {
                     wizardController.restart();
-                    wizardController.createWallet();
+                    if (!wizardController.createWallet())
+                        return;
                     wizardStateView.state = "wizardCreateWallet1"
                     wizardStateView.wizardCreateWallet1View.pageRoot.forceActiveFocus();
                 }
@@ -153,7 +154,7 @@ Rectangle {
             WizardMenuItem {
                 id: restoreWalletButton
                 headerText: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
-                bodyText: qsTr("Enter your private keys or 25-word mnemonic seed to restore your wallet.") + translationManager.emptyString
+                bodyText: qsTr("Enter your private keys, 16-word Polyseed, or 25-word legacy seed to restore your wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet.png"
 
                 onMenuClicked: {

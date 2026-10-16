@@ -88,10 +88,18 @@ function usefulName(path) {
     return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
 }
 
+function isPolyseed(seed) {
+    return seed.trim().split(/\s+/).length === 16;
+}
+
+function isLegacySeed(seed) {
+    var wordsArray = seed.trim().split(/\s+/);
+    return wordsArray.length === 25 || wordsArray.length === 24;
+}
+
 function checkSeed(seed) {
     console.log("Checking seed")
-    var wordsArray = seed.split(/\s+/);
-    return wordsArray.length === 25 || wordsArray.length === 24
+    return isPolyseed(seed) || isLegacySeed(seed);
 }
 
 function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline){

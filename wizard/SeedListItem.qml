@@ -38,15 +38,15 @@ ColumnLayout {
 
     function focusOnPreviousField() {
         if (wizardCreateWallet2.state == "verify") {
-            if (wordNumber < 5) {
+            var hiddenPosition = wizardCreateWallet2.hiddenWords.indexOf(wordNumber);
+            if (hiddenPosition <= 0) {
                 if (recoveryPhraseLabel.visible) {
                     return recoveryPhraseLabel.forceActiveFocus();
                 } else {
                     return header.forceActiveFocus();
                 }
-            } else if (wordNumber >= 5 && wordNumber < 25) {
-                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) - 1]].lineEdit.forceActiveFocus()
             }
+            return parent.children[wizardCreateWallet2.hiddenWords[hiddenPosition - 1]].lineEdit.forceActiveFocus()
         } else {
             if (wordNumber == 0) {
                 if (recoveryPhraseLabel.visible) {
@@ -62,18 +62,17 @@ ColumnLayout {
 
     function focusOnNextField() {
         if (wizardCreateWallet2.state == "verify") {
-            if (wordNumber < 20) {
-                return parent.children[wizardCreateWallet2.hiddenWords[parseInt(wordNumber / 5) + 1]].lineEdit.forceActiveFocus()
-            } else {
+            var hiddenPosition = wizardCreateWallet2.hiddenWords.indexOf(wordNumber);
+            if (hiddenPosition < 0 || hiddenPosition == wizardCreateWallet2.hiddenWords.length - 1) {
                 return navigation.btnPrev.forceActiveFocus()
             }
+            return parent.children[wizardCreateWallet2.hiddenWords[hiddenPosition + 1]].lineEdit.forceActiveFocus()
         } else {
-            if (wordNumber == 24) {
+            if (wordNumber == wizardCreateWallet2.seedWordCount - 1) {
                 if (createNewSeedButton.visible) {
                     return createNewSeedButton.forceActiveFocus()
-                } else {
-                    return printPDFTemplate.forceActiveFocus()
                 }
+                return printPDFTemplate.forceActiveFocus()
             } else {
                 return parent.children[wordNumber + 1].forceActiveFocus()
             }
@@ -137,7 +136,7 @@ ColumnLayout {
             themeTransition: false
             onTextChanged: {
                 if (wizardCreateWallet2.seedListGrid && wordsMatch) {
-                    if (wordNumber < 20) {
+                    if (wizardCreateWallet2.hiddenWords.indexOf(wordNumber) < wizardCreateWallet2.hiddenWords.length - 1) {
                         focusOnNextField();
                     }
                     lineEdit.readOnly = true;

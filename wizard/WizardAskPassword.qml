@@ -88,7 +88,7 @@ ColumnLayout {
 
     WizardHeader{
         title: qsTr("Give your wallet a password") + translationManager.emptyString
-        subtitle: qsTr("This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.").arg(!wizardController.walletOptionsIsRecoveringFromDevice ? qsTr("25 word mnemonic seed") : qsTr("hardware wallet"))+ translationManager.emptyString
+        subtitle: qsTr("This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.").arg(!wizardController.walletOptionsIsRecoveringFromDevice ? qsTr("recovery phrase") : qsTr("hardware wallet"))+ translationManager.emptyString
     }
 
     MoneroComponents.WarningBox {
