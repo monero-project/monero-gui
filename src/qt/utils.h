@@ -43,6 +43,6 @@ QString xdgMime();
 void registerXdgMime();
 #endif
 const static QRegularExpression reURI = QRegularExpression("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+QString browserUserAgent();
 
 #endif // UTILS_H
