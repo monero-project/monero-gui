@@ -28,8 +28,8 @@
 
 #pragma once
 
-#include <algorithm>
 #include <stdexcept>
+#include <utility>
 
 #include <gcrypt.h>
 
@@ -43,22 +43,17 @@ public:
   s_expression &operator=(const s_expression &) = delete;
 
   template <typename... Args>
-  s_expression(Args... args)
+  explicit s_expression(const char *format, Args... args)
   {
-    if (gcry_sexp_build(&data, nullptr, args...) != GPG_ERR_NO_ERROR)
+    if (gcry_sexp_build(&data, nullptr, format, args...) != GPG_ERR_NO_ERROR)
     {
       throw std::runtime_error("failed to build S-expression");
     }
   }
 
-  s_expression(s_expression &&other)
+  s_expression(s_expression &&other) noexcept
   {
     std::swap(data, other.data);
-  }
-
-  s_expression(gcry_sexp_t data)
-    : data(data)
-  {
   }
 
   ~s_expression()
