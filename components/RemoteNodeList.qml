@@ -61,6 +61,10 @@ ColumnLayout {
                 height: 30
                 Layout.fillWidth: true
                 color: itemMouseArea.containsMouse || trustedDaemonCheckMark.labelMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+                property var networkType: remoteNodesModel.get(index) ? remoteNodesModel.get(index).networkType : ""
+                visible: (networkType ? networkType == persistentSettings.nettype.toString()
+                                      : persistentSettings.nettype.toString() == 0 ? true
+                                                                                   : false)
 
                 Rectangle {
                     visible: index === remoteNodesModel.selected
@@ -77,7 +81,7 @@ ColumnLayout {
                     anchors.left: parent.left
                     anchors.top: parent.top
                     height: 1
-                    visible: index > 0
+                    visible: index != remoteNodesModel.findFirstRemoteNodeAvailable(persistentSettings.nettype)
 
                     MoneroEffects.ColorTransition {
                         targetObj: parent
@@ -91,6 +95,7 @@ ColumnLayout {
                     anchors.rightMargin: 80
                     color: "transparent"
                     property var trusted: remoteNodesModel.get(index) ? remoteNodesModel.get(index).trusted : false
+                    property var label: remoteNodesModel.get(index) ? remoteNodesModel.get(index).label : ""
 
                     MoneroComponents.TextPlain {
                         id: addressText
@@ -100,7 +105,7 @@ ColumnLayout {
                         anchors.left: parent.left
                         anchors.leftMargin: 6
                         font.pixelSize: 16
-                        text: address
+                        text: (label ? label + " (" + address + ")" : address)
                         themeTransition: false
                         elide: Text.ElideMiddle
                     }
