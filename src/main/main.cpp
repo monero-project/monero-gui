@@ -162,8 +162,8 @@ int main(int argc, char *argv[])
     if (isDesktop && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
         qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #ifdef Q_OS_LINUX
-    // platform xcb by default
-    if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "xcb");
+    // platform wayland by default, xcb fallback
+    if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "wayland;xcb");
 #endif
 
     // enable High DPI scaling
