@@ -84,6 +84,7 @@ private:
     bool m_app_exit = false;
     bool m_noSync = false;
     QString args = "";
+    mutable qint64 m_daemonPid = -1;
 
     mutable FutureScheduler m_scheduler;
 };
