@@ -40,6 +40,7 @@ Rectangle {
     color: "transparent"
 
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardLanguage"
 
     ColumnLayout {
@@ -48,6 +49,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         spacing: 30
+        KeyNavigation.tab: textWelcome
 
         Rectangle {
             // some margins for the titlebar
@@ -73,11 +75,24 @@ Rectangle {
             leftPadding: 0
             topPadding: 0
 
+            Accessible.role: Accessible.StaticText
+            Accessible.name: qsTr("Welcome to Monero") + translationManager.emptyString;
+            KeyNavigation.up: versionText
+            KeyNavigation.backtab: versionText
+            KeyNavigation.down: globe
+            KeyNavigation.tab: globe
+
             Behavior on opacity {
                 NumberAnimation {
                     duration: 350;
                     easing.type: Easing.InCubic;
                 }
+            }
+
+            Rectangle {
+                width: textWelcome.width
+                height: textWelcome.height
+                color: textWelcome.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
             }
         }
 
@@ -103,6 +118,19 @@ Rectangle {
             property int animSpeedNormal: 120000
             property real animFrom: 0
             property real animTo: 360
+
+            Accessible.role: Accessible.Graphic
+            Accessible.name: qsTr("Globe with country flags rotating") + translationManager.emptyString;
+            KeyNavigation.up: textWelcome
+            KeyNavigation.backtab: textWelcome
+            KeyNavigation.down: btnLanguage
+            KeyNavigation.tab: btnLanguage
+
+            Rectangle {
+                width: globe.width
+                height: globe.height
+                color: globe.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+            }
 
             Rectangle {
                 visible: !globe.small
@@ -152,19 +180,33 @@ Rectangle {
             Layout.fillWidth: true
             columnSpacing: 20
 
-            MoneroComponents.LanguageButton { }
+            MoneroComponents.LanguageButton {
+                id: btnLanguage
+                Accessible.role: Accessible.Button
+                Accessible.name: qsTr("Selected language ") + persistentSettings.language  + translationManager.emptyString
+                KeyNavigation.up: globe
+                KeyNavigation.backtab: globe
+                KeyNavigation.down: btnContinue
+                KeyNavigation.tab: btnContinue
+            }
 
             MoneroComponents.StandardButton {
                 id: btnContinue
                 Layout.minimumWidth: 150
                 text: qsTr("Continue") + translationManager.emptyString
-
+                Accessible.role: Accessible.Button
+                Accessible.name: qsTr("Continue") + translationManager.emptyString
+                KeyNavigation.up: btnLanguage
+                KeyNavigation.backtab: btnLanguage
+                KeyNavigation.down: versionText
+                KeyNavigation.tab: versionText
                 onClicked: {
                     wizardController.wizardStackView.backTransition = false;
                     if(wizardController.skipModeSelection){
                         wizardStateView.state = "wizardHome"
                     } else {
                         wizardStateView.state = "wizardModeSelection"
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }
                 }
             }
@@ -186,6 +228,12 @@ Rectangle {
             font.family: MoneroComponents.Style.fontRegular.name
             color: MoneroComponents.Style.defaultFontColor
             text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")"
+            Accessible.role: Accessible.StaticText
+            Accessible.name: qsTr("Monero GUI version") + " " + text + translationManager.emptyString;
+            KeyNavigation.up: btnContinue
+            KeyNavigation.backtab: btnContinue
+            KeyNavigation.down: textWelcome
+            KeyNavigation.tab: textWelcome
 
             Behavior on opacity {
                 NumberAnimation {
@@ -213,6 +261,7 @@ Rectangle {
         delay(versionTimer, 350, function() {
             versionText.opacity = 1;
         });
+        pageRoot.forceActiveFocus();
     }
 
     function delay(timer, interval, cb) {
