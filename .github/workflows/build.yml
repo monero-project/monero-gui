@@ -87,16 +87,19 @@ jobs:
       - uses: actions/checkout@v7
         with:
           submodules: recursive
+      - name: select Xcode 16.2
+        if: matrix.arch == 'ARM'
+        run: sudo xcode-select --switch /Applications/Xcode_16.2.app/Contents/Developer
       - name: install dependencies
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi libsodium ninja openssl pkg-config protobuf unbound zeromq aria2
       - name: download Qt
-        run: mkdir qt6 && cd qt6 && python3 ../monero-gui/.github/qt_helper.py mac_x64 desktop 6.11.1 clang_64 4a88665d61643410399e15d2cc7625cca62d7f5a005d88c02a1e17dde7d9f62c
+        run: mkdir qt6 && cd qt6 && python3 ../monero-gui/.github/qt_helper.py mac_x64 desktop 6.12.0 clang_64 2db37b3a5f2da2ea0fc922e1d476b9eb326cd9ad43e539519e4281f2f9ff8888
         working-directory: ../
       - name: configure
         run: >
           cmake -S . -B build -G Ninja
           -D CMAKE_PREFIX_PATH="/Users/runner/work/monero-gui/qt6/"
-          -D CMAKE_OSX_DEPLOYMENT_TARGET="13.0"
+          -D CMAKE_OSX_DEPLOYMENT_TARGET="14.4"
           -D ARCH=default
       - name: build
         run: cmake --build build
