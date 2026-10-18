@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
   <key>LSMinimumSystemVersion</key>
-  <string>10.10.0</string>
+  <string>@MACOSX_BUNDLE_MINIMUM_SYSTEM_VERSION@</string>
 
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
