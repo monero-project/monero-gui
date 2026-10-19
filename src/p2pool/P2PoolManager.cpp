@@ -74,7 +74,7 @@ void P2PoolManager::download() {
         QFile file(fileName);
         epee::net_utils::http::http_simple_client http_client;
         const epee::net_utils::http::http_response_info* response = NULL;
-        std::string userAgent = randomUserAgent().toStdString();
+        std::string userAgent = browserUserAgent().toStdString();
         std::chrono::milliseconds timeout = std::chrono::seconds(10);
         http_client.set_server(url.host().toStdString(), "443", {});
         bool success = http_client.invoke_get(url.path().toStdString(), timeout, {}, std::addressof(response), {{"User-Agent", userAgent}});
