@@ -322,6 +322,11 @@ if(MINGW)
 endif()
 
 if(APPLE)
+  set(MACOSX_BUNDLE_MINIMUM_SYSTEM_VERSION "12.0") # Qt 6.8 requirement
+  if(CMAKE_OSX_DEPLOYMENT_TARGET)
+    set(MACOSX_BUNDLE_MINIMUM_SYSTEM_VERSION "${CMAKE_OSX_DEPLOYMENT_TARGET}")
+  endif()
+
   set(ICON "${PROJECT_SOURCE_DIR}/images/appicon.icns")
   set_source_files_properties("${ICON}" PROPERTIES
     MACOSX_PACKAGE_LOCATION "Resources"
