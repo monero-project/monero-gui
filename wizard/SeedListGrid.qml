@@ -9,15 +9,16 @@ import "../components" as MoneroComponents
 
 GridLayout {
     id: seedGrid
+    property int columnCount: wizardController.layoutScale == 1 ? 5 : wizardController.layoutScale == 2 ? 4 : wizardController.layoutScale == 3 ? 3 : 2
     Layout.alignment: Qt.AlignHCenter
     flow: GridLayout.TopToBottom
-    columns: wizardController.layoutScale == 1 ? 5 :  wizardController.layoutScale == 2 ? 4 :  wizardController.layoutScale == 3 ? 3 : 2
-    rows: wizardController.layoutScale == 1 ? 5 :wizardController.layoutScale == 2 ? 7 : wizardController.layoutScale == 3 ? 9 : 13
+    columns: columnCount
+    rows: Math.ceil(wizardController.walletOptionsSeed.split(/\s+/).length / columnCount)
     columnSpacing: wizardController.layoutScale == 1 ? 25 : 18
     rowSpacing: 0
 
     Component.onCompleted: {
-        var seed = wizardController.walletOptionsSeed.split(" ");
+        var seed = wizardController.walletOptionsSeed.split(/\s+/);
         var component = Qt.createComponent("SeedListItem.qml");
         for(var i = 0; i < seed.length; i++) {
             component.createObject(seedGrid, {wordNumber: i, word: seed[i]});

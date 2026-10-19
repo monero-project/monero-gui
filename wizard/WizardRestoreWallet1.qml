@@ -43,11 +43,19 @@ Rectangle {
     property alias walletInput: wizardWalletInput
     property alias seedInput: seedInput
     property alias restoreHeight: restoreHeight
+    property alias restoreHeightCheckbox: restoreHeightCheckbox
     property alias wizardNav: nav
     property string viewName: "wizardRestoreWallet1"
+    readonly property bool legacySeed: Wizard.isLegacySeed(seedInput.text)
+    readonly property bool restoreHeightEnabled: wizardController.walletRestoreMode === "keys" || restoreHeightCheckbox.checked
+
+    onLegacySeedChanged: {
+        if (!restoreHeightCheckbox.manuallyToggled)
+            restoreHeightCheckbox.checked = legacySeed || restoreHeight.text !== "";
+    }
 
     function verify() {
-        if (restoreHeight.text.indexOf('-') === 4 && restoreHeight.text.length !== 10) {
+        if (restoreHeightEnabled && restoreHeight.text.indexOf('-') === 4 && restoreHeight.text.length !== 10) {
             return false;
         }
 
@@ -230,7 +238,7 @@ Rectangle {
                             anchors.margins: 8
                             anchors.leftMargin: 10
                             font.family: MoneroComponents.Style.fontRegular.name
-                            text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
+                            text: qsTr("Enter your 16-word Polyseed or 25-word legacy seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
                             visible: !seedInput.text
                         }
@@ -249,6 +257,14 @@ Rectangle {
                     placeholderFontSize: 16
                     placeholderText: qsTr("Passphrase") + translationManager.emptyString
                     visible: seedOffsetCheckbox.checked
+                }
+
+                MoneroComponents.WarningBox {
+                    visible: seedOffsetCheckbox.checked && seedOffset.text.length > 0 &&
+                             Wizard.isPolyseed(seedInput.text)
+                    text: qsTr("You will need this passphrase again to restore your wallet. It is not stored and cannot be displayed later. An incorrect passphrase will restore a different wallet.") + translationManager.emptyString
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: text
                 }
             }
 
@@ -288,27 +304,37 @@ Rectangle {
                 }
             }
 
-            GridLayout{
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 10
+
+                MoneroComponents.CheckBox2 {
+                    id: restoreHeightCheckbox
+                    property bool manuallyToggled: false
+                    visible: wizardController.walletRestoreMode === "seed"
+                    text: (legacySeed ? qsTr("Restore height") : qsTr("Restore height (optional for Polyseed)")) + translationManager.emptyString
+                    onClicked: manuallyToggled = true
+                }
+
                 MoneroComponents.LineEdit {
                     id: restoreHeight
+                    visible: restoreHeightEnabled
                     Layout.fillWidth: true
-                    labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
-                    labelFontSize: 14
                     placeholderFontSize: 16
-                    placeholderText: qsTr("Restore height") + translationManager.emptyString
+                    placeholderText: qsTr("Restore height or date (YYYY-MM-DD)") + translationManager.emptyString
                     validator: RegularExpressionValidator {
                         regularExpression: /^(\d+|\d{4}-\d{2}-\d{2})$/
                     }
                     text: "0"
                 }
+            }
 
-                Item {
-                    Layout.fillWidth: true
-                }
-
-                Item {
-                    Layout.fillWidth: true
-                }
+            MoneroComponents.WarningBox {
+                visible: restoreHeightEnabled && wizardController.walletRestoreMode === "seed" && Wizard.isPolyseed(seedInput.text) &&
+                         Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text) > 0
+                text: qsTr("Polyseed already contains the wallet creation date. A custom restore height or date is rarely needed, only enter one if you know what you are doing.") + translationManager.emptyString
+                Accessible.role: Accessible.StaticText
+                Accessible.name: text
             }
 
             WizardNav {
@@ -338,9 +364,8 @@ Rectangle {
                             break;
                     }
 
-                    if(restoreHeight.text){
-                        wizardController.walletOptionsRestoreHeight = Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text);
-                    }
+                    wizardController.walletOptionsRestoreHeight = restoreHeightEnabled && restoreHeight.text
+                            ? Utils.parseDateStringOrRestoreHeightAsInteger(restoreHeight.text) : 0;
 
                     wizardStateView.state = "wizardRestoreWallet2";
                 }
@@ -361,6 +386,8 @@ Rectangle {
             spendKeyLine.text = "";
             viewKeyLine.text = "";
             restoreHeight.text = "";
+            restoreHeightCheckbox.checked = false;
+            restoreHeightCheckbox.manuallyToggled = false;
         }
     }
 }

@@ -55,7 +55,6 @@ class QmlTestSetup : public QObject
 public:
     QmlTestSetup() : m_accountsDir(QDir::tempPath() + QStringLiteral("/monero-gui-qml-test-XXXXXX"))
     {
-        QDir::setCurrent(m_accountsDir.path());
     }
 
     Q_INVOKABLE bool writeSetting(const QString &path, const QString &key, const QVariant &value)
@@ -114,6 +113,8 @@ public:
 public slots:
     void qmlEngineAvailable(QQmlEngine *engine)
     {
+        QDir::setCurrent(m_accountsDir.path());
+
         qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
         qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
         qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");

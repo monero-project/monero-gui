@@ -65,7 +65,8 @@ Rectangle {
                 Layout.fillWidth: true
                 fontSize: 22
                 Layout.topMargin: 10
-                text: qsTr("Mnemonic seed") + translationManager.emptyString
+                text: currentWallet && currentWallet.polyseed ? qsTr("Polyseed recovery phrase") + translationManager.emptyString
+                                                              : qsTr("Mnemonic seed") + translationManager.emptyString
             }
 
             Rectangle {
