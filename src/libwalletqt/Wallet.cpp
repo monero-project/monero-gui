@@ -727,7 +727,7 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
 PendingTransaction *Wallet::createSweepUnmixableTransaction()
 {
     Monero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
-    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    PendingTransaction * result = new PendingTransaction(ptImpl, 0);
     return result;
 }
 
