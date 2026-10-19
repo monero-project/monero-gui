@@ -286,9 +286,8 @@ std::pair<quint8, QString> OSHelper::getNetworkTypeAndAddressFromFile(const QStr
     quint8 networkType = NetworkType::MAINNET;
     QString address = QString("");
     // attempt to retreive wallet address
-    if(QFile::exists(wallet + ".address.txt")){
-        QFile file(wallet + ".address.txt");
-        file.open(QFile::ReadOnly | QFile::Text);
+    QFile file(wallet + ".address.txt");
+    if(file.open(QFile::ReadOnly | QFile::Text)){
         QString _address = QString(file.readAll());
         if(!_address.isEmpty()){
             address = _address;
