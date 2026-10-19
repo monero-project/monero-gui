@@ -27,7 +27,7 @@
   <string>Monero GUI</string>
 
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright © 2014-2020 The Monero Project</string>
+  <string>Copyright © 2014-2026 The Monero Project</string>
 
   <key>CFBundleIdentifier</key>
   <string>org.monero-project.monero-wallet-gui</string>
