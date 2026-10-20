@@ -255,7 +255,7 @@ Rectangle {
             }
 
             WizardNav {
-                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                progressSteps: appWindow.walletMode === 0 ? 3 : 4
                 progress: 0
                 btnNext.enabled: walletInput.verify() && wizardCreateDevice1.deviceName;
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
