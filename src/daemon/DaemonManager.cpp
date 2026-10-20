@@ -120,9 +120,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // Start monerod
     bool started = m_daemon->startDetached(m_monerod, arguments);
 
-    // add state changed listener
-    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
-
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
         emit daemonStartFailure(m_daemon->errorString());
@@ -199,14 +196,6 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
     return false;
 }
 
-
-void DaemonManager::stateChanged(QProcess::ProcessState state)
-{
-    qDebug() << "STATE CHANGED: " << state;
-    if (state == QProcess::NotRunning) {
-        emit daemonStopped();
-    }
-}
 
 void DaemonManager::printOutput()
 {
