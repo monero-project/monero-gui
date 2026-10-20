@@ -40,6 +40,7 @@
 #include <version.h>
 
 #include "clipboardAdapter.h"
+#include "ColorScheme.h"
 #include "filter.h"
 #include "oscursor.h"
 #include "oshelper.h"
@@ -403,6 +404,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
 #endif
 
+    // Must outlive the engine: Style.blackTheme is re-evaluated while the QML tree is torn
+    // down, and the legacy blackTheme setting is saved from it.
+    ColorScheme colorScheme;
+
     QQmlApplicationEngine engine;
 
     engine.addImportPath(QStringLiteral(":/fonts"));
@@ -416,6 +421,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
+    engine.rootContext()->setContextProperty("colorScheme", &colorScheme);
 
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);

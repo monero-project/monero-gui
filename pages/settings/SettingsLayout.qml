@@ -53,6 +53,31 @@ Rectangle {
         anchors.topMargin: 0
         spacing: 6
 
+        ListModel {
+            id: themeModel
+            ListElement { column1: qsTr("System"); data: "system" }
+            ListElement { column1: qsTr("Light"); data: "light" }
+            ListElement { column1: qsTr("Dark"); data: "dark" }
+        }
+
+        MoneroComponents.StandardDropdown {
+            id: themeDropdown
+            Layout.bottomMargin: 12
+            Layout.maximumWidth: 200
+            labelText: qsTr("Theme") + translationManager.emptyString
+            labelFontSize: 14
+            dataModel: themeModel
+            onChanged: persistentSettings.theme = dataModel.get(currentIndex).data
+        }
+
+        // Selecting an item assigns currentIndex directly, which would break a plain
+        // binding, so the selection is driven by a Binding element that re-asserts.
+        Binding {
+            target: themeDropdown
+            property: "currentIndex"
+            value: Math.max(0, ["system", "light", "dark"].indexOf(persistentSettings.theme))
+        }
+
         MoneroComponents.CheckBox {
             id: customDecorationsCheckBox
             checked: persistentSettings.customDecorations
@@ -84,16 +109,6 @@ Rectangle {
             text: qsTr("Hide balance") + translationManager.emptyString
         }
 
-        MoneroComponents.CheckBox {
-            id: themeCheckbox
-            checked: !MoneroComponents.Style.blackTheme
-            text: qsTr("Light theme") + translationManager.emptyString
-            toggleOnClick: false
-            onClicked: {
-                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
-            }
-        }
-        
         MoneroComponents.CheckBox {
             checked: persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
