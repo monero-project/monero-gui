@@ -28,6 +28,8 @@
 
 #pragma once
 
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include <span.h>
@@ -53,7 +55,7 @@ public:
     while (!buffer.empty())
     {
       packet_tag tag = buffer.read_packet_tag();
-      packets.push_back({std::move(tag), buffer.read(tag.length)});
+      packets.push_back({tag, buffer.read(tag.length)});
     }
   }
 
@@ -70,14 +72,11 @@ public:
   }
 
   template <typename Callback>
-  void for_each(packet_tag::type type, Callback &callback) const
+  void for_each(Callback &&callback) const
   {
     for (const auto &packet : packets)
     {
-      if (packet.first.packet_type == type)
-      {
-        callback(packet.second);
-      }
+      callback(packet.first.packet_type, packet.second);
     }
   }
 
