@@ -122,6 +122,24 @@ function removeTrailingZeros(value) {
     return (value + '').replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
 }
 
+// Strips a redundant leading zero from an amount field as it's typed
+// (007 -> 7, 05 -> 5) and adjusts the cursor to stay in place. Also
+// turns a leading "." into "0." so the field doesn't start on a dot.
+// Takes the TextInput's current text/cursorPosition and returns the
+// corrected pair; the caller assigns both back to the field.
+function stripLeadingZeros(text, cursorPosition) {
+    const match = text.match(/^0+(\d.*)/);
+    if (match) {
+        const removedCharacters = text.length - match[1].length;
+        text = match[1];
+        cursorPosition = Math.max(cursorPosition - removedCharacters, 0);
+    } else if (text.indexOf('.') === 0) {
+        text = '0' + text;
+        cursorPosition = text.length > 2 ? 1 : text.length;
+    }
+    return { text: text, cursorPosition: cursorPosition };
+}
+
 function parseDateStringOrRestoreHeightAsInteger(value) {
     // Parse date string or restore height as integer
     var restoreHeight = 0;
