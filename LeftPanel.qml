@@ -256,11 +256,9 @@ Rectangle {
                     anchors.left: parent.left
                     anchors.leftMargin: 58
                     anchors.baseline: currencyLabel.baseline
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
-                    Binding on color {
-                        when: balancePart1MouseArea.containsMouse || balancePart2MouseArea.containsMouse
-                        value: MoneroComponents.Style.orange
-                    }
+                    color: balancePart1MouseArea.containsMouse || balancePart2MouseArea.containsMouse
+                        ? MoneroComponents.Style.orange
+                        : MoneroComponents.Style.blackTheme ? "white" : "black"
                     text: {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[0] + "."
