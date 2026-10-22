@@ -328,6 +328,21 @@ Rectangle{
                 }
             }
 
+            MoneroComponents.LineEdit {
+                id: daemonStartTimeoutField
+                Layout.preferredWidth: 200
+                labelText: qsTr("Daemon startup timeout (seconds)") + translationManager.emptyString
+                text: persistentSettings.daemonStartTimeout
+                validator: IntValidator { bottom: 10; top: 9999 }
+                onEditingFinished: {
+                    if (daemonStartTimeoutField.acceptableInput) {
+                        persistentSettings.daemonStartTimeout = parseInt(daemonStartTimeoutField.text);
+                    } else {
+                        daemonStartTimeoutField.text = persistentSettings.daemonStartTimeout;
+                    }
+                }
+            }
+
             RowLayout {
                 visible: !persistentSettings.useRemoteNode
 

@@ -44,12 +44,10 @@
 #include <QVariant>
 #include <QMap>
 
-namespace {
-    static const int DAEMON_START_TIMEOUT_SECONDS = 120;
-}
-
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/, int daemonStartTimeout)
 {
+    m_daemonStartTimeout = daemonStartTimeout;
+
     if (!QFileInfo(m_monerod).isFile())
     {
         emit daemonStartFailure("\"" + QDir::toNativeSeparators(m_monerod) + "\" " + tr("executable is missing"));
@@ -135,7 +133,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
             emit daemonStarted();
             m_noSync = noSync;
         } else {
-            emit daemonStartFailure(tr("Timed out, local node is not responding after %1 seconds").arg(DAEMON_START_TIMEOUT_SECONDS));
+            emit daemonStartFailure(tr("Timed out, local node is not responding after %1 seconds").arg(m_daemonStartTimeout));
         }
     });
 
@@ -162,7 +160,7 @@ bool DaemonManager::startWatcher(NetworkType::Type nettype, const QString &dataD
     // Check if daemon is started every 2 seconds
     QElapsedTimer timer;
     timer.start();
-    while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
+    while(true && !m_app_exit && timer.elapsed() / 1000 < m_daemonStartTimeout  ) {
         QThread::sleep(2);
         if(!running(nettype, dataDir)) {
             qDebug() << "daemon not running. checking again in 2 seconds.";

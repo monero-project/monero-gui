@@ -791,7 +791,7 @@ ApplicationWindow {
 
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain, persistentSettings.daemonStartTimeout);
     }
 
     function stopDaemon(callback, splash){
@@ -1516,6 +1516,7 @@ ApplicationWindow {
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
+        property int daemonStartTimeout: 120
         property string p2poolFlags
         property int logLevel: 0
         property string logCategories: ""

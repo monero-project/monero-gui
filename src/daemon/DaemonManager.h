@@ -47,7 +47,9 @@ public:
     explicit DaemonManager(QObject *parent = 0);
     ~DaemonManager();
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false);
+    static const int DEFAULT_DAEMON_START_TIMEOUT_SECONDS = 120;
+
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false, int daemonStartTimeout = DEFAULT_DAEMON_START_TIMEOUT_SECONDS);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QString &dataDir, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
@@ -84,6 +86,7 @@ private:
     bool m_app_exit = false;
     bool m_noSync = false;
     QString args = "";
+    int m_daemonStartTimeout = DEFAULT_DAEMON_START_TIMEOUT_SECONDS;
 
     mutable FutureScheduler m_scheduler;
 };
