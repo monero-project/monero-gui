@@ -29,6 +29,7 @@
 #include "QmlTestHarness.h"
 
 #include <QCoreApplication>
+#include <QCryptographicHash>
 #include <QDir>
 #include <QFile>
 #include <QQmlContext>
@@ -109,6 +110,14 @@ public:
     Q_INVOKABLE QString localFilePath(const QUrl &url)
     {
         return url.toLocalFile();
+    }
+
+    Q_INVOKABLE bool seedTemplateHashMatchesResource()
+    {
+        QFile file(":/wizard/template.pdf");
+        QCryptographicHash hash(QCryptographicHash::Sha256);
+        return file.open(QIODevice::ReadOnly) && hash.addData(&file) &&
+            hash.result().toHex() == OSHelper::seedTemplateHash;
     }
 
 public slots:
