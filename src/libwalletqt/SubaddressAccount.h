@@ -47,6 +47,8 @@ public:
     Q_INVOKABLE void setLabel(quint32 accountIndex, const QString &label) const;
     Q_INVOKABLE void refresh() const;
     quint64 count() const;
+    quint64 balance(quint32 accountIndex) const;
+    quint64 unlockedBalance(quint32 accountIndex) const;
 
 signals:
     void refreshStarted() const;
@@ -55,9 +57,10 @@ signals:
 public slots:
 
 private:
-    explicit SubaddressAccount(Monero::SubaddressAccount * subaddressAccountImpl, QObject *parent);
+    explicit SubaddressAccount(Monero::Wallet * walletImpl, Monero::SubaddressAccount * subaddressAccountImpl, QObject *parent);
     friend class Wallet;
     mutable QReadWriteLock m_lock;
+    Monero::Wallet * m_walletImpl;
     Monero::SubaddressAccount * m_subaddressAccountImpl;
     mutable QList<Monero::SubaddressAccountRow*> m_rows;
 };

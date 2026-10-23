@@ -29,6 +29,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "wallet/api/wallet2_api.h"
+#include "cryptonote_config.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
 #include <QClipboard>
@@ -263,19 +264,51 @@ QString WalletManager::maximumAllowedAmountAsString() const
     return WalletManager::displayAmount(WalletManager::maximumAllowedAmount());
 }
 
+// Amounts exchanged with QML are always in XMR. The wallet library formats and parses amounts
+// using the default-decimal-point setting stored in the wallet keys file, so it is not used here.
 QString WalletManager::displayAmount(quint64 amount)
 {
-    return QString::fromStdString(Monero::Wallet::displayAmount(amount));
+    QString result = QString::number(amount).rightJustified(CRYPTONOTE_DISPLAY_DECIMAL_POINT + 1, '0');
+    result.insert(result.size() - CRYPTONOTE_DISPLAY_DECIMAL_POINT, '.');
+    return result;
 }
 
 quint64 WalletManager::amountFromString(const QString &amount)
 {
-    return Monero::Wallet::amountFromString(amount.toStdString());
+    QString digits = amount.trimmed();
+    int fractionSize = 0;
+
+    const int pointIndex = digits.indexOf('.');
+    if (pointIndex != -1)
+    {
+        fractionSize = digits.size() - pointIndex - 1;
+        while (fractionSize > CRYPTONOTE_DISPLAY_DECIMAL_POINT && digits.endsWith('0'))
+        {
+            digits.chop(1);
+            --fractionSize;
+        }
+        if (fractionSize > CRYPTONOTE_DISPLAY_DECIMAL_POINT)
+            return 0;
+        digits.remove(pointIndex, 1);
+    }
+
+    if (digits.isEmpty())
+        return 0;
+    for (const QChar &c : digits)
+    {
+        if (c < '0' || c > '9')
+            return 0;
+    }
+
+    digits.append(QString(CRYPTONOTE_DISPLAY_DECIMAL_POINT - fractionSize, '0'));
+    bool ok = false;
+    const quint64 result = digits.toULongLong(&ok);
+    return ok ? result : 0;
 }
 
 quint64 WalletManager::amountFromDouble(double amount) const
 {
-    return Monero::Wallet::amountFromDouble(amount);
+    return amountFromString(QString::number(amount, 'f', CRYPTONOTE_DISPLAY_DECIMAL_POINT));
 }
 
 QString WalletManager::amountsSumFromStrings(const QVector<QString> &amounts)
