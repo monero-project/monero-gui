@@ -40,6 +40,7 @@
 #include "AddressBook.h"
 #include "Subaddress.h"
 #include "SubaddressAccount.h"
+#include "WalletManager.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "model/AddressBookModel.h"
@@ -673,7 +674,7 @@ PendingTransaction *Wallet::createTransaction(
     }
     std::vector<uint64_t> amounts;
     for (const auto &amount : destinationAmounts) {
-        amounts.push_back(Monero::Wallet::amountFromString(amount.toStdString()));
+        amounts.push_back(WalletManager::amountFromString(amount));
     }
     std::set<uint32_t> subaddr_indices;
     Monero::PendingTransaction *ptImpl = m_walletImpl->createTransactionMultDest(
@@ -798,7 +799,7 @@ void Wallet::estimateTransactionFeeAsync(
             const uint64_t fee = m_walletImpl->estimateTransactionFee(
                 destinations,
                 static_cast<Monero::PendingTransaction::Priority>(priority));
-            return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
+            return QJSValueList({WalletManager::displayAmount(fee)});
         },
         callback);
 }
@@ -969,7 +970,7 @@ Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &
 Q_INVOKABLE QString Wallet::getReserveProof(bool all, quint32 account_index, const QString &amount, const QString &message) const
 {
     qDebug("Generating reserve proof");
-    const quint64 amountAtomic = Monero::Wallet::amountFromString(amount.toStdString());
+    const quint64 amountAtomic = WalletManager::amountFromString(amount);
     std::string result = m_walletImpl->getReserveProof(all, account_index, amountAtomic, message.toStdString());
     if (result.empty())
         result = "error|" + m_walletImpl->errorString();
@@ -1083,7 +1084,7 @@ bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id
 QString Wallet::make_uri(const QString &address, const QString &amount, const QString &tx_description, const QString &recipient_name) const
 {
     std::string error;
-    const quint64 amountAtomic = Monero::Wallet::amountFromString(amount.toStdString());
+    const quint64 amountAtomic = WalletManager::amountFromString(amount);
     return QString::fromStdString(m_walletImpl->make_uri(address.toStdString(), "", amountAtomic, tx_description.toStdString(), recipient_name.toStdString(), error));
 }
 
@@ -1218,7 +1219,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_currentSubaddressAccount(0)
     , m_subaddress(new Subaddress(m_walletImpl->subaddress(), this))
     , m_subaddressModel(nullptr)
-    , m_subaddressAccount(new SubaddressAccount(m_walletImpl->subaddressAccount(), this))
+    , m_subaddressAccount(new SubaddressAccount(m_walletImpl, m_walletImpl->subaddressAccount(), this))
     , m_subaddressAccountModel(nullptr)
     , m_refreshNow(false)
     , m_refreshEnabled(false)

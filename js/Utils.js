@@ -122,6 +122,73 @@ function removeTrailingZeros(value) {
     return (value + '').replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
 }
 
+var denominationShift = {
+    "xmr": 0,
+    "mxmr": 3,
+    "atomic": 12,
+};
+
+var denominationUnitLabel = {
+    "xmr": "XMR",
+    "mxmr": "mXMR",
+    "atomic": "atomic units",
+};
+
+function shiftDecimalPlaces(numberString, places) {
+    var negative = numberString.charAt(0) === '-';
+    if (negative) numberString = numberString.substring(1);
+
+    var dotIndex = numberString.indexOf('.');
+    var intPart = dotIndex === -1 ? numberString : numberString.substring(0, dotIndex);
+    var fracPart = dotIndex === -1 ? '' : numberString.substring(dotIndex + 1);
+
+    while (fracPart.length < places) fracPart += '0';
+    intPart += fracPart.substring(0, places);
+    fracPart = fracPart.substring(places);
+
+    intPart = intPart.replace(/^0+(?=\d)/, '');
+    var result = fracPart.length > 0 ? (intPart + '.' + fracPart) : intPart;
+    return (negative ? '-' : '') + result;
+}
+
+function currentDenomination() {
+    var denomination = appWindow.persistentSettings.displayDenomination;
+    return denominationShift.hasOwnProperty(denomination) ? denomination : "xmr";
+}
+
+function addThousandsSeparators(numberString) {
+    var negative = numberString.charAt(0) === '-';
+    if (negative) numberString = numberString.substring(1);
+
+    var dotIndex = numberString.indexOf('.');
+    var intPart = dotIndex === -1 ? numberString : numberString.substring(0, dotIndex);
+    var fracPart = dotIndex === -1 ? '' : numberString.substring(dotIndex);
+
+    var grouped = '';
+    for (var i = 0; i < intPart.length; ++i) {
+        var digitsFromEnd = intPart.length - i;
+        if (i > 0 && digitsFromEnd % 3 === 0) {
+            grouped += ',';
+        }
+        grouped += intPart.charAt(i);
+    }
+
+    return (negative ? '-' : '') + grouped + fracPart;
+}
+
+function denominate(xmrAmountString) {
+    var shifted = shiftDecimalPlaces(xmrAmountString, denominationShift[currentDenomination()]);
+    return addThousandsSeparators(shifted);
+}
+
+function hiddenBalancePlaceholder() {
+    return currentDenomination() === "atomic" ? "?" : "?.??";
+}
+
+function denominationUnit() {
+    return denominationUnitLabel[currentDenomination()];
+}
+
 function parseDateStringOrRestoreHeightAsInteger(value) {
     // Parse date string or restore height as integer
     var restoreHeight = 0;
