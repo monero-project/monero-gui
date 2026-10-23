@@ -47,6 +47,11 @@ Item {
     TestCase {
         name: "Utils"
 
+        function test_bundled_template_hash() {
+            verify(settingsTestHelper.seedTemplateHashMatchesResource(),
+                   "Update OSHelper::seedTemplateHash to match wizard/template.pdf")
+        }
+
         function test_restore_height_stays_a_height() {
             compare(Utils.parseDateStringOrRestoreHeightAsInteger("0"), 0)
             compare(Utils.parseDateStringOrRestoreHeightAsInteger("1234567"), 1234567)
