@@ -367,7 +367,6 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
-        currentWallet.proxyAddress = Qt.binding(persistentSettings.getWalletProxyAddress);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.getProofClicked.connect(handleGetProof);
@@ -677,6 +676,17 @@ ApplicationWindow {
         passwordDialog.close();
     }
 
+    function reconnectWallet() {
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            isTrustedDaemon(),
+            0,
+            false,
+            false,
+            0,
+            persistentSettings.getWalletProxyAddress());
+    }
+
     function connectRemoteNode() {
         console.log("connecting remote node");
 
@@ -688,14 +698,7 @@ ApplicationWindow {
             const remoteNode = remoteNodesModel.currentRemoteNode();
             currentDaemonAddress = remoteNode.address;
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
-            currentWallet.initAsync(
-                currentDaemonAddress,
-                isTrustedDaemon(),
-                0,
-                false,
-                false,
-                0,
-                persistentSettings.getWalletProxyAddress());
+            reconnectWallet();
             walletManager.setDaemonAddressAsync(currentDaemonAddress);
         };
 
@@ -718,14 +721,7 @@ ApplicationWindow {
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.setDaemonLogin("", "");
-        currentWallet.initAsync(
-            currentDaemonAddress,
-            isTrustedDaemon(),
-            0,
-            false,
-            false,
-            0,
-            persistentSettings.getWalletProxyAddress());
+        reconnectWallet();
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
         firstBlockSeen = 0;
     }
@@ -1564,6 +1560,9 @@ ApplicationWindow {
 
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
+        onProxyAddressChanged: if (currentWallet && useRemoteNode) appWindow.reconnectWallet()
+        onProxyEnabledChanged: if (currentWallet && useRemoteNode) appWindow.reconnectWallet()
+
         function getProxyAddress() {
             if (socksProxyFlagSet) {
                 return socksProxyFlag == "" ? "" : "socks5://" + socksProxyFlag;
