@@ -199,23 +199,6 @@ QString Wallet::getProxyAddress() const
     return m_proxyAddress;
 }
 
-void Wallet::setProxyAddress(QString address)
-{
-    m_scheduler.run([this, address] {
-        {
-            QMutexLocker locker(&m_proxyMutex);
-
-            if (!m_walletImpl->setProxy(address.toStdString()))
-            {
-                qCritical() << "failed to set proxy" << address;
-            }
-
-            m_proxyAddress = address;
-        }
-        emit proxyAddressChanged();
-    });
-}
-
 bool Wallet::synchronized() const
 {
     return m_walletImpl->synchronized();

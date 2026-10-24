@@ -99,7 +99,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
-    Q_PROPERTY(QString proxyAddress READ getProxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
+    Q_PROPERTY(QString proxyAddress READ getProxyAddress NOTIFY proxyAddressChanged)
     Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
 
 public:
@@ -469,7 +469,6 @@ private:
     void refreshingSet(bool value);
     void setConnectionStatus(ConnectionStatus value);
     QString getProxyAddress() const;
-    void setProxyAddress(QString address);
     void startRefreshThread();
 
 private:
