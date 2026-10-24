@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -38,6 +38,8 @@
 #include "NetworkType.h"
 #include "qt/FutureScheduler.h"
 
+#include "P2PoolStatsProvider.h"
+
 class P2PoolManager : public QObject
 {
     Q_OBJECT
@@ -45,6 +47,12 @@ class P2PoolManager : public QObject
 public:
     explicit P2PoolManager(QObject *parent = 0);
     ~P2PoolManager();
+
+    Q_PROPERTY(P2PoolStatsProvider* p2poolStats READ getP2PoolStats CONSTANT)
+
+    Q_INVOKABLE P2PoolStatsProvider* getP2PoolStats() const;
+    Q_INVOKABLE QString getLogFilePath() const;
+    Q_INVOKABLE void clearLogFile();
 
     Q_INVOKABLE bool start(const QString &flags, const QString &address, const QString &chain, const QString &threads);
     Q_INVOKABLE void exit();
@@ -65,11 +73,12 @@ private:
     bool running(NetworkType::Type nettype) const;
 signals:
     void p2poolStartFailure() const;
-    void p2poolStatus(bool isMining, int hashrate) const;
+    void p2poolStatus(bool isMining, QVariant hashrate) const;
     void p2poolDownloadFailure(int errorCode) const;
     void p2poolDownloadSuccess() const;
 
 private:
+    std::unique_ptr<P2PoolStatsProvider> m_p2poolStats;
     std::unique_ptr<QProcess> m_p2poold;
     QMutex m_p2poolMutex;
     QString m_p2pool;
