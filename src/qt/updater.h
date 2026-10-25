@@ -51,7 +51,7 @@ public:
         size_t binarySize) const;
 
 private:
-    QByteArray verifyParseSignedHahes(
+    QByteArray verifyParseSignedHashes(
         const QByteArray &armoredSignedHashes,
         const QByteArray &secondDetachedSignature,
         const QString &binaryFilename,

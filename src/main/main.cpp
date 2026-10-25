@@ -66,6 +66,7 @@
 #include "qt/ipc.h"
 #include "qt/network.h"
 #include "qt/updater.h"
+#include "openpgp/openpgp.h"
 #include "qt/utils.h"
 #include "qt/TailsOS.h"
 #include "qt/KeysFiles.h"
@@ -255,6 +256,11 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     Monero::Utils::onStartup();
 
     Logger logger(app, parser.value(logPathOption));
+
+    if (!openpgp::initialize())
+    {
+        qCritical() << "Failed to initialize libgcrypt";
+    }
 
     // loglevel is configured in main.qml. Anything lower than
     // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
