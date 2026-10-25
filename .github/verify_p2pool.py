@@ -46,13 +46,11 @@ def main():
     urlretrieve(f"{url}sha256sums.txt.asc","sha256sums.txt.asc")
 
     subprocess.check_call(["gpg", "--import", "SChernykh.asc"])
-    subprocess.check_call(["gpg", "--verify", "sha256sums.txt.asc"])    
+    lines = subprocess.check_output(["gpg", "--output", "-", "--verify", "sha256sums.txt.asc"]).decode("utf-8").splitlines()
     fingerprint = subprocess.check_output(["gpg","--fingerprint", "SChernykh"]).decode("utf-8").splitlines()[1].strip()
     
     assert fingerprint == sech_key_fp
     
-    with open("sha256sums.txt.asc","r") as f:
-        lines = f.readlines()
 
     signed_hashes = {}
     for line in lines:
