@@ -39,6 +39,9 @@ MoneroEffects.ImageMask {
     property alias tooltip: tooltip.text
     signal clicked(var mouse)
 
+    // offset the hover enlargement so the icon expands from its centre
+    transform: Translate { id: hoverOffset }
+
     MoneroComponents.Tooltip {
         id: tooltip
         anchors.fill: parent
@@ -54,12 +57,16 @@ MoneroEffects.ImageMask {
             tooltip.text ? tooltip.tooltipPopup.open() : ""
             button.width = button.width + 2
             button.height = button.height + 2
+            hoverOffset.x = -1
+            hoverOffset.y = -1
         }
 
         onExited: {
             tooltip.text ? tooltip.tooltipPopup.close() : ""
             button.width = button.width - 2
             button.height = button.height - 2
+            hoverOffset.x = 0
+            hoverOffset.y = 0
         }
 
         onClicked: (mouse) => button.clicked(mouse)
