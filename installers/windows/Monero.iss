@@ -5,7 +5,7 @@
 
 [Setup]
 AppName=Monero GUI Wallet
-; For InnoSetup this is the property that uniquely identifies the application as such
+; InnoSetup uniquely identifies the application by "AppId", which defaults to "AppName" if not set
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
@@ -56,6 +56,8 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 [Dirs]
 Name: "{app}";
+; Working directory of the CLI wallet icon, must exist or the icon fails to start
+Name: "{userdocs}\Monero\wallets"; Flags: uninsneveruninstall
 
 [Files]
 ; The use of the flag "ignoreversion" for the following entries leads to the following behaviour:
@@ -96,7 +98,6 @@ Source: "bin\extras\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: igno
 Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\extras\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\extras\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\extras\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\extras\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\extras\monero-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -202,14 +203,14 @@ begin
   WizardForm.WizardBitmapImage.Height := 300;
   WizardForm.WizardBitmapImage.Width := 500;
 
-  // Image for the "Finnish" screen, in standard WizardBitmapImage size of 164 x 314
+  // Image for the "Finish" screen, in standard WizardBitmapImage size of 164 x 314
   ExtractTemporaryFile('FinishImage.bmp');
   WizardForm.WizardBitmapImage2.Bitmap.LoadFromFile(ExpandConstant('{tmp}\FinishImage.bmp'));
 
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitmonero');
   s := 'The default folder to store the Monero blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need more than 90 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need over 100 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
@@ -243,7 +244,7 @@ var s: String;
 begin
   s := BlockChainDirPage.Values[0];
   Result := s;
-  // No quotes for folder name with blanks as this is never used as part of a command line
+  // No quotes here, callers that use it as part of a command line have to add them
 end;
 
 function BlockChainDirOrEmpty(Param: String) : String;
@@ -275,7 +276,7 @@ function DaemonLog(Param: String) : String;
 // Full filename of the log of the daemon
 begin
   Result := BlockChainDir('') + '\bitmonero.log';
-  // No quotes for filename with blanks as this is never used as part of a command line
+  // No quotes here, callers that use it as part of a command line have to add them
 end;
 
 function DaemonFlags(Param: String): String;
@@ -287,24 +288,29 @@ begin
     // No need to add the default dir as flags for the daemon
     s := '';
   end;
-  if Pos(' ', s) > 0 then begin
-    // Quotes needed for filename with blanks
-    s := '"' + s + '"';
-  end;
   if s <> '' then begin
-    s := '--data-dir ' + s;
+    // A trailing backslash would escape the closing quote, so double it
+    if s[Length(s)] = '\' then begin
+      s := s + '\';
+    end;
+    // Always quote, folder names may contain blanks or characters special to the command line
+    s := '--data-dir "' + s + '"';
   end;
   Result := s;
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 var s: TArrayOfString;
+    flags: String;
 begin
   if CurStep = ssPostInstall then begin
     // Re-build "monero-daemon.bat" according to actual install and blockchain directory used
+    // "%" has to be doubled to be taken literally in a batch file
+    flags := DaemonFlags('');
+    StringChangeEx(flags, '%', '%%', True);
     SetArrayLength(s, 3);
     s[0] := 'REM Execute the Monero daemon and then stay with window open after it exits';
-    s[1] := '"' + ExpandConstant('{app}\monerod.exe') + '" ' + DaemonFlags('');
+    s[1] := '"' + ExpandConstant('{app}\monerod.exe') + '" ' + flags;
     s[2] := 'PAUSE';
     SaveStringsToFile(ExpandConstant('{app}\monero-daemon.bat'), s, false); 
   end;
@@ -316,7 +322,9 @@ begin
   s := 'Please note: Uninstall will not delete any downloaded blockchain. ';
   s := s + 'If you do not need it anymore you have to delete it manually.';
   s := s + #13#10#13#10 + 'Uninstall will not delete any wallets that you created either.';
-  MsgBox(s, mbInformation, MB_OK);
+  if not UninstallSilent then begin
+    MsgBox(s, mbInformation, MB_OK);
+  end;
   Result := true;
 end;
 
@@ -341,8 +349,8 @@ Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-c
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
 ; from the others by text, and make them sort at the end by the help of "x" in front 
-Name: "{group}\Utilities\x (Check Default Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
-Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
+Name: "{group}\Utilities\x (Check Default Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: """{code:BlockChainDir}"""
+Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: """{code:DaemonLog}"""
 Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: """{userdocs}\Monero\wallets"""
 Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: """{userappdata}\monero-wallet-gui\monero-wallet-gui.log"""
 Name: "{group}\Utilities\x (Try Daemon, Exit Confirm)"; Filename: "{app}\monero-daemon.bat"
