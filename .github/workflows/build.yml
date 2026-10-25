@@ -68,7 +68,7 @@ jobs:
       run: cmake --build . --target deploy
       working-directory: build/release
     - name: test qml
-      run: build/release/bin/monero-wallet-gui --test-qml 2>&1 | cat
+      run: QT_FORCE_STDERR_LOGGING=1 build/release/bin/monero-wallet-gui --test-qml
 
   macos-bundle:
     name: macOS ${{ matrix.arch }} bundle
