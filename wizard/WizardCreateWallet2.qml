@@ -320,7 +320,14 @@ Rectangle {
                     text: qsTr("Print a template") + translationManager.emptyString
                     tooltip: qsTr("Print a template to write down your seed") + translationManager.emptyString
                     onClicked: {
-                        oshelper.openSeedTemplate();
+                        var result = oshelper.openSeedTemplate();
+                        if (result === 0)
+                            return;
+
+                        var message = (result === -1
+                            ? qsTr("Unable to open the seed template because the file could not be verified.")
+                            : qsTr("Unable to open the seed template.")) + translationManager.emptyString;
+                        appWindow.showStatusMessage(message, 5);
                     }
                     Accessible.role: Accessible.Button
                     Accessible.name: qsTr("Print a template to write down your seed") + translationManager.emptyString

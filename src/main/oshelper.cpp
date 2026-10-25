@@ -32,10 +32,12 @@
 #include <unordered_set>
 
 #include <QCoreApplication>
+#include <QCryptographicHash>
 #include <QGuiApplication>
 #include <QFileDialog>
 #include <QScreen>
 #include <QStandardPaths>
+#include <QTemporaryDir>
 #include <QWindow>
 #include <QDir>
 #include <QDebug>
@@ -313,8 +315,35 @@ quint8 OSHelper::getNetworkTypeFromFile(const QString &keysPath, quint8 fallback
     return networkTypeAndAddress.second.isEmpty() ? fallbackNetworkType : networkTypeAndAddress.first;
 }
 
-void OSHelper::openSeedTemplate() const
+int OSHelper::openSeedTemplate() const
 {
-    QFile::copy(":/wizard/template.pdf", QDir::tempPath() + "/seed_template.pdf");
-    openFile(QDir::tempPath() + "/seed_template.pdf");
+    static const QTemporaryDir directory(QDir::tempPath() + "/monero-seed-template-XXXXXX");
+    if (!directory.isValid())
+    {
+        qWarning() << "Failed to create seed template directory" << directory.errorString();
+        return -2;
+    }
+
+    const QString path = directory.filePath("seed_template.pdf");
+    if (!QFile::exists(path) && !QFile::copy(":/wizard/template.pdf", path))
+    {
+        qWarning() << "Failed to copy seed template";
+        return -2;
+    }
+
+    QFile file(path);
+    QCryptographicHash hash(QCryptographicHash::Sha256);
+    if (!file.open(QIODevice::ReadOnly) || !hash.addData(&file))
+    {
+        qWarning() << "Failed to read seed template" << file.errorString();
+        return -2;
+    }
+    if (hash.result().toHex() != seedTemplateHash)
+    {
+        qWarning() << "Seed template integrity check failed";
+        return -1;
+    }
+    file.close();
+
+    return openFile(path) ? 0 : -2;
 }

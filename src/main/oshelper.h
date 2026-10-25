@@ -41,6 +41,8 @@ class OSHelper : public QObject
     Q_PROPERTY(bool installed READ installed CONSTANT);
 
 public:
+    static constexpr char seedTemplateHash[] = "bcca2abd0ecff56423b4b04e81b2506c6b22bc5f5ef568251d2fbabc966755ef";
+
     explicit OSHelper(QObject *parent = 0);
 
     Q_INVOKABLE void createDesktopEntry() const;
@@ -54,7 +56,8 @@ public:
     Q_INVOKABLE QString randomPassword(int numBytes = 32) const;
     Q_INVOKABLE bool isCapsLock() const;
     Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath, quint8 fallbackNetworkType) const;
-    Q_INVOKABLE void openSeedTemplate() const;
+    // 0: success, -1: integrity failure, -2: file/open failure.
+    Q_INVOKABLE int openSeedTemplate() const;
     bool installed() const;
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
