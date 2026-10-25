@@ -1135,28 +1135,13 @@ ApplicationWindow {
 
         txConfirmationPopup.clearFields();
         txConfirmationPopup.sweepUnmixable = true;
-        transaction = currentWallet.createSweepUnmixableTransaction();
+        txConfirmationPopup.bottomTextAnimation.running = false;
+        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
         txConfirmationPopup.open();
-        if (transaction.status !== PendingTransaction.Status_Ok) {
-            console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
-            // deleting transaction object, we don't want memleaks
-            currentWallet.disposeTransaction(transaction);
-            transaction = null;
 
-        } else if (transaction.txCount == 0) {
-            console.error("No unmixable outputs to sweep");
-            txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
-            // deleting transaction object, we don't want memleaks
-            currentWallet.disposeTransaction(transaction);
-            transaction = null;
-        } else {
-            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
-                    + ", fee: " + walletManager.displayAmount(transaction.fee));
-            txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
-            txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            // committing transaction
-        }
+        const requestId = ++transactionRequestId;
+        activeTransactionRequestId = requestId;
+        currentWallet.createSweepUnmixableTransactionAsync(requestId);
     }
 
     // called after user confirms transaction
