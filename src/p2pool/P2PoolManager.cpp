@@ -105,8 +105,10 @@ void P2PoolManager::download() {
             if (hash != validHash) {
                 emit p2poolDownloadFailure(HashVerificationFailed);
             }
+            else if (!file.open(QIODevice::WriteOnly)) {
+                emit p2poolDownloadFailure(InstallationFailed);
+            }
             else {
-                file.open(QIODevice::WriteOnly);
                 file.write(data);
                 file.close();
                 QProcess::execute("tar", {"-xzf", fileName, "--strip=1", "-C", m_p2poolPath});
@@ -141,7 +143,11 @@ void P2PoolManager::getStatus() {
         return;
     }
     QFile statsFile(statsPath);
-    statsFile.open(QIODevice::ReadOnly);
+    if (!statsFile.open(QIODevice::ReadOnly))
+    {
+        emit p2poolStatus(status, 0);
+        return;
+    }
     QTextStream statsOut(&statsFile);
     QByteArray data;
     statsOut >> data;
