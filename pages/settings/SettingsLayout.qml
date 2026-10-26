@@ -278,7 +278,7 @@ Rectangle {
         MoneroComponents.CheckBox {
             id: proxyCheckbox
             Layout.topMargin: 6
-            enabled: !socksProxyFlagSet
+            enabled: !socksProxyFlagSet && (!appWindow.currentWallet || !appWindow.currentWallet.initializing)
             checked: socksProxyFlagSet ? socksProxyFlag : persistentSettings.proxyEnabled
             onClicked: {
                 persistentSettings.proxyEnabled = !persistentSettings.proxyEnabled;

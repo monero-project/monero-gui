@@ -1664,8 +1664,8 @@ ApplicationWindow {
 
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: isTails
-        onProxyAddressChanged: if (currentWallet && useRemoteNode) appWindow.reconnectWallet()
-        onProxyEnabledChanged: if (currentWallet && useRemoteNode) appWindow.reconnectWallet()
+        onProxyAddressChanged: if (currentWallet && (appWindow.walletMode == 0 || useRemoteNode)) appWindow.reconnectWallet()
+        onProxyEnabledChanged: if (currentWallet && (appWindow.walletMode == 0 || useRemoteNode)) appWindow.reconnectWallet()
 
         function getProxyAddress() {
             if (socksProxyFlagSet) {
