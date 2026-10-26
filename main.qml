@@ -2340,6 +2340,13 @@ ApplicationWindow {
         confirmationDialog.open();
     }
 
+    Shortcut {
+        sequence: "Ctrl+Q"
+        enabled: !isAndroid && !isIOS && !appWindow.isQuitting
+        autoRepeat: false
+        onActivated: appWindow.close()
+    }
+
     onClosing: function(close) {
         close.accepted = false;
         console.log("blocking close event");
