@@ -143,6 +143,12 @@ ApplicationWindow {
     }
 
     function lock() {
+        if (txConfirmationPopup.visible) {
+            txConfirmationPopup.close()
+            txConfirmationPopup.clearFields()
+            txConfirmationPopup.rejected()
+        }
+
         if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
             appWindow.showProcessingSplash(qsTr("Locking..."));
             currentWallet.startBackgroundSync()
