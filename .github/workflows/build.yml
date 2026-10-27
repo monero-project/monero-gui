@@ -129,7 +129,7 @@ jobs:
     - name: sha256sum
       run: shasum -a256 /home/runner/work/monero-gui/monero-gui/build/x86_64-linux-gnu/release/bin/monero-wallet-gui
     - name: install test dependencies
-      run: sudo apt -y install xvfb libopengl0 libegl1 libgl1 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-shape0
+      run: sudo apt -y install xvfb libopengl0 libegl1 libgl1 libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-shape0
     - name: check qml startup
       run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/x86_64-linux-gnu/release/bin/monero-wallet-gui --check-qml
     - uses: actions/upload-artifact@v7

@@ -190,7 +190,7 @@ RUN git clone -b xcb-util-cursor-0.1.4 --depth 1 https://gitlab.freedesktop.org/
     git submodule init && \
     git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
     git -C m4 reset --hard c617eee22ae5c285e79e81ec39ce96862fd3262f && \
-    ./autogen.sh --enable-shared --disable-static && \
+    ./autogen.sh --disable-shared --enable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
