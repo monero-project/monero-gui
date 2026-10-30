@@ -321,6 +321,7 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.disconnect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
+        currentWallet.daemonNettypeMismatch.disconnect(onDaemonNettypeMismatch);
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
         middlePanel.getProofClicked.disconnect(handleGetProof);
@@ -381,6 +382,7 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
+        currentWallet.daemonNettypeMismatch.connect(onDaemonNettypeMismatch);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.getProofClicked.connect(handleGetProof);
@@ -415,6 +417,7 @@ ApplicationWindow {
             persistentSettings.is_recovering_from_device,
             persistentSettings.restore_height,
             persistentSettings.getWalletProxyAddress());
+        checkCurrentDaemonNettype();
 
         // save wallet keys in case wallet settings have been changed in the init
         currentWallet.setPassword(walletPassword);
@@ -809,6 +812,7 @@ ApplicationWindow {
             currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
             reconnectWallet();
             walletManager.setDaemonAddressAsync(currentDaemonAddress);
+            checkCurrentDaemonNettype();
         };
 
         if (typeof daemonManager != "undefined" && daemonRunning) {
@@ -832,7 +836,33 @@ ApplicationWindow {
         currentWallet.setDaemonLogin("", "");
         reconnectWallet();
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
+        checkCurrentDaemonNettype();
         firstBlockSeen = 0;
+    }
+
+    function checkCurrentDaemonNettype() {
+        if (typeof currentWallet === "undefined" || currentWallet === null) return;
+        currentWallet.checkDaemonNettypeAsync(currentDaemonAddress, persistentSettings.getWalletProxyAddress());
+    }
+
+    function nettypeName(nettype) {
+        switch (nettype) {
+            case NetworkType.MAINNET: return qsTr("Mainnet");
+            case NetworkType.TESTNET: return qsTr("Testnet");
+            case NetworkType.STAGENET: return qsTr("Stagenet");
+        }
+        return qsTr("unknown network");
+    }
+
+    function onDaemonNettypeMismatch(daemonNettype) {
+        console.error("Daemon network type mismatch: wallet is " + nettypeName(currentWallet.nettype) +
+            ", daemon at " + currentDaemonAddress + " is " + nettypeName(daemonNettype));
+
+        informationPopup.title = qsTr("Wrong daemon network type") + translationManager.emptyString;
+        informationPopup.text = qsTr("The node at %1 is running on %2, but this is a %3 wallet. Sync issues will likely occur.")
+            .arg(currentDaemonAddress).arg(nettypeName(daemonNettype)).arg(nettypeName(currentWallet.nettype)) + translationManager.emptyString;
+        informationPopup.onCloseCallback = null;
+        informationPopup.open();
     }
 
     function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
