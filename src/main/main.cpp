@@ -58,6 +58,8 @@
 #include "model/AddressBookModel.h"
 #include "Subaddress.h"
 #include "model/SubaddressModel.h"
+#include "Coins.h"
+#include "model/CoinsModel.h"
 #include "SubaddressAccount.h"
 #include "model/SubaddressAccountModel.h"
 #include "Logger.h"
@@ -391,6 +393,12 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     qmlRegisterUncreatableType<Subaddress>("moneroComponents.Subaddress", 1, 0, "Subaddress",
                                                         "Subaddress can't be instantiated directly");
+
+    qmlRegisterUncreatableType<CoinsModel>("moneroComponents.CoinsModel", 1, 0, "CoinsModel",
+                                                        "CoinsModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<Coins>("moneroComponents.Coins", 1, 0, "Coins",
+                                                        "Coins can't be instantiated directly");
 
     qmlRegisterUncreatableType<SubaddressAccountModel>("moneroComponents.SubaddressAccountModel", 1, 0, "SubaddressAccountModel",
                                                         "SubaddressAccountModel can't be instantiated directly");

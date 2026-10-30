@@ -978,6 +978,7 @@ ApplicationWindow {
         // history refresh is handled by walletUpdated
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
         currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount)
+        currentWallet.coins.refresh(currentWallet.currentSubaddressAccount)
 
         if(middlePanel.state == "History")
             middlePanel.historyView.update();
@@ -996,6 +997,7 @@ ApplicationWindow {
         // refresh transaction history here
         console.log("monero sent found")
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
+        currentWallet.coins.refresh(currentWallet.currentSubaddressAccount);
 
         if(middlePanel.state == "History")
             middlePanel.historyView.update();
