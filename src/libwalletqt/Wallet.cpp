@@ -40,11 +40,13 @@
 #include "AddressBook.h"
 #include "Subaddress.h"
 #include "SubaddressAccount.h"
+#include "Coins.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "model/AddressBookModel.h"
 #include "model/SubaddressModel.h"
 #include "model/SubaddressAccountModel.h"
+#include "model/CoinsModel.h"
 #include "wallet/api/wallet2_api.h"
 
 #include <QFile>
@@ -420,6 +422,7 @@ void Wallet::switchSubaddressAccount(quint32 accountIndex)
         }
         m_subaddress->refresh(m_currentSubaddressAccount);
         m_history->refresh(m_currentSubaddressAccount);
+        m_coins->refresh(m_currentSubaddressAccount);
         emit currentSubaddressAccountChanged();
     }
 }
@@ -627,6 +630,7 @@ bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
             m_history->refresh(currentSubaddressAccount());
             m_subaddress->refresh(currentSubaddressAccount());
             m_subaddressAccount->getAll();
+            m_coins->refresh(currentSubaddressAccount());
         }
         if (result)
             emit updated();
@@ -864,6 +868,20 @@ SubaddressAccountModel *Wallet::subaddressAccountModel() const
         m_subaddressAccountModel = new SubaddressAccountModel(w,m_subaddressAccount);
     }
     return m_subaddressAccountModel;
+}
+
+Coins *Wallet::coins() const
+{
+    return m_coins;
+}
+
+CoinsModel *Wallet::coinsModel() const
+{
+    if (!m_coinsModel) {
+        Wallet * w = const_cast<Wallet*>(this);
+        m_coinsModel = new CoinsModel(w, m_coins);
+    }
+    return m_coinsModel;
 }
 
 QString Wallet::generatePaymentId() const
@@ -1220,6 +1238,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_subaddressModel(nullptr)
     , m_subaddressAccount(new SubaddressAccount(m_walletImpl->subaddressAccount(), this))
     , m_subaddressAccountModel(nullptr)
+    , m_coins(new Coins(m_walletImpl, m_scheduler, this))
+    , m_coinsModel(nullptr)
     , m_refreshNow(false)
     , m_refreshEnabled(false)
     , m_refreshing(false)

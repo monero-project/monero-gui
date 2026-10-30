@@ -61,6 +61,8 @@ class Subaddress;
 class SubaddressModel;
 class SubaddressAccount;
 class SubaddressAccountModel;
+class Coins;
+class CoinsModel;
 
 Q_MOC_INCLUDE("TransactionHistory.h")
 Q_MOC_INCLUDE("model/TransactionHistorySortFilterModel.h")
@@ -70,6 +72,8 @@ Q_MOC_INCLUDE("Subaddress.h")
 Q_MOC_INCLUDE("model/SubaddressModel.h")
 Q_MOC_INCLUDE("SubaddressAccount.h")
 Q_MOC_INCLUDE("model/SubaddressAccountModel.h")
+Q_MOC_INCLUDE("Coins.h")
+Q_MOC_INCLUDE("model/CoinsModel.h")
 
 class Wallet : public QObject, public PassprasePrompter
 {
@@ -93,6 +97,8 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(Subaddress * subaddress READ subaddress)
     Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
     Q_PROPERTY(SubaddressAccount * subaddressAccount READ subaddressAccount)
+    Q_PROPERTY(CoinsModel * coinsModel READ coinsModel)
+    Q_PROPERTY(Coins * coins READ coins)
     Q_PROPERTY(bool viewOnly READ viewOnly)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
@@ -320,6 +326,12 @@ public:
     //! returns subadress account model
     SubaddressAccountModel *subaddressAccountModel() const;
 
+    //! returns coins
+    Coins *coins() const;
+
+    //! returns coins model
+    CoinsModel *coinsModel() const;
+
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
 
@@ -501,6 +513,8 @@ private:
     mutable SubaddressModel * m_subaddressModel;
     SubaddressAccount * m_subaddressAccount;
     mutable SubaddressAccountModel * m_subaddressAccountModel;
+    Coins * m_coins;
+    mutable CoinsModel * m_coinsModel;
     QMutex m_asyncMutex;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
