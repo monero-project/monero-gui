@@ -83,7 +83,7 @@ Rectangle {
     function generateQRCodeString() {
         if (pageReceive.state == "PaymentRequest") {
             return walletManager.make_uri(appWindow.current_address,
-                amountToReceiveXMR.text,
+                amountToReceiveXMR.xmrAmount,
                 txDescriptionInput.text, receiverNameInput.text);
         } else {
             return walletManager.make_uri(appWindow.current_address);
@@ -269,7 +269,7 @@ Rectangle {
                         if (amountToReceiveFiat.text == "") {
                             amountToReceiveXMR.text = "";
                         } else {
-                            amountToReceiveXMR.text = fiatApiConvertToXMR(amountToReceiveFiat.text);
+                            amountToReceiveXMR.text = Utils.amountToInput(fiatApiConvertToXMR(amountToReceiveFiat.text));
                         }
                     }
                     validator: RegularExpressionValidator {
@@ -294,6 +294,7 @@ Rectangle {
 
                 MoneroComponents.Input {
                     id: amountToReceiveXMR
+                    property string xmrAmount: ""
                     Layout.preferredWidth: 165
                     Layout.maximumWidth: 165
                     topPadding: 5
@@ -305,7 +306,7 @@ Rectangle {
                     verticalAlignment: TextInput.AlignVCenter
                     selectByMouse: true
                     color: MoneroComponents.Style.defaultFontColor
-                    placeholderText: "0.000000000000"
+                    placeholderText: Utils.amountPlaceholder(true)
 
                     background: Rectangle {
                         color: MoneroComponents.Style.blackTheme ? "transparent" : "white"
@@ -321,18 +322,26 @@ Rectangle {
                         if (amountToReceiveXMR.text == "") {
                             amountToReceiveFiat.text = "";
                         } else {
-                            amountToReceiveFiat.text = fiatApiConvertToFiat(amountToReceiveXMR.text);
+                            amountToReceiveFiat.text = fiatApiConvertToFiat(Utils.amountFromInput(amountToReceiveXMR.text));
                         }
                     }
+                    onTextChanged: xmrAmount = Utils.amountFromInput(text)
                     validator: RegularExpressionValidator {
-                        regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                        regularExpression: Utils.amountInputRegex()
+                    }
+
+                    Connections {
+                        target: persistentSettings
+                        function onDisplayDenominationChanged() {
+                            amountToReceiveXMR.text = Utils.amountToInput(amountToReceiveXMR.xmrAmount);
+                        }
                     }
                 }
 
                 MoneroComponents.Label {
                     Layout.bottomMargin: 3
                     fontSize: 14
-                    text: "XMR"
+                    text: Utils.denominationUnit()
                 }
 
                 MoneroComponents.Label {

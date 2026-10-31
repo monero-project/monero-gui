@@ -152,6 +152,8 @@ var denominationUnitLabel = {
     "atomic": "atomic units",
 };
 
+var xmrDecimalPlaces = 12;
+
 function shiftDecimalPlaces(numberString, places) {
     var negative = numberString.charAt(0) === '-';
     if (negative) numberString = numberString.substring(1);
@@ -160,9 +162,17 @@ function shiftDecimalPlaces(numberString, places) {
     var intPart = dotIndex === -1 ? numberString : numberString.substring(0, dotIndex);
     var fracPart = dotIndex === -1 ? '' : numberString.substring(dotIndex + 1);
 
-    while (fracPart.length < places) fracPart += '0';
-    intPart += fracPart.substring(0, places);
-    fracPart = fracPart.substring(places);
+    if (places >= 0) {
+        while (fracPart.length < places) fracPart += '0';
+        intPart += fracPart.substring(0, places);
+        fracPart = fracPart.substring(places);
+    } else {
+        var count = -places;
+        while (intPart.length < count) intPart = '0' + intPart;
+        fracPart = intPart.substring(intPart.length - count) + fracPart;
+        intPart = intPart.substring(0, intPart.length - count);
+        if (intPart === '') intPart = '0';
+    }
 
     intPart = intPart.replace(/^0+(?=\d)/, '');
     var result = fracPart.length > 0 ? (intPart + '.' + fracPart) : intPart;
@@ -195,6 +205,7 @@ function addThousandsSeparators(numberString) {
 }
 
 function denominate(xmrAmountString) {
+    if (!isPlainAmount(xmrAmountString)) return xmrAmountString;
     var shifted = shiftDecimalPlaces(xmrAmountString, denominationShift[currentDenomination()]);
     return addThousandsSeparators(shifted);
 }
@@ -205,6 +216,34 @@ function hiddenBalancePlaceholder() {
 
 function denominationUnit() {
     return denominationUnitLabel[currentDenomination()];
+}
+
+function isPlainAmount(value) {
+    return /^-?\d*\.?\d*$/.test(value) && /\d/.test(value);
+}
+
+// Input fields use the current denomination; everything behind them uses XMR
+function amountToInput(xmrAmountString) {
+    if (!isPlainAmount(xmrAmountString)) return xmrAmountString;
+    return shiftDecimalPlaces(xmrAmountString, denominationShift[currentDenomination()]);
+}
+
+function amountFromInput(inputString) {
+    if (!isPlainAmount(inputString)) return inputString;
+    return shiftDecimalPlaces(inputString, -denominationShift[currentDenomination()]);
+}
+
+function amountInputRegex() {
+    var shift = denominationShift[currentDenomination()];
+    var decimals = xmrDecimalPlaces - shift;
+    var fraction = decimals > 0 ? "([\\.,]\\d{1," + decimals + "})?" : "";
+    return new RegExp("^\\s*(\\d{1," + (8 + shift) + "})?" + fraction + "\\s*$");
+}
+
+function amountPlaceholder(allDecimals) {
+    var decimals = xmrDecimalPlaces - denominationShift[currentDenomination()];
+    if (decimals === 0) return "0";
+    return "0." + "0".repeat(allDecimals ? decimals : 2);
 }
 
 function parseDateStringOrRestoreHeightAsInteger(value) {

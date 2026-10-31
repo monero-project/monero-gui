@@ -1256,10 +1256,10 @@ ApplicationWindow {
                 informationPopup.text = qsTr("Bad signature");
             } else if (received > 0) {
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
+                    informationPopup.text = qsTr("This address received %1 %2, but the transaction is not yet mined").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(received)))).arg(Utils.denominationUnit());
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 %2, with %3 confirmation(s).").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(received)))).arg(Utils.denominationUnit()).arg(confirmations);
                 }
             }
             else {
@@ -1274,7 +1274,7 @@ ApplicationWindow {
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])) : qsTr("Bad signature");
+            informationPopup.text = good ? qsTr("Good signature on %1 %3 total and %2 %3 spent.").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(results[2])))).arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(results[3])))).arg(Utils.denominationUnit()) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;

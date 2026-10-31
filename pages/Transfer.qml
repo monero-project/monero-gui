@@ -279,7 +279,14 @@ Rectangle {
                 readonly property int colSpacing: 10
                 readonly property int rowSpacing: 10
                 readonly property int secondRowWidth: 125
-                readonly property int thirdRowWidth: 50
+                readonly property int thirdRowWidth: Math.max(50, Math.ceil(unitMetrics.advanceWidth) + colSpacing)
+
+                TextMetrics {
+                    id: unitMetrics
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 14
+                    text: Utils.denominationUnit()
+                }
 
                 RowLayout {
                     Layout.bottomMargin: recipientLayout.rowSpacing / 2
@@ -482,6 +489,7 @@ Rectangle {
                             }
 
                             MoneroComponents.LineEdit {
+                                id: amountLine
                                 KeyNavigation.backtab: parent.children[0]
                                 KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
                                 Layout.alignment: Qt.AlignVCenter
@@ -500,19 +508,26 @@ Rectangle {
                                 placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
                                 placeholderFontSize: 14
                                 placeholderLeftMargin: 0
-                                placeholderText: "0.00"
-                                text: amount
+                                placeholderText: Utils.amountPlaceholder(false)
+                                text: Utils.amountToInput(amount)
                                 onTextChanged: {
                                     text = text.trim().replace(",", ".");
                                     const corrected = Utils.stripLeadingZeros(text, cursorPosition);
                                     text = corrected.text;
                                     cursorPosition = corrected.cursorPosition;
-                                    error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
 
-                                    amount = text;
+                                    amount = Utils.amountFromInput(text);
+                                    error = walletManager.amountFromString(amount) > appWindow.getUnlockedBalance();
                                 }
                                 validator: RegularExpressionValidator {
-                                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                                    regularExpression: Utils.amountInputRegex()
+                                }
+                            }
+
+                            Connections {
+                                target: persistentSettings
+                                function onDisplayDenominationChanged() {
+                                    amountLine.text = Utils.amountToInput(amount);
                                 }
                             }
 
@@ -544,7 +559,7 @@ Rectangle {
                                 Layout.preferredWidth: recipientLayout.thirdRowWidth
                                 horizontalAlignment: Text.AlignHCenter
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                text: "XMR"
+                                text: Utils.denominationUnit()
                                 visible: recipientModel.count == 1
                             }
                         }
@@ -614,7 +629,7 @@ Rectangle {
                         inputPaddingTop: 0
                         inputPaddingBottom: 0
                         readOnly: true
-                        text: Utils.removeTrailingZeros(walletManager.displayAmount(recipientModel.getAmountTotal()))
+                        text: Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(recipientModel.getAmountTotal())))
                         visible: recipientModel.count > 1
                     }
 
@@ -625,7 +640,7 @@ Rectangle {
                         Layout.maximumWidth: recipientLayout.thirdRowWidth
                         horizontalAlignment: Text.AlignHCenter
                         font.family: MoneroComponents.Style.fontRegular.name
-                        text: "XMR"
+                        text: Utils.denominationUnit()
                         visible: recipientModel.count > 1
                     }
 
@@ -759,7 +774,8 @@ Rectangle {
                         if (!sendButton.enabled || estimatedFee == null) {
                             return ""
                         }
-                        return "~%1 XMR%2 %3".arg(estimatedFee)
+                        return "~%1 %2%3 %4".arg(Utils.removeTrailingZeros(Utils.denominate(estimatedFee)))
+                            .arg(Utils.denominationUnit())
                             .arg(estimatedFeeFiat)
                             .arg(qsTr("fee") + translationManager.emptyString);
                     }
