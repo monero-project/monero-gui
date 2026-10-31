@@ -42,6 +42,7 @@ import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import "../js/TxUtils.js" as TxUtils
+import "../js/Utils.js" as Utils
 
 Rectangle {
     id: pageAccount
@@ -116,7 +117,7 @@ Rectangle {
                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
                         onClicked: {
                             console.log("Copied to clipboard");
-                            var balanceAllNumberOnly = parent.text.slice(0, -4);
+                            var balanceAllNumberOnly = parent.text.split(" ")[0];
                             clipboard.setText(balanceAllNumberOnly);
                             appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
                         }
@@ -151,7 +152,7 @@ Rectangle {
                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
                         onClicked: {
                             console.log("Copied to clipboard");
-                            var unlockedBalanceAllNumberOnly = parent.text.slice(0, -4);
+                            var unlockedBalanceAllNumberOnly = parent.text.split(" ")[0];
                             clipboard.setText(unlockedBalanceAllNumberOnly);
                             appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
                         }
@@ -307,7 +308,7 @@ Rectangle {
                                 anchors.leftMargin: -balanceNumberLabel.width
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: balance + " XMR"
+                                text: Utils.denominate(balance) + " " + Utils.denominationUnit()
                                 elide: Text.ElideRight
                                 textWidth: 180
                                 themeTransition: false
@@ -396,8 +397,8 @@ Rectangle {
             subaddressAccountListView.model = appWindow.currentWallet.subaddressAccountModel;
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
 
-            balanceAll.text = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR"
-            unlockedBalanceAll.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR"
+            balanceAll.text = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.balanceAll())) + " " + Utils.denominationUnit()
+            unlockedBalanceAll.text = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll())) + " " + Utils.denominationUnit()
         }
     }
 

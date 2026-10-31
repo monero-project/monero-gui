@@ -28,6 +28,7 @@
 
 #include "SubaddressAccountModel.h"
 #include "SubaddressAccount.h"
+#include "WalletManager.h"
 #include <QDebug>
 #include <QHash>
 #include <wallet/api/wallet2_api.h>
@@ -58,7 +59,7 @@ QVariant SubaddressAccountModel::data(const QModelIndex &index, int role) const
 
     QVariant result;
 
-    bool found = m_subaddressAccount->getRow(index.row(), [&result, &role](const Monero::SubaddressAccountRow &row) {
+    bool found = m_subaddressAccount->getRow(index.row(), [this, &result, &role](const Monero::SubaddressAccountRow &row) {
         switch (role) {
         case SubaddressAccountAddressRole:
             result = QString::fromStdString(row.getAddress());
@@ -67,10 +68,10 @@ QVariant SubaddressAccountModel::data(const QModelIndex &index, int role) const
             result = QString::fromStdString(row.getLabel());
             break;
         case SubaddressAccountBalanceRole:
-            result = QString::fromStdString(row.getBalance());
+            result = WalletManager::displayAmount(m_subaddressAccount->balance(row.getRowId()));
             break;
         case SubaddressAccountUnlockedBalanceRole:
-            result = QString::fromStdString(row.getUnlockedBalance());
+            result = WalletManager::displayAmount(m_subaddressAccount->unlockedBalance(row.getRowId()));
             break;
         default:
             qCritical() << "Unimplemented role" << role;

@@ -237,7 +237,7 @@ Item {
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + walletManager.make_uri(appWindow.current_address, amountToReceive.text)
+                    source: "image://qrcode/" + walletManager.make_uri(appWindow.current_address, amountToReceive.xmrAmount)
 
                     MouseArea {
                         anchors.fill: parent
@@ -424,7 +424,7 @@ Item {
                         font.pixelSize: 12
                         font.bold: true
                         color: _color
-                        text: walletManager.make_uri(appWindow.current_address, amountToReceive.text)
+                        text: walletManager.make_uri(appWindow.current_address, amountToReceive.xmrAmount)
                         themeTransition: false
 
                         MouseArea {
@@ -472,7 +472,7 @@ Item {
                         font.pixelSize: 14
                         font.bold: false
                         color: "white"
-                        text: qsTr("Amount to receive") + " (XMR)" + translationManager.emptyString
+                        text: qsTr("Amount to receive") + " (" + Utils.denominationUnit() + ")" + translationManager.emptyString
                         themeTransition: false
                     }
 
@@ -483,6 +483,7 @@ Item {
 
                         MoneroComponents.Input {
                             id: amountToReceive
+                            property string xmrAmount: ""
                             topPadding: 0
                             leftPadding: 10
 
@@ -498,18 +499,27 @@ Item {
                             color: "#424242"
                             selectionColor: "#3f3fe3"
                             selectedTextColor: "white"
-                            placeholderText: "0.00"
+                            placeholderText: Utils.amountPlaceholder(false)
 
                             background: Rectangle {
                                 color: "transparent"
                             }
                             onTextChanged: {
+                                amountToReceive.text = amountToReceive.text.trim().replace(",", ".");
                                 if (amountToReceive.text.indexOf('.') === 0) {
                                     amountToReceive.text = '0' + amountToReceive.text;
                                 }
+                                xmrAmount = Utils.amountFromInput(amountToReceive.text);
                             }
                             validator: RegularExpressionValidator {
-                                regularExpression: /^(\d{1,8})?([\.]\d{1,12})?$/
+                                regularExpression: Utils.amountInputRegex()
+                            }
+
+                            Connections {
+                                target: persistentSettings
+                                function onDisplayDenominationChanged() {
+                                    amountToReceive.text = Utils.amountToInput(amountToReceive.xmrAmount);
+                                }
                             }
                         }
                     }
@@ -707,7 +717,7 @@ Item {
         fileMode: FileDialog.SaveFile
         nameFilters: ["Image (*.png)"]
         onAccepted: {
-            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, amountToReceive.text), walletManager.urlToLocalPath(selectedFile))) {
+            if (!walletManager.saveQrCode(walletManager.make_uri(appWindow.current_address, amountToReceive.xmrAmount), walletManager.urlToLocalPath(selectedFile))) {
                 console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(selectedFile) )
                 merchantPageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                 merchantPageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(selectedFile) + translationManager.emptyString;

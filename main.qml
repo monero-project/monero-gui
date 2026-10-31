@@ -517,23 +517,20 @@ ApplicationWindow {
         if (!currentWallet)
             return;
 
-        var balance = "?.??";
-        var balanceU = "?.??";
-        if(!hideBalanceForced && !persistentSettings.hideBalance){
-            balance = walletManager.displayAmount(currentWallet.balance());
-            balanceU = walletManager.displayAmount(currentWallet.unlockedBalance());
-        }
+        var hidden = hideBalanceForced || persistentSettings.hideBalance;
+        var balance = hidden ? "?.??" : walletManager.displayAmount(currentWallet.balance());
+        var balanceU = hidden ? "?.??" : walletManager.displayAmount(currentWallet.unlockedBalance());
 
         if (persistentSettings.fiatPriceEnabled) {
             appWindow.fiatApiUpdateBalance(balance);
         }
 
         leftPanel.minutesToUnlock = (balance !== balanceU) ? currentWallet.history.minutesToUnlock : "";
-        leftPanel.balanceString = balance
-        leftPanel.balanceUnlockedString = balanceU
+        leftPanel.balanceString = hidden ? Utils.hiddenBalancePlaceholder() : Utils.denominate(balance)
+        leftPanel.balanceUnlockedString = hidden ? Utils.hiddenBalancePlaceholder() : Utils.denominate(balanceU)
         if (middlePanel.state === "Account") {
-            middlePanel.accountView.balanceAllText = walletManager.displayAmount(appWindow.currentWallet.balanceAll()) + " XMR";
-            middlePanel.accountView.unlockedBalanceAllText = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll()) + " XMR";
+            middlePanel.accountView.balanceAllText = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.balanceAll())) + " " + Utils.denominationUnit();
+            middlePanel.accountView.unlockedBalanceAllText = Utils.denominate(walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll())) + " " + Utils.denominationUnit();
         }
     }
 
@@ -1259,10 +1256,10 @@ ApplicationWindow {
                 informationPopup.text = qsTr("Bad signature");
             } else if (received > 0) {
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
+                    informationPopup.text = qsTr("This address received %1 %2, but the transaction is not yet mined").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(received)))).arg(Utils.denominationUnit());
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 %2, with %3 confirmation(s).").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(received)))).arg(Utils.denominationUnit()).arg(confirmations);
                 }
             }
             else {
@@ -1277,7 +1274,7 @@ ApplicationWindow {
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])) : qsTr("Bad signature");
+            informationPopup.text = good ? qsTr("Good signature on %1 %3 total and %2 %3 spent.").arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(results[2])))).arg(Utils.removeTrailingZeros(Utils.denominate(walletManager.displayAmount(results[3])))).arg(Utils.denominationUnit()) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
@@ -1655,6 +1652,7 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+        property string displayDenomination: "xmr"  // "xmr", "mxmr" or "atomic"
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
@@ -2445,7 +2443,7 @@ ApplicationWindow {
 
     // reset label text. othewise potential privacy leak showing unlock time when switching wallets
     function clearMoneroCardLabelText(){
-        leftPanel.balanceString = "?.??"
+        leftPanel.balanceString = Utils.hiddenBalancePlaceholder()
         leftPanel.balanceFiatString = "?.??"
     }
 
