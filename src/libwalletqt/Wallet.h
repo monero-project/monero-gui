@@ -94,7 +94,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(Subaddress * subaddress READ subaddress)
     Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
     Q_PROPERTY(SubaddressAccount * subaddressAccount READ subaddressAccount)
-    Q_PROPERTY(bool viewOnly READ viewOnly)
+    Q_PROPERTY(bool viewOnly READ viewOnly CONSTANT)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
@@ -328,7 +328,7 @@ public:
     Q_INVOKABLE QString integratedAddress(const QString &paymentId) const;
 
     //! signing a message
-    Q_INVOKABLE QString signMessage(const QString &message, bool filename = false) const;
+    Q_INVOKABLE QString signMessage(const QString &message, bool filename = false, const QString &address = QString()) const;
 
     //! verify a signed message
     Q_INVOKABLE bool verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
