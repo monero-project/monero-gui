@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2024, The Monero Project
+// Copyright (c) 2014-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -134,29 +134,33 @@ bool P2PoolManager::isInstalled() {
 }
 
 void P2PoolManager::getStatus() {
-    QString statsPath = m_p2poolPath + "/stats/local/miner";
-    bool status = true;
-    if (!QFileInfo(statsPath).isFile() || !started)
-    {
-        status = started;
-        emit p2poolStatus(status, 0);
-        return;
-    }
-    QFile statsFile(statsPath);
-    if (!statsFile.open(QIODevice::ReadOnly))
-    {
-        emit p2poolStatus(status, 0);
-        return;
-    }
-    QTextStream statsOut(&statsFile);
-    QByteArray data;
-    statsOut >> data;
-    statsFile.close();
-    QJsonDocument json = QJsonDocument::fromJson(data);
-    QJsonObject jsonObj = json.object();
-    int hashrate = jsonObj.value("current_hashrate").toInt();
-    emit p2poolStatus(status, hashrate);
-    return;
+     QVariantMap miner =
+          m_p2poolStats->fetchLocal();
+     bool ready =
+          miner.contains("hashrate");
+
+     if (!started) {
+          emit p2poolStatus(false, QVariant());
+     } else if (!ready) {
+          emit p2poolStatus(true, QVariant());
+     } else {
+          emit p2poolStatus(true, miner["hashrate"]);
+     }
+}
+
+P2PoolStatsProvider* P2PoolManager::getP2PoolStats() const
+{
+  return m_p2poolStats.get();
+}
+
+QString P2PoolManager::getLogFilePath() const
+{
+    return m_p2poolPath + "/p2pool.log";
+}
+
+void P2PoolManager::clearLogFile()
+{
+    QFile::remove(getLogFilePath());
 }
 
 bool P2PoolManager::start(const QString &flags, const QString &address, const QString &chain, const QString &threads)
@@ -207,12 +211,15 @@ bool P2PoolManager::start(const QString &flags, const QString &address, const QS
 
     QMutexLocker locker(&m_p2poolMutex);
 
+    clearLogFile();
+
     m_p2poold.reset(new QProcess());
 
     // Set program parameters
     m_p2poold->setProgram(m_p2pool);
     m_p2poold->setArguments(arguments);
     m_p2poold->setWorkingDirectory(m_p2poolPath);
+    m_p2poold->setStandardErrorFile(getLogFilePath(), QIODevice::Append);
 
     // Start p2pool
     started = m_p2poold->startDetached();
@@ -239,6 +246,7 @@ void P2PoolManager::exit()
         QString dirName = m_p2poolPath + "/stats/";
         QDir dir(dirName);
         dir.removeRecursively();
+        m_p2poolStats->clear();
     }
 }
 
@@ -266,6 +274,8 @@ P2PoolManager::P2PoolManager(QObject *parent)
     if (m_p2pool.length() == 0) {
         qCritical() << "no p2pool binary defined for current platform";
     }
+
+    m_p2poolStats = std::make_unique<P2PoolStatsProvider>(started, m_p2poolPath, this);
 }
 
 P2PoolManager::~P2PoolManager() {
