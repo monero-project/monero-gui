@@ -1752,7 +1752,8 @@ Rectangle {
         var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
         var address = currentWallet.address(subaddrAccount, subaddrIndex)
         const hasPaymentId = parseInt(paymentId, 16);
-        const integratedAddress = !isout && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
+        const isPrimaryAddress = subaddrAccount === 0 && subaddrIndex === "0";
+        const integratedAddress = !isout && isPrimaryAddress && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
 
         if (rings)
             rings = rings.replace(/\|/g, '\n')
