@@ -137,7 +137,7 @@ Rectangle {
             }, State {
                 name: "Receive"
                 PropertyChanges { target: root; currentView: receiveView }
-                PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 80 }
+                PropertyChanges { target: mainFlickable; contentHeight: mainFlickable.height; interactive: false }
             }, State {
                 name: "Merchant"
                 PropertyChanges { target: root; currentView: merchantView }
@@ -161,7 +161,7 @@ Rectangle {
             }, State {
                 name: "Account"
                 PropertyChanges { target: root; currentView: accountView }
-                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }
+                PropertyChanges { target: mainFlickable; contentHeight: mainFlickable.height; interactive: false }
             }
         ]
 
@@ -186,6 +186,7 @@ Rectangle {
             boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
             ScrollBar.vertical: ScrollBar {
+                visible: root.currentView !== root.receiveView && root.currentView !== root.accountView
                 parent: root
                 anchors.left: parent.right
                 anchors.leftMargin: -14 // 10 margin + 4 scrollbar width
