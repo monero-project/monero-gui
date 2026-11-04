@@ -43,7 +43,7 @@ PlatformLabs.MenuBar {
         PlatformLabs.MenuItem {
             text: MoneroComponents.Style.blackTheme ? qsTr("Light Theme") : qsTr("Dark Theme")
             onTriggered: {
-                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                appWindow.toggleTheme();
             }
         }
         PlatformLabs.MenuItem {

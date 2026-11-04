@@ -171,6 +171,19 @@ find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS ${QT_COMPONENTS})
 
 list(TRANSFORM QT_COMPONENTS PREPEND "Qt6::" OUTPUT_VARIABLE QT_LIBRARIES)
 
+# Optional. Lets the "System" theme setting read the desktop colour-scheme preference
+# from xdg-desktop-portal on desktops where Qt's platform theme does not report one.
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+  find_package(Qt6 ${QT_MIN_VERSION} QUIET OPTIONAL_COMPONENTS DBus)
+  if(TARGET Qt6::DBus)
+    message(STATUS "Found Qt6DBus, system colour-scheme detection will use xdg-desktop-portal")
+    list(APPEND QT_LIBRARIES Qt6::DBus)
+    add_definitions(-DHAVE_QT_DBUS)
+  else()
+    message(STATUS "Qt6DBus not found, system colour-scheme detection will use QStyleHints and the palette")
+  endif()
+endif()
+
 get_target_property(QMAKE_IMPORTED_LOCATION Qt6::qmake IMPORTED_LOCATION)
 get_filename_component(QT_INSTALL_PREFIX "${QMAKE_IMPORTED_LOCATION}/../.." ABSOLUTE)
 

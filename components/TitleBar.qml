@@ -252,7 +252,7 @@ Rectangle {
                     btnSwitchThemeTooltip.tooltipPopup.close()
                 }
                 onClicked: {
-                    MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                    appWindow.toggleTheme();
                 }
             }
         }

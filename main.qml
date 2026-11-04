@@ -1650,7 +1650,8 @@ ApplicationWindow {
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
-        property bool blackTheme: MoneroComponents.Style.blackTheme
+        property bool blackTheme: true  // legacy, superseded by `theme`; kept in sync for downgrades
+        property string theme: ""       // "system" | "light" | "dark"; empty means not migrated yet
         property bool checkForUpdates: true
         property bool autosave: true
         property int autosaveMinutes: 10
@@ -1699,7 +1700,11 @@ ApplicationWindow {
             if (persistentSettings.walletMode == 1) {
                 persistentSettings.walletMode = 0;
             }
-            MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+            // Migrate the pre-existing boolean setting to the tri-state theme selector.
+            // New profiles inherit blackTheme's default and start on "dark".
+            if (persistentSettings.theme === "") {
+                persistentSettings.theme = persistentSettings.blackTheme ? "dark" : "light";
+            }
 
             if (!appWindow.fiatPriceAPIs.hasOwnProperty(fiatPriceProvider)) {
                 console.warn("unsupported fiat price provider \"" + fiatPriceProvider + "\", resetting");
@@ -1708,6 +1713,23 @@ ApplicationWindow {
             }
             Utils.finishSettingsLoad(persistentSettings)
         }
+    }
+
+    Binding {
+        target: MoneroComponents.Style
+        property: "theme"
+        value: persistentSettings.theme
+        when: persistentSettings.theme !== ""
+    }
+
+    // Keep the legacy key in sync so an older release still opens with the chosen theme.
+    // Inactive until the migration above has read the stored value, so Style's default
+    // cannot overwrite it first.
+    Binding {
+        target: persistentSettings
+        property: "blackTheme"
+        value: MoneroComponents.Style.blackTheme
+        when: persistentSettings.theme !== ""
     }
 
     ListModel {
@@ -2211,6 +2233,12 @@ ApplicationWindow {
                 color: "#FFFFFF"
             }
         }
+    }
+
+    // Title bar button and View menu. Flips to the explicit theme opposite to the one
+    // showing, also when following the system.
+    function toggleTheme(){
+        persistentSettings.theme = MoneroComponents.Style.blackTheme ? "light" : "dark";
     }
 
     function toggleLanguageView(){
