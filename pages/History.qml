@@ -1084,6 +1084,7 @@ Rectangle {
                         Rectangle {
                             color: "transparent"
                             Layout.fillWidth: true
+                            Layout.maximumWidth: Math.max(0, root.width - 2 * sideMargin)
                             Layout.preferredHeight: 20
 
                             MoneroComponents.TextPlain {
@@ -1092,7 +1093,11 @@ Rectangle {
                                 font.pixelSize: 15
                                 text: tx_note !== "" ? tx_note : "-"
                                 color: MoneroComponents.Style.defaultFontColor
+                                anchors.left: parent.left
+                                width: Math.min(implicitWidth, Math.max(0, parent.width - editNoteButton.width - 12))
                                 anchors.verticalCenter: parent.verticalCenter
+                                elide: Text.ElideRight
+                                clip: true
 
                                 MouseArea {
                                     state: "copyable"
@@ -1104,6 +1109,7 @@ Rectangle {
                             }
 
                             MoneroEffects.ImageMask {
+                                id: editNoteButton
                                 anchors.top: parent.top
                                 anchors.left: txNoteText.right
                                 anchors.leftMargin: 12
