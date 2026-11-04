@@ -1,0 +1,85 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Monero GUI Debug",
+            "detail": "Build monero-wallet-gui for development purposes",
+            "command": "make",
+            "args": [
+                "debug",
+                "-j",
+                {
+                    "value": "$((`nproc` > 1 ? $((`nproc` - 1)) : 1 ))",
+                    "quoting": "weak"
+                }
+            ],
+            "osx": {
+                "args": [
+                    "debug-static-mac64",
+                    "-j",
+                    {
+                        "value": "$((`nproc` > 1 ? $((`nproc` - 1)) : 1 ))",
+                        "quoting": "weak"
+                    }
+                ]
+            },
+            "windows": {
+                "args": [
+                    "release-win64",
+                    "-j",
+                    {
+                        "value": "$((`nproc` > 1 ? $((`nproc` - 1)) : 1 ))",
+                        "quoting": "weak"
+                    }
+                ],
+                "options": {
+                    "env": {
+                        "MSYSTEM": "MINGW64",
+                        "CHERE_INVOKING": "1"
+                    },
+                    "shell": {
+                        "executable": "C:\\msys64\\usr\\bin\\bash.exe",
+                        "args": [
+                            "--login",
+                            "-i",
+                            "-x",
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "label": "Monero GUI Clean",
+            "detail": "Cleanup builds",
+            "problemMatcher": [],
+        }
+    ],
+    "version": "2.0.0",
+}
