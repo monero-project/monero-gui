@@ -170,6 +170,7 @@ TransactionInfo::TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *
     , m_paymentId(QString::fromStdString(pimpl->paymentId()))
     , m_description(QString::fromStdString(pimpl->description()))
     , m_pending(pimpl->isPending())
+    , m_doubleSpendSeen(pimpl->doubleSpendSeen())
     , m_subaddrAccount(pimpl->subaddrAccount())
     , m_timestamp(QDateTime::fromSecsSinceEpoch(static_cast<qint64>(pimpl->timestamp())))
     , m_unlockTime(pimpl->unlockTime())
