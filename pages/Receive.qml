@@ -341,7 +341,7 @@ Rectangle {
                     Layout.preferredWidth: 90
                     fontSize: 14
                     text: qsTr("Description") + translationManager.emptyString
-                    tooltip: qsTr("What is being payed for (a product, service, donation) (optional)") + translationManager.emptyString
+                    tooltip: qsTr("What is being paid for (a product, service, donation) (optional)") + translationManager.emptyString
                     tooltipIconVisible: true
                 }
 
