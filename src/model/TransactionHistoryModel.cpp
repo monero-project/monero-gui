@@ -67,6 +67,8 @@ QVariant TransactionHistoryModel::parseTransactionInfo(const TransactionInfo &tI
         return QVariant::fromValue(tInfo.direction());
     case TransactionPendingRole:
         return tInfo.isPending();
+    case TransactionDoubleSpendSeenRole:
+        return tInfo.doubleSpendSeen();
     case TransactionFailedRole:
         return tInfo.isFailed();
     case TransactionAmountRole:
@@ -160,6 +162,7 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     QHash<int, QByteArray> roleNames = QAbstractListModel::roleNames();
     roleNames.insert(TransactionDirectionRole, "direction");
     roleNames.insert(TransactionPendingRole, "isPending");
+    roleNames.insert(TransactionDoubleSpendSeenRole, "doubleSpendSeen");
     roleNames.insert(TransactionFailedRole, "isFailed");
     roleNames.insert(TransactionAmountRole, "amount");
     roleNames.insert(TransactionDisplayAmountRole, "displayAmount");
