@@ -70,6 +70,11 @@ ColumnLayout {
             text: qsTr("Sign/verify") + translationManager.emptyString
             onSelected: state = "Sign"
         }
+        MoneroComponents.NavbarItem {
+            active: state == "Coins"
+            text: qsTr("Coins") + translationManager.emptyString
+            onSelected: state = "Coins"
+        }
     }
 
     Rectangle{
@@ -80,6 +85,7 @@ ColumnLayout {
         property TxKey prooveView: TxKey { }
         property SharedRingDB sharedRingDBView: SharedRingDB { }
         property Sign signView: Sign { }
+        property CoinControl coinsView: CoinControl { }
         Layout.fillWidth: true
         Layout.preferredHeight: panelHeight
         color: "transparent"
@@ -123,6 +129,10 @@ ColumnLayout {
                 name: "Sign"
                 PropertyChanges { target: stateView; currentView: stateView.signView }
                 PropertyChanges { target: root; panelHeight: stateView.signView.signHeight + 140 }
+            }, State {
+                name: "Coins"
+                PropertyChanges { target: stateView; currentView: stateView.coinsView }
+                PropertyChanges { target: root; panelHeight: stateView.coinsView.panelHeight + 140 }
             }
         ]
 
