@@ -739,7 +739,7 @@ Rectangle {
                                     font.pixelSize: 15
                                     text: {
                                         if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
-                                        if(fee !== "") return Utils.removeTrailingZeros(fee) + " XMR";
+                                        if(fee !== "") return Utils.removeTrailingZeros(Utils.denominate(fee)) + " " + Utils.denominationUnit();
                                         return "-";
                                     }
 
@@ -1477,7 +1477,7 @@ Rectangle {
             }
 
             if(root.sortSearchString.length >= 1){
-                if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
+                if(item.amount && Utils.removeTrailingZeros(Utils.amountToInput(item.amount.toFixed(12))).startsWith(root.sortSearchString)){
                     txs.push(item);
                 } else if(item.recipientAddresses.split("\n").some(function(address) {
                     return address.toLowerCase().startsWith(recipientQuery);
@@ -1603,7 +1603,7 @@ Rectangle {
                 // has the correct amount, so we try to fetch it from that instead.
                 amount = Number(TxUtils.destinationsToAmount(destinations));
             }
-            var displayAmount = Utils.removeTrailingZeros(amount.toFixed(12)) + " XMR";
+            var displayAmount = Utils.removeTrailingZeros(Utils.denominate(amount.toFixed(12))) + " " + Utils.denominationUnit();
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
@@ -1756,6 +1756,14 @@ Rectangle {
 
         if (rings)
             rings = rings.replace(/\|/g, '\n')
+
+        if (destinations) {
+            destinations = destinations.split("<br> ").map(function(destination) {
+                const separator = destination.indexOf(": ");
+                const amount = destination.substring(0, separator);
+                return Utils.denominate(amount) + " " + Utils.denominationUnit() + destination.substring(separator);
+            }).join("<br> ");
+        }
 
         currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
             informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;

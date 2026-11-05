@@ -101,12 +101,13 @@ Rectangle {
 
             MoneroComponents.LineEdit {
                 id: getReserveProofAmtLine
+                property string xmrAmount: ""
                 Layout.fillWidth: true
                 labelFontSize: 14
                 labelText: qsTr("Amount") + translationManager.emptyString
                 fontSize: 16
                 placeholderFontSize: 16
-                placeholderText: qsTr("Paste amount of XMR (reserve proof only)") + translationManager.emptyString
+                placeholderText: qsTr("Paste amount of %1 (reserve proof only)").arg(Utils.denominationUnit()) + translationManager.emptyString
                 readOnly: false
                 copyButton: true
                 enabled: getProofAddressLine.text.length === 0 && getProofTxIdLine.text.length === 0
@@ -115,10 +116,18 @@ Rectangle {
                     const corrected = Utils.stripLeadingZeros(text, cursorPosition);
                     text = corrected.text;
                     cursorPosition = corrected.cursorPosition;
-                    error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
+                    xmrAmount = Utils.amountFromInput(text);
+                    error = walletManager.amountFromString(xmrAmount) > appWindow.getUnlockedBalance();
                 }
                     validator: RegularExpressionValidator {
-                    regularExpression: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                    regularExpression: Utils.amountInputRegex()
+                }
+            }
+
+            Connections {
+                target: persistentSettings
+                function onDisplayDenominationChanged() {
+                    getReserveProofAmtLine.text = Utils.amountToInput(getReserveProofAmtLine.xmrAmount);
                 }
             }
 
@@ -138,10 +147,10 @@ Rectangle {
                 Layout.topMargin: 16
                 small: true
                 text: qsTr("Generate") + translationManager.emptyString
-                enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype)) || getReserveProofAmtLine.text.length != 0 && walletManager.amountFromString(getReserveProofAmtLine.text) < appWindow.getUnlockedBalance() && walletManager.amountFromString(getReserveProofAmtLine.text) > 0
+                enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype)) || getReserveProofAmtLine.text.length != 0 && walletManager.amountFromString(getReserveProofAmtLine.xmrAmount) < appWindow.getUnlockedBalance() && walletManager.amountFromString(getReserveProofAmtLine.xmrAmount) > 0
                 onClicked: {
                     console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
-                    middlePanel.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text, getReserveProofAmtLine.text)
+                    middlePanel.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text, getReserveProofAmtLine.xmrAmount)
                 }
             }
 

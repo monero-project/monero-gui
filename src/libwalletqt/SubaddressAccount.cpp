@@ -29,8 +29,8 @@
 #include "SubaddressAccount.h"
 #include <QDebug>
 
-SubaddressAccount::SubaddressAccount(Monero::SubaddressAccount *subaddressAccountImpl, QObject *parent)
-  : QObject(parent), m_subaddressAccountImpl(subaddressAccountImpl)
+SubaddressAccount::SubaddressAccount(Monero::Wallet *walletImpl, Monero::SubaddressAccount *subaddressAccountImpl, QObject *parent)
+  : QObject(parent), m_walletImpl(walletImpl), m_subaddressAccountImpl(subaddressAccountImpl)
 {
     getAll();
 }
@@ -86,4 +86,14 @@ quint64 SubaddressAccount::count() const
     QReadLocker locker(&m_lock);
 
     return m_rows.size();
+}
+
+quint64 SubaddressAccount::balance(quint32 accountIndex) const
+{
+    return m_walletImpl->balance(accountIndex);
+}
+
+quint64 SubaddressAccount::unlockedBalance(quint32 accountIndex) const
+{
+    return m_walletImpl->unlockedBalance(accountIndex);
 }
