@@ -1020,8 +1020,9 @@ Q_INVOKABLE QString Wallet::checkReserveProof(const QString &address, const QStr
     return QString::fromStdString(result);
 }
 
-QString Wallet::signMessage(const QString &message, bool filename) const
+QString Wallet::signMessage(const QString &message, bool filename, const QString &address) const
 {
+  const std::string signingAddress = address.toStdString();
   if (filename) {
     QFile file(message);
     uchar *data = NULL;
@@ -1032,14 +1033,14 @@ QString Wallet::signMessage(const QString &message, bool filename) const
       quint64 size = file.size();
       if (size == 0) {
         file.close();
-        return QString::fromStdString(m_walletImpl->signMessage(std::string()));
+        return QString::fromStdString(m_walletImpl->signMessage(std::string(), signingAddress));
       }
       data = file.map(0, size);
       if (!data) {
         file.close();
         return "";
       }
-      std::string signature = m_walletImpl->signMessage(std::string(reinterpret_cast<const char*>(data), size));
+      std::string signature = m_walletImpl->signMessage(std::string(reinterpret_cast<const char*>(data), size), signingAddress);
       file.unmap(data);
       file.close();
       return QString::fromStdString(signature);
@@ -1052,7 +1053,7 @@ QString Wallet::signMessage(const QString &message, bool filename) const
     }
   }
   else {
-    return QString::fromStdString(m_walletImpl->signMessage(message.toStdString()));
+    return QString::fromStdString(m_walletImpl->signMessage(message.toStdString(), signingAddress));
   }
 }
 
