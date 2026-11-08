@@ -53,6 +53,8 @@ struct packet_tag
   {
     signature = 2,
     public_key = 6,
+    marker = 10,
+    trust = 12,
     user_id = 13,
     public_subkey = 14,
   };
