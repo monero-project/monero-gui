@@ -45,7 +45,8 @@ if(QML_TESTS)
     list(APPEND SOURCE_FILES "${CMAKE_SOURCE_DIR}/tests/qml/QmlTestHarness.cpp")
 endif()
 if(APPLE)
-    list(APPEND SOURCE_FILES "qt/macoshelper.mm")
+    list(APPEND SOURCE_FILES "qt/macoshelper.mm" "qt/SystemEvents.mm")
+    set_source_files_properties("qt/SystemEvents.mm" PROPERTIES COMPILE_OPTIONS "-fobjc-arc")
 endif()
 
 set(monero_wallet_gui_sources

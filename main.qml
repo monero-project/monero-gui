@@ -108,6 +108,7 @@ ApplicationWindow {
     property bool splashDisplayedBeforeButtonRequest;
     property bool themeTransition: false
     property int backgroundSyncType: Wallet.BackgroundSync_Off;
+    property bool backgroundSyncStarting: false
     property bool isQuitting: false
 
     // fiat price conversion
@@ -143,6 +144,9 @@ ApplicationWindow {
     }
 
     function lock() {
+        // Already locking (e.g. screen lock followed by sleep).
+        if (backgroundSyncStarting) return;
+
         if (txConfirmationPopup.visible) {
             txConfirmationPopup.close()
             txConfirmationPopup.clearFields()
@@ -151,6 +155,7 @@ ApplicationWindow {
 
         if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
             appWindow.showProcessingSplash(qsTr("Locking..."));
+            backgroundSyncStarting = true;
             currentWallet.startBackgroundSync()
             return;
         }
@@ -163,6 +168,30 @@ ApplicationWindow {
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
         }
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
+    }
+
+    function lockOnSystemEvent() {
+        if (rootItem.state !== "normal" || !currentWallet) return;
+        if (!persistentSettings.lockOnSystemLock) return;
+        if (passwordDialog.visible || currentWallet.isBackgroundSyncing()) return;
+        lock();
+    }
+
+    // Like autosave, don't store while refreshing.
+    function prepareForSleep() {
+        if (rootItem.state !== "normal" || !currentWallet || !persistentSettings.autosave || currentWallet.refreshing) {
+            lockOnSystemEvent();
+            systemEvents.allowSleep();
+            return;
+        }
+
+        currentWallet.storeAsync(function(success) {
+            if (!success) {
+                console.error("Failed to store the wallet before sleep");
+            }
+            lockOnSystemEvent();
+            systemEvents.allowSleep();
+        });
     }
 
     function sequencePressed(obj, seq) {
@@ -315,6 +344,7 @@ ApplicationWindow {
         currentWallet.updated.disconnect(onWalletUpdate)
         currentWallet.backgroundSyncSetup.disconnect(onBackgroundSyncSetup)
         currentWallet.backgroundSyncStarted.disconnect(onBackgroundSyncStarted)
+        backgroundSyncStarting = false;
         currentWallet.backgroundSyncStopped.disconnect(onBackgroundSyncStopped)
         currentWallet.newBlock.disconnect(onWalletNewBlock)
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
@@ -743,6 +773,7 @@ ApplicationWindow {
 
     function onBackgroundSyncStarted() {
         console.log(">>> background sync started");
+        backgroundSyncStarting = false;
         hideProcessingSplash();
         var started = currentWallet.status === Wallet.Status_Ok;
         if (!started) {
@@ -1654,6 +1685,7 @@ ApplicationWindow {
         property bool hideBalance: false
         property bool askPasswordBeforeSending: true
         property bool lockOnUserInActivity: true
+        property bool lockOnSystemLock: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: true  // legacy, superseded by `theme`; kept in sync for downgrades
@@ -2662,6 +2694,12 @@ ApplicationWindow {
     Loader {
         active: isMac
         sourceComponent: MoneroComponents.MenuBar {}
+    }
+
+    Connections {
+        target: systemEvents
+        function onScreenLocked() { appWindow.lockOnSystemEvent(); }
+        function onSystemWillSleep() { appWindow.prepareForSleep(); }
     }
 
     Network {
