@@ -29,6 +29,9 @@
 #ifndef MACOSHELPER_H
 #define MACOSHELPER_H
 
+#include <optional>
+
+#include <QImage>
 #include <QPixmap>
 
 class MacOSHelper
@@ -40,6 +43,9 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    // Captures the main display with ScreenCaptureKit, excluding this application's windows.
+    // Returns std::nullopt when ScreenCaptureKit screenshots are unavailable (macOS < 14).
+    static std::optional<QImage> grabMainDisplay();
 };
 
 #endif //MACOSHELPER_H
