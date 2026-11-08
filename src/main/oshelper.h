@@ -48,6 +48,7 @@ public:
     static constexpr char seedTemplateHash[] = "bcca2abd0ecff56423b4b04e81b2506c6b22bc5f5ef568251d2fbabc966755ef";
 
     explicit OSHelper(QObject *parent = 0);
+    ~OSHelper() override;
 
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
@@ -76,8 +77,13 @@ private:
     QVariantMap m_screenshotPortalResults;
     bool m_screenshotPortalInProgress = false;
 #endif
+#ifdef Q_OS_MACOS
+    void *m_lockObservers = nullptr;
+#endif
 
 signals:
+    // macOS: emitted before sleep and on fast user switching.
+    void systemLockRequested();
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
     void screenshotPortalResponseReceived();
 #endif

@@ -109,6 +109,11 @@ ApplicationWindow {
     property bool splashDisplayedBeforeButtonRequest;
     property bool themeTransition: false
     property int backgroundSyncType: Wallet.BackgroundSync_Off;
+    property bool walletLocked: false
+    property bool walletOpening: false
+    property bool backgroundSyncStopping: false
+    // A system lock arrived while the wallet was opening or unlocking.
+    property bool lockPending: false
     property bool isQuitting: false
 
     // fiat price conversion
@@ -143,27 +148,73 @@ ApplicationWindow {
         leftPanel.selectItem(page)
     }
 
-    function lock() {
+    // Hide dialogs that may show wallet data. Returns a function that restores them after unlock.
+    function closeDialogsForLock() {
+        var inputDialogVisible = inputDialog && inputDialog.visible
+        var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible
+        var informationPopupVisible = informationPopup && informationPopup.visible
+        var txDetailsPopupVisible = txDetailsPopup && txDetailsPopup.visible
+
+        if (inputDialogVisible) inputDialog.close()
+        remoteNodeDialog.close();
+        informationPopup.close()
+        txDetailsPopup.close()
         if (txConfirmationPopup.visible) {
             txConfirmationPopup.close()
             txConfirmationPopup.clearFields()
             txConfirmationPopup.rejected()
         }
+        successfulTxPopup.close();
+
+        return function() {
+            if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
+            if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
+            if (informationPopupVisible) informationPopup.open()
+            if (txDetailsPopupVisible) txDetailsPopup.open()
+        }
+    }
+
+    function lock(hideWalletName) {
+        if (walletLocked || !currentWallet) return;
+        walletLocked = true;
+
+        // Settings and transaction password prompts can be dismissed; replace them with the lock prompt
+        if (passwordDialog.visible) passwordDialog.onCancel();
+        var reopenDialogs = closeDialogsForLock();
 
         if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
             appWindow.showProcessingSplash(qsTr("Locking..."));
-            currentWallet.startBackgroundSync()
-            return;
+            if (currentWallet.startBackgroundSync())
+                return;
+            hideProcessingSplash();
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password)
+            if(walletPassword === passwordDialog.password) {
+                walletLocked = false;
                 passwordDialog.close();
-            else 
+                reopenDialogs();
+            } else 
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
         }
-        passwordDialog.open(usefulName(persistentSettings.wallet_path));
+        passwordDialog.open(hideWalletName ? undefined : usefulName(persistentSettings.wallet_path));
+    }
+
+    function lockOnSystemEvent() {
+        if (!persistentSettings.lockOnSystemLock) return;
+        if (walletOpening || backgroundSyncStopping) {
+            lockPending = true;
+            return;
+        }
+        if (rootItem.state !== "normal" || !currentWallet) return;
+        lock();
+    }
+
+    function lockIfPending() {
+        if (!lockPending) return;
+        lockPending = false;
+        lock();
     }
 
     function sequencePressed(obj, seq) {
@@ -302,6 +353,8 @@ ApplicationWindow {
     }
 
     function closeWallet(callback) {
+        walletLocked = false;
+        backgroundSyncStopping = false;
 
         // Disconnect all listeners
         if (typeof currentWallet === "undefined" || currentWallet === null) {
@@ -629,10 +682,12 @@ ApplicationWindow {
     }
 
     function onWalletOpening(){
+        walletOpening = true;
         appWindow.showProcessingSplash(qsTr("Opening wallet ..."));
     }
 
     function onWalletOpened(wallet) {
+        walletOpening = false;
         hideProcessingSplash();
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
@@ -657,6 +712,7 @@ ApplicationWindow {
                         errorMessage += "\n" + qsTr("Make sure your Trezor is connected and unlocked.");
                     }
                     passwordDialog.showError(errorMessage);
+                    lockPending = false;
                     console.log("closing wallet async : " + wallet.address)
                     closeWallet();
                     return;
@@ -667,6 +723,7 @@ ApplicationWindow {
         if (wallet.isBackgroundWallet()) {
             passwordDialog.onCancel();
             appWindow.showStatusMessage(qsTr("Can't open background wallets in the GUI"),6);
+            lockPending = false;
             console.log("closing background wallet");
             closeWallet();
             return;
@@ -677,6 +734,7 @@ ApplicationWindow {
 
         // Force switch normal view
         rootItem.state = "normal";
+        lockIfPending();
 
         // Process queued IPC command
         if(typeof IPC !== "undefined" && IPC.queuedCmd().length > 0){
@@ -693,21 +751,29 @@ ApplicationWindow {
         onWalletPassphraseNeeded(currentWallet, on_device)
     }
 
+    function afterPassphraseEntered(handler) {
+        // An already-open wallet can request a passphrase too; only the manager's request is part of opening.
+        if (handler === walletManager)
+            appWindow.onWalletOpening();
+        else
+            appWindow.showProcessingSplash(qsTr("Opening wallet ..."));
+    }
+
     function onWalletPassphraseNeeded(handler, on_device){
         hideProcessingSplash();
 
         console.log(">>> wallet passphrase needed: ")
         devicePassphraseDialog.onAcceptedCallback = function(passphrase) {
             handler.onPassphraseEntered(passphrase, false, false);
-            appWindow.onWalletOpening();
+            afterPassphraseEntered(handler);
         }
         devicePassphraseDialog.onWalletEntryCallback = function() {
             handler.onPassphraseEntered("", true, false);
-            appWindow.onWalletOpening();
+            afterPassphraseEntered(handler);
         }
         devicePassphraseDialog.onRejectedCallback = function() {
             handler.onPassphraseEntered("", false, true);
-            appWindow.onWalletOpening();
+            afterPassphraseEntered(handler);
         }
 
         devicePassphraseDialog.open(on_device)
@@ -744,6 +810,7 @@ ApplicationWindow {
 
     function onBackgroundSyncStarted() {
         console.log(">>> background sync started");
+        walletLocked = true;
         hideProcessingSplash();
         var started = currentWallet.status === Wallet.Status_Ok;
         if (!started) {
@@ -756,8 +823,10 @@ ApplicationWindow {
             if(walletPassword === passwordDialog.password) {
                 if (currentWallet && started) {
                     appWindow.showProcessingSplash(qsTr("Unlocking..."));
+                    backgroundSyncStopping = true;
                     currentWallet.stopBackgroundSync(walletPassword);
                 } else {
+                    walletLocked = false;
                     passwordDialog.close();
                 }
             } else {
@@ -769,8 +838,10 @@ ApplicationWindow {
 
     function onBackgroundSyncStopped() {
         console.log(">>> background sync stopped");
+        backgroundSyncStopping = false;
         var stopped = currentWallet.status === Wallet.Status_Ok;
         if (!stopped) {
+            lockPending = false;
             hideProcessingSplash();
             console.error("Error stopping background sync: ", currentWallet.errorString);
 
@@ -783,7 +854,9 @@ ApplicationWindow {
 
         onWalletUpdate(stopped);
         hideProcessingSplash();
+        walletLocked = false;
         passwordDialog.close();
+        lockIfPending();
     }
 
     function reconnectWallet() {
@@ -1317,6 +1390,7 @@ ApplicationWindow {
     // close wallet and show wizard
     function showWizard(){
         walletInitialized = false;
+        lockPending = false;
         closeWallet(function() {
             wizard.restart();
             wizard.wizardState = "wizardHome";
@@ -1652,6 +1726,7 @@ ApplicationWindow {
         property bool hideBalance: false
         property bool askPasswordBeforeSending: true
         property bool lockOnUserInActivity: true
+        property bool lockOnSystemLock: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: true  // legacy, superseded by `theme`; kept in sync for downgrades
@@ -2510,47 +2585,13 @@ ApplicationWindow {
     function checkInUserActivity() {
         if(rootItem.state !== "normal") return;
         if(!persistentSettings.lockOnUserInActivity) return;
-        if(passwordDialog.visible) return;
-        var inputDialogVisible = inputDialog && inputDialog.visible
-        var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible
-        var informationPopupVisible = informationPopup && informationPopup.visible
-        var txDetailsPopupVisible = txDetailsPopup && txDetailsPopup.visible
+        if(walletLocked || passwordDialog.visible) return;
 
         // prompt password after X seconds of inactivity
         var inactivity = Utils.epoch() - appWindow.userLastActive;
         if(inactivity < (persistentSettings.lockOnUserInActivityInterval * 60)) return;
 
-        if (inputDialogVisible) inputDialog.close()
-        remoteNodeDialog.close();
-        informationPopup.close()
-        txDetailsPopup.close()
-        if (txConfirmationPopup.visible) {
-            txConfirmationPopup.close()
-            txConfirmationPopup.clearFields()
-            txConfirmationPopup.rejected()
-        }
-        successfulTxPopup.close();
-
-        if (currentWallet && currentWallet.getBackgroundSyncType() != Wallet.BackgroundSync_Off) {
-            appWindow.showProcessingSplash(qsTr("Locking..."));
-            currentWallet.startBackgroundSync()
-            return;
-        }
-
-        passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password){
-                passwordDialog.close();
-                if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
-                if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
-                if (informationPopupVisible) informationPopup.open()
-                if (txDetailsPopupVisible) txDetailsPopup.open()
-            } else {
-                passwordDialog.showError(qsTr("Wrong password"));
-            }
-        }
-
-        passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
-        passwordDialog.open();
+        lock(true);
     }
 
     function getDefaultDaemonRpcPort(networkType) {
@@ -2676,6 +2717,11 @@ ApplicationWindow {
     Loader {
         active: isMac
         sourceComponent: MoneroComponents.MenuBar {}
+    }
+
+    Connections {
+        target: oshelper
+        function onSystemLockRequested() { appWindow.lockOnSystemEvent(); }
     }
 
     Network {

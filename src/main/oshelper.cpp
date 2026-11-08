@@ -163,7 +163,16 @@ bool openFolderAndSelectItem(const QString &filePath)
 
 OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
+#ifdef Q_OS_MACOS
+    m_lockObservers = MacOSHelper::addLockObservers([this]() { emit systemLockRequested(); });
+#endif
+}
 
+OSHelper::~OSHelper()
+{
+#ifdef Q_OS_MACOS
+    MacOSHelper::removeLockObservers(m_lockObservers);
+#endif
 }
 
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)

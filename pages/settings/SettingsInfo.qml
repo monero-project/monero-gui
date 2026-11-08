@@ -217,8 +217,11 @@ Rectangle {
                                                                 + "The old wallet cache file will be renamed and can be restored later.\n"
                                                                 );
                                 confirmationDialog.onAcceptedCallback = function() {
+                                    // Defer system locks until the wallet is reopened
+                                    appWindow.walletOpening = true;
                                     appWindow.closeWallet(function() {
                                         walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                        appWindow.onWalletOpening();
                                         walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
                                                                         persistentSettings.nettype, persistentSettings.kdfRounds);
                                     });
