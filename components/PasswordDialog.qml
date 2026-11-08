@@ -156,6 +156,7 @@ FocusScope {
             Layout.maximumWidth: 400
 
             Label {
+                textFormat: Text.PlainText
                 text: {
                     if (newPasswordDialogMode) {
                         return qsTr("Please enter new wallet password") + translationManager.emptyString;

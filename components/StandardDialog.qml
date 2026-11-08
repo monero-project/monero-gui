@@ -46,6 +46,8 @@ Rectangle {
     property alias okText: okButton.text
     property alias cancelText: cancelButton.text
     property alias closeVisible: closeButton.visible
+    // Set at declaration only; changing it at runtime reformats the content
+    property alias textFormat: dialogContent.textFormat
 
     // same signals as Dialog has
     signal accepted()
@@ -136,7 +138,7 @@ Rectangle {
                     Layout.fillHeight: true
                     renderType: Text.QtRendering
                     font.family: MoneroComponents.Style.fontLight.name
-                    textFormat: TextEdit.AutoText
+                    textFormat: TextEdit.PlainText
                     readOnly: true
                     font.pixelSize: 14
                     selectByMouse: false

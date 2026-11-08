@@ -75,6 +75,7 @@ Popup {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 18
             text: qsTr("New Monero version v%1 is available.").arg(updateDialog.version)
+            textFormat: Text.PlainText
         }
 
         Text {
