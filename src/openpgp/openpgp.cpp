@@ -49,6 +49,8 @@ namespace
 {
 
 constexpr const uint8_t signature_type_subkey_binding = 0x18;
+constexpr const uint8_t signature_type_subkey_revocation = 0x28;
+constexpr const uint8_t subpacket_type_creation_time = 2;
 constexpr const uint8_t subpacket_type_key_flags = 27;
 constexpr const uint8_t key_flag_sign_data = 0x02;
 
@@ -276,15 +278,26 @@ public_key_rsa read_public_key(const std::vector<uint8_t> &data)
     gcry_mpi_get_nbits(public_key_n.get()));
 }
 
-bool subkey_binding_allows_signing(const std::vector<uint8_t> &data)
+struct subkey_signature
+{
+  uint8_t type;
+  uint32_t creation_time;
+  bool allows_signing;
+};
+
+// Returns false for signature versions other than 4
+bool read_subkey_signature(const std::vector<uint8_t> &data, subkey_signature &result)
 {
   deserializer<epee::span<const uint8_t>> signature(epee::to_span(data));
 
-  if (signature.read_big_endian<uint8_t>() != 4 ||
-    signature.read_big_endian<uint8_t>() != signature_type_subkey_binding)
+  if (signature.read_big_endian<uint8_t>() != 4)
   {
     return false;
   }
+
+  result.type = signature.read_big_endian<uint8_t>();
+  result.creation_time = 0;
+  result.allows_signing = false;
 
   /* const auto algorithm = */ signature.read_big_endian<uint8_t>();
   /* const auto hash_algorithm = */ signature.read_big_endian<uint8_t>();
@@ -300,14 +313,18 @@ bool subkey_binding_allows_signing(const std::vector<uint8_t> &data)
     }
 
     const uint8_t type = subpackets.read_big_endian<uint8_t>() & 0x7f;
-    const epee::span<const uint8_t> subpacket = subpackets.read_span(length - 1);
-    if (type == subpacket_type_key_flags)
+    deserializer<epee::span<const uint8_t>> subpacket(subpackets.read_span(length - 1));
+    if (type == subpacket_type_creation_time)
     {
-      return subpacket.size() > 0 && (subpacket[0] & key_flag_sign_data) != 0;
+      result.creation_time = subpacket.read_big_endian<uint32_t>();
+    }
+    else if (type == subpacket_type_key_flags)
+    {
+      result.allows_signing = !subpacket.empty() && (subpacket.read_big_endian<uint8_t>() & key_flag_sign_data) != 0;
     }
   }
 
-  return false;
+  return true;
 }
 
 } // namespace
@@ -362,38 +379,73 @@ public_key_block::public_key_block(const epee::span<const uint8_t> buffer)
   }
   m_user_id.assign(data->begin(), data->end());
 
-  // Only use subkeys allowed to sign
+  // Only use non-revoked subkeys whose most recent binding signature allows signing.
+  // A subkey's signatures are all the signature packets following it, up to the next packet that is not a
+  // signature, Marker or Trust packet.
   bool primary_key_found = false;
   const std::vector<uint8_t> *subkey = nullptr;
-  packets.for_each([this, &primary_key_found, &subkey](packet_tag::type type, const std::vector<uint8_t> &packet) {
+  bool subkey_revoked = false;
+  bool subkey_binding_found = false;
+  subkey_signature subkey_binding{};
+
+  const auto finish_subkey = [&]() {
+    if (subkey != nullptr && !subkey_revoked && subkey_binding_found && subkey_binding.allows_signing &&
+      is_rsa_public_key(*subkey))
+    {
+      push_back(read_public_key(*subkey));
+    }
+    subkey = nullptr;
+    subkey_revoked = false;
+    subkey_binding_found = false;
+  };
+
+  packets.for_each([&](packet_tag::type type, const std::vector<uint8_t> &packet) {
     switch (type)
     {
+    case packet_tag::type::signature:
+      if (subkey != nullptr)
+      {
+        subkey_signature signature;
+        if (!read_subkey_signature(packet, signature))
+        {
+          break;
+        }
+        if (signature.type == signature_type_subkey_revocation)
+        {
+          subkey_revoked = true;
+        }
+        else if (
+          signature.type == signature_type_subkey_binding &&
+          (!subkey_binding_found || signature.creation_time >= subkey_binding.creation_time))
+        {
+          subkey_binding = signature;
+          subkey_binding_found = true;
+        }
+      }
+      break;
+    // Marker and Trust packets carry no certificate data and must be ignored without ending the subkey
+    case packet_tag::type::marker:
+    case packet_tag::type::trust:
+      break;
     case packet_tag::type::public_key:
+      finish_subkey();
       if (primary_key_found)
       {
         throw std::runtime_error("multiple public keys");
       }
       push_back(read_public_key(packet));
       primary_key_found = true;
-      subkey = nullptr;
       break;
     case packet_tag::type::public_subkey:
+      finish_subkey();
       subkey = &packet;
       break;
-    case packet_tag::type::signature:
-      if (subkey != nullptr)
-      {
-        if (is_rsa_public_key(*subkey) && subkey_binding_allows_signing(packet))
-        {
-          push_back(read_public_key(*subkey));
-        }
-        subkey = nullptr;
-      }
-      break;
     default:
+      finish_subkey();
       break;
     }
   });
+  finish_subkey();
 
   if (!primary_key_found)
   {
