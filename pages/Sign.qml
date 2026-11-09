@@ -38,10 +38,34 @@ Rectangle {
     property alias signHeight: mainLayout.height
     property bool messageMode: true
     property bool fileMode: false
+    property int lastActiveSigningAccount: -1
 
     color: "transparent"
 
     Clipboard { id: clipboard }
+
+    Connections {
+        target: appWindow
+        function onCurrentWalletChanged() {
+            lastActiveSigningAccount = -1
+            signingAddressLine.text = ""
+            selectCurrentSigningAddress()
+        }
+    }
+
+    Connections {
+        target: appWindow.currentWallet || null
+        function onCurrentSubaddressAccountChanged() { selectCurrentSigningAddress() }
+    }
+
+    function selectCurrentSigningAddress() {
+        var wallet = appWindow.currentWallet
+        var account = wallet ? wallet.currentSubaddressAccount : -1
+        if (account !== lastActiveSigningAccount) {
+            lastActiveSigningAccount = account
+            signingAddressLine.text = wallet && account < wallet.numSubaddressAccounts() ? wallet.address(account, 0) : ""
+        }
+    }
 
     MessageDialog {
         // dynamically change onclose handler
@@ -53,6 +77,19 @@ Rectangle {
                 onCloseCallback()
             }
         }
+    }
+
+    MessageDialog {
+        id: signingErrorMessage
+        objectName: "signingErrorMessage"
+        title: qsTr("Error") + translationManager.emptyString
+        buttons: MessageDialog.Ok
+    }
+
+    function displaySigningError(previousError, filename) {
+        var error = appWindow.currentWallet.errorString
+        signingErrorMessage.text = error && (!filename || error !== previousError) ? error : qsTr("Failed to sign") + translationManager.emptyString
+        signingErrorMessage.open()
     }
 
     function displayVerificationResult(result) {
@@ -165,9 +202,22 @@ Rectangle {
             }
         }
 
+        MoneroComponents.TextPlain {
+            objectName: "signingUnavailableMessage"
+            Layout.fillWidth: true
+            visible: !!appWindow.currentWallet && (appWindow.currentWallet.isHwBacked() || appWindow.currentWallet.viewOnly)
+            text: qsTr("Signing is not supported for hardware or view-only wallets.") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14
+            color: MoneroComponents.Style.defaultFontColor
+        }
+
         ColumnLayout {
             id: signSection
+            objectName: "signSection"
             spacing: 10
+            enabled: !!appWindow.currentWallet && !appWindow.currentWallet.isHwBacked() && !appWindow.currentWallet.viewOnly
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
@@ -175,6 +225,18 @@ Rectangle {
                 Layout.bottomMargin: 24
                 textFormat: Text.RichText
                 text: fileMode ? qsTr("Sign file") + translationManager.emptyString : qsTr("Sign message") + translationManager.emptyString
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: signingAddressLine
+                objectName: "signingAddressLine"
+                Layout.fillWidth: true
+                labelFontSize: 14
+                labelText: qsTr("Signing address") + translationManager.emptyString
+                copyButton: true
+                pasteButton: true
+                onTextChanged: signSignatureLine.text = ""
+                wrapMode: Text.WrapAnywhere
             }
 
             ColumnLayout{
@@ -185,6 +247,7 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti{
                     id: signMessageLine
+                    objectName: "signMessageLine"
                     Layout.fillWidth: true
                     labelFontSize: 14
                     labelText: qsTr("Message") + translationManager.emptyString;
@@ -203,6 +266,7 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti {
                     id: signFileLine
+                    objectName: "signFileLine"
                     labelFontSize: 14
                     labelText: qsTr("File") + translationManager.emptyString
                     placeholderFontSize: 16
@@ -231,6 +295,7 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti {
                     id: signSignatureLine
+                    objectName: "signSignatureLine"
                     labelFontSize: 14
                     labelText: qsTr("Signature") + translationManager.emptyString
                     placeholderFontSize: 16
@@ -260,26 +325,34 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     id: signMessageButton
+                    objectName: "signMessageButton"
                     visible: messageMode
                     text: qsTr("Sign Message") + translationManager.emptyString
-                    enabled: signMessageLine.text !== ''
+                    enabled: signMessageLine.text !== '' && signingAddressLine.text !== ''
                     small: true
                     onClicked: {
-                      var signature = appWindow.currentWallet.signMessage(signMessageLine.text, false)
+                      var previousError = appWindow.currentWallet.errorString
+                      var signature = appWindow.currentWallet.signMessage(signMessageLine.text, false, signingAddressLine.text)
                       signSignatureLine.text = signature
+                      if (!signature)
+                          displaySigningError(previousError, false)
                     }
                 }
 
                 MoneroComponents.StandardButton {
                     id: signFileButton
+                    objectName: "signFileButton"
                     visible: fileMode
                     small: true
                     Layout.alignment: Qt.AlignBottom
                     text: qsTr("Sign File") + translationManager.emptyString
-                    enabled: signFileLine.text !== ''
+                    enabled: signFileLine.text !== '' && signingAddressLine.text !== ''
                     onClicked: {
-                        var signature = appWindow.currentWallet.signMessage(signFileLine.text, true);
+                        var previousError = appWindow.currentWallet.errorString;
+                        var signature = appWindow.currentWallet.signMessage(signFileLine.text, true, signingAddressLine.text);
                         signSignatureLine.text = signature;
+                        if (!signature)
+                            displaySigningError(previousError, true);
                     }
                 }
             }
@@ -287,6 +360,7 @@ Rectangle {
 
         ColumnLayout {
             id: verifySection
+            objectName: "verifySection"
             spacing: 16
 
             MoneroComponents.LabelSubheader {
@@ -440,5 +514,6 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("Sign/verify page loaded");
+        selectCurrentSigningAddress()
     }
 }
