@@ -1283,7 +1283,7 @@ ApplicationWindow {
         else if (isReserveProof && results[0] === "true") {
             var good = results[1] === "true";
             informationPopup.title = qsTr("Reserve proof check") + translationManager.emptyString;
-            informationPopup.text = good ? qsTr("Good signature on %1 total and %2 spent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])) : qsTr("Bad signature");
+            informationPopup.text = good ? qsTr("Good signature on %1 total, %2 spent, %3 unspent.").arg(walletManager.displayAmount(results[2])).arg(walletManager.displayAmount(results[3])).arg(walletManager.displayAmount(results[4])) : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;

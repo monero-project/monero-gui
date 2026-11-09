@@ -1012,11 +1012,11 @@ Q_INVOKABLE QString Wallet::getReserveProof(bool all, quint32 account_index, con
 
 Q_INVOKABLE QString Wallet::checkReserveProof(const QString &address, const QString &message, const QString &signature) const
 {
-    bool good;
-    uint64_t total;
-    uint64_t spent;
+    bool good = false;
+    uint64_t total = 0;
+    uint64_t spent = 0;
     bool success = m_walletImpl->checkReserveProof(address.toStdString(), message.toStdString(), signature.toStdString(), good, total, spent);
-    std::string result = std::string(success ? "true" : "false") + "|" + std::string(good ? "true" : "false") + "|" + QString::number(total).toStdString() + "|" + QString::number(spent).toStdString();
+    std::string result = std::string(success ? "true" : "false") + "|" + std::string(good ? "true" : "false") + "|" + QString::number(total).toStdString() + "|" + QString::number(spent).toStdString() + "|" + QString::number(total - spent).toStdString();
     return QString::fromStdString(result);
 }
 
