@@ -1778,10 +1778,6 @@ Rectangle {
 
         console.log("getProof: Generate clicked: txid " + hash + ", address " + address);
         middlePanel.getProofClicked(hash, address, '', null);
-        informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
-        informationPopup.text = qsTr("Generating payment proof") + "..." + translationManager.emptyString;
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
     }
 
     function toClipboard(text){
