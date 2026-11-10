@@ -19,6 +19,9 @@ jobs:
       run: DEV_MODE=ON QML_TESTS=ON make release
     - name: test qml
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
+    - name: check ssl
+      timeout-minutes: 2
+      run: env -u SSL_CERT_FILE -u SSL_CERT_DIR build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --ssl-check
 
   build-ubuntu:
     runs-on: ubuntu-26.04
@@ -44,6 +47,12 @@ jobs:
         QT_QPA_PLATFORM: offscreen
         QT_QUICK_BACKEND: software
       run: build/release/bin/monero-wallet-gui --test-qml
+    - name: check ssl
+      timeout-minutes: 2
+      env:
+        QT_QPA_PLATFORM: offscreen
+        QT_QUICK_BACKEND: software
+      run: env -u SSL_CERT_FILE -u SSL_CERT_DIR build/release/bin/monero-wallet-gui --ssl-check
 
   build-windows:
     runs-on: windows-latest
@@ -69,6 +78,9 @@ jobs:
       working-directory: build/release
     - name: test qml
       run: QT_FORCE_STDERR_LOGGING=1 build/release/bin/monero-wallet-gui --test-qml
+    - name: check ssl
+      timeout-minutes: 2
+      run: env -u SSL_CERT_FILE -u SSL_CERT_DIR QT_FORCE_STDERR_LOGGING=1 build/release/bin/monero-wallet-gui --ssl-check
 
   macos-bundle:
     name: macOS ${{ matrix.arch }} bundle
@@ -107,6 +119,9 @@ jobs:
         run: cmake --build build --target deploy
       - name: check qml startup
         run: build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --check-qml
+      - name: check ssl
+        timeout-minutes: 2
+        run: env -u SSL_CERT_FILE -u SSL_CERT_DIR build/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --ssl-check
       - name: create archive
         run: tar -C build/bin -czf "${{ matrix.archive_name }}" monero-wallet-gui.app
       - uses: actions/upload-artifact@v7
@@ -132,6 +147,9 @@ jobs:
       run: sudo apt -y install xvfb libopengl0 libegl1 libgl1 libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-shape0
     - name: check qml startup
       run: xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/x86_64-linux-gnu/release/bin/monero-wallet-gui --check-qml
+    - name: check ssl
+      timeout-minutes: 2
+      run: env -u SSL_CERT_FILE -u SSL_CERT_DIR xvfb-run -a /home/runner/work/monero-gui/monero-gui/build/x86_64-linux-gnu/release/bin/monero-wallet-gui --ssl-check
     - uses: actions/upload-artifact@v7
       with:
         name: ${{ github.job }}
