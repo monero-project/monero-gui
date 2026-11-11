@@ -31,6 +31,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QSet>
 #include <QString>
 /**
  * @brief The OSHelper class - exports to QML some OS-related functions
@@ -44,6 +45,7 @@ public:
     static constexpr char seedTemplateHash[] = "bcca2abd0ecff56423b4b04e81b2506c6b22bc5f5ef568251d2fbabc966755ef";
 
     explicit OSHelper(QObject *parent = 0);
+    ~OSHelper() override;
 
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
@@ -55,17 +57,22 @@ public:
     Q_INVOKABLE bool isWritableDirectory(const QString &path) const;
     Q_INVOKABLE QString randomPassword(int numBytes = 32) const;
     Q_INVOKABLE bool isCapsLock() const;
+    // macOS only; secure input is on while any owner holds a request.
+    Q_INVOKABLE void setSecureInput(QObject *owner, bool enable);
     Q_INVOKABLE quint8 getNetworkTypeFromFile(const QString &keysPath, quint8 fallbackNetworkType) const;
     // 0: success, -1: integrity failure, -2: file/open failure.
     Q_INVOKABLE int openSeedTemplate() const;
     bool installed() const;
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
+private slots:
+    void onSecureInputOwnerDestroyed(QObject *owner);
+
 private:
+    void updateSecureInput();
 
-signals:
-
-public slots:
+    QSet<QObject *> m_secureInputOwners;
+    bool m_secureInputEnabled = false;
 };
 
 #endif // OSHELPER_H

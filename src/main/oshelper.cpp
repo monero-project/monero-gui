@@ -128,7 +128,59 @@ bool openFolderAndSelectItem(const QString &filePath)
 
 OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
+    if (qGuiApp)
+    {
+        connect(qGuiApp, &QGuiApplication::applicationStateChanged, this, &OSHelper::updateSecureInput);
+    }
+}
 
+OSHelper::~OSHelper()
+{
+    m_secureInputOwners.clear();
+    updateSecureInput();
+}
+
+void OSHelper::setSecureInput(QObject *owner, bool enable)
+{
+    if (!owner)
+    {
+        return;
+    }
+
+    if (enable)
+    {
+        if (!m_secureInputOwners.contains(owner))
+        {
+            m_secureInputOwners.insert(owner);
+            connect(owner, &QObject::destroyed, this, &OSHelper::onSecureInputOwnerDestroyed, Qt::UniqueConnection);
+        }
+    }
+    else if (m_secureInputOwners.remove(owner))
+    {
+        disconnect(owner, &QObject::destroyed, this, &OSHelper::onSecureInputOwnerDestroyed);
+    }
+
+    updateSecureInput();
+}
+
+void OSHelper::onSecureInputOwnerDestroyed(QObject *owner)
+{
+    m_secureInputOwners.remove(owner);
+    updateSecureInput();
+}
+
+void OSHelper::updateSecureInput()
+{
+    const bool active = !qGuiApp || QGuiApplication::applicationState() == Qt::ApplicationActive;
+    const bool enable = active && !m_secureInputOwners.isEmpty();
+    if (enable == m_secureInputEnabled)
+    {
+        return;
+    }
+    m_secureInputEnabled = enable;
+#if defined(Q_OS_MAC)
+    MacOSHelper::setSecureEventInput(enable);
+#endif
 }
 
 void OSHelper::createDesktopEntry() const

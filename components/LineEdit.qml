@@ -53,6 +53,11 @@ ColumnLayout {
     property bool password: false
     property bool passwordHidden: true
     property var passwordLinked: null
+    // macOS Secure Keyboard Entry while focused and effectively visible
+    // (hidden items can keep activeFocus, e.g. after a dialog is closed)
+    property bool secureInput: password || passwordLinked !== null
+    readonly property bool secureInputActive: secureInput && input.activeFocus && input.visible
+    onSecureInputActiveChanged: oshelper.setSecureInput(input, secureInputActive)
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false

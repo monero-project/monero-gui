@@ -207,6 +207,7 @@ Rectangle {
                     MoneroComponents.InputMulti {
                         id: seedInput
                         property bool error: false
+                        secureInput: true
                         width: parent.width
                         height: 100
 
@@ -267,6 +268,7 @@ Rectangle {
             MoneroComponents.LineEdit {
                 id: viewKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
+                secureInput: true
                 Layout.fillWidth: true
                 placeholderFontSize: 16
                 placeholderText: qsTr("View key (private)") + translationManager.emptyString
@@ -279,6 +281,7 @@ Rectangle {
             MoneroComponents.LineEdit {
                 id: spendKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
+                secureInput: true
                 Layout.fillWidth: true
                 placeholderFontSize: 16
                 placeholderText: qsTr("Spend key (private)") + " / " + qsTr("Leave blank to create a view-only wallet") + translationManager.emptyString
