@@ -623,6 +623,13 @@ Rectangle {
         allArgs.push(flag)
         //pop from allArgs if value is inside the deleteme array (defaultArgs)
 allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
+        //drop the --i2p-sam the GUI added; keep one from custom flags or an external daemon
+        var keptExternalI2PSam = false
+        if (!/(?:^|\s)--i2p-sam(?:=|\s|$)/.test(persistentSettings.daemonFlags)) {
+            var guiI2PSam = persistentSettings.daemonI2PSamArgument
+            allArgs = allArgs.filter( ( el ) => !(/^--i2p-sam(?:=|\s|$)/.test(el) && guiI2PSam && appWindow.i2pSamFlagValue(el) === guiI2PSam) )
+            keptExternalI2PSam = allArgs.some( ( el ) => /^--i2p-sam(?:=|\s|$)/.test(el) )
+        }
         //append required p2pool flags
         for (let i = 0; i < p2poolArgs.length; i++) {
             if(!allArgs.includes(p2poolArgs[i])) {
@@ -630,8 +637,15 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
                 continue
             }
         }
-        var success = daemonManager.start(allArgs.join(" "), persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain)
+        var daemonArgs = appWindow.applyI2PFlags(allArgs.join(" "))
+        if (daemonArgs === null) {
+            miningError(qsTr("Couldn't start mining.<br>Invalid I2P router address or SAM port.") + translationManager.emptyString)
+            return
+        }
+        var success = daemonManager.start(daemonArgs, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain)
         if (success) {
+            // A kept external --i2p-sam isn't GUI-supplied
+            persistentSettings.daemonI2PSamArgument = keptExternalI2PSam ? "" : appWindow.i2pSamFlagValue(daemonArgs)
             startP2Pool()
         }
         else {
