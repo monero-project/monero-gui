@@ -29,7 +29,6 @@
 import QtQuick
 import QtCore
 import QtMultimedia
-import QtQuick.Dialogs
 import moneroComponents.QRCodeScanner 1.0
 
 Rectangle {
@@ -83,11 +82,18 @@ Rectangle {
         return { "address": address, "extra_parameters": params }
     }
 
+    // Errors may contain scanned data; MessageDialog would render it as rich text
+    function showError(error) {
+        informationPopup.title = qsTr("QR Scanner") + translationManager.emptyString
+        informationPopup.text = error
+        informationPopup.onCloseCallback = null
+        informationPopup.open()
+    }
+
     function showDecodeError(error, warning) {
         if (!warning)
             root.state = "Stopped"
-        messageDialog.text = error
-        messageDialog.visible = true
+        showError(error)
     }
 
     function startCapture() {
@@ -172,8 +178,7 @@ Rectangle {
             console.error("QR scanner camera error:", error, errorString)
             if (root.state === "Capture") {
                 root.state = "Stopped"
-                messageDialog.text = errorString
-                messageDialog.visible = true
+                root.showError(errorString)
             }
         }
         focusMode: Camera.FocusModeAuto
@@ -228,14 +233,6 @@ Rectangle {
             onDoubleClicked: {
                 root.state = "Stopped"
             }
-        }
-    }
-
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("QR Scanner")  + translationManager.emptyString
-        onAccepted: {
-            root.state = "Stopped"
         }
     }
 

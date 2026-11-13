@@ -254,6 +254,7 @@ Rectangle {
                                 }
 
                                 Text {
+                                    textFormat: Text.PlainText
                                     text: {
                                         // truncate on window width
                                         var maxLength = wizardController.layoutScale <= 1 ? 12 : 16

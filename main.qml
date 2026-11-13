@@ -1836,6 +1836,15 @@ ApplicationWindow {
         }
     }
 
+    // Transaction details dialog
+    StandardDialog {
+        id: txDetailsPopup
+        anchors.fill: parent
+        z: parent.z + 1
+        cancelVisible: false
+        textFormat: TextEdit.RichText
+    }
+
     // Transaction confirmation popup
     TxConfirmationDialog {
         // dynamically change onclose handler
@@ -1978,9 +1987,9 @@ ApplicationWindow {
             informationPopup.open();
         }
         onRejectedNewPassword: {}
-        Keys.enabled: !passwordDialog.visible && informationPopup.visible
-        Keys.onEnterPressed: informationPopup.close()
-        Keys.onReturnPressed: informationPopup.close()
+        Keys.enabled: !passwordDialog.visible && (informationPopup.visible || txDetailsPopup.visible)
+        Keys.onEnterPressed: informationPopup.visible ? informationPopup.close() : txDetailsPopup.close()
+        Keys.onReturnPressed: informationPopup.visible ? informationPopup.close() : txDetailsPopup.close()
     }
 
     DevicePassphraseDialog {
@@ -2504,6 +2513,7 @@ ApplicationWindow {
         var inputDialogVisible = inputDialog && inputDialog.visible
         var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible
         var informationPopupVisible = informationPopup && informationPopup.visible
+        var txDetailsPopupVisible = txDetailsPopup && txDetailsPopup.visible
 
         // prompt password after X seconds of inactivity
         var inactivity = Utils.epoch() - appWindow.userLastActive;
@@ -2512,6 +2522,7 @@ ApplicationWindow {
         if (inputDialogVisible) inputDialog.close()
         remoteNodeDialog.close();
         informationPopup.close()
+        txDetailsPopup.close()
         if (txConfirmationPopup.visible) {
             txConfirmationPopup.close()
             txConfirmationPopup.clearFields()
@@ -2531,6 +2542,7 @@ ApplicationWindow {
                 if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
                 if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
                 if (informationPopupVisible) informationPopup.open()
+                if (txDetailsPopupVisible) txDetailsPopup.open()
             } else {
                 passwordDialog.showError(qsTr("Wrong password"));
             }

@@ -326,12 +326,12 @@ Rectangle {
                                     } 
                                     else 
                                     {
-                                        miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+                                        miningError(qsTr("Couldn't start mining.") + translationManager.emptyString)
                                     }
                                 }
                             }
                             else {
-                                miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+                                miningError(qsTr("Couldn't start mining.") + translationManager.emptyString)
                             }
                         }
                     }
@@ -582,9 +582,10 @@ Rectangle {
     function miningError(message) {
         p2poolManager.exit()
         errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-        errorPopup.text = message
+        var text = message
         if (persistentSettings.useRemoteNode && !persistentSettings.allowRemoteNodeMining)
-            errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
+            text += "\n" + qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.") + translationManager.emptyString
+        errorPopup.text = text
         errorPopup.open()
     }
 
@@ -635,7 +636,7 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
             startP2Pool()
         }
         else {
-            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+            miningError(qsTr("Couldn't start mining.") + translationManager.emptyString)
         }
     }
 
@@ -655,7 +656,7 @@ allArgs = allArgs.filter( ( el ) => !defaultArgs.includes( el.split(" ")[0] ) )
             update()
         }
         else {
-            miningError(qsTr("Couldn't start mining.<br>") + translationManager.emptyString)
+            miningError(qsTr("Couldn't start mining.") + translationManager.emptyString)
         }
     }
 
