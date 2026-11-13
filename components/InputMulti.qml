@@ -40,6 +40,11 @@ TextArea {
     property bool mouseSelection: true
     property bool error: false
     property bool addressValidation: false
+    // macOS Secure Keyboard Entry while focused and effectively visible
+    // (hidden items can keep activeFocus, e.g. after a dialog is closed)
+    property bool secureInput: false
+    readonly property bool secureInputActive: secureInput && activeFocus && visible
+    onSecureInputActiveChanged: oshelper.setSecureInput(textArea, secureInputActive)
 
     id: textArea
     font.family: MoneroComponents.Style.fontRegular.name

@@ -36,6 +36,7 @@
 #import <Cocoa/Cocoa.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
+#include <Carbon/Carbon.h>
 #include <Availability.h>
 
 #include "ScopeGuard.h"
@@ -46,6 +47,15 @@ void MacOSHelper::disableWindowTabbing()
     if ([NSWindow respondsToSelector:@selector(allowsAutomaticWindowTabbing)])
         [NSWindow setAllowsAutomaticWindowTabbing: NO];
 #endif
+}
+
+void MacOSHelper::setSecureEventInput(bool enable)
+{
+    // Calls are reference-counted by macOS; keep them balanced.
+    if (enable)
+        EnableSecureEventInput();
+    else
+        DisableSecureEventInput();
 }
 
 bool MacOSHelper::isCapsLock()

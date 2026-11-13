@@ -40,6 +40,7 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    static void setSecureEventInput(bool enable);
 };
 
 #endif //MACOSHELPER_H
