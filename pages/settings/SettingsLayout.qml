@@ -181,6 +181,13 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            visible: isMac
+            checked: persistentSettings.lockOnSystemLock
+            onClicked: persistentSettings.lockOnSystemLock = !persistentSettings.lockOnSystemLock
+            text: qsTr("Lock wallet when the screen locks or the computer sleeps") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: backgroundSyncCheckbox
             visible: !!currentWallet && !currentWallet.isHwBacked() && !appWindow.viewOnly
             checked: appWindow.backgroundSyncType != Wallet.BackgroundSync_Off

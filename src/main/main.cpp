@@ -73,6 +73,7 @@
 #include "qt/KeysFiles.h"
 #include "qt/PortableSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#include "qt/SystemEvents.h"
 #ifdef QML_TESTS
 #include "QmlTestHarness.h"
 #endif
@@ -436,6 +437,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // Must outlive the engine: Style.blackTheme is re-evaluated while the QML tree is torn
     // down, and the legacy blackTheme setting is saved from it.
     ColorScheme colorScheme;
+    SystemEvents systemEvents;
 
     QQmlApplicationEngine engine;
 
@@ -451,6 +453,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
     engine.rootContext()->setContextProperty("colorScheme", &colorScheme);
+    engine.rootContext()->setContextProperty("systemEvents", &systemEvents);
 
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
