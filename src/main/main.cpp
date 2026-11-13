@@ -249,8 +249,11 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     parser.addOption(socksProxyOption);
     QCommandLineOption checkQmlOption("check-qml");
     checkQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);
+    QCommandLineOption sslCheckOption("ssl-check");
+    sslCheckOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser.addOption(logPathOption);
     parser.addOption(checkQmlOption);
+    parser.addOption(sslCheckOption);
     parser.addHelpOption();
     parser.process(app);
 
@@ -269,6 +272,26 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     int logLevel = qEnvironmentVariableIntValue("MONERO_LOG_LEVEL", &logLevelOk);
     if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
         Monero::WalletManagerFactory::setLogLevel(logLevel);
+    }
+
+    if (parser.isSet(sslCheckOption))
+    {
+        try
+        {
+            const Network network(parser.value(socksProxyOption));
+            if (network.get("https://web.getmonero.org/downloads/hashes.txt").empty())
+            {
+                qCritical() << "SSL check failed: empty response";
+                return 1;
+            }
+            qWarning() << "SSL check passed";
+            return 0;
+        }
+        catch (const std::exception &e)
+        {
+            qCritical() << "SSL check failed:" << e.what();
+        }
+        return 1;
     }
 
     if (parser.isSet(verifyUpdateOption))
