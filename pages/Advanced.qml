@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2024, The Monero Project
+// Copyright (c) 2021-2026, The Monero Project
 //
 // All rights reserved.
 //
@@ -39,6 +39,7 @@ ColumnLayout {
     spacing: 0
     property int panelHeight: 900
     property alias miningView: stateView.miningView
+    property alias miningDashboardView: stateView.miningDashboardView
     property alias signView: stateView.signView
     property alias prooveView: stateView.prooveView
     property alias state: stateView.state
@@ -50,7 +51,7 @@ ColumnLayout {
         Layout.bottomMargin: height
 
         MoneroComponents.NavbarItem {
-            active: state == "Mining"
+            active: state == "Mining" || state == "Mining dashboard"
             text: qsTr("Mining") + translationManager.emptyString
             onSelected: state = "Mining"
             visible: !isAndroid
@@ -77,6 +78,7 @@ ColumnLayout {
         property Item currentView
         property Item previousView
         property Mining miningView: Mining { }
+        property MiningDashboard miningDashboardView: MiningDashboard { }
         property TxKey prooveView: TxKey { }
         property SharedRingDB sharedRingDBView: SharedRingDB { }
         property Sign signView: Sign { }
@@ -84,6 +86,13 @@ ColumnLayout {
         Layout.preferredHeight: panelHeight
         color: "transparent"
         state: isAndroid ? "Prove" : "Mining"
+
+        readonly property int pushDirection: {
+            if (state == "Mining") return 1;
+            if (state == "Mining dashboard") return -1;
+
+            return navbarId.currentIndex < navbarId.previousIndex ? 1 : -1;
+        }
 
         onCurrentViewChanged: {
             if (previousView) {
@@ -108,6 +117,10 @@ ColumnLayout {
 
         states: [
             State {
+                name: "Mining dashboard"
+                PropertyChanges { target: stateView; currentView: stateView.miningDashboardView }
+                PropertyChanges { target: root; panelHeight: stateView.miningDashboardView.miningDashboardHeight + 140 }
+            }, State {
                 name: "Mining"
                 PropertyChanges { target: stateView; currentView: stateView.miningView }
                 PropertyChanges { target: root; panelHeight: stateView.miningView.miningHeight + 140 }
@@ -132,6 +145,24 @@ ColumnLayout {
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
+            replaceEnter: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: stateView.pushDirection * -stackView.width
+                    to: 0
+                    duration: 300
+                    easing.type: Easing.OutCubic
+                }
+            }
+            replaceExit: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: 0
+                    to: stateView.pushDirection * stackView.width
+                    duration: 300
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
     }
 
