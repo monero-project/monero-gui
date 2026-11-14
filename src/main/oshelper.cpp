@@ -67,8 +67,16 @@
 namespace
 {
 
-QPixmap screenshot()
+QImage screenshot()
 {
+#if defined(Q_OS_MAC)
+    // ScreenCaptureKit (macOS 14+) excludes our windows from the capture; they don't need hiding
+    if (const std::optional<QImage> image = MacOSHelper::grabMainDisplay())
+    {
+        return *image;
+    }
+#endif
+
     std::unordered_set<QWindow *> hidden;
     const QWindowList windows = QGuiApplication::allWindows();
     for (QWindow *window : windows)
@@ -95,7 +103,7 @@ QPixmap screenshot()
         }
     });
 
-    return QGuiApplication::primaryScreen()->grabWindow(0);
+    return QGuiApplication::primaryScreen()->grabWindow(0).toImage();
 }
 
 } // namespace
@@ -150,7 +158,7 @@ QList<QString> OSHelper::grabQrCodesFromScreen() const
 
     try
     {
-        const QImage image = screenshot().toImage();
+        const QImage image = screenshot();
         const std::vector<std::string> decoded = QrDecoder().decode(image);
         std::for_each(decoded.begin(), decoded.end(), [&codes](const std::string &code) {
             codes.push_back(QString::fromStdString(code));

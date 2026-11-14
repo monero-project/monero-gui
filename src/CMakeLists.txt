@@ -46,6 +46,7 @@ if(QML_TESTS)
 endif()
 if(APPLE)
     list(APPEND SOURCE_FILES "qt/macoshelper.mm")
+    set_source_files_properties("qt/macoshelper.mm" PROPERTIES COMPILE_OPTIONS "-fobjc-arc")
 endif()
 
 set(monero_wallet_gui_sources

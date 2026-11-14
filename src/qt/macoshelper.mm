@@ -37,8 +37,139 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <Availability.h>
+#include <unistd.h>
+
+#if defined(__MAC_14_0) && __MAC_OS_X_VERSION_MAX_ALLOWED >= __MAC_14_0
+#define MONERO_HAVE_SCREENSHOT_MANAGER 1
+#import <ScreenCaptureKit/ScreenCaptureKit.h>
+#endif
 
 #include "ScopeGuard.h"
+
+namespace
+{
+
+QImage toQImage(CGImageRef cgImage)
+{
+    const size_t width = CGImageGetWidth(cgImage);
+    const size_t height = CGImageGetHeight(cgImage);
+    QImage image(static_cast<int>(width), static_cast<int>(height), QImage::Format_ARGB32_Premultiplied);
+    if (image.isNull())
+    {
+        return {};
+    }
+    image.fill(Qt::transparent);
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+    CGContextRef context = CGBitmapContextCreate(image.bits(), width, height, 8, image.bytesPerLine(), colorSpace,
+        kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
+    CGColorSpaceRelease(colorSpace);
+    if (!context)
+    {
+        return {};
+    }
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), cgImage);
+    CGContextRelease(context);
+    return image;
+}
+
+#ifdef MONERO_HAVE_SCREENSHOT_MANAGER
+// Long enough for ScreenCaptureKit to answer, short enough not to freeze the GUI if it doesn't
+const int64_t screenCaptureTimeout = 5 * NSEC_PER_SEC;
+
+API_AVAILABLE(macos(14.0))
+QImage captureMainDisplay()
+{
+    __block SCShareableContent *content = nil;
+    __block NSError *contentError = nil;
+    dispatch_semaphore_t contentReady = dispatch_semaphore_create(0);
+    [SCShareableContent getShareableContentExcludingDesktopWindows:NO
+                                               onScreenWindowsOnly:YES
+                                                 completionHandler:^(SCShareableContent *result, NSError *error) {
+        content = result;
+        contentError = error;
+        dispatch_semaphore_signal(contentReady);
+    }];
+    if (dispatch_semaphore_wait(contentReady, dispatch_time(DISPATCH_TIME_NOW, screenCaptureTimeout)) != 0)
+    {
+        qWarning() << "ScreenCaptureKit: timed out listing shareable content";
+        return {};
+    }
+    if (!content)
+    {
+        qWarning() << "ScreenCaptureKit: failed to list shareable content:"
+                   << QString::fromNSString(contentError.localizedDescription);
+        return {};
+    }
+
+    const CGDirectDisplayID mainDisplayId = CGMainDisplayID();
+    SCDisplay *display = nil;
+    for (SCDisplay *candidate in content.displays)
+    {
+        if (candidate.displayID == mainDisplayId)
+        {
+            display = candidate;
+            break;
+        }
+    }
+    if (!display)
+    {
+        display = content.displays.firstObject;
+    }
+    if (!display)
+    {
+        qWarning() << "ScreenCaptureKit: no display available";
+        return {};
+    }
+
+    // Leave out our own windows so whatever is behind them (such as a QR code) is visible.
+    const pid_t pid = getpid();
+    NSMutableArray<SCRunningApplication *> *excludedApps = [NSMutableArray array];
+    for (SCRunningApplication *app in content.applications)
+    {
+        if (app.processID == pid)
+        {
+            [excludedApps addObject:app];
+        }
+    }
+
+    SCContentFilter *filter = [[SCContentFilter alloc] initWithDisplay:display
+                                                 excludingApplications:excludedApps
+                                                      exceptingWindows:@[]];
+    SCStreamConfiguration *config = [[SCStreamConfiguration alloc] init];
+    const CGFloat scale = filter.pointPixelScale;
+    config.width = static_cast<size_t>(filter.contentRect.size.width * scale);
+    config.height = static_cast<size_t>(filter.contentRect.size.height * scale);
+    config.showsCursor = NO;
+
+    // Held as an ID so the image is released by ARC, even if it arrives after we stopped waiting
+    __block id capturedImage = nil;
+    __block NSError *captureError = nil;
+    dispatch_semaphore_t imageReady = dispatch_semaphore_create(0);
+    [SCScreenshotManager captureImageWithFilter:filter
+                                  configuration:config
+                              completionHandler:^(CGImageRef image, NSError *error) {
+        capturedImage = (__bridge id)image;
+        captureError = error;
+        dispatch_semaphore_signal(imageReady);
+    }];
+    if (dispatch_semaphore_wait(imageReady, dispatch_time(DISPATCH_TIME_NOW, screenCaptureTimeout)) != 0)
+    {
+        qWarning() << "ScreenCaptureKit: timed out capturing the display";
+        return {};
+    }
+    if (!capturedImage)
+    {
+        qWarning() << "ScreenCaptureKit: failed to capture the display:"
+                   << QString::fromNSString(captureError.localizedDescription);
+        return {};
+    }
+
+    return toQImage((__bridge CGImageRef)capturedImage);
+}
+#endif
+
+} // namespace
 
 void MacOSHelper::disableWindowTabbing()
 {
@@ -80,4 +211,15 @@ QString MacOSHelper::bundlePath()
         return {};
     }
     return QString::fromNSString(bundlePathString);
+}
+
+std::optional<QImage> MacOSHelper::grabMainDisplay()
+{
+#ifdef MONERO_HAVE_SCREENSHOT_MANAGER
+    if (@available(macOS 14.0, *))
+    {
+        return captureMainDisplay();
+    }
+#endif
+    return std::nullopt;
 }
