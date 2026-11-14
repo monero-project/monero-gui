@@ -57,6 +57,10 @@
 #include <QVector>
 #include <QMutexLocker>
 
+#include "net/http.h"
+#include "storages/http_abstract_invoke.h"
+#include "rpc/core_rpc_server_commands_defs.h"
+
 #include "qt/ScopeGuard.h"
 
 namespace {
@@ -82,6 +86,17 @@ namespace {
             {"type", type}
         };
     }
+
+    struct get_version_nettype_response_t: public cryptonote::rpc_response_base
+    {
+        std::string nettype;
+
+        BEGIN_KV_SERIALIZE_MAP()
+            KV_SERIALIZE_PARENT(cryptonote::rpc_response_base)
+            KV_SERIALIZE_OPT(nettype, std::string())
+        END_KV_SERIALIZE_MAP()
+    };
+    typedef epee::misc_utils::struct_init<get_version_nettype_response_t> get_version_nettype_response;
 }
 
 Wallet::Wallet(QObject * parent)
@@ -363,6 +378,40 @@ void Wallet::initAsync(
         m_initializing = false;
         emit initializingChanged();
     }
+}
+
+void Wallet::checkDaemonNettypeAsync(const QString &daemonAddress, const QString &proxyAddress /* = "" */)
+{
+    const NetworkType::Type walletNettype = nettype();
+    const std::string daemon_address = daemonAddress.toStdString();
+    const std::string proxy_address = proxyAddress.toStdString();
+    m_scheduler.run([daemon_address, proxy_address, walletNettype, this] {
+        net::http::client client;
+        if (!client.set_server(daemon_address, boost::none)) return;
+        if (!proxy_address.empty())
+            client.set_proxy(proxy_address);
+
+        cryptonote::COMMAND_RPC_GET_VERSION::request req = AUTO_VAL_INIT(req);
+        get_version_nettype_response res = AUTO_VAL_INIT(res);
+        const bool r = epee::net_utils::invoke_http_json_rpc("/json_rpc", "get_version", req, res, client, std::chrono::seconds(8));
+        client.disconnect();
+
+        if (!r || res.status != CORE_RPC_STATUS_OK) return;
+
+        // nettype is empty on older daemons
+        NetworkType::Type daemonNettype;
+        if (res.nettype == "mainnet")
+            daemonNettype = NetworkType::MAINNET;
+        else if (res.nettype == "testnet")
+            daemonNettype = NetworkType::TESTNET;
+        else if (res.nettype == "stagenet")
+            daemonNettype = NetworkType::STAGENET;
+        else
+            return;
+
+        if (daemonNettype != walletNettype)
+            emit daemonNettypeMismatch(static_cast<int>(daemonNettype));
+    });
 }
 
 bool Wallet::isHwBacked() const
