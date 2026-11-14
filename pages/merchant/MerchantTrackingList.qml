@@ -184,8 +184,10 @@ ListView {
                         anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: 12
                         font.bold: false
-                        color: "#a8a8a8"
+                        color: double_spend_seen ? "#b00020" : "#a8a8a8"
                         text: {
+                            if (double_spend_seen)
+                                return qsTr("Possible double spend") + translationManager.emptyString;
                             if(in_txpool){
                                 return qsTr("Awaiting in txpool") + translationManager.emptyString;
                             } else {
