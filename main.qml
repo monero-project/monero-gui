@@ -904,7 +904,14 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain);
+        var allFlags = flags;
+        if (persistentSettings.anonymityNetworkType === 1 && allFlags.indexOf("--i2p-sam") === -1) {
+            const i2pHost = persistentSettings.i2pRouterAddress || "127.0.0.1";
+            const i2pPort = persistentSettings.i2pSamPort || "7656";
+            allFlags = (allFlags + " --i2p-sam " + i2pHost + ":" + i2pPort).trim();
+        }
+
+        daemonManager.start(allFlags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -1661,6 +1668,10 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+
+        property int anonymityNetworkType: 0
+        property string i2pRouterAddress: "127.0.0.1"
+        property string i2pSamPort: "7656"
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
