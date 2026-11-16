@@ -71,8 +71,6 @@ void IPC::bind(){
 // when queued, false if sent to another instance, at which point we can
 // kill the current process.
 bool IPC::saveCommand(QString cmdString){
-    qDebug() << QString("saveCommand called: %1").arg(cmdString);
-
     QLocalSocket ls;
     QByteArray buffer;
     buffer = buffer.append(cmdString.toUtf8());
@@ -82,11 +80,11 @@ bool IPC::saveCommand(QString cmdString){
     if(ls.waitForConnected(1000)){
         ls.write(buffer);
         if (!ls.waitForBytesWritten(1000)){
-            qDebug() << QString("Could not send command \"%1\" over IPC %2: \"%3\"").arg(cmdString, socketFilePath, ls.errorString());
+            qDebug() << QString("Could not send command over IPC %1: \"%2\"").arg(socketFilePath, ls.errorString());
             return false;
         }
 
-        qDebug() << QString("Sent command \"%1\" over IPC \"%2\"").arg(cmdString, socketFilePath);
+        qDebug() << "Sent command over IPC" << socketFilePath;
         return false;
     }
 
@@ -109,7 +107,6 @@ void IPC::handleConnection(){
 
     clientConnection->waitForReadyRead(2);
     QString cmdString = QString(clientConnection->readAll());
-    qDebug() << cmdString;
 
     this->parseCommand(cmdString);
 
