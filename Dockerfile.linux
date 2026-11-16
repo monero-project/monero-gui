@@ -17,7 +17,7 @@ ENV CMAKE_PREFIX_PATH="${QT_PREFIX}"
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
     aria2 automake autopoint bison bzip2 ca-certificates curl gettext git g++ make \
-    gperf libarchive-tools libgl1-mesa-dev libglib2.0-dev libpng-dev libpthread-stubs0-dev \
+    gperf libarchive-tools libexpat1-dev libgl1-mesa-dev libglib2.0-dev libpng-dev libpthread-stubs0-dev \
     libtool-bin libudev-dev mesa-common-dev \
     ninja-build pkg-config python3 python-is-python3 wget xutils-dev && \
     rm -rf /var/lib/apt/lists/*
@@ -40,6 +40,16 @@ RUN wget -q https://github.com/Kitware/CMake/releases/download/v4.3.3/cmake-4.3.
     tar -xzf cmake-4.3.3-linux-x86_64.tar.gz -C /usr/local --strip-components=1 && \
     rm cmake-4.3.3-linux-x86_64.tar.gz && \
     cmake --version
+
+RUN wget https://dbus.freedesktop.org/releases/dbus/dbus-1.12.2.tar.gz && \
+    echo "272bb5091770b047c8188b926d5e6038fa4fe6745488b2add96b23e2d9a83d88  dbus-1.12.2.tar.gz" | sha256sum -c && \
+    tar -xzf dbus-1.12.2.tar.gz && \
+    rm dbus-1.12.2.tar.gz && \
+    cd dbus-1.12.2 && \
+    ./configure --prefix="${QT_PREFIX}" --disable-shared --enable-static --disable-systemd --disable-launchd --disable-selinux --disable-apparmor --disable-libaudit --disable-xml-docs --disable-doxygen-docs --disable-ducktype-docs --disable-modular-tests --disable-embedded-tests --disable-x11-autolaunch --without-x --with-systemdsystemunitdir=no --with-systemduserunitdir=no && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    rm -rf $(pwd)
 
 RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && \
@@ -218,7 +228,7 @@ RUN rm -f /usr/lib/x86_64-linux-gnu/libX11.a \
     -submodules qtbase,qtdeclarative,qtshadertools,qtsvg,qttools \
     -prefix ${QT_PREFIX} -opensource -confirm-license -release -static -no-avx \
     -opengl desktop -xcb -no-feature-xlib -system-freetype -fontconfig -no-feature-eglfs -no-glib \
-    -no-dbus -no-feature-qml-worker-script -no-feature-linuxfb -no-openssl -no-feature-sql -no-feature-kms \
+    -dbus-linked -no-feature-qml-worker-script -no-feature-linuxfb -no-openssl -no-feature-sql -no-feature-kms \
     -no-feature-testlib -no-feature-quick-particles -no-feature-qml-xmllistmodel -no-feature-qml-debug \
     -no-feature-quickcontrols2-imagine -no-feature-quickcontrols2-universal -no-feature-quickcontrols2-fluentwinui3 \
     -no-feature-printsupport -no-feature-pdf -no-feature-vulkan -no-feature-sessionmanager -no-feature-gtk3 \

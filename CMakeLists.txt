@@ -161,6 +161,9 @@ set(QT_COMPONENTS
   Widgets
   Xml
 )
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+  list(APPEND QT_COMPONENTS DBus)
+endif()
 if(QML_TESTS)
   list(APPEND QT_COMPONENTS QuickTest Test)
 endif()
