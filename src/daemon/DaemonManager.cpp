@@ -59,10 +59,10 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // prepare command line arguments and pass to monerod
     QStringList arguments;
 
-    // Start daemon with --detach flag on non-windows platforms
-#ifndef Q_OS_WIN
-    arguments << "--detach";
-#endif
+    // QProcess::startDetached() already detaches the child into its own
+    // session on Unix. Passing --detach to monerod would make it fork again,
+    // so the PID returned below would be the short-lived parent, not the
+    // actually running daemon.
 
     if (nettype == NetworkType::TESTNET)
         arguments << "--testnet";
@@ -113,8 +113,11 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
-    // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
+    // Start monerod and record the PID of the process we launched so that
+    // shutdown terminates only that instance, never a user-started node.
+    qint64 pid = -1;
+    bool started = QProcess::startDetached(m_monerod, arguments, QString(), &pid);
+    m_daemonPid = started ? pid : -1;
 
     // add state changed listener
     connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
@@ -180,12 +183,20 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype, const QString &dataDi
         if(running(nettype, dataDir)) {
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
-                qDebug() << "Killing it! ";
+                // Only terminate the daemon instance this wallet started. Killing
+                // every monerod process on the system could silently shut down a
+                // remote node owned by the user or another application.
+                qint64 pid = m_daemonPid;
+                if(pid > 0) {
+                    qDebug() << "Killing monerod (pid " << pid << ")";
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
+                    QProcess::execute("taskkill",  {"/F", "/PID", QString::number(pid)});
 #else
-                QProcess::execute("pkill", {"monerod"});
+                    QProcess::execute("kill", {"-9", QString::number(pid)});
 #endif
+                } else {
+                    qDebug() << "No known monerod pid to kill, leaving running processes untouched";
+                }
             }
 
         } else
