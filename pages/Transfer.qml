@@ -881,6 +881,7 @@ Rectangle {
         id: advancedLayout
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
+        anchors.right: parent.right
         anchors.margins: 20
         anchors.topMargin: 32
         spacing: 10

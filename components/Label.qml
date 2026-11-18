@@ -36,6 +36,7 @@ Item {
     property alias text: label.text
     property alias tooltip: label.tooltip
     property alias tooltipIconVisible: label.tooltipIconVisible
+    property alias tooltipWidth: label.tooltipWidth
     property alias color: label.color
     property alias labelMouseArea: labelMouseArea
     property int textFormat: Text.PlainText
