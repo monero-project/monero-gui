@@ -38,6 +38,7 @@ Rectangle {
     id: wizardHome
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property alias createWalletButton: createWalletButton
     property alias openWalletButton: openWalletButton
     property alias restoreWalletButton: restoreWalletButton
@@ -50,6 +51,7 @@ Rectangle {
         width: parent.width - 100
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
+        KeyNavigation.tab: welcomeHeader
 
         spacing: 10
 
@@ -65,14 +67,26 @@ Rectangle {
                 spacing: 10
 
                 WizardHeader {
+                    id: welcomeHeader
                     Layout.bottomMargin: 7
                     Layout.fillWidth: true
                     title: qsTr("Welcome to Monero") + translationManager.emptyString
                     subtitle: ""
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: title
+                    Keys.onUpPressed: wizardHome.lastFocusItem().forceActiveFocus();
+                    Keys.onBacktabPressed: wizardHome.lastFocusItem().forceActiveFocus();
+                    KeyNavigation.down: languageButton
+                    KeyNavigation.tab: languageButton
                 }
 
                 MoneroComponents.LanguageButton {
+                    id: languageButton
                     Layout.bottomMargin: 8
+                    KeyNavigation.up: welcomeHeader
+                    KeyNavigation.backtab: welcomeHeader
+                    KeyNavigation.down: createWalletButton
+                    KeyNavigation.tab: createWalletButton
                 }
             }
 
@@ -93,6 +107,12 @@ Rectangle {
                     wizardStateView.state = "wizardCreateWallet1"
                     wizardStateView.wizardCreateWallet1View.pageRoot.forceActiveFocus();
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: languageButton
+                KeyNavigation.backtab: languageButton
+                KeyNavigation.down: createWalletFromDeviceButton
+                KeyNavigation.tab: createWalletFromDeviceButton
             }
 
             Rectangle {
@@ -105,6 +125,7 @@ Rectangle {
             }
 
             WizardMenuItem {
+                id: createWalletFromDeviceButton
                 headerText: {
                     var nettype = persistentSettings.nettype;
                     return qsTr("Create a new wallet from hardware") + (nettype === 2 ? " (" + qsTr("stagenet") + ")"
@@ -118,6 +139,12 @@ Rectangle {
                     wizardController.restart();
                     wizardStateView.state = "wizardCreateDevice1"
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: createWalletButton
+                KeyNavigation.backtab: createWalletButton
+                KeyNavigation.down: openWalletButton
+                KeyNavigation.tab: openWalletButton
             }
 
             Rectangle {
@@ -139,6 +166,12 @@ Rectangle {
                     wizardStateView.state = "wizardOpenWallet1"
                     wizardStateView.wizardOpenWallet1View.pageRoot.forceActiveFocus();
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: createWalletFromDeviceButton
+                KeyNavigation.backtab: createWalletFromDeviceButton
+                KeyNavigation.down: restoreWalletButton
+                KeyNavigation.tab: restoreWalletButton
             }
 
             Rectangle {
@@ -160,6 +193,12 @@ Rectangle {
                     wizardController.restart();
                     wizardStateView.state = "wizardRestoreWallet1"
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText
+                KeyNavigation.up: openWalletButton
+                KeyNavigation.backtab: openWalletButton
+                KeyNavigation.down: changeWalletModeButton
+                KeyNavigation.tab: changeWalletModeButton
             }
 
             RowLayout {
@@ -175,7 +214,15 @@ Rectangle {
                     onClicked: {
                         wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardModeSelection';
-                    }                    
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
+                    }
+                    Accessible.role: Accessible.Button
+                    Accessible.name: text
+                    Accessible.onPressAction: doClick()
+                    KeyNavigation.up: restoreWalletButton
+                    KeyNavigation.backtab: restoreWalletButton
+                    Keys.onDownPressed: wizardHome.focusAfter(changeWalletModeButton);
+                    Keys.onTabPressed: wizardHome.focusAfter(changeWalletModeButton);
                 }
             }
 
@@ -187,6 +234,15 @@ Rectangle {
                 checked: false
                 text: qsTr("Advanced options") + translationManager.emptyString
                 visible: appWindow.walletMode >= 2
+                Accessible.role: Accessible.CheckBox
+                Accessible.name: text
+                Accessible.checked: checked
+                KeyNavigation.up: changeWalletModeButton
+                KeyNavigation.backtab: changeWalletModeButton
+                Keys.onDownPressed: wizardHome.focusAfter(showAdvancedCheckbox);
+                Keys.onTabPressed: wizardHome.focusAfter(showAdvancedCheckbox);
+                // Collapsing disables the grid, which drops focus if it was inside it
+                onClicked: if (!checked) showAdvancedCheckbox.forceActiveFocus();
             }
 
             ListModel {
@@ -197,7 +253,9 @@ Rectangle {
             }
 
             GridLayout {
+                id: advancedOptionsGrid
                 visible: showAdvancedCheckbox.checked && appWindow.walletMode >= 2
+                enabled: visible
                 columns: 4
                 columnSpacing: 20
                 Layout.fillWidth: true
@@ -210,16 +268,26 @@ Rectangle {
                     Layout.maximumWidth: 180
                     labelText: qsTr("Network") + ":" + translationManager.emptyString
                     labelFontSize: 14
+                    Accessible.role: Accessible.ComboBox
+                    Accessible.name: qsTr("Network") + ": " + dataModel.get(expanded ? highlightIndex : currentIndex).column1 + translationManager.emptyString
+                    KeyNavigation.backtab: showAdvancedCheckbox
+                    KeyNavigation.tab: kdfRoundsText
 
                     onChanged: {
                         var item = dataModel.get(currentIndex).nettype.toLowerCase();
+                        var nettype = persistentSettings.nettype;
                         if(item === "mainnet") {
-                            persistentSettings.nettype = NetworkType.MAINNET
+                            nettype = NetworkType.MAINNET
                         } else if(item === "stagenet"){
-                            persistentSettings.nettype = NetworkType.STAGENET
+                            nettype = NetworkType.STAGENET
                         } else if(item === "testnet"){
-                            persistentSettings.nettype = NetworkType.TESTNET
+                            nettype = NetworkType.TESTNET
                         }
+                        if (nettype === persistentSettings.nettype) {
+                            networkTypeDropdown.currentIndex = Qt.binding(function() { return persistentSettings.nettype });
+                            return;
+                        }
+                        persistentSettings.nettype = nettype
                         appWindow.disconnectRemoteNode()
                         networkTypeDropdown.currentIndex = Qt.binding(function() { return persistentSettings.nettype });
                         persistentSettings.wallet_path = ""
@@ -234,6 +302,9 @@ Rectangle {
 
                     labelText: qsTr("Number of KDF rounds:") + translationManager.emptyString
                     labelFontSize: 14
+                    inputAccessibleName: labelText
+                    KeyNavigation.backtab: networkTypeDropdown
+                    KeyNavigation.tab: welcomeHeader
                     fontSize: 16
                     placeholderFontSize: 16
                     placeholderText: "0"
@@ -279,7 +350,28 @@ Rectangle {
         }
     }
 
+    function lastFocusItem() {
+        if (advancedOptionsGrid.visible) {
+            return kdfRoundsText;
+        }
+        if (showAdvancedCheckbox.visible) {
+            return showAdvancedCheckbox;
+        }
+        return changeWalletModeButton;
+    }
+
+    function focusAfter(item) {
+        if (item === lastFocusItem()) {
+            welcomeHeader.forceActiveFocus();
+        } else if (item === changeWalletModeButton) {
+            showAdvancedCheckbox.forceActiveFocus();
+        } else {
+            networkTypeDropdown.forceActiveFocus();
+        }
+    }
+
     function onPageCompleted(){
+        pageRoot.forceActiveFocus();
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         if (networkTypeDropdown.currentIndex != 0) {
             showAdvancedCheckbox.checked = true;

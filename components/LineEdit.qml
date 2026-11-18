@@ -40,6 +40,7 @@ ColumnLayout {
     default property alias content: inlineButtons.children
 
     property alias input: input
+    property string inputAccessibleName: ""
     property bool inputHasFocus: input.activeFocus
     property bool tabNavigationEnabled: true
     property alias text: input.text
@@ -216,6 +217,7 @@ ColumnLayout {
 
     MoneroComponents.Input {
         id: input
+        Accessible.name: item.inputAccessibleName
         Keys.onBacktabPressed: {
             item.backtabPressed();
             if (item.KeyNavigation.backtab) {

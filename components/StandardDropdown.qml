@@ -81,6 +81,78 @@ ColumnLayout {
 
     signal changed();
 
+    property int highlightIndex: 0
+
+    function openPopup() {
+        dropdown.highlightIndex = columnid.currentIndex
+        dropdown.updateMaxAvailableDropdownHeight()
+        popup.open()
+        dropdown.ensureHighlightVisible()
+    }
+
+    function ensureHighlightVisible() {
+        var row = repeater.itemAt(dropdown.highlightIndex)
+        if (!row) {
+            return
+        }
+        // droplist's height animates on open, so use the height it is animating to
+        var viewHeight = Math.min(columnid.height, dropdown.maxAvailableDropdownHeight)
+        if (row.y < dropFlickable.contentY) {
+            dropFlickable.contentY = row.y
+        } else if (row.y + row.height > dropFlickable.contentY + viewHeight) {
+            dropFlickable.contentY = row.y + row.height - viewHeight
+        }
+    }
+
+    onHighlightIndexChanged: if (expanded) ensureHighlightVisible()
+
+    // Close when keyboard focus moves away (e.g. Tab), otherwise the popup stays
+    // open with nothing left to receive Escape
+    onActiveFocusChanged: if (!activeFocus) popup.close()
+
+    function selectItem(index) {
+        popup.close()
+        columnid.currentIndex = index
+        changed();
+    }
+
+    Accessible.onPressAction: {
+        if (dropdown.expanded) {
+            popup.close()
+        } else {
+            dropdown.forceActiveFocus()
+            dropdown.openPopup()
+        }
+    }
+
+    Keys.onPressed: (event) => {
+        var isActivationKey = event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space
+        // A held key would otherwise open the popup and then immediately commit the highlighted row
+        if (isActivationKey && event.isAutoRepeat) {
+            event.accepted = true
+            return
+        }
+        if (!dropdown.expanded) {
+            if (isActivationKey) {
+                dropdown.openPopup()
+                event.accepted = true
+            }
+            return
+        }
+        if (event.key === Qt.Key_Up) {
+            dropdown.highlightIndex = Math.max(0, dropdown.highlightIndex - 1)
+        } else if (event.key === Qt.Key_Down) {
+            dropdown.highlightIndex = Math.min(repeater.count - 1, dropdown.highlightIndex + 1)
+        } else if (isActivationKey) {
+            dropdown.selectItem(dropdown.highlightIndex)
+        } else if (event.key === Qt.Key_Escape) {
+            popup.close()
+        } else {
+            return
+        }
+        event.accepted = true
+    }
+
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
 
     spacing: 0
@@ -105,9 +177,9 @@ ColumnLayout {
 
     Rectangle {
         id: head
-        color: dropArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+        color: dropArea.containsMouse || dropdown.activeFocus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
         border.width: dropdown.headerBorder ? 1 : 0
-        border.color: dropdown.colorBorder
+        border.color: dropdown.activeFocus ? MoneroComponents.Style.inputBorderColorActive : dropdown.colorBorder
         radius: 4
         Layout.fillWidth: true
         Layout.preferredHeight: dropdownHeight
@@ -154,8 +226,8 @@ ColumnLayout {
                 if (dropdown.expanded) {
                     popup.close()
                 } else {
-                    dropdown.updateMaxAvailableDropdownHeight()
-                    popup.open()
+                    dropdown.forceActiveFocus()
+                    dropdown.openPopup()
                 }
             }
             hoverEnabled: true
@@ -182,6 +254,7 @@ ColumnLayout {
             }
 
             Flickable {
+                id: dropFlickable
                 anchors.fill: parent
                 contentHeight: columnid.height
                 interactive: contentHeight > height
@@ -210,7 +283,7 @@ ColumnLayout {
                             anchors.right: parent.right
                             height: (dropdown.dropdownHeight * 0.75)
                             //radius: index === repeater.count - 1 ? 4 : 0
-                            color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
+                            color: itemArea.containsMouse || index === dropdown.highlightIndex ? dropdown.releasedColor : dropdown.pressedColor
 
                             MoneroComponents.TextPlain {
                                 id: col1Text
@@ -222,7 +295,7 @@ ColumnLayout {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.bold: false
                                 font.pixelSize: fontItemSize
-                                color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
+                                color: itemArea.containsMouse || index === dropdown.highlightIndex ? "#FA6800" : "#FFFFFF"
                                 text: qsTr(column1) + translationManager.emptyString
                             }
 
@@ -243,11 +316,7 @@ ColumnLayout {
                                 hoverEnabled: true
                                 cursorShape: Qt.ArrowCursor
 
-                                onClicked: {
-                                    popup.close()
-                                    columnid.currentIndex = index
-                                    changed();
-                                }
+                                onClicked: dropdown.selectItem(index)
                             }
                         }
                     }

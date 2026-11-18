@@ -40,15 +40,43 @@ RowLayout {
     Layout.bottomMargin: 10
     property alias imageIcon: icon.source
     property bool checkbox: false
+    property bool selected: false
     property alias checked: checkboxItem.checked
     property alias headerText: header.text
     property alias bodyText: body.text
     signal menuClicked();
     spacing: 10
 
+    function doClick() {
+        rowlayout.menuClicked();
+    }
+
+    Keys.onReturnPressed: rowlayout.doClick();
+    Keys.onEnterPressed: rowlayout.doClick();
+    Keys.onSpacePressed: rowlayout.doClick();
+    Accessible.onPressAction: rowlayout.doClick();
+    Accessible.onToggleAction: if (rowlayout.checkbox) rowlayout.doClick();
+
     Item {
         Layout.preferredWidth: 70
         Layout.preferredHeight: 70
+
+        Rectangle {
+            x: -parent.x
+            y: -parent.y
+            z: -1
+            width: rowlayout.width
+            height: rowlayout.height
+            color: rowlayout.activeFocus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+        }
+
+        Rectangle {
+            x: -8
+            height: parent.height
+            width: 2
+            color: MoneroComponents.Style.buttonBackgroundColor
+            visible: rowlayout.selected
+        }
 
         MoneroComponents.CheckBox {
             id: checkboxItem
@@ -82,7 +110,7 @@ RowLayout {
             cursorShape: Qt.PointingHandCursor
             anchors.fill: parent
             onClicked: {
-                rowlayout.menuClicked();
+                rowlayout.doClick();
             }
         }
     }
@@ -115,7 +143,7 @@ RowLayout {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
                 onClicked: {
-                    rowlayout.menuClicked();
+                    rowlayout.doClick();
                 }
             }
         }
@@ -140,7 +168,7 @@ RowLayout {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
                 onClicked: {
-                    rowlayout.menuClicked();
+                    rowlayout.doClick();
                 }
             }
         }

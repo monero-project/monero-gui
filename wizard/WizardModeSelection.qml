@@ -39,6 +39,7 @@ Rectangle {
     color: "transparent"
 
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardModeSelection1"
     property bool portable: portableSettings.portable
     property alias advancedModeButton: advancedModeButton
@@ -48,13 +49,14 @@ Rectangle {
     function applyWalletMode(mode, wizardState) {
         if (!portableSettings.setPortable(portable)) {
             appWindow.showStatusMessage(qsTr("Failed to configure portable mode"), 3);
-            return;
+            return false;
         }
 
         logger.resetLogFilePath(portable);
         appWindow.changeWalletMode(mode);
         wizardController.wizardStackView.backTransition = false;
         wizardController.wizardState = wizardState;
+        return true;
     }
 
     ColumnLayout {
@@ -63,6 +65,7 @@ Rectangle {
         width: parent.width - 100
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
+        KeyNavigation.tab: modeSelectionHeader
 
         spacing: 10
 
@@ -74,11 +77,19 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
+                id: modeSelectionHeader
                 title: qsTr("Mode selection") + translationManager.emptyString
                 subtitle: qsTr("Please select the statement that best matches you.") + translationManager.emptyString
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title + ". " + subtitle
+                Keys.onUpPressed: wizardNav.btnPrev.forceActiveFocus();
+                Keys.onBacktabPressed: wizardNav.btnPrev.forceActiveFocus();
+                KeyNavigation.down: simpleModeButton.enabled ? simpleModeButton : advancedModeButton
+                KeyNavigation.tab: simpleModeButton.enabled ? simpleModeButton : advancedModeButton
             }
 
             WizardMenuItem {
+                id: simpleModeButton
                 enabled: simpleModeAvailable
                 opacity: simpleModeAvailable ? 1.0 : 0.5
                 Layout.topMargin: 20
@@ -96,12 +107,21 @@ Rectangle {
                 }
 
                 imageIcon: "qrc:///images/remote-node.png"
+                selected: appWindow.walletMode == 0
 
                 onMenuClicked: {
                     if (simpleModeAvailable) {
-                        applyWalletMode(0, 'wizardModeRemoteNodeWarning');
+                        if (applyWalletMode(0, 'wizardModeRemoteNodeWarning')) {
+                            wizardStateView.wizardModeRemoteNodeWarningView.pageRoot.forceActiveFocus();
+                        }
                     }
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText + " " + (selected ? qsTr("Selected") : qsTr("Not selected")) + translationManager.emptyString
+                KeyNavigation.up: modeSelectionHeader
+                KeyNavigation.backtab: modeSelectionHeader
+                KeyNavigation.down: advancedModeButton
+                KeyNavigation.tab: advancedModeButton
             }
 
             Rectangle {
@@ -118,17 +138,31 @@ Rectangle {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
+                selected: appWindow.walletMode >= 2
 
                 onMenuClicked: {
                     appWindow.persistentSettings.pruneBlockchain = true;
                     applyWalletMode(2, 'wizardHome');
                 }
+                Accessible.role: Accessible.MenuItem
+                Accessible.name: headerText + ". " + bodyText + " " + (selected ? qsTr("Selected") : qsTr("Not selected")) + translationManager.emptyString
+                KeyNavigation.up: simpleModeButton.enabled ? simpleModeButton : modeSelectionHeader
+                KeyNavigation.backtab: simpleModeButton.enabled ? simpleModeButton : modeSelectionHeader
+                KeyNavigation.down: optionalFeaturesHeader
+                KeyNavigation.tab: optionalFeaturesHeader
             }
 
             WizardHeader {
+                id: optionalFeaturesHeader
                 Layout.topMargin: 20
                 title: qsTr("Optional features") + translationManager.emptyString
                 subtitle: qsTr("Select enhanced functionality you would like to enable.") + translationManager.emptyString
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title + ". " + subtitle
+                KeyNavigation.up: advancedModeButton
+                KeyNavigation.backtab: advancedModeButton
+                KeyNavigation.down: portableModeButton
+                KeyNavigation.tab: portableModeButton
             }
 
             WizardMenuItem {
@@ -138,16 +172,26 @@ Rectangle {
                 bodyText: qsTr("Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.") + translationManager.emptyString
                 checkbox: true
                 checked: wizardModeSelection1.portable
+                Accessible.role: Accessible.CheckBox
+                Accessible.name: headerText + ". " + bodyText
+                Accessible.checked: checked
+                KeyNavigation.up: optionalFeaturesHeader
+                KeyNavigation.backtab: optionalFeaturesHeader
+                KeyNavigation.down: wizardNav.btnPrev
+                KeyNavigation.tab: wizardNav.btnPrev
 
                 onMenuClicked: wizardModeSelection1.portable = !wizardModeSelection1.portable
             }
 
             WizardNav {
+                id: wizardNav
                 Layout.topMargin: 5
                 btnPrevText: qsTr("Back to menu") + translationManager.emptyString
                 btnNext.visible: false
-                progressSteps: 0
+                progressEnabled: false
                 autoTransition: false
+                btnPrevKeyNavigationBackTab: portableModeButton
+                btnNextKeyNavigationTab: modeSelectionHeader
 
                 onPrevClicked: {
                     if (wizardController.wizardStackView.backTransition) {
@@ -155,6 +199,7 @@ Rectangle {
                     } else {
                         wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardLanguage';
+                        wizardStateView.wizardLanguageView.pageRoot.forceActiveFocus();
                     }
                 }
             }

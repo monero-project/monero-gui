@@ -35,12 +35,27 @@ import FontAwesome
 import "../components" as MoneroComponents
 
 Item {
+    id: languageButton
     implicitHeight: layout.height
     implicitWidth: layout.width
 
+    Accessible.role: Accessible.Button
+    Accessible.name: qsTr("Change language") + ": " + persistentSettings.language + translationManager.emptyString
+    Keys.onReturnPressed: appWindow.toggleLanguageView()
+    Keys.onEnterPressed: appWindow.toggleLanguageView()
+    Keys.onSpacePressed: appWindow.toggleLanguageView()
+    Accessible.onPressAction: appWindow.toggleLanguageView()
+
+    Rectangle {
+        anchors.fill: parent
+        anchors.margins: -4
+        radius: 4
+        color: languageButton.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+    }
+
     RowLayout {
         id: layout
-        opacity: mouseArea.containsMouse ? 1 : 0.85
+        opacity: mouseArea.containsMouse || languageButton.focus ? 1 : 0.85
         spacing: 10
 
         MoneroComponents.Label {
