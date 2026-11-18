@@ -67,11 +67,18 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     return true;
 }
 
-long MacOSHelper::setPasteboardText(const QString &text)
+long MacOSHelper::setSensitivePasteboardText(const QString &text)
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-    const NSInteger changeCount = [pasteboard clearContents];
-    [pasteboard setString:text.toNSString() forType:NSPasteboardTypeString];
+    // Keeps the copy out of Universal Clipboard
+    const NSInteger changeCount = [pasteboard prepareForNewContentsWithOptions:NSPasteboardContentsCurrentHostOnly];
+    NSPasteboardItem *item = [[NSPasteboardItem alloc] init];
+    [item setString:text.toNSString() forType:NSPasteboardTypeString];
+    // http://nspasteboard.org
+    [item setData:[NSData data] forType:@"org.nspasteboard.ConcealedType"];
+    [item setData:[NSData data] forType:@"org.nspasteboard.TransientType"];
+    [pasteboard writeObjects:@[item]];
+    [item release];
     return changeCount;
 }
 

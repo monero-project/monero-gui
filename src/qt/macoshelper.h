@@ -40,8 +40,9 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    // Copies text kept off other devices and out of clipboard managers.
     // Returns the change count from taking ownership.
-    static long setPasteboardText(const QString &text);
+    static long setSensitivePasteboardText(const QString &text);
     static void clearPasteboardIfUnchanged(long changeCount);
 };
 
