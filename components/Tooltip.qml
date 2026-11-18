@@ -35,11 +35,14 @@ import FontAwesome
 import "." as MoneroComponents
 
 Rectangle {
+    id: root
     property alias text: tooltip.text
     property alias tooltipPopup: popup
+    property alias maximumTooltipWidth: root.maximumTooltipWidth
     property bool tooltipIconVisible: false
     property bool tooltipLeft: false
     property bool tooltipBottom: tooltipIconVisible ? false : true
+    property int maximumTooltipWidth: 370
 
     color: "transparent"
     height: tooltipIconVisible ? icon.height : parent.height
@@ -96,12 +99,12 @@ Rectangle {
         delay: 200
 
         RowLayout {
-            Layout.maximumWidth: 370
+            Layout.maximumWidth: maximumTooltipWidth
 
             Text {
                 id: tooltip
                 width: contentWidth
-                Layout.maximumWidth: 370
+                Layout.maximumWidth: maximumTooltipWidth
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 12
