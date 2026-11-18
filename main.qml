@@ -98,6 +98,8 @@ ApplicationWindow {
     property int userLastActive;  // epoch
     // Default daemon addresses
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
+    // seconds, 0 disables clearing
+    readonly property int sensitiveClipboardClearDelay: persistentSettings.clearSecretsFromClipboard ? 60 : 0
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
     property int simpleModeIndex: 0
@@ -1654,6 +1656,7 @@ ApplicationWindow {
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
+        property bool clearSecretsFromClipboard: true
         property bool blackTheme: true  // legacy, superseded by `theme`; kept in sync for downgrades
         property string theme: ""       // "system" | "light" | "dark"; empty means not migrated yet
         property bool checkForUpdates: true

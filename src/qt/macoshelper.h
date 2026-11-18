@@ -40,6 +40,9 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    // Returns the change count from taking ownership.
+    static long setPasteboardText(const QString &text);
+    static void clearPasteboardIfUnchanged(long changeCount);
 };
 
 #endif //MACOSHELPER_H

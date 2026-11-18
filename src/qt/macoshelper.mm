@@ -67,6 +67,21 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     return true;
 }
 
+long MacOSHelper::setPasteboardText(const QString &text)
+{
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    const NSInteger changeCount = [pasteboard clearContents];
+    [pasteboard setString:text.toNSString() forType:NSPasteboardTypeString];
+    return changeCount;
+}
+
+void MacOSHelper::clearPasteboardIfUnchanged(long changeCount)
+{
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    if ([pasteboard changeCount] == changeCount)
+        [pasteboard clearContents];
+}
+
 QString MacOSHelper::bundlePath()
 {
     NSBundle *main = [NSBundle mainBundle];

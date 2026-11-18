@@ -83,6 +83,7 @@ ColumnLayout {
     property bool mouseSelection: true
     property alias readOnly: input.readOnly
     property bool copyButton: false
+    property bool sensitiveCopy: false
     property bool pasteButton: false
     property bool showingHeader: labelText != "" || copyButton || pasteButton
     property var wrapMode: Text.NoWrap
@@ -140,8 +141,16 @@ ColumnLayout {
                 onClicked: {
                     if (input.text.length > 0) {
                         console.log("Copied to clipboard");
-                        clipboard.setText(input.text);
-                        appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                        if (sensitiveCopy) {
+                            clipboard.setSensitiveText(input.text, appWindow.sensitiveClipboardClearDelay);
+                        } else {
+                            clipboard.setText(input.text);
+                        }
+                        if (sensitiveCopy && appWindow.sensitiveClipboardClearDelay > 0) {
+                            appWindow.showStatusMessage(qsTr("Copied to clipboard. The wallet will try to clear it in 1 minute.") + translationManager.emptyString, 5);
+                        } else {
+                            appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                        }
                     }
                 }
             }
