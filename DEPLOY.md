@@ -1,6 +1,6 @@
 # macOS:
 
-Use macOS 12 for better backwards compability.
+Use macOS 12 for better backwards compatibility.
 
 1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm libsodium expat protobuf@21 libgcrypt hidapi libusb cmake pkg-config && brew link protobuf@21`
 
