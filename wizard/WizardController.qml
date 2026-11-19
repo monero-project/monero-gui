@@ -311,6 +311,10 @@ Rectangle {
                 }
             }
         }
+
+        MoneroComponents.FlickableClickGuard {
+            flickable: wizardFlickable
+        }
 	}
 
     //Open Wallet from file
