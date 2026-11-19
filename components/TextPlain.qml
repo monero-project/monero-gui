@@ -15,6 +15,7 @@ Text {
     property alias tooltip: tooltip.text
     property alias tooltipLeft: tooltip.tooltipLeft
     property alias tooltipIconVisible: tooltip.tooltipIconVisible
+    readonly property real tooltipIconWidth: tooltipIconVisible && tooltip.text !== "" ? tooltip.width : 0
     property alias tooltipPopup: tooltip.tooltipPopup
     font.family: MoneroComponents.Style.fontMedium.name
     font.bold: false
