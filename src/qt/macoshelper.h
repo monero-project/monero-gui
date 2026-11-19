@@ -29,6 +29,8 @@
 #ifndef MACOSHELPER_H
 #define MACOSHELPER_H
 
+#include <functional>
+
 #include <QPixmap>
 
 class MacOSHelper
@@ -40,6 +42,9 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    // Calls callback before sleep and on fast user switching. Returns a handle for removeLockObservers().
+    static void *addLockObservers(std::function<void()> callback);
+    static void removeLockObservers(void *observers);
 };
 
 #endif //MACOSHELPER_H

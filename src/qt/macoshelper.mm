@@ -67,6 +67,32 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     return true;
 }
 
+void *MacOSHelper::addLockObservers(std::function<void()> callback)
+{
+    NSNotificationCenter *center = [[NSWorkspace sharedWorkspace] notificationCenter];
+    void (^block)(NSNotification *) = ^(NSNotification *) {
+        callback();
+    };
+    NSArray *observers = @[
+        [center addObserverForName:NSWorkspaceWillSleepNotification object:nil
+                             queue:[NSOperationQueue mainQueue] usingBlock:block],
+        [center addObserverForName:NSWorkspaceSessionDidResignActiveNotification object:nil
+                             queue:[NSOperationQueue mainQueue] usingBlock:block],
+    ];
+    return [observers retain];
+}
+
+void MacOSHelper::removeLockObservers(void *observers)
+{
+    NSArray *array = static_cast<NSArray *>(observers);
+    NSNotificationCenter *center = [[NSWorkspace sharedWorkspace] notificationCenter];
+    for (id observer in array)
+    {
+        [center removeObserver:observer];
+    }
+    [array release];
+}
+
 QString MacOSHelper::bundlePath()
 {
     NSBundle *main = [NSBundle mainBundle];

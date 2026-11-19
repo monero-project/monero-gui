@@ -240,7 +240,7 @@ public:
     Q_INVOKABLE bool isBackgroundSyncing() const;
 
     //! scan in the background with just the view key (wipe the spend key)
-    Q_INVOKABLE void startBackgroundSync();
+    Q_INVOKABLE bool startBackgroundSync();
 
     //! bring the spend key back and process background synced txs
     Q_INVOKABLE void stopBackgroundSync(const QString &password);
