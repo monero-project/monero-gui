@@ -40,6 +40,9 @@ public:
     static bool openFolderAndSelectItem(const QUrl &path);
     static QString bundlePath();
     static void disableWindowTabbing();
+    // Opts out of App Nap without blocking idle system sleep. Returns a handle for endActivity().
+    static void *beginActivity(const QString &reason);
+    static void endActivity(void *activity);
 };
 
 #endif //MACOSHELPER_H

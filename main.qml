@@ -961,6 +961,8 @@ ApplicationWindow {
         // A long initial scan reports blocks before its first refresh completes.
         // The wallet only scans once the daemon is synchronized.
         daemonSynced = true;
+        // Still scanning; onHeightRefreshed sets this once the refresh completes.
+        walletSynced = false;
         if (appWindow.walletMode == 0) {
             disconnectedEpoch = Utils.epoch();
         }
@@ -1735,6 +1737,13 @@ ApplicationWindow {
         property: "blackTheme"
         value: MoneroComponents.Style.blackTheme
         when: persistentSettings.theme !== ""
+    }
+
+    // Keep macOS App Nap from throttling the app while the daemon or wallet is syncing.
+    Binding {
+        target: oshelper
+        property: "syncActivity"
+        value: !!currentWallet && !disconnected && (!daemonSynced || !walletSynced)
     }
 
     ListModel {

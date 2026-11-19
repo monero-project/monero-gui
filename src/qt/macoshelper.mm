@@ -67,6 +67,21 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     return true;
 }
 
+void *MacOSHelper::beginActivity(const QString &reason)
+{
+    // Without LatencyCritical, a hidden app is still throttled to a lower priority.
+    const NSActivityOptions options = NSActivityUserInitiatedAllowingIdleSystemSleep | NSActivityLatencyCritical;
+    id activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:reason.toNSString()];
+    return [activity retain];
+}
+
+void MacOSHelper::endActivity(void *activity)
+{
+    id token = static_cast<id>(activity);
+    [[NSProcessInfo processInfo] endActivity:token];
+    [token release];
+}
+
 QString MacOSHelper::bundlePath()
 {
     NSBundle *main = [NSBundle mainBundle];
