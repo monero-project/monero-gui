@@ -1508,16 +1508,11 @@ Rectangle {
         root.txData = txs;
         root.txCount = root.txData.length;
 
-        root.updateSort();
-        root.updateDisplay(root.txOffset, root.txMax);
-        if (currentPage) {
-            root.paginationJump(parseInt(currentPage));
-        }
+        root.updateSort(currentPage);
     }
 
-    function updateSort(){
+    function updateSort(currentPage){
         // applying sorts
-        root.txOffset = 0;
         root.txData.sort(function(a, b) {
             if (root.sortBy === "blockheight") {
                 var aPending = a.blockheight === "";
@@ -1533,7 +1528,7 @@ Rectangle {
         if(root.sortDirection)
             root.txData.reverse();
 
-        root.updateDisplay(root.txOffset, root.txMax);
+        root.paginationJump(currentPage || 1);
     }
 
     function updateDisplay(tx_offset, tx_max) {
@@ -1696,7 +1691,7 @@ Rectangle {
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
 
         root.updateTransactionsFromModel();
-        root.updateFilter(currentPage);
+        root.updateFilter(currentPage || root.txPage);
     }
 
     function editDescription(_hash, _tx_note, currentPage){
@@ -1721,7 +1716,9 @@ Rectangle {
     }
 
     function paginationJump(pageNumber){
-        root.txOffset = root.txMax * Math.ceil(pageNumber - 1 || 0);
+        const lastPage = Math.ceil(root.txCount / root.txMax);
+        const page = Math.max(1, Math.min(pageNumber, lastPage));
+        root.txOffset = (page - 1) * root.txMax;
         updateDisplay(root.txOffset, root.txMax);
     }
 
