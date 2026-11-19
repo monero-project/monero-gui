@@ -16,7 +16,7 @@ Copyright (c) 2014-2024, The Monero Project
     + [Building Reproducible Linux static binaries with Docker (any OS)](#building-reproducible-linux-static-binaries-with-docker-any-os)
     + [Building Android APK with Docker (any OS) *Experimental*](#building-android-apk-with-docker-any-os-experimental)
     + [Building on Linux](#building-on-linux)
-    + [Building on OS X](#building-on-os-x)
+    + [Building on macOS](#building-on-macos)
     + [Building on Windows](#building-on-windows)
 
 ## Development resources
@@ -297,11 +297,11 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 The executable can be found in the build/release/bin folder.
 
-### Building on OS X
+### Building on macOS
 
-1. Install Xcode from AppStore
+1. Install Xcode from the App Store, or just the Command Line Tools with `xcode-select --install`
 
-2. Install [homebrew](http://brew.sh/)
+2. Install [Homebrew](https://brew.sh/)
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 

@@ -112,7 +112,7 @@ QString xdgMime(){
 
 void registerXdgMime(){
     // Register desktop entry
-    // - MacOS handled via Info.plist
+    // - macOS handled via Info.plist
     // - Windows handled in the installer by rbrunner7
     // - Linux written to `QStandardPaths::ApplicationsLocation`
     // - Tails written to persistent dotfiles

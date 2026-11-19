@@ -97,7 +97,7 @@
 #ifdef MONERO_GUI_STATIC
 
 #include <QtPlugin>
-#if defined(Q_OS_OSX)
+#if defined(Q_OS_MACOS)
   Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 #elif defined(Q_OS_WIN)
   Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
