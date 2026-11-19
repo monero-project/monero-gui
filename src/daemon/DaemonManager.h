@@ -74,7 +74,6 @@ signals:
 public slots:
     void printOutput();
     void printError();
-    void stateChanged(QProcess::ProcessState state);
 
 private:
     std::unique_ptr<QProcess> m_daemon;
