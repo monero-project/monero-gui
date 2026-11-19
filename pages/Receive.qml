@@ -770,13 +770,8 @@ Rectangle {
         }
     }
 
-    // Stop scrolling without consuming the first click on a row or control.
-    MouseArea {
-        anchors.fill: subaddressListView
-        onPressed: (mouse) => {
-            subaddressListView.cancelFlick();
-            mouse.accepted = false;
-        }
+    MoneroComponents.FlickableClickGuard {
+        flickable: subaddressListView
     }
 
     MessageDialog {

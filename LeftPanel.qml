@@ -509,6 +509,10 @@ Rectangle {
 
         } // Flickable
 
+        MoneroComponents.FlickableClickGuard {
+            flickable: flicker
+        }
+
         Rectangle {
             id: separator
             anchors.left: parent.left

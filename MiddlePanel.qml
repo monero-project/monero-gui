@@ -166,6 +166,7 @@ Rectangle {
         ]
 
     ColumnLayout {
+        id: viewLayout
         anchors.fill: parent
         anchors.margins: {
             if(currentView === merchantView || currentView === historyView)
@@ -213,6 +214,11 @@ Rectangle {
             }
 
         }// flickable
+    }
+
+    MoneroComponents.FlickableClickGuard {
+        flickable: mainFlickable
+        anchors.fill: viewLayout
     }
 
     // border
