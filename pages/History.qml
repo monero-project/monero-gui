@@ -459,7 +459,6 @@ Rectangle {
                 visible: root.txCount > 0
                 spacing: 0
                 Layout.alignment: Qt.AlignRight
-                Layout.preferredWidth: childrenRect.width
                 Layout.preferredHeight: 20
 
                 Rectangle {
