@@ -181,6 +181,13 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: clearSecretsFromClipboardCheckbox
+            checked: persistentSettings.clearSecretsFromClipboard
+            onClicked: persistentSettings.clearSecretsFromClipboard = !persistentSettings.clearSecretsFromClipboard
+            text: qsTr("Clear clipboard 1 minute after copying seed or private keys with Copy buttons") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: backgroundSyncCheckbox
             visible: !!currentWallet && !currentWallet.isHwBacked() && !appWindow.viewOnly
             checked: appWindow.backgroundSyncType != Wallet.BackgroundSync_Off

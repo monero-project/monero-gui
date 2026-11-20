@@ -302,8 +302,12 @@ Rectangle {
                     primary: false
                     text: qsTr("Copy to clipboard") + translationManager.emptyString
                     onClicked: {
-                        clipboard.setText(wizardController.walletOptionsSeed);
-                        appWindow.showStatusMessage(qsTr("Recovery phrase copied to clipboard"),3);
+                        clipboard.setSensitiveText(wizardController.walletOptionsSeed, appWindow.sensitiveClipboardClearDelay);
+                        if (appWindow.sensitiveClipboardClearDelay > 0) {
+                            appWindow.showStatusMessage(qsTr("Copied to clipboard. The wallet will try to clear it in 1 minute.") + translationManager.emptyString, 5);
+                        } else {
+                            appWindow.showStatusMessage(qsTr("Recovery phrase copied to clipboard"),3);
+                        }
                     }
                     Accessible.role: Accessible.Button
                     Accessible.name: qsTr("Copy to clipboard") + translationManager.emptyString

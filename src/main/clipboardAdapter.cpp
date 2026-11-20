@@ -28,6 +28,126 @@
 
 #include "clipboardAdapter.h"
 
+#include <QTimer>
+
+#ifdef Q_OS_MACOS
+#include "qt/macoshelper.h"
+#else
+#include <QCryptographicHash>
+#include <QMimeData>
+#endif
+
+namespace
+{
+#ifndef Q_OS_MACOS
+// Marks text for clipboard managers and the OS clipboard history to skip.
+QMimeData *sensitiveMimeData(const QString &text)
+{
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setText(text);
+#if defined(Q_OS_WIN)
+    // https://learn.microsoft.com/en-us/windows/win32/dataxchg/clipboard-formats#cloud-clipboard-and-clipboard-history-formats
+    mimeData->setData(QStringLiteral("ExcludeClipboardContentFromMonitorProcessing"), QByteArrayLiteral("1"));
+    mimeData->setData(QStringLiteral("CanIncludeInClipboardHistory"), QByteArray(4, '\0'));
+    mimeData->setData(QStringLiteral("CanUploadToCloudClipboard"), QByteArray(4, '\0'));
+#elif defined(Q_OS_UNIX)
+    // Honoured by KDE's Klipper
+    mimeData->setData(QStringLiteral("x-kde-passwordManagerHint"), QByteArrayLiteral("secret"));
+#endif
+    return mimeData;
+}
+
+// Reading a clipboard owned by another app can block. Android doesn't report
+// ownership.
+bool ownershipLost(const QClipboard *clipboard, QClipboard::Mode mode)
+{
+    static const bool reportsOwnership = QGuiApplication::platformName() == QStringLiteral("xcb")
+        || QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))
+        || QGuiApplication::platformName() == QStringLiteral("windows");
+    if (!reportsOwnership)
+        return false;
+    return mode == QClipboard::Clipboard ? !clipboard->ownsClipboard() : !clipboard->ownsSelection();
+}
+
+QByteArray hashText(const QString &text)
+{
+    return QCryptographicHash::hash(text.toUtf8(), QCryptographicHash::Sha256);
+}
+#endif
+
+// Clears copied secrets after a delay unless something else was copied since.
+// Shared by all clipboardAdapter instances.
+class SensitiveClipboardGuard : public QObject
+{
+public:
+    static SensitiveClipboardGuard &instance()
+    {
+        static SensitiveClipboardGuard *guard = new SensitiveClipboardGuard(qApp);
+        return *guard;
+    }
+
+#ifdef Q_OS_MACOS
+    void track(long changeCount, int clearDelaySeconds)
+    {
+        m_changeCount = changeCount;
+        start(clearDelaySeconds);
+    }
+#else
+    void track(const QString &text, int clearDelaySeconds)
+    {
+        m_hash = hashText(text);
+        start(clearDelaySeconds);
+    }
+#endif
+
+    void clearIfUnchanged()
+    {
+        m_timer.stop();
+        if (!m_pending)
+            return;
+        m_pending = false;
+
+#ifdef Q_OS_MACOS
+        MacOSHelper::clearPasteboardIfUnchanged(m_changeCount);
+#else
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        for (const QClipboard::Mode mode : {QClipboard::Clipboard, QClipboard::Selection})
+        {
+            if (!ownershipLost(clipboard, mode) && hashText(clipboard->text(mode)) == m_hash)
+                clipboard->clear(mode);
+        }
+        m_hash.clear();
+#endif
+    }
+
+private:
+    explicit SensitiveClipboardGuard(QObject *parent) :
+        QObject(parent)
+    {
+        m_timer.setSingleShot(true);
+        connect(&m_timer, &QTimer::timeout, this, &SensitiveClipboardGuard::clearIfUnchanged);
+        connect(qApp, &QCoreApplication::aboutToQuit, this, &SensitiveClipboardGuard::clearIfUnchanged);
+    }
+
+    void start(int clearDelaySeconds)
+    {
+        m_pending = clearDelaySeconds > 0;
+        if (m_pending)
+            m_timer.start(clearDelaySeconds * 1000);
+        else
+            m_timer.stop();
+    }
+
+    QTimer m_timer;
+    bool m_pending = false;
+#ifdef Q_OS_MACOS
+    long m_changeCount = 0;
+#else
+    QByteArray m_hash;
+#endif
+};
+} // namespace
+
 clipboardAdapter::clipboardAdapter(QObject *parent) :
     QObject(parent)
 {
@@ -37,6 +157,20 @@ clipboardAdapter::clipboardAdapter(QObject *parent) :
 void clipboardAdapter::setText(const QString &text) {
     m_pClipboard->setText(text, QClipboard::Clipboard);
     m_pClipboard->setText(text, QClipboard::Selection);
+}
+
+void clipboardAdapter::setSensitiveText(const QString &text, int clearDelaySeconds) {
+#ifdef Q_OS_MACOS
+    // Qt can't set the pasteboard options or return the change count
+    const long changeCount = MacOSHelper::setSensitivePasteboardText(text);
+    SensitiveClipboardGuard::instance().track(changeCount, clearDelaySeconds);
+#else
+    // QClipboard takes ownership of the MIME data; each mode needs its own
+    m_pClipboard->setMimeData(sensitiveMimeData(text), QClipboard::Clipboard);
+    if (m_pClipboard->supportsSelection())
+        m_pClipboard->setMimeData(sensitiveMimeData(text), QClipboard::Selection);
+    SensitiveClipboardGuard::instance().track(text, clearDelaySeconds);
+#endif
 }
 
 QString clipboardAdapter::text() const {
