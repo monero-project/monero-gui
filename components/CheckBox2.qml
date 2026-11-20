@@ -45,6 +45,10 @@ RowLayout {
     signal clicked()
     height: 25
 
+    Keys.onReturnPressed: toggle()
+    Keys.onEnterPressed: toggle()
+    Keys.onSpacePressed: toggle()
+
     function toggle(){
         checkBox.checked = !checkBox.checked
         checkBox.clicked()
@@ -56,7 +60,7 @@ RowLayout {
         Rectangle{
             height: label.height
             width: (label.width + indicatorRect.width + checkBox.textMargin)
-            color: "transparent"
+            color: checkBox.focus ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
             MoneroComponents.TextPlain {
                 id: label

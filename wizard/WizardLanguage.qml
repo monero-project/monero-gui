@@ -40,6 +40,7 @@ Rectangle {
     color: "transparent"
 
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardLanguage"
 
     ColumnLayout {
@@ -48,6 +49,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         spacing: 30
+        KeyNavigation.tab: languageButton
 
         Rectangle {
             // some margins for the titlebar
@@ -152,11 +154,19 @@ Rectangle {
             Layout.fillWidth: true
             columnSpacing: 20
 
-            MoneroComponents.LanguageButton { }
+            MoneroComponents.LanguageButton {
+                id: languageButton
+                KeyNavigation.backtab: btnContinue
+                KeyNavigation.tab: btnContinue
+                KeyNavigation.right: btnContinue
+            }
 
             MoneroComponents.StandardButton {
                 id: btnContinue
                 Layout.minimumWidth: 150
+                KeyNavigation.backtab: languageButton
+                KeyNavigation.tab: languageButton
+                KeyNavigation.left: languageButton
                 text: qsTr("Continue") + translationManager.emptyString
 
                 onClicked: {
@@ -165,6 +175,7 @@ Rectangle {
                         wizardStateView.state = "wizardHome"
                     } else {
                         wizardStateView.state = "wizardModeSelection"
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }
                 }
             }

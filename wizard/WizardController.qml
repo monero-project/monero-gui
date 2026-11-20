@@ -283,6 +283,36 @@ Rectangle {
                 releaseFocus();
             }
 
+            function ensureVisible(item) {
+                var ancestor = item;
+                while (ancestor && ancestor !== wizardFlickable.contentItem) {
+                    ancestor = ancestor.parent;
+                }
+                if (!ancestor || !item.visible) {
+                    return;
+                }
+
+                var margin = 20;
+                // The custom title bar overlaps the top of the flickable
+                var topInset = persistentSettings.customDecorations ? 50 : 0;
+                var top = item.mapToItem(wizardFlickable.contentItem, 0, 0).y;
+                var bottom = top + item.height;
+                var maxContentY = Math.max(0, wizardFlickable.contentHeight - wizardFlickable.height);
+                // Items taller than the viewport (e.g. a page's root) are aligned to the top
+                if (top < wizardFlickable.contentY + topInset || item.height > wizardFlickable.height - topInset) {
+                    wizardFlickable.contentY = Math.max(0, Math.min(maxContentY, top - topInset - margin));
+                } else if (bottom > wizardFlickable.contentY + wizardFlickable.height) {
+                    wizardFlickable.contentY = Math.min(maxContentY, bottom - wizardFlickable.height + margin);
+                }
+            }
+
+            Connections {
+                target: wizardFlickable.Window.window
+                function onActiveFocusItemChanged() {
+                    wizardFlickable.ensureVisible(wizardFlickable.Window.window.activeFocusItem);
+                }
+            }
+
             StackView {
                 id: stackView
                 property bool backTransition: false
@@ -543,6 +573,13 @@ Rectangle {
             persistentSettings.wallet_path = persistentSettings.wallet_path.replace(appWindow.accountsDir, "");
 
         appWindow.openWallet();
+    }
+
+    onVisibleChanged: {
+        var view = wizardStateView.currentView;
+        if (visible && view && view.pageRoot) {
+            view.pageRoot.forceActiveFocus();
+        }
     }
 
     Component.onCompleted: {

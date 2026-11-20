@@ -38,8 +38,8 @@ Rectangle {
 
     color: "transparent"
     property alias pageHeight: pageRoot.height
+    property alias pageRoot: pageRoot
     property string viewName: "wizardModeRemoteNodeWarning"
-    property bool understood: false
 
     ColumnLayout {
         id: pageRoot
@@ -47,6 +47,7 @@ Rectangle {
         width: parent.width - 100
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
+        KeyNavigation.tab: aboutSimpleModeHeader
 
         spacing: 10
 
@@ -58,8 +59,15 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
+                id: aboutSimpleModeHeader
                 title: qsTr("About the simple mode") + translationManager.emptyString
                 subtitle: ""
+                Accessible.role: Accessible.StaticText
+                Accessible.name: title
+                Keys.onUpPressed: wizardNav.btnNext.enabled ? wizardNav.btnNext.forceActiveFocus() : wizardNav.btnPrev.forceActiveFocus()
+                Keys.onBacktabPressed: wizardNav.btnNext.enabled ? wizardNav.btnNext.forceActiveFocus() : wizardNav.btnPrev.forceActiveFocus()
+                KeyNavigation.down: text1
+                KeyNavigation.tab: text1
             }
 
             ColumnLayout {
@@ -69,6 +77,7 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
+                    id: text1
                     text: qsTr("This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.") + translationManager.emptyString
                     themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
                     themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
@@ -79,9 +88,16 @@ Rectangle {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: text
+                    KeyNavigation.up: aboutSimpleModeHeader
+                    KeyNavigation.backtab: aboutSimpleModeHeader
+                    KeyNavigation.down: text2
+                    KeyNavigation.tab: text2
                 }
 
                 MoneroComponents.TextPlain {
+                    id: text2
                     text: qsTr("Remote nodes are useful if you are not able/don't want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
                     themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
@@ -92,12 +108,25 @@ Rectangle {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
+                    Accessible.role: Accessible.StaticText
+                    Accessible.name: text
+                    KeyNavigation.up: text1
+                    KeyNavigation.backtab: text1
+                    KeyNavigation.down: warningBox
+                    KeyNavigation.tab: warningBox
                 }
 
                 MoneroComponents.WarningBox {
+                    id: warningBox
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
+                    Accessible.role: Accessible.AlertMessage
+                    Accessible.name: text.replace(/<[^>]*>/g, "")
+                    KeyNavigation.up: text2
+                    KeyNavigation.backtab: text2
+                    KeyNavigation.down: understoodCheckbox
+                    KeyNavigation.tab: understoodCheckbox
                 }
 
                 MoneroComponents.CheckBox {
@@ -105,23 +134,32 @@ Rectangle {
                     Layout.topMargin: 20
                     fontSize: 16
                     text: qsTr("I understand the privacy implications of using a third-party server.") + translationManager.emptyString
-                    onClicked: {
-                        wizardModeRemoteNodeWarning.understood = !wizardModeRemoteNodeWarning.understood
-                    }
+                    Accessible.role: Accessible.CheckBox
+                    Accessible.name: text
+                    Accessible.checked: checked
+                    Accessible.onPressAction: toggle()
+                    Accessible.onToggleAction: toggle()
+                    KeyNavigation.up: warningBox
+                    KeyNavigation.backtab: warningBox
+                    KeyNavigation.down: wizardNav.btnPrev
+                    KeyNavigation.tab: wizardNav.btnPrev
                 }
 
                 WizardNav {
+                    id: wizardNav
                     Layout.topMargin: 4
-                    btnNext.enabled: wizardModeRemoteNodeWarning.understood
-                    progressSteps: 0
+                    btnNext.enabled: understoodCheckbox.checked
+                    progressEnabled: false
+                    btnPrevKeyNavigationBackTab: understoodCheckbox
+                    btnNextKeyNavigationTab: aboutSimpleModeHeader
 
                     onPrevClicked: {
                         wizardController.wizardState = 'wizardModeSelection';
+                        wizardStateView.wizardModeSelectionView.pageRoot.forceActiveFocus();
                     }
 
                     onNextClicked: {
-                        appWindow.changeWalletMode(0);
-                        wizardController.wizardState = 'wizardHome';
+                        wizardStateView.wizardModeSelectionView.applyWalletMode(0, 'wizardHome');
                     }
                 }
             }
@@ -141,7 +179,6 @@ Rectangle {
     }
 
     function onPageCompleted(previousView){
-        wizardModeRemoteNodeWarning.understood = false;
         understoodCheckbox.checked = false;
     }
 }
