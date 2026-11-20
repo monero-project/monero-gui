@@ -39,6 +39,14 @@ Rectangle {
     visible: false
     color: "transparent"
 
+    function resetProgress() {
+        fillLevel = 0
+        progressText.text = Qt.binding(function() {
+            return qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
+        })
+        progressTextValue.text = ""
+    }
+
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
         if(targetBlock > 0) {
             var remaining = (currentBlock < targetBlock) ? targetBlock - currentBlock : 0
