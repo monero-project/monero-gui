@@ -159,8 +159,7 @@ Rectangle {
                     }
 
                     onNextClicked: {
-                        appWindow.changeWalletMode(0);
-                        wizardController.wizardState = 'wizardHome';
+                        wizardStateView.wizardModeSelectionView.applyWalletMode(0, 'wizardHome');
                     }
                 }
             }

@@ -111,9 +111,10 @@ Rectangle {
 
                 onMenuClicked: {
                     if (simpleModeAvailable) {
-                        if (applyWalletMode(0, 'wizardModeRemoteNodeWarning')) {
-                            wizardStateView.wizardModeRemoteNodeWarningView.pageRoot.forceActiveFocus();
-                        }
+                        // Simple mode is applied once the warning is acknowledged
+                        wizardController.wizardStackView.backTransition = false;
+                        wizardController.wizardState = 'wizardModeRemoteNodeWarning';
+                        wizardStateView.wizardModeRemoteNodeWarningView.pageRoot.forceActiveFocus();
                     }
                 }
                 Accessible.role: Accessible.MenuItem
