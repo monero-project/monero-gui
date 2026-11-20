@@ -40,6 +40,28 @@ Rectangle{
     Layout.fillWidth: true
     enabled: !appWindow.currentWallet || !appWindow.currentWallet.initializing
     property alias nodeHeight: root.height
+    readonly property string customI2PSam: appWindow.i2pSamFlagValue(persistentSettings.daemonFlags)
+    readonly property bool i2pAcceptsInbound: customI2PSam
+        ? appWindow.i2pSamValueAcceptsInbound(customI2PSam)
+        : appWindow.persistentSettings.i2pAcceptInbound
+    readonly property bool i2pRouterIsRemote: {
+        var host = customI2PSam ? appWindow.i2pSamValueHost(customI2PSam) : i2pRouterAddress.text;
+        return walletManager.i2pSamEndpoint(host, "1") !== "" && !walletManager.i2pSamHostIsLoopback(host);
+    }
+
+    function i2pFieldsValid() {
+        return walletManager.i2pSamEndpoint(i2pRouterAddress.text, i2pSamPort.text) !== "";
+    }
+
+    function commitI2PSettings() {
+        if (appWindow.persistentSettings.anonymityNetworkType !== 1)
+            return true;
+        if (!i2pFieldsValid())
+            return false;
+        appWindow.persistentSettings.i2pRouterAddress = i2pRouterAddress.text.trim();
+        appWindow.persistentSettings.i2pSamPort = i2pSamPort.text.trim();
+        return true;
+    }
 
     /* main layout */
     ColumnLayout {
@@ -275,7 +297,10 @@ Rectangle{
                     if (appWindow.daemonRunning) {
                         appWindow.stopDaemon();
                     } else {
+                        // Commit fields that may still be focused, since editingFinished hasn't fired yet
                         persistentSettings.daemonFlags = daemonFlags.text;
+                        if (!commitI2PSettings())
+                            return;
                         appWindow.startDaemon(persistentSettings.daemonFlags);
                     }
                 }
@@ -351,6 +376,197 @@ Rectangle{
                             console.log("setting bootstrap node to " + persistentSettings.bootstrapNodeAddress)
                         }
                     }
+                }
+            }
+
+            Timer {
+                id: i2pStatusTimer
+                property bool probeInFlight: false
+                interval: 5000
+                // Only poll while the I2P settings are on screen for a local node
+                running: i2pSettings.visible && !customI2PSam
+                repeat: true
+                triggeredOnStart: true
+                onRunningChanged: if (running) i2pStatus.state = "checking"
+                onTriggered: {
+                    if (probeInFlight)
+                        return;
+                    var host = appWindow.persistentSettings.i2pRouterAddress;
+                    var port = appWindow.persistentSettings.i2pSamPort;
+                    if (!walletManager.i2pSamEndpoint(host, port)) {
+                        i2pStatus.state = "invalid";
+                        return;
+                    }
+                    probeInFlight = true;
+                    walletManager.checkI2PSamAsync(host, port, function(reachable) {
+                        probeInFlight = false;
+                        i2pStatus.state = reachable ? "online" : "offline";
+                    });
+                }
+            }
+
+            MoneroComponents.Label {
+                id: soloTitleLabel
+                fontSize: 18
+                text: qsTr("Anonymity network") + translationManager.emptyString
+            }
+
+            ColumnLayout {
+                spacing: 20
+                Layout.fillWidth: true
+                id: networkColumn
+                z: parent.z + 1
+
+                MoneroComponents.StandardDropdown {
+                    id: anonymityNetworkDropdown
+                    Layout.maximumWidth: 200
+                    dataModel: anonymityNetworkModel
+                    currentIndex: appWindow.persistentSettings.anonymityNetworkType
+                    enabled: !customI2PSam
+                    onChanged: {
+                        appWindow.persistentSettings.anonymityNetworkType = currentIndex;
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    visible: customI2PSam !== ""
+                    text: qsTr("I2P is configured by the --i2p-sam startup flag (%1), which overrides the settings on this page.").arg(customI2PSam) + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    Layout.fillWidth: true
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 14
+                    color: "#fa6800"
+                }
+
+                ColumnLayout {
+                    id: i2pSettings
+                    spacing: 20
+                    Layout.fillWidth: true
+                    visible: appWindow.persistentSettings.anonymityNetworkType === 1 || customI2PSam !== ""
+
+                    MoneroComponents.TextPlain {
+                        id: soloMainLabel
+                        text: qsTr("Configure your I2P connection settings. Most users should stick to the default settings.") + translationManager.emptyString
+                        wrapMode: Text.Wrap
+                        Layout.fillWidth: true
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
+                    }
+
+                    RowLayout {
+                        spacing: 32
+                        Layout.fillWidth: true
+                        visible: !customI2PSam
+
+                        MoneroComponents.LineEdit {
+                            id: i2pRouterAddress
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 300
+                            labelFontSize: 14
+                            labelText: qsTr("Router address") + translationManager.emptyString
+                            text: appWindow.persistentSettings.i2pRouterAddress || "127.0.0.1"
+                            placeholderText: "127.0.0.1"
+                            placeholderFontSize: 14
+                            fontSize: 14
+                            error: !i2pFieldsValid()
+                            onEditingFinished: commitI2PSettings()
+                        }
+
+                        MoneroComponents.LineEdit {
+                            id: i2pSamPort
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 100
+                            labelFontSize: 14
+                            labelText: qsTr("SAM port") + translationManager.emptyString
+                            text: appWindow.persistentSettings.i2pSamPort || "7656"
+                            placeholderText: "7656"
+                            placeholderFontSize: 14
+                            fontSize: 14
+                            error: !i2pFieldsValid()
+                            onEditingFinished: commitI2PSettings()
+                        }
+                    }
+
+                    MoneroComponents.CheckBox {
+                        id: i2pAcceptInboundCheckBox
+                        // Keep the checked binding
+                        toggleOnClick: false
+                        checked: i2pAcceptsInbound
+                        enabled: !customI2PSam
+                        onClicked: appWindow.persistentSettings.i2pAcceptInbound = !appWindow.persistentSettings.i2pAcceptInbound
+                        text: qsTr("Accept inbound I2P connections") + translationManager.emptyString
+                    }
+
+                    MoneroComponents.TextPlain {
+                        text: (i2pAcceptsInbound
+                            ? qsTr("Your node will create a persistent I2P address, store its key in the blockchain data directory, and announce it to other nodes. ")
+                            : "")
+                            + qsTr("Only transactions are relayed over I2P; the blockchain is still downloaded over the public network.") + translationManager.emptyString
+                        wrapMode: Text.Wrap
+                        Layout.fillWidth: true
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        color: MoneroComponents.Style.dimmedFontColor
+                    }
+
+                    MoneroComponents.TextPlain {
+                        visible: i2pRouterIsRemote
+                        text: qsTr("The provided router address is not on this computer, so your connection to it will be unencrypted. Only use a router you trust, over a secure channel such as an SSH tunnel or VPN.")
+                            + (i2pAcceptsInbound
+                                ? qsTr(" With inbound connections enabled, the node also sends its private I2P key to the router.")
+                                : "")
+                            + translationManager.emptyString
+                        wrapMode: Text.Wrap
+                        Layout.fillWidth: true
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        color: MoneroComponents.Style.errorColor
+                    }
+
+                    Text {
+                        id: i2pStatus
+                        visible: !customI2PSam
+                        state: "checking"
+                        property string color: "#fa6800"
+                        property string label: qsTr("Checking router status...")
+                        textFormat: Text.RichText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 14
+                        text: "<span style='color: " + color + ";'>" + label + "</span>" + translationManager.emptyString
+                        states: [
+                            State {
+                                name: "online"
+                                PropertyChanges { target: i2pStatus; color: MoneroComponents.Style.blackTheme ? "lime" : "green"; label: qsTr("Router is online") }
+                            }, State {
+                                name: "offline"
+                                PropertyChanges { target: i2pStatus; color: MoneroComponents.Style.errorColor; label: qsTr("Router is offline") }
+                            }, State {
+                                name: "invalid"
+                                PropertyChanges { target: i2pStatus; color: MoneroComponents.Style.errorColor; label: qsTr("Invalid router address or SAM port") }
+                            }
+                        ]
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    visible: appWindow.i2pRestartPending()
+                    text: qsTr("Restart the daemon to apply the anonymity network settings. Until then, the running daemon keeps its previous settings.") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    Layout.fillWidth: true
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 14
+                    color: "#fa6800"
+                }
+            }
+
+            ListModel {
+                id: anonymityNetworkModel
+                ListElement {
+                    column1: "None"
+                }
+                ListElement {
+                    column1: "I2P"
                 }
             }
         }

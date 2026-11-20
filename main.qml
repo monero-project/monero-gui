@@ -898,13 +898,66 @@ ApplicationWindow {
             currentWallet.refreshHeightAsync();
     }
 
+    function i2pSamArgument() {
+        if (persistentSettings.anonymityNetworkType !== 1)
+            return "";
+        var endpoint = walletManager.i2pSamEndpoint(persistentSettings.i2pRouterAddress, persistentSettings.i2pSamPort);
+        if (!endpoint)
+            return null;
+        // Empty max_out keeps the daemon default; 0 max_in disables the inbound session
+        return persistentSettings.i2pAcceptInbound ? endpoint : endpoint + ",,0";
+    }
+
+    function i2pSamFlagValue(flags) {
+        var match = flags.match(/(?:^|\s)--i2p-sam(?:=|\s+)(\S+)/);
+        return match ? match[1] : "";
+    }
+
+    function i2pSamValueHost(value) {
+        var endpoint = value.split(",")[0];
+        var colon = endpoint.lastIndexOf(":");
+        return colon > 0 ? endpoint.substring(0, colon) : endpoint;
+    }
+
+    // Only an explicit max_in of 0 disables inbound
+    function i2pSamValueAcceptsInbound(value) {
+        var parts = value.split(",");
+        return !(parts.length > 2 && parts[2].trim() !== "" && Number(parts[2]) === 0);
+    }
+
+    function applyI2PFlags(flags) {
+        if (/(?:^|\s)--i2p-sam(?:=|\s|$)/.test(flags))
+            return flags;
+        var argument = i2pSamArgument();
+        if (argument === null)
+            return null;
+        return argument ? (flags + " --i2p-sam " + argument).trim() : flags;
+    }
+
+    function i2pRestartPending() {
+        if (!daemonRunning)
+            return false;
+        var expected = applyI2PFlags(persistentSettings.daemonFlags);
+        return expected === null || i2pSamFlagValue(expected) !== persistentSettings.daemonI2PSamArgument;
+    }
+
     function startDaemon(flags){
+        var allFlags = applyI2PFlags(flags);
+        if (allFlags === null) {
+            informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
+            informationPopup.text = qsTr("Invalid I2P router address or SAM port. Enter a numeric IP address and a port between 1 and 65535.") + translationManager.emptyString;
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
+            return;
+        }
+
         daemonStartStopInProgress = 1;
 
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain);
+        if (daemonManager.start(allFlags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, persistentSettings.pruneBlockchain))
+            persistentSettings.daemonI2PSamArgument = i2pSamFlagValue(allFlags);
     }
 
     function stopDaemon(callback, splash){
@@ -1661,6 +1714,12 @@ ApplicationWindow {
         property bool autosave: true
         property int autosaveMinutes: 10
         property bool pruneBlockchain: false
+
+        property int anonymityNetworkType: 0
+        property string i2pRouterAddress: "127.0.0.1"
+        property string i2pSamPort: "7656"
+        property bool i2pAcceptInbound: false
+        property string daemonI2PSamArgument: ""
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false

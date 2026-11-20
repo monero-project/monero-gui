@@ -42,6 +42,8 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
+#include <boost/asio/ip/address.hpp>
+#include "net/net_helper.h"
 
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
@@ -376,6 +378,76 @@ bool WalletManager::startMining(const QString &address, quint32 threads, bool ba
 bool WalletManager::stopMining()
 {
     return m_pimpl->stopMining();
+}
+
+namespace
+{
+bool parseI2PSamHost(const QString &host, boost::asio::ip::address &ip)
+{
+    std::string address = host.trimmed().toStdString();
+    if (address.size() > 1 && address.front() == '[' && address.back() == ']')
+        address = address.substr(1, address.size() - 2);
+
+    boost::system::error_code ec;
+    ip = boost::asio::ip::make_address(address, ec);
+    return !ec && !(ip.is_v6() && ip.to_v6().scope_id() != 0);
+}
+
+bool parseI2PSamEndpoint(const QString &host, const QString &port, boost::asio::ip::address &ip, quint16 &portNumber)
+{
+    if (!parseI2PSamHost(host, ip))
+        return false;
+
+    const QString trimmedPort = port.trimmed();
+    bool ok = false;
+    const uint value = trimmedPort.toUInt(&ok);
+    if (!ok || value == 0 || value > 65535 || trimmedPort.startsWith('+'))
+        return false;
+    portNumber = static_cast<quint16>(value);
+    return true;
+}
+}
+
+QString WalletManager::i2pSamEndpoint(const QString &host, const QString &port) const
+{
+    boost::asio::ip::address ip;
+    quint16 portNumber = 0;
+    if (!parseI2PSamEndpoint(host, port, ip, portNumber))
+        return {};
+
+    const QString ipString = QString::fromStdString(ip.to_string());
+    return (ip.is_v6() ? "[" + ipString + "]" : ipString) + ":" + QString::number(portNumber);
+}
+
+bool WalletManager::i2pSamHostIsLoopback(const QString &host) const
+{
+    boost::asio::ip::address ip;
+    if (!parseI2PSamHost(host, ip))
+        return false;
+    if (ip.is_v6() && ip.to_v6().is_v4_mapped())
+        return boost::asio::ip::make_address_v4(boost::asio::ip::v4_mapped, ip.to_v6()).is_loopback();
+    return ip.is_loopback();
+}
+
+void WalletManager::checkI2PSamAsync(const QString &host, const QString &port, const QJSValue &callback)
+{
+    boost::asio::ip::address ip;
+    quint16 portNumber = 0;
+    if (!parseI2PSamEndpoint(host, port, ip, portNumber))
+    {
+        m_scheduler.run([] { return QJSValueList{false}; }, callback);
+        return;
+    }
+
+    m_scheduler.run([ip, portNumber] {
+        epee::net_utils::blocked_mode_client client;
+        client.set_ssl(epee::net_utils::ssl_support_t::e_ssl_support_disabled);
+        const bool reachable = client.connect(
+            ip.to_string(),
+            std::to_string(portNumber),
+            std::chrono::milliseconds{2000});
+        return QJSValueList{reachable};
+    }, callback);
 }
 
 bool WalletManager::localDaemonSynced() const

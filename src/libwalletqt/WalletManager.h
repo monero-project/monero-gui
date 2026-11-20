@@ -162,6 +162,10 @@ public:
     Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
     Q_INVOKABLE bool stopMining();
 
+    Q_INVOKABLE QString i2pSamEndpoint(const QString &host, const QString &port) const;
+    Q_INVOKABLE bool i2pSamHostIsLoopback(const QString &host) const;
+    Q_INVOKABLE void checkI2PSamAsync(const QString &host, const QString &port, const QJSValue &callback);
+
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;
