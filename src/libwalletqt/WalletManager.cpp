@@ -549,11 +549,10 @@ QString WalletManager::checkUpdates(const QString &software, const QString &subd
 bool WalletManager::clearWalletCache(const QString &wallet_path) const
 {
 
+    // The caller passes the resolved wallet cache path. Do not derive it from
+    // the keys path: a wallet whose name ends in ".keys" must not be confused
+    // with another wallet's keys file.
     QString fileName = wallet_path;
-    // Make sure wallet file is not .keys; only strip a trailing extension so
-    // directories containing ".keys" in their name are left untouched.
-    if (fileName.endsWith(".keys"))
-        fileName.chop(5);
     QFile walletCache(fileName);
     QString suffix = ".old_cache";
     QString newFileName = fileName + suffix;
