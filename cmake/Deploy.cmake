@@ -128,9 +128,6 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             libzmq.dll
             #platform files
             libgcc_s_seh-1.dll
-            #openssl files
-            libssl-3-x64.dll
-            libcrypto-3-x64.dll
             #icu
             libicudt78.dll
             libicuin78.dll
@@ -145,6 +142,17 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         endif()
 
         list(TRANSFORM WIN_DEPLOY_DLLS PREPEND "$ENV{MSYSTEM_PREFIX}/bin/")
+
+        # The OpenSSL DLL names embed the library ABI major, so discover the
+        # installed ones instead of pinning a version that MSYS2 may bump.
+        foreach(_openssl_lib ssl crypto)
+            file(GLOB _openssl_dlls "${ENV{MSYSTEM_PREFIX}/bin/lib${_openssl_lib}-*-x64.dll")
+            if (NOT _openssl_dlls)
+                message(FATAL_ERROR "OpenSSL ${_openssl_lib} runtime DLL not found in $ENV{MSYSTEM_PREFIX}/bin")
+            endif()
+            list(APPEND WIN_DEPLOY_DLLS ${_openssl_dlls})
+        endforeach()
+
         add_custom_command(TARGET deploy
                            POST_BUILD
                            COMMAND ${CMAKE_COMMAND} -E copy ${WIN_DEPLOY_DLLS} "$<TARGET_FILE_DIR:monero-wallet-gui>"
