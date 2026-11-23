@@ -637,30 +637,17 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
-            // try to resolve common wallet cache errors automatically
-            switch (wallet.errorString) {
-                case "basic_string::_M_replace_aux":
-                case "std::bad_alloc":
-                    walletManager.clearWalletCache(wallet.path);
-                    walletPassword = passwordDialog.password;
-                    appWindow.initialize();
-                    console.error("Repairing wallet cache with error: ", wallet.errorString);
-                    appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
-                    return;
-                default:
-                    // opening with password but password doesn't match
-                    console.error("Error opening wallet with password: ", wallet.errorString);
-                    var errorMessage = qsTr("Couldn't open wallet: ") + wallet.errorString;
-                    if (wallet.isLedger()) {
-                        errorMessage += "\n" + qsTr("Make sure your Ledger is connected and unlocked, and the Monero app is open.");
-                    } else if (wallet.isTrezor()) {
-                        errorMessage += "\n" + qsTr("Make sure your Trezor is connected and unlocked.");
-                    }
-                    passwordDialog.showError(errorMessage);
-                    console.log("closing wallet async : " + wallet.address)
-                    closeWallet();
-                    return;
+            console.error("Error opening wallet with password: ", wallet.errorString);
+            var errorMessage = qsTr("Couldn't open wallet: ") + wallet.errorString;
+            if (wallet.isLedger()) {
+                errorMessage += "\n" + qsTr("Make sure your Ledger is connected and unlocked, and the Monero app is open.");
+            } else if (wallet.isTrezor()) {
+                errorMessage += "\n" + qsTr("Make sure your Trezor is connected and unlocked.");
             }
+            passwordDialog.showError(errorMessage);
+            console.log("closing wallet async : " + wallet.address)
+            closeWallet();
+            return;
         }
 
         // Don't allow opening background wallets in the GUI
