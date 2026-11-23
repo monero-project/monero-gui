@@ -146,7 +146,7 @@ if(APPLE OR (WIN32 AND NOT STATIC))
         # The OpenSSL DLL names embed the library ABI major, so discover the
         # installed ones instead of pinning a version that MSYS2 may bump.
         foreach(_openssl_lib ssl crypto)
-            file(GLOB _openssl_dlls "${ENV{MSYSTEM_PREFIX}/bin/lib${_openssl_lib}-*-x64.dll")
+            file(GLOB _openssl_dlls "$ENV{MSYSTEM_PREFIX}/bin/lib${_openssl_lib}-*-x64.dll")
             if (NOT _openssl_dlls)
                 message(FATAL_ERROR "OpenSSL ${_openssl_lib} runtime DLL not found in $ENV{MSYSTEM_PREFIX}/bin")
             endif()
