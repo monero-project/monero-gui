@@ -73,6 +73,10 @@
 #include "qt/KeysFiles.h"
 #include "qt/PortableSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+#include <shellapi.h>
+#endif
 #ifdef QML_TESTS
 #include "QmlTestHarness.h"
 #endif
@@ -128,6 +132,23 @@ bool isARM = false;
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(translations);
+
+#ifdef Q_OS_WIN
+    // Older installers pass the URI without --.
+    const int uriIndex = argc > 1 && qstrcmp(argv[1], "--") == 0 ? 2 : 1;
+    const QLatin1StringView uri(argc > uriIndex ? argv[uriIndex] : "");
+    if (uri.startsWith(u"monero:", Qt::CaseInsensitive) || uri.startsWith(u"moneroseed:", Qt::CaseInsensitive)) {
+        // Windows substitutes the link into "%1". The CRT and Qt must both see it as one argument.
+        int wideArgc;
+        wchar_t **wideArgv = CommandLineToArgvW(GetCommandLineW(), &wideArgc);
+        const bool singleUri = wideArgv && wideArgc == uriIndex + 1 && argc == wideArgc;
+        LocalFree(wideArgv);
+        if (!singleUri) {
+            qCritical() << "Expected a single argument for a Windows protocol link";
+            return 1;
+        }
+    }
+#endif
 
 #ifdef QML_TESTS
     int qmlTestResult;
