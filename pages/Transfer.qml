@@ -881,131 +881,164 @@ Rectangle {
         id: advancedLayout
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
+        anchors.right: parent.right
         anchors.margins: 20
         anchors.topMargin: 32
         spacing: 10
         enabled: !viewOnly || pageRoot.enabled
 
-        RowLayout {
+        CheckBox2 {
+            id: showAdvancedCheckbox
             visible: appWindow.walletMode >= 2
-            CheckBox2 {
-                id: showAdvancedCheckbox
-                checked: persistentSettings.transferShowAdvanced
-                onClicked: {
-                    persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
+            checked: persistentSettings.transferShowAdvanced
+            onClicked: {
+                persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
+            }
+            text: qsTr("Advanced options") + translationManager.emptyString
+        }
+
+        ColumnLayout {
+            id: optionRows
+            Layout.fillWidth: true
+            Layout.leftMargin: 10
+            spacing: advancedLayout.spacing
+            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
+            readonly property real titleColumnWidth: Math.max(0, ...Array.from(children, row => row.implicitTitleWidth))
+            readonly property bool stacked: width < implicitWidth
+
+            component TransferOption: AdvancedOptionsItem {
+                Layout.fillWidth: true
+                titleColumnWidth: optionRows.titleColumnWidth
+                stacked: optionRows.stacked
+            }
+
+            component OptionButton: StandardButton {
+                small: true
+                primary: false
+                visible: text.length > 0
+            }
+
+            TransferOption {
+                title: qsTr("Outputs") + translationManager.emptyString
+                OptionButton {
+                    text: qsTr("Export") + translationManager.emptyString
+                    enabled: appWindow.viewOnly
+                    onClicked: {
+                        console.log("Transfer: export outputs clicked")
+                        exportOutputsDialog.open();
+                    }
                 }
-                text: qsTr("Advanced options") + translationManager.emptyString
-            }
-        }
-
-        AdvancedOptionsItem {
-            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            title: qsTr("Outputs") + translationManager.emptyString
-            button1.text: qsTr("Export") + translationManager.emptyString
-            button1.enabled: appWindow.viewOnly
-            button1.onClicked: {
-                console.log("Transfer: export outputs clicked")
-                exportOutputsDialog.open();
-            }
-            button2.text: qsTr("Import") + translationManager.emptyString
-            button2.enabled: !appWindow.viewOnly
-            button2.onClicked: {
-                console.log("Transfer: import outputs clicked")
-                importOutputsDialog.open();
-            }
-            tooltip: {
-                var header = qsTr("Required for cold wallets to sign their corresponding key images") + translationManager.emptyString;
-                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
-                       ";} p.orange{color:#ff9323;}</style>" +
-                       "<div class='header'>" + header + "</div>" +
-                       "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
-                       "<p>" + qsTr("2. Using cold wallet, import the outputs file") + "</p>" +
-                       translationManager.emptyString
-            }
-        }
-
-        AdvancedOptionsItem {
-            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            title: qsTr("Key images") + translationManager.emptyString
-            button1.text: qsTr("Export") + translationManager.emptyString
-            button1.enabled: !appWindow.viewOnly
-            button1.onClicked: {
-                console.log("Transfer: export key images clicked")
-                exportKeyImagesDialog.open();
-            }
-            button2.text: qsTr("Import") + translationManager.emptyString
-            button2.enabled: appWindow.viewOnly && appWindow.isTrustedDaemon()
-            button2.onClicked: {
-                console.log("Transfer: import key images clicked")
-                importKeyImagesDialog.open(); 
-            }
-            tooltip: {
-                var errorMessage = "";
-                if (appWindow.viewOnly && !appWindow.isTrustedDaemon()){
-                    errorMessage = "<p class='orange'>" + qsTr("* To import, you must connect to a local node or a trusted remote node") + "</p>";
+                OptionButton {
+                    text: qsTr("Import") + translationManager.emptyString
+                    enabled: !appWindow.viewOnly
+                    onClicked: {
+                        console.log("Transfer: import outputs clicked")
+                        importOutputsDialog.open();
+                    }
                 }
-                var header = qsTr("Required for view-only wallets to display the real balance") + translationManager.emptyString;
-                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
-                       ";} p.orange{color:#ff9323;}</style>" +
-                       "<div class='header'>" + header + "</div>" +
-                       "<p>" + qsTr("1. Using cold wallet, export the key images into a file") + "</p>" +
-                       "<p>" + qsTr("2. Using view-only wallet, import the key images file") + "</p>" +
-                       errorMessage + translationManager.emptyString
-            }
-        }
-
-        AdvancedOptionsItem {
-            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            title: qsTr("Offline transaction signing") + translationManager.emptyString
-            button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: root.canCreateOfflineTx
-            button1.onClicked: {
-                console.log("Transfer: saveTx Clicked")
-                var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
-                console.log("priority: " + priority)
-                setPaymentId(paymentIdLine.text.trim());
-                root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
-            }
-            button2.text: qsTr("Sign (offline)") + translationManager.emptyString
-            button2.enabled: currentWallet !== undefined && !appWindow.viewOnly && !currentWallet.isHwBacked()
-            button2.onClicked: {
-                console.log("Transfer: sign tx clicked")
-                signTxDialog.open();
-            }
-            button3.text: qsTr("Submit") + translationManager.emptyString
-            button3.enabled: appWindow.viewOnly
-            button3.onClicked: {
-                console.log("Transfer: submit tx clicked")
-                submitTxDialog.open();
-            }
-            tooltip: {
-                var errorMessage = "";
-                if (appWindow.viewOnly && !root.hasValidTransferInfo) {
-                    errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
+                tooltip: {
+                    var header = qsTr("Required for cold wallets to sign their corresponding key images") + translationManager.emptyString;
+                    return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
+                           ";} p.orange{color:#ff9323;}</style>" +
+                           "<div class='header'>" + header + "</div>" +
+                           "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
+                           "<p>" + qsTr("2. Using cold wallet, import the outputs file") + "</p>" +
+                           translationManager.emptyString
                 }
-                var header = qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString;
-                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
-                       ";} p.orange{color:#ff9323;}</style>" +
-                       "<div class='header'>" + header + "</div>" +
-                       "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
-                       "<p>" + qsTr("2. Using cold wallet, import the outputs file and export the key images") + "</p>" +
-                       "<p>" + qsTr("3. Using view-only wallet, import the key images file and create a transaction file") + "</p>" +
-                       errorMessage +
-                       "<p>" + qsTr("4. Using cold wallet, sign your transaction file") + "</p>" +
-                       "<p>" + qsTr("5. Using view-only wallet, submit your signed transaction") + "</p>" + translationManager.emptyString
             }
-        }
 
-        AdvancedOptionsItem {
-            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            title: qsTr("Unmixable outputs") + translationManager.emptyString
-            button1.text: qsTr("Sweep") + translationManager.emptyString
-            button1.enabled : pageRoot.enabled
-            button1.onClicked: {
-                console.log("Transfer: sweepUnmixableClicked")
-                root.sweepUnmixableClicked()
+            TransferOption {
+                title: qsTr("Key images") + translationManager.emptyString
+                OptionButton {
+                    text: qsTr("Export") + translationManager.emptyString
+                    enabled: !appWindow.viewOnly
+                    onClicked: {
+                        console.log("Transfer: export key images clicked")
+                        exportKeyImagesDialog.open();
+                    }
+                }
+                OptionButton {
+                    text: qsTr("Import") + translationManager.emptyString
+                    enabled: appWindow.viewOnly && appWindow.isTrustedDaemon()
+                    onClicked: {
+                        console.log("Transfer: import key images clicked")
+                        importKeyImagesDialog.open();
+                    }
+                }
+                tooltip: {
+                    var errorMessage = "";
+                    if (appWindow.viewOnly && !appWindow.isTrustedDaemon()){
+                        errorMessage = "<p class='orange'>" + qsTr("* To import, you must connect to a local node or a trusted remote node") + "</p>";
+                    }
+                    var header = qsTr("Required for view-only wallets to display the real balance") + translationManager.emptyString;
+                    return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
+                           ";} p.orange{color:#ff9323;}</style>" +
+                           "<div class='header'>" + header + "</div>" +
+                           "<p>" + qsTr("1. Using cold wallet, export the key images into a file") + "</p>" +
+                           "<p>" + qsTr("2. Using view-only wallet, import the key images file") + "</p>" +
+                           errorMessage + translationManager.emptyString
+                }
             }
-            tooltip: qsTr("Create a transaction that spends old unmovable outputs") + translationManager.emptyString
+
+            TransferOption {
+                title: qsTr("Offline transaction signing") + translationManager.emptyString
+                OptionButton {
+                    text: qsTr("Create") + translationManager.emptyString
+                    enabled: root.canCreateOfflineTx
+                    onClicked: {
+                        console.log("Transfer: saveTx Clicked")
+                        var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
+                        console.log("priority: " + priority)
+                        setPaymentId(paymentIdLine.text.trim());
+                        root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
+                    }
+                }
+                OptionButton {
+                    text: qsTr("Sign (offline)") + translationManager.emptyString
+                    enabled: currentWallet !== undefined && !appWindow.viewOnly && !currentWallet.isHwBacked()
+                    onClicked: {
+                        console.log("Transfer: sign tx clicked")
+                        signTxDialog.open();
+                    }
+                }
+                OptionButton {
+                    text: qsTr("Submit") + translationManager.emptyString
+                    enabled: appWindow.viewOnly
+                    onClicked: {
+                        console.log("Transfer: submit tx clicked")
+                        submitTxDialog.open();
+                    }
+                }
+                tooltip: {
+                    var errorMessage = "";
+                    if (appWindow.viewOnly && !root.hasValidTransferInfo) {
+                        errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
+                    }
+                    var header = qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString;
+                    return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
+                           ";} p.orange{color:#ff9323;}</style>" +
+                           "<div class='header'>" + header + "</div>" +
+                           "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
+                           "<p>" + qsTr("2. Using cold wallet, import the outputs file and export the key images") + "</p>" +
+                           "<p>" + qsTr("3. Using view-only wallet, import the key images file and create a transaction file") + "</p>" +
+                           errorMessage +
+                           "<p>" + qsTr("4. Using cold wallet, sign your transaction file") + "</p>" +
+                           "<p>" + qsTr("5. Using view-only wallet, submit your signed transaction") + "</p>" + translationManager.emptyString
+                }
+            }
+
+            TransferOption {
+                title: qsTr("Unmixable outputs") + translationManager.emptyString
+                OptionButton {
+                    text: qsTr("Sweep") + translationManager.emptyString
+                    enabled: pageRoot.enabled
+                    onClicked: {
+                        console.log("Transfer: sweepUnmixableClicked")
+                        root.sweepUnmixableClicked()
+                    }
+                }
+                tooltip: qsTr("Create a transaction that spends old unmovable outputs") + translationManager.emptyString
+            }
         }
     }
 
