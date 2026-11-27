@@ -169,6 +169,10 @@ Drawer {
                 palette.dark: "#B8B8BD"
             }
         }
+
+        MoneroComponents.FlickableClickGuard {
+            flickable: languagesListView
+        }
     }
 
     LanguageModels.LanguageModel {

@@ -414,13 +414,8 @@ Rectangle {
         }
     }
 
-    // Stop scrolling without consuming the first click on a row or control.
-    MouseArea {
-        anchors.fill: subaddressAccountListView
-        onPressed: (mouse) => {
-            subaddressAccountListView.cancelFlick();
-            mouse.accepted = false;
-        }
+    MoneroComponents.FlickableClickGuard {
+        flickable: subaddressAccountListView
     }
 
     function onPageCompleted() {

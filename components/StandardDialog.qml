@@ -123,7 +123,7 @@ Rectangle {
             Layout.preferredHeight: 240
 
             Flickable {
-                id: flickable
+                id: dialogFlickable
                 anchors.fill: parent
                 ScrollBar.vertical: ScrollBar {
                     onActiveChanged: if (!active && !isMac) active = true
@@ -160,6 +160,10 @@ Rectangle {
                         }
                     }
                 }
+            }
+
+            MoneroComponents.FlickableClickGuard {
+                flickable: dialogFlickable
             }
         }
 

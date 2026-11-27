@@ -182,6 +182,7 @@ ColumnLayout {
             }
 
             Flickable {
+                id: dropdownFlickable
                 anchors.fill: parent
                 contentHeight: columnid.height
                 interactive: contentHeight > height
@@ -252,6 +253,10 @@ ColumnLayout {
                         }
                     }
                 }
+            }
+
+            MoneroComponents.FlickableClickGuard {
+                flickable: dropdownFlickable
             }
         }
     }
