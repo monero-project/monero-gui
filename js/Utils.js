@@ -36,8 +36,8 @@ function finishSettingsLoad(settings) {
 
 function showSeedPage() {
     // Shows `Settings->Seed & keys`. Prompts a password dialog.
-    passwordDialog.onAcceptedCallback = function() {
-        if(walletPassword === passwordDialog.password){
+    passwordDialog.onAcceptedCallback = function(password) {
+        if(walletPassword === password){
             if(currentWallet.seedLanguage == "") {
                 console.log("No seed language set. Using English as default");
                 currentWallet.setSeedLanguage("English");

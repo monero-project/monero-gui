@@ -157,8 +157,8 @@ ApplicationWindow {
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
-        passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password)
+        passwordDialog.onAcceptedCallback = function(password) {
+            if(walletPassword === password)
                 passwordDialog.close();
             else 
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
@@ -240,8 +240,8 @@ ApplicationWindow {
     }
 
     function openWallet(prevState) {
-        passwordDialog.onAcceptedCallback = function() {
-            walletPassword = passwordDialog.password;
+        passwordDialog.onAcceptedCallback = function(password) {
+            walletPassword = password;
             initialize();
         }
         passwordDialog.onRejectedCallback = function() {
@@ -642,7 +642,6 @@ ApplicationWindow {
                 case "basic_string::_M_replace_aux":
                 case "std::bad_alloc":
                     walletManager.clearWalletCache(wallet.path);
-                    walletPassword = passwordDialog.password;
                     appWindow.initialize();
                     console.error("Repairing wallet cache with error: ", wallet.errorString);
                     appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
@@ -752,8 +751,8 @@ ApplicationWindow {
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
-        passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password) {
+        passwordDialog.onAcceptedCallback = function(password) {
+            if(walletPassword === password) {
                 if (currentWallet && started) {
                     appWindow.showProcessingSplash(qsTr("Unlocking..."));
                     currentWallet.stopBackgroundSync(walletPassword);
@@ -1862,8 +1861,8 @@ ApplicationWindow {
                 }
             }
             close();
-            passwordDialog.onAcceptedCallback = function() {
-                if(walletPassword === passwordDialog.password){
+            passwordDialog.onAcceptedCallback = function(password) {
+                if(walletPassword === password){
                     handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
@@ -1966,17 +1965,17 @@ ApplicationWindow {
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
-        onAccepted: {
+        onAccepted: function(password) {
             if (onAcceptedCallback)
-                onAcceptedCallback();
+                onAcceptedCallback(password);
         }
         onRejected: {
             if (onRejectedCallback)
                 onRejectedCallback();
         }
-        onAcceptedNewPassword: {
-            if (currentWallet.setPassword(passwordDialog.password)) {
-                appWindow.walletPassword = passwordDialog.password;
+        onAcceptedNewPassword: function(password) {
+            if (currentWallet.setPassword(password)) {
+                appWindow.walletPassword = password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
             } else {
@@ -2537,8 +2536,8 @@ ApplicationWindow {
             return;
         }
 
-        passwordDialog.onAcceptedCallback = function() {
-            if(walletPassword === passwordDialog.password){
+        passwordDialog.onAcceptedCallback = function(password) {
+            if(walletPassword === password){
                 passwordDialog.close();
                 if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
                 if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)

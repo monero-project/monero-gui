@@ -87,9 +87,9 @@ Item {
         anchors.fill: parent
         passphraseDialogMode: true
 
-        onAcceptedPassphrase: {
+        onAcceptedPassphrase: function(password) {
             if (onAcceptedCallback)
-                onAcceptedCallback(passphraseDialog.password);
+                onAcceptedCallback(password);
         }
 
         onRejectedPassphrase: {

@@ -164,7 +164,7 @@ Item {
         id: passwordDialog
         anchors.fill: parent
 
-        onAccepted: {
+        onAccepted: function(password) {
             appWindow.walletPassword = password
             appWindow.lastWalletOpenError = ""
             var wallet = walletManager.openWallet(
@@ -269,6 +269,7 @@ Item {
             tryCompare(appWindow, "walletOpenRequested", true)
             compare(appWindow.currentWallet.status, Wallet.Status_Ok,
                     appWindow.currentWallet.errorString)
+            compare(passwordDialog.password, "")
             var address = appWindow.currentWallet.address(0, 0)
             verify(address.length > 0)
             return address

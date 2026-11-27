@@ -123,8 +123,8 @@ Rectangle {
             toggleOnClick: false
             onClicked: {
                 if (persistentSettings.askPasswordBeforeSending) {
-                    passwordDialog.onAcceptedCallback = function() {
-                        if (appWindow.walletPassword === passwordDialog.password){
+                    passwordDialog.onAcceptedCallback = function(password) {
+                        if (appWindow.walletPassword === password){
                             persistentSettings.askPasswordBeforeSending = false;
                         } else {
                             passwordDialog.showError(qsTr("Wrong password"));

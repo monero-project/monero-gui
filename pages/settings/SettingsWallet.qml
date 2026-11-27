@@ -162,8 +162,8 @@ Rectangle {
             title: qsTr("Change wallet password") + translationManager.emptyString
 
             onClicked: {
-                passwordDialog.onAcceptedCallback = function() {
-                    if(appWindow.walletPassword === passwordDialog.password){
+                passwordDialog.onAcceptedCallback = function(password) {
+                    if(appWindow.walletPassword === password){
                         passwordDialog.openNewPasswordDialog()
                     } else {
                         informationPopup.title  = qsTr("Error") + translationManager.emptyString;
