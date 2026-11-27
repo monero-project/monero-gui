@@ -77,7 +77,8 @@ ApplicationWindow {
     property var transaction;
     property double transactionRequestId: 0
     property double activeTransactionRequestId: 0
-    property var walletPassword
+    // only set while a wallet is opening
+    property string pendingOpenPassword: ""
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
@@ -158,7 +159,7 @@ ApplicationWindow {
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         passwordDialog.onAcceptedCallback = function(password) {
-            if(walletPassword === password)
+            if(currentWallet && currentWallet.verifyPassword(password))
                 passwordDialog.close();
             else 
                 passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
@@ -241,8 +242,7 @@ ApplicationWindow {
 
     function openWallet(prevState) {
         passwordDialog.onAcceptedCallback = function(password) {
-            walletPassword = password;
-            initialize();
+            initialize(password);
         }
         passwordDialog.onRejectedCallback = function() {
             if (prevState) {
@@ -255,7 +255,7 @@ ApplicationWindow {
         passwordDialog.open(usefulName(persistentSettings.wallet_path));
     }
 
-    function initialize() {
+    function initialize(password) {
         console.log("initializing..")
 
         // Reload transfer page with translations enabled
@@ -281,13 +281,17 @@ ApplicationWindow {
         var wallet_path = persistentSettings.wallet_path;
         if(isIOS)
             wallet_path = appWindow.accountsDir + wallet_path;
-        // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
         console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
 
-        this.onWalletOpening();
+        openWalletAsync(wallet_path, password);
+    }
+
+    function openWalletAsync(wallet_path, password) {
+        onWalletOpening();
+        pendingOpenPassword = password;
         walletManager.openWalletAsync(
             wallet_path,
-            walletPassword,
+            password,
             persistentSettings.nettype,
             persistentSettings.kdfRounds);
     }
@@ -348,7 +352,7 @@ ApplicationWindow {
         }
     }
 
-    function connectWallet(wallet) {
+    function connectWallet(wallet, password) {
         currentWallet = wallet
 
         walletName = usefulName(wallet.path)
@@ -424,7 +428,7 @@ ApplicationWindow {
             persistentSettings.getWalletProxyAddress());
 
         // save wallet keys in case wallet settings have been changed in the init
-        currentWallet.setPassword(walletPassword);
+        currentWallet.setPassword(password);
     }
 
     function isTrustedDaemon() {
@@ -633,6 +637,9 @@ ApplicationWindow {
     }
 
     function onWalletOpened(wallet) {
+        var password = pendingOpenPassword;
+        pendingOpenPassword = "";
+
         hideProcessingSplash();
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
@@ -642,7 +649,7 @@ ApplicationWindow {
                 case "basic_string::_M_replace_aux":
                 case "std::bad_alloc":
                     walletManager.clearWalletCache(wallet.path);
-                    appWindow.initialize();
+                    appWindow.initialize(password);
                     console.error("Repairing wallet cache with error: ", wallet.errorString);
                     appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
                     return;
@@ -672,7 +679,7 @@ ApplicationWindow {
         }
 
         // wallet opened successfully, subscribing for wallet updates
-        connectWallet(wallet)
+        connectWallet(wallet, password)
 
         // Force switch normal view
         rootItem.state = "normal";
@@ -752,10 +759,10 @@ ApplicationWindow {
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         passwordDialog.onAcceptedCallback = function(password) {
-            if(walletPassword === password) {
-                if (currentWallet && started) {
+            if(currentWallet && currentWallet.verifyPassword(password)) {
+                if (started) {
                     appWindow.showProcessingSplash(qsTr("Unlocking..."));
-                    currentWallet.stopBackgroundSync(walletPassword);
+                    currentWallet.stopBackgroundSync(password);
                 } else {
                     passwordDialog.close();
                 }
@@ -1862,7 +1869,7 @@ ApplicationWindow {
             }
             close();
             passwordDialog.onAcceptedCallback = function(password) {
-                if(walletPassword === password){
+                if(currentWallet && currentWallet.verifyPassword(password)){
                     handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
@@ -1975,7 +1982,6 @@ ApplicationWindow {
         }
         onAcceptedNewPassword: function(password) {
             if (currentWallet.setPassword(password)) {
-                appWindow.walletPassword = password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
             } else {
@@ -2537,7 +2543,7 @@ ApplicationWindow {
         }
 
         passwordDialog.onAcceptedCallback = function(password) {
-            if(walletPassword === password){
+            if(currentWallet && currentWallet.verifyPassword(password)){
                 passwordDialog.close();
                 if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
                 if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)

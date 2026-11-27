@@ -51,7 +51,6 @@ Item {
     property bool ctrlPressed: false
     property bool themeTransition: false
     property var currentWallet
-    property string walletPassword: ""
     property int restoreHeight: 0
     property string lastWalletOpenError: ""
     property bool walletCreated: false
@@ -165,7 +164,6 @@ Item {
         anchors.fill: parent
 
         onAccepted: function(password) {
-            appWindow.walletPassword = password
             appWindow.lastWalletOpenError = ""
             var wallet = walletManager.openWallet(
                 persistentSettings.wallet_path, password,
@@ -270,6 +268,8 @@ Item {
             compare(appWindow.currentWallet.status, Wallet.Status_Ok,
                     appWindow.currentWallet.errorString)
             compare(passwordDialog.password, "")
+            verify(appWindow.currentWallet.verifyPassword(password))
+            verify(!appWindow.currentWallet.verifyPassword(password + "x"))
             var address = appWindow.currentWallet.address(0, 0)
             verify(address.length > 0)
             return address

@@ -124,7 +124,7 @@ Rectangle {
             onClicked: {
                 if (persistentSettings.askPasswordBeforeSending) {
                     passwordDialog.onAcceptedCallback = function(password) {
-                        if (appWindow.walletPassword === password){
+                        if (currentWallet.verifyPassword(password)){
                             persistentSettings.askPasswordBeforeSending = false;
                         } else {
                             passwordDialog.showError(qsTr("Wrong password"));
@@ -187,7 +187,14 @@ Rectangle {
             text: qsTr("Sync in the background when locked") + translationManager.emptyString
             toggleOnClick: false
             onClicked: {
-                if (currentWallet && appWindow) {
+                if (!currentWallet || !appWindow)
+                    return;
+
+                passwordDialog.onAcceptedCallback = function(password) {
+                    if (!currentWallet || !currentWallet.verifyPassword(password)) {
+                        passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
+                        return;
+                    }
                     appWindow.showProcessingSplash(qsTr("Updating settings..."))
 
                     // TODO: add support for custom background password option
@@ -195,10 +202,10 @@ Rectangle {
                     if (currentWallet.getBackgroundSyncType() === Wallet.BackgroundSync_Off)
                         newBackgroundSyncType = Wallet.BackgroundSync_ReusePassword
 
-                    // TODO: don't keep the wallet password in memory on the appWindow
-                    // https://github.com/monero-project/monero-gui/issues/1537#issuecomment-410055329
-                    currentWallet.setupBackgroundSync(newBackgroundSyncType, appWindow.walletPassword)
+                    currentWallet.setupBackgroundSync(newBackgroundSyncType, password)
                 }
+                passwordDialog.onRejectedCallback = null;
+                passwordDialog.open()
             }
         }
 
