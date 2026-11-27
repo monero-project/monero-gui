@@ -129,8 +129,8 @@ if(APPLE OR (WIN32 AND NOT STATIC))
             #platform files
             libgcc_s_seh-1.dll
             #openssl files
-            libssl-3-x64.dll
-            libcrypto-3-x64.dll
+            libssl-4-x64.dll
+            libcrypto-4-x64.dll
             #icu
             libicudt78.dll
             libicuin78.dll
