@@ -48,9 +48,9 @@ FocusScope {
     property bool backgroundSyncing
 
     // same signals as Dialog has
-    signal accepted()
-    signal acceptedNewPassword()
-    signal acceptedPassphrase()
+    signal accepted(string password)
+    signal acceptedNewPassword(string password)
+    signal acceptedPassphrase(string password)
     signal rejected()
     signal rejectedNewPassword()
     signal rejectedPassphrase()
@@ -103,6 +103,8 @@ FocusScope {
     }
 
     function close() {
+        passwordInput1.reset();
+        passwordInput2.reset();
         leftPanel.enabled = true
         middlePanel.enabled = true
         wizard.enabled = !wizard.deviceWalletCreationInProgress
@@ -122,13 +124,14 @@ FocusScope {
         if (!passwordDialogMode && passwordInput1.text !== passwordInput2.text) {
             return;
         }
+        var password = passwordInput1.text;
         root.close()
         if (passwordDialogMode) {
-            root.accepted()
+            root.accepted(password)
         } else if (newPasswordDialogMode) {
-            root.acceptedNewPassword()
+            root.acceptedNewPassword(password)
         } else if (passphraseDialogMode) {
-            root.acceptedPassphrase()
+            root.acceptedPassphrase(password)
         }
     }
 

@@ -98,6 +98,7 @@ Wallet *WalletManager::createWallet(const QString &path, const QString &password
     Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
                                                   language.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds);
     m_currentWallet  = new Wallet(w);
+    m_currentWallet->m_kdfRounds = kdfRounds;
     return m_currentWallet;
 }
 
@@ -125,6 +126,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
 
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), w->status());
     m_currentWallet  = new Wallet(w);
+    m_currentWallet->m_kdfRounds = kdfRounds;
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
     if (m_currentWallet->thread() != qApp->thread()) {
@@ -151,6 +153,7 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &passwo
     }
     Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), password.toStdString(), seed.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds, seed_offset.toStdString());
     m_currentWallet = new Wallet(w);
+    m_currentWallet->m_kdfRounds = kdfRounds;
     return m_currentWallet;
 }
 
@@ -167,6 +170,7 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
     Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), password.toStdString(), language.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight,
                                                        address.toStdString(), viewkey.toStdString(), spendkey.toStdString(), kdfRounds);
     m_currentWallet = new Wallet(w);
+    m_currentWallet->m_kdfRounds = kdfRounds;
     return m_currentWallet;
 }
 
@@ -193,6 +197,7 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
     w->setListener(nullptr);
 
     m_currentWallet = new Wallet(w);
+    m_currentWallet->m_kdfRounds = kdfRounds;
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
     if (m_currentWallet->thread() != qApp->thread()) {

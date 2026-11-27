@@ -530,7 +530,6 @@ Rectangle {
         persistentSettings.is_recovering_from_device = false;
 
         appWindow.restoreHeight = 0;
-        appWindow.walletPassword = "";
 
         if(typeof fn == 'object')
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fn);

@@ -59,6 +59,8 @@
 
 #include "qt/ScopeGuard.h"
 
+#include "memwipe.h"
+
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
     static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 30;
@@ -232,6 +234,40 @@ QString Wallet::errorString() const
 bool Wallet::setPassword(const QString &password)
 {
     return m_walletImpl->setPassword(password.toStdString());
+}
+
+bool Wallet::verifyPassword(const QString &password)
+{
+    QMutexLocker locker(&m_verifyPasswordMutex);
+
+    if (m_walletImpl->path().empty())
+        return false;
+    const std::string keysFile = m_walletImpl->keysFilename();
+
+    // keys file is locked while the wallet is open
+    const bool wasLocked = m_walletImpl->isKeysFileLocked();
+    if (wasLocked && !m_walletImpl->unlockKeysFile())
+        return false;
+    const auto relock = sg::make_scope_guard([this, wasLocked]() noexcept {
+        if (wasLocked)
+            m_walletImpl->lockKeysFile();
+    });
+
+    std::string pw = password.toStdString();
+    const auto wipe = sg::make_scope_guard([&pw]() noexcept {
+        memwipe(&pw[0], pw.size());
+    });
+
+    try
+    {
+        // view key check is enough; avoids decrypting the spend key
+        return Monero::WalletManagerFactory::getWalletManager()->verifyWalletPassword(keysFile, pw, true, m_kdfRounds);
+    }
+    catch (const std::exception &e)
+    {
+        qWarning() << "Failed to verify wallet password:" << e.what();
+        return false;
+    }
 }
 
 QString Wallet::address(quint32 accountIndex, quint32 addressIndex) const

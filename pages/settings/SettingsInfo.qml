@@ -203,29 +203,40 @@ Rectangle {
                         }
                         if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {
-                                currentWallet.walletCreationHeight = _restoreHeight
-                                // Restore height is saved in .keys file. Set password to trigger rewrite.
-                                currentWallet.setPassword(appWindow.walletPassword)
+                                passwordDialog.onAcceptedCallback = function(password) {
+                                    if (!currentWallet.verifyPassword(password)) {
+                                        passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
+                                        return;
+                                    }
+                                    currentWallet.walletCreationHeight = _restoreHeight
+                                    // Restore height is saved in .keys file. Set password to trigger rewrite.
+                                    currentWallet.setPassword(password)
 
-                                // Show confirmation dialog
-                                confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
-                                confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
-                                                                + "The following information will be deleted\n"
-                                                                + "- Recipient addresses\n"
-                                                                + "- Tx keys\n"
-                                                                + "- Tx descriptions\n\n"
-                                                                + "The old wallet cache file will be renamed and can be restored later.\n"
-                                                                );
-                                confirmationDialog.onAcceptedCallback = function() {
-                                    appWindow.closeWallet(function() {
-                                        walletManager.clearWalletCache(persistentSettings.wallet_path);
-                                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                                        persistentSettings.nettype, persistentSettings.kdfRounds);
-                                    });
+                                    // Show confirmation dialog
+                                    confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
+                                    confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
+                                                                    + "The following information will be deleted\n"
+                                                                    + "- Recipient addresses\n"
+                                                                    + "- Tx keys\n"
+                                                                    + "- Tx descriptions\n\n"
+                                                                    + "The old wallet cache file will be renamed and can be restored later.\n"
+                                                                    );
+                                    confirmationDialog.onAcceptedCallback = function() {
+                                        var reopenPassword = password;
+                                        password = "";
+                                        appWindow.closeWallet(function() {
+                                            walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                            appWindow.openWalletAsync(persistentSettings.wallet_path, reopenPassword);
+                                            reopenPassword = "";
+                                        });
+                                    }
+                                    confirmationDialog.onRejectedCallback = function() {
+                                        password = "";
+                                    }
+                                    confirmationDialog.open()
                                 }
-
-                                confirmationDialog.onRejectedCallback = null;
-                                confirmationDialog.open()
+                                passwordDialog.onRejectedCallback = null;
+                                passwordDialog.open()
                                 return;
                             }
                         }

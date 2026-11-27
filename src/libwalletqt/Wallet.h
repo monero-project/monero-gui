@@ -160,6 +160,9 @@ public:
     //! changes the password using existing parameters (path, seed, seed lang)
     Q_INVOKABLE bool setPassword(const QString &password);
 
+    //! checks password against the keys file
+    Q_INVOKABLE bool verifyPassword(const QString &password);
+
     //! returns wallet's public address
     Q_INVOKABLE QString address(quint32 accountIndex, quint32 addressIndex) const;
 
@@ -504,6 +507,8 @@ private:
     SubaddressAccount * m_subaddressAccount;
     mutable SubaddressAccountModel * m_subaddressAccountModel;
     QMutex m_asyncMutex;
+    QMutex m_verifyPasswordMutex;
+    quint64 m_kdfRounds = 1;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
