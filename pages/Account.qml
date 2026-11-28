@@ -122,7 +122,7 @@ Rectangle {
                 Layout.fillWidth: true
                 fontSize: 24
                 textFormat: Text.RichText
-                text: qsTr("Balance All") + translationManager.emptyString
+                text: qsTr("Wallet balance") + translationManager.emptyString
             }
 
             RowLayout {
