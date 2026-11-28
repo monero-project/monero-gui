@@ -42,6 +42,7 @@ class TransactionInfo : public QObject
     Q_OBJECT
     Q_PROPERTY(Direction direction READ direction)
     Q_PROPERTY(bool isPending READ isPending)
+    Q_PROPERTY(bool doubleSpendSeen READ doubleSpendSeen)
     Q_PROPERTY(bool isFailed READ isFailed)
     Q_PROPERTY(bool isCoinbase READ isCoinbase)
     Q_PROPERTY(double amount READ amount)
@@ -74,6 +75,7 @@ public:
 
     Direction  direction() const;
     bool isPending() const;
+    bool doubleSpendSeen() const { return m_doubleSpendSeen; }
     bool isFailed() const;
     bool isCoinbase() const;
     double amount() const;
@@ -114,6 +116,7 @@ private:
     QString m_paymentId;
     QString m_description;
     bool m_pending;
+    bool m_doubleSpendSeen;
     bool m_coinbase;
     quint32 m_subaddrAccount;
     QSet<quint32> m_subaddrIndex;

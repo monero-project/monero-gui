@@ -881,8 +881,7 @@ ApplicationWindow {
             }
         }
 
-        // Update history on every refresh if it's empty
-        if(currentWallet.history.count == 0)
+        if (currentWallet.history.count == 0 || (middlePanel.merchantView.enableTracking && !foundNewBlock))
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
 
         onWalletUpdate();

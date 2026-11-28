@@ -658,6 +658,7 @@ Item {
                     "amount": displayAmount,
                     "confirmations": confirmations,
                     "in_txpool": in_txpool,
+                    "double_spend_seen": model.data(idx, TransactionHistoryModel.TransactionDoubleSpendSeenRole),
                     "txid": txid,
                     "time_epoch": timeEpoch,
                     "time_date": timeDate + " " + timeHour,
@@ -672,12 +673,14 @@ Item {
             return
         }
 
+        root.trackingError = "";
         trackingModel.clear();
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
                 "confirmations": tx.confirmations,
                 "in_txpool": tx.in_txpool,
+                "double_spend_seen": tx.double_spend_seen,
                 "txid": tx.txid,
                 "time_epoch": tx.time_epoch,
                 "time_date": tx.time_date,
