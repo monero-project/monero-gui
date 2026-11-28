@@ -45,6 +45,7 @@
 
 #include "qt/updater.h"
 #include "qt/ScopeGuard.h"
+#include "common/util.h"
 
 class WalletPassphraseListenerImpl : public  Monero::WalletListener, public PassphraseReceiver
 {
@@ -266,6 +267,11 @@ QString WalletManager::maximumAllowedAmountAsString() const
 QString WalletManager::displayAmount(quint64 amount)
 {
     return QString::fromStdString(Monero::Wallet::displayAmount(amount));
+}
+
+QString WalletManager::getHumanReadableTimespan(quint64 seconds)
+{
+    return QString::fromStdString(tools::get_human_readable_timespan(seconds));
 }
 
 quint64 WalletManager::amountFromString(const QString &amount)
