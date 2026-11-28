@@ -166,6 +166,31 @@ OSHelper::OSHelper(QObject *parent) : QObject(parent)
 
 }
 
+bool OSHelper::syncActivity() const
+{
+    return m_syncActivity;
+}
+
+void OSHelper::setSyncActivity(bool active)
+{
+    if (m_syncActivity == active)
+    {
+        return;
+    }
+    m_syncActivity = active;
+#ifdef Q_OS_MACOS
+    if (active)
+    {
+        m_syncActivityToken = MacOSHelper::beginActivity(QStringLiteral("Synchronizing wallet"));
+    }
+    else
+    {
+        MacOSHelper::endActivity(m_syncActivityToken);
+        m_syncActivityToken = nullptr;
+    }
+#endif
+}
+
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 void OSHelper::resetScreenshotPortalResponse()
 {

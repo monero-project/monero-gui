@@ -43,6 +43,8 @@ class OSHelper : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool installed READ installed CONSTANT);
+    // macOS: keeps App Nap from throttling the app while set.
+    Q_PROPERTY(bool syncActivity READ syncActivity WRITE setSyncActivity);
 
 public:
     static constexpr char seedTemplateHash[] = "bcca2abd0ecff56423b4b04e81b2506c6b22bc5f5ef568251d2fbabc966755ef";
@@ -63,10 +65,17 @@ public:
     // 0: success, -1: integrity failure, -2: file/open failure.
     Q_INVOKABLE int openSeedTemplate() const;
     bool installed() const;
+    bool syncActivity() const;
+    void setSyncActivity(bool active);
 
     static std::pair<quint8, QString> getNetworkTypeAndAddressFromFile(const QString &wallet);
 private:
     QImage screenshot();
+
+    bool m_syncActivity = false;
+#ifdef Q_OS_MACOS
+    void *m_syncActivityToken = nullptr;
+#endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
     QImage screenshotPortal();
     void resetScreenshotPortalResponse();
