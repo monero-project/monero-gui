@@ -349,6 +349,9 @@ ApplicationWindow {
     }
 
     function connectWallet(wallet) {
+        walletSynced = false
+        blocksToSync = 1
+        leftPanel.progressBar.resetProgress()
         currentWallet = wallet
 
         walletName = usefulName(wallet.path)
