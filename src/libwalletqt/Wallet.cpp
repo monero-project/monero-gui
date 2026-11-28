@@ -610,19 +610,26 @@ bool Wallet::isBackgroundSyncing() const
     return m_walletImpl->isBackgroundSyncing();
 }
 
-void Wallet::startBackgroundSync()
+bool Wallet::startBackgroundSync()
 {
     qDebug() << "Starting background sync";
     bool refreshEnabled = m_refreshEnabled;
     pauseRefresh();
 
     // run inside scheduler because of lag when stopping/starting refresh
-    m_scheduler.run([this, refreshEnabled] {
+    const auto future = m_scheduler.run([this, refreshEnabled] {
         m_walletImpl->startBackgroundSync();
         if (refreshEnabled)
             startRefresh();
         emit backgroundSyncStarted();
     });
+    if (!future.first)
+    {
+        if (refreshEnabled)
+            startRefresh();
+        return false;
+    }
+    return true;
 }
 
 void Wallet::stopBackgroundSync(const QString &password)
