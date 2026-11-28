@@ -84,6 +84,7 @@ Rectangle {
                 id: seedText
                 spacing: 0
                 copyButton: true
+                sensitiveCopy: true
                 addressValidation: false
                 readOnly: true
                 wrapMode: Text.WordWrap
@@ -150,6 +151,7 @@ Rectangle {
                 id: secretViewKey
                 readOnly: true
                 copyButton: true
+                sensitiveCopy: true
                 labelText: qsTr("Secret view key") + translationManager.emptyString
                 fontSize: 16
             }
@@ -168,6 +170,7 @@ Rectangle {
                 id: secretSpendKey
                 readOnly: true
                 copyButton: true
+                sensitiveCopy: true
                 labelText: qsTr("Secret spend key") + translationManager.emptyString
                 fontSize: 16
             }
